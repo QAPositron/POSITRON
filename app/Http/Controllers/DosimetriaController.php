@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContratoDosimetria;
+
+use App\Models\contratodosimetriasede as ModelsContratodosimetriasede;
+use App\Models\Contratodosimetriasede;
 use App\Models\ContratosDosimetriaEmpresa;
 use App\Models\Dosimetriacontrato;
 use App\Models\Empresa;
@@ -56,19 +59,45 @@ class DosimetriaController extends Controller
             'fecha_inicio_contrato'         => 'required',
             'fecha_finalizacion_contrato'   => 'required',
             'periodo_recambio_contrato'     => 'required',
-            'fecha_contrato'                => 'required'
+            
+            
         ]);
         $contratoDosi = new Dosimetriacontrato();
 
         $contratoDosi->codigo_contrato              = $request->codigo_contrato;
-        $contratoDosi->fecha_contrato               = $request->fecha_contrato;
         $contratoDosi->fecha_inicio                 = $request->fecha_inicio_contrato;
         $contratoDosi->fecha_finalizacion           = $request->fecha_finalizacion_contrato;
         $contratoDosi->periodo_recambio             = $request->periodo_recambio_contrato;
         
         $contratoDosi->save();
+        
+       /*  $contratoDosiSede = new Contratodosimetriasede();
 
-        return $contratoDosi;
-        /* return redirect()->route('empresasdosi.create'); */
+        $contratoDosiSede->contratodosimetria_id    = $contratoDosi->id_contrato_dosimetria;
+        $contratoDosiSede->sede_id                  = $request->id_sede;
+        $contratoDosiSede->dosi_cuerpo_entero       = $request->num_dosi_ce_contrato_sede;
+        $contratoDosiSede->dosi_ambiental           = $request->num_dosi_ambiental_contrato_sede;
+        $contratoDosiSede->dosi_ezclip              = $request->num_dosi_ezclip_contrato_sede;
+
+        $contratoDosiSede->save(); */
+
+
+       /*  return $contratoDosiSede; */
+        /* return $contratoDosiSede; */
+        return redirect()->route('contratosdosi.create');
+    }
+    public function saveSedeContrato(Request $request){
+        $request->validate([
+            'id_sede'                           => 'required',
+            'num_dosi_ce_contrato_sede'         => 'required',
+            'num_dosi_ambiental_contrato_sede'  => 'required',
+            'num_dosi_ezclip_contrato_sede'     => 'required'
+        ]);
+        $contratoDosiSede = new Contratodosimetriasede();
+        
+        $contratoDosiSede->sede_id                  = $request->id_sede;
+        $contratoDosiSede->dosi_cuerpo_entero       = $request->num_dosi_ce_contrato_sede;
+        $contratoDosiSede->dosi_ambiental           = $request->num_dosi_ambiental_contrato_sede;
+        $contratoDosiSede->dosi_ezclip              = $request->num_dosi_ezclip_contrato_sede;
     }
 }

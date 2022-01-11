@@ -16,7 +16,6 @@ class CreateDosimetriacontratosTable extends Migration
         Schema::create('dosimetriacontratos', function (Blueprint $table) {
             $table->bigincrements('id_contrato_dosimetria')->unique();
             $table->integer('codigo_contrato')->nullable();
-            $table->date('fecha_contrato')->nullable();
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_finalizacion')->nullable();
             $table->string('periodo_recambio')->nullable();

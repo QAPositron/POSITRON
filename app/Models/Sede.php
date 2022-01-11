@@ -33,9 +33,9 @@ class Sede extends Model
         return $this->hasMany(Trabajadordosimetro::class, 'id_trabajadordosimetro');
     }
 
-    //relacion cero a muchos con contrato dosimetria sede
-    public function contratosDosimetriaSedes(){
+    //relacion uno a muchos con contrato dosimetria sede
+    public function contratodosimetriasede(){
         /* return $this->hasMany('App\Models\Sede'); */
-        return $this->hasMany(ContratosDosimetriaSede::class, 'id_contrato_dosimetria_sede');
+        return $this->hasMany(Contratodosimetriasede::class, 'id_contratodosimetriasede');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContratosdosimetriasedesTable extends Migration
+class CreateContratodosimetriasedesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,20 @@ class CreateContratosdosimetriasedesTable extends Migration
      */
     public function up()
     {
-        Schema::create('contratosdosimetriasedes', function (Blueprint $table) {
-            $table->bigincrements('id_ContratoDosimetriaSede')->unique();
+        Schema::create('contratodosimetriasedes', function (Blueprint $table) {
+            $table->bigincrements('id_contratodosimetriasede')->unique();
+            
+            $table-> unsignedBigInteger('contratodosimetria_id');
+            $table-> foreign('contratodosimetria_id')->references('id_contrato_dosimetria')->on('dosimetriacontratos')->onDelete('cascade')->onUpdate('cascade');
             
             $table-> unsignedBigInteger('sede_id');
             $table-> foreign('sede_id')->references('id_sede')->on('sedes')->onDelete('cascade')->onUpdate('cascade');
-
-            $table-> unsignedBigInteger('contratodosimetria_id');
-            $table-> foreign('contratodosimetria_id')->references('id_contrato_dosimetria')->on('dosimetriacontratos')->onDelete('cascade')->onUpdate('cascade');
-
+            
             $table->integer('dosi_cuerpo_entero')->nullable();
             $table->integer('dosi_ambiental')->nullable();
             $table->integer('dosi_ezclip')->nullable();
             $table->timestamps();
+            
         });
     }
 
@@ -36,6 +37,6 @@ class CreateContratosdosimetriasedesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contratosdosimetriasedes');
+        Schema::dropIfExists('contratodosimetriasedes');
     }
 }
