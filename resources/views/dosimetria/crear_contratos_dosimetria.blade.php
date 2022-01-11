@@ -52,14 +52,9 @@
                                         <small>*{{$message}}</small>
                                     @enderror
                                 </div>
+                                <hr>
+                                <label class="text-center">ASIGNE ESTE CONTRATO A UNA SEDE:</label>
                                 <div class="form-floating my-3">
-                                    <input type="date" name="fecha_contrato" id="fecha_contrato" class="form-control"  autofocus > 
-                                    <label for="floatingInputGrid">FECHA FIRMADO:</label>
-                                    @error('fecha_contrato')
-                                        <small>*{{$message}}</small>
-                                    @enderror
-                                </div>
-                                <!-- <div class="form-floating">
                                     <select class="form-select" name="id_sede" id="id_sede">
                                         <option value="">--SELECCIONE--</option>
                                         @foreach($sedes as $sed)
@@ -70,44 +65,42 @@
                                     @error('id_sede')
                                         <small>*{{$message}}</small>
                                     @enderror
-                                </div> -->
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label for="">#DOSÍM. C. ENTERO:</label>
+                                            <input type="number" name="num_dosi_ce_contrato_sede" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
+                                            @error('num_dosi_ce_contrato_sede')
+                                                <small>*{{$message}}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="">#DOSÍM. AMBIENTAL:</label>
+                                            <input type="number" name="num_dosi_ambiental_contrato_sede" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
+                                            @error('num_dosi_ambiental_contrato_sede')
+                                                <small>*{{$message}}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="">#DOSÍM. EZCLIP:</label>
+                                            <input type="number" name="num_dosi_ezclip_contrato_sede" id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
+                                            @error('num_dosi_ezclip_contrato_sede')
+                                                <small>*{{$message}}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                            <button type="submit" class="btn colorQA"  data-bs-dismiss="modal" data-bs-target="#nueva_sedeModal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-                                </svg>
-                            </button>
+                            <button type="submit" class="btn colorQA"  data-bs-dismiss="modal">GUARDAR</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- <div class="modal fade" id="nueva_sedeModal" tabindex="-1" aria-labelledby="nueva_sedeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title w-100 text-center" id="nueva_sedeModalLabel">ASIGNAR SEDES</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form action="{{route('empresasdosi.save')}}" method="POST">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="col-md">
-                                    <label class="text-center">AL SELECCIONAR UNA EMPRESA Y GUARDAR SE PODRAN CREAR CONTRATOS EN ELLA</label>
-                                    
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                                <button type="submit" class="btn colorQA"  data-bs-dismiss="modal" >GUARDAR</button>
-                            </div>
-                        </form>
-                    </div> 
-                </div>
-            </div> -->
     </div>
 </div>
 <BR></BR>
