@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ContratoDosimetriaSede extends Model
+class Contratodosimetriasede extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_ContratoDosimetriaSede';
+
+    protected $primaryKey = 'id_contratodosimetriasede';
 
     //Relacion uno a muchos (inversa) con sede
     public function sede(){

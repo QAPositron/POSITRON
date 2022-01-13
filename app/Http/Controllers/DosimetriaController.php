@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\ContratoDosimetria;
 
-
-
-
 use App\Models\Contratodosimetriasede;
 
 use App\Models\ContratosDosimetriaEmpresa;
@@ -50,9 +47,11 @@ class DosimetriaController extends Controller
         $sedes = Sede::join('empresas', 'empresas_id', '=', 'id_empresa')
         ->select('id_sede', 'nombre_sede')
         ->get();
+
+        $contratoDosiSede = Contratodosimetriasede::all();
         
-        return view('dosimetria.crear_contratos_dosimetria', compact('empresa', 'sedes'));
-        /* return $sedes; */
+        return view('dosimetria.crear_contratos_dosimetria', compact('empresa', 'sedes', 'contratoDosiSede'));
+        /* return $contratoDosiSede; */
     }
 
     public function saveContrato(Request $request){
@@ -62,7 +61,7 @@ class DosimetriaController extends Controller
             'fecha_inicio_contrato'         => 'required',
             'fecha_finalizacion_contrato'   => 'required',
             'periodo_recambio_contrato'     => 'required',
-            
+            'id_sede'                       => 'required',
             
         ]);
         $contratoDosi = new Dosimetriacontrato();
@@ -74,6 +73,16 @@ class DosimetriaController extends Controller
         
         $contratoDosi->save();
         
+        
+        foreach ($request->all() as $req){
+            $contratoDosiSede = new Contratodosimetriasede();
+            $contratoDosiSede->contratodosimetria_id = $contratoDosi->id_contrato_dosimetria;
+            $contratoDosiSede->sede_id               = $req->id_sede;
+            $contratoDosiSede->dosi_cuerpo_entero    = $req->num_dosi_ce;
+            $contratoDosiSede->dosi_ambiental        = $req->num_dosi_ambiental;
+            $contratoDosiSede->dosi_ezclip           = $req->num_dosi_ezclip;
+            $contratoDosiSede->save();
+        }
        /*  $contratoDosiSede = new Contratodosimetriasede();
 
         $contratoDosiSede->contratodosimetria_id    = $contratoDosi->id_contrato_dosimetria;
@@ -87,20 +96,11 @@ class DosimetriaController extends Controller
 
        /*  return $contratoDosiSede; */
         /* return $contratoDosiSede; */
-        return redirect()->route('contratosdosi.create');
+        /* return redirect()->route('contratosdosi.create'); */
+        return $contratoDosiSede;
     }
-    public function saveSedeContrato(Request $request){
-        $request->validate([
-            'id_sede'                           => 'required',
-            'num_dosi_ce_contrato_sede'         => 'required',
-            'num_dosi_ambiental_contrato_sede'  => 'required',
-            'num_dosi_ezclip_contrato_sede'     => 'required'
-        ]);
-        $contratoDosiSede = new Contratodosimetriasede();
-        
-        $contratoDosiSede->sede_id                  = $request->id_sede;
-        $contratoDosiSede->dosi_cuerpo_entero       = $request->num_dosi_ce_contrato_sede;
-        $contratoDosiSede->dosi_ambiental           = $request->num_dosi_ambiental_contrato_sede;
-        $contratoDosiSede->dosi_ezclip              = $request->num_dosi_ezclip_contrato_sede;
+
+    public function createdetalleContrato(){
+        return view('dosimetria.detalle_contrato_dosimetria');
     }
 }

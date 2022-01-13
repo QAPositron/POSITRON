@@ -1,5 +1,14 @@
 @extends('layouts.plantillabase')
 @section('contenido')
+<style>
+    .puntero{
+        cursor:pointer;
+    }
+    .ocultar{
+        display: none;
+    }
+</style>
+
 <h3 class="text-center ">{{$empresa->nombre_empresa}}</h3>
 <div class="row">
     <div class="col"></div>
@@ -52,119 +61,75 @@
                                         <small>*{{$message}}</small>
                                     @enderror
                                 </div>
-                                <div class="form-floating my-4">
-                                    <select class="form-select" name="id_sede" id="id_sede">
-                                        <option value="">--SELECCIONE--</option>
-                                        @foreach($sedes as $sed)
-                                            <option value ="{{$sed->id_sede}}">{{$sed->nombre_sede}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingSelectGrid">SEDE:</label>
-                                    @error('id_sede')
-                                        <small>*{{$message}}</small>
-                                    @enderror
+                                <hr>
+                                <label class="text-center">ASIGNE ESTE CONTRATO A UNA SEDE:</label>
+
+                                <div class="row">
+                                    <div class="col-md text-center">
+                                        <button class="btn btn-sm colorQA" id="agregar">AGREGAR SEDE </button>
+                                    </div>
                                 </div>
-                                <div class="container-fluid">
-                                    <label for="">#DOSÍM. C. ENTERO:</label>
+                                <div class="container-fluid" id="clonar">
                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <input type="number" name="num_dosi_ce_contrato_sede" id="num_dosi_ce_contrato_sede" class="form-control mx-4" autofocus >
+                                        <div class="col-md">
+                                            <div class="form-floating my-3">
+                                                <select class="form-select" name="id_sede[]" id="id_sede">
+                                                    <option value="">--SELECCIONE--</option>
+                                                    @foreach($sedes as $sed)
+                                                        <option value ="{{$sed->id_sede}}">{{$sed->nombre_sede}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <label for="floatingSelectGrid">SEDE:</label>
+                                                @error('id_sede')
+                                                    <small>*{{$message}}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label for="">#DOSÍM. C. ENTERO:</label>
+                                            <input type="number" name="num_dosi_ce[]" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
                                             @error('num_dosi_ce_contrato_sede')
                                                 <small>*{{$message}}</small>
                                             @enderror
                                         </div>
+                                        <div class="col-md">
+                                            <label for="">#DOSÍM. AMBIENTAL:</label>
+                                            <input type="number" name="num_dosi_ambiental[]" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
+                                            @error('num_dosi_ambiental_contrato_sede')
+                                                <small>*{{$message}}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="">#DOSÍM. EZCLIP:</label>
+                                            <input type="number" name="num_dosi_ezclip[]" id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
+                                            @error('num_dosi_ezclip_contrato_sede')
+                                                <small>*{{$message}}</small>
+                                            @enderror
+                                        </div>
                                     </div>
-                                    <label for="">#DOSÍM. AMBIENTAL:</label>
-                                    <div class="col-md-3">
-                                        <input type="number" name="num_dosi_ambiental_contrato_sede" id="num_dosi_ambiental_contrato_sede" class="form-control mx-4" autofocus >
-                                        @error('num_dosi_ambiental_contrato_sede')
-                                            <small>*{{$message}}</small>
-                                        @enderror
-                                    </div>
-                                    <label for="">#DOSÍM. EZCLIP:</label>
-                                    <div class="col-md-3">
-                                        <input type="number" name="num_dosi_ezclip_contrato_sede" id="num_dosi_ezclip_contrato_sede" class="form-control mx-4" autofocus >
-                                        @error('num_dosi_ezclip_contrato_sede')
-                                            <small>*{{$message}}</small>
-                                        @enderror
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md text-center" >
+                                            <button class="btn colorQA" id="eliminar" hidden>ELIMINAR</button>
+                                        </div>
                                     </div>
                                 </div>
+                                <div id="contenedor">
+
+                                </div>   
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
                             <button type="submit" class="btn colorQA"  data-bs-dismiss="modal">GUARDAR</button>
-                            <!-- <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#añadir_sedeModal" >AÑADIR SEDE</button> -->
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- <div class="modal fade" id="añadir_sedeModal" tabindex="-1" role="dialog" aria-labelledby="añadir_sedeLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title w-100 text-center" id="exampleModalLabel">AÑADIR SEDE A CONTRATO</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{route('contratosdosi.save')}}" method="POST">
-                        @csrf 
-                        <div class="modal-body">
-                            <div class="col-md mx-5">
-                                <label class="text-center ">ASIGNE ESTA SEDE AL CONTRATO ANTERIORMENTE REGISTRADO:</label>
-                                <div class="form-floating ">
-                                    <select class="form-select"  name="empresas_id" id="empresas_id">
-                                        <option value=""></option>
-                                    </select>
-                                    <label for="floatingSelectGrid">CONTRATO:</label>
-                                </div>
-                                <div class="form-floating my-4">
-                                    <select class="form-select" name="id_sede" id="id_sede">
-                                        <option value="">--SELECCIONE--</option>
-                                        @foreach($sedes as $sed)
-                                            <option value ="{{$sed->id_sede}}">{{$sed->nombre_sede}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingSelectGrid">SEDE:</label>
-                                    @error('id_sede')
-                                        <small>*{{$message}}</small>
-                                    @enderror
-                                </div>
-                                
-                                <label for="">#DOSÍM. C. ENTERO:</label>
-                                <div class="col-md-3">
-                                    <input type="number" name="num_dosi_ce_contrato_sede" id="num_dosi_ce_contrato_sede" class="form-control mx-4" autofocus >
-                                    @error('num_dosi_ce_contrato_sede')
-                                        <small>*{{$message}}</small>
-                                    @enderror
-                                </div>
-                                <label for="">#DOSÍM. AMBIENTAL:</label>
-                                <div class="col-md-3">
-                                    <input type="number" name="num_dosi_ambiental_contrato_sede" id="num_dosi_ambiental_contrato_sede" class="form-control mx-4" autofocus >
-                                    @error('num_dosi_ambiental_contrato_sede')
-                                        <small>*{{$message}}</small>
-                                    @enderror
-                                </div>
-                                <label for="">#DOSÍM. EZCLIP:</label>
-                                <div class="col-md-3">
-                                    <input type="number" name="num_dosi_ezclip_contrato_sede" id="num_dosi_ezclip_contrato_sede" class="form-control mx-4" autofocus >
-                                    @error('num_dosi_ezclip_contrato_sede')
-                                        <small>*{{$message}}</small>
-                                    @enderror
-                                </div>
-                                
-                                
-                            </div>    
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button> 
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>    
-                </div>
-            </div>
-        </div> -->
+        
     </div>
 </div>
 <BR></BR>
@@ -178,7 +143,6 @@
                     <tr>
                         <th>No. CONTRATO</th>
                         <th style='width: 13.60%'>SEDES</th>
-                        <th>FECHA CONTRATO</th>
                         <th>FECHA INICIO</th>
                         <th>FECHA FINALIZACIÓN</th>
                         <th>P. RECAMBIO</th>
@@ -186,11 +150,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                   
+                    @foreach($contratoDosiSede as $contdosised)
+                        <tr>
+                            <td><a class="link-dark" href="">{{$contdosised->dosimetriacontrato->codigo_contrato}}</a></td>
+                            <td>{{$contdosised->sede->nombre_sede}}</td>
+                            <td>{{$contdosised->dosimetriacontrato->fecha_inicio}}</td>
+                            <td>{{$contdosised->dosimetriacontrato->fecha_finalizacion}}</td>
+                            <td>{{$contdosised->dosimetriacontrato->periodo_recambio}}</td>
+                            
+                            <td>
+
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
     <div class="col"></div>
 </div>
-@endsection()
+<script
+src="https://code.jquery.com/jquery-3.6.0.js"
+integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+crossorigin="anonymous">
+</script>
+<script type="text/javascript">
+    let agregar = document.getElementById('agregar');
+    let contenido = document.getElementById('contenedor');
+    
+    agregar.addEventListener('click', e =>{
+        e.preventDefault();
+
+        let clonado = document.querySelector('#clonar');
+        let clon = clonado.cloneNode(true);
+        
+        contenido.appendChild(clon).classList.remove('clonar');
+
+    })
+</script>
+@endsection
