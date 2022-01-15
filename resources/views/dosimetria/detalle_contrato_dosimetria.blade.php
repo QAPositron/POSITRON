@@ -5,7 +5,7 @@
 <br>
 <h4 class="text-center ">CONTRATO No. {{$dosimetriacontrato->codigo_contrato}}</h4>
 <br>
-<h6 class="text-center ">TOTAL DE DOSÍMETROS:       CUERPO E.:#        AMBIENTAL: #       EZCLIP:# </h6>
+<h6 class="text-center ">TOTAL DE DOSÍMETROS:       CUERPO E.:        AMBIENTAL: #       EZCLIP:# </h6>
 
 <div class="row">
     <div class="col"></div>

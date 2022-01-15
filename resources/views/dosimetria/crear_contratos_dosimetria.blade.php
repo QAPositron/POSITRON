@@ -71,10 +71,12 @@
                                 </div> -->
                                 <hr>
                                 <label class="text-center">ASIGNE ESTE CONTRATO A UNA SEDE:</label>
-
-                                <div class="row">
+                                
+                                
+                                <div class="row mt-2">
                                     <div class="col-md text-center">
                                         <button class="btn btn-sm colorQA" id="agregar">AGREGAR SEDE </button>
+                                        <button type="button" class="btn btn-sm bg-danger" id="agregar" onclick="deleteElement()">ELIMINAR SEDE </button>
                                     </div>
                                 </div>
                                 <div class="container-fluid" id="clonar">
@@ -96,21 +98,21 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md">
-                                            <label for="">#DOSÍM. C. ENTERO:</label>
+                                            <label for="" class="text-center">No. DOSÍM. C. ENTERO</label>
                                             <input type="number" name="num_dosi_ce[]" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
                                             @error('num_dosi_ce_contrato_sede')
                                                 <small>*{{$message}}</small>
                                             @enderror
                                         </div>
                                         <div class="col-md">
-                                            <label for="">#DOSÍM. AMBIENTAL:</label>
+                                            <label for="" class="text-center">No. DOSÍM. AMBIENTAL</label>
                                             <input type="number" name="num_dosi_ambiental[]" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
                                             @error('num_dosi_ambiental_contrato_sede')
                                                 <small>*{{$message}}</small>
                                             @enderror
                                         </div>
                                         <div class="col-md">
-                                            <label for="">#DOSÍM. EZCLIP:</label>
+                                            <label for="" class="text-center">No. DOSÍM. EZCLIP</label>
                                             <input type="number" name="num_dosi_ezclip[]" id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
                                             @error('num_dosi_ezclip_contrato_sede')
                                                 <small>*{{$message}}</small>
@@ -181,6 +183,7 @@ integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
 </script>
 <script type="text/javascript">
+    let sedesNumber = 0;
     let agregar = document.getElementById('agregar');
     let contenido = document.getElementById('contenedor');
     
@@ -191,7 +194,31 @@ crossorigin="anonymous">
         let clon = clonado.cloneNode(true);
         
         contenido.appendChild(clon).classList.remove('clonar');
-
+        sedesNumber ++;
     })
+    
+    /* function deleteElement() {
+        sedesNumber--;
+        if(sedesNumber >=0) {
+            parentNode = document.getElementsByClassName('contenedorMoreSedes');
+            parentNodeLength = parentNode.length;
+            document.getElementById('clonar').remove();
+        }
+    } */
+    function deleteElement() {
+        if (sedesNumber == 1){
+
+        }else {
+            sedesNumber--;
+            if(sedesNumber >0) {
+
+                parentNode = document.getElementsByClassName('contenedorMoreSedes');
+                parentNodeLength = parentNode.length;
+                document.getElementById('clonar').remove();
+
+            }
+        }
+    }
+    
 </script>
 @endsection

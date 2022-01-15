@@ -24,6 +24,9 @@
         background-color: #1A9980;
         color: white;
       }
+      .bg-danger{
+        color: white;
+      }
       tr:hover{
         background-color: rgba(26, 153, 128, 0.1);
       }
