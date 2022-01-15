@@ -1,13 +1,5 @@
 @extends('layouts.plantillabase')
 @section('contenido')
-<style>
-    .puntero{
-        cursor:pointer;
-    }
-    .ocultar{
-        display: none;
-    }
-</style>
 
 <h3 class="text-center ">{{$empresa->nombre_empresa}}</h3>
 <div class="row">
@@ -61,6 +53,22 @@
                                         <small>*{{$message}}</small>
                                     @enderror
                                 </div>
+                                <div class="form-floating my-3">
+                                    <select class="form-select" name="empresa_contrato" id="empresa_contrato">
+                                        <option value="{{$empresa->id_empresa}}">{{$empresa->nombre_empresa}}</option>
+                                    </select>
+                                    <label for="floatingInputGrid">EMPRESA:</label>
+                                    @error('empresa_contrato')
+                                        <small>*{{$message}}</small>
+                                    @enderror
+                                </div>
+                                <!-- <div class="form-floating my-3">
+                                    <input type="text" name="empresa_contrato" id="empresa_contrato" class="form-control" value="{{$empresa->nombre_empresa}}" readonly> 
+                                    <label for="floatingInputGrid">EMPRESA:</label>
+                                    @error('empresa_contrato')
+                                        <small>*{{$message}}</small>
+                                    @enderror
+                                </div> -->
                                 <hr>
                                 <label class="text-center">ASIGNE ESTE CONTRATO A UNA SEDE:</label>
 
@@ -135,28 +143,26 @@
 <BR></BR>
 <div class="row">
     <div class="col"></div>
-    <div class="col-12">
+    <div class="col-9">
         <h4 class="text-center">LISTADO DE CONTRATOS</h4>
         <div class="table table-responsive p-4 ">
             <table class="table table-bordered">
                 <thead class ="text-center">
                     <tr>
                         <th>No. CONTRATO</th>
-                        <th style='width: 13.60%'>SEDES</th>
-                        <th>FECHA INICIO</th>
-                        <th>FECHA FINALIZACIÓN</th>
+                        <th style='width: 15.60%'>FECHA INICIO</th>
+                        <th style='width: 15.60%'>FECHA FINALIZACIÓN</th>
                         <th>P. RECAMBIO</th>
                         <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($contratoDosiSede as $contdosised)
+                    @foreach($dosimetriacontrato as $dosicont)
                         <tr>
-                            <td><a class="link-dark" href="">{{$contdosised->dosimetriacontrato->codigo_contrato}}</a></td>
-                            <td>{{$contdosised->sede->nombre_sede}}</td>
-                            <td>{{$contdosised->dosimetriacontrato->fecha_inicio}}</td>
-                            <td>{{$contdosised->dosimetriacontrato->fecha_finalizacion}}</td>
-                            <td>{{$contdosised->dosimetriacontrato->periodo_recambio}}</td>
+                            <td><a class="link-dark" href="{{route('detallecontrato.create', $dosicont->id_contrato_dosimetria)}}">{{$dosicont->codigo_contrato}}</a></td>
+                            <td>{{$dosicont->fecha_inicio}}</td>
+                            <td>{{$dosicont->fecha_finalizacion}}</td>
+                            <td>{{$dosicont->periodo_recambio}}</td>
                             
                             <td>
 

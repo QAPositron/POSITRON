@@ -117,7 +117,7 @@
                             <div class="table table-responsive p-4 ">
                                 <table class="table table-bordered">
                                     <thead class ="text-center">
-                                        <tr >
+                                        <tr>
                                             <th style='width: 12.60%'>SEDE</th>
                                             <th style='width: 10.55%'>MUNICIPIO</th>
                                             <th style='width: 10.55%'>DEPARTAMENTO</th>

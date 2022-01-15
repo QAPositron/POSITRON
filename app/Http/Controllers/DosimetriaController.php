@@ -44,14 +44,16 @@ class DosimetriaController extends Controller
     
     public function createContrato($id){
         $empresa = Empresa::find($id);
-        $sedes = Sede::join('empresas', 'empresas_id', '=', 'id_empresa')
-        ->select('id_sede', 'nombre_sede')
-        ->get();
 
-        $contratoDosiSede = Contratodosimetriasede::all();
-        
-        return view('dosimetria.crear_contratos_dosimetria', compact('empresa', 'sedes', 'contratoDosiSede'));
-        /* return $contratoDosiSede; */
+        $sedes = Sede::leftJoin('contratodosimetriasedes', 'sedes.id_sede', '=', 'contratodosimetriasedes.sede_id')
+        ->where('sedes.empresas_id', $id)
+        ->whereNull('contratodosimetriasedes.sede_id')
+        ->get();
+      
+        $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
+        ->get();
+        return view('dosimetria.crear_contratos_dosimetria', compact('empresa', 'sedes', 'dosimetriacontrato'));
+        /* return $empresa; */
     }
 
     public function saveContrato(Request $request){
@@ -67,40 +69,45 @@ class DosimetriaController extends Controller
         $contratoDosi = new Dosimetriacontrato();
 
         $contratoDosi->codigo_contrato              = $request->codigo_contrato;
+        $contratoDosi->empresa_id                   = $request->empresa_contrato;
         $contratoDosi->fecha_inicio                 = $request->fecha_inicio_contrato;
         $contratoDosi->fecha_finalizacion           = $request->fecha_finalizacion_contrato;
         $contratoDosi->periodo_recambio             = $request->periodo_recambio_contrato;
         
         $contratoDosi->save();
-        
-        
-        foreach ($request->all() as $req){
+
+        for($i=0; $i<count($request->id_sede); $i++){
+
             $contratoDosiSede = new Contratodosimetriasede();
+
+            $contratoDosiSede->sede_id               = $request->id_sede[$i];
             $contratoDosiSede->contratodosimetria_id = $contratoDosi->id_contrato_dosimetria;
-            $contratoDosiSede->sede_id               = $req->id_sede;
-            $contratoDosiSede->dosi_cuerpo_entero    = $req->num_dosi_ce;
-            $contratoDosiSede->dosi_ambiental        = $req->num_dosi_ambiental;
-            $contratoDosiSede->dosi_ezclip           = $req->num_dosi_ezclip;
+            $contratoDosiSede->dosi_cuerpo_entero    = $request->num_dosi_ce[$i];
+            $contratoDosiSede->dosi_ambiental        = $request->num_dosi_ambiental[$i];
+            $contratoDosiSede->dosi_ezclip           = $request->num_dosi_ezclip[$i];
             $contratoDosiSede->save();
         }
-       /*  $contratoDosiSede = new Contratodosimetriasede();
+        
+        
+        return redirect()->route('contratosdosi.create', $contratoDosi->empresa_id);
 
-        $contratoDosiSede->contratodosimetria_id    = $contratoDosi->id_contrato_dosimetria;
-        $contratoDosiSede->sede_id                  = $request->id_sede;
-        $contratoDosiSede->dosi_cuerpo_entero       = $request->num_dosi_ce_contrato_sede;
-        $contratoDosiSede->dosi_ambiental           = $request->num_dosi_ambiental_contrato_sede;
-        $contratoDosiSede->dosi_ezclip              = $request->num_dosi_ezclip_contrato_sede;
-
-        $contratoDosiSede->save(); */
-
-
-       /*  return $contratoDosiSede; */
-        /* return $contratoDosiSede; */
-        /* return redirect()->route('contratosdosi.create'); */
-        return $contratoDosiSede;
     }
 
-    public function createdetalleContrato(){
-        return view('dosimetria.detalle_contrato_dosimetria');
+    public function createdetalleContrato($id){
+        $dosimetriacontrato = Dosimetriacontrato::find($id);
+        $dosimecontra = Dosimetriacontrato::join('contratodosimetriasedes', 'id_contrato_dosimetria', '=', 'contratodosimetria_id')
+        ->join('sedes', 'sede_id', '=', 'id_sede')
+        ->join('empresas', 'empresas_id', '=', 'id_empresa')
+        ->select('codigo_contrato', 'fecha_inicio', 'fecha_finalizacion', 'periodo_recambio','id_sede','nombre_sede', 'nombre_empresa', 'dosi_cuerpo_entero', 'dosi_ambiental', 'dosi_ezclip', 'id_contratodosimetriasede')
+        ->where('id_contrato_dosimetria', '=', $id)
+        ->get();
+        return view('dosimetria.detalle_contrato_dosimetria', compact('dosimetriacontrato', 'dosimecontra'));
+       /*  return $dosimecontra; */
+    }
+    public function createdetsedeContrato($id){
+        $dosisedecontra = Contratodosimetriasede::find($id);
+       
+        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisedecontra'));
+        /* return $dosisedecontra; */
     }
 }
