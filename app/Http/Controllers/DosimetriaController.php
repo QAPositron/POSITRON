@@ -8,8 +8,13 @@ use App\Models\Contratodosimetriasede;
 
 use App\Models\ContratosDosimetriaEmpresa;
 use App\Models\Dosimetriacontrato;
+use App\Models\Dosimetro;
 use App\Models\Empresa;
+use App\Models\Holder;
 use App\Models\Sede;
+use App\Models\Trabajador;
+use App\Models\Trabajadordosimetro;
+use App\Models\Trabajadorsede;
 use Illuminate\Http\Request;
 
 class DosimetriaController extends Controller
@@ -84,6 +89,7 @@ class DosimetriaController extends Controller
             $contratoDosiSede->contratodosimetria_id = $contratoDosi->id_contrato_dosimetria;
             $contratoDosiSede->dosi_cuerpo_entero    = $request->num_dosi_ce[$i];
             $contratoDosiSede->dosi_ambiental        = $request->num_dosi_ambiental[$i];
+            $contratoDosiSede->dosi_control          = $request->num_dosi_caso[$i];
             $contratoDosiSede->dosi_ezclip           = $request->num_dosi_ezclip[$i];
             $contratoDosiSede->save();
         }
@@ -98,7 +104,7 @@ class DosimetriaController extends Controller
         $dosimecontra = Dosimetriacontrato::join('contratodosimetriasedes', 'id_contrato_dosimetria', '=', 'contratodosimetria_id')
         ->join('sedes', 'sede_id', '=', 'id_sede')
         ->join('empresas', 'empresas_id', '=', 'id_empresa')
-        ->select('codigo_contrato', 'fecha_inicio', 'fecha_finalizacion', 'periodo_recambio','id_sede','nombre_sede', 'nombre_empresa', 'dosi_cuerpo_entero', 'dosi_ambiental', 'dosi_ezclip', 'id_contratodosimetriasede')
+        ->select('codigo_contrato', 'fecha_inicio', 'fecha_finalizacion', 'periodo_recambio','id_sede','nombre_sede', 'nombre_empresa', 'dosi_cuerpo_entero', 'dosi_ambiental', 'dosi_ezclip', 'dosi_control', 'id_contratodosimetriasede')
         ->where('id_contrato_dosimetria', '=', $id)
         ->get();
         return view('dosimetria.detalle_contrato_dosimetria', compact('dosimetriacontrato', 'dosimecontra'));
@@ -109,5 +115,39 @@ class DosimetriaController extends Controller
        
         return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisedecontra'));
         /* return $dosisedecontra; */
+    }
+
+    public function asignaDosiContrato($id)
+    {
+        $contdosisede = Contratodosimetriasede::find($id);
+        $trabajadores = Trabajadorsede::where('sede_id', '=', $contdosisede->sede_id)
+        ->get();
+        $dosimetros =Dosimetro::all();
+        $holder = Holder::all();
+        return view('dosimetria.asignar_dosimetro_contrato', compact('contdosisede', 'trabajadores', 'dosimetros', 'holder'));
+        /* return $contdosisede; */
+        /* return $trabajadores; */
+    }
+     
+    public function saveAsignacionDosiContrato(Request $request){
+        $request->validate([
+            'primerDia_asigdosim'       => 'required',
+            'ultimoDia_asigdosim'       => 'required',
+            'id_trabajador_asigdosim'   => 'required',
+            'num_dosimetro_asigdosim'   => 'required',
+            'num_holder_asigdosim'      => 'required',
+            'ocupacion__asigdosim'      => 'required',
+        ]);
+        for($i=0; $i<count($request->id_trabajador_asigdosim); $i++){
+
+            $asigdosim = new Trabajadordosimetro();
+
+            $asigdosim->trabajador_id                = $request->id_trabajador_asigdosim[$i];
+            $asigdosim->dosimetro_id                 = $request->num_dosimetro_asigdosim[$i];
+            $asigdosim->holder_id                    = $request->num_holder_asigdosim[$i];
+            
+            $asigdosim->save();
+        }
+        return $asigdosim;
     }
 }

@@ -25,6 +25,7 @@ class CreateContratodosimetriasedesTable extends Migration
             $table-> foreign('contratodosimetria_id')->references('id_contrato_dosimetria')->on('dosimetriacontratos')->onDelete('cascade')->onUpdate('cascade');
 
             $table->integer('dosi_cuerpo_entero')->nullable();
+            $table->integer('dosi_control')->nullable();
             $table->integer('dosi_ambiental')->nullable();
             $table->integer('dosi_ezclip')->nullable();
             $table->timestamps();

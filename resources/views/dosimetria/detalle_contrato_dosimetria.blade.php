@@ -46,6 +46,7 @@
                         <th class="table-active text-center" style='width: 30.90%'>SEDES</th>
                         <th class="table-active text-center">DOSÍMETROS C. ENTERO</th>
                         <th class="table-active text-center">DOSÍMETROS AMBIENTAL</th>
+                        <th class="table-active text-center">DOSÍMETROS CONTROL</th>
                         <th class="table-active text-center">DOSÍMETROS EZCLIP</th>
                         <th class="table-active text-center" style='width: 13.90%'>ACCIONES</th>
                     </tr>
@@ -56,8 +57,9 @@
                             <td><a class="link-dark" href="{{route('detallesedecont.create', $dosicont->id_contratodosimetriasede)}}">{{$dosicont->nombre_sede}}</a></td>
                             <td class="text-center">{{$dosicont->dosi_cuerpo_entero}}</td>
                             <td class="text-center">{{$dosicont->dosi_ambiental}}</td>
+                            <td class="text-center">{{$dosicont->dosi_control}}</td>
                             <td class="text-center">{{$dosicont->dosi_ezclip}}</td>
-                            <td >
+                            <td>
                             <div class="row">
                                 <div class="col">
                                     <a href="" class="btn colorQA">

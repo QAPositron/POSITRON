@@ -101,7 +101,7 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="text" class="form-control"  name="cedula_trabajador" id="cedula_trabajador" value="{{old('cedula_trabajador')}}" autofocus style="text-transform:uppercase;">
+                            <input type="number" class="form-control"  name="cedula_trabajador" id="cedula_trabajador" value="{{old('cedula_trabajador')}}" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid">CEDULA:</label>
                             @error('cedula_trabajador')
                                 <small>*{{$message}}</small>

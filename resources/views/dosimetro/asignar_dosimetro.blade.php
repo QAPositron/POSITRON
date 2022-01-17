@@ -13,7 +13,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating ">
-                            <select class="form-select" name="id_empresas" id="id_empresas"  autofocus aria-label="Floating label select example">
+                            <select class="form-select" name="id_empresa_asigdosim" id="id_empresa_asigdosim"  autofocus aria-label="Floating label select example">
                                 <option value="">--SELECCIONE--</option>
                                 @foreach($empresas as $emp)
                                     <option value ="{{ $emp->id_empresa}}">{{$emp->nombre_empresa}}</option>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" name="id_sedes" id="id_sedes" autofocus aria-label="Floating label select example">
+                            <select class="form-select" name="id_sede_asigdosim" id="id_sede_asigdosim" autofocus aria-label="Floating label select example">
                             </select>
                             <label for="floatingSelectGrid">SEDE:</label>
                         </div>
@@ -73,19 +73,32 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="primerDia_dosimetro" id="primerDia_dosimetro" >
+                            <input type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" >
                             <label for="floatingInputGrid">PRIMER DÍA</label>
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="ultimoDia_dosimetro" id="ultimoDia_dosimetro" >
+                            <input type="date" class="form-control" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
                             <label for="floatingInputGrid">ULTIMO DÍA:</label>
                         </div>
                     </div>
                 </div>
                 <br>
-                
+                <div class="row g-2">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" name="ocupacion_asigdosim" id="ocupacion_asigdosim" >
+                            <label for="floatingInputGrid">OCUPACIÓN</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" name="energia_asigdosim" id="energia_asigdosim" >
+                            <label for="floatingInputGrid">ENERGÍA:</label>
+                        </div>
+                    </div>
+                </div>
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="table table-responsive p-4 ">
