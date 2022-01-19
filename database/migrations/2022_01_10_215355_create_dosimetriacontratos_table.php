@@ -14,7 +14,7 @@ class CreateDosimetriacontratosTable extends Migration
     public function up()
     {
         Schema::create('dosimetriacontratos', function (Blueprint $table) {
-            $table->bigincrements('id_contrato_dosimetria')->unique();
+            $table->bigincrements('id_contratodosimetria')->unique();
             $table->integer('codigo_contrato')->nullable();
 
             $table-> unsignedBigInteger('empresa_id');

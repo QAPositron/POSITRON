@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dosimetriacontrato extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_contrato_dosimetria';
+    protected $primaryKey = 'id_contratodosimetria';
 
     //relacion uno a muchos con contrato dosimetria sede
     public function contratodosimetriasede(){
@@ -17,8 +17,7 @@ class Dosimetriacontrato extends Model
     }
 
      //Relacion uno a muchos (inversa) con empresa
-     public function empresa(){
-        
+    public function empresa(){
         return $this->belongsTo(Empresa::class, 'empresa_id', 'id_empresa');
     }
 }

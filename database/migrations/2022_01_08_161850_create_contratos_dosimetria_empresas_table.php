@@ -15,7 +15,7 @@ class CreateContratosDosimetriaEmpresasTable extends Migration
     {
         Schema::create('contratos_dosimetria_empresas', function (Blueprint $table) {
 
-            $table->bigincrements('id_contrato_dosimetria_emp')->unique();
+            $table->bigincrements('id_contratodosimetria_emp')->unique();
 
             $table-> unsignedBigInteger('empresa_id');
             $table-> foreign('empresa_id')->references('id_empresa')->on('empresas')->onDelete('cascade')->onUpdate('cascade');

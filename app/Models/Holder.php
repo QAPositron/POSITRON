@@ -10,7 +10,7 @@ class Holder extends Model
     use HasFactory;
     protected $primaryKey = 'id_holder';
 
-    //relacion uno a muchos
+    //relacion uno a muchos con trabajador dosiemtro
     public function trabajadordosimetro(){
         /* return $this->hasMany('App\Models\Sede'); */
         return $this->hasOne(Trabajadordosimetro::class, 'id_trabajadordosimetro');

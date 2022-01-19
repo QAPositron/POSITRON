@@ -112,41 +112,34 @@
                                     <th style='width: 16.60%'>OCUPACIÓN</th>
                                 </thead>
                                 <tbody>
-                                    
-                                    @foreach($trabajadores as $trab)
+                                    @for($i=0; $i<$contdosisede->dosi_control; $i++)
                                         <tr>
-                                            <td >
-                                                <input type="number" name="id_trabajador_asigdosim[]" id="id_trabajador_asigdosim" hidden value="{{ $trab->trabajador->id_trabajador}}">
-                                                <input type="text" class="form-control mx-1" style="border:0; background-color:#F8F9FA;"  value="{{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}" readonly>
-                                            </td>
                                             <td>
-                                                {{$trab->trabajador->primer_apellido_trabajador}} {{$trab->trabajador->segundo_apellido_trabajador}}
+                                                <input type="number" name="id_sede_asigdosim_control" id="id_sede_asigdosim_control" hidden value="{{$contdosisede->sede_id}}">
+                                                
+                                                <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
+                                                N.A.
                                             </td>
-                                            <td>{{$trab->trabajador->cedula_trabajador}}</td>
+                                            <td colspan="2">CONTROL</td>
                                             <td>
-                                                <select class="form-select" name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim"  autofocus aria-label="Floating label select example" >
+                                                <select class="form-select" name="id_dosimetro_asigdosim_control[]" id="id_dosimetro_asigdosim_control"  autofocus aria-label="Floating label select example">
+                                                    <option value ="">--</option>
                                                     @foreach($dosimetros as $dosi)
-                                                        <option value ="{{ $dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}</option>
+                                                        <option value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}</option>
                                                     @endforeach
                                                 </select>
-                                                <!-- <input type="number" class="form-control mx-1" style="width:120px" name="num_dosimetro_asigdosim[]" id="num_dosimetro_asigdosim" autofocus> -->
-                                                @error('id_dosimetro_asigdosim')
+                                                @error('id_dosimetro_asigdosim_control')
                                                     <small>*{{$message}}</small>
                                                 @enderror
                                             </td>
+                                            <td class="text-center">N.A.</td>
                                             <td>
-                                                <input type="number" class="form-control mx-1" style="width:120px" name="num_holder_asigdosim[]" id="num_holder_asigdosim" autofocus>
-                                                @error('num_holder_asigdosim')
-                                                    <small>*{{$message}}</small>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                <select class="form-select" name="ocupacion__asigdosim" id="ocupacion__asigdosim" autofocus style="text-transform:uppercase">
+                                                <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control" autofocus style="text-transform:uppercase">
                                                     <option value="">--</option>
-                                                    <option value="T">TELETERAPIA,</option>
-                                                    <option value="B">BRANQUITERAPIA,</option>
+                                                    <option value="T">TELETERAPIA</option>
+                                                    <option value="B">BRANQUITERAPIA</option>
                                                     <option value="N">MEDICINA NUCLEAR</option>
-                                                    <option value="G">GAMAGRAFIA INDUSTRIAL,</option>
+                                                    <option value="G">GAMAGRAFIA INDUSTRIAL</option>
                                                     <option value="F">MEDIDORES FIJOS</option>
                                                     <option value="I">INVESTIGACIÓN</option>
                                                     <option value="D">DENSÍMETRO NUCLEAR</option>
@@ -161,9 +154,74 @@
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                 </select>
+                                                @error('ocupacion_asigdosim_control')
+                                                    <small>*{{$message}}</small>
+                                                @enderror
+                                            </td>
+                                        </tr>
+                                    @endfor
+                                    @foreach($trabajadores as $trab)
+                                        <tr>
+                                            <td>
+                                                <input type="number" name="id_trabajador_asigdosim[]" id="id_trabajador_asigdosim" hidden value="{{$trab->trabajador->id_trabajador}}">
+                                                <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
+                                                {{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}
+                                            </td>
+                                            <td>
+                                                {{$trab->trabajador->primer_apellido_trabajador}} {{$trab->trabajador->segundo_apellido_trabajador}}
+                                            </td>
+                                            <td>{{$trab->trabajador->cedula_trabajador}}</td>
+                                            <td>
+                                                <select class="form-select" name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim"  autofocus aria-label="Floating label select example" >
+                                                    <option value ="">--</option>
+                                                    @foreach($dosimetros as $dosi)
+                                                        <option value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('id_dosimetro_asigdosim')
+                                                    <small>*{{$message}}</small>
+                                                @enderror
+                                            </td>
+                                            <td>
+                                                <select class="form-select" name="id_holder_asigdosim[]" id="id_holder_asigdosim" autofocus aria-label="Floating label select example">
+                                                    <option value ="">--</option>
+                                                    
+                                                    @foreach($holders as $hol)
+                                                        <option value ="{{$hol->id_holder}}">{{$hol->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('id_holder_asigdosim')
+                                                    <small>*{{$message}}</small>
+                                                @enderror
+                                            </td>
+                                            <td>
+                                                <select class="form-select" name="ocupacion_asigdosim[]" id="ocupacion_asigdosim" autofocus style="text-transform:uppercase">
+                                                    <option value="">--</option>
+                                                    <option value="T">TELETERAPIA</option>
+                                                    <option value="B">BRANQUITERAPIA</option>
+                                                    <option value="N">MEDICINA NUCLEAR</option>
+                                                    <option value="G">GAMAGRAFIA INDUSTRIAL</option>
+                                                    <option value="F">MEDIDORES FIJOS</option>
+                                                    <option value="I">INVESTIGACIÓN</option>
+                                                    <option value="D">DENSÍMETRO NUCLEAR</option>
+                                                    <option value="M">MEDIDORES MÓVILES</option>
+                                                    <option value="E">DOCENCIA</option>
+                                                    <option value="P">PERFILAJE Y REGISTRO</option>
+                                                    <option value="T">TRAZADORES</option>
+                                                    <option value="H">HEMODINAMIA</option>
+                                                    <option value="X">RX PERIAPICALES</option>
+                                                    <option value="R">RADIODIAGNÓSTICO</option>
+                                                    <option value="S">FLUOROSCOPÍA</option>
+                                                    <option value="AM">APLICACIONES MÉDICAS</option>
+                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                </select>
+                                                @error('ocupacion_asigdosim')
+                                                <small>*{{$message}}</small>
+                                                @enderror
                                             </td>
                                         </tr>
                                     @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>

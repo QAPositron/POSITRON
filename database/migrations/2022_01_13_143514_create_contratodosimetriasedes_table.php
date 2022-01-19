@@ -22,7 +22,7 @@ class CreateContratodosimetriasedesTable extends Migration
             $table-> foreign('sede_id')->references('id_sede')->on('sedes')->onDelete('cascade')->onUpdate('cascade');
 
             $table-> unsignedBigInteger('contratodosimetria_id');
-            $table-> foreign('contratodosimetria_id')->references('id_contrato_dosimetria')->on('dosimetriacontratos')->onDelete('cascade')->onUpdate('cascade');
+            $table-> foreign('contratodosimetria_id')->references('id_contratodosimetria')->on('dosimetriacontratos')->onDelete('cascade')->onUpdate('cascade');
 
             $table->integer('dosi_cuerpo_entero')->nullable();
             $table->integer('dosi_control')->nullable();

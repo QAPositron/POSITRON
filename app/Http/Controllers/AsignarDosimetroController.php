@@ -40,7 +40,7 @@ class AsignarDosimetroController extends Controller
 
         $dosiasignado->dosimetro_id        = $request->codigo_dosimetro;
         $dosiasignado->trabajador_id       = $request->id_trabajadores;
-        $dosiasignado->holders_id          = $request->holder_dosimetro;
+        $dosiasignado->holder_id           = $request->holder_dosimetro;
         $dosiasignado->empresa_id          = $request->id_empresas;
         $dosiasignado->sede_id             = $request->id_sedes;
        

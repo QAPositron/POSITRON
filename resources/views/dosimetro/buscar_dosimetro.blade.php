@@ -19,7 +19,7 @@
                 <div class="card-body ">
                     <!-- //////////////////// PESTAÑA DE DOSIMETROS //////////////// -->
                     <div class="tab-content mt-3">
-                        <div class="tab-pane active" id="dosimetro" role="tabpanel" aria-labelledby="dosimetro-tab">
+                        <div class="tab-pane active" id="dosimetro" role="tabpanel">
                             <div class="row">
                                 <div class="col">
                                     <a href="{{route('dosimetros.create')}}" class="btn colorQA btn-sm m-4">
@@ -82,6 +82,7 @@
                             </div>
                             
                         </div>
+
                         <div class="tab-pane" id="holder" role="tabpanel" aria-labelledby="holder-tab">
                             
                             <div class="row">
@@ -100,29 +101,25 @@
                                     <thead class="table-active text-center">
                                         <th scope='col'  style='width: 18.60%'>CODIGO</th>
                                         <th scope='col'>TIPO</th>
-                                        <th scope='col'>TECNOLOGIA</th>
-                                        <th scope='col' style='width: 13.90%'>F. ING. AL SERV.</th>
                                         <th scope='col'>ESTADO</th>
                                         <th scope='col' style='width: 11.90%'>ACCIONES</th>
                                     </thead>
-                                    @foreach($dosimetro as $dosi)
+                                    @foreach($holder as $hol)
                                         <tr>
-                                            <td>{{$dosi->codigo_dosimeter}}</td>
-                                            <td>{{$dosi->tipo_dosimetro}}</td>
-                                            <td>{{$dosi->tecnologia_dosimetro}}</td>
-                                            <td>{{$dosi->fecha_ingreso_servicio}}</td>
-                                            <td>{{$dosi->estado_dosimetro}}</td>
+                                            <td>{{$hol->codigo_holder}}</td>
+                                            <td>{{$hol->tipo_holder}}</td>
+                                            <td>{{$hol->estado_holder}}</td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <a href="{{route('dosimetros.edit', $dosi->id_dosimetro)}}" class="btn colorQA">
+                                                        <a href="{{route('holders.edit', $hol->id_holder)}}" class="btn colorQA">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                                                             <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
                                                             </svg>
                                                         </a>
                                                     </div>
                                                     <div class="col">
-                                                        <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetros.destroy', $dosi)}}" method="POST">
+                                                        <form id="form_eliminar_holder" name="form_eliminar_holder" action="{{route('holders.destroy', $hol)}}" method="POST">
                                                             @csrf  
                                                             @method('delete')
                                                             <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
@@ -194,7 +191,7 @@ crossorigin="anonymous">
             $(this).tab('show')
         })
 
-        $('#form_eliminar_dosimetro').submit(function(e){
+        $('#form_eliminar_holder').submit(function(e){
             e.preventDefault();
             Swal.fire({
                 text: "SEGURO QUE DESEA ELIMINAR ESTE DOSÍMETRO??",

@@ -24,13 +24,13 @@ class Empresa extends Model
     //relacion uno a muchos
     public function dosimetriacontratos(){
         /* return $this->hasMany('App\Models\Sede'); */
-        return $this->hasMany(Dosimetriacontrato::class, 'id_contrato_dosimetria');
+        return $this->hasMany(Dosimetriacontrato::class, 'id_contratodosimetria');
     }
 
     //relacion uno a muchos
     public function contratosDosimetriaEmpresas(){
         /* return $this->hasMany('App\Models\Sede'); */
-        return $this->hasMany(ContratosDosimetriaEmpresa::class, 'id_contrato_dosimetria_emp');
+        return $this->hasMany(ContratosDosimetriaEmpresa::class, 'id_contratodosimetria_emp');
     }
     
 }

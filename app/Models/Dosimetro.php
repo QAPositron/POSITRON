@@ -14,4 +14,8 @@ class Dosimetro extends Model
         return $this->hasMany(Trabajadordosimetro::class, 'id_trabajadordosimetro');
     }
    
+    //relacion uno a muchos con la tabla dosicontrolcontdosisedes
+    public function dosicontrolcontratodosisede(){
+        return $this->hasMany(Dosicontrolcontdosisede::class, 'id_dosicontrolcontdosisedes');
+    }
 }

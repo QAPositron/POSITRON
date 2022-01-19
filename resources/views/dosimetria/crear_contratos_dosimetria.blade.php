@@ -176,7 +176,7 @@
                 <tbody>
                     @foreach($dosimetriacontrato as $dosicont)
                         <tr>
-                            <td><a class="link-dark" href="{{route('detallecontrato.create', $dosicont->id_contrato_dosimetria)}}">{{$dosicont->codigo_contrato}}</a></td>
+                            <td><a class="link-dark" href="{{route('detallecontrato.create', $dosicont->id_contratodosimetria)}}">{{$dosicont->codigo_contrato}}</a></td>
                             <td>{{$dosicont->fecha_inicio}}</td>
                             <td>{{$dosicont->fecha_finalizacion}}</td>
                             <td>{{$dosicont->periodo_recambio}}</td>

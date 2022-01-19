@@ -33,8 +33,8 @@ class TrabajadorsController extends Controller
             'tipo_trabajador'               => 'required',
             
         ]);
+        
         $trabajador = new Trabajador();
-
         $trabajador->primer_nombre_trabajador       = strtoupper($request->primer_nombre_trabajador);
         $trabajador->segundo_nombre_trabajador      = strtoupper($request->segundo_nombre_trabajador);
         $trabajador->primer_apellido_trabajador     = strtoupper($request->primer_apellido_trabajador);

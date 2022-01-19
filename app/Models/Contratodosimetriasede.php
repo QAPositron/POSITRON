@@ -19,6 +19,14 @@ class Contratodosimetriasede extends Model
     //Relacion uno a muchos (inversa) con dosimetria contrato
     public function dosimetriacontrato(){
         /* return $this->belongsTo('App\Models\Empresa'); */
-        return $this->belongsTo(Dosimetriacontrato::class, 'contratodosimetria_id', 'id_contrato_dosimetria');
+        return $this->belongsTo(Dosimetriacontrato::class, 'contratodosimetria_id', 'id_contratodosimetria');
+    }
+     //relacion uno a muchos con la tabla trabajadordosimetro
+     public function trabajadordosimetro(){
+        return $this->hasMany(Trabajadordosimetro::class, 'id_trabajadordosimetro');
+    }
+    //relacion uno a muchos con la tabla dosicontrolcontdosisedes
+    public function dosicontrolcontratodosisede(){
+        return $this->hasMany(Dosicontrolcontdosisede::class, 'id_dosicontrolcontdosisedes');
     }
 }

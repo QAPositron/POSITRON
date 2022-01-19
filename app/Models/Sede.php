@@ -37,5 +37,10 @@ class Sede extends Model
     public function contratodosimetriasede(){
     /* return $this->hasMany('App\Models\Sede'); */
     return $this->hasMany(Contratodosimetriasede::class, 'id_contratodosimetriasede');
-}
+    }
+
+    //relacion uno a muchos con la tabla dosicontrolcontdosisedes
+    public function dosicontrolcontratodosisede(){
+        return $this->hasMany(Dosicontrolcontdosisede::class, 'id_dosicontrolcontdosisedes');
+    }
 }

@@ -25,8 +25,26 @@
                         @for($i=1; $i<=12; $i++)
                             <tr>
                                 <th>MES {{$i}}</th>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    @php
+                                        $lenghtData = 0;
+                                        foreach($trabjasigcontra as $trab){
+                                            $lenghtData += 1 ;
+                                        }
+                                        echo "$lenghtData";
+                                    @endphp
+                                </td>
+                                <td>
+                                    @php
+                                        $lenghtData = 0;
+                                        $suma = $dosisedecontra->dosi_cuerpo_entero + $dosisedecontra->dosi_control + $dosisedecontra->dosi_ambiental + $dosisedecontra->dosi_ezclip;
+                                        foreach($trabjasigcontra as $trab){
+                                            $lenghtData += 1 ;
+                                        }
+                                        $resul = $suma - $lenghtData;
+                                        echo "$resul";
+                                    @endphp
+                                </td>
                                 <td>
 
                                     <div class="row ">
