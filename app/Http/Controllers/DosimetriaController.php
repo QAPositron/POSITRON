@@ -112,17 +112,22 @@ class DosimetriaController extends Controller
         return view('dosimetria.detalle_contrato_dosimetria', compact('dosimetriacontrato', 'dosimecontra'));
        /*  return $dosimecontra; */
     }
+
     public function createdetsedeContrato($id){
         $dosisedecontra = Contratodosimetriasede::find($id);
         $trabjasigcontra = Trabajadordosimetro::where('contratodosimetriasede_id', '=', $id)
         ->get();
         return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisedecontra', 'trabjasigcontra'));
-        /* return $trabjasigcontra; */
+        /* return $dosisedecontra; */
     }
 
     public function asignaDosiContrato($id)
     {
         $contdosisede = Contratodosimetriasede::find($id);
+        $trabjadosi = Trabajador::leftjoin('trabajadordosimetros', 'trabajadors.id_trabajador', '=', 'trabajadordosimetros.trabajador_id')
+        ->whereNull('trabajadordosimetros.trabajador_id')
+        ->select("*")
+        ->get();
         $trabajadores = Trabajadorsede::where('sede_id', '=', $contdosisede->sede_id)
         ->get();
         $dosimetros =Dosimetro::leftJoin('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
@@ -179,7 +184,7 @@ class DosimetriaController extends Controller
             
             $asigdosim_control->save();
         }
-        return redirect()->route('detallesedecont.create', $request->id_sede_asigdosim);
+        return redirect()->route('detallesedecont.create', $request->id_contrato_asigdosim);
 
         /* return $request; */
         

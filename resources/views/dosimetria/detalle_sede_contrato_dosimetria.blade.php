@@ -1,7 +1,7 @@
 @extends('layouts.plantillabase')
 @section('contenido')
     
-        <h3 class="text-center ">{{$dosisedecontra->dosimetriacontrato->empresa->nombre_empresa}} - SEDE: {{$dosisedecontra->sede->nombre_sede}}</h3>
+        <h3 class="text-center ">{{$dosisedecontra->sede->empresa->nombre_empresa}} - SEDE: {{$dosisedecontra->sede->nombre_sede}}</h3>
         <br>
         <h4 class="text-center ">CONTRATO No. {{$dosisedecontra->dosimetriacontrato->codigo_contrato}}</h4>
     

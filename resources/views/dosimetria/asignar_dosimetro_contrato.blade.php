@@ -184,8 +184,8 @@
                                             </td>
                                             <td>
                                                 <select class="form-select" name="id_holder_asigdosim[]" id="id_holder_asigdosim" autofocus aria-label="Floating label select example">
-                                                    <option value ="">--</option>
-                                                    
+                                                    <option value ="">N.A.</option>
+                                                    <!-- <option value ="">N.A.</option> -->
                                                     @foreach($holders as $hol)
                                                         <option value ="{{$hol->id_holder}}">{{$hol->codigo_holder}}</option>
                                                     @endforeach
