@@ -112,7 +112,7 @@ class DosimetriaController extends Controller
             $trabajadorNuevo->trabajador_id = $request->idTrabajador;
             $trabajadorNuevo->sede_id = $request->id_sede_asigdosim;
             $trabajadorNuevo->save();
-        return redirect()->route('asignadosicontrato.create', $request->contratoId);
+        return redirect()->route('asignadosicontrato.create',['asigdosicont' =>$request->contratoId, 'mesnumber'=> $request->mesnumber] );
     }
 
     public function createdetalleContrato($id){
@@ -148,15 +148,33 @@ class DosimetriaController extends Controller
         $dosimetrosTrabajadores = Trabajadordosimetro::where('contratodosimetriasede_id', $id)
             ->select("*")
             ->get();
-        $dosimetrosEzClipAsignados = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+        $dosimetroControlEzclipAsignados=Dosicontrolcontdosisede::where('contratodosimetriasede_id', $id)
+            ->join('dosimetros','dosimetros.id_dosimetro','=','dosicontrolcontdosisedes.dosimetro_id')
             ->where('tipo_dosimetro', 'EZCLIP')
             ->select("*")
             ->count();
-        $dosimetrosCuerpoEnteroAsignados = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+            $dosimetroControlCuerpoAsignados=Dosicontrolcontdosisede::where('contratodosimetriasede_id', $id)
+                ->join('dosimetros','dosimetros.id_dosimetro','=','dosicontrolcontdosisedes.dosimetro_id')
+                ->where('tipo_dosimetro', 'CUERPO')
+                ->select("*")
+                ->count();
+                $dosimetrosControlAmbientalAsignados=Dosicontrolcontdosisede::where('contratodosimetriasede_id', $id)
+                    ->join('dosimetros','dosimetros.id_dosimetro','=','dosicontrolcontdosisedes.dosimetro_id')
+                    ->where('tipo_dosimetro', 'AMBIENTAL')
+                    ->select("*")
+                    ->count();
+        $dosimetrosEzClipAsignados = Trabajadordosimetro::where('contratodosimetriasede_id', $id)
+        ->join('dosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+            ->where('tipo_dosimetro', 'EZCLIP')
+            ->select("*")
+            ->count();
+        $dosimetrosCuerpoEnteroAsignados = Trabajadordosimetro::where('contratodosimetriasede_id', $id)
+        ->join('dosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
             ->where('tipo_dosimetro', 'CUERPO')
             ->select("*")
             ->count();
-        $dosimetrosAmbienteAsignados = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+        $dosimetrosAmbienteAsignados = Trabajadordosimetro::where('contratodosimetriasede_id', $id)
+        ->join('dosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
             ->where('tipo_dosimetro', 'AMBIENTAL')
             ->select("*")
             ->count();
@@ -186,25 +204,26 @@ class DosimetriaController extends Controller
         ]);
         return view('dosimetria.asignar_dosimetro_contrato', compact('contdosisede', 'trabajadores', 'dosimetros', 'holders', 'dosimetrosControlAsignados', 'dosimetrosEzClipAsignados',
         'dosimetrosCuerpoEnteroAsignados', 'dosimetrosAmbienteAsignados', 'dosimetrosControl', 'ocupacionesMap', 'dosimetrosTrabajadores',
-        'holdersDisponibles', 'dosimetrosDisponibles', 'allWorks'));
+        'holdersDisponibles', 'dosimetrosDisponibles', 'allWorks', 'dosimetroControlEzclipAsignados',
+        'dosimetroControlCuerpoAsignados', 'dosimetrosControlAmbientalAsignados'));
         /* return $contdosisede; */
         /* return $trabajadores; */
     }
-    public function deleteTrabajadorSede($idWork, $contratoId) {
+    public function deleteTrabajadorSede($idWork, $contratoId, $mesnumber) {
         $trabajadorSede = Trabajadorsede::where('trabajador_id', $idWork)
         ->delete();
-        return redirect()->route('asignadosicontrato.create', $contratoId);
+        return redirect()->route('asignadosicontrato.create', ['asigdosicont' =>$contratoId, 'mesnumber'=> $mesnumber]);
     }
-    public function deleteDosimetro($idWork, $contratoId) {
+    public function deleteDosimetro($idWork, $contratoId, $mesnumber) {
 
     $dosimetrosTrabajadores = Trabajadordosimetro::where('trabajador_id', $idWork)
     ->delete();
-    return redirect()->route('asignadosicontrato.create', $contratoId);
+    return redirect()->route('asignadosicontrato.create', ['asigdosicont' =>$contratoId, 'mesnumber'=> $mesnumber]);
     }
-    public function deleteDosimetroControl($idDosiControl, $contratoId) {
+    public function deleteDosimetroControl($idDosiControl, $contratoId, $mesnumber) {
         $dosiControl = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', $idDosiControl)
         ->delete();
-        return redirect()->route('asignadosicontrato.create', $contratoId);
+        return redirect()->route('asignadosicontrato.create', ['asigdosicont' =>$contratoId, 'mesnumber'=> $mesnumber]);
     }
     public function saveAsignacionDosiContrato(Request $request){
         $request->validate([
