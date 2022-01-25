@@ -18,6 +18,7 @@ use App\Models\Trabajador;
 use App\Models\Trabajadordosimetro;
 use App\Models\Trabajadorsede;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DosimetriaController extends Controller
 {
@@ -42,13 +43,13 @@ class DosimetriaController extends Controller
         $empresaDosi->numtotal_dosi_control        = 0;
         $empresaDosi->numtotal_dosi_ambiental      = 0;
         $empresaDosi->numtotal_dosi_ezclip         = 0;
-        
+
         $empresaDosi->save();
 
         /* return $empresaDosi; */
         return redirect()->route('empresasdosi.create');
     }
-    
+
     public function createContrato($id){
         $empresa = Empresa::find($id);
 
@@ -56,7 +57,7 @@ class DosimetriaController extends Controller
         ->where('sedes.empresas_id', $id)
         ->whereNull('contratodosimetriasedes.sede_id')
         ->get();
-      
+
         $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
         ->get();
         return view('dosimetria.crear_contratos_dosimetria', compact('empresa', 'sedes', 'dosimetriacontrato'));
@@ -71,7 +72,7 @@ class DosimetriaController extends Controller
             'fecha_finalizacion_contrato'   => 'required',
             'periodo_recambio_contrato'     => 'required',
             'id_sede'                       => 'required',
-            
+
         ]);
         $contratoDosi = new Dosimetriacontrato();
 
@@ -80,7 +81,7 @@ class DosimetriaController extends Controller
         $contratoDosi->fecha_inicio                 = $request->fecha_inicio_contrato;
         $contratoDosi->fecha_finalizacion           = $request->fecha_finalizacion_contrato;
         $contratoDosi->periodo_recambio             = $request->periodo_recambio_contrato;
-        
+
         $contratoDosi->save();
 
         for($i=0; $i<count($request->id_sede); $i++){
@@ -95,10 +96,23 @@ class DosimetriaController extends Controller
             $contratoDosiSede->dosi_ezclip           = $request->num_dosi_ezclip[$i];
             $contratoDosiSede->save();
         }
-        
-        
+
+
         return redirect()->route('contratosdosi.create', $contratoDosi->empresa_id);
 
+    }
+    public function  createTrabajadorSede(Request $request) {
+        $request->validate([
+            'idTrabajador'               => 'required',
+            'id_sede_asigdosim'                       => 'required',
+
+        ]);
+
+            $trabajadorNuevo = new Trabajadorsede();
+            $trabajadorNuevo->trabajador_id = $request->idTrabajador;
+            $trabajadorNuevo->sede_id = $request->id_sede_asigdosim;
+            $trabajadorNuevo->save();
+        return redirect()->route('asignadosicontrato.create', $request->contratoId);
     }
 
     public function createdetalleContrato($id){
@@ -124,6 +138,28 @@ class DosimetriaController extends Controller
     public function asignaDosiContrato($id)
     {
         $contdosisede = Contratodosimetriasede::find($id);
+        $dosimetrosControlAsignados = Dosicontrolcontdosisede::where('contratodosimetriasede_id', $id)
+            ->select("*")
+        ->count();
+        $allWorks = DB::table('trabajadors')->get();
+        $dosimetrosControl = Dosicontrolcontdosisede::where('contratodosimetriasede_id', $id)
+            ->select("*")
+            ->get();
+        $dosimetrosTrabajadores = Trabajadordosimetro::where('contratodosimetriasede_id', $id)
+            ->select("*")
+            ->get();
+        $dosimetrosEzClipAsignados = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+            ->where('tipo_dosimetro', 'EZCLIP')
+            ->select("*")
+            ->count();
+        $dosimetrosCuerpoEnteroAsignados = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+            ->where('tipo_dosimetro', 'CUERPO')
+            ->select("*")
+            ->count();
+        $dosimetrosAmbienteAsignados = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+            ->where('tipo_dosimetro', 'AMBIENTAL')
+            ->select("*")
+            ->count();
         $trabjadosi = Trabajador::leftjoin('trabajadordosimetros', 'trabajadors.id_trabajador', '=', 'trabajadordosimetros.trabajador_id')
         ->whereNull('trabajadordosimetros.trabajador_id')
         ->select("*")
@@ -134,15 +170,42 @@ class DosimetriaController extends Controller
         ->whereNull('trabajadordosimetros.dosimetro_id')
         ->select("*")
         ->get();
-        $holders = Holder::leftJoin('trabajadordosimetros','holders.id_holder', '=', 'trabajadordosimetros.holder_id') 
+        $holders = Holder::leftJoin('trabajadordosimetros','holders.id_holder', '=', 'trabajadordosimetros.holder_id')
         ->whereNull('trabajadordosimetros.holder_id')
         ->select("*")
         ->get();
-        return view('dosimetria.asignar_dosimetro_contrato', compact('contdosisede', 'trabajadores', 'dosimetros', 'holders'));
+        $holdersDisponibles = Holder::join('trabajadordosimetros','holders.id_holder', '=', 'trabajadordosimetros.holder_id')
+            ->select("*")
+            ->get();
+        $dosimetrosDisponibles =Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+            ->select("*")
+            ->get();
+        $ocupacionesMap = collect([
+             ['key' => 'T', 'value' => 'TELETERAPIA'],
+            ['key' => 'C', 'value' => 'CASA']
+        ]);
+        return view('dosimetria.asignar_dosimetro_contrato', compact('contdosisede', 'trabajadores', 'dosimetros', 'holders', 'dosimetrosControlAsignados', 'dosimetrosEzClipAsignados',
+        'dosimetrosCuerpoEnteroAsignados', 'dosimetrosAmbienteAsignados', 'dosimetrosControl', 'ocupacionesMap', 'dosimetrosTrabajadores',
+        'holdersDisponibles', 'dosimetrosDisponibles', 'allWorks'));
         /* return $contdosisede; */
         /* return $trabajadores; */
     }
-    
+    public function deleteTrabajadorSede($idWork, $contratoId) {
+        $trabajadorSede = Trabajadorsede::where('trabajador_id', $idWork)
+        ->delete();
+        return redirect()->route('asignadosicontrato.create', $contratoId);
+    }
+    public function deleteDosimetro($idWork, $contratoId) {
+
+    $dosimetrosTrabajadores = Trabajadordosimetro::where('trabajador_id', $idWork)
+    ->delete();
+    return redirect()->route('asignadosicontrato.create', $contratoId);
+    }
+    public function deleteDosimetroControl($idDosiControl, $contratoId) {
+        $dosiControl = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', $idDosiControl)
+        ->delete();
+        return redirect()->route('asignadosicontrato.create', $contratoId);
+    }
     public function saveAsignacionDosiContrato(Request $request){
         $request->validate([
             'primerDia_asigdosim'       => 'required',
@@ -151,7 +214,7 @@ class DosimetriaController extends Controller
             'id_dosimetro_asigdosim'    => 'required',
             'id_holder_asigdosim'       => 'required',
             'ocupacion_asigdosim'       => 'required',
-            
+
         ]);
         for($i=0; $i<count($request->id_trabajador_asigdosim); $i++){
 
@@ -164,12 +227,12 @@ class DosimetriaController extends Controller
             $asigdosim->primer_dia_uso               = $request->primerDia_asigdosim;
             $asigdosim->ultimo_dia_uso               = $request->ultimoDia_asigdosim;
             $asigdosim->ocupacion                    = $request->ocupacion_asigdosim[$i];
-            
-            
+
+
             $asigdosim->save();
         }
         ////////////////// SAVE DE DOSIMETRO TIPO  CONTROL /////////////////////////
-        
+
         for($i=0; $i<count($request->id_dosimetro_asigdosim_control); $i++){
 
             $asigdosim_control = new Dosicontrolcontdosisede();
@@ -181,12 +244,12 @@ class DosimetriaController extends Controller
             $asigdosim_control->ultimo_dia_uso              = $request->ultimoDia_asigdosim;
             $asigdosim_control->ocupacion                   = $request->ocupacion_asigdosim_control[$i];
             $asigdosim_control->energia                     = $request->energia_asigdosim;
-            
+
             $asigdosim_control->save();
         }
         return redirect()->route('detallesedecont.create', $request->id_contrato_asigdosim);
 
         /* return $request; */
-        
+
     }
 }

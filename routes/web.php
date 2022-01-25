@@ -101,6 +101,13 @@ Route::get('detallesedecont/{detsedcont}/create',[DosimetriaController::class, '
 Route::get('asignadosicontrato/{asigdosicont}/create', [DosimetriaController::class, 'asignaDosiContrato'])->name('asignadosicontrato.create');
 Route::post('asignadosicontrato', [DosimetriaController::class, 'saveAsignacionDosiContrato'])->name('asignadosicontrato.save');
 
+///////DELETE DOSIMETRO FOR WORK////////
+Route::delete('eliminatedDosiForWork/{idWork}/{contratoId}', [DosimetriaController::class, 'deleteDosimetro'])->name('dosimetroWork.destroy');
+Route::delete('eliminatedDosiControl/{idDosiControl}/{contratoId}', [DosimetriaController::class, 'deleteDosimetroControl'])->name('dosimetroControl.destroy');
+Route::delete('eliminatedTrabajadorSede/{idWork}/{contratoId}', [DosimetriaController::class, 'deleteTrabajadorSede'])->name('trabajadorSede.destroy');
+Route::post('createdTrabajadorSede', [DosimetriaController::class, 'createTrabajadorSede'])->name('trabajadorSede.create');
+
+
 
 Route::get('asignadosicreate', [AsignarDosimetroController::class, 'create'])->name('asignadosis.create');
 Route::get('asignadosi', [AsignarDosimetroController::class, 'save'])->name('asignadosis.save');
