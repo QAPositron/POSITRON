@@ -5,6 +5,11 @@
     <br>
     <h4 class="text-center ">CONTRATO No. {{$dosisedecontra->dosimetriacontrato->codigo_contrato}}</h4>
     
+
+        <h3 class="text-center ">{{$dosisedecontra->sede->empresa->nombre_empresa}} - SEDE: {{$dosisedecontra->sede->nombre_sede}}</h3>
+        <br>
+        <h4 class="text-center ">CONTRATO No. {{$dosisedecontra->dosimetriacontrato->codigo_contrato}}</h4>
+
     <br>
     <h6 class="text-center ">TOTAL DE DOSÍMETROS:       CUERPO E.:#        AMBIENTAL: #       EZCLIP:# </h6>
 
@@ -22,9 +27,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for($i=1; $i<=12; $i++)
+
+                        @for($i=0; $i<12; $i++)
+
+
                             <tr>
                                 <th><a class="link-dark" href="{{route('asignadosicontrato.info', $dosisedecontra->id_contratodosimetriasede)}}">MES {{$i}}</a></th>
+                                <th>MES {{$i+1}} <br>
+                                @if($i==0)
+                                    <span>{{date("d-m-Y",strtotime($dosisedecontra->dosimetriacontrato->fecha_inicio))}}</span>
+                                    @else
+                                        <span>{{date("d-m-Y",strtotime($dosisedecontra->dosimetriacontrato->fecha_inicio."+ ".(30*$i)." days" ))}}</span>
+                                    @endif
+
+
+
+                                </th>
                                 <td>
                                     @php
                                         $lenghtData = 0;
@@ -39,6 +57,7 @@
                                         $lenghtData = 0;
                                         $suma = $dosisedecontra->dosi_cuerpo_entero + $dosisedecontra->dosi_control + $dosisedecontra->dosi_ambiental + $dosisedecontra->dosi_ezclip;
                                         foreach($trabjasigcontra as $trab){
+                                            //esto esta bien PERO, recuerda que los dosimetros de control falta sumarlos, esos no se asignan al trabajador sino a la sede
                                             $lenghtData += 1 ;
                                         }
                                         $resul = $suma - $lenghtData;
@@ -75,8 +94,8 @@
                                 </td>
                             </tr>
                         @endfor
-                        
-                        
+
+
                     </tbody>
                 </table>
             </div>

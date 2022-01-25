@@ -102,6 +102,13 @@ Route::get('asignadosicontrato/{asigdosicont}/create', [DosimetriaController::cl
 Route::post('asignadosicontrato', [DosimetriaController::class, 'saveAsignacionDosiContrato'])->name('asignadosicontrato.save');
 
 Route::get('asignadosicontrato/{asigdosicont}/info', [DosimetriaController::class, 'info'])->name('asignadosicontrato.info');
+///////DELETE DOSIMETRO FOR WORK////////
+Route::delete('eliminatedDosiForWork/{idWork}/{contratoId}', [DosimetriaController::class, 'deleteDosimetro'])->name('dosimetroWork.destroy');
+Route::delete('eliminatedDosiControl/{idDosiControl}/{contratoId}', [DosimetriaController::class, 'deleteDosimetroControl'])->name('dosimetroControl.destroy');
+Route::delete('eliminatedTrabajadorSede/{idWork}/{contratoId}', [DosimetriaController::class, 'deleteTrabajadorSede'])->name('trabajadorSede.destroy');
+Route::post('createdTrabajadorSede', [DosimetriaController::class, 'createTrabajadorSede'])->name('trabajadorSede.create');
+
+
 
 /////////RUTAS PARA EL CRUD DE LA LECTURA DE DOSIMETROS///////
 Route::get('lecturadosi/{lecdosi}/create', [DosimetriaController::class, 'lecturadosi'])->name('lecturadosi.create');
