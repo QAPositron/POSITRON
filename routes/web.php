@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+| 
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -101,19 +101,31 @@ Route::get('detallesedecont/{detsedcont}/create',[DosimetriaController::class, '
 Route::get('asignadosicontrato/{asigdosicont}/create', [DosimetriaController::class, 'asignaDosiContrato'])->name('asignadosicontrato.create');
 Route::post('asignadosicontrato', [DosimetriaController::class, 'saveAsignacionDosiContrato'])->name('asignadosicontrato.save');
 
+Route::get('asignadosicontrato/{asigdosicont}/info', [DosimetriaController::class, 'info'])->name('asignadosicontrato.info');
 
-Route::get('asignadosicreate', [AsignarDosimetroController::class, 'create'])->name('asignadosis.create');
-Route::get('asignadosi', [AsignarDosimetroController::class, 'save'])->name('asignadosis.save');
+/////////RUTAS PARA EL CRUD DE LA LECTURA DE DOSIMETROS///////
+Route::get('lecturadosi/{lecdosi}/create', [DosimetriaController::class, 'lecturadosi'])->name('lecturadosi.create');
+Route::put('lecturadosi/{lecdosi}', [DosimetriaController::class, 'savelecturadosi'])->name('lecturadosi.save');
+
+Route::get('lecturadosicontrol/{lecdosicont}/create', [DosimetriaController::class, 'lecturadosicontrol'])->name('lecturadosicontrol.create');
+Route::put('lecturadosicontrol/{lecdosicont}', [DosimetriaController::class, 'savelecturadosicontrol'])->name('lecturadosicontrol.save');
+
+/////////RUTAS PARA LOS REPORTES O INFORMES DE DOSIMETRIA///////
+Route::get('repodosimetria/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');
 
 
-Route::get('/prueba1', [PruebaController::class,'index']);
+/* Route::get('asignadosicreate', [AsignarDosimetroController::class, 'create'])->name('asignadosis.create');
+Route::get('asignadosi', [AsignarDosimetroController::class, 'save'])->name('asignadosis.save'); */
+
+
+/* Route::get('/prueba1', [PruebaController::class,'index']);
 Route::post('/prueba1', [PruebaController::class, 'sedes']);
 Route::post('/prueba',[PruebaController::class,'prueba']);
 
 Route::get('pruebacreate',[PruebaController::class,'index1']);
 Route::get('/prueba2',[PruebaController::class,'prueba2']);
 Route::get('/prueba3',[PruebaController::class,'prueba3']);
-Route::get('/prueba4',[PruebaController::class,'prueba4']);
+Route::get('/prueba4',[PruebaController::class,'prueba4']); */
 
 /* Route::post('/prueba', function(Request $request){
     $name = $request->input('name');

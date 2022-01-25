@@ -1,9 +1,9 @@
 @extends('layouts.plantillabase')
 @section('contenido')
     
-        <h3 class="text-center ">{{$dosisedecontra->sede->empresa->nombre_empresa}} - SEDE: {{$dosisedecontra->sede->nombre_sede}}</h3>
-        <br>
-        <h4 class="text-center ">CONTRATO No. {{$dosisedecontra->dosimetriacontrato->codigo_contrato}}</h4>
+    <h3 class="text-center ">{{$dosisedecontra->sede->empresa->nombre_empresa}} - SEDE: {{$dosisedecontra->sede->nombre_sede}}</h3>
+    <br>
+    <h4 class="text-center ">CONTRATO No. {{$dosisedecontra->dosimetriacontrato->codigo_contrato}}</h4>
     
     <br>
     <h6 class="text-center ">TOTAL DE DOSÍMETROS:       CUERPO E.:#        AMBIENTAL: #       EZCLIP:# </h6>
@@ -24,7 +24,7 @@
                     <tbody>
                         @for($i=1; $i<=12; $i++)
                             <tr>
-                                <th>MES {{$i}}</th>
+                                <th><a class="link-dark" href="{{route('asignadosicontrato.info', $dosisedecontra->id_contratodosimetriasede)}}">MES {{$i}}</a></th>
                                 <td>
                                     @php
                                         $lenghtData = 0;

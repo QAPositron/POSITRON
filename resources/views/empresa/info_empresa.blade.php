@@ -24,7 +24,7 @@
                 <div class="card-body">
                     <!-- //////////////////// PESTAÑA DE EMPRESA //////////////// -->
                     <div class="tab-content mt-3">
-                        <div class="tab-pane active" id="empresa" role="tabpanel">
+                        <div class="tab-pane active" id="empresa" role="tabpanel">  
                             <h4 class="card-title text-center pt-3">{{$empresa->nombre_empresa}}</h4>
                             
                             <div class="table table-responsive p-4 ">
