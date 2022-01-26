@@ -215,16 +215,48 @@ class DosimetriaController extends Controller
         return redirect()->route('asignadosicontrato.create', ['asigdosicont' =>$contratoId, 'mesnumber'=> $mesnumber]);
     }
     public function deleteDosimetro($idWork, $contratoId, $mesnumber) {
-
+    $dosiTrabajador = Trabajadordosimetro::where('trabajador_id', $idWork)
+        ->select("dosimetro_id")
+    ->get();
     $dosimetrosTrabajadores = Trabajadordosimetro::where('trabajador_id', $idWork)
     ->delete();
-    return redirect()->route('asignadosicontrato.create', ['asigdosicont' =>$contratoId, 'mesnumber'=> $mesnumber]);
+        return $this->callAction('patchDosimetroDelete', ['idDosimetro' =>$dosiTrabajador[0]['dosimetro_id'],
+            'contratoId'=> $contratoId, 'mesnumber'=>$mesnumber ]);
     }
-    public function deleteDosimetroControl($idDosiControl, $contratoId, $mesnumber) {
-        $dosiControl = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', $idDosiControl)
-        ->delete();
+    public function patchDosimetroDelete($idDosimetro, $contratoId, $mesnumber) {
+        $estado='STOCK';
+        $result = DB::table('dosimetros')
+            ->where('id_dosimetro', $idDosimetro)
+            ->update([
+                'estado_dosimetro' => $estado
+            ]);
+
         return redirect()->route('asignadosicontrato.create', ['asigdosicont' =>$contratoId, 'mesnumber'=> $mesnumber]);
     }
+    public function deleteDosimetroControl($idDosiControl, $contratoId, $mesnumber) {
+        $idDosimetro = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', $idDosiControl)
+        ->select("dosimetro_id")
+        ->get();
+        $dosiControl = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', $idDosiControl)
+        ->delete();
+        return $this->callAction('patchDosimetroDelete', ['idDosimetro' =>$idDosimetro[0]['dosimetro_id'],
+            'contratoId'=> $contratoId, 'mesnumber'=>$mesnumber ]);
+
+    }
+    public function patchDosimetroStock($idDosimetro, $contratoId, $mesnumber) {
+        $idDosimetroTotal = json_decode($idDosimetro);
+        $estado='EN USO';
+        for($i=0; $i<count($idDosimetroTotal); $i++) {
+            $result = DB::table('dosimetros')
+                ->where('id_dosimetro', $idDosimetroTotal[$i])
+                ->update([
+                   'estado_dosimetro' => $estado
+                ]);
+        }
+
+            return redirect()->route('detallesedecont.create', $contratoId);
+    }
+
     public function saveAsignacionDosiContrato(Request $request){
         $request->validate([
             'primerDia_asigdosim'       => 'required',
@@ -266,9 +298,17 @@ class DosimetriaController extends Controller
 
             $asigdosim_control->save();
         }
-        return redirect()->route('detallesedecont.create', $request->id_contrato_asigdosim);
 
+        $dosimetrosTotal = array_merge($request->id_dosimetro_asigdosim, $request->id_dosimetro_asigdosim_control);
+        $dosimetrosTotal = json_encode($dosimetrosTotal);
+        //return redirect()->route('detallesedecont.create', $request->id_contrato_asigdosim);
+        return $this->callAction('patchDosimetroStock',['idDosimetro' =>$dosimetrosTotal,
+            'contratoId'=> $request->id_contrato_asigdosim, 'mesnumber'=>$request->mesNumber1 ]);
+        /*return route('dosimetroStock.patch',  ['idDosimetro' =>$dosimetrosTotal,
+            'contratoId'=> $request->id_contrato_asigdosim, 'mesnumber'=>$request->mesNumber1 ] );*/
         /* return $request; */
 
     }
+
+
 }

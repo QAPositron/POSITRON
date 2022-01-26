@@ -8,6 +8,7 @@
             <h3 class="text-center">MES {{ Request()->mesnumber  }}</h3>
             <form class="m-4" action="{{route('asignadosicontrato.save')}}" method="POST">
                 @csrf
+                <input hidden name="mesNumber1" id="mesNumber1" value="{{ Request()->mesnumber  }}" />
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating ">
@@ -81,14 +82,24 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" >
+                            @if(count($dosimetrosControl)>0)
+                            <input disabled value="{{$dosimetrosControl[0]['primer_dia_uso']}}" type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" >
                             <label for="floatingInputGrid">PRIMER DÍA</label>
+                            @else
+                                <input type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" >
+                                <label for="floatingInputGrid">PRIMER DÍA</label>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
+                            @if(count($dosimetrosControl)>0)
+                            <input disabled value="{{$dosimetrosControl[0]['ultimo_dia_uso']}}" type="date" class="form-control" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
                             <label for="floatingInputGrid">ULTIMO DÍA:</label>
+                            @else
+                                <input type="date" class="form-control" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
+                                <label for="floatingInputGrid">ULTIMO DÍA:</label>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -257,16 +268,10 @@
                                                         <option value ="">--</option>
                                                         <?php $cez=0; $cam=0; $cce=0; ?>
                                                         @foreach($dosimetros as $dosi)
-                                                            @if($dosi->tipo_dosimetro == 'EZCLIP' && ($contdosisede->dosi_ezclip - $cez)>0)
-                                                                <?php $cez++; ?>
-                                                            <option value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}--{{$dosi->tipo_dosimetro}}</option>
-                                                            @elseif($dosi->tipo_dosimetro == 'CUERPO' && ($contdosisede->dosi_cuerpo_entero - $cce)>0)
-                                                                <?php $cce++; ?>
-                                                                    <option value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}--{{$dosi->tipo_dosimetro}}</option>
-                                                            @elseif($dosi->tipo_dosimetro == 'AMBIENTAL' && ($contdosisede->dosi_ambiental - $cam)>0)
-                                                                <?php $cam++; ?>
-                                                                    <option value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}--{{$dosi->tipo_dosimetro}}</option>
 
+                                                            @if($dosi->tipo_dosimetro == 'CONTROL' && ($contdosisede->dosi_control - $cce)>0)
+                                                                <?php $cce++; ?>
+                                                            <option value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}--{{$dosi->tipo_dosimetro}}</option>
                                                             @endif
                                                         @endforeach
 
@@ -546,11 +551,19 @@
                     <div class="col"></div>
                     <div class="col">
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <button onclick="e.preventDefault()" id="assignBtn" class="btn colorQA"  type="submit">
+                            @if(count($dosimetrosControl)>0)
+                            <button disabled onclick="e.preventDefault()" id="assignBtn" class="btn colorQA"  type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                                 </svg>ASIGNAR
                             </button>
+                            @else
+                                <button onclick="e.preventDefault()" id="assignBtn" class="btn colorQA"  type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                    </svg>ASIGNAR
+                                </button>
+                                @endif
                         </div>
                     </div>
                     <div class="col"></div>
