@@ -6,10 +6,6 @@
     <h4 class="text-center ">CONTRATO No. {{$dosisedecontra->dosimetriacontrato->codigo_contrato}}</h4>
     
 
-        <h3 class="text-center ">{{$dosisedecontra->sede->empresa->nombre_empresa}} - SEDE: {{$dosisedecontra->sede->nombre_sede}}</h3>
-        <br>
-        <h4 class="text-center ">CONTRATO No. {{$dosisedecontra->dosimetriacontrato->codigo_contrato}}</h4>
-
     <br>
     <h6 class="text-center ">TOTAL DE DOSÍMETROS:       CUERPO E.:#        AMBIENTAL: #       EZCLIP:# </h6>
 
@@ -28,19 +24,17 @@
                     </thead>
                     <tbody>
 
-                        @for($i=0; $i<12; $i++)
+                        @for($i=0; $i< 12; $i++)
 
 
                             <tr>
-                                <th><a class="link-dark" href="{{route('asignadosicontrato.info', $dosisedecontra->id_contratodosimetriasede)}}">MES {{$i}}</a></th>
-                                <th>MES {{$i+1}} <br>
-                                @if($i==0)
-                                    <span>{{date("d-m-Y",strtotime($dosisedecontra->dosimetriacontrato->fecha_inicio))}}</span>
-                                    @else
-                                        <span>{{date("d-m-Y",strtotime($dosisedecontra->dosimetriacontrato->fecha_inicio."+ ".(30*$i)." days" ))}}</span>
+                                
+                                <th><a class="link-dark" href="{{route('asignadosicontrato.info', $dosisedecontra->id_contratodosimetriasede)}}">MES {{$i+1}} </a><br>
+                                    @if($i==0)
+                                        <span>{{date("d-m-Y",strtotime($dosisedecontra->dosimetriacontrato->fecha_inicio))}}</span>
+                                        @else
+                                            <span>{{date("d-m-Y",strtotime($dosisedecontra->dosimetriacontrato->fecha_inicio."+ ".(30*$i)." days" ))}}</span>
                                     @endif
-
-
 
                                 </th>
                                 <td>
@@ -83,7 +77,7 @@
                                             </a>
                                         </div>
                                         <div class="col-md">
-                                            <a href="" class="btn colorQA btn-sm">
+                                            <a href="{{route('repodosimetria.pdf', $dosisedecontra->id_contratodosimetriasede)}}" class="btn colorQA btn-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                 <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>

@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 /* use PDF; */
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
 
 class DosimetriaController extends Controller
 {
@@ -348,11 +349,13 @@ class DosimetriaController extends Controller
 
         return $dosicontasig;
     }
-    public function pdf(){
+    public function pdf($id){
+        $trabajdosi= Trabajadordosimetro::where('contratodosimetriasede_id', '=', $id)
+        ->get();
         
-
-        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria');
-        $pdf->setPaper(array(0,0,612.00,1008.0), 'landscape');
-        return $pdf->stream();
+       /*  $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria');
+        $pdf->setPaper('8.5x14', 'landscape');
+        return $pdf->stream(); */
+        return $trabajdosi;
     }
 }

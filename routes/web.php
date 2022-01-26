@@ -118,7 +118,7 @@ Route::get('lecturadosicontrol/{lecdosicont}/create', [DosimetriaController::cla
 Route::put('lecturadosicontrol/{lecdosicont}', [DosimetriaController::class, 'savelecturadosicontrol'])->name('lecturadosicontrol.save');
 
 /////////RUTAS PARA LOS REPORTES O INFORMES DE DOSIMETRIA///////
-Route::get('repodosimetria/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');
+Route::get('repodosimetria/{repodosi}/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');
 
 
 /* Route::get('asignadosicreate', [AsignarDosimetroController::class, 'create'])->name('asignadosis.create');
