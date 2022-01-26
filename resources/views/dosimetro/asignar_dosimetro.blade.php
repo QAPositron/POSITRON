@@ -6,6 +6,7 @@
     <div class="col-8">
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3">ASIGNAR DOSÍMETRO</h2>
+
             <form class="m-4" action="" method="POST">
 
                 @csrf
@@ -111,14 +112,14 @@
                                     <th style='width: 20.60%'>HOLDER</th>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                
+
             </form>
         </div>
     </div>
@@ -133,11 +134,11 @@ crossorigin="anonymous">
 </script>
 
 <script type="text/javascript">
-    
+
     $(document).ready(function(){
 
-        
-    
+
+
         $('#id_empresas').on('change', function(){
             var empresa_id = $(this).val();
             alert(empresa_id);
@@ -181,7 +182,7 @@ crossorigin="anonymous">
                 $('#id_trabajadores').append("<option value=''>--SELECCIONE TRABAJADOR--</option>");
                 $.each(trabajadores, function(index, value){
                     $('#id_trabajadores').append("<option value='"+ index + "'>" + value + "</option>");
-                }) */ 
+                }) */
             });
         }
     }
@@ -195,10 +196,10 @@ crossorigin="anonymous">
                     $('#id_trabajadores').append("<option value=''>--SELECCIONE TRABAJADOR--</option>");
                     $.each(trabajadores, function(index, value){
                         $('#id_trabajadores').append("<option value='"+ index + "'>" + value + "</option>");
-                    }) 
+                    })
                 });
             }
     }); */
-    
+
 </script>
-@endsection 
+@endsection

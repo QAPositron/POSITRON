@@ -98,17 +98,19 @@ Route::get('detallecontrato/{detcont}/create', [DosimetriaController::class, 'cr
 Route::get('detallesedecont/{detsedcont}/create',[DosimetriaController::class, 'createdetsedeContrato'])->name('detallesedecont.create');
 /////////RUTAS PARA EL CRUD DE ASIGNACION DOSIMETROS///////
 
-Route::get('asignadosicontrato/{asigdosicont}/create', [DosimetriaController::class, 'asignaDosiContrato'])->name('asignadosicontrato.create');
+Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/create', [DosimetriaController::class, 'asignaDosiContrato'])->name('asignadosicontrato.create');
 Route::post('asignadosicontrato', [DosimetriaController::class, 'saveAsignacionDosiContrato'])->name('asignadosicontrato.save');
 
 Route::get('asignadosicontrato/{asigdosicont}/info', [DosimetriaController::class, 'info'])->name('asignadosicontrato.info');
 ///////DELETE DOSIMETRO FOR WORK////////
-Route::delete('eliminatedDosiForWork/{idWork}/{contratoId}', [DosimetriaController::class, 'deleteDosimetro'])->name('dosimetroWork.destroy');
-Route::delete('eliminatedDosiControl/{idDosiControl}/{contratoId}', [DosimetriaController::class, 'deleteDosimetroControl'])->name('dosimetroControl.destroy');
-Route::delete('eliminatedTrabajadorSede/{idWork}/{contratoId}', [DosimetriaController::class, 'deleteTrabajadorSede'])->name('trabajadorSede.destroy');
-Route::post('createdTrabajadorSede', [DosimetriaController::class, 'createTrabajadorSede'])->name('trabajadorSede.create');
-
-
+Route::delete('eliminatedDosiForWork/{idWork}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteDosimetro'])->name('dosimetroWork.destroy');
+Route::delete('eliminatedDosiControl/{idDosiControl}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteDosimetroControl'])->name('dosimetroControl.destroy');
+Route::delete('eliminatedTrabajadorSede/{idWork}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteTrabajadorSede'])->name('trabajadorSede.destroy');
+Route::post('createdTrabajadorSede/{mesnumber}', [DosimetriaController::class, 'createTrabajadorSede'])->name('trabajadorSede.create');
+Route::patch('editDosimetroStock/{idDosimetro}/{contratoId}/{mesnumber}',
+    [DosimetriaController::class, 'patchDosimetroStock'])->name('dosimetroStock.patch');
+Route::patch('editDosimetroDelete/{idDosimetro}/{contratoId}/{mesnumber}',
+    [DosimetriaController::class, 'patchDosimetroDelete'])->name('dosimetroStockDelete.patch');
 
 /////////RUTAS PARA EL CRUD DE LA LECTURA DE DOSIMETROS///////
 Route::get('lecturadosi/{lecdosi}/create', [DosimetriaController::class, 'lecturadosi'])->name('lecturadosi.create');

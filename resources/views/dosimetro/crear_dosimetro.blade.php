@@ -5,13 +5,13 @@
     <div class="col-4">
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3">CREAR DOSIMETRO</h2>
-            
+
             <form class="m-4"  action="{{route('dosimetros.save')}}" method="POST">
-                
+
                 @csrf
 
                 <div class="row g-2">
-                    
+
                     <div class="col-md">
                         <div class="form-floating" >
                             <select class="form-select" name="tipo_dosimetro" id="tipo_dosimetro" value="{{old('tipo_dosimetro')}}" autofocus style="text-transform:uppercase">
@@ -19,6 +19,8 @@
                                 <option value="CUERPO">CUERPO</option>
                                 <option value="EZCLIP">EZCLIP</option>
                                 <option value="AMBIENTAL">AMBIENTAL</option>
+                                <option value="CONTROL">CONTROL</option>
+
                             </select>
                             <label for="floatingInputGrid">TIPO:</label>
                             @error('tipo_dosimetro')
@@ -35,7 +37,7 @@
                                 <option value="">--SELECCIONE--</option>
                                 <option value="OSL">OSL</option>
                                 <option value="TLD">TLD</option>
-                                <option value="ELECTRÓNICO">ELECTRÓNICO</option>    
+                                <option value="ELECTRÓNICO">ELECTRÓNICO</option>
                             </select>
                             <label for="floatingInputGrid">TECNOLOGÍA:</label>
                             @error('tecnologia_dosimetro')
@@ -60,7 +62,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" name="fecha_ingre_serv_dosimetro" id="fecha_ingre_serv_dosimetro" class="form-control" value="{{old('fecha_ingre_serv_dosimetro')}}" autofocus style="text-transform:uppercase;"> 
+                            <input type="date" name="fecha_ingre_serv_dosimetro" id="fecha_ingre_serv_dosimetro" class="form-control" value="{{old('fecha_ingre_serv_dosimetro')}}" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid">FECHA INGRESO AL SERVICIO:</label>
                             @error('fecha_ingre_serv_dosimetro')
                                 <small>*{{$message}}</small>
@@ -101,4 +103,4 @@
     </div>
     <div class="col"></div>
 </div>
-@endsection 
+@endsection
