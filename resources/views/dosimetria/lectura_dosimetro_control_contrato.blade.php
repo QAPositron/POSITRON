@@ -57,7 +57,7 @@
                         <div class="tab-pane" id="infocontrato" role="tabpanel" aria-labelledby="infocontrato-tab">
                             <h4 class="card-title text-center pt-3">INFORMACIÓN DEL CONTRATO</h4>
                             <BR></BR>
-                            <Label class="mx-5">LA SIGUIENTE ES INFORMACIÓN DEL CONTRATO QUE ES RAELACIONADO AL DOSÍMETRO EN EL PROCESO DE ASIGNACIÓN:</Label>
+                            <Label class="mx-5">LA SIGUIENTE ES INFORMACIÓN DEL CONTRATO QUE ES RELACIONADO AL DOSÍMETRO EN EL PROCESO DE ASIGNACIÓN:</Label>
                             <BR></BR>
                             <div class="row">
                                 <div class="col"></div>

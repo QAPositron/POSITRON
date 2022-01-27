@@ -5,7 +5,14 @@
 <br>
 <h4 class="text-center">CONTRATO No. {{$contdosisede->dosimetriacontrato->codigo_contrato}}</h4>
 <br>
-<h4 class="text-center">TRABAJADORES ASIGNADOS</h4>
+<h4 class="text-center">
+    TRABAJADORES ASIGNADOS AL MES {{ Request()->mesnumber  }} (
+        @if(Request()->mesnumber == 1)
+            <span>{{date("d-m-Y",strtotime($contdosisede->dosimetriacontrato->fecha_inicio))}}</span>
+        @else
+            <span>{{date("d-m-Y",strtotime($contdosisede->dosimetriacontrato->fecha_inicio."+ ".(30*(Request()->mesnumber-1))." days" ))}}</span>
+        @endif )
+</h4>
 
 <div class="row">
     <div class="col"></div>

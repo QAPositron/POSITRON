@@ -5,7 +5,7 @@
     <div class="col-9">
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3">ASIGNAR DOSÍMETRO</h2>
-            <h3 class="text-center">MES {{ Request()->mesnumber  }}</h3>
+            <h3 class="text-center">MES {{ Request()->mesnumber  }} </h3>
             <form class="m-4" action="{{route('asignadosicontrato.save')}}" method="POST">
                 @csrf
                 <input hidden name="mesNumber1" id="mesNumber1" value="{{ Request()->mesnumber  }}" />
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row g-2 mx-5">
+                <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
@@ -103,7 +103,7 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="text" class="form-control" name="energia_asigdosim" id="energia_asigdosim" value="FOTONES" readonly>
+                            <input type="text" class="form-control" name="energia_asigdosim" id="energia_asigdosim" value="F" readonly>
                             <label for="floatingInputGrid">ENERGÍA:</label>
                         </div>
                     </div>
@@ -118,14 +118,7 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="table table-responsive text-center">
-                            <button data-bs-toggle="modal" data-bs-target="#añadirTrabajador" type="button" class="btn colorQA">
-                                
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus text-center" viewBox="0 0 16 16">
-                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                                </svg>
-                                
-                            </button>
+                            
                            
                             <br>
                             <table class="table table-bordered">
@@ -139,84 +132,213 @@
                                     <th>ACCIONES</th>
                                 </thead>
                                 <tbody>
-                                @if (count($dosimetrosControl) > 0)
-                                    @foreach($dosimetrosControl as $control)
+                                    @if (count($dosimetrosControl) > 0)
+                                        @foreach($dosimetrosControl as $control)
+                                            <tr>
+                                                <td>
+                                                    <input type="number" name="id_sede_asigdosim_control" id="id_sede_asigdosim_control" hidden value="{{$contdosisede->sede_id}}">
 
-                                        <tr>
+                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
+                                                    N.A.
+                                                </td>
 
-                                            <td>
-                                                <input type="number" name="id_sede_asigdosim_control" id="id_sede_asigdosim_control" hidden value="{{$contdosisede->sede_id}}">
-
-                                                <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
-                                                N.A.
-                                            </td>
-
-                                            <td colspan="2">CONTROL</td>
-                                            <td>
-                                                    <select class="form-select" name="id_dosimetro_asigdosim_control[]" id="id_dosimetro_asigdosim_control"  autofocus aria-label="Floating label select example">
-
+                                                <td colspan="2">CONTROL</td>
+                                                <td>
+                                                        <select class="form-select" name="id_dosimetro_asigdosim_control[]" id="id_dosimetro_asigdosim_control"  autofocus aria-label="Floating label select example">
                                                             @foreach($dosimetros as $dosi)>
 
-                                                            @if( $control->dosimetro_id == $dosi->id_dosimetro  )
-                                                                <option selected  value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}--{{$dosi->tipo_dosimetro}}</option>
-                                                            @endif
+                                                                @if( $control->dosimetro_id == $dosi->id_dosimetro  )
+                                                                    <option selected  value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
+                                                    @error('id_dosimetro_asigdosim_control')
+                                                    <small>*{{$message}}</small>
+                                                    @enderror
+                                                </td>
+                                                <td class="text-center">N.A.</td>
+                                                <td>
 
+                                                        <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control" autofocus style="text-transform:uppercase">
+                                                            @foreach($dosimetros as $dosi)
+                                                                @if($control->ocupacion=='T' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="T">TELETERAPIA</option>
+                                                                @elseif($control->ocupacion=='B' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="B">BRANQUITERAPIA</option>
+                                                                @elseif($control->ocupacion=='N' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="N">MEDICINA NUCLEAR</option>
+                                                                @elseif($control->ocupacion=='G' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="G">GAMAGRAFIA INDUSTRIAL</option>
+                                                                @elseif($control->ocupacion=='F' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="F">MEDIDORES FIJOS</option>
+                                                                @elseif($control->ocupacion=='I' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="I">INVESTIGACIÓN</option>
+                                                                @elseif($control->ocupacion=='D' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="D">DENSÍMETRO NUCLEAR</option>
+                                                                @elseif($control->ocupacion=='M' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="M">MEDIDORES MÓVILES</option>
+                                                                @elseif($control->ocupacion=='E' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="E">DOCENCIA</option>
+                                                                @elseif($control->ocupacion=='P' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="P">PERFILAJE Y REGISTRO</option>
+                                                                @elseif($control->ocupacion=='TR' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="T">TRAZADORES</option>
+                                                                @elseif($control->ocupacion=='H' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="H">HEMODINAMIA</option>
+                                                                @elseif($control->ocupacion=='X' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="X">RX PERIAPICALES</option>
+                                                                @elseif($control->ocupacion=='R' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="R">RADIODIAGNÓSTICO</option>
+                                                                @elseif($control->ocupacion=='S' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="S">FLUOROSCOPÍA</option>
+                                                                @elseif($control->ocupacion=='AM' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="AM">APLICACIONES MÉDICAS</option>
+                                                                @elseif($control->ocupacion=='AI' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                    <option selected  value="AI">APLICACIONES INDUSTRIALES</option>
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
+                                                    @error('ocupacion_asigdosim_control')
+                                                    <small>*{{$message}}</small>
+                                                    @enderror
+                                                </td>
+                                                <td>
+
+
+                                                        <button data-bs-toggle="modal" data-bs-target="#dosimetroControl{{$control->id_dosicontrolcontdosisedes}}" class="btn btn-danger btn-sm" type="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                            </svg>
+                                                        </button>
+
+                                                </td>
+
+                                            </tr>
+
+                                            @endforeach
+                                        @else
+                                        @for($i=0; $i<$contdosisede->dosi_control-count($dosimetrosControl); $i++)
+                                            <tr>
+
+                                                <td>
+                                                    <input type="number" name="id_sede_asigdosim_control" id="id_sede_asigdosim_control" hidden value="{{$contdosisede->sede_id}}">
+
+                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
+                                                    N.A.
+                                                </td>
+
+                                                <td colspan="2">CONTROL</td>
+                                                <td>
+                                                    <?php $c=0; ?>
+                                                    @if (count($dosimetrosControl) > 0)
+                                                            <?php $c++; ?>
+                                                    <select class="form-select" name="id_dosimetro_asigdosim_control[]" id="id_dosimetro_asigdosim_control"  autofocus aria-label="Floating label select example">
+                                                        @foreach($dosimetrosControl as $control)
+                                                        @foreach($dosimetros as $dosi)>
+
+                                                            @if( $control->dosimetro_id == $dosi->id_dosimetro && $i==$dosimetrosControl)
+                                                            <option>{{$c}}</option>
+                                                            <option selected  value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
+                                                            @endif
+                                                        @endforeach
                                                         @endforeach
                                                     </select>
 
+                                                    @else
+                                                        <select class="form-select" name="id_dosimetro_asigdosim_control[]" id="id_dosimetro_asigdosim_control"  autofocus aria-label="Floating label select example">
+                                                            <option value ="">--</option>
+                                                            <?php $cez=0; $cam=0; $cce=0; ?>
+                                                            @foreach($dosimetros as $dosi)
 
-                                                @error('id_dosimetro_asigdosim_control')
-                                                <small>*{{$message}}</small>
-                                                @enderror
-                                            </td>
-                                            <td class="text-center">N.A.</td>
-                                            <td>
+                                                                @if($dosi->tipo_dosimetro == 'CONTROL' && ($contdosisede->dosi_control - $cce)>0)
+                                                                    <?php $cce++; ?>
+                                                                <option value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
+                                                                @endif
+                                                            @endforeach
 
-                                                    <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control" autofocus style="text-transform:uppercase">
-                                                        @foreach($dosimetros as $dosi)
-                                                            @if($control->ocupacion=='T' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="T">TELETERAPIA</option>
-                                                            @elseif($control->ocupacion=='B' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="B">BRANQUITERAPIA</option>
-                                                            @elseif($control->ocupacion=='N' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="N">MEDICINA NUCLEAR</option>
-                                                            @elseif($control->ocupacion=='G' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="G">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($control->ocupacion=='F' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="F">MEDIDORES FIJOS</option>
-                                                            @elseif($control->ocupacion=='I' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="I">INVESTIGACIÓN</option>
-                                                            @elseif($control->ocupacion=='D' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="D">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($control->ocupacion=='M' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="M">MEDIDORES MÓVILES</option>
-                                                            @elseif($control->ocupacion=='E' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="E">DOCENCIA</option>
-                                                            @elseif($control->ocupacion=='P' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="P">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($control->ocupacion=='TR' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="T">TRAZADORES</option>
-                                                            @elseif($control->ocupacion=='H' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="H">HEMODINAMIA</option>
-                                                            @elseif($control->ocupacion=='X' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="X">RX PERIAPICALES</option>
-                                                            @elseif($control->ocupacion=='R' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="R">RADIODIAGNÓSTICO</option>
-                                                            @elseif($control->ocupacion=='S' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="S">FLUOROSCOPÍA</option>
-                                                            @elseif($control->ocupacion=='AM' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($control->ocupacion=='AI' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="AI">APLICACIONES INDUSTRIALES</option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                @error('ocupacion_asigdosim_control')
-                                                <small>*{{$message}}</small>
-                                                @enderror
-                                            </td>
-                                            <td>
+                                                        </select>
+                                                    @endif
 
+
+                                                    @error('id_dosimetro_asigdosim_control')
+                                                        <small>*{{$message}}</small>
+                                                    @enderror
+                                                </td>
+                                                <td class="text-center">N.A.</td>
+                                                <td>
+                                                    @if (count($dosimetrosControl) > 0)
+
+                                                            <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control" autofocus style="text-transform:uppercase">
+                                                                @foreach($dosimetrosControl as $control)
+                                                            @if($control->ocupacion=='T')
+                                                                <option selected hidden value="T">TELETERAPIA</option>
+                                                                @elseif($control->ocupacion=='B')
+                                                                <option selected hidden value="B">BRANQUITERAPIA</option>
+                                                                @elseif($control->ocupacion=='N')
+                                                                <option selected hidden value="N">MEDICINA NUCLEAR</option>
+                                                                @elseif($control->ocupacion=='G')
+                                                                <option selected hidden value="G">GAMAGRAFIA INDUSTRIAL</option>
+                                                                @elseif($control->ocupacion=='F')
+                                                                <option selected hidden value="F">MEDIDORES FIJOS</option>
+                                                                @elseif($control->ocupacion=='I')
+                                                                <option selected hidden value="I">INVESTIGACIÓN</option>
+                                                                @elseif($control->ocupacion=='D')
+                                                                <option selected hidden value="D">DENSÍMETRO NUCLEAR</option>
+                                                                @elseif($control->ocupacion=='M')
+                                                                <option selected hidden value="M">MEDIDORES MÓVILES</option>
+                                                                @elseif($control->ocupacion=='E')
+                                                                <option selected hidden value="E">DOCENCIA</option>
+                                                                @elseif($control->ocupacion=='P')
+                                                                <option selected hidden value="P">PERFILAJE Y REGISTRO</option>
+                                                                @elseif($control->ocupacion=='T')
+                                                                <option selected hidden value="T">TRAZADORES</option>
+                                                                @elseif($control->ocupacion=='H')
+                                                                <option selected hidden value="H">HEMODINAMIA</option>
+                                                                @elseif($control->ocupacion=='RX')
+                                                                <option selected hidden value="X">RX PERIAPICALES</option>
+                                                                @elseif($control->ocupacion=='R')
+                                                                <option selected hidden value="R">RADIODIAGNÓSTICO</option>
+                                                                @elseif($control->ocupacion=='S')
+                                                                <option selected hidden value="S">FLUOROSCOPÍA</option>
+                                                                @elseif($control->ocupacion=='AM')
+                                                                <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
+                                                                @elseif($control->ocupacion=='AI')
+                                                                <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                                @endif
+                                                                @endforeach
+                                                            </select>
+
+                                                    @else
+
+                                                        <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control" autofocus style="text-transform:uppercase">
+                                                            <option value="">--</option>
+                                                            <option value="T">TELETERAPIA</option>
+                                                            <option value="B">BRANQUITERAPIA</option>
+                                                            <option value="N">MEDICINA NUCLEAR</option>
+                                                            <option value="G">GAMAGRAFIA INDUSTRIAL</option>
+                                                            <option value="F">MEDIDORES FIJOS</option>
+                                                            <option value="I">INVESTIGACIÓN</option>
+                                                            <option value="D">DENSÍMETRO NUCLEAR</option>
+                                                            <option value="M">MEDIDORES MÓVILES</option>
+                                                            <option value="E">DOCENCIA</option>
+                                                            <option value="P">PERFILAJE Y REGISTRO</option>
+                                                            <option value="T">TRAZADORES</option>
+                                                            <option value="H">HEMODINAMIA</option>
+                                                            <option value="X">RX PERIAPICALES</option>
+                                                            <option value="R">RADIODIAGNÓSTICO</option>
+                                                            <option value="S">FLUOROSCOPÍA</option>
+                                                            <option value="AM">APLICACIONES MÉDICAS</option>
+                                                            <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        </select>
+
+                                                    @endif
+                                                    @error('ocupacion_asigdosim_control')
+                                                        <small>*{{$message}}</small>
+                                                    @enderror
+                                                </td>
+                                                <td>
+                                                    @foreach($dosimetrosControl as $control)
 
                                                     <button data-bs-toggle="modal" data-bs-target="#dosimetroControl{{$control->id_dosicontrolcontdosisedes}}" class="btn btn-danger btn-sm" type="button">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -225,146 +347,11 @@
                                                         </svg>
                                                     </button>
 
-                                            </td>
-
-                                        </tr>
-
-                                        @endforeach
-                                    @else
-                                    @for($i=0; $i<$contdosisede->dosi_control-count($dosimetrosControl); $i++)
-                                        <tr>
-
-                                            <td>
-                                                <input type="number" name="id_sede_asigdosim_control" id="id_sede_asigdosim_control" hidden value="{{$contdosisede->sede_id}}">
-
-                                                <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
-                                                N.A.
-                                            </td>
-
-                                            <td colspan="2">CONTROL</td>
-                                            <td>
-                                                <?php $c=0; ?>
-                                                @if (count($dosimetrosControl) > 0)
-                                                        <?php $c++; ?>
-                                                <select class="form-select" name="id_dosimetro_asigdosim_control[]" id="id_dosimetro_asigdosim_control"  autofocus aria-label="Floating label select example">
-                                                    @foreach($dosimetrosControl as $control)
-                                                    @foreach($dosimetros as $dosi)>
-
-                                                        @if( $control->dosimetro_id == $dosi->id_dosimetro && $i==$dosimetrosControl)
-                                                        <option>{{$c}}</option>
-                                                        <option selected  value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}--{{$dosi->tipo_dosimetro}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                    @endforeach
-                                                </select>
-
-                                                @else
-                                                    <select class="form-select" name="id_dosimetro_asigdosim_control[]" id="id_dosimetro_asigdosim_control"  autofocus aria-label="Floating label select example">
-                                                        <option value ="">--</option>
-                                                        <?php $cez=0; $cam=0; $cce=0; ?>
-                                                        @foreach($dosimetros as $dosi)
-
-                                                            @if($dosi->tipo_dosimetro == 'CONTROL' && ($contdosisede->dosi_control - $cce)>0)
-                                                                <?php $cce++; ?>
-                                                            <option value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}}--{{$dosi->tipo_dosimetro}}</option>
-                                                            @endif
-                                                        @endforeach
-
-                                                    </select>
-                                                @endif
-
-
-                                                @error('id_dosimetro_asigdosim_control')
-                                                    <small>*{{$message}}</small>
-                                                @enderror
-                                            </td>
-                                            <td class="text-center">N.A.</td>
-                                            <td>
-                                                @if (count($dosimetrosControl) > 0)
-
-                                                        <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control" autofocus style="text-transform:uppercase">
-                                                            @foreach($dosimetrosControl as $control)
-                                                           @if($control->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                               @elseif($control->ocupacion=='B')
-                                                            <option selected hidden value="B">BRANQUITERAPIA</option>
-                                                            @elseif($control->ocupacion=='N')
-                                                            <option selected hidden value="N">MEDICINA NUCLEAR</option>
-                                                            @elseif($control->ocupacion=='G')
-                                                            <option selected hidden value="G">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($control->ocupacion=='F')
-                                                            <option selected hidden value="F">MEDIDORES FIJOS</option>
-                                                            @elseif($control->ocupacion=='I')
-                                                            <option selected hidden value="I">INVESTIGACIÓN</option>
-                                                            @elseif($control->ocupacion=='D')
-                                                            <option selected hidden value="D">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($control->ocupacion=='M')
-                                                            <option selected hidden value="M">MEDIDORES MÓVILES</option>
-                                                            @elseif($control->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($control->ocupacion=='P')
-                                                            <option selected hidden value="P">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($control->ocupacion=='T')
-                                                            <option selected hidden value="T">TRAZADORES</option>
-                                                            @elseif($control->ocupacion=='H')
-                                                            <option selected hidden value="H">HEMODINAMIA</option>
-                                                            @elseif($control->ocupacion=='RX')
-                                                            <option selected hidden value="X">RX PERIAPICALES</option>
-                                                            @elseif($control->ocupacion=='R')
-                                                            <option selected hidden value="R">RADIODIAGNÓSTICO</option>
-                                                            @elseif($control->ocupacion=='S')
-                                                            <option selected hidden value="S">FLUOROSCOPÍA</option>
-                                                            @elseif($control->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($control->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                            @endif
-                                                               @endforeach
-                                                        </select>
-
-                                                @else
-
-                                                    <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control" autofocus style="text-transform:uppercase">
-                                                        <option value="">--</option>
-                                                        <option value="T">TELETERAPIA</option>
-                                                        <option value="B">BRANQUITERAPIA</option>
-                                                        <option value="N">MEDICINA NUCLEAR</option>
-                                                        <option value="G">GAMAGRAFIA INDUSTRIAL</option>
-                                                        <option value="F">MEDIDORES FIJOS</option>
-                                                        <option value="I">INVESTIGACIÓN</option>
-                                                        <option value="D">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="M">MEDIDORES MÓVILES</option>
-                                                        <option value="E">DOCENCIA</option>
-                                                        <option value="P">PERFILAJE Y REGISTRO</option>
-                                                        <option value="T">TRAZADORES</option>
-                                                        <option value="H">HEMODINAMIA</option>
-                                                        <option value="X">RX PERIAPICALES</option>
-                                                        <option value="R">RADIODIAGNÓSTICO</option>
-                                                        <option value="S">FLUOROSCOPÍA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    </select>
-
-                                                @endif
-                                                @error('ocupacion_asigdosim_control')
-                                                    <small>*{{$message}}</small>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                @foreach($dosimetrosControl as $control)
-
-                                                <button data-bs-toggle="modal" data-bs-target="#dosimetroControl{{$control->id_dosicontrolcontdosisedes}}" class="btn btn-danger btn-sm" type="button">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                    </svg>
-                                                </button>
-
-                                            </td>
-                                            @endforeach
-                                        </tr>
-                                    @endfor
-                                @endif
+                                                </td>
+                                                @endforeach
+                                            </tr>
+                                        @endfor
+                                    @endif
                                     <?php $ct = 0; ?>
 
                                     @foreach($trabajadores as $trab)
@@ -385,28 +372,28 @@
                                                     @if(count($dosimetrosTrabajadores)>0)
 
                                                         @foreach($dosimetrosTrabajadores as $dosiT)
-                                                    @foreach($dosimetrosDisponibles as $dosi)
+                                                            @foreach($dosimetrosDisponibles as $dosi)
 
                                                                 @if($dosiT['dosimetro_id'] == $dosi['id_dosimetro'] && $trab->trabajador->id_trabajador == $dosiT->trabajador_id)
-                                                        <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} -- {{$dosi->tipo_dosimetro}}</option>
+                                                                    <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
                                                                 @endif
 
-                                                    @endforeach
+                                                            @endforeach
                                                         @endforeach
 
                                                     @else
-                                                        <option value="">--</option>
+                                                    <option value="">--</option>
                                                     <?php $cez=0; $cam=0; $cce=0; ?>
                                                         @foreach($dosimetros as $dosi)
                                                             @if($dosi->tipo_dosimetro == 'EZCLIP' && ($contdosisede->dosi_ezclip - $cez)>0)
                                                                 <?php $cez++; ?>
-                                                            <option onclick="count('EZCLIP')" change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} -- {{$dosi->tipo_dosimetro}}</option>
+                                                            <option onclick="count('EZCLIP')" change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
                                                             @elseif($dosi->tipo_dosimetro == 'CUERPO' && ($contdosisede->dosi_cuerpo_entero - $cce)>0)
                                                                 <?php $cce++; ?>
-                                                                <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} -- {{$dosi->tipo_dosimetro}}</option>
+                                                                <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
                                                             @elseif($dosi->tipo_dosimetro == 'AMBIENTAL' && ($contdosisede->dosi_ambiental - $cam)>0)
                                                                 <?php $cam++; ?>
-                                                                <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} -- {{$dosi->tipo_dosimetro}}</option>
+                                                                <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
                                                             @endif
                                                         @endforeach
 
@@ -419,14 +406,14 @@
                                             <td>
 
                                                 <select class="form-select" name="id_holder_asigdosim[]" id="id_holder_asigdosim" autofocus aria-label="Floating label select example">
-                                                    <!-- <option value ="">N.A.</option> -->
+                                                    <option value ="">N.A.</option>
                                                     @if(count($dosimetrosTrabajadores)>0)
 
                                                         @foreach($dosimetrosTrabajadores as $dosiT)
                                                             @foreach($holdersDisponibles as $hol)
 
                                                                 @if($dosiT['holder_id'] == $hol['id_holder'] && $trab->trabajador->id_trabajador == $dosiT->trabajador_id)
-                                                                    <option selected  value ="{{$hol->id_holder}}"><?php echo $hol->codigo_holder; ?></option>
+                                                                    <option selected  value ="{{$hol->id_holder}}"><?php echo $hol->codigo_holder.' - '.$hol->tipo_holder; ?></option>
                                                                     @endif
 
                                                             @endforeach
@@ -436,7 +423,7 @@
                                                         <option value="">--</option>
                                                         @foreach($holders as $hol)
 
-                                                            <option value ="{{$hol->id_holder}}">{{$hol->codigo_holder}}</option>
+                                                            <option value ="{{$hol->id_holder}}">{{$hol->codigo_holder}} - {{$hol->tipo_holder}}</option>
                                                         @endforeach
                                                     @endif
                                                 </select>
@@ -547,18 +534,29 @@
                     <div class="col">
                         <div class="d-grid gap-2 col-6 mx-auto">
                             @if(count($dosimetrosControl)>0)
-                            <button disabled onclick="e.preventDefault()" id="assignBtn" class="btn colorQA"  type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                </svg>ASIGNAR
-                            </button>
+                                <button disabled onclick="e.preventDefault()" id="assignBtn" class="btn colorQA"  type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                                    <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                                </svg> <br> GUARDAR ASIGNACIÓN
+                                </button>
                             @else
                                 <button onclick="e.preventDefault()" id="assignBtn" class="btn colorQA"  type="submit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                    </svg>ASIGNAR
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                                    <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                                </svg> <br> GUARDAR ASIGNACIÓN
                                 </button>
-                                @endif
+                            @endif
+                            
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-grip gap-2 col-6 mx-auto">
+                            <button data-bs-toggle="modal" data-bs-target="#añadirTrabajador" type="button" class="btn colorQA">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-plus text-center" viewBox="0 0 16 16">
+                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                                </svg> <br> AÑADIR TRABAJADOR
+                            </button>
                         </div>
                     </div>
                     <div class="col"></div>

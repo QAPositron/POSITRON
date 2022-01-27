@@ -25,7 +25,9 @@ class CreateDosicontrolcontdosisedesTable extends Migration
 
             $table-> unsignedBigInteger('sede_id');
             $table-> foreign('sede_id')->references('id_sede')->on('sedes')->onDelete('cascade')->onUpdate('cascade');
-
+            
+            $table->integer('mes_asignacion');
+            $table->string('dosimetro_uso', 10);
             $table->date('primer_dia_uso')->nullable();
             $table->date('ultimo_dia_uso')->nullable();
             $table->string('ocupacion', 30)->nullable();

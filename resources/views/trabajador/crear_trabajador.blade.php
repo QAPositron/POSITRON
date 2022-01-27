@@ -162,22 +162,7 @@
                     </div>
                 </div>
                 <br>
-                <h6 class="text-center">ACTIVAR AL TRABAJADOR EN EL MODULO DE:</h6>
-                <div class="row g-2">
-                    <div class="col-md"></div>
-                    <div class="col-3">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="ckeckAulaVirtual" name="ckeckAulaVirtual" >
-                            <label class="custom-control-label" for="ckeckAulaVirtual">AULA VIRUTAL</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="checkDosimetria" name="checkDosimetria">
-                            <label class="custom-control-label" for="checkDosimetria">DOSIMETRÍA</label>
-                        </div>
-                    </div>
-                    <div class="col-md"></div>
-                </div>
-                <br>    
+                    
                 <!---------BOTON------------->
                 <div class="row">
                     <div class="col"></div>

@@ -117,59 +117,59 @@
 <table style="top:150px; border-collapse:collapse;" cellspacing="4" cellpadding="0">
     <thead>
         <tr align="center">
-            <th rowspan="2" style="width:70px;  border:0.6px solid black;">Código de Usuario</td>
-            <th rowspan="2" style="width:120px; border:0.6px solid black;">Apellido(s)</td>
-            <th rowspan="2" style="width:120px; border:0.6px solid black;">Nombre(s)</td>
+            <th rowspan="2" style="width:60px;  border:0.6px solid black;">Código de Usuario</td>
+            <th rowspan="2" style="width:110px; border:0.6px solid black;">Apellido(s)</td>
+            <th rowspan="2" style="width:110px; border:0.6px solid black;">Nombre(s)</td>
             <th rowspan="2" style="width:5px; border:0.6px solid black;"><p class="anchoCell">Género</p></td>
             <th rowspan="2" style="width:5px; border:0.6px solid black;"><p class="anchoCell">Ocupación</p></td>
-            <th rowspan="2" style="padding:8px; border:0.6px solid black;">Documento de Identidad</td>
+            <th rowspan="2" style="width:60px; padding:5px; border:0.6px solid black;">Documento de Identidad</td>
             <th rowspan="2" style="width:60px;  border:0.6px solid black;">Fecha de Ingreso al Servicio</td>
-            <th colspan="2" style="padding:8px; border:0.6px solid black;">Periodo de uso del dosímetro</td>
+            <th colspan="2" style="width:60px; padding:5px; border:0.6px solid black;">Periodo de uso del dosímetro</td>
             <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Periodo de recambio</p></td>
             <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Ubcación del dosímetro</p></td>
             <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Energía ó calidad de radiación</p></td>
-            <th colspan="3" style="width:180px; padding:8px; border:0.6px solid black;">Dosis del Periodo (mSv)</td>
-            <th colspan="3" style="width:140px; padding:8px; border:0.6px solid black;">Dosis acumulada 12 meses anteriores</td>
-            <th colspan="3" style="width:180px; padding:8px; border:0.6px solid black;">Dosis acumulada desde ingreso al servicio (mSv)</td>
+            <th colspan="3" style="width:170px; padding:5px; border:0.6px solid black;">Dosis del Periodo (mSv)</td>
+            <th colspan="3" style="width:170px; padding:5px; border:0.6px solid black;">Dosis acumulada 12 meses anteriores</td>
+            <th colspan="3" style="width:170px; padding:5px; border:0.6px solid black;">Dosis acumulada desde ingreso al servicio (mSv)</td>
         </tr>
         <tr align="center">
-            <th style="padding:8px; border:0.6px solid black;">Primer Día</td>
-            <th style="padding:8px; border:0.6px solid black;">Ultimo Día</td>
-            <th style="padding:8px; border:0.6px solid black;">Hp(10)</td>
-            <th style="padding:8px; border:0.6px solid black;">Hp(0.07)</td>
-            <th style="padding:8px; border:0.6px solid black;">Hp(3)</td>
-            <th style="padding:8px; border:0.6px solid black;">Hp(10)</td>
-            <th style="padding:8px; border:0.6px solid black;">Hp(0.07)</td>
-            <th style="padding:8px; border:0.6px solid black;">Hp(3)</td>
-            <th style="padding:8px; border:0.6px solid black;">Hp(10)</td>
-            <th style="padding:8px; border:0.6px solid black;">Hp(0.07)</td>
-            <th style="padding:8px; border:0.6px solid black;">Hp(3)</td>
+            <th style="padding:5px; border:0.6px solid black;">Primer Día</td>
+            <th style="padding:5px; border:0.6px solid black;">Ultimo Día</td>
+            <th style="padding:5px; border:0.6px solid black;">Hp(10)</td>
+            <th style="padding:5px; border:0.6px solid black;">Hp(0.07)</td>
+            <th style="padding:5px; border:0.6px solid black;">Hp(3)</td>
+            <th style="padding:5px; border:0.6px solid black;">Hp(10)</td>
+            <th style="padding:5px; border:0.6px solid black;">Hp(0.07)</td>
+            <th style="padding:5px; border:0.6px solid black;">Hp(3)</td>
+            <th style="padding:5px; border:0.6px solid black;">Hp(10)</td>
+            <th style="padding:5px; border:0.6px solid black;">Hp(0.07)</td>
+            <th style="padding:5px; border:0.6px solid black;">Hp(3)</td>
         </tr>
     </thead>
     <tbody>
-        @foreach($)
+        @foreach($dosicontrolasig as $dosicont)
             <tr>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
-                <td style="border:0.1px solid black;">&nbsp;</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->id_dosicontrolcontdosisedes}}</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">CONTROL</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">N.A.</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">N.A.</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->ocupacion}}</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">N.A.</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->primer_dia_uso}}</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->ultimo_dia_uso}}</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->energia}}</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->Hp10_calc_dose}}</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->Hp007_calc_dose}}</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->Hp3_calc_dose}}</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
+                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
             </tr>
         @endforeach
         

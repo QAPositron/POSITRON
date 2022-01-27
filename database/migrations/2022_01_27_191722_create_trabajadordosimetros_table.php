@@ -29,7 +29,8 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table-> foreign('holder_id')->references('id_holder')->on('holders')->onDelete('cascade')->onUpdate('cascade');
 
             
-            
+            $table->integer('mes_asignacion');
+            $table->string('dosimetro_uso',10);
             $table->date('primer_dia_uso')->nullable();
             $table->date('ultimo_dia_uso')->nullable();
             $table->string('ocupacion', 30)->nullable();

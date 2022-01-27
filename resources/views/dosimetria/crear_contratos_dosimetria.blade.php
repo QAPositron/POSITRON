@@ -57,9 +57,10 @@
                                         <div class="form-floating my-3">
                                             <select class="form-select" name="periodo_recambio_contrato" id="periodo_recambio_contrato"  autofocus>
                                                 <option value="">--SELECCIONE--</option>
-                                                <option value="SEMESTRAL">SEMESTRAL</option>
-                                                <option value="BIMESTRAL">BIMESTRAL</option>
-                                                <option value="TRIMESTRAL">TRIMESTRAL</option>
+                                                <option value="MEN">MENSUAL</option>
+                                                <option value="SEM">SEMESTRAL</option>
+                                                <option value="BIM">BIMESTRAL</option>
+                                                <option value="TRIM">TRIMESTRAL</option>
                                             </select>
                                             <label for="floatingInputGrid">PERIODO DE RECAMBIO:</label>
                                             @error('periodo_recambio_contrato')
