@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col"></div>
-        <div class="col-6">
+        <div class="col-8">
             <div class="table table-responsive p-4">
                 <table class="table table-bordered ">
                     <thead class="table-active">

@@ -7,6 +7,7 @@ use App\Models\ContratoDosimetria;
 use App\Models\Contratodosimetriasede;
 
 use App\Models\ContratosDosimetriaEmpresa;
+use App\Models\Departamentosede;
 use App\Models\Dosicontrolcontdosisede;
 use App\Models\DosimControlcontdosiSede;
 use App\Models\Dosimetriacontrato;
@@ -55,28 +56,35 @@ class DosimetriaController extends Controller
         return redirect()->route('empresasdosi.create');
     }
 
-    public function createContrato($id){
+    public function listarContratosdosi($id){
         $empresa = Empresa::find($id);
-
-        $sedes = Sede::leftJoin('contratodosimetriasedes', 'sedes.id_sede', '=', 'contratodosimetriasedes.sede_id')
-        ->where('sedes.empresas_id', $id)
-        ->whereNull('contratodosimetriasedes.sede_id')
-        ->get();
-
         $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
         ->get();
-        return view('dosimetria.crear_contratos_dosimetria', compact('empresa', 'sedes', 'dosimetriacontrato'));
-        /* return $empresa; */
+        return view('dosimetria.listar_contratos_dosimetria', compact('empresa', 'dosimetriacontrato'));
+        /* return $id; */
     }
 
-    public function saveContrato(Request $request){
+    public function createContrato($id){
+        $empresa = Empresa::find($id);
+        
+        /* SELECT * FROM `departamentosedes` INNER JOIN sedes on departamentosedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
+       
+       
+        return view('dosimetria.crear_contratos_dosimetria', compact('empresa'));
+       /*  return $sedes; */
+    }
+    public function selectdepa(Request $request){
+        echo "objeto obtenido".$request; 
+    }
+
+    public function saveContratodosi(Request $request){
 
         $request->validate([
             'codigo_contrato'               => 'required',
             'fecha_inicio_contrato'         => 'required',
             'fecha_finalizacion_contrato'   => 'required',
             'periodo_recambio_contrato'     => 'required',
-            'id_sede'                       => 'required',
+            
 
         ]);
         $contratoDosi = new Dosimetriacontrato();
@@ -89,7 +97,8 @@ class DosimetriaController extends Controller
 
         $contratoDosi->save();
 
-        for($i=0; $i<count($request->id_sede); $i++){
+        
+        /* for($i=0; $i<count($request->id_sede); $i++){
 
             $contratoDosiSede = new Contratodosimetriasede();
 
@@ -100,16 +109,30 @@ class DosimetriaController extends Controller
             $contratoDosiSede->dosi_control          = $request->num_dosi_caso[$i];
             $contratoDosiSede->dosi_ezclip           = $request->num_dosi_ezclip[$i];
             $contratoDosiSede->save();
-        }
-
-
-        return redirect()->route('contratosdosi.create', $contratoDosi->empresa_id);
-
+        } */
+        
+        return redirect()->route('contratosdosisede.create', $contratoDosi->id_contratodosimetria);
+        /* return $request; */
     }
+
+    public function createSedeContrato($id){
+        $dosimetriacontrato = Dosimetriacontrato::find($id);
+        $sedes = Sede::leftJoin('contratodosimetriasedes', 'sedes.id_sede', '=', 'contratodosimetriasedes.sede_id')
+        ->where('sedes.empresas_id', $dosimetriacontrato->empresa_id)
+        ->whereNull('contratodosimetriasedes.sede_id')
+        ->get();
+        $departamentos = Departamentosede::join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
+        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
+        ->where('empresas.id_empresa', $dosimetriacontrato->empresa_id)
+        ->get();
+        return view('dosimetria.agregar_sedes_contrato_dosimetria', compact('sedes', 'dosimetriacontrato', 'departamentos'));
+        /* return $sedes; */
+    }
+
     public function  createTrabajadorSede(Request $request) {
         $request->validate([
-            'idTrabajador'               => 'required',
-            'id_sede_asigdosim'                       => 'required',
+            'idTrabajador'            => 'required',
+            'id_sede_asigdosim'      => 'required',
 
         ]);
 
