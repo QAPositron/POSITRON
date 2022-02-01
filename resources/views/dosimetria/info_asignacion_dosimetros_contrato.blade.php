@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="col-md p-1 ">
                                             <form id="form_eliminar_sede" name="form_eliminar_sede" action="" method="POST">
-                                                @csrf  
+                                                @csrf
                                                 @method('delete')
                                                 <button class="btn btn-danger btn-sm" onclick="Eliminar(evt);" type="submit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -85,27 +85,25 @@
                                 @endif
                             </td>
                             <td>{{$trabasig->ocupacion}}</td>
-                            <td> 
+                            <td>
                                 <div class="container p-1">
                                     <div class="row">
                                         <div class="col p-1 text-center">
-                                            <a href="" class="btn colorQA btn-sm">
+                                            <button data-bs-toggle="modal" data-bs-target="#trabajadorEdit{{$trabasig->trabajador->id_trabajador}}" class="btn colorQA btn-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill mb-1" viewBox="0 0 16 16">
                                                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
                                                 </svg> <br> EDITAR
-                                            </a>
+                                            </button>
                                         </div>
                                         <div class="col-md p-1 ">
-                                            <form id="form_eliminar_sede" name="form_eliminar_sede" action="" method="POST">
-                                                @csrf  
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm" onclick="Eliminar(evt);" type="submit">
+
+                                                <button data-bs-toggle="modal" data-bs-target="#trabajadorDelete{{$trabasig->trabajador->id_trabajador}}" class="btn btn-danger btn-sm" onclick="Eliminar(evt);" type="submit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                                     </svg> <br> ELIMINAR
                                                 </button>
-                                            </form>
+
                                         </div>
                                         <div class="col-md p-1 ">
                                             <a href="{{route('lecturadosi.create', $trabasig->id_trabajadordosimetro)}}" class="btn colorQA btn-sm">
@@ -126,4 +124,115 @@
     </div>
     <div class="col"></div>
 </div>
+
+<!-- Modal -->
+@foreach($trabjasignados as $trab)
+    <div class="modal fade" id="trabajadorDelete{{$trab->trabajador->id_trabajador}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('asignadosicontrato.deleteInfo', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisede->id_contratodosimetriasede, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
+                    <div class="modal-body">
+                        <span>¿Eliminar a este trabajador junto con su dosimetro asignado?</span>
+                        @csrf
+                        @method('delete')
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn colorQA">Eliminar dosimetro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach
+@foreach($trabjasignados as $trab)
+    <div class="modal fade" id="trabajadorEdit{{$trab->trabajador->id_trabajador}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form_eliminar_dosimetro" name="form_editar_dosimetro" action="{{route('asignadosicontrato.updateInfo', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisede->id_contratodosimetriasede, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
+                    <div class="modal-body">
+                        <span>¿Editar el dosimetro de este trabajador?</span>
+                        @csrf
+                        @method('patch')
+                        <br>
+                        <br>
+                        <span>Tenga en cuenta que esta acción varia en función de los dosimetros que aún queden disponibles
+                        en el momento y de los tipos que haya contratado la empresa</span>
+                        <br>
+                        <br>
+                        <table class="table table-sm table-bordered">
+                            <tr>
+                                <th class="text-center">Dosimetro</th>
+                                <th class="text-center">Holder</th>
+                                <th class="text-center">Ocupación</th>
+                            </tr>
+                            <tr>
+                            <td>
+                                <select class="form-select" name="id_dosimetro_asigdosim" id="id_dosimetro_asigdosim"  autofocus aria-label="Floating label select example">
+                                    <option value="">--</option>
+                                    <?php $cez=0; $cam=0; $cce=0; ?>
+                                    @foreach($dosimetros as $dosi)
+                                        @if($dosi->tipo_dosimetro == 'EZCLIP' && ($contdosisede->dosi_ezclip - $cez)>0)
+                                            <?php $cez++; ?>
+                                            <option onclick="count('EZCLIP')" change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
+                                        @elseif($dosi->tipo_dosimetro == 'CUERPO' && ($contdosisede->dosi_cuerpo_entero - $cce)>0)
+                                            <?php $cce++; ?>
+                                            <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
+                                        @elseif($dosi->tipo_dosimetro == 'AMBIENTAL' && ($contdosisede->dosi_ambiental - $cam)>0)
+                                            <?php $cam++; ?>
+                                            <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </td>
+                                <td>
+                                    <select class="form-select" name="id_holder_asigdosim" id="id_holder_asigdosim" autofocus aria-label="Floating label select example">
+                                        @foreach($holders as $hol)
+
+                                            <option value ="{{$hol->id_holder}}">{{$hol->codigo_holder}} - {{$hol->tipo_holder}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-select" name="ocupacion_asigdosim_control" id="ocupacion_asigdosim_control" autofocus style="text-transform:uppercase">
+                                        <option value="">--</option>
+                                        <option value="T">TELETERAPIA</option>
+                                        <option value="B">BRANQUITERAPIA</option>
+                                        <option value="N">MEDICINA NUCLEAR</option>
+                                        <option value="G">GAMAGRAFIA INDUSTRIAL</option>
+                                        <option value="F">MEDIDORES FIJOS</option>
+                                        <option value="I">INVESTIGACIÓN</option>
+                                        <option value="D">DENSÍMETRO NUCLEAR</option>
+                                        <option value="M">MEDIDORES MÓVILES</option>
+                                        <option value="E">DOCENCIA</option>
+                                        <option value="P">PERFILAJE Y REGISTRO</option>
+                                        <option value="T">TRAZADORES</option>
+                                        <option value="H">HEMODINAMIA</option>
+                                        <option value="X">RX PERIAPICALES</option>
+                                        <option value="R">RADIODIAGNÓSTICO</option>
+                                        <option value="S">FLUOROSCOPÍA</option>
+                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn colorQA">Editar dosimetro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach
 @endsection

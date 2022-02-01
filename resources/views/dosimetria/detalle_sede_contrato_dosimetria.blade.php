@@ -1,10 +1,10 @@
 @extends('layouts.plantillabase')
 @section('contenido')
-    
+
     <h3 class="text-center ">{{$dosisedecontra->sede->empresa->nombre_empresa}} - SEDE: {{$dosisedecontra->sede->nombre_sede}}</h3>
     <br>
     <h4 class="text-center ">CONTRATO No. {{$dosisedecontra->dosimetriacontrato->codigo_contrato}}</h4>
-    
+
 
     <br>
     <h6 class="text-center ">TOTAL DE DOSÍMETROS:       CUERPO E.: # {{$dosisedecontra->dosi_cuerpo_entero}}        AMBIENTAL: # {{$dosisedecontra->dosi_ambiental}}       EZCLIP: # {{$dosisedecontra->dosi_ezclip}} </h6>
@@ -28,7 +28,7 @@
 
 
                             <tr>
-                                
+
                                 <th>
                                     <a class="link-dark" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisedecontra->id_contratodosimetriasede, 'mesnumber' => $i+1 ])}}">MES {{$i+1}} </a><br>
                                     @if($i==0)
@@ -41,7 +41,9 @@
                                     @php
                                         $lenghtData = 0;
                                         foreach($trabjasigcontra as $trab){
+                                            if ($trab->mes_asignacion == ($i+1)) {
                                             $lenghtData += 1 ;
+                                           }
                                         }
                                         echo "$lenghtData";
                                     @endphp
@@ -52,7 +54,9 @@
                                         $suma = $dosisedecontra->dosi_cuerpo_entero + $dosisedecontra->dosi_control + $dosisedecontra->dosi_ambiental + $dosisedecontra->dosi_ezclip;
                                         foreach($trabjasigcontra as $trab){
                                             //esto esta bien PERO, recuerda que los dosimetros de control falta sumarlos, esos no se asignan al trabajador sino a la sede
+                                            if ($trab->mes_asignacion == ($i+1)) {
                                             $lenghtData += 1 ;
+                                            }
                                         }
                                         $resul = $suma - $lenghtData;
                                         echo "$resul";
@@ -61,11 +65,19 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md text-center">
-                                            <a href="{{route('asignadosicontrato.create', [ 'asigdosicont' => $dosisedecontra->id_contratodosimetriasede, 'mesnumber' => $i+1 ] )}}" class="btn colorQA btn-sm">
+                                            @if($mesTotal[$i]>0)
+                                            <a onclick="return false" style="background-color: #a0aec0" class="btn btn-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
                                                 </svg> ASIGNAR
                                             </a>
+                                            @else
+                                                <a href="{{route('asignadosicontrato.create', [ 'asigdosicont' => $dosisedecontra->id_contratodosimetriasede, 'mesnumber' => $i+1 ] )}}" class="btn colorQA btn-sm">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+                                                    </svg> ASIGNAR
+                                                </a>
+                                            @endif
                                         </div>
                                         <div class="col-md text-center">
                                             <a href="{{route('repodosimetria.pdf', $dosisedecontra->id_contratodosimetriasede)}}" class="btn colorQA btn-sm">

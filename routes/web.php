@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-| 
+|
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -102,6 +102,10 @@ Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/create', [DosimetriaCo
 Route::post('asignadosicontrato', [DosimetriaController::class, 'saveAsignacionDosiContrato'])->name('asignadosicontrato.save');
 
 Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/info', [DosimetriaController::class, 'info'])->name('asignadosicontrato.info');
+// para eliminar y editar en ruta info
+Route::patch('asignadosicontrato/{idWork}/{contratoId}/{mesnumber}/update', [DosimetriaController::class, 'updateInfo'])->name('asignadosicontrato.updateInfo');
+Route::delete('asignadosicontrato/{idWork}/{contratoId}/{mesnumber}/delete', [DosimetriaController::class, 'deleteInfo'])->name('asignadosicontrato.deleteInfo');
+
 ///////DELETE DOSIMETRO FOR WORK////////
 Route::delete('eliminatedDosiForWork/{idWork}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteDosimetro'])->name('dosimetroWork.destroy');
 Route::delete('eliminatedDosiControl/{idDosiControl}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteDosimetroControl'])->name('dosimetroControl.destroy');
