@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departamentosede;
 use App\Models\Empresa;
 use App\Models\Sede;
 use Illuminate\Http\Request;
@@ -18,12 +19,12 @@ class SedesController extends Controller
     public function save(Request $request){
         
         $request->validate([
-            'id_empresa'            => 'required',
-            'nombre_sede'           => 'required',
-            'municipio_sede'        => 'required',              
-            'departamento_sede'     => 'required',  
-            'direccion_sede'        => 'required',
-             
+            'id_empresa'                => 'required',
+            'nombre_sede'               => 'required',
+            'municipio_sede'            => 'required',              
+            'departamento_sede'         => 'required',  
+            'direccion_sede'            => 'required',
+            'multiple_select_depsede'   => 'required',
            
         ]);
         
@@ -36,7 +37,18 @@ class SedesController extends Controller
         $sede->direccion_sede	   =strtoupper($request->direccion_sede);
         
         $sede->save();
+
+        for($i=0; $i<count($request->multiple_select_depsede); $i++){
+
+            $deptosede = new Departamentosede();
+
+            $deptosede->sede_id                 = $sede->id_sede;
+            $deptosede->nombre_departamento     = $request->multiple_select_depsede[$i];
+            
+            $deptosede->save();
+        }
         return redirect()->route('empresas.info', $request->id_empresa);
+        return $request;
     }
 
 

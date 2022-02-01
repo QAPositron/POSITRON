@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contacto;
+use App\Models\Departamentosede;
 use App\Models\Empresa;
 use App\Models\Sede;
 use App\Models\Trabajador;
@@ -110,7 +111,11 @@ class EmpresasController extends Controller
 
     public function info(Empresa $empresa){
         /* SELECT * FROM trabajadors INNER JOIN trabajadorsedes ON trabajadors.id_trabajador = trabajadorsedes.trabajador_id INNER JOIN sedes ON trabajadorsedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
-        $sede = Sede::where('empresas_id',$empresa->id_empresa)->get();
+        $sede = Sede::where('empresas_id', $empresa->id_empresa)->get();
+        $departamentos = Departamentosede::join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
+        ->where('empresas_id', '=', $empresa->id_empresa)
+        ->select('nombre_departamento', 'sede_id')
+        ->get();
         $trabajador = Trabajador::join('trabajadorsedes','trabajadors.id_trabajador', '=', 'trabajadorsedes.trabajador_id')
         ->join('sedes','trabajadorsedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
@@ -126,8 +131,8 @@ class EmpresasController extends Controller
         ->orderBy('sedes.id_sede')
         ->select("*")
         ->get();
-        /* return $trabajador; */
-        return view('empresa.info_empresa', compact('empresa' ,'sede', 'trabajador', 'contacto'));
+        /* return $depaEsp; */
+        return view('empresa.info_empresa', compact('empresa' ,'sede', 'trabajador', 'contacto', 'departamentos'));
     }
    
 }

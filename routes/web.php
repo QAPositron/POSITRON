@@ -90,8 +90,13 @@ Route::delete('holders/{holder}', [HolderController::class, 'destroy'])->name('h
 Route::get('empresasdosicreate', [DosimetriaController::class, 'createEmpresa'])->name('empresasdosi.create');
 Route::post('empresasdosi', [DosimetriaController::class, 'saveEmpresa'])->name('empresasdosi.save');
 
-Route::get('contratosdosicreate/{contratodosi}/create', [DosimetriaController::class, 'createContrato'])->name('contratosdosi.create');
-Route::post('contratosdosi', [DosimetriaController::class, 'saveContrato'])->name('contratosdosi.save');
+Route::get('contratosdosilistar/{empresadosi}/listar', [DosimetriaController::class, 'listarContratosdosi'])->name('contratosdosi.listar');
+Route::get('contratosdosicreate/{empresadosi}/create', [DosimetriaController::class, 'createContrato'])->name('contratosdosi.create');
+Route::get('contratodosisedecreate/{contratodosi}/create', [DosimetriaController::class, 'createSedeContrato'])->name('contratosdosisede.create');
+
+Route::get('/contratodosidepa',[DosimetriaController::class,'selectdepa']);
+
+Route::post('contratosdosi', [DosimetriaController::class, 'saveContratodosi'])->name('contratosdosi.save');
 Route::post('contratosdosisede', [DosimetriaController::class, 'saveSedeContrato'])->name('contratosdosisede.save');
 
 Route::get('detallecontrato/{detcont}/create', [DosimetriaController::class, 'createdetalleContrato'])->name('detallecontrato.create');
@@ -131,14 +136,14 @@ Route::get('repodosimetria/{repodosi}/pdf', [DosimetriaController::class, 'pdf']
 Route::get('asignadosi', [AsignarDosimetroController::class, 'save'])->name('asignadosis.save'); */
 
 
-/* Route::get('/prueba1', [PruebaController::class,'index']);
+Route::get('/prueba1', [PruebaController::class,'index']);
 Route::post('/prueba1', [PruebaController::class, 'sedes']);
 Route::post('/prueba',[PruebaController::class,'prueba']);
 
 Route::get('pruebacreate',[PruebaController::class,'index1']);
 Route::get('/prueba2',[PruebaController::class,'prueba2']);
 Route::get('/prueba3',[PruebaController::class,'prueba3']);
-Route::get('/prueba4',[PruebaController::class,'prueba4']); */
+Route::get('/prueba4',[PruebaController::class,'prueba4']);
 
 /* Route::post('/prueba', function(Request $request){
     $name = $request->input('name');

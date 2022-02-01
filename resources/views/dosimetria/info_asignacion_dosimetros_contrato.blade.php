@@ -16,17 +16,17 @@
 
 <div class="row">
     <div class="col"></div>
-    <div class="col-9">
+    <div class="col-10">
         <div class="table table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr class="table-active text-center">
-                        <th>TRABAJADOR</th>
+                        <th style='width: 16.90%'>TRABAJADOR</th>
                         <th>N. IDEN.</th>
                         <th>DOSÍMETRO</th>
                         <th style='width: 14.90%'>HOLDER</th>
-                        <th>OCUPACIÓN</th>
-                        <th style='width: 25.90%'>ACCIONES</th>
+                        <th style='width: 9.90%'>OCUPACIÓN</th>
+                        <th style='width: 28.90%'>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
