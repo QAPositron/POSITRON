@@ -86,7 +86,7 @@
                     <tbody>
                         @foreach($empresaDosi as $empdosi)
                             <tr>
-                                <td><a class="link-dark" href="{{route('contratosdosi.listar', $empdosi->empresa_id)}}">{{$empdosi->empresa->nombre_empresa}}</a></td>
+                                <td><a class="link-dark" href="{{route('contratosdosi.createlist', $empdosi->empresa_id)}}">{{$empdosi->empresa->nombre_empresa}}</a></td>
                                 <td>{{$empdosi->empresa->tipo_identificacion_empresa}}</td>
                                 <td>{{$empdosi->empresa->num_iden_empresa}} {{$empdosi->empresa->DV}}</td>
                                 <td>{{$empdosi->numtotal_dosi_cuerpo_entero}}</td>

@@ -16,7 +16,7 @@
                         <button type="button" class="btn btn-sm bg-danger" id="agregar" onclick="deleteElement()">ELIMINAR SEDE </button>
                     </div>
                 </div>
-                    <br>
+                <br>
                 <div hidden class="container-fluid" id="clonar">
                     <div class="row">
                         <div class="col-md-5">
@@ -155,99 +155,7 @@
 
                     </div>
                 </div>
-                <!--
-                <div class="container-fluid" id="clonar1">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-floating my-3">
-                                <select class="form-select" name="id_sede[]" id="id_sede">
-                                    <option value="">--SELECCIONE--</option>
-                                    @foreach($sedes as $sed)
-                                        <option value ="{{$sed->id_sede}}">{{$sed->nombre_sede}}</option>
-                                    @endforeach
-                                </select>
-                                <?php
-                                $value = null;
-                                ?>
-                                <label for="floatingSelectGrid">SEDE:</label>
-                                @error('id_sede')
-                                    <small>*{{$message}}</small>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md mt-4">
-                            <button type="button" class="btn btn-sm colorQA" id="agregarDepto">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="col-md mt-4">
-                            <button type="button" class="btn btn-sm bg-danger" id="agregar" onclick="deleteDepa()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="col-md"></div>
-                        <div class="col-md"></div>
-                        <div class="col-md"></div>
-                        <div class="col-md"></div>
-                    </div>
-                    <div id="clonarDepto">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-floating mt-4">
-                                    <select class="form-select" name="departamento_sede[]" id="departamento_sede">
-                                        <option value="">--SELECCIONE--</option>
-                                        @foreach($departamentos as $depa)
-                                            <option value ="{{$depa->id_departamentosede}}">{{$depa->nombre_departamento}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingSelectGrid">DEPARTAMENTO:</label>
-                                    @error('id_sede')
-                                        <small>*{{$message}}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                <label for="" class="text-center">No. DOSÍM. C. ENTERO</label>
-                                <input type="number" name="num_dosi_ce[]" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
-                                @error('num_dosi_ce_contrato_sede')
-                                    <small>*{{$message}}</small>
-                                @enderror
-                            </div>
-                            <div class="col-md">
-                                <label for="" class="text-center">No. DOSÍM. AMBIENTAL</label>
-                                <input type="number" name="num_dosi_ambiental[]" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
-                                @error('num_dosi_ambiental_contrato_sede')
-                                    <small>*{{$message}}</small>
-                                @enderror
-                            </div>
-                            <div class="col-md">
-                                <label for="" class="text-center">No. DOSÍM. CASO</label>
-                                <input type="number" name="num_dosi_caso[]" id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
-                                @error('num_dosi_caso_contrato_sede')
-                                    <small>*{{$message}}</small>
-                                @enderror
-                            </div>
-                            <div class="col-md">
-                                <label for="" class="text-center">No. DOSÍM. EZCLIP</label>
-                                <input type="number" name="num_dosi_ezclip[]" id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
-                                @error('num_dosi_ezclip_contrato_sede')
-                                    <small>*{{$message}}</small>
-                                @enderror
-                            </div>
-
-                        </div>
-                    </div>
-                    <div id="contenedorDepto">
-
-                    </div>
-                </div>
-                -->
+                
                 <div id="contenedor">
 
                 </div>
