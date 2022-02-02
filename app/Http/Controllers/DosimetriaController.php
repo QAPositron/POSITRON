@@ -66,15 +66,19 @@ class DosimetriaController extends Controller
 
     public function createContrato($id){
         $empresa = Empresa::find($id);
-        
+
         /* SELECT * FROM `departamentosedes` INNER JOIN sedes on departamentosedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
-       
-       
+
+
         return view('dosimetria.crear_contratos_dosimetria', compact('empresa'));
        /*  return $sedes; */
     }
     public function selectdepa(Request $request){
-        echo "objeto obtenido".$request; 
+        $departamentos = DB::table('departamentosedes')
+            ->where('sede_id', $request->sede_id)
+            ->select("*")
+            ->get();
+        echo "$departamentos";
     }
 
     public function saveContratodosi(Request $request){
@@ -84,7 +88,7 @@ class DosimetriaController extends Controller
             'fecha_inicio_contrato'         => 'required',
             'fecha_finalizacion_contrato'   => 'required',
             'periodo_recambio_contrato'     => 'required',
-            
+
 
         ]);
         $contratoDosi = new Dosimetriacontrato();
@@ -97,7 +101,7 @@ class DosimetriaController extends Controller
 
         $contratoDosi->save();
 
-        
+
         /* for($i=0; $i<count($request->id_sede); $i++){
 
             $contratoDosiSede = new Contratodosimetriasede();
@@ -110,7 +114,7 @@ class DosimetriaController extends Controller
             $contratoDosiSede->dosi_ezclip           = $request->num_dosi_ezclip[$i];
             $contratoDosiSede->save();
         } */
-        
+
         return redirect()->route('contratosdosisede.create', $contratoDosi->id_contratodosimetria);
         /* return $request; */
     }
