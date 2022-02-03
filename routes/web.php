@@ -99,6 +99,8 @@ Route::get('/contratodosisedecreate/{contratodosi}/contratodosidepa',[Dosimetria
 Route::post('contratosdosi', [DosimetriaController::class, 'saveContratodosi'])->name('contratosdosi.save');
 Route::post('contratosdosisede', [DosimetriaController::class, 'saveSedeContrato'])->name('contratosdosisede.save');
 
+Route::get('contratosdosicreatelist/{empresadosi}/createlist', [DosimetriaController::class, 'createlistContrato'])->name('contratosdosi.createlist');
+
 Route::get('detallecontrato/{detcont}/create', [DosimetriaController::class, 'createdetalleContrato'])->name('detallecontrato.create');
 Route::get('detallesedecont/{detsedcont}/create',[DosimetriaController::class, 'createdetsedeContrato'])->name('detallesedecont.create');
 /////////RUTAS PARA EL CRUD DE ASIGNACION DOSIMETROS///////

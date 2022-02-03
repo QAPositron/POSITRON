@@ -20,7 +20,7 @@
                         <button type="button" class="btn btn-sm bg-danger" id="agregar" onclick="deleteElement()">ELIMINAR SEDE </button>
                     </div>
                 </div>
-                    <br>
+                <br>
                 <div hidden class="container-fluid" id="clonar">
                     <div class="row">
                         <div class="col-md-5">

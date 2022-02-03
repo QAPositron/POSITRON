@@ -1,11 +1,15 @@
 <style type="text/css">
     
     html{
-        margin: 2pt 30pt 30pt 2pt;
+        margin: 30pt 30pt 30pt 30pt;
         font-family: sans-serif;
         font-size: 10px;
     }
     
+    .page-break {
+        page-break-after: always;
+    }
+
     .verticalText {
         writing-mode: vertical-lr;
         transform: rotate(-90deg);
@@ -39,12 +43,15 @@
         border: 1px;
     }
 </style>
+<body>
 <!-- ////////////////////ENCABEZADO/////////////// -->
-<img src="http://<?php echo $_SERVER['HTTP_HOST']?>/QAPOSITRON(1)/public/imagenes/VerdeSF.png" width="200">
+
+
+<img src="{{asset('imagenes/LOGOVERDE.png')}}" width="200">
 
 <h3 style="position:absolute; top:87px; left:30px;">REPORTE DE DOSIMETRÍA</h3>
 
-<table style="position:absolute; top:0px; left:220px;" cellspacing="0" cellpadding="0">
+<table style="position:absolute; top:0px; left:240px;" cellspacing="0" cellpadding="0">
     <tr>
         <th style="font-size: 15px;" align="left">QA POSITRON S.A.S.</th>
     </tr>
@@ -71,7 +78,7 @@
     </tr>
 </table>
 
-<table style="position:absolute; top:0px; left:690px; border-collapse:collapse;" cellspacing="1" cellpadding="2" >
+<table style="position:absolute; top:0px; left:710px; border-collapse:collapse;" cellspacing="1" cellpadding="2" >
     <tr>
         <td style="border:0.1px solid black;">No. de Cuenta ó clave </td>
         <td style="width: 100px; border:0.1px solid black;">&nbsp;</td>
@@ -94,7 +101,7 @@
     </tr>
 </table>    
 
-<table style="position:absolute; top:0px; left:910px; border-collapse:collapse;" cellspacing="1" cellpadding="3.3">
+<table style="position:absolute; top:0px; left:930px; border-collapse:collapse;" cellspacing="1" cellpadding="3.3">
     <tr>
         <td style="border:0.1px solid black;">Fecha recibo dosím.</td>
         <td style="width: 94px; border:0.1px solid black;">&nbsp;</td>
@@ -109,7 +116,7 @@
     </tr>
 </table>
 
-<img src="http://<?php echo $_SERVER['HTTP_HOST']?>/QAPOSITRON(1)/public/imagenes/LOGODOSIMETRIA.png" width="100" style="left:1152px;">
+<img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="100" style="left:1162px;">
 
 <!-- ////////////////////FIN ENCABEZADO/////////////// -->
 
@@ -128,9 +135,9 @@
             <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Periodo de recambio</p></td>
             <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Ubcación del dosímetro</p></td>
             <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Energía ó calidad de radiación</p></td>
-            <th colspan="3" style="width:170px; padding:5px; border:0.6px solid black;">Dosis del Periodo (mSv)</td>
-            <th colspan="3" style="width:170px; padding:5px; border:0.6px solid black;">Dosis acumulada 12 meses anteriores</td>
-            <th colspan="3" style="width:170px; padding:5px; border:0.6px solid black;">Dosis acumulada desde ingreso al servicio (mSv)</td>
+            <th colspan="3" style="width:178px; padding:5px; border:0.6px solid black;">Dosis del Periodo (mSv)</td>
+            <th colspan="3" style="width:178px; padding:5px; border:0.6px solid black;">Dosis acumulada 12 meses anteriores</td>
+            <th colspan="3" style="width:178px; padding:5px; border:0.6px solid black;">Dosis acumulada desde ingreso al servicio (mSv)</td>
         </tr>
         <tr align="center">
             <th style="padding:5px; border:0.6px solid black;">Primer Día</td>
@@ -147,7 +154,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($dosicontrolasig as $dosicont)
+        {{--  @foreach($dosicontrolasig as $dosicont)
             <tr>
                 <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->id_dosicontrolcontdosisedes}}</td>
                 <td style="padding:3px; border:0.1px solid black;" align="center">CONTROL</td>
@@ -171,7 +178,7 @@
                 <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
                 <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
             </tr>
-        @endforeach
+        @endforeach --}}
         
     </tbody>
 </table>
@@ -226,16 +233,16 @@
 
 <!-- ////////////////////////////////////----------------SEGUNDA PAGINA------------//////////////////////////////////////////////7 -->
 
-<!-- <div style="position:absolute; width: 100%; height:20px; page-break-before: always; font-size: 12px;">
+<div style="position:absolute; width: 100%; height:20px; page-break-before: always; font-size: 12px;">
     <p style=" float: left; border:solid 1px #000; width: 31.5%;" align="center"> <b> INFORMACIÓN GENERAL </b></p>
-    <P style="float: right; border:solid 1px #000; width: 67%;" align="center"> <b> INFORMACIÓN PARA LA LECTURA E INTERPRETACIÓN DELINFORME </b> </P>
-</div> -->
+    <P style="float: right; border:solid 1px #000; width: 67%;" align="center"> <b> INFORMACIÓN PARA LA LECTURA E INTERPRETACIÓN DEL INFORME </b> </P>
+</div>
 <!-- //////////////Primera Columna///////////// -->
-<!-- <div style=" position:absolute;  top:40px; border:solid 1px #000; width: 31.5%; height:680px; padding:0px;  font-size: 8px;">
+<div style=" position:absolute;  top:40px; border:solid 1px #000; width: 31.5%; height:700px; padding:0px;  font-size: 8px;">
     <p style="margin:4px; " align="center">
         <b> <u>LÍMITES ANUALES DE EXPOSICIÓN A RADIACIONES</u></b>
     </p>
-    <table  style="top:20px; border:solid 1px #000;" border="1">
+    <table  style="top:20px; border:solid 1px #000; width:100%" border="1">
         <tr align="center">
             <td>CUERPO ENTERO, VIAS SANGUÍNEAS, ORGANOS, GÓNADAS:</td>
             <td>20 mSv\año</td>
@@ -257,23 +264,23 @@
             <td>1 mSv\año</td>
         </tr>
     </table>
-    <div style=" position:absolute;  top: 113px; padding:0px;">
-        <p style="margin:0px;  text-align:justify; padding:2px; "> 
+    <div style=" position:absolute;  top:80px; padding:0px;">
+        <p style="text-align:justify; padding:5px;"> 
             Las diferentes agencias regulatorias tienen diferentes límites de exposición. Verifique las regulaciones aplicadas en su práctica para cumplir con los requerimientos. <b> Se recalca la necesidad por parte de la entidad usuaria de realizar una investigación interna exhaustiva para determinar las causas de dosis altas, especialmente cuando los resultados superen los siguientes parámetros de referencia normativa: en tejido profundo cuando se registren dosis superiores a 1,7mSv por periodo mensual o su equivalente (3,33mSv para bimestral, 5mSv para trimestral).</b>
         </p>
-        <p style="margin:4px;" align="center">
+        <p align="center">
             <b> <u>DOSÍMETRO DE CONTROL</u></b>
         </p>
-        <P style="margin:0px;  text-align:justify; padding:2px;">
+        <P style="text-align:justify; padding:5px;">
             Un dosímetro de control (principal y/o de departamento) es incluido con cada entrega de dosímetros para monitorear la exposición a radiación recibida durante el tránsito y almacenamiento por los dosímetros personales y ambientales. En las instalaciones del cliente, el control debe guardarse en un área libre radiación durante el periodo de uso. Bajo ninguna circunstancia el dosímetro de control debe asignarse como dosímetro de medición ambiental o como dosímetro personal.
         </P>
-        <p style="margin:4px;" align="center">
+        <p align="center">
             <b><u>MÍNIMA DOSIS EQUIVALENTE REPORTADA</u></b>
         </p>
-        <p style="margin:0px;  text-align:justify; padding:2px;">
+        <p style="text-align:justify; padding:5px;">
             Dosis equivalentes por debajo de la cantidad mínima cuantificable para el período de uso son registradas como ‘’M’’. Los niveles mínimos de reporte varían de acuerdo con el tipo de dosímetro y calidad de la radiación, de acuerdo a los siguientes parámetros:
         </p>
-        <table style="top:190px; border:solid 2px #000; text-align:center; width:100%"  border="1">
+        <table style="top:230px; border:solid 2px #000; text-align:center; width:100%"  border="1">
             <tr align="center">
                 <td>Photones (Rayos X y gamma)</td>
                 <td>0.01 mSv</td>
@@ -295,79 +302,76 @@
                 <td>0.3 mSv</td>
             </tr>
         </table>
-        <div style=" position:absolute; margin:0px; text-align:justify; top: 255px; padding:0px;">
-            <p>
+        <div style=" position:absolute; margin:0px; text-align:justify; top: 300px; padding:0px;">
+            <p style="text-align:justify; padding:5px;">
                 “SL” es una opción elegible para la mínima dosis equivalente reportada en los dosímetros LUXEL® para fotones (Rayos X y Gamma). Exposiciones menores de 0.01 mSv reportados como “M”, y las exposiciones iguales o superiores a 0.01 mSv empiezan a reportar con
                 0.01 mSv y reportan con incrementos de 0.01 mSv.
             </p>
-            <p>
+            <p  style="padding-left:5px;">
                 <b><u>LECTURA DEL ANILLO Y LECTURAS DE CRISTALINO:</u></b>
             </p>
-            <p style="margin:0px;  text-align:justify; padding:2px;">
+            <p style="text-align:justify; padding:5px;">
                 Las lecturas de anillo se reportan como una dosis superficial. Las lecturas de dosímetro de cristalino (lente de ojo) se reportan como una dosis de lente de ojo y superficial.
             </p>
-            <p>
+            <p style="padding-left:5px;">
                 <b><u>CÁLCULOS ESPECIALES:</u></b>
             </p>
-            <p style="margin:0px;  text-align:justify; padding:2px;">
+            <p style="text-align:justify; padding:5px;">
                 Pueden hacerse cálculos especiales de dosis a usuarios que utilicen chalecos y otros instrumentos de blindaje, a saber: <br>
                 1)	EDE 1 - Dos dosímetros: 1 dosímetro dispuesto al nivel de la cintura bajo el blindaje y 1 dosímetro dispuesto al nivel del cuello fuera del blindaje 1.5 (cintura) +0.04 (cuello) = Dosis Profunda Equivalente asignada <br>
                 2)	EDE 2- Un dosímetro: 1 dosímetro dispuesto por fuera del blindaje. <br>
                 0.30 (dosímetro de cuerpo entero) = Dosis Profunda Equivalente Asignada <br>    
                 La línea “asignada” seguirá todas las dosis originales para dosímetro de cuerpo entero con el cálculo de resultados EDE 1 o EDE 2 o bien, el protocolo de asignación de dosis de Landauer (dosis profunda y superficial de cuerpo entero de la lectura más alta para el dosímetro de cuerpo entero y dosis de lente de ojo del dosímetro más cercano al ojo).
             </p>
-            <p>
+            <p style="padding-left:5px;">
                 <b><u>DOSIMETRO FETAL:</u></b>
             </p>
-            <p style="margin:0px;  text-align:justify; padding:2px;">
+            <p style="  text-align:justify; padding:5px;">
                 Una usuaria declarada en estado de embarazo generará el registro de la exposición fetal en una página extra del reporte basada en el dosímetro de cuerpo entero situado  en el lugar más cercano al feto. La dosis asignada al feto es reportada para el periodo de uso actual, así como la dosis estimada desde la concepción hasta la declaración de estado de embarazo (de ser suministrada por el usuario) y una dosis total desde la declaración de estado de embarazo hasta el presente.
             </p>
         </div>
     </div>    
-</div> -->
+</div>
 <!-- /////////// Segunda Columna /////////////////7 -->
-<!-- <div style=" position:absolute; top:40px; left:409px; width: 67%; height:690px; padding:0px; font-size: 8px;">
-    <div style=" float: left; border:solid 1px #000; width: 49%; height:680px; padding:0px;">
-        <p align="center"> 
+<div style=" position:absolute; top:40px; left:430px; width: 67%; height:690px; padding:0px; font-size: 8px;">
+    <div style=" float: left; border:solid 1px #000; width: 49%; height:700px; padding:0px;">
+        <p style="right:50px; top:50px;" align="center"> 
             <b><u>INFORMACIÓN DEL REPORTE DE EXPOSICIÓN</u></b>
         </p>
-        <br>
-        <p style="text-align:justify;">
+        <p style="text-align:justify; padding:5px;">
             <br>
             La información para cada participante se registrará en una o más líneas, de la siguiente manera:
-            <br>
+            
         </p>
         <br>
-        <br>
-        <p>
+        <p style=" padding:5px;">
             <b><u>INFORMACION DE LOS USUARIOS DEL SERVICIO:</u></b>
         </p>
-        <p style="text-align:justify;"> 
+        <p style="padding:5px;"> 
             <b>Número de usuario o participante:</b> Número único asignado por Landauer.
         </p>
-        <p style="text-align:justify;">
+        <p style="text-align:justify; padding:5px;">
             Nombre(s) y Apellido(s):  identificando la persona a la cual el dosímetro es asignado. Género (M=Masculino, F=Femenino); Documento de Identidad. Fecha de Ingreso al Servicio: corresponde a la fecha en que Landauer empezó a mantener registros de dosimetría para un participante en la cuenta actual, o de la última reactivación del servicio, de aplicar.
             <br>
             <br>
             La información personal de cada participante consistente en Documento de Identificación (Cedula de Ciudadanía o Extranjería), fecha de nacimiento y género, puede ser suprimida en duplicado de reportes por razones de privacidad.
         </p>
-        <p style="text-align:justify;">
+        <p style="text-align:justify; padding:5px;">
             <b><u>Ocupación: </u></b> de acuerdo con la información suministrada por la entidad contratante, se clasifica la ocupación con la siguiente nomenclatura: T=Teleterapia, B=Braquiterapia, N=Medicina Nuclear, G=Gammagrafía industrial, F=Medidores fijos, I=Investigación, D=Densímetro nuclear, M=Medidores móviles, E=Docencia, P=Perfilaje y registro, T=Trazadores, H=Hemodinamia, X=RX periapicales, R=Radiodiagnóstico, S=Fluoroscopía, AM=Aplicaciones Médicas, AI=Aplicaciones Industriales.
         </p>
-        <br>
-        <br>
-        <p>
+        
+        <p style="padding:5px;">
             <b><u>INFORMACION DEL PERIODO DE USO, DOSIMETRO Y RADIACION :</u></b> 
         </p>
-        <p> 
-            <b style="text-align:justify;">Periodo de uso del Dosimetro:</b>se relaciona la fecha asignada para inicio y terminacion del periodo de medicion, la cual es correspondiente con la marcación del dosímetro de acuerdo a la solicitud del cliente. Periodo de recambio: se refiere a la frecuencia de cambio en términos de M=Mes, B=Bimestre o T=Trimestre, o PERS=Personalizado.
+        <p style="text-align:justify; padding:5px;"> 
+            <b >Periodo de uso del Dosimetro:</b>se relaciona la fecha asignada para inicio y terminacion del periodo de medicion, la cual es correspondiente con la marcación del dosímetro de acuerdo a la solicitud del cliente. Periodo de recambio: se refiere a la frecuencia de cambio en términos de M=Mes, B=Bimestre o T=Trimestre, o PERS=Personalizado.
         </p>
-        <p style="text-align:justify;"> 
+        <p style="text-align:justify; padding:5px;"> 
             <b> <u>Tipo de Dosímetro:</u></b>clase de dosímetro de acuerdo a las necesidades de monitoreo a radiación, a saber:
         </p>
         <br>
         <br>
-        <table style="position:absolute; border:solid 2px #000; top:400px; left: -1px; width: 412px;"  border="1">
+        <table style="border:solid 2px #000; top:400px; left:35px;"  border="1">
             <tr align="center">
                 <td rowspan="3">LUXEL® (OSL):</td>
                 <td>P, Pa:</td>
@@ -393,11 +397,11 @@
             </tr>
         </table>
         <div style=" position:absolute; margin:0px; padding:0px; text-align:justify; top: 470px;  height: 200px; padding:0px;">
-            <p style="top:28px; text-align:justify;"> 
+            <p style="top:28px; text-align:justify; padding:5px;"> 
                 <b>Ubicación del dosímetro:</b> Se refiere al uso o localización en el cuerpo, para la cual el dosímetro es suministrado, <br>
                 a saber:
             </p>
-            <table style="border:solid 2px #000; left: -1px; width: 412px; top:37px;"  border="1">
+            <table style="border:solid 2px #000; left: 10px; width: 412px; top:37px;"  border="1">
                 <thead>
                     <tr >
                         <th>Uso</th>
@@ -483,15 +487,15 @@
                 
             </table>
         </div>
-    </div> -->
+    </div>
     <!-- /////// Tercera Columna//////////// -->
- <!--    <div  style=" float: right; border:solid 1px #000; width: 49%; height:680px; padding:0px;">
+    <div  style=" float: right; border:solid 1px #000; width: 49%; height:700px; padding:0px;">
         <br><br>
-        <p style="top:30px; "> 
+        <p style="top:30px; text-align:justify; padding:5px;"> 
             <b> <u> Energía o calidad de radiación:</u> </b> Tipos y energías de radiación incorporadas en la dosis equivalente de cuerpo entero, a saber:
         </p>
         
-        <p style="top:30px; margin:4px; padding:6px; " >
+        <p style="top:30px; margin:4px; padding:7px; " >
             B : Beta <br>
             BH : Beta de alta energía, por ejemplo, Estroncio, Fósforo BL : Beta de baja energía, por ejemplo, Talio, Kriptón <br>
             BN : Beta, Neutrón (Mezcla) BS : Beta - Estroncio <br>
@@ -508,11 +512,11 @@
             <b><u>INFORMACIÓN DEL REPORTE DE EXPOSICIÓN </u></b>
         </p>
         <br>
-        <p style="margin:4px;">
+        <p style=" padding:5px;">
             <b><u>INFORMACION DE LAS DOSIS REPORTADAS</u></b>
         </p>
         <br>
-        <p style="margin:0px;  text-align:justify; padding:2px; "> 
+        <p style=" text-align:justify; padding:5px; "> 
             <b> Dosis Equivalentes Para Tejido Profundo, Hp(10) (DDE):</b> La dosis equivalente para tejido profundo aplica para la exposición externa de cuerpo entero, a una profundidad de tejido de 1 centímetro (1000 mg/cm2), equivalente a 10mm de profundidad. <br>
             <b> Dosis equivalente para Lente De Ojo, Hp(3) (LDE):</b> La dosis equivalente para ojo aplica para la exposición externa de los lentes, a una profundidad de tejido de 0.3 centímetros (300 mg/cm2), equivalente a 3mm de profundidad. <br>
             <b> Dosis equivalente en Tejido Superficial, piel o extremidades, Hp(0.07): </b> La dosis equivalente para tejido superficial aplica para la exposición externa de la piel o extremidades a una profundidad de tejido de 0.007 centímetros (7 mg/cm2) promediada para una área de 1 cm2, equivalente a 0,07mm de profundidad. <br>
@@ -527,11 +531,11 @@
             <b> Notas:</b> Son los mensajes de texto explic  ando cualquier anormalidad  o  comentario respecto a las dosis registradas. La nota con el mensaje aparece en una línea separada debajo de la información de exposición del dosímetro.
         </p>
         <br>
-        <p style="margin:4px;">
+        <p style="padding:5px;">
             <b><u>NIVELES DE DOSIS POR PERIODOS DE MEDICION</u></b>
         </p>
         <br>
-        <p style="top:30px; text-align:justify; "> 
+        <p style="top:30px; text-align:justify; padding:5px;"> 
             En desarrollo del servicio de dosimetría, se establecen como dosis sujetas a la necesidad de investigación interna en la institución cliente las lecturas registradas por encima de los siguientes límites:
             <br>
             <br>
@@ -541,4 +545,18 @@
             Adicionalmente, le informamos la necesidad de controlar la exposición ocupacional de todo trabajador, de forma que no rebasen en sus registros de dosis equivalentes resultantes según la profundidad y la frecuencia de medición, los siguientes limites: 1) Para Dosis de Cristalino del Ojo HP(3), o “EYE”: dosis superiores a 12.5 mSv en un periodo mensual de medición; 25 mSv en un periodo bimestral de medición; y 37.5 mSv para un periodo trimestral de medición. 2) Para Dosis Superficial HP(0.07), o “SHALLOW”: dosis superiores a 41.67 mSv en un periodo mensual de medición; 83.33 mSv en un periodo bimestral de medición; y 125 mSv para un periodo trimestral de medición.
         </p>
     </div>
-</div> -->
+</div>
+
+{{-- ////////////////////SCRIPT PARA CONTAR LAS PAGINAS/////////////// --}}
+    <script type="text/php">
+        if (isset($pdf)) {
+            $text = "página {PAGE_NUM} de {PAGE_COUNT}";
+            $size = 10;
+            $font = $fontMetrics->getFont("Verdana");
+            $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
+            $x = ($pdf->get_width() - $width) / 2;
+            $y = $pdf->get_height() - 60;
+            $pdf->page_text($x, $y, $text, $font, $size);
+        }
+    </script>
+</body>

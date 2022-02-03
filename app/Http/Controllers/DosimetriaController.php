@@ -56,6 +56,23 @@ class DosimetriaController extends Controller
         return redirect()->route('empresasdosi.create');
     }
 
+    public function createlistContrato($id){
+        $empresa = Empresa::find($id);
+        $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
+        ->get();
+        /* SELECT * FROM `departamentosedes` INNER JOIN sedes on departamentosedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
+        $sedes = Sede::leftJoin('contratodosimetriasedes', 'sedes.id_sede', '=', 'contratodosimetriasedes.sede_id')
+        ->where('sedes.empresas_id', $id)
+        ->whereNull('contratodosimetriasedes.sede_id')
+        ->get();
+        $departamentos = Departamentosede::join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
+        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
+        ->where('empresas.id_empresa', $id)
+        ->get();
+        return view('dosimetria.crear_listar_contratos_dosimetria', compact('empresa', 'dosimetriacontrato', 'sedes','departamentos'));
+        /* return $sedes; */
+    }
+
     public function listarContratosdosi($id){
         $empresa = Empresa::find($id);
         $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
@@ -83,7 +100,7 @@ class DosimetriaController extends Controller
 
     public function saveContratodosi(Request $request){
 
-        $request->validate([
+        /* $request->validate([
             'codigo_contrato'               => 'required',
             'fecha_inicio_contrato'         => 'required',
             'fecha_finalizacion_contrato'   => 'required',
@@ -99,7 +116,7 @@ class DosimetriaController extends Controller
         $contratoDosi->fecha_finalizacion           = $request->fecha_finalizacion_contrato;
         $contratoDosi->periodo_recambio             = $request->periodo_recambio_contrato;
 
-        $contratoDosi->save();
+        $contratoDosi->save(); */
 
 
         /* for($i=0; $i<count($request->id_sede); $i++){
@@ -115,8 +132,8 @@ class DosimetriaController extends Controller
             $contratoDosiSede->save();
         } */
 
-        //return redirect()->route('contratosdosisede.create', $contratoDosi->id_contratodosimetria);
-         return $request;
+        /* return redirect()->route('contratosdosisede.create', $contratoDosi->id_contratodosimetria); */
+        return $request;
     }
 
     public function createSedeContrato($id){
