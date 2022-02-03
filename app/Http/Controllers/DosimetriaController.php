@@ -115,8 +115,8 @@ class DosimetriaController extends Controller
             $contratoDosiSede->save();
         } */
 
-        return redirect()->route('contratosdosisede.create', $contratoDosi->id_contratodosimetria);
-        /* return $request; */
+        //return redirect()->route('contratosdosisede.create', $contratoDosi->id_contratodosimetria);
+         return $request;
     }
 
     public function createSedeContrato($id){
