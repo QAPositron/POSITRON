@@ -61,6 +61,7 @@
                         <div class="col-md"></div>
                         <div class="col-md"></div>
                     </div>
+                    <!--
                     <div hidden id="clonarDepto">
                         <div class="row">
                             <div class="col-md-3">
@@ -108,53 +109,7 @@
 
                         </div>
                     </div>
-                    <div hidden id="clonarDepto1">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-floating mt-4">
-                                    <select class="form-select" name="departamento_sede[]" id="departamento_sede">
-                                        <option value="">--SELECCIONE--</option>
-                                        @foreach($departamentos as $depa)
-                                            <option value ="{{$depa->id_departamentosede}}">{{$depa->nombre_departamento}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingSelectGrid">DEPARTAMENTO:</label>
-                                    @error('id_sede')
-                                    <small>*{{$message}}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                <label for="" class="text-center">No. DOSÍM. C. ENTERO</label>
-                                <input type="number" name="num_dosi_ce[]" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
-                                @error('num_dosi_ce_contrato_sede')
-                                <small>*{{$message}}</small>
-                                @enderror
-                            </div>
-                            <div class="col-md">
-                                <label for="" class="text-center">No. DOSÍM. AMBIENTAL</label>
-                                <input type="number" name="num_dosi_ambiental[]" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
-                                @error('num_dosi_ambiental_contrato_sede')
-                                <small>*{{$message}}</small>
-                                @enderror
-                            </div>
-                            <div class="col-md">
-                                <label for="" class="text-center">No. DOSÍM. CASO</label>
-                                <input type="number" name="num_dosi_caso[]" id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
-                                @error('num_dosi_caso_contrato_sede')
-                                <small>*{{$message}}</small>
-                                @enderror
-                            </div>
-                            <div class="col-md">
-                                <label for="" class="text-center">No. DOSÍM. EZCLIP</label>
-                                <input type="number" name="num_dosi_ezclip[]" id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
-                                @error('num_dosi_ezclip_contrato_sede')
-                                <small>*{{$message}}</small>
-                                @enderror
-                            </div>
-
-                        </div>
-                    </div>
+                    -->
                     <div class="" id="contenedorDepto0">
 
                     </div>
@@ -218,16 +173,6 @@
     let agregarDepto = document.getElementById('agregarDepto1');
     let contenidoDepto = null;
 
-    $(document).ready(function () {
-
-        $('#id_sede').on('change', function () {
-            console.log('hola cambie de sede')
-        });
-        $('#id_sede').change(function() {alert('ok');});
-
-
-       console.log( $('#id_sede').val());
-    })
     function readySede() {
         $(document).ready(function () {
             $(`#id_sede${sedesNumber-1}`).change(function () {

@@ -50,7 +50,7 @@
                                 <div class="row">
                                     <div class="col-md">
                                         <div class="form-floating my-3">
-                                            <input type="date" name="fecha_inicio_contrato" id="fecha_inicio_contrato" class="form-control"  autofocus > 
+                                            <input type="date" name="fecha_inicio_contrato" id="fecha_inicio_contrato" class="form-control"  autofocus >
                                             <label for="floatingInputGrid">FECHA DE INICIO:</label>
                                             @error('fecha_inicio_contrato')
                                                 <small>*{{$message}}</small>
@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating my-3">
-                                            <input type="date" name="fecha_finalizacion_contrato" id="fecha_finalizacion_contrato" class="form-control"  autofocus > 
+                                            <input type="date" name="fecha_finalizacion_contrato" id="fecha_finalizacion_contrato" class="form-control"  autofocus >
                                             <label for="floatingInputGrid">FECHA DE FINALIZACIÓN:</label>
                                             @error('fecha_finalizacion_contrato')
                                                 <small>*{{$message}}</small>
@@ -67,15 +67,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="col-md">
                                 <hr>
                                 <label class="text-center ms-4">ASIGNE A ESTE CONTRATO UNA O MÁS SEDES:</label>
-                                
+
                                 <div class="row mt-2">
                                     <div class="col-md text-center">
-                                        <button class="btn btn-sm colorQA" id="agregar">AGREGAR SEDE </button>
+                                        <button onclick="readySede()" class="btn btn-sm colorQA" id="agregar">AGREGAR SEDE </button>
                                         <button type="button" class="btn btn-sm bg-danger" id="agregar" onclick="deleteElement()">ELIMINAR SEDE </button>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <div class="form-floating my-3">
-                                                    <select class="form-select" name="id_sede[]" id="id_sede">
+                                                    <select class="form-select" id="id_sede">
                                                         <option value="">--SELECCIONE--</option>
                                                         @foreach($sedes as $sed)
                                                             <option value ="{{$sed->id_sede}}">{{$sed->nombre_sede}}</option>
@@ -115,7 +115,7 @@
                                             <div class="row ">
                                                 <div class="col-md-3">
                                                     <div class="form-floating mt-4">
-                                                        <select class="form-select" name="departamento_sede[]" id="departamento_sede">
+                                                        <select class="form-select"  id="departamento_sede">
                                                             <option value="">--SELECCIONE--</option>
                                                             @foreach($departamentos as $depa)
                                                                 <option value ="{{$depa->id_departamentosede}}">{{$depa->nombre_departamento}}</option>
@@ -129,92 +129,46 @@
                                                 </div>
                                                 <div class="col-md">
                                                     <label for="" class="text-center">No. DOSÍM. C. ENTERO</label>
-                                                    <input type="number" name="num_dosi_ce[]" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
+                                                    <input type="number" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
                                                     @error('num_dosi_ce_contrato_sede')
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="col-md">
                                                     <label for="" class="text-center">No. DOSÍM. AMBIENTAL</label>
-                                                    <input type="number" name="num_dosi_ambiental[]" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
+                                                    <input type="number" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
                                                     @error('num_dosi_ambiental_contrato_sede')
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="col-md">
                                                     <label for="" class="text-center">No. DOSÍM. CASO</label>
-                                                    <input type="number" name="num_dosi_caso[]" id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
+                                                    <input type="number" id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
                                                     @error('num_dosi_caso_contrato_sede')
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="col-md">
                                                     <label for="" class="text-center">No. DOSÍM. EZCLIP</label>
-                                                    <input type="number" name="num_dosi_ezclip[]" id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
+                                                    <input type="number"  id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
                                                     @error('num_dosi_ezclip_contrato_sede')
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </div>
-                    
+
                                             </div>
                                         </div>
-                                        <div id="clonarDepto1">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="form-floating mt-4">
-                                                        <select class="form-select" name="departamento_sede[]" id="departamento_sede">
-                                                            <option value="">--SELECCIONE--</option>
-                                                            @foreach($departamentos as $depa)
-                                                                <option value ="{{$depa->id_departamentosede}}">{{$depa->nombre_departamento}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <label for="floatingSelectGrid">DEPARTAMENTO:</label>
-                                                        @error('id_sede')
-                                                        <small>*{{$message}}</small>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md">
-                                                    <label for="" class="text-center">No. DOSÍM. C. ENTERO</label>
-                                                    <input type="number" name="num_dosi_ce[]" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
-                                                    @error('num_dosi_ce_contrato_sede')
-                                                    <small>*{{$message}}</small>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-md">
-                                                    <label for="" class="text-center">No. DOSÍM. AMBIENTAL</label>
-                                                    <input type="number" name="num_dosi_ambiental[]" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
-                                                    @error('num_dosi_ambiental_contrato_sede')
-                                                    <small>*{{$message}}</small>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-md">
-                                                    <label for="" class="text-center">No. DOSÍM. CASO</label>
-                                                    <input type="number" name="num_dosi_caso[]" id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
-                                                    @error('num_dosi_caso_contrato_sede')
-                                                    <small>*{{$message}}</small>
-                                                    @enderror
-                                                </div>
-                                                <div class="col-md">
-                                                    <label for="" class="text-center">No. DOSÍM. EZCLIP</label>
-                                                    <input type="number" name="num_dosi_ezclip[]" id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
-                                                    @error('num_dosi_ezclip_contrato_sede')
-                                                    <small>*{{$message}}</small>
-                                                    @enderror
-                                                </div>
-                    
-                                            </div>
-                                        </div>
+
                                         <div class="" id="contenedorDepto0">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div id="contenedor">
-                
+
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -225,7 +179,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 <BR></BR>
@@ -289,31 +243,83 @@ crossorigin="anonymous">
         contenido.appendChild(clon).setAttribute("class", `${sedesNumber}`);
         document.getElementById(`${sedesNumber}`).removeAttribute("hidden");
         document.getElementById(`${sedesNumber}`).querySelector('#contenedorDepto0')
-        .setAttribute("id", `contenedorDeptoSede${sedesNumber}`);
-
+            .setAttribute("id", `contenedorDeptoSede${sedesNumber}`);
+        document.getElementById(`${sedesNumber}`).querySelector('#id_sede')
+            .setAttribute("id", `id_sede${sedesNumber}`);
+        document.getElementById(`${sedesNumber}`).querySelector(`#id_sede${sedesNumber}`)
+            .setAttribute("name", `id_sede${sedesNumber}[]`);
         console.log(document.getElementById(`${sedesNumber}`).querySelector(`#contenedorDeptoSede${sedesNumber}`))
         contenidoDepto= document.getElementById(`contenedorDeptoSede${sedesNumber}`)
-        //contenido.appendChild(clon).classList.remove('clonar');
         sedesNumber ++;
     })
 
     /////////////clonar departamento////////////
     function addDepa() {
-        console.log('añado depa')
+
         let clonadoDepto = document.querySelector('#clonarDepto');
         let clonDepto = clonadoDepto.cloneNode(true);
 
         console.log(contenidoDepto);
         contenidoDepto.appendChild(clonDepto).setAttribute("id", `depa${depaNumber}`);
         document.getElementById(`depa${depaNumber}`).removeAttribute("hidden");
-        // contenidoDepto.appendChild(clonDepto).classList.remove('clonarDepto');
-        // contenidoDepto.appendChild(clonDepto).classList.add(`clonarDepto${depaNumber}-${sedesNumber}`);
-        //contenidoDepto.appendChild(clonDepto).classList.addClass(`${depaNumber}`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#departamento_sede`)
+            .setAttribute("name", `departamentos_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ce_contrato_sede`)
+            .setAttribute("name", `dosimetro_cuerpoEntero_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ambiental_contrato_sede`)
+            .setAttribute("name", `dosimetro_ambiental_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_caso_contrato_sede`)
+            .setAttribute("name", `dosimetro_caso_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ezclip_contrato_sede`)
+            .setAttribute("name", `dosimetro_ezclip_sede${sedesNumber-1}[]`);
+
         depaNumber++;
         ///////////////
+        /*
 
+
+        num_dosi_ce_contrato_sede" class="form-control" autofocus >
+                                                    @error('num_dosi_ce_contrato_sede')
+        <small>*{{$message}}</small>
+                                                    @enderror
+        </div>
+        <div class="col-md">
+            <label for="" class="text-center">No. DOSÍM. AMBIENTAL</label>
+            <input type="number" name="num_dosi_ambiental[]" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
+@error('num_dosi_ambiental_contrato_sede')
+        <small>*{{$message}}</small>
+                                                    @enderror
+        </div>
+        <div class="col-md">
+            <label for="" class="text-center">No. DOSÍM. CASO</label>
+            <input type="number" name="num_dosi_caso[]" id="num_dosi_caso_contrato_sede"
+*/
     }
 
+    function readySede() {
+        $(document).ready(function () {
+            $(`#id_sede${sedesNumber-1}`).change(function () {
+                //alert('hi')
+                let sede_id = $(this).val();
+
+                if ($.trim(sede_id) != '') {
+                    $.get('contratodosidepa', {sede_id: sede_id}, function (depas) {
+                        console.log('departamentos', depas)
+                        $('#departamento_sede').empty();
+                        $('#departamento_sede').append("<option value=''> --SELECCIONE UN DEPARTAMENTO-- </option>");
+                        $.each(JSON.parse(depas), function (index, value) {
+                            $('#departamento_sede').append("<option value='" + value.id_departamentosede + "'>" + value.nombre_departamento + "</option>")
+                        })
+                    });
+                }
+            });
+        });
+    }
 
     function deleteElement() {
         if (sedesNumber == 1){
