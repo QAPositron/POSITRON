@@ -26,4 +26,8 @@ class Trabajadordosimetro extends Model
     public function contratodosimetriasede(){
         return $this->belongsTo(Contratodosimetriasede::class, 'contratodosimetriasede_id', 'id_contratodosimetriasede');
     }
+     //Relacion uno a muchos (inversa) con contratodosimetriasededepto
+    public function contratodosimetriasededepto(){
+        return $this->belongsTo(Contratodosimetriasededepto::class, 'contdosisededepto_id', 'id_contdosisededepto');
+    }
 }

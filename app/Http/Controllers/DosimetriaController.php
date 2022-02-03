@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContratoDosimetria;
 
 use App\Models\Contratodosimetriasede;
-
+use App\Models\Contratodosimetriasededepto;
 use App\Models\ContratosDosimetriaEmpresa;
 use App\Models\Departamentosede;
 use App\Models\Dosicontrolcontdosisede;
@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 /* use PDF; */
 use Barryvdh\DomPDF\Facade as PDF;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class DosimetriaController extends Controller
@@ -100,10 +101,9 @@ class DosimetriaController extends Controller
 
     public function saveContratodosi(Request $request){
 
-        /* $request->validate([
+        $request->validate([
             'codigo_contrato'               => 'required',
             'fecha_inicio_contrato'         => 'required',
-            'fecha_finalizacion_contrato'   => 'required',
             'periodo_recambio_contrato'     => 'required',
 
 
@@ -116,9 +116,45 @@ class DosimetriaController extends Controller
         $contratoDosi->fecha_finalizacion           = $request->fecha_finalizacion_contrato;
         $contratoDosi->periodo_recambio             = $request->periodo_recambio_contrato;
 
-        $contratoDosi->save(); */
+        $contratoDosi->save();
+
+        
+        
+        for($i=1; $i<10; $i++){
+            if($request->input('id_sede'.$i) != null){
+
+                $longitudsede = count($request->input('id_sede'.$i)); //1
+                $contratoDosiSede = new Contratodosimetriasede();
+                $contratoDosiSede->contratodosimetria_id = $contratoDosi->id_contratodosimetria;//1
+                
+                for($x=0; $x<$longitudsede; $x++){
+                    
+                    $contratoDosiSede->sede_id = $request->input('id_sede'.$i)[$x];
+                    $contratoDosiSede->save();
+
+                }
+                
+                $contratoDosiSedeDepto = new Contratodosimetriasededepto();
+                $contratoDosiSedeDepto->contratodosimetriasede_id = $contratoDosiSede->id_contratodosimetriasede;
+                
+                $longitudepto = count($request->input('departamentos_sede'.$i));
+                
+                for($x=0; $x<$longitudepto; $x++){
+                    $contratoDosiSedeDepto->departamentosede_id =  $request->input('departamentos_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_cuerpo_entero = $request->input('dosimetro_cuerpoEntero_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_control = $request->input('dosimetro_caso_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_ambiental = $request->input('dosimetro_ambiental_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_ezclip = $request->input('dosimetro_ezclip_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->save();
+                }
+            }else{
+                break;
+            }
 
 
+            
+        }
+        /* return $request; */
         /* for($i=0; $i<count($request->id_sede); $i++){
 
             $contratoDosiSede = new Contratodosimetriasede();
@@ -133,7 +169,7 @@ class DosimetriaController extends Controller
         } */
 
         /* return redirect()->route('contratosdosisede.create', $contratoDosi->id_contratodosimetria); */
-        return $request;
+        
     }
 
     public function createSedeContrato($id){

@@ -29,4 +29,8 @@ class Contratodosimetriasede extends Model
     public function dosicontrolcontratodosisede(){
         return $this->hasMany(Dosicontrolcontdosisede::class, 'id_dosicontrolcontdosisedes');
     }
+    //relacion uno a muchos con la tabla contratodosimetriasedesdepto
+    public function contratodosimetriasededepto(){
+        return $this->hasMany(Contratodosimetriasededepto::class, 'id_contdosisededepto');
+    }
 }

@@ -14,7 +14,6 @@ class CreateDosicontrolcontdosisedesTable extends Migration
     public function up()
     {
         Schema::create('dosicontrolcontdosisedes', function (Blueprint $table) {
-            
             $table->bigincrements('id_dosicontrolcontdosisedes')->unique();
 
             $table-> unsignedBigInteger('dosimetro_id');
@@ -23,8 +22,8 @@ class CreateDosicontrolcontdosisedesTable extends Migration
             $table-> unsignedBigInteger('contratodosimetriasede_id');
             $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
 
-            $table-> unsignedBigInteger('sede_id');
-            $table-> foreign('sede_id')->references('id_sede')->on('sedes')->onDelete('cascade')->onUpdate('cascade');
+            $table-> unsignedBigInteger('contdosisededepto_id');
+            $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
             
             $table->integer('mes_asignacion');
             $table->string('dosimetro_uso', 10);
