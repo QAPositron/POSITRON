@@ -116,7 +116,7 @@ class DosimetriaController extends Controller
 
         $contratoDosi->save();
 
-        for($i=1; $i<10; $i++){
+        for($i=1; $i<20; $i++){
             if($request->input('id_sede'.$i) != null){
 
                 $contratoDosiSede = new Contratodosimetriasede();
