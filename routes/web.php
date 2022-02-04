@@ -97,7 +97,7 @@ Route::get('contratodosisedecreate/{contratodosi}/create', [DosimetriaController
 Route::get('/contratosdosicreatelist/{contratodosi}/contratodosidepa',[DosimetriaController::class,'selectdepa']);
 
 Route::post('contratosdosi', [DosimetriaController::class, 'saveContratodosi'])->name('contratosdosi.save');
-Route::post('contratosdosisede', [DosimetriaController::class, 'saveSedeContrato'])->name('contratosdosisede.save');
+/* Route::post('contratosdosisede', [DosimetriaController::class, 'saveSedeContrato'])->name('contratosdosisede.save'); */
 
 Route::get('contratosdosicreatelist/{empresadosi}/createlist', [DosimetriaController::class, 'createlistContrato'])->name('contratosdosi.createlist');
 

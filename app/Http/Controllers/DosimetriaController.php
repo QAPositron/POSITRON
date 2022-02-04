@@ -74,23 +74,21 @@ class DosimetriaController extends Controller
         /* return $sedes; */
     }
 
-    public function listarContratosdosi($id){
+    /* public function listarContratosdosi($id){
         $empresa = Empresa::find($id);
         $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
         ->get();
         return view('dosimetria.listar_contratos_dosimetria', compact('empresa', 'dosimetriacontrato'));
-        /* return $id; */
-    }
+        
+    } */
 
-    public function createContrato($id){
+    /* public function createContrato($id){
         $empresa = Empresa::find($id);
 
-        /* SELECT * FROM `departamentosedes` INNER JOIN sedes on departamentosedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
 
 
         return view('dosimetria.crear_contratos_dosimetria', compact('empresa'));
-       /*  return $sedes; */
-    }
+    } */
     public function selectdepa(Request $request){
         $departamentos = DB::table('departamentosedes')
             ->where('sede_id', $request->sede_id)
@@ -118,9 +116,7 @@ class DosimetriaController extends Controller
 
         $contratoDosi->save();
 
-        
-        
-        for($i=1; $i<3; $i++){
+        for($i=1; $i<10; $i++){
             if($request->input('id_sede'.$i) != null){
 
                 $contratoDosiSede = new Contratodosimetriasede();
@@ -146,40 +142,8 @@ class DosimetriaController extends Controller
             }else{
                 break;
             }
-           ///return $request ;
-            
-            
         }
-        /* return $request; */
-        /* for($i=0; $i<count($request->id_sede); $i++){
-
-            $contratoDosiSede = new Contratodosimetriasede();
-
-            $contratoDosiSede->sede_id               = $request->id_sede[$i];
-            $contratoDosiSede->contratodosimetria_id = $contratoDosi->id_contratodosimetria;
-            $contratoDosiSede->dosi_cuerpo_entero    = $request->num_dosi_ce[$i];
-            $contratoDosiSede->dosi_ambiental        = $request->num_dosi_ambiental[$i];
-            $contratoDosiSede->dosi_control          = $request->num_dosi_caso[$i];
-            $contratoDosiSede->dosi_ezclip           = $request->num_dosi_ezclip[$i];
-            $contratoDosiSede->save();
-        } */
-
-        /* return redirect()->route('contratosdosisede.create', $contratoDosi->id_contratodosimetria); */
-        
-    }
-
-    public function createSedeContrato($id){
-        $dosimetriacontrato = Dosimetriacontrato::find($id);
-        $sedes = Sede::leftJoin('contratodosimetriasedes', 'sedes.id_sede', '=', 'contratodosimetriasedes.sede_id')
-        ->where('sedes.empresas_id', $dosimetriacontrato->empresa_id)
-        ->whereNull('contratodosimetriasedes.sede_id')
-        ->get();
-        $departamentos = Departamentosede::join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
-        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
-        ->where('empresas.id_empresa', $dosimetriacontrato->empresa_id)
-        ->get();
-        return view('dosimetria.agregar_sedes_contrato_dosimetria', compact('sedes', 'dosimetriacontrato', 'departamentos'));
-        /* return $sedes; */
+        return redirect()->route('detallecontrato.create', $contratoDosi->id_contratodosimetria);
     }
 
     public function  createTrabajadorSede(Request $request) {
@@ -198,19 +162,29 @@ class DosimetriaController extends Controller
 
     public function createdetalleContrato($id){
         $dosimetriacontrato = Dosimetriacontrato::find($id);
-        $dosimecontra = Dosimetriacontrato::join('contratodosimetriasedes', 'id_contratodosimetria', '=', 'contratodosimetria_id')
+        /* SELECT * FROM `dosimetriacontratos` INNER JOIN contratodosimetriasedes ON dosimetriacontratos.id_contratodosimetria = contratodosimetriasedes.contratodosimetria_id
+         INNER JOIN empresas ON dosimetriacontratos.empresa_id = empresas.id_empresa 
+         INNER JOIN sedes ON contratodosimetriasedes.sede_id = sedes.id_sede 
+         INNER JOIN contratodosimetriasededeptos ON contratodosimetriasedes.id_contratodosimetriasede = contratodosimetriasededeptos.contratodosimetriasede_id
+         INNER JOIN departamentosedes ON contratodosimetriasededeptos.departamentosede_id = departamentosedes.id_departamentosede;; */
+        $dosimecontrasedeptos = Dosimetriacontrato::join('empresas', 'empresa_id', '=', 'id_empresa')
+        ->join('contratodosimetriasedes', 'id_contratodosimetria', '=', 'contratodosimetria_id')
         ->join('sedes', 'sede_id', '=', 'id_sede')
-        ->join('empresas', 'empresas_id', '=', 'id_empresa')
-        ->select('codigo_contrato', 'fecha_inicio', 'fecha_finalizacion', 'periodo_recambio','id_sede','nombre_sede', 'nombre_empresa', 'dosi_cuerpo_entero', 'dosi_ambiental', 'dosi_ezclip', 'dosi_control', 'id_contratodosimetriasede')
+        ->join('contratodosimetriasededeptos', 'id_contratodosimetriasede', '=', 'contratodosimetriasede_id')
+        ->join('departamentosedes', 'departamentosede_id', '=', 'id_departamentosede')
+        ->select('nombre_empresa', 'nombre_sede', 'codigo_contrato','fecha_inicio', 'fecha_finalizacion', 'periodo_recambio','nombre_departamento', 'dosi_cuerpo_entero', 'dosi_control', 'dosi_ambiental', 'dosi_ezclip', 'id_contdosisededepto')
         ->where('id_contratodosimetria', '=', $id)
         ->get();
 
-        return view('dosimetria.detalle_contrato_dosimetria', compact('dosimetriacontrato', 'dosimecontra'));
-       /*  return $dosimecontra; */
+        return view('dosimetria.detalle_contrato_dosimetria', compact('dosimetriacontrato', 'dosimecontrasedeptos'));
+        /* return $dosimecontrasedeptos; */
     }
 
     public function createdetsedeContrato($id){
-        $dosisedecontra = Contratodosimetriasede::find($id);
+        $dosisededeptocontra = Contratodosimetriasededepto::find($id);
+        /* $dosisededepacontra = Contratodosimetriasededepto::join('departamentosedes', 'departamentosede_id', '=', 'id_departamentosede')
+        ->where('contratodosimetriasede_id', '=', $id)
+        ->get(); */
         $trabjasigcontra = Trabajadordosimetro::where('contratodosimetriasede_id', '=', $id)
         ->get();
         $mes1Assign = Trabajadordosimetro::where('contratodosimetriasede_id', $id)
@@ -269,14 +243,14 @@ class DosimetriaController extends Controller
             $mes9Assign, $mes10Assign,
             $mes11Assign, $mes12Assign
         ];
-        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisedecontra', 'trabjasigcontra',
+        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra',
         'mesTotal'));
-        /* return $dosisedecontra; */
+        /* return $dosisededeptocontra; */
     }
 
     public function asignaDosiContrato($id, $mesnumber)
     {
-        $contdosisede = Contratodosimetriasede::find($id);
+        $contdosisededepto = Contratodosimetriasededepto::find($id);
         $dosimetrosControlAsignados = Dosicontrolcontdosisede::where('contratodosimetriasede_id', $id)
             ->where('dosimetro_uso', 'TRUE')
             ->where('mes_asignacion', $mesnumber)
@@ -341,7 +315,7 @@ class DosimetriaController extends Controller
         ->whereNull('trabajadordosimetros.trabajador_id')
         ->select("*")
         ->get();
-        $trabajadores = Trabajadorsede::where('sede_id', '=', $contdosisede->sede_id)
+        $trabajadores = Trabajadorsede::where('sede_id', '=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
         ->get();
         $dosimetros =Dosimetro::leftJoin('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
             ->whereNull('trabajadordosimetros.dosimetro_uso')
@@ -367,7 +341,7 @@ class DosimetriaController extends Controller
              ['key' => 'T', 'value' => 'TELETERAPIA'],
             ['key' => 'C', 'value' => 'CASA']
         ]);
-        return view('dosimetria.asignar_dosimetro_contrato', compact('contdosisede', 'trabajadores', 'dosimetros', 'holders', 'dosimetrosControlAsignados', 'dosimetrosEzClipAsignados',
+        return view('dosimetria.asignar_dosimetro_contrato', compact('contdosisededepto', 'trabajadores', 'dosimetros', 'holders', 'dosimetrosControlAsignados', 'dosimetrosEzClipAsignados',
         'dosimetrosCuerpoEnteroAsignados', 'dosimetrosAmbienteAsignados', 'dosimetrosControl', 'ocupacionesMap', 'dosimetrosTrabajadores',
         'holdersDisponibles', 'dosimetrosDisponibles', 'allWorks', 'dosimetroControlEzclipAsignados',
         'dosimetroControlCuerpoAsignados', 'dosimetrosControlAmbientalAsignados',

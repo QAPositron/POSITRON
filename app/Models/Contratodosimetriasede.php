@@ -33,4 +33,5 @@ class Contratodosimetriasede extends Model
     public function contratodosimetriasededepto(){
         return $this->hasMany(Contratodosimetriasededepto::class, 'id_contdosisededepto');
     }
+    
 }

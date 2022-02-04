@@ -13,7 +13,7 @@
                     <div class="col-md">
                         <div class="form-floating ">
                             <select class="form-select" name="id_empresa_asigdosim" id="id_empresa_asigdosim"  autofocus aria-label="Floating label select example" >
-                                <option value ="{{ $contdosisede->dosimetriacontrato->empresa->id_empresa}}">{{$contdosisede->dosimetriacontrato->empresa->nombre_empresa}}</option>
+                                <option value ="{{ $contdosisededepto->contratodosimetriasede->sede->empresa->id_empresa}}">{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}</option>
                             </select>
                             <label for="floatingSelectGrid">EMPRESA:</label>
                         </div>
@@ -21,7 +21,7 @@
                     <div class="col-md">
                         <div class="form-floating">
                             <select class="form-select" name="id_sede_asigdosim" id="id_sede_asigdosim" autofocus aria-label="Floating label select example">
-                            <option value ="{{ $contdosisede->sede->id_sede}}">{{$contdosisede->sede->nombre_sede}}</option>
+                            <option value ="{{ $contdosisededepto->contratodosimetriasede->sede->id_sede}}">{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</option>
                             </select>
                             <label for="floatingSelectGrid">SEDE:</label>
                         </div>
@@ -33,7 +33,7 @@
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead class="text-center">
-                                    <th colspan="4">CONTRATO No. {{$contdosisede->dosimetriacontrato->codigo_contrato}}</th>
+                                    <th colspan="4">CONTRATO No. {{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</th>
                                 </thead>
                                 <tbody>
                                     <tr class="text-center">
@@ -44,30 +44,30 @@
                                     </tr>
                                     <tr>
                                         <th>C. ENTERO:</th>
-                                        <td class="text-center">{{$contdosisede->dosi_cuerpo_entero}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_cuerpo_entero}}</td>
                                         <td class="text-center">{{$dosimetrosCuerpoEnteroAsignados + $dosimetroControlCuerpoAsignados}}</td>
-                                        <td class="text-center">{{ $contdosisede->dosi_cuerpo_entero - $dosimetrosCuerpoEnteroAsignados - $dosimetroControlCuerpoAsignados}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_cuerpo_entero - $dosimetrosCuerpoEnteroAsignados - $dosimetroControlCuerpoAsignados}}</td>
                                     </tr>
                                     <tr>
                                         <th>AMBIENTE:</th>
-                                        <td class="text-center">{{$contdosisede->dosi_ambiental}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_ambiental}}</td>
                                         <td class="text-center">{{$dosimetrosAmbienteAsignados + $dosimetrosControlAmbientalAsignados}}</td>
-                                        <td class="text-center">{{$contdosisede->dosi_ambiental - $dosimetrosAmbienteAsignados - $dosimetrosControlAmbientalAsignados}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_ambiental - $dosimetrosAmbienteAsignados - $dosimetrosControlAmbientalAsignados}}</td>
                                     </tr>
                                     <tr>
                                         <th>CONTROL:</th>
-                                        <td class="text-center">{{$contdosisede->dosi_control}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_control}}</td>
                                         <td class="text-center">{{$dosimetrosControlAsignados}}</td>
-                                        <td class="text-center">{{$contdosisede->dosi_control - $dosimetrosControlAsignados}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_control - $dosimetrosControlAsignados}}</td>
                                     </tr>
                                     <tr>
                                         <th>EzCLIP:</th>
-                                        <td class="text-center">{{$contdosisede->dosi_ezclip}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_ezclip}}</td>
                                         <td class="text-center">
                                             {{$dosimetrosEzClipAsignados}}
                                         </td>
                                         <td class="text-center">
-                                            {{$contdosisede->dosi_ezclip - $dosimetrosEzClipAsignados}}
+                                            {{$contdosisededepto->dosi_ezclip - $dosimetrosEzClipAsignados}}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="text" class="form-control" name="periodorecambio_asigdosim" id="periodorecambio_asigdosim" value="{{$contdosisede->dosimetriacontrato->periodo_recambio}}" readonly>
+                            <input type="text" class="form-control" name="periodorecambio_asigdosim" id="periodorecambio_asigdosim" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}" readonly>
                             <label for="floatingInputGrid">PERIODO RECAMBIO:</label>
                         </div>
                     </div>
@@ -136,9 +136,9 @@
                                         @foreach($dosimetrosControl as $control)
                                             <tr>
                                                 <td>
-                                                    <input type="number" name="id_sede_asigdosim_control" id="id_sede_asigdosim_control" hidden value="{{$contdosisede->sede_id}}">
+                                                    <input type="number" name="id_departamento_asigdosim_control" id="id_departamento_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
 
-                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
+                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
                                                     N.A.
                                                 </td>
 
@@ -221,9 +221,9 @@
                                         @foreach($dosimetrosControlAsignadosAnteriores as $control)
                                             <tr>
                                                 <td>
-                                                    <input type="number" name="id_sede_asigdosim_control" id="id_sede_asigdosim_control" hidden value="{{$contdosisede->sede_id}}">
+                                                    <input type="number" name="id_departamento_asigdosim_control" id="id_departamento_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
 
-                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
+                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
                                                     N.A.
                                                 </td>
 
@@ -303,13 +303,13 @@
 
                                         @endforeach
                                         @else
-                                        @for($i=0; $i<$contdosisede->dosi_control-count($dosimetrosControl); $i++)
+                                        @for($i=0; $i<$contdosisededepto->dosi_control-count($dosimetrosControl); $i++)
                                             <tr>
 
                                                 <td>
-                                                    <input type="number" name="id_sede_asigdosim_control" id="id_sede_asigdosim_control" hidden value="{{$contdosisede->sede_id}}">
+                                                    <input type="number" name="id_departamento_asigdosim_control" id="id_departamento_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
 
-                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
+                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
                                                     N.A.
                                                 </td>
 
@@ -336,7 +336,7 @@
                                                             <?php $cez=0; $cam=0; $cce=0; ?>
                                                             @foreach($dosimetros as $dosi)
 
-                                                                @if($dosi->tipo_dosimetro == 'CONTROL' && ($contdosisede->dosi_control - $cce)>0)
+                                                                @if($dosi->tipo_dosimetro == 'CONTROL' && ($contdosisededepto->dosi_control - $cce)>0)
                                                                     <?php $cce++; ?>
                                                                 <option value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
                                                                 @endif
@@ -445,7 +445,7 @@
                                         <tr id="trabajador{{$trab->trabajador->id_trabajador}}">
                                             <td>
                                                 <input type="number" name="id_trabajador_asigdosim[]" id="id_trabajador_asigdosim" hidden value="{{$trab->trabajador->id_trabajador}}">
-                                                <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisede->id_contratodosimetriasede}}">
+                                                <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
                                                 {{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}
                                             </td>
                                             <td>
@@ -473,13 +473,13 @@
                                                     <option value="">--</option>
                                                     <?php $cez=0; $cam=0; $cce=0; ?>
                                                         @foreach($dosimetros as $dosi)
-                                                            @if($dosi->tipo_dosimetro == 'EZCLIP' && ($contdosisede->dosi_ezclip - $cez)>0)
+                                                            @if($dosi->tipo_dosimetro == 'EZCLIP' && ($contdosisededepto->dosi_ezclip - $cez)>0)
                                                                 <?php $cez++; ?>
                                                             <option onclick="count('EZCLIP')" change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
-                                                            @elseif($dosi->tipo_dosimetro == 'CUERPO' && ($contdosisede->dosi_cuerpo_entero - $cce)>0)
+                                                            @elseif($dosi->tipo_dosimetro == 'CUERPO' && ($contdosisededepto->dosi_cuerpo_entero - $cce)>0)
                                                                 <?php $cce++; ?>
                                                                 <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
-                                                            @elseif($dosi->tipo_dosimetro == 'AMBIENTAL' && ($contdosisede->dosi_ambiental - $cam)>0)
+                                                            @elseif($dosi->tipo_dosimetro == 'AMBIENTAL' && ($contdosisededepto->dosi_ambiental - $cam)>0)
                                                                 <?php $cam++; ?>
                                                                 <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
                                                             @endif
@@ -659,11 +659,11 @@
                     <div class="modal-body">
                         <div class="form-floating">
                             <select class="form-select" name="id_sede_asigdosim" id="id_sede_asigdosim" autofocus aria-label="Floating label select example">
-                                <option value ="{{ $contdosisede->sede->id_sede}}">{{$contdosisede->sede->nombre_sede}}</option>
+                                <option value ="{{$contdosisededepto->contratodosimetriasede->sede->id_sede}}">{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</option>
                             </select>
                             <label for="floatingSelectGrid">SEDE:</label>
                         </div>
-                        <input hidden name="contratoId" id="contratoId" value="{{$contdosisede->id_contratodosimetriasede}}">
+                        <input hidden name="contratoId" id="contratoId" value="{{$contdosisededepto->contratodosimetriasede_id}}">
                         <input hidden name="mesnumber" id="mesnumber" value="{{Request()->mesnumber}}">
 
                         <br>
@@ -723,7 +723,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">{{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_eliminar_trabajador_sede" name="form_eliminar_dosimetro" action="{{route('trabajadorSede.destroy', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisede->id_contratodosimetriasede, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
+                <form id="form_eliminar_trabajador_sede" name="form_eliminar_dosimetro" action="{{route('trabajadorSede.destroy', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisededepto->contratodosimetriasede_id, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
                     <div class="modal-body">
                         <span>¿Eliminar este trabajador?</span>
                         @csrf
@@ -748,7 +748,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">{{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetroWork.destroy', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisede->id_contratodosimetriasede, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
+                <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetroWork.destroy', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisededepto->contratodosimetriasede_id, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
                     <div class="modal-body">
                         <span>¿Eliminar el dosimetro asignado a este trabajador?</span>
                         @csrf
@@ -774,7 +774,7 @@
                             <h5 class="modal-title" id="staticBackdropLabel">Quitar este dosimetro de control </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                       <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetroControl.destroy', ['idDosiControl' => $dosicontrol->id_dosicontrolcontdosisedes, 'contratoId' => $contdosisede->id_contratodosimetriasede, 'mesnumber'=>(Request()->mesnumber-1)]  )}}" method="POST">
+                       <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetroControl.destroy', ['idDosiControl' => $dosicontrol->id_dosicontrolcontdosisedes, 'contratoId' => $contdosisededepto->contratodosimetriasede_id, 'mesnumber'=>(Request()->mesnumber-1)]  )}}" method="POST">
                             <div class="modal-body">
                                 <span>¿Eliminar el dosimetro asignado a este dosimetro de control?</span>
                                 @csrf

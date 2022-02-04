@@ -14,4 +14,8 @@ class Departamentosede extends Model
     public function sede(){
         return $this->belongsTo(Sede::class, 'sede_id', 'id_sede');
     }
+     //relacion uno a muchos con la tabla contratodosimetriasedesdepto
+     public function contratodosimetriasededepto(){
+        return $this->hasMany(Contratodosimetriasededepto::class, 'id_contdosisededepto');
+    }
 }
