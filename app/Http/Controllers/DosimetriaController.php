@@ -120,26 +120,22 @@ class DosimetriaController extends Controller
 
         
         
-        for($i=1; $i<10; $i++){
+        for($i=1; $i<3; $i++){
             if($request->input('id_sede'.$i) != null){
 
-                $longitudsede = count($request->input('id_sede'.$i)); //1
                 $contratoDosiSede = new Contratodosimetriasede();
-                $contratoDosiSede->contratodosimetria_id = $contratoDosi->id_contratodosimetria;//1
+                $contratoDosiSede->contratodosimetria_id = $contratoDosi->id_contratodosimetria;
+                $contratoDosiSede->sede_id = $request->input('id_sede'.$i)[0];
+                $contratoDosiSede->save();
                 
-                for($x=0; $x<$longitudsede; $x++){
-                    
-                    $contratoDosiSede->sede_id = $request->input('id_sede'.$i)[$x];
-                    $contratoDosiSede->save();
-
-                }
                 
-                $contratoDosiSedeDepto = new Contratodosimetriasededepto();
-                $contratoDosiSedeDepto->contratodosimetriasede_id = $contratoDosiSede->id_contratodosimetriasede;
+                
                 
                 $longitudepto = count($request->input('departamentos_sede'.$i));
-                
+                //return $longitudepto ;
                 for($x=0; $x<$longitudepto; $x++){
+                    $contratoDosiSedeDepto = new Contratodosimetriasededepto();
+                    $contratoDosiSedeDepto->contratodosimetriasede_id = $contratoDosiSede->id_contratodosimetriasede;
                     $contratoDosiSedeDepto->departamentosede_id =  $request->input('departamentos_sede'.$i)[$x];
                     $contratoDosiSedeDepto->dosi_cuerpo_entero = $request->input('dosimetro_cuerpoEntero_sede'.$i)[$x];
                     $contratoDosiSedeDepto->dosi_control = $request->input('dosimetro_caso_sede'.$i)[$x];
@@ -150,8 +146,8 @@ class DosimetriaController extends Controller
             }else{
                 break;
             }
-
-
+           ///return $request ;
+            
             
         }
         /* return $request; */
