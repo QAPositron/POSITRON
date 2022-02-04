@@ -12,7 +12,7 @@ class Contratodosimetriasededepto extends Model
     
     //Relacion uno a muchos (inversa) con contrato dosimetria sedes
     public function contratodosimetriasede(){
-        return $this->belongsTo(contratodosimetriasede::class, 'contratodosimetriasede_id', 'id_contratodosimetriasede');
+        return $this->belongsTo(Contratodosimetriasede::class, 'contratodosimetriasede_id', 'id_contratodosimetriasede');
     }
     
     /* //relacion uno a muchos con la tabla dosicontrolcontdosisedes
