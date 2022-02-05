@@ -477,6 +477,9 @@ class DosimetriaController extends Controller
             $asigdosim->contratodosimetriasede_id    = $request->id_contrato_asigdosim;
             $asigdosim->contdosisededepto_id         = $request->id_departamento_asigdosim_control;
             $asigdosim->mes_asignacion               = $request->mesNumber1;
+            $asigdosim->fecha_dosim_enviado          = $request->fecha_envio_dosim_asignado;
+            $asigdosim->fecha_dosim_recibido         = $request->fecha_recibido_dosim_asignado;
+            $asigdosim->fecha_dosim_devuelto         = $request->fecha_devuelto_dosim_asignado;
             $asigdosim->trabajador_id                = $request->id_trabajador_asigdosim[$i];
             $asigdosim->dosimetro_id                 = $request->id_dosimetro_asigdosim[$i];
             $asigdosim->holder_id                    = $request->id_holder_asigdosim[$i];
@@ -496,6 +499,9 @@ class DosimetriaController extends Controller
             $asigdosim_control->dosimetro_id                = $request->id_dosimetro_asigdosim_control[$i];
             $asigdosim_control->mes_asignacion              = $request->mesNumber1;
             $asigdosim_control->contratodosimetriasede_id   = $request->id_contrato_asigdosim_control;
+            $asigdosim_control->fecha_dosim_enviado          = $request->fecha_envio_dosim_asignado;
+            $asigdosim_control->fecha_dosim_recibido         = $request->fecha_recibido_dosim_asignado;
+            $asigdosim_control->fecha_dosim_devuelto         = $request->fecha_devuelto_dosim_asignado;
             $asigdosim_control->contdosisededepto_id        = $request->id_departamento_asigdosim_control;
             $asigdosim_control->primer_dia_uso              = $request->primerDia_asigdosim;
             $asigdosim_control->ultimo_dia_uso              = $request->ultimoDia_asigdosim;
@@ -516,7 +522,7 @@ class DosimetriaController extends Controller
         /* return $request; */
     }
 
-    public function info($id, $mesnumber ){
+    public function info($id, $mesnumber, Request $request){
         $contdosisede = Contratodosimetriasede::find($id);
         $dosicontrolasig = Dosicontrolcontdosisede::where('contratodosimetriasede_id', '=', $contdosisede->id_contratodosimetriasede)
         ->where('mes_asignacion', '=', $mesnumber)
@@ -524,6 +530,7 @@ class DosimetriaController extends Controller
         $trabjasignados = Trabajadordosimetro::where('contratodosimetriasede_id', '=', $contdosisede->id_contratodosimetriasede)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
+
         $dosimetros =Dosimetro::leftJoin('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
             ->whereNull('trabajadordosimetros.dosimetro_uso')
             ->orWhere(function ($query) {
@@ -538,6 +545,7 @@ class DosimetriaController extends Controller
             })
             ->select("*")
             ->get();
+
         return view('dosimetria.info_asignacion_dosimetros_contrato', compact('contdosisede', 'trabjasignados', 'dosicontrolasig',
         'holders', 'dosimetros'));
         return $dosicontrolasig;
