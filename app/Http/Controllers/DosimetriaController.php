@@ -79,7 +79,7 @@ class DosimetriaController extends Controller
         $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
         ->get();
         return view('dosimetria.listar_contratos_dosimetria', compact('empresa', 'dosimetriacontrato'));
-        
+
     } */
 
     /* public function createContrato($id){
@@ -123,10 +123,10 @@ class DosimetriaController extends Controller
                 $contratoDosiSede->contratodosimetria_id = $contratoDosi->id_contratodosimetria;
                 $contratoDosiSede->sede_id = $request->input('id_sede'.$i)[0];
                 $contratoDosiSede->save();
-                
-                
-                
-                
+
+
+
+
                 $longitudepto = count($request->input('departamentos_sede'.$i));
                 //return $longitudepto ;
                 for($x=0; $x<$longitudepto; $x++){
@@ -163,8 +163,8 @@ class DosimetriaController extends Controller
     public function createdetalleContrato($id){
         $dosimetriacontrato = Dosimetriacontrato::find($id);
         /* SELECT * FROM `dosimetriacontratos` INNER JOIN contratodosimetriasedes ON dosimetriacontratos.id_contratodosimetria = contratodosimetriasedes.contratodosimetria_id
-         INNER JOIN empresas ON dosimetriacontratos.empresa_id = empresas.id_empresa 
-         INNER JOIN sedes ON contratodosimetriasedes.sede_id = sedes.id_sede 
+         INNER JOIN empresas ON dosimetriacontratos.empresa_id = empresas.id_empresa
+         INNER JOIN sedes ON contratodosimetriasedes.sede_id = sedes.id_sede
          INNER JOIN contratodosimetriasededeptos ON contratodosimetriasedes.id_contratodosimetriasede = contratodosimetriasededeptos.contratodosimetriasede_id
          INNER JOIN departamentosedes ON contratodosimetriasededeptos.departamentosede_id = departamentosedes.id_departamentosede;; */
         $dosimecontrasedeptos = Dosimetriacontrato::join('empresas', 'empresa_id', '=', 'id_empresa')
@@ -475,6 +475,7 @@ class DosimetriaController extends Controller
             $asigdosim = new Trabajadordosimetro();
 
             $asigdosim->contratodosimetriasede_id    = $request->id_contrato_asigdosim;
+            $asigdosim->contdosisededepto_id         = $request->id_departamento_asigdosim_control;
             $asigdosim->mes_asignacion               = $request->mesNumber1;
             $asigdosim->trabajador_id                = $request->id_trabajador_asigdosim[$i];
             $asigdosim->dosimetro_id                 = $request->id_dosimetro_asigdosim[$i];
@@ -495,7 +496,7 @@ class DosimetriaController extends Controller
             $asigdosim_control->dosimetro_id                = $request->id_dosimetro_asigdosim_control[$i];
             $asigdosim_control->mes_asignacion              = $request->mesNumber1;
             $asigdosim_control->contratodosimetriasede_id   = $request->id_contrato_asigdosim_control;
-            $asigdosim_control->sede_id                     = $request->id_sede_asigdosim_control;
+            $asigdosim_control->contdosisededepto_id        = $request->id_departamento_asigdosim_control;
             $asigdosim_control->primer_dia_uso              = $request->primerDia_asigdosim;
             $asigdosim_control->ultimo_dia_uso              = $request->ultimoDia_asigdosim;
             $asigdosim_control->ocupacion                   = $request->ocupacion_asigdosim_control[$i];
