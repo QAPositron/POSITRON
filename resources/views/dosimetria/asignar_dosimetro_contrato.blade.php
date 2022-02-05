@@ -6,6 +6,7 @@
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3">ASIGNAR DOSÍMETRO</h2>
             <h3 class="text-center">MES {{ Request()->mesnumber  }} </h3>
+            <h3 class="text-center">DEPARTAMENTO {{ $contdosisededepto->departamentosede->nombre_departamento }} </h3>
             <form class="m-4" action="{{route('asignadosicontrato.save')}}" method="POST">
                 @csrf
                 <input hidden name="mesNumber1" id="mesNumber1" value="{{ Request()->mesnumber  }}" />

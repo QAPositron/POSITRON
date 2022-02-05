@@ -13,7 +13,38 @@
             <span>{{date("d-m-Y",strtotime($contdosisede->dosimetriacontrato->fecha_inicio."+ ".(30*(Request()->mesnumber-1))." days" ))}}</span>
         @endif )
 </h4>
+<br>
+<br>
+@if(count($trabjasignados)>0)
+<div class="row g-2 mx-3">
+    <div class="col-md">
+        <div class="form-floating">
 
+            <input value="{{$trabjasignados[0]->fecha_dosim_enviado}}" type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
+            <label for="floatingInputGrid">FECHA ENVIO</label>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="form-floating">
+            <input value="{{$trabjasignados[0]->fecha_dosim_recibido}}" type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
+            <label for="floatingInputGrid">FECHA RECIBIDO</label>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="form-floating">
+            <input value="{{$trabjasignados[0]->fecha_dosim_devuelto}}" type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
+            <label for="floatingInputGrid">FECHA DEVUELTO</label>
+        </div>
+    </div>
+    <br>
+    <br>
+    <center>
+        <button type="submit" class="btn colorQA">Editar fechas</button>
+    </center>
+</div>
+@endif
+<br>
+<br>
 <div class="row">
     <div class="col"></div>
     <div class="col-10">

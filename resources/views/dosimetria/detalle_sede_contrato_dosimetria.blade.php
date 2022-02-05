@@ -8,7 +8,7 @@
 
     <br>
     <h6 class="text-center ">TOTAL DE DOSÍMETROS:       CUERPO E.: # {{$dosisededeptocontra->dosi_cuerpo_entero}}        CONTROL: # {{$dosisededeptocontra->dosi_control}}        AMBIENTAL: # {{$dosisededeptocontra->dosi_ambiental}}       EZCLIP: # {{$dosisededeptocontra->dosi_ezclip}} </h6>
-    
+
 
     <div class="row">
         <div class="col"></div>
