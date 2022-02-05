@@ -15,6 +15,7 @@
 </h4>
 <br>
 <br>
+@if(count($trabjasignados)>0)
 <div class="row g-2 mx-3">
     <div class="col-md">
         <div class="form-floating">
@@ -41,7 +42,7 @@
         <button type="submit" class="btn colorQA">Editar fechas</button>
     </center>
 </div>
-
+@endif
 <br>
 <br>
 <div class="row">
