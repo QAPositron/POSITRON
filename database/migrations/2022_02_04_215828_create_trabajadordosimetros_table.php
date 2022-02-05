@@ -13,6 +13,7 @@ class CreateTrabajadordosimetrosTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('trabajadordosimetros', function (Blueprint $table) {
             $table->bigincrements('id_trabajadordosimetro')->unique();
             
@@ -36,6 +37,9 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table->string('dosimetro_uso',10);
             $table->date('primer_dia_uso')->nullable();
             $table->date('ultimo_dia_uso')->nullable();
+            $table->date('fecha_dosim_enviado')->nullable();
+            $table->date('fecha_dosim_recibido')->nullable();
+            $table->date('fecha_dosim_devuelto')->nullable();
             $table->string('ocupacion', 30)->nullable();
             $table->string('ubicacion', 30)->nullable();
             $table->string('energia', 30)->nullable();

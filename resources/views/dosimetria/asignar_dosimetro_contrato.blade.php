@@ -76,6 +76,7 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
@@ -97,6 +98,27 @@
                                 <input type="date" class="form-control" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
                                 <label for="floatingInputGrid">ULTIMO DÍA:</label>
                             @endif
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row g-2 mx-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
+                            <label for="floatingInputGrid">FECHA ENVIO</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
+                            <label for="floatingInputGrid">FECHA RECIBIDO</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
+                            <label for="floatingInputGrid">FECHA DEVUELTO</label>
                         </div>
                     </div>
                 </div>
@@ -792,7 +814,11 @@
     @endforeach
 </div>
 <br>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#id_holder_asigdosim').select2();
+        });
        function deleteTrabajador(id) {
            console.log(id);
            document.getElementById(id).remove();

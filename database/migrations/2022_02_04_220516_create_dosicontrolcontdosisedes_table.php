@@ -29,6 +29,9 @@ class CreateDosicontrolcontdosisedesTable extends Migration
             $table->string('dosimetro_uso', 10);
             $table->date('primer_dia_uso')->nullable();
             $table->date('ultimo_dia_uso')->nullable();
+            $table->date('fecha_dosim_enviado')->nullable();
+            $table->date('fecha_dosim_recibido')->nullable();
+            $table->date('fecha_dosim_devuelto')->nullable();
             $table->string('ocupacion', 30)->nullable();
             $table->string('energia', 30)->nullable();
             $table->date('zero_level_date')->nullable();
