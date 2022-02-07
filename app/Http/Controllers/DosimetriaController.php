@@ -461,7 +461,7 @@ class DosimetriaController extends Controller
     }
 
     public function saveAsignacionDosiContrato(Request $request){
-        $request->validate([
+       /*  $request->validate([
             'primerDia_asigdosim'       => 'required',
             'ultimoDia_asigdosim'       => 'required',
             'id_trabajador_asigdosim'   => 'required',
@@ -474,7 +474,7 @@ class DosimetriaController extends Controller
 
             $asigdosim = new Trabajadordosimetro();
 
-            $asigdosim->contratodosimetriasede_id    = $request->id_contrato_asigdosim;
+            $asigdosim->contratodosimetriasede_id    = $request->id_contrato_asigdosim_sede;
             $asigdosim->contdosisededepto_id         = $request->id_departamento_asigdosim_control;
             $asigdosim->mes_asignacion               = $request->mesNumber1;
             $asigdosim->fecha_dosim_enviado          = $request->fecha_envio_dosim_asignado;
@@ -489,16 +489,16 @@ class DosimetriaController extends Controller
             $asigdosim->dosimetro_uso                = 'TRUE';
 
             $asigdosim->save();
-        }
+        } */
         ////////////////// SAVE DE DOSIMETRO TIPO  CONTROL /////////////////////////
 
-        for($i=0; $i<count($request->id_dosimetro_asigdosim_control); $i++){
+        /* for($i=0; $i<count($request->id_dosimetro_asigdosim_control); $i++){
 
             $asigdosim_control = new Dosicontrolcontdosisede();
 
             $asigdosim_control->dosimetro_id                = $request->id_dosimetro_asigdosim_control[$i];
             $asigdosim_control->mes_asignacion              = $request->mesNumber1;
-            $asigdosim_control->contratodosimetriasede_id   = $request->id_contrato_asigdosim_control;
+            $asigdosim_control->contratodosimetriasede_id   = $request->id_contrato_asigdosim_control_sede;
             $asigdosim_control->fecha_dosim_enviado          = $request->fecha_envio_dosim_asignado;
             $asigdosim_control->fecha_dosim_recibido         = $request->fecha_recibido_dosim_asignado;
             $asigdosim_control->fecha_dosim_devuelto         = $request->fecha_devuelto_dosim_asignado;
@@ -510,16 +510,16 @@ class DosimetriaController extends Controller
             $asigdosim_control->dosimetro_uso               = 'TRUE';
 
             $asigdosim_control->save();
-        }
+        } */
 
         $dosimetrosTotal = array_merge($request->id_dosimetro_asigdosim, $request->id_dosimetro_asigdosim_control);
         $dosimetrosTotal = json_encode($dosimetrosTotal);
         //return redirect()->route('detallesedecont.create', $request->id_contrato_asigdosim);
-        return $this->callAction('patchDosimetroStock',['idDosimetro' =>$dosimetrosTotal,
-            'contratoId'=> $request->id_contrato_asigdosim, 'mesnumber'=>$request->mesNumber1 ]);
+        /* return $this->callAction('patchDosimetroStock',['idDosimetro' =>$dosimetrosTotal,
+            'contratoId'=> $request->id_contrato_asigdosim, 'mesnumber'=>$request->mesNumber1 ]); */
         /*return route('dosimetroStock.patch',  ['idDosimetro' =>$dosimetrosTotal,
             'contratoId'=> $request->id_contrato_asigdosim, 'mesnumber'=>$request->mesNumber1 ] );*/
-        /* return $request; */
+        return $request;
     }
 
     public function info($id, $mesnumber, Request $request){

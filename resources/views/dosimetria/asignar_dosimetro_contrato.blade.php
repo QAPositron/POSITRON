@@ -162,6 +162,7 @@
                                                     <input type="number" name="id_departamento_asigdosim_control" id="id_departamento_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
 
                                                     <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
+                                                    <input type="number" name="id_contrato_asigdosim_control_sede" id="id_contrato_asigdosim_control_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
                                                     N.A.
                                                 </td>
 
@@ -247,6 +248,7 @@
                                                     <input type="number" name="id_departamento_asigdosim_control" id="id_departamento_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
 
                                                     <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
+                                                    <input type="number" name="id_contrato_asigdosim_control_sede" id="id_contrato_asigdosim_control_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id }}">
                                                     N.A.
                                                 </td>
 
@@ -333,6 +335,7 @@
                                                     <input type="number" name="id_departamento_asigdosim_control" id="id_departamento_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
 
                                                     <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
+                                                    <input type="number" name="id_contrato_asigdosim_control_sede" id="id_contrato_asigdosim_control_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id }}">
                                                     N.A.
                                                 </td>
 
@@ -469,6 +472,7 @@
                                             <td>
                                                 <input type="number" name="id_trabajador_asigdosim[]" id="id_trabajador_asigdosim" hidden value="{{$trab->trabajador->id_trabajador}}">
                                                 <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
+                                                <input type="number" name="id_contrato_asigdosim_sede" id="id_contrato_asigdosim_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
                                                 {{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}
                                             </td>
                                             <td>
