@@ -754,7 +754,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn colorQA">Eliminar trabajdor</button>
+                        <button onclick="deleteTrabajador('trabajador{{$trab->trabajador->id_trabajador}}')" type="button" data-bs-dismiss="modal" class="btn colorQA">Eliminar trabajdor</button>
                     </div>
                 </form>
             </div>
@@ -820,7 +820,6 @@
             $('#id_holder_asigdosim').select2();
         });
        function deleteTrabajador(id) {
-           console.log(id);
            document.getElementById(id).remove();
        }
        function count(obj) {
