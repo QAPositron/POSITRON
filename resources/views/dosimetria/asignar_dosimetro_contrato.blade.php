@@ -161,7 +161,7 @@
                                                 <td>
                                                     <input type="number" name="id_departamento_asigdosim_control" id="id_departamento_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
 
-                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
+                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                                     N.A.
                                                 </td>
 
@@ -246,7 +246,7 @@
                                                 <td>
                                                     <input type="number" name="id_departamento_asigdosim_control" id="id_departamento_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
 
-                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
+                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                                     N.A.
                                                 </td>
 
@@ -332,7 +332,7 @@
                                                 <td>
                                                     <input type="number" name="id_departamento_asigdosim_control" id="id_departamento_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
 
-                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
+                                                    <input type="number" name="id_contrato_asigdosim_control" id="id_contrato_asigdosim_control" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                                     N.A.
                                                 </td>
 
@@ -468,7 +468,7 @@
                                         <tr id="trabajador{{$trab->trabajador->id_trabajador}}">
                                             <td>
                                                 <input type="number" name="id_trabajador_asigdosim[]" id="id_trabajador_asigdosim" hidden value="{{$trab->trabajador->id_trabajador}}">
-                                                <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
+                                                <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                                 {{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}
                                             </td>
                                             <td>
@@ -771,7 +771,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">{{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetroWork.destroy', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisededepto->contratodosimetriasede_id, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
+                <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetroWork.destroy', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisededepto->id_contdosisededepto , 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
                     <div class="modal-body">
                         <span>¿Eliminar el dosimetro asignado a este trabajador?</span>
                         @csrf

@@ -523,11 +523,11 @@ class DosimetriaController extends Controller
     }
 
     public function info($id, $mesnumber, Request $request){
-        $contdosisede = Contratodosimetriasede::find($id);
-        $dosicontrolasig = Dosicontrolcontdosisede::where('contratodosimetriasede_id', '=', $contdosisede->id_contratodosimetriasede)
+        $contdosisededepto = Contratodosimetriasededepto::find($id);
+        $dosicontrolasig = Dosicontrolcontdosisede::where('contratodosimetriasede_id', '=', $contdosisededepto->contratodosimetriasede_id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
-        $trabjasignados = Trabajadordosimetro::where('contratodosimetriasede_id', '=', $contdosisede->id_contratodosimetriasede)
+        $trabjasignados = Trabajadordosimetro::where('contratodosimetriasede_id', '=', $contdosisededepto->contratodosimetriasede_id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
 
@@ -546,9 +546,9 @@ class DosimetriaController extends Controller
             ->select("*")
             ->get();
 
-        return view('dosimetria.info_asignacion_dosimetros_contrato', compact('contdosisede', 'trabjasignados', 'dosicontrolasig',
+        return view('dosimetria.info_asignacion_dosimetros_contrato', compact('contdosisededepto', 'trabjasignados', 'dosicontrolasig',
         'holders', 'dosimetros'));
-        return $dosicontrolasig;
+        /* return $contdosisededepto; */
     }
 
     public function updateInfo($idWork, $contratoId, $mesnumber, Request $request) {

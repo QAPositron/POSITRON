@@ -1,16 +1,16 @@
 @extends('layouts.plantillabase')
 @section('contenido')
 
-<h3 class="text-center">{{$contdosisede->sede->empresa->nombre_empresa}} - {{$contdosisede->sede->nombre_sede}}</h3>
+<h3 class="text-center">{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</h3>
 <br>
-<h4 class="text-center">CONTRATO No. {{$contdosisede->dosimetriacontrato->codigo_contrato}}</h4>
+<h4 class="text-center">CONTRATO No. {{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</h4>
 <br>
 <h4 class="text-center">
     TRABAJADORES ASIGNADOS AL MES {{ Request()->mesnumber  }} (
         @if(Request()->mesnumber == 1)
-            <span>{{date("d-m-Y",strtotime($contdosisede->dosimetriacontrato->fecha_inicio))}}</span>
+            <span>{{date("d-m-Y",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))}}</span>
         @else
-            <span>{{date("d-m-Y",strtotime($contdosisede->dosimetriacontrato->fecha_inicio."+ ".(30*(Request()->mesnumber-1))." days" ))}}</span>
+            <span>{{date("d-m-Y",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio."+ ".(30*(Request()->mesnumber-1))." days" ))}}</span>
         @endif )
 </h4>
 <br>
@@ -165,7 +165,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">{{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('asignadosicontrato.deleteInfo', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisede->id_contratodosimetriasede, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
+                <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('asignadosicontrato.deleteInfo', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisededepto->id_contdosisededepto, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
                     <div class="modal-body">
                         <span>¿Eliminar a este trabajador junto con su dosimetro asignado?</span>
                         @csrf
@@ -188,7 +188,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">{{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_eliminar_dosimetro" name="form_editar_dosimetro" action="{{route('asignadosicontrato.updateInfo', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisede->id_contratodosimetriasede, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
+                <form id="form_eliminar_dosimetro" name="form_editar_dosimetro" action="{{route('asignadosicontrato.updateInfo', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisededepto->id_contdosisededepto, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
                     <div class="modal-body">
                         <span>¿Editar el dosimetro de este trabajador?</span>
                         @csrf
@@ -211,13 +211,13 @@
                                     <option value="">--</option>
                                     <?php $cez=0; $cam=0; $cce=0; ?>
                                     @foreach($dosimetros as $dosi)
-                                        @if($dosi->tipo_dosimetro == 'EZCLIP' && ($contdosisede->dosi_ezclip - $cez)>0)
+                                        @if($dosi->tipo_dosimetro == 'EZCLIP' && ($contdosisededepto->dosi_ezclip - $cez)>0)
                                             <?php $cez++; ?>
                                             <option onclick="count('EZCLIP')" change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
-                                        @elseif($dosi->tipo_dosimetro == 'CUERPO' && ($contdosisede->dosi_cuerpo_entero - $cce)>0)
+                                        @elseif($dosi->tipo_dosimetro == 'CUERPO' && ($contdosisededepto->dosi_cuerpo_entero - $cce)>0)
                                             <?php $cce++; ?>
                                             <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
-                                        @elseif($dosi->tipo_dosimetro == 'AMBIENTAL' && ($contdosisede->dosi_ambiental - $cam)>0)
+                                        @elseif($dosi->tipo_dosimetro == 'AMBIENTAL' && ($contdosisededepto->dosi_ambiental - $cam)>0)
                                             <?php $cam++; ?>
                                             <option change="saveTypeDosi({{$dosi->tipo_dosimetro}})" value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
                                         @endif
