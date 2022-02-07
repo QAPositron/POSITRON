@@ -41,7 +41,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating ">
-                            <select class="form-select" name="estado_holder" id="estado_holder" value="{{old('estado_holder')}}" autofocus style="text-transform:uppercase">
+                            <select class="form-select  form-select-solid" name="estado_holder" id="estado_holder" data-control="select2" data-placeholder="Select an option" value="{{old('estado_holder')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
                                 <option value="STOCK">STOCK</option>
                                 <option value="PERDIDO">PERDIDO</option>
@@ -68,4 +68,15 @@
     </div>
     <div class="col"></div>
 </div>
+<script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+</script>
+<script>
+    $(document).ready(function() {
+        $('#estado_holder').select2();
+        $('#tipo_holder').select2();
+    });
+</script>
 @endsection 
