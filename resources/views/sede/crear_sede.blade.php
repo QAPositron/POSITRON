@@ -121,9 +121,9 @@
                                     <BR></BR>
                                     <div class="form-floating">
                                         <select class="form-select" id="multiple_select_depsede" name="multiple_select_depsede[]" autofocus aria-label="Floating label select example" multiple="true">
-                                            <option value="ONCOLOGÍA">ONCOLOGÍA</option>
-                                            <option value="ODONTOLOGÍA">ODONTOLOGÍA</option>
-                                            <option value="CIRUJIA">CIRUJIA</option>
+                                            <option value="ONCO">ONCOLOGÍA</option>
+                                            <option value="ODON">ODONTOLOGÍA</option>
+                                            <option value="CIRU">CIRUJIA</option>
                                             <option value="UCI">UCI</option>
                                             <option value="--">--</option>
                                             <option value="--">--</option>

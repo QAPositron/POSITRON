@@ -461,7 +461,7 @@ class DosimetriaController extends Controller
     }
 
     public function saveAsignacionDosiContrato(Request $request){
-       /*  $request->validate([
+        $request->validate([
             'primerDia_asigdosim'       => 'required',
             'ultimoDia_asigdosim'       => 'required',
             'id_trabajador_asigdosim'   => 'required',
@@ -489,19 +489,19 @@ class DosimetriaController extends Controller
             $asigdosim->dosimetro_uso                = 'TRUE';
 
             $asigdosim->save();
-        } */
+        }
         ////////////////// SAVE DE DOSIMETRO TIPO  CONTROL /////////////////////////
 
-        /* for($i=0; $i<count($request->id_dosimetro_asigdosim_control); $i++){
+        for($i=0; $i<count($request->id_dosimetro_asigdosim_control); $i++){
 
             $asigdosim_control = new Dosicontrolcontdosisede();
 
             $asigdosim_control->dosimetro_id                = $request->id_dosimetro_asigdosim_control[$i];
             $asigdosim_control->mes_asignacion              = $request->mesNumber1;
             $asigdosim_control->contratodosimetriasede_id   = $request->id_contrato_asigdosim_control_sede;
-            $asigdosim_control->fecha_dosim_enviado          = $request->fecha_envio_dosim_asignado;
-            $asigdosim_control->fecha_dosim_recibido         = $request->fecha_recibido_dosim_asignado;
-            $asigdosim_control->fecha_dosim_devuelto         = $request->fecha_devuelto_dosim_asignado;
+            $asigdosim_control->fecha_dosim_enviado         = $request->fecha_envio_dosim_asignado;
+            $asigdosim_control->fecha_dosim_recibido        = $request->fecha_recibido_dosim_asignado;
+            $asigdosim_control->fecha_dosim_devuelto        = $request->fecha_devuelto_dosim_asignado;
             $asigdosim_control->contdosisededepto_id        = $request->id_departamento_asigdosim_control;
             $asigdosim_control->primer_dia_uso              = $request->primerDia_asigdosim;
             $asigdosim_control->ultimo_dia_uso              = $request->ultimoDia_asigdosim;
@@ -510,16 +510,16 @@ class DosimetriaController extends Controller
             $asigdosim_control->dosimetro_uso               = 'TRUE';
 
             $asigdosim_control->save();
-        } */
+        }
 
         $dosimetrosTotal = array_merge($request->id_dosimetro_asigdosim, $request->id_dosimetro_asigdosim_control);
         $dosimetrosTotal = json_encode($dosimetrosTotal);
         //return redirect()->route('detallesedecont.create', $request->id_contrato_asigdosim);
-        /* return $this->callAction('patchDosimetroStock',['idDosimetro' =>$dosimetrosTotal,
-            'contratoId'=> $request->id_contrato_asigdosim, 'mesnumber'=>$request->mesNumber1 ]); */
+        return $this->callAction('patchDosimetroStock',['idDosimetro' =>$dosimetrosTotal,
+            'contratoId'=> $request->id_contrato_asigdosim, 'mesnumber'=>$request->mesNumber1 ]);
         /*return route('dosimetroStock.patch',  ['idDosimetro' =>$dosimetrosTotal,
             'contratoId'=> $request->id_contrato_asigdosim, 'mesnumber'=>$request->mesNumber1 ] );*/
-        return $request;
+        /* return $request; */
     }
 
     public function info($id, $mesnumber, Request $request){
@@ -624,9 +624,8 @@ class DosimetriaController extends Controller
 
     public function lecturadosi($id){
         $trabjasig = Trabajadordosimetro::find($id);
-
-        return view('dosimetria.lectura_dosimetro_contrato', compact('trabjasig'));
-        /* return $trabjasig; */
+        return $trabjasig;
+        /* return view('dosimetria.lectura_dosimetro_contrato', compact('trabjasig')); */
     }
     public function savelecturadosi(Request $request, $id){
 
@@ -638,7 +637,6 @@ class DosimetriaController extends Controller
             'verification_Date'             => 'required',
             'verification_required_before'  => 'required',
         ]);
-
 
         $trabjasig->zero_level_date         = $request->zeroLevel_date;
         $trabjasig->measurement_date        = $request->measurement_date;
@@ -660,14 +658,20 @@ class DosimetriaController extends Controller
         $trabjasig->remaining_days_available_for_use    = $request->remaining_days_available_use;
 
         $trabjasig->save();
-
-        return $trabjasig;
+        return redirect()->route('asignadosicontrato.info', ["asigdosicont" => $request->id_contratodosimetriasededepto, "mesnumber" => $request->mes_asignacion])->with('actualizar', 'ok');
+        
     }
+    public function editlecturadosi($id){
+        $trabjasig = Trabajadordosimetro::find($id);
+        return view('dosimetria.lectura_dosimetro_contrato_edit', compact('trabjasig'));
+        
+    }
+
     public function lecturadosicontrol($id){
         $dosicontasig = Dosicontrolcontdosisede::find($id);
 
         return view('dosimetria.lectura_dosimetro_control_contrato', compact('dosicontasig'));
-        /* return $dosicontasig; */
+       
     }
     public function savelecturadosicontrol(Request $request, $id){
 
@@ -680,38 +684,58 @@ class DosimetriaController extends Controller
             'verification_required_before'  => 'required',
         ]);
 
-
-        $dosicontasig->zero_level_date         = $request->zeroLevel_date;
-        $dosicontasig->measurement_date        = $request->measurement_date;
-        $dosicontasig->Hp007_calc_dose         = $request->hp007_calc_dose;
-        $dosicontasig->Hp007_background_dose   = $request->hp007_background_dose;
-        $dosicontasig->Hp007_raw_dose          = $request->hp007_raw_dose;
-        $dosicontasig->Hp10_calc_dose          = $request->hp10_calc_dose;
-        $dosicontasig->Hp10_background_dose    = $request->hp10_background_dose;
-        $dosicontasig->Hp10_raw_dose           = $request->hp10_raw_dose;
-        $dosicontasig->EzClip_calc_dose        = $request->ezclip_calc_dose;
-        $dosicontasig->EzClip_background_dose  = $request->ezclip_background_dose;
-        $dosicontasig->EzClip_raw_dose         = $request->ezclip_raw_dose;
-        $dosicontasig->Hp3_calc_dose           = $request->hp3_calc_dose;
-        $dosicontasig->Hp3_background_dose     = $request->hp3_background_dose;
-        $dosicontasig->Hp3_raw_dose            = $request->hp3_raw_dose;
-        $dosicontasig->H_10_calc_dose          = $request->h10_cal_dose;
-        $dosicontasig->verification_date       = $request->verification_Date;
+        $dosicontasig->zero_level_date                     = $request->zeroLevel_date;
+        $dosicontasig->measurement_date                    = $request->measurement_date;
+        $dosicontasig->Hp007_calc_dose                     = $request->hp007_calc_dose;
+        $dosicontasig->Hp007_background_dose               = $request->hp007_background_dose;
+        $dosicontasig->Hp007_raw_dose                      = $request->hp007_raw_dose;
+        $dosicontasig->Hp10_calc_dose                      = $request->hp10_calc_dose;
+        $dosicontasig->Hp10_background_dose                = $request->hp10_background_dose;
+        $dosicontasig->Hp10_raw_dose                       = $request->hp10_raw_dose;
+        $dosicontasig->EzClip_calc_dose                    = $request->ezclip_calc_dose;
+        $dosicontasig->EzClip_background_dose              = $request->ezclip_background_dose;
+        $dosicontasig->EzClip_raw_dose                     = $request->ezclip_raw_dose;
+        $dosicontasig->Hp3_calc_dose                       = $request->hp3_calc_dose;
+        $dosicontasig->Hp3_background_dose                 = $request->hp3_background_dose;
+        $dosicontasig->Hp3_raw_dose                        = $request->hp3_raw_dose;
+        $dosicontasig->H_10_calc_dose                      = $request->h10_cal_dose;
+        $dosicontasig->verification_date                   = $request->verification_Date;
         $dosicontasig->verification_required_on_or_before  = $request->verification_required_before;
         $dosicontasig->remaining_days_available_for_use    = $request->remaining_days_available_use;
 
         $dosicontasig->save();
 
-        return $dosicontasig;
+        return redirect()->route('asignadosicontrato.info',["asigdosicont" => $request->id_contratodosimetriasededepto, "mesnumber" => $request->mes_asignacion])->with('actualizar', 'ok');
+
     }
-    public function pdf($id){
-        $trabajdosiasig= Trabajadordosimetro::where('contratodosimetriasede_id', '=', $id)
+    public function editlecturadosicontrol($id){
+        $dosicontasig = Dosicontrolcontdosisede::find($id);
+        return view('dosimetria.lectura_dosimetro_control_edit', compact('dosicontasig'));
+    }
+   
+    public function pdf($id, $mesnumber){
+        /* SELECT * FROM `contratodosimetriasededeptos` INNER JOIN contratodosimetriasedes ON contratodosimetriasededeptos.contratodosimetriasede_id = contratodosimetriasedes.id_contratodosimetriasede 
+        INNER JOIN dosimetriacontratos ON contratodosimetriasedes.contratodosimetria_id = dosimetriacontratos.id_contratodosimetria 
+        INNER JOIN empresas ON dosimetriacontratos.empresa_id = empresas.id_empresa WHERE contratodosimetriasededeptos.id_contdosisededepto = 1; */
+        $contratoDosi = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id','=','contratodosimetriasedes.id_contratodosimetriasede')
+        ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
+        ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
+        ->join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
+        ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $id)
+        ->select("*")
+        ->get();
+        $trabajdosiasig= Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
+        /* SELECT * FROM `dosicontrolcontdosisedes` INNER JOIN contratodosimetriasededeptos ON dosicontrolcontdosisedes.contdosisededepto_id = contratodosimetriasededeptos.id_contdosisededepto 
+        INNER JOIN departamentosedes ON contratodosimetriasededeptos.departamentosede_id = departamentosedes.id_departamentosede; */
+        $dosicontrolasig = Dosicontrolcontdosisede::join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
+        ->join('departamentosedes','contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
+        ->where('contdosisededepto_id', '=', $id)
+        ->where('mes_asignacion', '=', $mesnumber)
         ->get();
 
-        $dosicontrolasig = Dosicontrolcontdosisede::where('contratodosimetriasede_id', '=', $id)
-        ->get();
-
-        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig'));
+        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'contratoDosi'));
         $pdf->setPaper('8.5x14', 'landscape');
         return $pdf->stream();
         /* return $dosicontrolasig; */

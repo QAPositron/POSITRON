@@ -126,12 +126,14 @@ Route::patch('editDosimetroDelete/{idDosimetro}/{contratoId}/{mesnumber}',
 /////////RUTAS PARA EL CRUD DE LA LECTURA DE DOSIMETROS///////
 Route::get('lecturadosi/{lecdosi}/create', [DosimetriaController::class, 'lecturadosi'])->name('lecturadosi.create');
 Route::put('lecturadosi/{lecdosi}', [DosimetriaController::class, 'savelecturadosi'])->name('lecturadosi.save');
+Route::get('lecturadosi/{lecdosicont}/edit', [DosimetriaController::class, 'editlecturadosi'])->name('lecturadosi.edit');
 
 Route::get('lecturadosicontrol/{lecdosicont}/create', [DosimetriaController::class, 'lecturadosicontrol'])->name('lecturadosicontrol.create');
 Route::put('lecturadosicontrol/{lecdosicont}', [DosimetriaController::class, 'savelecturadosicontrol'])->name('lecturadosicontrol.save');
+Route::get('lecturadosicontrol/{lecdosicont}/edit', [DosimetriaController::class, 'editlecturadosicontrol'])->name('lecturadosicontrol.edit');
 
 /////////RUTAS PARA LOS REPORTES O INFORMES DE DOSIMETRIA///////
-Route::get('repodosimetria/{repodosi}/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');
+Route::get('repodosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');
 
 
 /* Route::get('asignadosicreate', [AsignarDosimetroController::class, 'create'])->name('asignadosis.create');

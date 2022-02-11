@@ -1,16 +1,15 @@
 @extends('layouts.plantillabase')
 @section('contenido')
 <br>
-<h3 class="text-center">LECTURA DE DOSÍMETRO TIPO CONTROL </h3>
-<h3 class="text-center">PARA EL DEPARTAMENTO: {{$dosicontasig->contratodosimetriasededepto->departamentosede->nombre_departamento}} - CONTRATO No. {{$dosicontasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}} - MES {{$dosicontasig->mes_asignacion}}</h3>    
-
+<h3 class="text-center">EDITAR LA LECTURA DEL DOSÍMETRO TIPO CONTROL </h3>
+<h3 class="text-center">PARA EL DEPARTAMENTO: {{$dosicontasig->contratodosimetriasededepto->departamentosede->nombre_departamento}}" - CONTRATO No. {{$dosicontasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}} - MES {{$dosicontasig->mes_asignacion}}</h3>
 <BR></BR>
 
 <div class="row">
         <div class="col"></div>
         <div class="col-11">
-            <div class="card">
-                <div class="card-header">
+            <div class="card ">
+                <div class="card-header ">
                     <ul class="nav nav-tabs card-header-tabs" id="infoLectura" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" href="#infoempresa" role="tab" aria-controls="infoempresa" aria-selected="true">INFO EMPRESA</a>
@@ -18,8 +17,8 @@
                         <li class="nav-item">
                             <a class="nav-link"  href="#infocontrato" role="tab" aria-controls="infocontrato" aria-selected="false">INFO CONTRATO</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#lectura" role="tab" aria-controls="lectura" aria-selected="false">LECTURA</a>
+                        <li class="nav-item">
+                            <a class="nav-link link-danger" href="#lectura" role="tab" aria-controls="lectura" aria-selected="false">LECTURA</a>
                         </li>
                     </ul>
                 </div>
@@ -102,16 +101,16 @@
                         </div>
                         <!-- //////////////////// PESTAÑA DE LECTURA//////////////// -->
                         <div class="tab-pane" id="lectura" role="tabpanel" aria-labelledby="lectura-tab">
-                            <h4 class="card-title text-center pt-3">LECTURA DEL DOSÍMETRO TIPO {{$dosicontasig->dosimetro->tipo_dosimetro}} </h4>
+                            <h4 class="card-title text-center pt-3">LECTURA DE DOSÍMETRO TIPO {{$dosicontasig->dosimetro->tipo_dosimetro}} ASIGNADO AL MES {{$dosicontasig->mes_asignacion}}</h4>
                             <h5 class="card-title text-center">CÓDIGO DEL DOSÍMETRO: {{$dosicontasig->dosimetro->codigo_dosimeter}}</h5>
                             <BR></BR>
-                            <Label class="mx-5">INGRESE LA INFORMACIÓN DE LA LECTURA DEL DOSÍMETRO ASIGNADO:</Label>
+                            <Label class="mx-5">MODIFIQUE LA INFORMACIÓN DE LA LECTURA DEL DOSÍMETRO ASIGNADO:</Label>
                             <BR></BR>
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col-10">
                                     <div class="card text-dark bg-light">
-                                        <form class="m-4" id="form_save_lectura_dosim" name="form_save_lectura_dosim" action="{{route('lecturadosicontrol.save', $dosicontasig)}}" method="POST">
+                                        <form class="m-4" id="form_edit_save_lectura_dosim" name="form_edit_save_lectura_dosim" action="{{route('lecturadosicontrol.save', $dosicontasig )}}" method="POST">
                                             
                                             @csrf
 
@@ -122,31 +121,19 @@
                                             <div class="row g-2">
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosicontasig->Hp007_calc_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosicontasig->Hp007_calc_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosicontasig->Hp007_calc_dose}}">
                                                         <label for="floatingInputGrid">Hp007 CALC DOSE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp007_background_dose" id="hp007_background_dose" value="{{$dosicontasig->Hp007_background_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp007_background_dose" id="hp007_background_dose" value="{{$dosicontasig->Hp007_background_dose}}">
-                                                        @endif 
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp007_background_dose" id="hp007_background_dose" value="{{$dosicontasig->Hp007_background_dose}}">
                                                         <label for="floatingInputGrid">Hp007 BACKGROUND DOSE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp007_raw_dose" id="hp007_raw_dose" value="{{$dosicontasig->Hp007_raw_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp007_raw_dose" id="hp007_raw_dose" value="{{$dosicontasig->Hp007_raw_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp007_raw_dose" id="hp007_raw_dose" value="{{$dosicontasig->Hp007_raw_dose}}">
                                                         <label for="floatingInputGrid">Hp007 RAW DOSE:</label>
                                                     </div>
                                                 </div>
@@ -155,31 +142,19 @@
                                             <div class="row g-2">
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$dosicontasig->Hp10_calc_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$dosicontasig->Hp10_calc_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$dosicontasig->Hp10_calc_dose}}">
                                                         <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control"  name="hp10_background_dose" id="hp10_background_dose" value="{{$dosicontasig->Hp10_background_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control"  name="hp10_background_dose" id="hp10_background_dose" value="{{$dosicontasig->Hp10_background_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control"  name="hp10_background_dose" id="hp10_background_dose" value="{{$dosicontasig->Hp10_background_dose}}">
                                                         <label for="floatingInputGrid">Hp10 BACKGROUND DOSE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp10_raw_dose" id="hp10_raw_dose" value="{{$dosicontasig->Hp10_raw_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp10_raw_dose" id="hp10_raw_dose" value="{{$dosicontasig->Hp10_raw_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp10_raw_dose" id="hp10_raw_dose" value="{{$dosicontasig->Hp10_raw_dose}}">
                                                         <label for="floatingInputGrid">Hp10 RAW DOSE:</label>
                                                     </div>
                                                 </div>
@@ -188,31 +163,19 @@
                                             <div class="row g-2">
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="ezclip_calc_dose" id="ezclip_calc_dose" value="{{$dosicontasig->Ezclip_calc_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="ezclip_calc_dose" id="ezclip_calc_dose" value="{{$dosicontasig->Ezclip_calc_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="ezclip_calc_dose" id="ezclip_calc_dose" value="{{$dosicontasig->Ezclip_calc_dose}}">
                                                         <label for="floatingInputGrid">EzClip CALC DOSE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="ezclip_background_dose" id="ezclip_background_dose" value="{{$dosicontasig->Ezclip_background_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="ezclip_background_dose" id="ezclip_background_dose" value="{{$dosicontasig->Ezclip_background_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="ezclip_background_dose" id="ezclip_background_dose" value="{{$dosicontasig->Ezclip_background_dose}}">
                                                         <label for="floatingInputGrid">EzClip BACKGROUND DOSE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="ezclip_raw_dose" id="ezclip_raw_dose" value="{{$dosicontasig->Ezclip_raw_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="ezclip_raw_dose" id="ezclip_raw_dose" value="{{$dosicontasig->Ezclip_raw_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="ezclip_raw_dose" id="ezclip_raw_dose" value="{{$dosicontasig->Ezclip_raw_dose}}">
                                                         <label for="floatingInputGrid">EzClip RAW DOSE:</label>
                                                     </div>
                                                 </div>
@@ -221,31 +184,19 @@
                                             <div class="row g-2">
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosicontasig->Hp3_calc_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosicontasig->Hp3_calc_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosicontasig->Hp3_calc_dose}}">
                                                         <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp3_background_dose" id="hp3_background_dose" value="{{$dosicontasig->Hp3_background_dose}}"readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_background_dose" id="hp3_background_dose" value="{{$dosicontasig->Hp3_background_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp3_background_dose" id="hp3_background_dose" value="{{$dosicontasig->Hp3_background_dose}}">
                                                         <label for="floatingInputGrid">Hp3 BACKGROUND DOSE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp3_raw_dose" id="hp3_raw_dose" value="{{$dosicontasig->Hp3_raw_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_raw_dose" id="hp3_raw_dose" value="{{$dosicontasig->Hp3_raw_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp3_raw_dose" id="hp3_raw_dose" value="{{$dosicontasig->Hp3_raw_dose}}">
                                                         <label for="floatingInputGrid">Hp3 RAW DOSE:</label>
                                                     </div>
                                                 </div>
@@ -254,31 +205,19 @@
                                             <div class="row g-2">
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="date" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}" readonly>
-                                                        @else
-                                                            <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}">
-                                                        @endif
+                                                        <input type="date" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}">
                                                         <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="date" class="form-control" name="zeroLevel_date" id="zeroLevel_date" value="{{$dosicontasig->zero_level_date}}" readonly>
-                                                        @else
-                                                            <input type="date" step="any" class="form-control" name="zeroLevel_date" id="zeroLevel_date" value="{{$dosicontasig->zero_level_date}}">
-                                                        @endif
+                                                        <input type="date" class="form-control" name="zeroLevel_date" id="zeroLevel_date" value="{{$dosicontasig->zero_level_date}}">
                                                         <label for="floatingInputGrid">ZERO LEVEL DATE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="h10_cal_dose" id="h10_cal_dose" value="{{$dosicontasig->H_10_calc_dose}}"readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="h10_cal_dose" id="h10_cal_dose" value="{{$dosicontasig->H_10_calc_dose}}">
-                                                        @endif
+                                                        <input type="NUMBER" step="any" class="form-control" name="h10_cal_dose" id="h10_cal_dose" value="{{$dosicontasig->H_10_calc_dose}}">
                                                         <label for="floatingInputGrid">H*(10) CALC DOSE:</label>
                                                     </div>
                                                 </div>
@@ -287,21 +226,13 @@
                                             <div class="row g-2">
                                                 <div class="col-4 mx-4 ">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="date" class="form-control" name="verification_Date" id="verification_Date" value="{{$dosicontasig->verification_date}}" readonly>
-                                                        @else
-                                                            <input type="date" class="form-control" name="verification_Date" id="verification_Date" value="{{$dosicontasig->verification_date}}">
-                                                        @endif
+                                                        <input type="date" class="form-control" name="verification_Date" id="verification_Date" value="{{$dosicontasig->verification_date}}">
                                                         <label for="floatingInputGrid">VERIFICATION DATE:</label>
                                                     </div>
                                                 </div>
                                                 <div class="col mx-4 ">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="date" class="form-control" name="verification_required_before" id="verification_required_before" value="{{$dosicontasig->verification_required_on_or_before}}" readonly>
-                                                        @else
-                                                            <input type="date" class="form-control" name="verification_required_before" id="verification_required_before" value="{{$dosicontasig->verification_required_on_or_before}}">
-                                                        @endif
+                                                        <input type="date" class="form-control" name="verification_required_before" id="verification_required_before" value="{{$dosicontasig->verification_required_on_or_before}}">
                                                         <label for="floatingInputGrid">VERIFICATION REQUIRED ON OR BEFORE:</label>
                                                     </div>
                                                 </div>
@@ -311,11 +242,7 @@
                                             <div class="row g-2">
                                                 <div class="col-5 mx-4">
                                                     <div class="form-floating">
-                                                        @if($dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="remaining_days_available_use" id="remaining_days_available_use" value="{{$dosicontasig->remaining_days_available_for_use}}" readonly>
-                                                        @else
                                                         <input type="NUMBER" class="form-control" name="remaining_days_available_use" id="remaining_days_available_use" value="{{$dosicontasig->remaining_days_available_for_use}}">
-                                                        @endif
                                                         <label for="floatingInputGrid">REMAINING DAYS AVAILABLE FOR USE:</label>
                                                     </div>
                                                 </div>
@@ -328,11 +255,9 @@
                                                 <div class="col-md"></div>
                                                 <div class="col-md"></div>
                                                 <div class="col-md d-grid gap-2">
-                                                    @if($dosicontasig->measurement_date !='')
-                                                        <input type="submit" class="btn colorQA mt-2" name="update" id="update" value="GUARDAR" disabled>
-                                                    @else
-                                                        <input type="submit" class="btn colorQA mt-2" name="update" id="update" value="GUARDAR" >
-                                                    @endif
+                                                    
+                                                    <input type="submit" class="btn colorQA mt-2" name="update" id="update" value="EDITAR">
+                                                    
                                                 </div>
                                                 <div class="col-md"></div>
                                                 <div class="col-md"></div>
@@ -366,17 +291,26 @@ crossorigin="anonymous">
         })
     })
 </script>
-
-<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
-     $(document).ready(function(){
-        $('#form_save_lectura_dosim').submit(function(){
-            Swal.fire(
-                'LA LUECTUA HA SIDO GUARDADA CON EXITO',
-                'That thing is still around?',
-                'success'
-                )
+    $(document).ready(function(){
+        $('#form_edit_save_lectura_dosim').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "SEGURO QUE DESEA MODIFICAR LA LECTURA DE ESTE DOSIMETRO?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    this.submit(); 
+                }
+            })
+           
         })
-    }) 
-</script> -->
+    })
+</script>
 @endsection
