@@ -20,8 +20,13 @@ class CreateSedesTable extends Migration
             $table-> foreign('empresas_id')->references('id_empresa')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
             
             $table->string('nombre_sede', 40);
-            $table->string('municipio_sede', 30);
-            $table->string('departamento_sede', 30);
+
+            $table-> unsignedBigInteger('municipiocol_id');
+            $table-> foreign('municipiocol_id')->references('id_municipiocol')->on('colmunicipios')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('departamentocol_id');
+            $table-> foreign('departamentocol_id')->references('id_departamentocol')->on('coldepartamentos')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->string('direccion_sede', 30);
             $table->timestamps(); // crea dos coulmas create_at y update_at cada que re introduce y se actualiza un registro se guarada la fecha y hora en que se realizo el registro
         });

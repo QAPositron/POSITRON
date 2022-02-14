@@ -13,8 +13,15 @@ class CreateColmunicipiosTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('colmunicipios', function (Blueprint $table) {
-            $table->id();
+            $table->bigincrements('id_municipiocol')->unique();
+
+            $table-> unsignedBigInteger('departamentocol_id');
+            $table-> foreign('departamentocol_id')->references('id_departamentocol')->on('coldepartamentos')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->string('nombre_municol',40);
+            $table->string('abrev_municol',40);
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ class Empresa extends Model
 {
     use HasFactory;
     
-    protected $primaryKey = 'id_empresa';
+    protected $primaryKey = 'id_empresa'; 
     //relacion uno a muchos
     public function sedes(){
         /* return $this->hasMany('App\Models\Sede'); */

@@ -12,7 +12,7 @@
     
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+    <!-- <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/> -->
 
     
 
@@ -40,6 +40,10 @@
         margin: 0;
       }
       input[type=number] { -moz-appearance:textfield; }
+
+      .select2-selection__placeholder {
+        color: #4BD196;
+      }
     </style>
 
   </head>
@@ -62,6 +66,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <script src="assets/plugins/global/plugins.bundle.js"></script>
+    <!-- <script src="assets/plugins/global/plugins.bundle.js"></script> -->
   </body>
 </html>

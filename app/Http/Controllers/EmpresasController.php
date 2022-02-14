@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coldepartamento;
+use App\Models\Colmunicipio;
 use App\Models\Contacto;
 use App\Models\Departamentosede;
 use App\Models\Empresa;
@@ -12,12 +14,23 @@ use Illuminate\Http\Request;
 class EmpresasController extends Controller
 {
     public function create(){
-        return view('empresa.crear_empresa');
+        $departamentoscol = Coldepartamento::all();
+        return view('empresa.crear_empresa', compact('departamentoscol'));
+        /* return $departamentoscol; */
     }
 
+    public function selectmunicipios(Request $request)
+    {
+        $municipios = Colmunicipio::where('departamentocol_id', '=', $request->departamento_id)->get();
+        foreach($municipios as $muni){
+            $municipiosArray[$muni->id_municipiocol] = $muni->nombre_municol;
+        }
+        return response()->json($municipiosArray);
+        echo "CONSULTA REALIZADA".$municipiosArray;        
+    }
     public function save(Request $request){
         
-        $request->validate([
+        /* $request->validate([
             'nombre_empresa'      => 'required',
             'tipo_empresa'        => 'required',              
             'tipoIden_empresa'    => 'required',  
@@ -54,7 +67,8 @@ class EmpresasController extends Controller
         
         $empresa->save();
 
-        return redirect()->route('empresas.search');
+        return redirect()->route('empresas.search'); */
+        return $request;
     }
 
     public function search(){

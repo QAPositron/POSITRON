@@ -24,6 +24,7 @@ class CreateDepartamentosedesTable extends Migration
 
             $table->timestamps();
         });
+
     }
 
     /**

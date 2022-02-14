@@ -22,8 +22,10 @@ class CreateEmpresasTable extends Migration
             $table->string('email_empresa')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('direccion_empresa', 40);
-            $table->string('ciudad_empresa', 40);
-            $table->string('departamento_empresa', 40);
+
+            $table-> unsignedBigInteger('municipiocol_id');
+            $table-> foreign('municipiocol_id')->references('id_municipiocol')->on('colmunicipios')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->string('pais_empresa' , 40);
             $table->string('tipo_empresa', 40);
             $table->string('tipo_identificacion_empresa', 40);
@@ -31,7 +33,6 @@ class CreateEmpresasTable extends Migration
             $table->string('respo_iva_empresa');
             $table->string('respo_fiscal_empresa');
            
-            //$table->rememberToken(); // token para mantener la sesion iniciadac cuando el usuario selecciona la oipcion
             $table->timestamps(); // crea dos coulmas create_at y update_at cada q
             
         });

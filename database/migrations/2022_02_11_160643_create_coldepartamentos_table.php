@@ -13,13 +13,13 @@ class CreateColdepartamentosTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('coldepartamentos', function (Blueprint $table) {
             $table->bigincrements('id_departamentocol')->unique();
-            $table->string('nombre_deptocol',25);
-            $table->string('abreviatura_deptocol',25);
+            $table->string('nombre_deptocol',40);
+            $table->string('abreviatura_deptocol',5);
             $table->timestamps();
         });
-
     }
 
     /**

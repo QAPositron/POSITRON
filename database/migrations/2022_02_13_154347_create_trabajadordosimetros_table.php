@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDosicontrolcontdosisedesTable extends Migration
+class CreateTrabajadordosimetrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,35 @@ class CreateDosicontrolcontdosisedesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dosicontrolcontdosisedes', function (Blueprint $table) {
-            $table->bigincrements('id_dosicontrolcontdosisedes')->unique();
+        
+        Schema::create('trabajadordosimetros', function (Blueprint $table) {
+            $table->bigincrements('id_trabajadordosimetro')->unique();
+            
+            $table-> unsignedBigInteger('contratodosimetriasede_id');
+            $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('trabajador_id');
+            $table-> foreign('trabajador_id')->references('id_trabajador')->on('trabajadors')->onDelete('cascade')->onUpdate('cascade');
 
             $table-> unsignedBigInteger('dosimetro_id');
             $table-> foreign('dosimetro_id')->references('id_dosimetro')->on('dosimetros')->onDelete('cascade')->onUpdate('cascade');
 
-            $table-> unsignedBigInteger('contratodosimetriasede_id');
-            $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
+            $table-> unsignedBigInteger('holder_id')->nullable();
+            $table-> foreign('holder_id')->references('id_holder')->on('holders')->onDelete('cascade')->onUpdate('cascade');
 
-            $table-> unsignedBigInteger('contdosisededepto_id');
+            $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
+
             
             $table->integer('mes_asignacion');
-            $table->string('dosimetro_uso', 10);
+            $table->string('dosimetro_uso',10);
             $table->date('primer_dia_uso')->nullable();
             $table->date('ultimo_dia_uso')->nullable();
             $table->date('fecha_dosim_enviado')->nullable();
             $table->date('fecha_dosim_recibido')->nullable();
             $table->date('fecha_dosim_devuelto')->nullable();
             $table->string('ocupacion', 30)->nullable();
+            $table->string('ubicacion', 30)->nullable();
             $table->string('energia', 30)->nullable();
             $table->date('zero_level_date')->nullable();
             $table->date('measurement_date')->nullable();
@@ -69,6 +78,6 @@ class CreateDosicontrolcontdosisedesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dosicontrolcontdosisedes');
+        Schema::dropIfExists('trabajadordosimetros');
     }
 }

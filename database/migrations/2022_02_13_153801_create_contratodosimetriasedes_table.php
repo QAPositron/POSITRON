@@ -13,7 +13,7 @@ class CreateContratodosimetriasedesTable extends Migration
      */
     public function up()
     {
-    
+        
         Schema::create('contratodosimetriasedes', function (Blueprint $table) {
                     
 

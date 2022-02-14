@@ -35,6 +35,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('empresas/search', [EmpresasController::class, 'search'])->name('empresas.search');
 
 Route::get('empresas/create', [EmpresasController::class, 'create'])->name('empresas.create');
+
+Route::get('/empresas/empresasdeptomuni', [EmpresasController::class, 'selectmunicipios']);
+
 Route::post('empresas', [EmpresasController::class, 'save'])->name('empresas.save');
 Route::get('empresas/{empresa}/edit', [EmpresasController::class, 'edit'])->name('empresas.edit');
 Route::put('empresas/{empresa}', [EmpresasController::class, 'update'])->name('empresas.update');
