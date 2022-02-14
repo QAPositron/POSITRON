@@ -189,7 +189,7 @@
                                                                 @if($control->ocupacion=='T' &&  $control->dosimetro_id == $dosi->id_dosimetro)
                                                                     <option selected  value="T">TELETERAPIA</option>
                                                                 @elseif($control->ocupacion=='B' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="B">BRANQUITERAPIA</option>
+                                                                    <option selected  value="B">BRAQUITERAPIA</option>
                                                                 @elseif($control->ocupacion=='N' &&  $control->dosimetro_id == $dosi->id_dosimetro)
                                                                     <option selected  value="N">MEDICINA NUCLEAR</option>
                                                                 @elseif($control->ocupacion=='G' &&  $control->dosimetro_id == $dosi->id_dosimetro)
@@ -275,7 +275,7 @@
                                                             @if($control->ocupacion=='T' &&  $control->dosimetro_id == $dosi->id_dosimetro)
                                                                 <option selected  value="T">TELETERAPIA</option>
                                                             @elseif($control->ocupacion=='B' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                <option selected  value="B">BRANQUITERAPIA</option>
+                                                                <option selected  value="B">BRAQUITERAPIA</option>
                                                             @elseif($control->ocupacion=='N' &&  $control->dosimetro_id == $dosi->id_dosimetro)
                                                                 <option selected  value="N">MEDICINA NUCLEAR</option>
                                                             @elseif($control->ocupacion=='G' &&  $control->dosimetro_id == $dosi->id_dosimetro)
@@ -386,7 +386,7 @@
                                                                     @if($control->ocupacion=='T')
                                                                         <option selected hidden value="T">TELETERAPIA</option>
                                                                         @elseif($control->ocupacion=='B')
-                                                                        <option selected hidden value="B">BRANQUITERAPIA</option>
+                                                                        <option selected hidden value="B">BRAQUITERAPIA</option>
                                                                         @elseif($control->ocupacion=='N')
                                                                         <option selected hidden value="N">MEDICINA NUCLEAR</option>
                                                                         @elseif($control->ocupacion=='G')
@@ -426,7 +426,7 @@
                                                         <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control{{$i}}" autofocus style="text-transform:uppercase">
                                                             <option value="">--</option>
                                                             <option value="T">TELETERAPIA</option>
-                                                            <option value="B">BRANQUITERAPIA</option>
+                                                            <option value="B">BRAQUITERAPIA</option>
                                                             <option value="N">MEDICINA NUCLEAR</option>
                                                             <option value="G">GAMAGRAFIA INDUSTRIAL</option>
                                                             <option value="F">MEDIDORES FIJOS</option>
@@ -553,7 +553,7 @@
                                                         @if($dosiT->ocupacion=='T' && $trab->trabajador->id_trabajador == $dosiT->trabajador_id && $dosiT->dosimetro_uso == 'TRUE')
                                                         <option selected  value="T">TELETERAPIA</option>
                                                         @elseif($dosiT->ocupacion=='B' && $trab->trabajador->id_trabajador == $dosiT->trabajador_id && $dosiT->dosimetro_uso == 'TRUE')
-                                                        <option selected  value="B">BRANQUITERAPIA</option>
+                                                        <option selected  value="B">BRAQUITERAPIA</option>
                                                         @elseif($dosiT->ocupacion=='N' && $trab->trabajador->id_trabajador == $dosiT->trabajador_id && $dosiT->dosimetro_uso == 'TRUE')
                                                         <option selected  value="N">MEDICINA NUCLEAR</option>
                                                         @elseif($dosiT->ocupacion=='G' && $trab->trabajador->id_trabajador == $dosiT->trabajador_id && $dosiT->dosimetro_uso == 'TRUE')
@@ -595,7 +595,7 @@
                                                     <select class="form-select" name="ocupacion_asigdosim[]" id="ocupacion_asigdosim{{$trab->trabajador->id_trabajador}}" autofocus style="text-transform:uppercase">
                                                         <option value="">--</option>
                                                         <option value="T">TELETERAPIA</option>
-                                                        <option value="B">BRANQUITERAPIA</option>
+                                                        <option value="B">BRAQUITERAPIA</option>
                                                         <option value="N">MEDICINA NUCLEAR</option>
                                                         <option value="G">GAMAGRAFIA INDUSTRIAL</option>
                                                         <option value="F">MEDIDORES FIJOS</option>

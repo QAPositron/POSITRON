@@ -13,7 +13,6 @@ class CreateTrabajadordosimetrosTable extends Migration
      */
     public function up()
     {
-        
         Schema::create('trabajadordosimetros', function (Blueprint $table) {
             $table->bigincrements('id_trabajadordosimetro')->unique();
             
@@ -45,25 +44,25 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table->string('energia', 30)->nullable();
             $table->date('zero_level_date')->nullable();
             $table->date('measurement_date')->nullable();
-            $table->float('Hp007_calc_dose', 8, 3)->nullable();
-            $table->float('Hp007_background_dose', 8, 3)->nullable();
-            $table->float('Hp007_raw_dose', 8, 3)->nullable();
-            $table->float('Hp10_calc_dose', 8, 3)->nullable();
-            $table->float('Hp10_background_dose', 8, 3)->nullable();
-            $table->float('Hp10_raw_dose', 8, 3)->nullable();
-            $table->float('Cu_calc_dose', 8, 3)->nullable();
-            $table->float('Cu_background_dose', 8, 3)->nullable();
-            $table->float('Cu_raw_dose', 8, 3)->nullable();
-            $table->float('Pb/Sn_calc_dose', 8, 3)->nullable();
-            $table->float('Pb/Sn_background_dose', 8, 3)->nullable();
-            $table->float('Pb/Sn_raw_dose', 8, 3)->nullable();
-            $table->float('EzClip_calc_dose', 8, 3)->nullable();
-            $table->float('EzClip_background_dose', 8, 3)->nullable();
-            $table->float('EzClip_raw_dose', 8, 3)->nullable();
-            $table->float('Hp3_calc_dose', 8, 3)->nullable();
-            $table->float('Hp3_background_dose', 8, 3)->nullable();
-            $table->float('Hp3_raw_dose', 8, 3)->nullable();
-            $table->float('H_10_calc_dose', 8, 3)->nullable();
+            $table->double('Hp007_calc_dose', 8, 5)->nullable();
+            $table->double('Hp007_background_dose', 8, 5)->nullable();
+            $table->double('Hp007_raw_dose', 8, 5)->nullable();
+            $table->double('Hp10_calc_dose', 8, 5)->nullable();
+            $table->double('Hp10_background_dose', 8, 5)->nullable();
+            $table->double('Hp10_raw_dose', 8, 5)->nullable();
+            $table->double('Cu_calc_dose', 8, 5)->nullable();
+            $table->double('Cu_background_dose', 8, 5)->nullable();
+            $table->double('Cu_raw_dose', 8, 5)->nullable();
+            $table->double('Pb/Sn_calc_dose', 8, 5)->nullable();
+            $table->double('Pb/Sn_background_dose', 8, 5)->nullable();
+            $table->double('Pb/Sn_raw_dose', 8, 5)->nullable();
+            $table->double('EzClip_calc_dose', 8, 5)->nullable();
+            $table->double('EzClip_background_dose', 8, 5)->nullable();
+            $table->double('EzClip_raw_dose', 8, 5)->nullable();
+            $table->double('Hp3_calc_dose', 8, 5)->nullable();
+            $table->double('Hp3_background_dose', 8, 5)->nullable();
+            $table->double('Hp3_raw_dose', 8, 5)->nullable();
+            $table->double('H_10_calc_dose', 8, 5)->nullable();
             $table->date('verification_date')->nullable();
             $table->date('verification_required_on_or_before')->nullable();
             $table->integer('remaining_days_available_for_use')->nullable();

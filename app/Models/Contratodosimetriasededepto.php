@@ -15,10 +15,10 @@ class Contratodosimetriasededepto extends Model
         return $this->belongsTo(Contratodosimetriasede::class, 'contratodosimetriasede_id', 'id_contratodosimetriasede');
     }
 
-    /* //relacion uno a muchos con la tabla dosicontrolcontdosisedes
+    //relacion uno a muchos con la tabla dosicontrolcontdosisedes
     public function dosicontrolcontratodosisede(){
-        return $this->hasOne(Dosicontrolcontdosisede::class, 'id_dosicontrolcontdosisedes');
-    } */
+        return $this->hasOne(Dosicontrolcontdosisede::class, 'contdosisededepto_id', 'id_contdosisededepto');
+    }
 
     //relacion uno a muchos con la tabla trabajadordosimetros
     public function trabajadordosimetro(){

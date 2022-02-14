@@ -48,6 +48,7 @@
 
 
 <img src="{{asset('imagenes/LOGOVERDE.png')}}" width="200">
+<!-- <img src="public_path('../public/imagenes/LOGOVERDE.png');" width="200"> -->
 
 <h3 style="position:absolute; top:87px; left:30px;">REPORTE DE DOSIMETRÍA</h3>
 
@@ -68,60 +69,156 @@
         <td>Email:dosimetria.qapositron@gmail.com</td>
     </tr>
     <tr>
-        <td>Sitio web: www.qapositron.com</td>
+        <td style="padding-bottom:13px;">Sitio web: www.qapositron.com</td>
+    </tr>
+    <tr>
+        <th style="font-size: 11px; border: solid 0.4px #000; padding:8px;">
+            @foreach($contratoDosi as $cont)
+                {{$cont->nombre_empresa}} - SEDE: {{$cont->nombre_sede}}
+            @endforeach 
+        </th>
     </tr>
 </table>
 
-<table style="position:absolute; top:90px; left:320px; font-size: 11px; border: solid 0.6px #000;" cellspacing="1" cellpadding="8">
+<!-- <table style="position:absolute; top:90px; left:240px; font-size: 11px; border: solid 0.6px #000;" cellspacing="1" cellpadding="8">
     <tr>
-        <th cellpadding="8">ENTIDAD CLIENTE DEL SERVICIO DE DOSIMETRÍA</th>
+        <th cellpadding="8">
+        @foreach($contratoDosi as $cont)
+            {{$cont->nombre_empresa}} - SEDE: {{$cont->nombre_sede}}
+        @endforeach 
+        </th>
     </tr>
-</table>
+</table> -->
 
-<table style="position:absolute; top:0px; left:710px; border-collapse:collapse;" cellspacing="1" cellpadding="2" >
+<table style="position:absolute; top:0px; left:710px; border-collapse:collapse;" cellpadding="3">
     <tr>
-        <td style="border:0.1px solid black;">No. de Cuenta ó clave </td>
-        <td style="width: 100px; border:0.1px solid black;">&nbsp;</td>
+        <td style="border:0.1px solid black;">No. de Cuenta</td>
+        <td style="width: 120px; border:0.1px solid black;" align="center">
+        @foreach($contratoDosi as $cont)
+            {{$cont->codigo_contrato}}
+        @endforeach
+        </td>
+        <!-- <td style="border:0.1px solid black;">Fecha recibo dosím.</td>
+        <td style="width: 94px; border:0.1px solid black;" align="center">
+            @php
+                $chek = 'inicial';
+            @endphp      
+            @foreach($trabajdosiasig as $trabj)
+                @php
+                    if($trabj->fecha_dosim_recibido != $chek){
+                        echo "{$trabj->fecha_dosim_recibido}";
+                        $chek = strval($trabj->fecha_dosim_recibido);
+                    }else{ 
+                        echo " ";
+                    }
+                @endphp
+            @endforeach
+        </td> -->
+    </tr>
+    <tr>
+        <td style="border:0.1px solid black;">Código Depto.</td>
+        <td style="width: 94px; border:0.1px solid black;" align="center">
+            @php
+                $chek = 'inicial';
+            @endphp      
+            @foreach($dosicontrolasig as $dosicontrol)
+                @php
+                    if($dosicontrol->nombre_departamento != $chek){
+                        echo "{$dosicontrol->nombre_departamento}";
+                        $chek = strval($dosicontrol->nombre_departamento);
+                    }else{ 
+                        echo " ";
+                    }
+                @endphp
+            @endforeach
+        </td>
+        <!-- <td style="border:0.1px solid black;">Fecha del reporte</td>
+        <td style="width: 94px; border:0.1px solid black;" align="center">
+        @php
+            $fecha = date("d-m-Y");
+            echo "$fecha";
+        @endphp
+        </td> -->
     </tr>
     <tr>
         <td style="border:0.1px solid black;"> NIT Entidad Usuaria</td>
-        <td style="width: 100px; border:0.1px solid black;">&nbsp;</td>
+        <td style="width: 120px; border:0.1px solid black;" align="center">
+        @foreach($contratoDosi as $cont)
+            {{$cont->num_iden_empresa}}
+        @endforeach 
+        </td>
+       <!--  <td colspan="2" rowspan="2" style="width: 50px; border:0.1px solid black;" align="center">Vo.Bo. / QA POSITRON S.A.S</td> -->
     </tr>
     <tr>
         <td style="border:0.1px solid black;">Mucipio/Ciudad</td>
-        <td style="width: 100px; border:0.1px solid black;">&nbsp;</td>
+        <td style="width: 120px; border:0.1px solid black;" align="center">
+        @foreach($contratoDosi as $cont)
+            {{$cont->ciudad_empresa}} - {{$cont->departamento_empresa}}
+        @endforeach 
+        </td>
     </tr>
     <tr>
         <td style="border:0.1px solid black;">Persona Contacto</td>
-        <td style="width: 100px; border:0.1px solid black;">&nbsp;</td>
+        <td style="width: 120px; border:0.1px solid black;" align="center">
+            
+        </td>
+        <!-- <td colspan="2" rowspan="2" style="width: 94px; border:0.1px solid black;"></td> -->
+                
     </tr>
     <tr>
         <td style="border:0.1px solid black;">Cargo del contacto</td>
-        <td style="width: 100px; border:0.1px solid black;">&nbsp;</td>
+        <td style="width: 120px; border:0.1px solid black;" align="center">
+        
+        </td>
     </tr>
 </table>    
 
-<table style="position:absolute; top:0px; left:930px; border-collapse:collapse;" cellspacing="1" cellpadding="3.3">
+<table style="position:absolute; top:0px; left:940px; border-collapse:collapse;" cellpadding="3.3">
     <tr>
         <td style="border:0.1px solid black;">Fecha recibo dosím.</td>
-        <td style="width: 94px; border:0.1px solid black;">&nbsp;</td>
+        <td style="width: 94px; border:0.1px solid black;">
+            @php
+                $chek = 'inicial';
+            @endphp      
+            @foreach($trabajdosiasig as $trabj)
+                @php
+                    if($trabj->fecha_dosim_recibido != $chek){
+                        echo "{$trabj->fecha_dosim_recibido}";
+                        $chek = strval($trabj->fecha_dosim_recibido);
+                    }else{ 
+                        echo " ";
+                    }
+                @endphp
+            @endforeach
+        </td>
     </tr>
     <tr>
         <td style="border:0.1px solid black;">Fecha del reporte</td>
-        <td style="width: 94px; border:0.1px solid black;">&nbsp;</td>
+        <td style="width: 94px; border:0.1px solid black;">
+        @php
+            $fecha = date("d-m-Y");
+            echo "$fecha";
+        @endphp
+        </td>
     </tr>
+    <tr><td colspan="2" rowspan="3" style="border:0.1px solid black;" align="center">Vo.Bo. / QA POSITRON S.A.S</td></tr>
+    <tr></tr>
+    <tr></tr>
     <tr>
-        <td style="width: 50px; border:0.1px solid black;">Vo.Bo. / Firma del responsable del Reporte</td>
-        <td style="width: 94px; border:0.1px solid black;">&nbsp;</td>
+        <td colspan="2" rowspan="5" style=" border:0.1px solid black;">hfdfgdfgdf</td>
     </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
 </table>
 
-<img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="100" style="left:1162px;">
+<img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="100" style="left:1152px;">
 
 <!-- ////////////////////FIN ENCABEZADO/////////////// -->
 
 <!-- ////////////////////CUERPO/////////////// -->
-<table style="top:150px; border-collapse:collapse;" cellspacing="4" cellpadding="0">
+<table style="top:130px; border-collapse:collapse;" cellspacing="4" cellpadding="0">
     <thead>
         <tr align="center">
             <th rowspan="2" style="width:60px;  border:0.6px solid black;">Código de Usuario</td>
@@ -133,7 +230,7 @@
             <th rowspan="2" style="width:60px;  border:0.6px solid black;">Fecha de Ingreso al Servicio</td>
             <th colspan="2" style="width:60px; padding:5px; border:0.6px solid black;">Periodo de uso del dosímetro</td>
             <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Periodo de recambio</p></td>
-            <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Ubcación del dosímetro</p></td>
+            <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Ubicación del dosímetro</p></td>
             <th rowspan="2" style="width:50px; border:0.6px solid black;"><p class="verticalText">Energía ó calidad de radiación</p></td>
             <th colspan="3" style="width:178px; padding:5px; border:0.6px solid black;">Dosis del Periodo (mSv)</td>
             <th colspan="3" style="width:178px; padding:5px; border:0.6px solid black;">Dosis acumulada 12 meses anteriores</td>
@@ -154,91 +251,136 @@
         </tr>
     </thead>
     <tbody>
-        {{--  @foreach($dosicontrolasig as $dosicont)
-            <tr>
-                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->id_dosicontrolcontdosisedes}}</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">CONTROL</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">N.A.</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">N.A.</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->ocupacion}}</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">N.A.</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->primer_dia_uso}}</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->ultimo_dia_uso}}</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->energia}}</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->Hp10_calc_dose}}</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->Hp007_calc_dose}}</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">{{$dosicont->Hp3_calc_dose}}</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
-                <td style="padding:3px; border:0.1px solid black;" align="center">&nbsp;</td>
+        @foreach($dosicontrolasig as $dosicontrol)
+            <tr align="center">
+                <td style="padding:2px; border:0.1px solid black;">{{$dosicontrol->nombre_departamento}}</td>
+                <td style="padding:2px; border:0.1px solid black;">CONTROL</td>
+                <td style="padding:2px; border:0.1px solid black;">N.A.</td>
+                <td style="padding:2px; border:0.1px solid black;">N.A.</td>
+                <td style="padding:2px; border:0.1px solid black;">{{$dosicontrol->ocupacion}}</td>
+                <td style="padding:2px; border:0.1px solid black;">N.A.</td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;">{{$dosicontrol->primer_dia_uso}}</td>
+                <td style="padding:2px; border:0.1px solid black;">{{$dosicontrol->ultimo_dia_uso}}</td>
+                <td style="padding:2px; border:0.1px solid black;">
+                    @foreach($contratoDosi as $cont)
+                        {{$cont->periodo_recambio}}
+                    @endforeach
+                </td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;">{{$dosicontrol->energia}}</td>
+                
+                <!--  /////////DOSIS DEL PERIODO///// -->
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+
+                <!-- ///////DOSIS ACUMULADA 12 MESES ANTERIORES/////// -->
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+
+                <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+
             </tr>
-        @endforeach --}}
-        
+        @endforeach
+        @foreach($trabajdosiasig as $dositrabj)
+            <tr >
+                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->trabajador_id}}</td>
+                <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->trabajador->primer_apellido_trabajador}} {{$dositrabj->trabajador->segundo_apellido_trabajador}}</td>
+                <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->trabajador->primer_nombre_trabajador}} {{$dositrabj->trabajador->segundo_nombre_trabajador}}</td>
+                <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->trabajador->genero_trabajador}}</td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->ocupacion}}</td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->trabajador->cedula_trabajador}}</td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->primer_dia_uso}}</td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->ultimo_dia_uso}}</td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">
+                    @foreach($contratoDosi as $cont)
+                        {{$cont->periodo_recambio}}
+                    @endforeach
+                </td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->energia}}</td>
+
+                <!--  /////////DOSIS DEL PERIODO///// -->
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+
+                <!-- ///////DOSIS ACUMULADA 12 MESES ANTERIORES/////// -->
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+
+                <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;"></td>
+
+            </tr>
+        @endforeach
     </tbody>
 </table>
 
-<p style="position:absolute; top:480px; font-size:9px; text-align:justify; padding:5px;">
+<p style="position:absolute; top:500px; font-size:8px; text-align:justify;">
     <b>Nomenclatura y Notas Principales:</b> <b>N.A.</b>=No Aplica; <b>N.D.</b>= No Disponible; <b>M</b>=Dosis No Detectable, por debajo del umbral de medición de 0,01mSv;  <b> AUSENTE(ABSENT)=NP</b>=Dosímetro No Presentado; (1) <b> DNL</b>=Dosímetro No Legible; (2) <b>Control no restado en la evaluación (No control substracted)=DCNE</b>=Dosímetro Control No Evaluable; (3) <b>Control no utilizado en la evaluación (Control not used in assesment); </b> (4) <b>La imagen indica exposición estática(Imaging indicates an static exposure); </b> (5) <b>La imagen indica exposicion dinamica(Imaging indicates dinamic exposure); </b> (6) <b>Los resultados de la imagen son inconclusos, posible exposición mixta (estática y dinámica) (Dosimeter imaged, imaging results are inconclusive);  </b>  (7)<b>Dosímetro sin usar(Unused); </b> (8) <b>Dosímetro reprocesado, la segunda lectura coincide con la dosis reportada inicialmente(Dosimeter reprocessed, second read agrees with reported dose).</b>
 </p>
 
-<p style="position:absolute; width: 810px; top:533px; border:solid 0.1px #000; padding: 3px 18px 5px 5px; font-size:9px;" >
+<p style="position:absolute; width: 760px; top:533px; border:solid 0.1px #000; padding: 3px 18px 5px 5px; font-size:8px;" >
     [1] Varios registros para un mismo usuario, puede significar: i)que usa un segundo dosímetro, ej: de anillo, ii)que tiene reportes para mas de un periodo, al no haber entregado el dosímetro para su lectura.<br>
     [2] Un dosímetro puede ser no legible = DNL, por deterioro de los materiales portadores de los elementos sensibles a la radiacion.<br>
     [3] Una dosis reportada como M=ND=No Detectable, significa que la lectura está entre cero y el nivel mínimo de detección, que para la dosimetría OSL (Luminiscencia Estimulada Ópticamente) es de tan solo 0.01mSv (ver reverso del reporte para información más detallada).
 </p> 
 
-<p style="position:absolute; top:533px; left: 850px;  width: 428px; height:56px; border:solid 0.1px #000; padding:3px 18px 3px 8px; font-size:9px; text-align:justify;" >
+<p style="position:absolute; top:533px; left: 810px;  width: 428px; height:41px; border:solid 0.1px #000; padding:3px 18px 3px 8px; font-size:8px; text-align:justify;" >
     <b>Nota Importante:</b> <br> 
     La razón por la cual la ICRP=Comisión Internacional de Protección Radiológica, recomienda que el límite de dosis para Trabajadores Ocupacionalmente Expuestos sea de 20 mSv año obedece a estimar que la vida laboral de una persona es de 50 años y que en toda la vida debe recibirse como máximo una dosis de un Sievert.
 </p> 
 
-<div style="position:absolute; top:615px; border:solid 0.1px #000; width: 1295px;  height:80px; padding:5px 5px 5px 5px;">
-    <div style="float: left; width: 640px; text-align: justify; padding:0px;">
-        <p style="font-size:13px; margin:0px; padding:0px;">Información de interés general:</p>
-        <p style="padding:0px; margin:0px; font-size:9px;">
+<div style="position:absolute; top:600px; border:solid 0.1px #000; width: 1255px;  height:80px; padding:5px 5px 5px 5px;">
+    <div style="float: left; width: 540px; text-align: justify; padding:0px;">
+        <p style="font-size:12px; margin:0px; padding:0px;">Información de interés general:</p>
+        <p style="padding:0px; margin:0px; font-size:8px;">
         
-             -  Hp(d), es la dosis equivalente personal a la profundidad indicada en milimetros. Así: Hp(10) estima la dosis en tejido profundo (deep) a 10mm 
-            de profundidad, Hp(3) estima la dosis al cristalino (eye o lente de ojo) a 3mm de profundidad, y Hp(0.07) estima la dosis en tejido superficial
-            (extremidades y piel o shallow) a 0,07mm de profundidad. <br>             
+             -  Hp(d), es la dosis equivalente personal a la profundidad indicada en milimetros. Así: Hp(10) estima la dosis en tejido profundo (deep) 
+                a 10mm de profundidad, Hp(3) estima la dosis al cristalino (eye o lente de ojo) a 3mm de profundidad, y Hp(0.07) estima la dosis 
+                en tejido superficial (extremidades y piel o shallow) a 0,07mm de profundidad.    <br>          
              -  Los dosímetros de anillo y brazalete tienen aplicación en prácticas donde el usuario manipula los materiales radiactivos. <br>          
-             -  Los dosímetros de control, tienen por objeto la verificación de irradiaciones incidentales o accidentales durante el transporte y/o lugar             
-            de almacenamiento mientras es retornado para lectura. No deben utilizarse o ser asignados a usuario <br>
+             -  Los dosímetros de control, tienen por objeto la verificación de irradiaciones incidentales o accidentales durante el transporte y/o lugar            
+            de almacenamiento mientras es retornado para lectura. No deben utilizarse o ser asignados a usuario 
         </p>
     </div>
-    <div style="float: right; width:610px; text-align:justify;">
-        <p style="padding:5px; margin:0px; font-size:9px;">
+    <div style="float: right; width:610px; margin-right:20px; text-align:justify;">
+        <p style="padding:5px; margin:0px; font-size:8px;">
             <br>
-             -  Toda dosis que supere el valor de 1.67 mSv/mes debe ser investigada y documentada al interior de la instalación. Tal registro, es
-            una señal de alerta indicadora de la posibilidad de sobrepasar el límite anual, o indicadora de la necesidad de optimizar la práctica <br>
-             -  Toda dosis que supere el valor de 12.0 mSv/mes debe ser inmediatamente reportada a la Autoridad Reguladora, con el fin de emprender
-            acciones que reduzcan o eviten la exposición o la probabilidad de exposición <br>
-             -  La periodicidad de recambio de los dosímetros, reviste importancia ante la necesidad de investigar registros de dosis fuera de los rangos
-            recomendados, ante un incidente, un accidente o una situación de emergencia
+             -  Toda dosis que supere el valor de 1.67 mSv/mes debe ser investigada y documentada al interior de la instalación. Tal registro, es 
+            una señal de alerta indicadora de la posibilidad de sobrepasar el límite anual, o indicadora de la necesidad de optimizar la práctica. <br>
+             -  Toda dosis que supere el valor de 12.0 mSv/mes debe ser inmediatamente reportada a la Autoridad Reguladora, con el fin de emprender 
+            acciones que reduzcan o eviten la exposición o la probabilidad de exposición. <br>
+             -  La periodicidad de recambio de los dosímetros, reviste importancia ante la necesidad de investigar registros de dosis fuera de los rangos 
+            recomendados, ante un incidente, un accidente o una situación de emergencia.
         </p>
     </div>
 </div>
-<div style=" position:absolute; top:705px; width:1305px; height:33px; border:solid 0.1px #000; text-align:justify; ">
-    <p style=" margin:0px; font-size:9px; padding:5px;">
-        <b>(1) En el caso que usuario haya sido desactivado y reactivado posteriormente, la fecha indicada en este campo será la de la ultima reactivación. Nota 9. Se refleja periodo de uso extendido según indicación sobre fechas reales de uso y por solicitud expresa del cliente.
-        Este ajuste no implica <br> cambio en el histórico de dosis.
-        En caso de necesitar cualquier aclaración respecto a la información aquí dispuesta favor hacer la consulta al correo electrónico reportes@dosimetrix.com.</b>
-    </p>
-</div>
+<p style="position:absolute; top:691px; margin:0px; height:23px; width:1255px; font-size:8px; padding:5px; border:solid 0.1px #000; text-align:justify;">
+    <b>(1) En el caso que usuario haya sido desactivado y reactivado posteriormente, la fecha indicada en este campo será la de la ultima reactivación. Nota 9. Se refleja periodo de uso extendido según indicación sobre fechas reales de uso y por solicitud expresa del cliente.
+    Este ajuste no implica <br> cambio en el histórico de dosis.
+    En caso de necesitar cualquier aclaración respecto a la información aquí dispuesta favor hacer la consulta al correo electrónico reportes@dosimetrix.com.</b>
+</p>
+
 
 <!-- ////////////////////////////////////----------------SEGUNDA PAGINA------------//////////////////////////////////////////////7 -->
 
-<div style="position:absolute; width: 100%; height:20px; page-break-before: always; font-size: 12px;">
+<!-- <div style="position:absolute; width: 100%; height:20px; page-break-before: always; font-size: 12px;">
     <p style=" float: left; border:solid 1px #000; width: 31.5%;" align="center"> <b> INFORMACIÓN GENERAL </b></p>
     <P style="float: right; border:solid 1px #000; width: 67%;" align="center"> <b> INFORMACIÓN PARA LA LECTURA E INTERPRETACIÓN DEL INFORME </b> </P>
-</div>
+</div> -->
 <!-- //////////////Primera Columna///////////// -->
-<div style=" position:absolute;  top:40px; border:solid 1px #000; width: 31.5%; height:700px; padding:0px;  font-size: 8px;">
+<!-- <div style=" position:absolute;  top:40px; border:solid 1px #000; width: 31.5%; height:700px; padding:0px;  font-size: 8px;">
     <p style="margin:4px; " align="center">
         <b> <u>LÍMITES ANUALES DE EXPOSICIÓN A RADIACIONES</u></b>
     </p>
@@ -331,9 +473,9 @@
             </p>
         </div>
     </div>    
-</div>
+</div> -->
 <!-- /////////// Segunda Columna /////////////////7 -->
-<div style=" position:absolute; top:40px; left:430px; width: 67%; height:690px; padding:0px; font-size: 8px;">
+<!-- <div style=" position:absolute; top:40px; left:430px; width: 67%; height:690px; padding:0px; font-size: 8px;">
     <div style=" float: left; border:solid 1px #000; width: 49%; height:700px; padding:0px;">
         <p style="right:50px; top:50px;" align="center"> 
             <b><u>INFORMACIÓN DEL REPORTE DE EXPOSICIÓN</u></b>
@@ -487,9 +629,9 @@
                 
             </table>
         </div>
-    </div>
+    </div> -->
     <!-- /////// Tercera Columna//////////// -->
-    <div  style=" float: right; border:solid 1px #000; width: 49%; height:700px; padding:0px;">
+    <!-- <div  style=" float: right; border:solid 1px #000; width: 49%; height:700px; padding:0px;">
         <br><br>
         <p style="top:30px; text-align:justify; padding:5px;"> 
             <b> <u> Energía o calidad de radiación:</u> </b> Tipos y energías de radiación incorporadas en la dosis equivalente de cuerpo entero, a saber:
@@ -545,9 +687,9 @@
             Adicionalmente, le informamos la necesidad de controlar la exposición ocupacional de todo trabajador, de forma que no rebasen en sus registros de dosis equivalentes resultantes según la profundidad y la frecuencia de medición, los siguientes limites: 1) Para Dosis de Cristalino del Ojo HP(3), o “EYE”: dosis superiores a 12.5 mSv en un periodo mensual de medición; 25 mSv en un periodo bimestral de medición; y 37.5 mSv para un periodo trimestral de medición. 2) Para Dosis Superficial HP(0.07), o “SHALLOW”: dosis superiores a 41.67 mSv en un periodo mensual de medición; 83.33 mSv en un periodo bimestral de medición; y 125 mSv para un periodo trimestral de medición.
         </p>
     </div>
-</div>
+</div> -->
 
-{{-- ////////////////////SCRIPT PARA CONTAR LAS PAGINAS/////////////// --}}
+    <!-- ////////////////////SCRIPT PARA CONTAR LAS PAGINAS/////////////// -->
     <script type="text/php">
         if (isset($pdf)) {
             $text = "página {PAGE_NUM} de {PAGE_COUNT}";

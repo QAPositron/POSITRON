@@ -1,10 +1,8 @@
 @extends('layouts.plantillabase')
 @section('contenido')
 
-<h3 class="text-center">{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</h3>
-<br>
+<h2 class="text-center">{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</h2>
 <h4 class="text-center">CONTRATO No. {{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</h4>
-<br>
 <h4 class="text-center">
     TRABAJADORES ASIGNADOS AL MES {{ Request()->mesnumber  }} (
         @if(Request()->mesnumber == 1)
@@ -47,17 +45,22 @@
 <br>
 <div class="row">
     <div class="col"></div>
-    <div class="col-10">
+    <div class="col-13">
         <div class="table table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr class="table-active text-center">
-                        <th style='width: 16.90%'>TRABAJADOR</th>
-                        <th>N. IDEN.</th>
-                        <th>DOSÍMETRO</th>
-                        <th style='width: 14.90%'>HOLDER</th>
-                        <th style='width: 9.90%'>OCUPACIÓN</th>
-                        <th style='width: 28.90%'>ACCIONES</th>
+                        <th >TRABAJADOR</th>
+                        <th style='width: 5.90%'>N. IDEN.</th>
+                        <th style='width: 4.90%'>DOSÍM</th>
+                        <th style='width: 5.90%'>HOLDER</th>
+                        <th style='width: 4.90%'>OCUP.</th>
+                        <th style='width: 7.90%'>ZERO LEVEL</th>
+                        <th style='width: 5.90%'>MEA/MENT</th>
+                        <th style='width: 5.90%'>VERIFI/TION</th>
+                        <th style='width: 7.90%'>VERIFICA. REQUIRED BEF.</th>
+                        <th style='width: 4.90%'>DAYS FOR USE</th>
+                        <th style='width: 21.90%'>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,14 +68,20 @@
                         <tr>
                             <td>CONTROL</td>
                             <td>N.A.</td>
-                            <td>{{$dosicontasig->dosimetro->codigo_dosimeter}}</td>
+                            <td>{{$dosicontasig->dosimetro->codigo_dosimeter}} - {{$dosicontasig->dosimetro->tipo_dosimetro}}</td>
                             <td>N.A.</td>
                             <td>{{$dosicontasig->ocupacion}}</td>
+                            <td>{{$dosicontasig->zero_level_date}}</td>
+                            <td>{{$dosicontasig->measurement_date}}</td>
+                            <td>{{$dosicontasig->verification_date}}</td>
+                            <td>{{$dosicontasig->verification_required_on_or_before}}</td>
+                            <td>{{$dosicontasig->remaining_days_available_for_use}}</td>
+
                             <td>
-                                <div class="container p-1">
+                                <div class="container">
                                     <div class="row">
                                         <div class="col p-1 text-center ">
-                                            <a href="" class="btn colorQA btn-sm">
+                                            <a href="{{route('lecturadosicontrol.edit', $dosicontasig->id_dosicontrolcontdosisedes)}}" class="btn colorQA btn-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill mb-1" viewBox="0 0 16 16">
                                                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
                                                 </svg> <br> EDITAR
@@ -107,7 +116,7 @@
                         <tr>
                             <td>{{$trabasig->trabajador->primer_nombre_trabajador}} {{$trabasig->trabajador->segundo_nombre_trabajador}} {{$trabasig->trabajador->primer_apellido_trabajador}} {{$trabasig->trabajador->segundo_apellido_trabajador}}</td>
                             <td>{{$trabasig->trabajador->cedula_trabajador}}</td>
-                            <td>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                            <td>{{$trabasig->dosimetro->codigo_dosimeter}} - {{$trabasig->dosimetro->tipo_dosimetro}}</td>
                             <td>
                                 @if($trabasig->holder_id == '')
                                     N.A.
@@ -116,25 +125,28 @@
                                 @endif
                             </td>
                             <td>{{$trabasig->ocupacion}}</td>
+                            <td>{{$trabasig->zero_level_date}}</td>
+                            <td>{{$trabasig->measurement_date}}</td>
+                            <td>{{$trabasig->verification_date}}</td>
+                            <td>{{$trabasig->verification_required_on_or_before}}</td>
+                            <td>{{$trabasig->remaining_days_available_for_use}}</td>
                             <td>
-                                <div class="container p-1">
+                                <div class="container">
                                     <div class="row">
                                         <div class="col p-1 text-center">
-                                            <button data-bs-toggle="modal" data-bs-target="#trabajadorEdit{{$trabasig->trabajador->id_trabajador}}" class="btn colorQA btn-sm">
+                                            <a href="{{route('lecturadosi.edit', $trabasig->id_trabajadordosimetro)}}" class="btn colorQA btn-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill mb-1" viewBox="0 0 16 16">
                                                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-                                                </svg> <br> EDITAR
-                                            </button>
+                                                </svg><br> EDITAR
+                                            </a>
                                         </div>
                                         <div class="col-md p-1 ">
-
-                                                <button data-bs-toggle="modal" data-bs-target="#trabajadorDelete{{$trabasig->trabajador->id_trabajador}}" class="btn btn-danger btn-sm" onclick="Eliminar(evt);" type="submit">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                    </svg> <br> ELIMINAR
-                                                </button>
-
+                                            <button data-bs-toggle="modal" data-bs-target="#trabajadorDelete{{$trabasig->trabajador->id_trabajador}}" class="btn btn-danger btn-sm" onclick="Eliminar(evt);" type="submit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                </svg> <br> ELIMINAR
+                                            </button>
                                         </div>
                                         <div class="col-md p-1 ">
                                             <a href="{{route('lecturadosi.create', $trabasig->id_trabajadordosimetro)}}" class="btn colorQA btn-sm">
@@ -266,4 +278,20 @@
         </div>
     </div>
 @endforeach
+
+<script
+src="https://code.jquery.com/jquery-3.6.0.js"
+integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+crossorigin="anonymous">
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('actualizar')== 'ok')
+    <script>
+        Swal.fire(
+        'ACTUALIZADO!',
+        'SE HA ACTUALIZADO LA LECTURA DEL DOSÍMETRO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
 @endsection
