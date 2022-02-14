@@ -260,6 +260,7 @@ class DosimetriaController extends Controller
             ->where('mes_asignacion', ($mesnumber-1))
             ->where('dosimetro_uso', 'TRUE')
             ->select("*")
+            ->select("*")
             ->get();
         $allWorks = DB::table('trabajadors')->get();
         $dosimetrosControl = Dosicontrolcontdosisede::where('mes_asignacion', $mesnumber)
@@ -391,7 +392,7 @@ class DosimetriaController extends Controller
             'contratoId'=> $contratoId, 'mesnumber'=>$mesnumber ]);
     }
     public function patchDosimetroDelete($idDosimetro, $contratoId, $mesnumber) {
-        $estado='STOCK';
+        $estado='EN LECTURA';
         $result = DB::table('dosimetros')
             ->where('id_dosimetro', $idDosimetro)
             ->update([

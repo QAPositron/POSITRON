@@ -7,7 +7,7 @@
             <h2 class="text-center mt-3">ASIGNAR DOSÍMETRO</h2>
             <h3 class="text-center">MES {{ Request()->mesnumber  }} </h3>
             <h3 class="text-center">DEPARTAMENTO {{ $contdosisededepto->departamentosede->nombre_departamento }} </h3>
-            <button onclick="addTrabajador(2)">añadir trabajador</button>
+
             <form class="m-4" action="{{route('asignadosicontrato.save')}}" method="POST">
                 @csrf
                 <input hidden name="mesNumber1" id="mesNumber1" value="{{ Request()->mesnumber  }}" />
@@ -915,7 +915,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">{{$trab->trabajador->primer_nombre_trabajador}} {{$trab->trabajador->segundo_nombre_trabajador}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_eliminar_trabajador_sede" name="form_eliminar_dosimetro" action="{{route('trabajadorSede.destroy', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisededepto->contratodosimetriasede_id, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
+                <form id="form_eliminar_trabajador_sede" name="form_eliminar_dosimetro" action="{{route('trabajadorSede.destroy', ['idWork' => $trab->trabajador->id_trabajador, 'contratoId' => $contdosisededepto->id_contdosisededepto, 'mesnumber'=>Request()->mesnumber ]  )}}" method="POST">
                     <div class="modal-body">
                         <span>¿Eliminar este trabajador?</span>
                         @csrf
@@ -966,7 +966,7 @@
                             <h5 class="modal-title" id="staticBackdropLabel">Quitar este dosimetro de control </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                       <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetroControl.destroy', ['idDosiControl' => $dosicontrol->id_dosicontrolcontdosisedes, 'contratoId' => $contdosisededepto->contratodosimetriasede_id, 'mesnumber'=>(Request()->mesnumber-1)]  )}}" method="POST">
+                       <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetroControl.destroy', ['idDosiControl' => $dosicontrol->id_dosicontrolcontdosisedes, 'contratoId' => $contdosisededepto->id_contdosisededepto, 'mesnumber'=>(Request()->mesnumber-1)]  )}}" method="POST">
                             <div class="modal-body">
                                 <span>¿Eliminar el dosimetro asignado a este dosimetro de control?</span>
                                 @csrf
@@ -1010,8 +1010,11 @@
        function deleteTrabajador(id) {
            document.getElementById(id).remove();
        }
+       function deleteTrabajadorAfterAdd(id) {
+           document.getElementById(`trabajador${id}`).remove()
+       }
        function addTrabajador(id, primerNombre, segundoNombre, primerApellido, segundoApellido, cedula) {
-           console.log('valores', id)
+
            var fila = document.createElement("tr");
            fila.setAttribute("id", `trabajador${id}`)
            let inputTrab = document.createElement("input")
@@ -1061,7 +1064,8 @@
 
 
            let optionHolderNull = document.createElement("option")
-           optionHolderNull.innerText = "NA"
+           optionHolderNull.setAttribute("value", "")
+           optionHolderNull.innerText = "N.A."
            selectHolders.appendChild(optionHolderNull)
 
            let contador=0;
@@ -1164,8 +1168,11 @@
            ocupacionesTd.appendChild(selectOcupaciones)
 
            let btnQuitar = document.createElement("button")
-           btnQuitar.setAttribute("class", "btn btn-danger")
-           btnQuitar.setAttribute("onclick", `deleteTrabajador(${id})`)
+           btnQuitar.setAttribute("style", "border: none; background-color: #d9534f; border-radius: 5rem; width:2rem;")
+          // btnQuitar.setAttribute("onclick", `deleteTrabajador(${id})`)
+           btnQuitar.onclick = function () {
+               deleteTrabajadorAfterAdd(id);
+           }
            btnQuitar.setAttribute("type", "button")
            btnQuitar.innerText="X"
 
