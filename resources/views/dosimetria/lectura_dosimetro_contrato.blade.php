@@ -332,8 +332,31 @@
                                                         <label for="floatingInputGrid">REMAINING DAYS AVAILABLE FOR USE:</label>
                                                     </div>
                                                 </div>
-                                                <div class="col"></div>
-                                                <div class="col"></div>
+                                                <div class="col">
+                                                    <label for="">A CONTINUACIÓN, SELECCIONE SI DESEA QUE EL DOSÍMETRO CAMBIE DEL ESTADO "EN LECTURA" A "EN STOCK": </label>
+                                                    <BR></BR>
+                                                    <div class="row">
+                                                        <div class="col"></div>
+                                                        <div class="col-6">
+                                                            @if($trabjasig->dosimetro->estado_dosimetro == 'EN LECTURA' || $trabjasig->dosimetro->estado_dosimetro == 'EN USO')
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input " type="checkbox" value="TRUE" id="estado_uso" name="estado_uso">
+                                                                    <label class="form-check-label" for="defaultCheck1">
+                                                                        DOSÍMETRO EN STOCK
+                                                                    </label>
+                                                                </div>
+                                                            @else
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input " type="checkbox" value="TRUE" id="estado_uso" name="estado_uso" disabled>
+                                                                    <label class="form-check-label" for="defaultCheck1">
+                                                                        DOSÍMETRO EN STOCK
+                                                                    </label>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        <div class="col"></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <br>
                                             <!-- ----------------BOTON--------------- -->

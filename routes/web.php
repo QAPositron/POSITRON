@@ -49,6 +49,9 @@ Route::get('empresas/{empresa}/info', [EmpresasController::class, 'info'])->name
 /////////RUTAS PARA EL CRUD DE SEDES///////
 
 Route::get('sedes/{sede}/create', [SedesController::class, 'create'])->name('sedes.create');
+
+Route::get('/sedes/{sede}/sedesdeptomuni', [SedesController::class, 'selectmunicipios']);
+
 Route::post('sedes', [SedesController::class, 'save'])->name('sedes.save');
 Route::get('sedes/{sede}/edit', [SedesController::class, 'edit'])->name('sedes.edit');
 Route::put('sedes/{sede}', [SedesController::class, 'update'])->name('sedes.update');

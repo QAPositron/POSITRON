@@ -47,4 +47,7 @@ class Sede extends Model
     public function departamentosede(){
         return $this->hasMany(Departamentosede::class, 'id_departamentosede');
     }
+    public function municipios(){
+        return $this->belongsTo(Colmunicipio::class, 'municipiocol_id', 'id_municipiocol');
+    }
 }

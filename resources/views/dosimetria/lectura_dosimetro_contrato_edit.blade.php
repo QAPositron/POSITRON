@@ -261,8 +261,25 @@
                                                         <label for="floatingInputGrid">REMAINING DAYS AVAILABLE FOR USE:</label>
                                                     </div>
                                                 </div>
-                                                <div class="col"></div>
-                                                <div class="col"></div>
+                                                @if($trabjasig->dosimetro->estado_dosimetro == 'EN LECTURA' || $trabjasig->dosimetro->estado_dosimetro == 'EN USO')
+                                                    <div class="col">
+                                                        <label for="">A CONTINUACIÓN, SELECCIONE SI DESEA QUE EL DOSÍMETRO CAMBIE DEL ESTADO "EN LECTURA" A "EN STOCK": </label>
+                                                        <BR></BR>
+                                                        <div class="row">
+                                                            <div class="col"></div>
+                                                            <div class="col-6">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input " type="checkbox" value="TRUE" id="estado_uso" name="estado_uso">
+                                                                    <label class="form-check-label" for="defaultCheck1">
+                                                                        DOSÍMETRO EN STOCK
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col"></div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                
                                             </div>
                                             <br>
                                             <!-- ----------------BOTON--------------- -->

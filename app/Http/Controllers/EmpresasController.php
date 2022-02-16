@@ -30,7 +30,7 @@ class EmpresasController extends Controller
     }
     public function save(Request $request){
         
-        /* $request->validate([
+        $request->validate([
             'nombre_empresa'      => 'required',
             'tipo_empresa'        => 'required',              
             'tipoIden_empresa'    => 'required',  
@@ -44,7 +44,7 @@ class EmpresasController extends Controller
             'direccion_empresa'   => 'required',
             'pais_empresa'        => 'required',
             'ciudad_empresa'      => 'required',
-            'departamento_empresa'=> 'required',
+            
         ]);
         
         $empresa = new Empresa();
@@ -62,13 +62,12 @@ class EmpresasController extends Controller
         $empresa->email_verified_at                 = now();
         $empresa->direccion_empresa                 = strtoupper($request->direccion_empresa);
         $empresa->pais_empresa                      = strtoupper($request->pais_empresa);
-        $empresa->ciudad_empresa                    = strtoupper($request->ciudad_empresa);
-        $empresa->departamento_empresa              = strtoupper($request->departamento_empresa);
+        $empresa->municipiocol_id                   = $request->ciudad_empresa;
+        
         
         $empresa->save();
 
-        return redirect()->route('empresas.search'); */
-        return $request;
+        return redirect()->route('empresas.search');
     }
 
     public function search(){

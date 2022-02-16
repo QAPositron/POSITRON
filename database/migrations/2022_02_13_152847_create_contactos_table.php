@@ -24,7 +24,9 @@ class CreateContactosTable extends Migration
             $table->integer('cedula_contacto')->unique();
             $table->string('correo_contacto', 30)->unique();
             $table->string('telefono_contacto', 15);
-            $table->string('tipo_contacto', 15);
+            $table->string('profesion_contacto', 50);
+            $table->string('lider_ava', 15)->nullable();
+            $table->string('lider_dosimetria', 15)->nullable();
             $table->timestamps();
         });
     }

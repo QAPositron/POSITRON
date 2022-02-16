@@ -35,10 +35,10 @@
                                         <div class="form-floating my-3">
                                             <select class="form-select" name="periodo_recambio_contrato" id="periodo_recambio_contrato"  autofocus>
                                                 <option value="">--SELECCIONE--</option>
-                                                <option value="MEN">MENSUAL</option>
-                                                <option value="SEM">SEMESTRAL</option>
-                                                <option value="BIM">BIMESTRAL</option>
-                                                <option value="TRIM">TRIMESTRAL</option>
+                                                <option value="MENS">MENSUAL</option>
+                                                <option value="SEMS">SEMESTRAL</option>
+                                                <option value="BIMS">BIMESTRAL</option>
+                                                <option value="TRIMS">TRIMESTRAL</option>
                                             </select>
                                             <label for="floatingInputGrid">PERIODO DE RECAMBIO:</label>
                                             @error('periodo_recambio_contrato')
@@ -142,7 +142,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-md">
-                                                    <label for="" class="text-center">No. DOSÍM. CASO</label>
+                                                    <label for="" class="text-center">No. DOSÍM. CONTROL</label>
                                                     <input type="number" id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
                                                     @error('num_dosi_caso_contrato_sede')
                                                     <small>*{{$message}}</small>

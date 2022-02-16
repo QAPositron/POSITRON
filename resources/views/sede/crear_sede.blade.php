@@ -55,7 +55,7 @@
             <div class="row">
 
                 <div class="col"></div>
-                <div class="col-6">
+                <div class="col-8">
                     <div class="card text-dark bg-light" >
                         <h2 class="text-center mt-3">CREAR SEDE</h2>
 
@@ -88,19 +88,26 @@
                             <br>
                             <div class="row g-2">
                                 <div class="col-md">
-                                    <div class="form-floating text-wrap">
-                                        <input type="text" class="form-control"   name="municipio_sede" id="municipio_sede"  autofocus style="text-transform:uppercase;">
-                                        <label for="floatingInputGrid">MUNICIPIO:</label>
-                                        @error('municipio_sede')
+                                    <div class="form-group">
+                                        <label for="floatingInputGrid">DEPARTAMENTO:</label>
+                                        <select class="form-control"  name="departamento_sede" id="departamento_sede" value="{{old('departamento_sede')}}" autofocus style="text-transform:uppercase">
+                                            <option value="">--SELECCIONE--</option>
+                                            @foreach($departamentoscol as $depacol)
+                                                <option value="{{$depacol->id_departamentocol}}">{{$depacol->nombre_deptocol}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('departamento_sede')
                                             <small>*{{$message}}</small>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md">
-                                    <div class="form-floating text-wrap">
-                                        <input type="text" class="form-control"   name="departamento_sede" id="departamento_sede" autofocus style="text-transform:uppercase;">
-                                        <label for="floatingInputGrid">DEPARTAMENTO:</label>
-                                        @error('departamento_sede')
+                                    <div class="form-group">
+                                        <label for="floatingInputGrid">MUNICIPIO:</label>
+                                        <select class="form-control" name="municipio_sede" id="municipio_sede" value="{{old('municipio_sede')}}" autofocus style="text-transform:uppercase">
+
+                                        </select>
+                                        @error('municipio_sede')
                                             <small>*{{$message}}</small>
                                         @enderror
                                     </div>
@@ -112,32 +119,28 @@
                                 <label for="">DIRECCIÓN:</label>
                             </div>
                             <br>
-                            <label for="">AÑADA LOS DEPARTAMENTOS DE ESPECIALIDADES QUE CONTEGA ESTA SEDE:</label>
+                            <label for="">AÑADA LOS DEPARTAMENTOS DE ESPECIALIDADES QUE CONTEGA ESTA SEDE</label>
+                            <br>
                             <br>
                             <div class="row g-2">
                                 
                                 <div class="col-10">
                                     <label for="">ESPECIALIDADES:</label>
-                                    <BR></BR>
                                     <div class="form-floating">
                                         <select class="form-select" id="multiple_select_depsede" name="multiple_select_depsede[]" autofocus aria-label="Floating label select example" multiple="true">
                                             <option value="ONCO">ONCOLOGÍA</option>
                                             <option value="ODON">ODONTOLOGÍA</option>
                                             <option value="CIRU">CIRUJIA</option>
                                             <option value="UCI">UCI</option>
-                                            <option value="--">--</option>
-                                            <option value="--">--</option>
                                         </select>
-                                        
                                     </div>    
                                 </div>
-                                <input type="text" name="nombre_departamento[]" id="nombre_departamento" class="form-control"  autofocus style="text-transform:uppercase;" hidden>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col d-grid gap-2">
-                                    <input class="btn btn-primary " type="submit" id="boton-guardar" name="boton-guardar" value="GUARDAR">
+                                    <input class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar" value="GUARDAR">
                                 </div>
                                 <div class="col"></div>
                             </div>
@@ -148,6 +151,11 @@
                 <div class="col"></div>    
             </div>
         </div>
+        <!-- <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous">
+        </script> -->
         <script type="text/javascript">
             $(document).ready(() => {
 
@@ -155,6 +163,30 @@
                     placeholder:"SELECCIONE LAS ESPECIALIDADES",
                     tags: true,
                     tokenSeparators: ['/',',',',',','," "]
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#departamento_sede').select2();
+                $('#municipio_sede').select2();
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#departamento_sede').on('change', function(){
+                    var departamento_id = $(this).val();
+                    alert(departamento_id);
+                    if($.trim(departamento_id) != ''){
+                        $.get('sedesdeptomuni', {departamento_id: departamento_id}, function(municipios){
+                            console.log(municipios);
+                            $('#municipio_sede').empty();
+                            $('#municipio_sede').append("<option value=''>--SELECCIONE UNA SEDE--</option>");
+                            $.each(municipios, function(index, value){
+                                $('#municipio_sede').append("<option value='"+ index + "'>" + value + "</option>");
+                            })
+                        });
+                    }
                 });
             });
         </script>

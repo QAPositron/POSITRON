@@ -32,5 +32,10 @@ class Empresa extends Model
         /* return $this->hasMany('App\Models\Sede'); */
         return $this->hasMany(ContratosDosimetriaEmpresa::class, 'id_contratodosimetria_emp');
     }
+    //relacion uno a uno con municipioscol
+    public function municipios(){
+        return $this->belongsTo(Colmunicipio::class, 'municipiocol_id', 'id_municipiocol');
+    }
+    
     
 }

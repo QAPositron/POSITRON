@@ -64,10 +64,10 @@
                                             <td>{{$empresa->pais_empresa}}</td>
                                         </tr>
                                         <tr>
-                                            <th style='width: 12.55%'>CIUDAD:</th>
-                                            <td>{{$empresa->ciudad_empresa}}</td>
+                                            <th style='width: 12.55%'>MUNICIPIO:</th>
+                                            <td>{{$empresa->municipios->nombre_municol}}</td>
                                             <th style='width: 12.55%'>DEPARTAMENTO:</th>
-                                            <td>{{$empresa->departamento_empresa}}</td>
+                                            <td>{{$empresa->municipios->coldepartamento->nombre_deptocol}}</td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="table-active text-center">
@@ -129,7 +129,7 @@
                                         @foreach($sede as $sed)
                                             <tr>
                                                 <td>{{$sed->nombre_sede}}</td>
-                                                <td>{{$sed->municipio_sede}} / {{$sed->departamento_sede}}</td>
+                                                <td>{{$sed->municipios->nombre_municol}} / {{$sed->municipios->coldepartamento->abreviatura_deptocol}}</td>
                                                 <td>{{$sed->direccion_sede}}</td>
                                                 <td class="text-center">
                                                     @php
@@ -286,9 +286,9 @@
                                                 echo "<th >N. IDEN</th>";    
                                                 echo "<th>GÉNERO</th>";
                                                 echo "<th style='width: 15.60%'>EMAIL</th>";
-                                                echo "<th>TELEFONO</th>";
-                                                echo "<th style='width: 6.60%'>PERFIL LABORAL</th>";
-                                                echo "<th style='width: 12.60%'>ACCIONES</th>";
+                                                echo "<th style='width: 9.60%'>TELEFONO</th>";
+                                                echo "<th>PERFIL LABORAL</th>";
+                                                echo "<th style='width: 11.10%'>ACCIONES</th>";
                                             echo "</thead>";
                                     }
                                 @endphp
@@ -299,8 +299,18 @@
                                     <td>{{$cont->genero_contacto}}</td>
                                     <td>{{$cont->correo_contacto}}</td>
                                     <td>{{$cont->telefono_contacto}}</td>
-                                    <td>{{$cont->tipo_contacto}}</td>
                                     <td>
+                                        {{$cont->profesion_contacto}}
+                                        <br> 
+                                        @if($cont->lider_ava == 'TRUE')
+                                            <B>(LIDER A. VIRTUAL)</B>
+                                            <br>
+                                        @endif
+                                        @if($cont->lider_dosimetria == 'TRUE')
+                                            <B>(LIDER DOSIMETRÍA)</B>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
                                         <div class="row">
                                             <div class="col">
                                                 <a href="{{route('contactos.edit', $cont->id_contacto)}}" class="btn colorQA">

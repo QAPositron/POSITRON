@@ -14,14 +14,13 @@ class Colmunicipio extends Model
     public function coldepartamento(){
         return $this->belongsTo(Coldepartamento::class, 'departamentocol_id', 'id_departamentocol');
     }
-        /* return $this->belongsTo('App\Models\Empresa'); */
-
-    public function dosicontrolcontratodosisede(){
-        return $this->hasOne(Dosicontrolcontdosisede::class, 'contdosisededepto_id', 'id_contdosisededepto');
+    //relacion uno a uno (inversa) con empresa
+    public function empresa(){
+        return $this->hasOne(Empresa::class, 'municipiocol_id', 'id_municipiocol');
     }
-
-    /* public function empresa(){
-        return $th
-    } */
+    //relacion uno a uno (inversa) con empresa  
+    public function sede(){
+        return $this->hasOne(Sede::class, 'municipiocol_id', 'id_municipiocol');
+    }
 
 }

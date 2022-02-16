@@ -151,7 +151,6 @@
                         <div class="form-floating">
                             <input type="numeric" name="pais_empresa" id="pais_empresa" class="form-control" value="COLOMBIA" readonly autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid">PAÍS:</label>
-                            
                         </div>
                     </div>
                     <div class="col-md">
@@ -170,7 +169,7 @@
                     </div>
                     <div class="col-md">
                         <div class="form-group">
-                            <label for="floatingInputGrid">CIUDAD:</label>
+                            <label for="floatingInputGrid">MUNICIPIO:</label>
                             <select class="form-control" name="ciudad_empresa" id="ciudad_empresa" value="{{old('ciudad_empresa')}}" autofocus style="text-transform:uppercase">
 
                             </select>

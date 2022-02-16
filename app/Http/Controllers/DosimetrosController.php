@@ -62,6 +62,7 @@ class DosimetrosController extends Controller
         $dosimetro->tecnologia_dosimetro    = strtoupper($request->tecnologia_dosimetro);
         $dosimetro->codigo_dosimeter        = $request->codigo_dosimetro;
         $dosimetro->fecha_ingreso_servicio  = $request->fecha_ingre_serv_dosimetro;
+        $dosimetro->estado_dosimetro        = strtoupper($request->estado_dosimetro);
 
         $dosimetro->save();
         return redirect()->route('dosimetros.search')->with('actualizar', 'ok');

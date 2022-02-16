@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coldepartamento;
+use App\Models\Colmunicipio;
 use App\Models\Departamentosede;
 use App\Models\Empresa;
 use App\Models\Sede;
@@ -11,11 +13,21 @@ class SedesController extends Controller
 {
     public function create($id){
         $empresa = Empresa::find($id);
-        
+        $departamentoscol = Coldepartamento::all();
         /* return $empresa; */
-        return view('sede.crear_sede', compact('empresa'));
+        return view('sede.crear_sede', compact('empresa', 'departamentoscol'));
     }
 
+    public function selectmunicipios(Request $request)
+    {
+        $municipios = Colmunicipio::where('departamentocol_id', '=', $request->departamento_id)->get();
+        foreach($municipios as $muni){
+            $municipiosArray[$muni->id_municipiocol] = $muni->nombre_municol;
+        }
+        return response()->json($municipiosArray);
+        echo "CONSULTA REALIZADA".$municipiosArray;        
+    }
+    
     public function save(Request $request){
         
         $request->validate([
@@ -32,8 +44,7 @@ class SedesController extends Controller
 
         $sede->empresas_id         =$request->id_empresa;
         $sede->nombre_sede         =strtoupper($request->nombre_sede);
-        $sede->municipio_sede      =strtoupper($request->municipio_sede);
-        $sede->departamento_sede   =strtoupper($request->departamento_sede);
+        $sede->municipiocol_id     =strtoupper($request->municipio_sede);       
         $sede->direccion_sede	   =strtoupper($request->direccion_sede);
         
         $sede->save();
@@ -48,7 +59,7 @@ class SedesController extends Controller
             $deptosede->save();
         }
         return redirect()->route('empresas.info', $request->id_empresa);
-        return $request;
+        /* return $request; */
     }
 
 

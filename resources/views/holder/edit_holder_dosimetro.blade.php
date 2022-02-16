@@ -26,7 +26,7 @@
                             <select class="form-select" name="tipo_holder" id="tipo_holder" value="{{old('tipo_holder', $holder->tipo_holder)}}" autofocus style="text-transform:uppercase">
                                 <option value="{{$holder->tipo_holder}}">{{old('tipo_holder', $holder->tipo_holder)}}</option>
                                 <option value="ANILLO">ANILLO</option>
-                                <option value="PULCERA">PULCERA</option>
+                                <option value="EXTREM.">EXTREMIDAD</option>
                                 <option value="CRISTALINO">CRISTALINO</option>
                             </select>
                             <label for="floatingInputGrid"> TIPO HOLDER:</label>

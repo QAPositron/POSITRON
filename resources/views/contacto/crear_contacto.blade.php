@@ -87,12 +87,12 @@
                         <div class="form-floating">
                             <select class="form-select" name="tipoIden_contacto" id="tipoIden_contacto" value="{{old('tipoIden_contacto')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="CÉDULA DE EXTRANJERÍA">CÉDULA DE EXTRANJERÍA</option>
+                                <option value="CÉDULA DE CIUDADANIA">CÉDULA DE CIUDADANIA</option>
+                                <option value="TARJETA DE IDENTIDAD">TARJETA DE IDENTIDAD</option>
+                                <option value="REGISTRO CIVIL">REGISTRO CIVIL</option>
                                 <option value="TARJETA DE EXTRANJERÍA">TARJETA DE EXTRANJERÍA</option>
                                 <option value="DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO">DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO</option>
-                                <option value="TARJETA DE IDENTIDAD">TARJETA DE IDENTIDAD</option>
-                                <option value="CÉDULA DE CIUDADANIA">CÉDULA DE CIUDADANIA</option>
-                                <option value="REGISTRO CIVIL">REGISTRO CIVIL</option>
+                                <option value="CÉDULA DE EXTRANJERÍA">CÉDULA DE EXTRANJERÍA</option>
                                 <option value="PASAPORTE">PASAPORTE</option>
                             </select>
                             <label for="floatingInputGrid">TIPO DE IDENTIFICACIÓN:</label>
@@ -114,7 +114,7 @@
                 <br>
                 <div class="row g-2">
                     <div class="col-md">
-                        <div class="form-floating text-wrap">
+                        <div class="form-floating ">
                             <select class="form-select" name="genero_contacto" id="genero_contacto" style="text-transform:uppercase;">
                                 <option value="{{old('genero_contacto')}}">--SELECCIONE--</option>
                                 <option value="femenino">FEMENINO</option>
@@ -149,14 +149,44 @@
                         </div>
                     </div>
                     <div class="col-md">
-                        <div class="form-floating text-wrap">
-                        <input type="text" class="form-control"  name="tipo_contacto" id="tipo_contacto" value="{{old('tipo_contacto')}}" autofocus style="text-transform:uppercase;">
+                        <div class="form-floating">
+                            <select class="form-select" name="profesion_contacto" id="profesion_contacto" style="text-transform:uppercase;">
+                                <option value="{{old('profesion_contacto')}}">--SELECCIONE--</option>
+                                <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
+                                <option value="CALIDAD">CALIDAD</option>
+                                <option value="BIOMÉDICA">BIOMÉDICA</option>
+                                <option value="OFICIAL DE PROTECCIÓN READIOLÓGICA">OFICIAL DE PROTECCIÓN RADIOLÓGICA</option>
+                                <option value="FÍSICA MÉDICA">FÍSICA MÉDICA</option>
+                                <option value="CONTABILIDAD">CONTABILIDAD</option>
+                                <option value="SUBGERENCIA">SUBGERENCIA</option>
+                                <option value="GERENCIA">GERENCIA</option>
+                            </select>
                             <label for="">PERFIL LABORAL:</label>
-                            @error('tipo_contacto')
+                            @error('profesion_contacto')
                                 <small>*{{$message}}</small>
                             @enderror
                         </div>
                     </div>
+                </div>
+                <BR></BR>
+                <label for="">A CONTINUACION, SELECCIONE SI ESTE CONTACTO ES EL LIDER O ENCARGADO DE LOS SERVICIOS:</label>
+                <div class="row g-2">
+                    <div class="col-md"></div>
+                    <div class="col-md text-center">
+                        <div class="form-check">
+                            <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava">
+                            <label class="form-check-label" for="defaultCheck1">
+                                AULA VIRTUAL
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria">
+                            <label class="form-check-label" for="defaultCheck1">
+                                DOSIMETRÍA
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md"></div>
                 </div>
                 <br>
                 <!---------BOTON------------->

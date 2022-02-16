@@ -96,9 +96,9 @@
                         <div class="form-floating text-wrap">
                             <select class="form-select" name="genero_trabajador" id="genero_trabajador" style="text-transform:uppercase;">
                                 <option value="{{old('genero_trabajador', $trabajador->trabajador->genero_trabajador)}}">{{$trabajador->trabajador->genero_trabajador}}</option>
-                                <option value="femenino">FEMENINO</option>
-                                <option value="masculino">MASCULINO</option>
-                                <option value="otro">OTRO</option>
+                                <option value="F">FEMENINO</option>
+                                <option value="M">MASCULINO</option>
+                                <option value="O">OTRO</option>
                             </select>
                             <label for="floatingInputGrid">GÉNERO:</label>
                             @error('genero_trabajador')

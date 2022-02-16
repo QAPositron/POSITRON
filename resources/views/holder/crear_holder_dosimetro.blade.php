@@ -23,14 +23,14 @@
                 <br>
                 <div class="row g-2">
                     <div class="col-md">
-                        <div class="form-floating">
+                        <div class="form-group">
+                            <label for="floatingInputGrid"> TIPO:</label>
                             <select class="form-select" name="tipo_holder" id="tipo_holder" value="{{old('tipo_holder')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
                                 <option value="ANILLO">ANILLO</option>
-                                <option value="PULCERA">PULCERA</option>
+                                <option value="EXTREM.">EXTREMIDAD</option>
                                 <option value="CRISTALINO">CRISTALINO</option>
                             </select>
-                            <label for="floatingInputGrid"> TIPO:</label>
                             @error('tipo_holder')
                                 <small>*{{$message}}</small>
                             @enderror
@@ -40,7 +40,8 @@
                 <br>
                 <div class="row g-2">
                     <div class="col-md">
-                        <div class="form-floating ">
+                        <div class="form-group">
+                            <label for="floatingInputGrid"> ESTADO:</label>
                             <select class="form-select  form-select-solid" name="estado_holder" id="estado_holder" data-control="select2" data-placeholder="Select an option" value="{{old('estado_holder')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
                                 <option value="STOCK">STOCK</option>
@@ -48,7 +49,6 @@
                                 <option value="DAÑADO">DAÑADO</option>
                                 <option value="EN USO">EN USO</option>
                             </select>
-                            <label for="floatingInputGrid"> ESTADO:</label>
                             @error('estado_holder')
                                 <small>*{{$message}}</small>
                             @enderror

@@ -16,7 +16,7 @@
                         <div class="form-floating" >
                             <select class="form-select" name="tipo_dosimetro" id="tipo_dosimetro" value="{{old('tipo_dosimetro')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="CUERPO">CUERPO</option>
+                                <option value="CUERPO E.">CUERPO ENTERO</option>
                                 <option value="EZCLIP">EZCLIP</option>
                                 <option value="AMBIENTAL">AMBIENTAL</option>
                                 <option value="CONTROL">CONTROL</option>

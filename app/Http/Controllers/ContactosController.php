@@ -34,8 +34,7 @@ class ContactosController extends Controller
     public function save(Request $request){
 
         $request->validate([
-            'id_empresas'                   => 'required',
-            'id_sedes'                      => 'required',
+            
             'primer_nombre_contacto'      => 'required',              
             'primer_apellido_contacto'    => 'required',
             'segundo_apellido_contacto'   => 'required',
@@ -44,7 +43,7 @@ class ContactosController extends Controller
             'genero_contacto'             => 'required',
             'correo_contacto'             => 'required',
             'telefono_contacto'           => 'required|max:12',
-            'tipo_contacto'               => 'required',
+            'profesion_contacto'          => 'required',
             
         ]);
         $contacto = new Contacto();
@@ -58,7 +57,9 @@ class ContactosController extends Controller
         $contacto->genero_contacto              = strtoupper($request->genero_contacto);
         $contacto->correo_contacto              = strtoupper($request->correo_contacto);
         $contacto->telefono_contacto            = $request->telefono_contacto;
-        $contacto->tipo_contacto                = strtoupper($request->tipo_contacto);
+        $contacto->profesion_contacto           = strtoupper($request->profesion_contacto);
+        $contacto->lider_ava                    = $request->lider_ava;
+        $contacto->lider_dosimetria            = $request->lider_dosimetria;
         
         $contacto->save();
 
@@ -69,8 +70,8 @@ class ContactosController extends Controller
         $contactosede->sede_id       = $request->id_sedes;
 
         $contactosede->save();
-       /*  return $contacto;
-        return$contactosede; */
+        /* return $request; */
+        /* return$contactosede; */
         return redirect()->route('empresas.info', $request->id_empresas);
     }
 
@@ -84,8 +85,8 @@ class ContactosController extends Controller
     public function update(Request $request, Contacto $contacto){
         
         $request->validate([
-            'id_empresas'                   => 'required',
-            'id_sedes'                      => 'required',
+            'id_sedes'                    => 'required',
+            'id_empresas'                 => 'required',
             'primer_nombre_contacto'      => 'required',              
             'primer_apellido_contacto'    => 'required',
             'segundo_apellido_contacto'   => 'required',

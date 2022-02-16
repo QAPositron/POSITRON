@@ -20,7 +20,7 @@ class Trabajadordosimetro extends Model
     }
     //Relacion uno a uno (inversa) con holder
     public function holder(){
-        return $this->belongsTo('App\Models\Holder', 'holder_id', 'id_holder');
+        return $this->belongsTo(Holder::class, 'holder_id', 'id_holder');
     }
     //Relacion uno a uno (inversa) con contradodosimetriasede
     public function contratodosimetriasede(){
