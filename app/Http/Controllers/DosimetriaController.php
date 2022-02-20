@@ -675,7 +675,13 @@ class DosimetriaController extends Controller
             $dosiestado->estado_dosimetro = 'STOCK';
             $dosiestado->save();
         }
-        
+        if($request->estadoholder_uso == 'TRUE'){
+            $dosiholderestado = Holder::find($trabjasig->holder->id_holder);
+
+            $dosiholderestado->estado_holder = 'STOCK';
+            $dosiholderestado->save();
+        } 
+
         return redirect()->route('asignadosicontrato.info', ["asigdosicont" => $request->id_contratodosimetriasededepto, "mesnumber" => $request->mes_asignacion])->with('actualizar', 'ok');
         /* return $request; */
     }

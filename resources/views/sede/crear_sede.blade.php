@@ -176,7 +176,7 @@
             $(document).ready(function() {
                 $('#departamento_sede').on('change', function(){
                     var departamento_id = $(this).val();
-                    alert(departamento_id);
+                    /* alert(departamento_id); */
                     if($.trim(departamento_id) != ''){
                         $.get('sedesdeptomuni', {departamento_id: departamento_id}, function(municipios){
                             console.log(municipios);

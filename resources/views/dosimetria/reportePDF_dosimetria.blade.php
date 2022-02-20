@@ -69,7 +69,7 @@
         <td>Email:dosimetria.qapositron@gmail.com</td>
     </tr>
     <tr>
-        <td style="padding-bottom:13px;">Sitio web: www.qapositron.com</td>
+        <td style="padding-bottom:9px;">Sitio web: www.qapositron.com</td>
     </tr>
     <tr>
         <th style="font-size: 11px; border: solid 0.4px #000; padding:8px;">
@@ -80,7 +80,7 @@
     </tr>
 </table>
 
-<table style="position:absolute; top:0px; left:710px; border-collapse:collapse;" cellpadding="4">
+<table style="position:absolute; top:0px; left:710px; border-collapse:collapse; font-size: 8px;" cellpadding="4">
     <tr>
         <td style="border:0.1px solid black;">No. de Cuenta</td>
         <td style="width: 120px; border:0.1px solid black;" align="center">
@@ -148,7 +148,7 @@
         @endforeach 
         </td>
         <td colspan="2" rowspan="3" style="width: 94px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="195" height="58" style="top:62px;">
+            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="195" height="60" style="top:55px;">
         </td>
     </tr>
     <tr>
@@ -302,32 +302,56 @@
                 <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->energia}}</td>
 
                 <!--  /////////DOSIS DEL PERIODO///// -->
-                <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->Hp10_calc_dose}}</td>
-                <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->Hp007_calc_dose}}</td>
-                <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->Hp3_calc_dose}}</td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->Hp10_calc_dose}}</td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->Hp007_calc_dose}}</td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->Hp3_calc_dose}}</td>
 
                 <!-- ///////DOSIS ACUMULADA 12 MESES ANTERIORES/////// -->
-                <td style="padding:2px; border:0.1px solid black;">
+                <td style="padding:2px; border:0.1px solid black;" align="center">
                     @php
                         $sumaHp10calcdose = 0;
                     @endphp
                     @foreach($trabajadoresaisgxmeses as $mesesdositrab)
-                    
                         @for($i=0; $i< count($mesesdositrab); $i++)
                             @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
                                 @php
-                                    
                                     $sumaHp10calcdose += $mesesdositrab[$i]->Hp10_calc_dose;
-                                    
                                 @endphp
-                                
                             @endif
                         @endfor
                     @endforeach
                     {{$sumaHp10calcdose}}
                 </td>
-                <td style="padding:2px; border:0.1px solid black;"></td>
-                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">
+                    @php
+                        $sumaHp007calcdose = 0;
+                    @endphp
+                    @foreach($trabajadoresaisgxmeses as $mesesdositrab)
+                        @for($i=0; $i< count($mesesdositrab); $i++)
+                            @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                @php
+                                    $sumaHp007calcdose += $mesesdositrab[$i]->Hp007_calc_dose;
+                                @endphp
+                            @endif
+                        @endfor
+                    @endforeach
+                    {{$sumaHp007calcdose}}
+                </td>
+                <td style="padding:2px; border:0.1px solid black;" align="center">
+                    @php
+                        $sumaHp3calcdose = 0;
+                    @endphp
+                    @foreach($trabajadoresaisgxmeses as $mesesdositrab)
+                        @for($i=0; $i< count($mesesdositrab); $i++)
+                            @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                @php
+                                    $sumaHp3calcdose += $mesesdositrab[$i]->Hp3_calc_dose;
+                                @endphp
+                            @endif
+                        @endfor
+                    @endforeach
+                    {{$sumaHp3calcdose}}
+                </td>
 
                 <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
                 <td style="padding:2px; border:0.1px solid black;"></td>

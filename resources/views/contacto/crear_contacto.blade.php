@@ -169,7 +169,7 @@
                     </div>
                 </div>
                 <BR></BR>
-                <label for="">A CONTINUACION, SELECCIONE SI ESTE CONTACTO ES EL LIDER O ENCARGADO DE LOS SERVICIOS:</label>
+                <label for="">A CONTINUACIÓN, SELECCIONE SI ESTE CONTACTO ES EL LÍDER O ENCARGADO DE LOS SERVICIOS:</label>
                 <div class="row g-2">
                     <div class="col-md"></div>
                     <div class="col-md text-center">

@@ -208,7 +208,7 @@
                                                 echo "<th>EMAIL</th>";
                                                 echo "<th>TELEFONO</th>";
                                                 echo "<th style='width: 6.60%'>PERFIL LABORAL</th>";
-                                                echo "<th style='width: 6.60%'>ACTIVO EN</th>";
+                                               
                                                 echo "<th style='width: 12.60%'>ACCIONES</th>";
                                             echo "</thead>";
                                     }
@@ -222,13 +222,13 @@
                                     <td>{{$trab->email_trabajador}}</td>
                                     <td>{{$trab->telefono_trabajador}}</td>
                                     <td>{{$trab->tipo_trabajador}}</td>
-                                    <td>@if($trab->aula_virtual == "ON")
+                                    <!-- <td>@if($trab->aula_virtual == "ON")
                                         A.VIRUTAL 
                                         @endif
                                         @if($trab->dosimetria == "ON")
                                         DOSIMETRÍA
                                         @endif
-                                    </td>
+                                    </td> -->
                                     <td class="text-center">
                                         <div class="row">
                                             <div class="col">

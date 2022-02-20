@@ -359,6 +359,39 @@
                                                 </div>
                                             </div>
                                             <br>
+                                            @if($trabjasig->dosimetro->tipo_dosimetro == 'EZCLIP')
+                                                <div class="row g-2">
+                                                    <div class="col"></div>
+                                                    <div class="col-6">
+                                                        <label for="">SELECCIONE PARA CAMBIAR EL ESTADO DEL HOLDER QUE SE ENCUENTRA "EN USO" A "EN STOCK": </label>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col"></div>
+                                                            <div class="col-6">
+                                                                <br>
+                                                                @if($trabjasig->holder->estado_holder == 'EN USO')
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input " type="checkbox" value="TRUE" id="estadoholder_uso" name="estadoholder_uso">
+                                                                        <label class="form-check-label" for="defaultCheck1">
+                                                                            HOLDER EN STOCK
+                                                                        </label>
+                                                                    </div>
+                                                                @else
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input " type="checkbox" value="TRUE" id="estadoholder_uso" name="estadoholder_uso" disabled>
+                                                                        <label class="form-check-label" for="defaultCheck1">
+                                                                            HOLDER EN STOCK
+                                                                        </label>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="col"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col"></div>
+                                                </div>
+                                            @endif
+                                            <br>
                                             <!-- ----------------BOTON--------------- -->
                                             <div class="row g-2">
                                                 <div class="col-md"></div>
