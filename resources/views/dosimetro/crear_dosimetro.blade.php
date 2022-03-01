@@ -95,6 +95,9 @@
                     <div class="col d-grid gap-2">
                         <button class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar">GUARDAR</button>
                     </div>
+                    <div class="col d-grid gap-2">
+                        <a href="{{route('dosimetros.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                    </div>
                     <div class="col"></div>
                 </div>
             </form>

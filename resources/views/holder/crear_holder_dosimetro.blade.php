@@ -42,7 +42,7 @@
                     <div class="col-md">
                         <div class="form-group">
                             <label for="floatingInputGrid"> ESTADO:</label>
-                            <select class="form-select  form-select-solid" name="estado_holder" id="estado_holder" data-control="select2" data-placeholder="Select an option" value="{{old('estado_holder')}}" autofocus style="text-transform:uppercase">
+                            <select class="form-select  form-select-solid" name="estado_holder" id="estado_holder" data-control="select2"  value="{{old('estado_holder')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
                                 <option value="STOCK">STOCK</option>
                                 <option value="PERDIDO">PERDIDO</option>

@@ -6,7 +6,7 @@
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3">CREAR EMPRESA</h2>
             
-            <form class="m-4"  action="{{route('empresas.save')}}" method="POST">
+            <form class="m-4"  id="form_create_empresa" name="form_create_empresa" action="{{route('empresas.save')}}" method="POST">
                 
                 @csrf
 
@@ -173,7 +173,6 @@
                             <select class="form-control" name="ciudad_empresa" id="ciudad_empresa" value="{{old('ciudad_empresa')}}" autofocus style="text-transform:uppercase">
 
                             </select>
-                            <!-- <input type="text" name="ciudad_empresa" id="ciudad_empresa" class="form-control" value="{{old('ciudad_empresa')}}" autofocus style="text-transform:uppercase;">  -->
                             @error('ciudad_empresa')
                                 <small>*{{$message}}</small>
                             @enderror
@@ -185,7 +184,10 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col d-grid gap-2">
-                        <button class="btn btn-primary " onclick="Obtener(e);"  type="submit" id="boton-guardar" name="boton-guardar" >GUARDAR</button>
+                        <button class="btn colorQA" onclick="Obtener(e);"  type="submit" id="boton-guardar" name="boton-guardar" >GUARDAR</button>
+                    </div>
+                    <div class="col d-grid gap-2">
+                        <a href="{{route('empresas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                     </div>
                     <div class="col"></div>
                 </div>
@@ -226,6 +228,8 @@
     });
 </script>
 
+
+
 <script type="text/javascript"> 
     function ShowSelected(){
         var option =document.getElementById("tipoIden_empresa").value;
@@ -245,6 +249,26 @@
     }
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#form_create_empresa').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "DESEA GUARDAR ESTA EMPRESA??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
+    })
+</script>
 @endsection 
 
 

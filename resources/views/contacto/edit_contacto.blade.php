@@ -14,10 +14,8 @@
 
                 <div class="row g-2">
                     <div class="col-md">
-                        <div class="form-floating">
-                            <select class="form-select" name="id_empresas" id="id_empresas">
-                                <option value="{{old('id_empresas', $contacto->sede->empresa->nombre_empresa)}}">{{$contacto->sede->empresa->nombre_empresa}}</option>
-                            </select>
+                        <div class="form-floating text-wrap">
+                            <input type="text" class="form-control"  name="id_empresas" id="id_empresas"  value="{{old('id_empresas', $contacto->sede->empresa->nombre_empresa)}}" autofocus style="text-transform:uppercase;" disabled>
                             <label for="floatingSelectGrid">EMPRESA:</label>
                             @error('id_empresas')
                                 <small>*{{$message}}</small>
@@ -132,7 +130,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating text-wrap">
-                        <input type="text" class="form-control"  name="tipo_contacto" id="tipo_contacto" value="{{old('tipo_contacto', $contacto->contacto->tipo_contacto)}}" autofocus style="text-transform:uppercase;">
+                        <input type="text" class="form-control"  name="tipo_contacto" id="tipo_contacto" value="{{old('tipo_contacto', $contacto->contacto->profesion_contacto)}}" autofocus style="text-transform:uppercase;">
                             <label for="">PERFIL LABORAL:</label>
                             @error('tipo_contacto')
                                 <small>*{{$message}}</small>
@@ -145,7 +143,10 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col d-grid gap-2">
-                        <button class="btn btn-primary" type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR </button>
+                        <button class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR </button>
+                    </div>
+                    <div class="col d-grid gap-2">
+                        <a href="{{route('empresas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                     </div>
                     <div class="col"></div>
                 </div>

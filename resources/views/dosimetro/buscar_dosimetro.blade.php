@@ -152,15 +152,15 @@
 
 
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     function Eliminar(evt) {
         evt.preventDefault();
     }
-</script>     
+</script>     --}} 
 <script
-src="https://code.jquery.com/jquery-3.6.0.js"
-integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-crossorigin="anonymous">
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if(session('actualizar')== 'ok')
@@ -191,7 +191,7 @@ crossorigin="anonymous">
             $(this).tab('show')
         })
 
-        $('#form_eliminar_holder').submit(function(e){
+        $('#form_eliminar_dosimetro').submit(function(e){
             e.preventDefault();
             Swal.fire({
                 text: "SEGURO QUE DESEA ELIMINAR ESTE DOSÍMETRO??",
@@ -199,20 +199,17 @@ crossorigin="anonymous">
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'SI!'
+                confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    /* Swal.fire(
-                        'ELIMINADA!',
-                        'HA ELIMINADO UNA EMPRESA.',
-                        'success'
-                        ) */
+                   
                     this.submit();
                 }
             })
         })
     })
 </script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('#form_eliminar_holder').submit(function(e){
@@ -223,18 +220,15 @@ crossorigin="anonymous">
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'SI!'
+                confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    /* Swal.fire(
-                        'ELIMINADA!',
-                        'HA ELIMINADO UNA EMPRESA.',
-                        'success'
-                        ) */
+                   
                     this.submit();
                 }
             })
         })
     })
 </script>
+
 @endsection()

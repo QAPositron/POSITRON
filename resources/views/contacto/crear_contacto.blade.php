@@ -11,10 +11,9 @@
 
                 <div class="row g-2">
                     <div class="col-md">
-                        <div class="form-floating">
-                            <select class="form-select" name="id_empresas" id="id_empresas" autofocus aria-label="Floating label select example">
-                                <option value="{{$empresa->id_empresa}}">{{$empresa->nombre_empresa}}</option>
-                            </select>
+                        <div class="form-floating text-wrap">
+                            <input type="text" class="form-control" name="empresas_id" id="empresas_id" value="{{old('empresas_id', $empresa->nombre_empresa)}}" autofocus style="text-transform:uppercase;" disabled>
+                            <input type="text" class="form-control" name="id_empresas" id="id_empresas" value="{{old('id_empresas', $empresa->id_empresa)}}" autofocus style="text-transform:uppercase;" hidden>
                             <label for="floatingSelectGrid">EMPRESA:</label>
                             @error('id_empresas')
                                 <small>*{{$message}}</small>
@@ -193,7 +192,10 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col d-grid gap-2">
-                        <input class="btn btn-primary" type="submit" id="boton-guardar" name="boton-guardar" value="GUARDAR">
+                        <input class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar" value="GUARDAR">
+                    </div>
+                    <div class="col d-grid gap-2">
+                        <a href="{{route('empresas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                     </div>
                     <div class="col"></div>
                 </div>

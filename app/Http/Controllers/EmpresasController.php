@@ -67,7 +67,7 @@ class EmpresasController extends Controller
         
         $empresa->save();
 
-        return redirect()->route('empresas.search');
+        return redirect()->route('empresas.search')->with('guardar', 'ok');
     }
 
     public function search(){
@@ -76,9 +76,10 @@ class EmpresasController extends Controller
     }
 
     public function edit(Empresa $empresa){
-       
-        return view('empresa.edit_empresa', compact('empresa'));
+        $departamentoscol = Coldepartamento::all();
+        return view('empresa.edit_empresa', compact('empresa', 'departamentoscol'));
     }
+
     public function update(Request $request, Empresa $empresa){
         
         $request->validate([
@@ -111,12 +112,13 @@ class EmpresasController extends Controller
         $empresa->email_verified_at                 = now();
         $empresa->direccion_empresa                 = strtoupper($request->direccion_empresa);
         $empresa->pais_empresa                      = strtoupper($request->pais_empresa);
-        $empresa->ciudad_empresa                    = strtoupper($request->ciudad_empresa);
-        $empresa->departamento_empresa              = strtoupper($request->departamento_empresa);
+        $empresa->municipiocol_id                   = $request->ciudad_empresa;
+        
         
         $empresa->save();
-        return redirect()->route('empresas.search');
+        return redirect()->route('empresas.search')->with('actualizar', 'ok');
     }
+
     public function destroy(Empresa $empresa){
         $empresa->delete();
         return redirect()->route('empresas.search')->with('eliminar', 'ok');

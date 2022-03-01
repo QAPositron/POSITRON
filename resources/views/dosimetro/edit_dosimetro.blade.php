@@ -124,14 +124,10 @@ $(document).ready(function(){
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'SI!'
+            confirmButtonText: 'SI, SEGURO!'
         }).then((result) => {
             if (result.isConfirmed) {
-                /* Swal.fire(
-                'ACTUALIZADA!',
-                'SE HA ACTUALIZADO UN DOSÍMETRO.',
-                'success'
-                ) */
+                
                 this.submit(); 
             }
         })

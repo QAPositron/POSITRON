@@ -145,7 +145,7 @@
                         </div>
                     </div>
                 </div>
-                <br>
+               {{--  <br>
                 <h6 class="text-center">ACTIVAR AL TRABAJADOR EN EL MODULO DE:</h6>
                 <div class="row g-2">
                     <div class="col-md"></div>
@@ -169,16 +169,16 @@
                         </div>
                     </div>
                     <div class="col-md"></div>
-                </div>
+                </div> --}}
                 <br>
                 <!---------BOTON------------->
                 <div class="row">
                     <div class="col"></div>
                     <div class="col d-grid gap-2">
-                        <button class="btn btn-primary" type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR </button>
+                        <button class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR </button>
                     </div>
                     <div class="col d-grid gap-2">
-                    <a href="{{route('empresas.search')}}" class="btn btn-primary " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                    <a href="{{route('empresas.search')}}" class="btn btn-danger" type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                     </div>
                     <div class="col"></div>
                 </div>

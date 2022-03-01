@@ -37,6 +37,7 @@ Route::get('empresas/search', [EmpresasController::class, 'search'])->name('empr
 Route::get('empresas/create', [EmpresasController::class, 'create'])->name('empresas.create');
 
 Route::get('/empresas/empresasdeptomuni', [EmpresasController::class, 'selectmunicipios']);
+Route::get('/empresas/{edit}/empresasdeptomuni', [EmpresasController::class, 'selectmunicipios']);
 
 Route::post('empresas', [EmpresasController::class, 'save'])->name('empresas.save');
 Route::get('empresas/{empresa}/edit', [EmpresasController::class, 'edit'])->name('empresas.edit');

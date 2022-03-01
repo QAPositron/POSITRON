@@ -44,6 +44,11 @@
       .select2-selection__placeholder {
         color: #4BD196;
       }
+      
+      .dropdown-menu  a:hover{
+        background-color: rgba(26, 153, 128, 0.3);
+        color:black;
+      }
     </style>
 
   </head>

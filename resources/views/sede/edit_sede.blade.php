@@ -14,11 +14,8 @@
 
                     <div class="row g-2">
                         <div class="col-md">
-                            <div class="form-floating ">
-                                <select class="form-select"  name="empresas_id" id="empresas_id">
-                                    <option value="{{$sede->empresas_id}}">{{$sede->empresa->nombre_empresa}}</option>
-                                </select>
-                                <!-- <input type="text" class="form-control"  name="nombre_empresa" id="nombre_empresa"  value="{{$sede->empresa->nombre_empresa}}" readonly style="text-transform:uppercase;"> -->
+                            <div class="form-floating text-wrap">
+                                <input type="text" class="form-control"   name="empresas_id" id="empresas_id" value="{{old('empresas_id', $sede->empresa->nombre_empresa)}}" autofocus style="text-transform:uppercase;" disabled>
                                 <label for="floatingSelectGrid">EMPRESA:</label>
                             </div>
                         </div>
@@ -36,7 +33,7 @@
                     <div class="row g-2">
                         <div class="col-md">
                             <div class="form-floating text-wrap">
-                                <input type="text" class="form-control"   name="municipio_sede" id="municipio_sede" value="{{old('municipio_sede', $sede->municipio_sede)}}" autofocus style="text-transform:uppercase;">
+                                <input type="text" class="form-control"   name="municipio_sede" id="municipio_sede" value="{{old('municipio_sede', $sede->municipios->nombre_municol)}}" autofocus style="text-transform:uppercase;">
                                 <label for="floatingInputGrid">MUNICIPIO:</label>
                                 @error('municipio_sede')
                                     <small>*{{$message}}</small>
@@ -45,7 +42,7 @@
                         </div>
                         <div class="col-md">
                             <div class="form-floating text-wrap">
-                                <input type="text" class="form-control"   name="departamento_sede" id="departamento_sede" value="{{old('departamento_sede', $sede->departamento_sede)}}"  autofocus style="text-transform:uppercase;">
+                                <input type="text" class="form-control"   name="departamento_sede" id="departamento_sede" value="{{old('departamento_sede', $sede->municipios->coldepartamento->nombre_deptocol)}}"  autofocus style="text-transform:uppercase;">
                                 <label for="floatingInputGrid">DEPARTAMENTO:</label>
                                 @error('departamento_sede')
                                     <small>*{{$message}}</small>
@@ -62,10 +59,10 @@
                     <div class="row">
                         <div class="col"></div>
                         <div class="col d-grid gap-2">
-                            <button class="btn btn-primary" type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR</button>
+                            <button class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR</button>
                         </div>
                         <div class="col d-grid gap-2">
-                            <a href="{{route('empresas.search')}}" class="btn btn-primary " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                            <a href="{{route('empresas.search')}}" class="btn btn-danger" type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                         </div>
                         <div class="col"></div>
                     </div>

@@ -56,7 +56,7 @@
 
                 <div class="col"></div>
                 <div class="col-8">
-                    <div class="card text-dark bg-light" >
+                    <div class="card text-dark bg-light">
                         <h2 class="text-center mt-3">CREAR SEDE</h2>
 
                         <form class="m-4" action="{{route('sedes.save')}}" method="POST">
@@ -66,9 +66,8 @@
                             <div class="row g-2">
                                 <div class="col-md">
                                     <div class="form-floating text-wrap">
-                                        <select class="form-select" name="id_empresa" id="id_empresa" autofocus aria-label="Floating label select example">
-                                            <option value="{{$empresa->id_empresa}}">{{$empresa->nombre_empresa}}</option>
-                                        </select>
+                                        <input type="text" class="form-control"   name="empresas_id" id="empresas_id" value="{{old('empresas_id', $empresa->nombre_empresa)}}" autofocus style="text-transform:uppercase;" disabled>
+                                        <input type="text" class="form-control"   name="id_empresa" id="id_empresa" value="{{old('id_empresa', $empresa->id_empresa)}}" autofocus style="text-transform:uppercase;" hidden>
                                         <label for="floatingSelectGrid">EMPRESA:</label>
                                         @error('id_empresa')
                                             <small>*{{$message}}</small>
@@ -141,6 +140,9 @@
                                 <div class="col"></div>
                                 <div class="col d-grid gap-2">
                                     <input class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar" value="GUARDAR">
+                                </div>
+                                <div class="col d-grid gap-2">
+                                    <a href="{{route('empresas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                                 </div>
                                 <div class="col"></div>
                             </div>

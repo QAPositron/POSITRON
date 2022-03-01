@@ -75,8 +75,6 @@ class ContactosController extends Controller
         return redirect()->route('empresas.info', $request->id_empresas);
     }
 
-   
-
     public function edit(Contactosede $contacto){
         
         return view('contacto.edit_contacto', compact('contacto'));

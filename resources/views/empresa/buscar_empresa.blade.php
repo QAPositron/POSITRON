@@ -1,36 +1,36 @@
 @extends('layouts.plantillabase')
 @section('contenido')
-    <div class="row">
-        <div class="col">
-            <a href="{{route('empresas.create')}}" class="btn colorQA btn-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg> CREAR EMPRESA
-            </a>
-            
-        </div>
-        <div class="col"></div>
+<div class="row">
+    <div class="col">
+        <a href="{{route('empresas.create')}}" class="btn colorQA btn-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg> CREAR EMPRESA
+        </a>
+        
     </div>
-    <div class="row">
-        <div class="col"></div>
-        <div class="col">
-            <div class="card text-dark bg-light" style="max-width: 25rem;">
-                <h3 class="pt-4 text-center">BUSCAR</h3>
-                <form class="m-4"action="">
-                    <label for="exampleFormControlInput1" class="form-label">PALABRA CLAVE: </label>
-                    <div class="row">
-                        <div class="col-8">
-                            <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="--BUSCAR--" autofocus style="text-transform:uppercase;">
-                        </div>
-                        <div class="col">
-                            <input class="btn colorQA" type="submit" id="submit" name="submit" value="BUSCAR">
-                        </div>
+    <div class="col"></div>
+</div>
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
+        <div class="card text-dark bg-light" style="max-width: 25rem;">
+            <h3 class="pt-4 text-center">BUSCAR</h3>
+            <form class="m-4"action="">
+                <label for="exampleFormControlInput1" class="form-label">PALABRA CLAVE: </label>
+                <div class="row">
+                    <div class="col-8">
+                        <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="--BUSCAR--" autofocus style="text-transform:uppercase;">
                     </div>
-                </form>
-            </div>
+                    <div class="col">
+                        <input class="btn colorQA" type="submit" id="submit" name="submit" value="BUSCAR">
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="col"></div>
     </div>
+    <div class="col"></div>
+</div>
     
 <div class="row pt-5" id ="salida">
     <h3 class="text-center">TODAS LAS EMPRESAS</h3>
@@ -50,7 +50,7 @@
                 <td><a class="link-dark" href="{{route('empresas.info', $emp->id_empresa)}}">{{$emp->nombre_empresa}}</a></td>
                 <td>{{$emp->num_iden_empresa}}  {{$emp->DV}}</td>
                 <td>{{$emp->tipo_identificacion_empresa}}</td>
-                <td>{{$emp->ciudad_empresa}}</td>
+                <td>{{$emp->municipios->nombre_municol}}</td>
                 <td>{{$emp->direccion_empresa}}</td>
                 <td>{{$emp->email_empresa}}</td>
                 <td>
@@ -87,6 +87,24 @@ integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('guardar')== 'ok')
+    <script>
+        Swal.fire(
+        'GUARDADA!',
+        'SE HA GUARDADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
+@if(session('actualizar')== 'ok')
+    <script>
+        Swal.fire(
+        'ACTUALIZADA!',
+        'SE HA ACTUALIZADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
 @if(session('eliminar')== 'ok')
     <script>
         Swal.fire(
@@ -107,25 +125,20 @@ crossorigin="anonymous">
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'SI!'
+                confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    /* Swal.fire(
-                        'ELIMINADA!',
-                        'HA ELIMINADO UNA EMPRESA.',
-                        'success'
-                        ) */
+                   
                     this.submit();
                 }
             })
         })
     })
 </script>
-
-<!-- <script type="text/javascript">
+{{-- <script type="text/javascript">
     function Eliminar(evt) {
         evt.preventDefault();
     }
-</script> -->
+</script> --}}
 
 @endsection()

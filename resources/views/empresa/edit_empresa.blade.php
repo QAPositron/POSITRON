@@ -161,19 +161,27 @@
                         </div>
                     </div>
                     <div class="col-md">
-                        <div class="form-floating">
-                            <input type="text" name="ciudad_empresa" id="ciudad_empresa" class="form-control" value="{{old('ciudad_empresa', $empresa->ciudad_empresa)}}" autofocus style="text-transform:uppercase;"> 
-                            <label for="floatingInputGrid">CIUDAD:</label>
-                            @error('ciudad_empresa')
+                        <div class="form-group">
+                            <label for="floatingInputGrid">DEPARTAMENTO:</label>
+                            <select class="form-control"  name="departamento_empresa" id="departamento_empresa" value="{{old('departamento_empresa')}}" autofocus style="text-transform:uppercase">
+                                <option value="{{$empresa->municipios->coldepartamento->id_departamentocol}}">{{$empresa->municipios->coldepartamento->nombre_deptocol}}</option>
+                                @foreach($departamentoscol as $depacol)
+                                    <option value="{{$depacol->id_departamentocol}}">{{$depacol->nombre_deptocol}}</option>
+                                @endforeach
+                            </select>
+                            @error('departamento_empresa')
                                 <small>*{{$message}}</small>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md">
-                        <div class="form-floating">
-                            <input type="text" name="departamento_empresa" id="departamento_empresa" class="form-control" value="{{old('departamento_empresa', $empresa->departamento_empresa)}}" autofocus style="text-transform:uppercase;"> 
-                            <label for="floatingInputGrid">DEPARTAMENTO:</label>
-                            @error('departamento_empresa')
+                        <div class="form-group">
+                            <label for="floatingInputGrid">MUNICIPIO:</label>
+                            <select class="form-control" name="ciudad_empresa" id="ciudad_empresa" value="{{old('ciudad_empresa')}}" autofocus style="text-transform:uppercase">
+                                <option value="$empresa->municipios->id_municipiocol">{{$empresa->municipios->nombre_municol}}</option>
+                            </select>
+                           
+                            @error('ciudad_empresa')
                                 <small>*{{$message}}</small>
                             @enderror
                         </div>
@@ -220,7 +228,35 @@ integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
-       
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#departamento_empresa').select2();
+        $('#ciudad_empresa').select2();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#departamento_empresa').on('change', function(){
+            var departamento_id = $(this).val();
+            alert(departamento_id);
+            if($.trim(departamento_id) != ''){
+                $.get('empresasdeptomuni', {departamento_id: departamento_id}, function(municipios){
+                    console.log(municipios);
+                    $('#ciudad_empresa').empty();
+                    $('#ciudad_empresa').append("<option value='{{$empresa->municipios->id_municipiocol}}'>{{$empresa->municipios->nombre_municol}}</option>");
+                    $.each(municipios, function(index, value){
+                        $('#ciudad_empresa').append("<option value='"+ index + "'>" + value + "</option>");
+                    })
+                });
+            }
+        });
+    });
+</script>
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
     $('#form_edit_empresa').submit(function(e){
@@ -231,14 +267,10 @@ $(document).ready(function(){
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'SI!'
+            confirmButtonText: 'SI, SEGURO!'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                'ACTUALIZADA!',
-                'SE HA ACTUALIZADO UNA EMPRESA.',
-                'success'
-                )
+                
                 this.submit(); 
             }
         })
