@@ -37,7 +37,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /////////RUTAS PARA EL CRUD DE EMPRESAS///////
 Route::get('empresas/search', [EmpresasController::class, 'search'])->name('empresas.search');
-Route::get('empresas/busqueda', [EmpresasController::class, 'busqueda'])->name('empresas.busqueda');
 
 Route::get('empresas/create', [EmpresasController::class, 'create'])->name('empresas.create');
 

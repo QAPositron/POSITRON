@@ -127,9 +127,7 @@ class EmpresasController extends Controller
         return redirect()->route('empresas.search')->with('eliminar', 'ok');
     }
 
-    public function busqueda(Request $request){
-        return $request;
-    }
+    
 
     public function info(Empresa $empresa){
         /* SELECT * FROM trabajadors INNER JOIN trabajadorsedes ON trabajadors.id_trabajador = trabajadorsedes.trabajador_id INNER JOIN sedes ON trabajadorsedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
