@@ -42,6 +42,24 @@
                 margin: 0;
             }
             input[type=number] { -moz-appearance:textfield; }
+
+            .form-control:focus {
+                border-color: white;
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
+            }
+            .form-select:focus{
+                border-color: white;
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
+            }
+            .form-check-input:focus{
+                border-color: white;
+                /* background-attachment: #1A9980; */
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
+            }
+            .form-check-input:checked{
+                background: #1A9980;
+                border-color: white;
+            }
         
         </style>
         
@@ -59,7 +77,7 @@
                     <div class="card text-dark bg-light">
                         <h2 class="text-center mt-3">CREAR SEDE</h2>
 
-                        <form class="m-4" action="{{route('sedes.save')}}" method="POST">
+                        <form class="m-4" id="form_create_sede" name="form_create_sede" action="{{route('sedes.save')}}" method="POST">
                         
                             @csrf
 
@@ -100,8 +118,12 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md">
-                                    <div class="form-group">
+                                <div class="col-md" id="div_municipio">
+                                    <div class="spinner_municipio text-center" id="spinner_municipio">
+
+                                    </div>
+
+                                    <div class="form-group" id="municipio_empresa" name="municipio_empresa">
                                         <label for="floatingInputGrid">MUNICIPIO:</label>
                                         <select class="form-control" name="municipio_sede" id="municipio_sede" value="{{old('municipio_sede')}}" autofocus style="text-transform:uppercase">
 
@@ -122,7 +144,6 @@
                             <br>
                             <br>
                             <div class="row g-2">
-                                
                                 <div class="col-10">
                                     <label for="">ESPECIALIDADES:</label>
                                     <div class="form-floating">
@@ -142,7 +163,7 @@
                                     <input class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar" value="GUARDAR">
                                 </div>
                                 <div class="col d-grid gap-2">
-                                    <a href="{{route('empresas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                                    <a href="{{route('empresas.info', $empresa->id_empresa)}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                                 </div>
                                 <div class="col"></div>
                             </div>
@@ -153,11 +174,13 @@
                 <div class="col"></div>    
             </div>
         </div>
-        <!-- <script
+        {{-- <script
             src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
             crossorigin="anonymous">
-        </script> -->
+        </script> --}}
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
         <script type="text/javascript">
             $(document).ready(() => {
 
@@ -177,11 +200,18 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#departamento_sede').on('change', function(){
+                    $('#municipio_empresa').fadeOut();
+                    $('#spinner_municipio').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');
                     var departamento_id = $(this).val();
+
+                    var padre = document.getElementById("spinner_municipio");
+                    var hijo = document.getElementById("spinner");
                     /* alert(departamento_id); */
                     if($.trim(departamento_id) != ''){
                         $.get('sedesdeptomuni', {departamento_id: departamento_id}, function(municipios){
                             console.log(municipios);
+                            var remove = padre.removeChild(hijo);
+                            $('#municipio_empresa').fadeIn();
                             $('#municipio_sede').empty();
                             $('#municipio_sede').append("<option value=''>--SELECCIONE UNA SEDE--</option>");
                             $.each(municipios, function(index, value){
@@ -191,6 +221,26 @@
                     }
                 });
             });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#form_create_sede').submit(function(e){
+                    e.preventDefault();
+                    Swal.fire({
+                        text: "DESEA GUARDAR ESTA SEDE??",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'SI, SEGURO!'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                           
+                            this.submit();
+                        }
+                    })
+                })
+            })
         </script>
     </body>
 </html>

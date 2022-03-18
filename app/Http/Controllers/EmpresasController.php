@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Areadepartamentosede;
 use App\Models\Coldepartamento;
 use App\Models\Colmunicipio;
 use App\Models\Contacto;
+use App\Models\Contactosede;
 use App\Models\Departamentosede;
 use App\Models\Empresa;
 use App\Models\Sede;
@@ -13,6 +15,7 @@ use Illuminate\Http\Request;
 
 class EmpresasController extends Controller
 {
+    
     public function create(){
         $departamentoscol = Coldepartamento::all();
         return view('empresa.crear_empresa', compact('departamentoscol'));
@@ -124,12 +127,22 @@ class EmpresasController extends Controller
         return redirect()->route('empresas.search')->with('eliminar', 'ok');
     }
 
+    public function busqueda(Request $request){
+        return $request;
+    }
+
     public function info(Empresa $empresa){
         /* SELECT * FROM trabajadors INNER JOIN trabajadorsedes ON trabajadors.id_trabajador = trabajadorsedes.trabajador_id INNER JOIN sedes ON trabajadorsedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
         $sede = Sede::where('empresas_id', $empresa->id_empresa)->get();
         $departamentos = Departamentosede::join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
         ->where('empresas_id', '=', $empresa->id_empresa)
-        ->select('nombre_departamento', 'sede_id')
+        ->select('nombre_departamento', 'sede_id', 'id_departamentosede')
+        ->get();
+        $areadeptos = Areadepartamentosede::join('departamentosedes', 'areadepartamentosedes.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
+        ->join('sedes','departamentosedes.sede_id', '=', 'sedes.id_sede')
+        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
+        ->where('empresas_id', '=', $empresa->id_empresa)
+        ->orderBy('nombre_departamento', 'ASC')
         ->get();
         $trabajador = Trabajador::join('trabajadorsedes','trabajadors.id_trabajador', '=', 'trabajadorsedes.trabajador_id')
         ->join('sedes','trabajadorsedes.sede_id', '=', 'sedes.id_sede')
@@ -139,15 +152,15 @@ class EmpresasController extends Controller
         ->select("*")
         ->get();
         /* SELECT * FROM `contactos` INNER JOIN contactosedes ON contactos.id_contacto = contactosedes.id_contactosede INNER JOIN sedes ON contactosedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa ORDER BY sedes.id_sede; */
-        $contacto = Contacto::join('contactosedes', 'contactos.id_contacto', '=', 'contactosedes.id_contactosede')
+        $contacto = Contactosede::join('contactos', 'contactosedes.contacto_id', '=', 'contactos.id_contacto')
         ->join('sedes', 'contactosedes.sede_id', '=', 'sedes.id_sede') 
         ->join('empresas','sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('empresas.id_empresa', '=', $empresa->id_empresa)
         ->orderBy('sedes.id_sede')
         ->select("*")
         ->get();
-        /* return $depaEsp; */
-        return view('empresa.info_empresa', compact('empresa' ,'sede', 'trabajador', 'contacto', 'departamentos'));
+        /* return $areadeptos; */
+        return view('empresa.info_empresa', compact('empresa' ,'sede', 'trabajador', 'contacto', 'departamentos', 'areadeptos'));
     }
    
 }

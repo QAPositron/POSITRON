@@ -18,4 +18,10 @@ class Departamentosede extends Model
      public function contratodosimetriasededepto(){
         return $this->hasMany(Contratodosimetriasededepto::class, 'id_contdosisededepto');
     }
+
+    //relacion uno a muchos con la tabla areadepartamentosede
+    public function areadepartamentosede(){
+        return $this->hasMany(Areadepartamentosede::class, 'id_areadepartamentosede');
+    }
+
 }

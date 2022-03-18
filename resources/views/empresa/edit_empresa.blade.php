@@ -164,7 +164,7 @@
                         <div class="form-group">
                             <label for="floatingInputGrid">DEPARTAMENTO:</label>
                             <select class="form-control"  name="departamento_empresa" id="departamento_empresa" value="{{old('departamento_empresa')}}" autofocus style="text-transform:uppercase">
-                                <option value="{{$empresa->municipios->coldepartamento->id_departamentocol}}">{{$empresa->municipios->coldepartamento->nombre_deptocol}}</option>
+                                <option value="{{$empresa->municipios->coldepartamento->id_departamentocol}}">--{{$empresa->municipios->coldepartamento->nombre_deptocol}}--</option>
                                 @foreach($departamentoscol as $depacol)
                                     <option value="{{$depacol->id_departamentocol}}">{{$depacol->nombre_deptocol}}</option>
                                 @endforeach
@@ -174,11 +174,15 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md">
-                        <div class="form-group">
+                    <div class="col-md" id="div_municipio">
+                        <div class="spinner_municipio text-center" id="spinner_municipio">
+
+                        </div>
+
+                        <div class="form-group" id="municipio_empresa" name="municipio_empresa">
                             <label for="floatingInputGrid">MUNICIPIO:</label>
                             <select class="form-control" name="ciudad_empresa" id="ciudad_empresa" value="{{old('ciudad_empresa')}}" autofocus style="text-transform:uppercase">
-                                <option value="$empresa->municipios->id_municipiocol">{{$empresa->municipios->nombre_municol}}</option>
+                                <option value="$empresa->municipios->id_municipiocol">--{{$empresa->municipios->nombre_municol}}--</option>
                             </select>
                            
                             @error('ciudad_empresa')
@@ -239,13 +243,19 @@ crossorigin="anonymous">
 <script type="text/javascript">
     $(document).ready(function() {
         $('#departamento_empresa').on('change', function(){
+            $('#municipio_empresa').fadeOut();
+            $('#spinner_municipio').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');
             var departamento_id = $(this).val();
-            alert(departamento_id);
+            /* alert(departamento_id); */
+            var padre = document.getElementById("spinner_municipio");
+            var hijo = document.getElementById("spinner");
             if($.trim(departamento_id) != ''){
                 $.get('empresasdeptomuni', {departamento_id: departamento_id}, function(municipios){
                     console.log(municipios);
+                    var remove = padre.removeChild(hijo);
+                    $('#municipio_empresa').fadeIn();
                     $('#ciudad_empresa').empty();
-                    $('#ciudad_empresa').append("<option value='{{$empresa->municipios->id_municipiocol}}'>{{$empresa->municipios->nombre_municol}}</option>");
+                    $('#ciudad_empresa').append("<option value='{{$empresa->municipios->id_municipiocol}}'>--{{$empresa->municipios->nombre_municol}}--</option>");
                     $.each(municipios, function(index, value){
                         $('#ciudad_empresa').append("<option value='"+ index + "'>" + value + "</option>");
                     })
@@ -254,8 +264,6 @@ crossorigin="anonymous">
         });
     });
 </script>
-
-
 
 <script type="text/javascript">
 $(document).ready(function(){

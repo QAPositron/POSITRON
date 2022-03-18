@@ -58,15 +58,15 @@ class SedesController extends Controller
             
             $deptosede->save();
         }
-        return redirect()->route('empresas.info', $request->id_empresa);
+        return redirect()->route('empresas.info', $request->id_empresa)->with('guardar', 'ok');
         /* return $request; */
     }
 
 
     public function edit(Sede $sede){
-        
-        /* return $sede; */
-        return view('sede.edit_sede', compact('sede'));
+        $departamentoscol = Coldepartamento::all();
+        $deptos = Departamentosede::where('sede_id', '=', $sede->id_sede)->get();
+        return view('sede.edit_sede', compact('sede', 'departamentoscol', 'deptos'));
     }
 
     public function update(Request $request, Sede $sede){
@@ -75,25 +75,38 @@ class SedesController extends Controller
             
             'nombre_sede'           => 'required',
             'municipio_sede'        => 'required',              
-            'departamento_sede'     => 'required',  
             'direccion_sede'        => 'required',
            
         ]);
 
-        $sede->empresas_id         =strtoupper($request->empresas_id);
+        $sede->empresas_id         =$request->id_empresa;
         $sede->nombre_sede         =strtoupper($request->nombre_sede);
-        $sede->municipio_sede      =strtoupper($request->municipio_sede);
-        $sede->departamento_sede   =strtoupper($request->departamento_sede);
+        $sede->municipiocol_id     =$request->municipio_sede;
         $sede->direccion_sede	   =strtoupper($request->direccion_sede);
-        
+
+        /* return $request; */
+
         $sede->save();
-        
-        
-        return redirect()->route('empresas.info', $request->empresas_id);
+        if(empty($request->multiple_select_depsede)){
+
+        }else{
+            for($i=0; $i<count($request->multiple_select_depsede); $i++){
+    
+                $deptosede = new Departamentosede();
+    
+                $deptosede->sede_id                 = $sede->id_sede;
+                $deptosede->nombre_departamento     = $request->multiple_select_depsede[$i];
+                
+                $deptosede->save();
+            }
+        }
+        return redirect()->route('empresas.info', $request->id_empresa)->with('actualizar', 'ok');
     }
+
     public function destroy(Sede $sede){
         $sede->delete();
         return redirect()->route('empresas.search')->with('eliminar', 'ok');
     }
+    
 
 }

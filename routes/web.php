@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AreadepartamentosedeController;
 use App\Http\Controllers\AsignarDosimetroController;
 use App\Http\Controllers\ContactosController;
+use App\Http\Controllers\DepartamentosedesController;
 use App\Http\Controllers\DosimetriaController;
 use App\Http\Controllers\DosimetrosController;
 use App\Http\Controllers\EmpresasController;
@@ -11,6 +13,8 @@ use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\SedesController;
 use App\Http\Controllers\TrabajadoresController;
 use App\Http\Controllers\TrabajadorsController;
+use App\Models\Areadepartamentosede;
+use App\Models\Departamentosede;
 use App\Models\Holder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -33,11 +37,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /////////RUTAS PARA EL CRUD DE EMPRESAS///////
 Route::get('empresas/search', [EmpresasController::class, 'search'])->name('empresas.search');
+Route::get('empresas/busqueda', [EmpresasController::class, 'busqueda'])->name('empresas.busqueda');
 
 Route::get('empresas/create', [EmpresasController::class, 'create'])->name('empresas.create');
 
 Route::get('/empresas/empresasdeptomuni', [EmpresasController::class, 'selectmunicipios']);
 Route::get('/empresas/{edit}/empresasdeptomuni', [EmpresasController::class, 'selectmunicipios']);
+Route::get('/sedes/{edit}/empresasdeptomuni', [EmpresasController::class, 'selectmunicipios']);
 
 Route::post('empresas', [EmpresasController::class, 'save'])->name('empresas.save');
 Route::get('empresas/{empresa}/edit', [EmpresasController::class, 'edit'])->name('empresas.edit');
@@ -46,17 +52,24 @@ Route::delete('empresas/{empresa}', [EmpresasController::class, 'destroy'])->nam
 
 
 Route::get('empresas/{empresa}/info', [EmpresasController::class, 'info'])->name('empresas.info');
+Route::get('empresas/{empresa}/info#sede', [EmpresasController::class, 'info'])->name('empresas.infosede');
 
 /////////RUTAS PARA EL CRUD DE SEDES///////
 
 Route::get('sedes/{sede}/create', [SedesController::class, 'create'])->name('sedes.create');
-
 Route::get('/sedes/{sede}/sedesdeptomuni', [SedesController::class, 'selectmunicipios']);
 
 Route::post('sedes', [SedesController::class, 'save'])->name('sedes.save');
 Route::get('sedes/{sede}/edit', [SedesController::class, 'edit'])->name('sedes.edit');
 Route::put('sedes/{sede}', [SedesController::class, 'update'])->name('sedes.update');
 Route::delete('sedes/{sede}', [SedesController::class, 'destroy'])->name('sedes.destroy');
+Route::delete('empresas/{empresa}/{depto}/destroydepto', [DepartamentosedesController::class, 'destroydepa'])->name('sedesdepto.destroydepa');
+
+/*------------RUTAS PARA EL CRUD DE LAS AREAS PARA LOS DEPARTAMENTOS-------------- */
+
+Route::post('areadeptosave', [AreadepartamentosedeController::class, 'save'])->name('areadepto.save');
+Route::put('areadeptoupdate/{area}', [AreadepartamentosedeController::class, 'update'])->name('areadepto.update');
+Route::delete('areadeptodestroy/{area}', [AreadepartamentosedeController::class, 'destroy'])->name('areadepto.destroy');
 
 /////////RUTAS PARA EL CRUD DE TRABAJADORES///////
 
@@ -68,8 +81,11 @@ Route::put('trabajadores/{trabajador}', [TrabajadorsController::class, 'update']
 Route::delete('trabajadores/{trabajador}', [TrabajadorsController::class, 'destroy'])->name('trabajadores.destroy');
 
 /////////RUTAS PARA EL CRUD DE CONTACTOS///////
+Route::get('contactos/search', [ContactosController::class, 'search'])->name('contactos.search');
+Route::get('contactos/selectsedes', [ContactosController::class, 'selectsedes']);
+Route::get('contactos/{contacto}/selectsedes', [ContactosController::class, 'selectsedes']);
 
-Route::get('contactos/{contacto}/create', [ContactosController::class, 'create'])->name('contactos.create');
+Route::get('contactos/create', [ContactosController::class, 'create'])->name('contactos.create');
 Route::post('contactos', [ContactosController::class, 'save'])->name('contactos.save');
 Route::get('contactos/{contacto}/edit', [ContactosController::class, 'edit'])->name('contactos.edit');
 Route::put('contactos/{contacto}', [ContactosController::class, 'update'])->name('contactos.update');

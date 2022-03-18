@@ -31,46 +31,46 @@
                                 <table class="table table-bordered">
                                     <tbody >
                                         <tr>
-                                            <th colspan="4" class="table-active text-center">EMPRESA</th>
+                                            <th colspan="4" class="table-active text-center align-middle">EMPRESA</th>
                                         </tr>
                                         <tr>
-                                            <th class="m-auto"style='width: 12.55%'>TIPO IDENTIFICACIÓN:</th>
-                                            <td style='width: 18.55%'>{{$empresa->tipo_identificacion_empresa}}</td>
-                                            <th style='width: 12.55%'>NÚMERO IDENTIFICACIÓN:</th>
-                                            <td style='width: 20.55%'>{{$empresa->num_iden_empresa}} {{$empresa->DV}}</td>
+                                            <th class="m-auto align-middle" style='width: 12.55%'>TIPO IDENTIFICACIÓN:</th>
+                                            <td class="align-middle" style='width: 18.55%'>{{$empresa->tipo_identificacion_empresa}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>NÚMERO IDENTIFICACIÓN:</th>
+                                            <td class="align-middle" style='width: 20.55%'>{{$empresa->num_iden_empresa}} {{$empresa->DV}}</td>
                                         </tr>
                                         <tr>
-                                            <th style='width: 12.55%'>ACTIVIDAD ECONÓMICA:</th>
-                                            <td>{{$empresa->actividad_economica_empresa}}</td>
-                                            <th style='width: 12.55%'>TIPO:</th>
-                                            <td>{{$empresa->tipo_empresa}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>ACTIVIDAD ECONÓMICA:</th>
+                                            <td class="align-middle">{{$empresa->actividad_economica_empresa}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>TIPO:</th>
+                                            <td class="align-middle">{{$empresa->tipo_empresa}}</td>
                                         </tr>
                                         <tr>
-                                            <th style='width: 12.55%'>RESPONSABILIDAD IVA:</th>
-                                            <td>{{$empresa->respo_iva_empresa}}</td>
-                                            <th style='width: 12.55%'>RESPONSABILIDAD FISCAL:</th>
-                                            <td>{{$empresa->respo_fiscal_empresa}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>RESPONSABILIDAD IVA:</th>
+                                            <td class="align-middle">{{$empresa->respo_iva_empresa}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>RESPONSABILIDAD FISCAL:</th>
+                                            <td class="align-middle">{{$empresa->respo_fiscal_empresa}}</td>
                                         </tr>
                                         <tr>
-                                            <th style='width: 12.55%'>TELÉFONO:</th>
-                                            <td>{{$empresa->telefono_empresa}}</td>
-                                            <th style='width: 12.55%'>CORREO ELECTRÓNICO:</th>
-                                            <td>{{$empresa->email_empresa }}</td>
+                                            <th class="align-middle" style='width: 12.55%'>TELÉFONO:</th>
+                                            <td class="align-middle">{{$empresa->telefono_empresa}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>CORREO ELECTRÓNICO:</th>
+                                            <td class="align-middle">{{$empresa->email_empresa }}</td>
                                         </tr>
                                         <tr>
-                                            <th style='width: 12.55%'>DIREECCIÓN:</th>
-                                            <td>{{$empresa->direccion_empresa}}</td>
-                                            <th style='width: 12.55%'>PAÍS:</th>
-                                            <td>{{$empresa->pais_empresa}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>DIREECCIÓN:</th>
+                                            <td class="align-middle">{{$empresa->direccion_empresa}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>PAÍS:</th>
+                                            <td class="align-middle">{{$empresa->pais_empresa}}</td>
                                         </tr>
                                         <tr>
-                                            <th style='width: 12.55%'>MUNICIPIO:</th>
-                                            <td>{{$empresa->municipios->nombre_municol}}</td>
-                                            <th style='width: 12.55%'>DEPARTAMENTO:</th>
-                                            <td>{{$empresa->municipios->coldepartamento->nombre_deptocol}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>MUNICIPIO:</th>
+                                            <td class="align-middle">{{$empresa->municipios->nombre_municol}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>DEPARTAMENTO:</th>
+                                            <td class="align-middle">{{$empresa->municipios->coldepartamento->nombre_deptocol}}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="table-active text-center">
+                                            <td colspan="4" class="table-active text-center align-middle">
                                                 <div class="row">
                                                     <div class="col"></div>
                                                     <div class="col">
@@ -112,56 +112,97 @@
                                 </div>
                                 <div class="col"></div>
                             </div>
-                            <h4 class="card-title text-center">SEDES SUBSCRITAS A LA EMPRESA: {{$empresa->nombre_empresa}}</h4>
-                            
-                            <div class="table table-responsive p-5 ">
-                                <table class="table table-bordered">
-                                    <thead class ="text-center">
-                                        <tr>
-                                            <th style='width: 12.60%'>SEDE</th>
-                                            <th style='width: 15.55%'>MUNICIPIO</th>
-                                            <th style='width: 9.55%'>DIRECCIÓN</th>
-                                            <th style='width: 10.55%'>DEPARTAMENTOS</th>
-                                            <th style='width: 5.60%'>ACCIONES</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-9">
+                                    <h4 class="card-title text-center">SEDES SUBSCRITAS A LA EMPRESA: {{$empresa->nombre_empresa}}</h4>
+                                        <br>
+                                        @php
+                                            $check = 'inicial';
+                                        @endphp
                                         @foreach($sede as $sed)
+                                            @php
+                                                if($sed->nombre_sede != $check){
+                                                    echo "<table class='table table-bordered x-4'>";
+                                                        echo "<h4 class='card-title text-center' id='sede_id' name='sede_id'>{$sed->nombre_sede}</h4>";  
+                                                        $check = strval($sed->nombre_sede);
+                                                        echo "<thead class='table-active text-center'>";
+                                                            echo  "<tr>";
+                                                                echo "<th rowspan='2' class='align-middle'>MUNICIPIO</th>";
+                                                                echo "<th rowspan='2' class='align-middle'>DIRECCIÓN</th>";
+                                                                echo "<th colspan='3' class='align-middle'>DEPARTAMENTOS</th>";
+                                                                echo "<th rowspan='2' class='align-middle' style='width: 14.60%'>ACCIONES</th>";
+                                                            echo "</tr>";
+                                                            echo "<tr>";
+                                                                echo "<th class='align-middle' style='font-size:13px; width: 10.50%;'>NOMBRE</th>";
+                                                                echo "<th class='align-middle' style='font-size:13px;'>ELIMINAR <br> DEPTO.</th>";
+                                                                echo "<th class='align-middle' style='font-size:13px;'>CREAR <br> ÁREA</th>";
+                                                            echo "</tr>";
+                                                        echo "</thead>";
+                                                }
+                                            @endphp
                                             <tr>
-                                                <td>{{$sed->nombre_sede}}</td>
-                                                <td>{{$sed->municipios->nombre_municol}} / {{$sed->municipios->coldepartamento->abreviatura_deptocol}}</td>
-                                                <td>{{$sed->direccion_sede}}</td>
-                                                <td class="text-center">
-                                                    @php
-                                                        $chek = 'inicial';
-                                                    @endphp
+                                                <td class="text-center align-middle">{{$sed->municipios->nombre_municol}} / {{$sed->municipios->coldepartamento->abreviatura_deptocol}}</td>  
+                                                <td class="text-center align-middle">{{$sed->direccion_sede}}</td>
+                                                <td colspan="3" class="text-center align-middle">
                                                     @foreach($departamentos as $dep)
                                                         @php
+                                                            $chek = 'inicial';
+                                                        @endphp
+                                                        <?php
                                                             if($dep->sede_id != $chek && $dep->sede_id == $sed->id_sede){
-                                                                echo "{$dep->nombre_departamento}";
-                                                                echo "<br>"; 
-                                                                $check = strval($dep->sede_id);
+                                                        ?>
+                                                                <div class='row'>
+                                                                    <div class='col-md p-1'>
+                                                                        {{$dep->nombre_departamento}}
+                                                                    </div>
+                                                                    <div class='col-md p-1'>
+                                                                        <form id="eliminar_depto" name="eliminar_depto" class="eliminar_depto" action="{{route('sedesdepto.destroydepa', ['empresa'=>$empresa->id_empresa, 'depto' =>$dep->id_departamentosede])}}" method="POST">
+                                                                            @csrf  
+                                                                            @method('delete')
+                                                                            
+                                                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-x-lg mb-1" viewBox="0 0 16 16">
+                                                                                    <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                                                                    <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                                                                </svg>
+                                                                            </button>
+                                                                        </form>
+                                                                        
+                                                                        <?php
+                                                                            $check = strval($dep->sede_id);
+                                                                        ?>
+                                                                    </div>
+                                                                    <div class="col-md p-1">
+                                                                        <button class="btn colorQA btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#nuevaAreaModal" onclick="capturar('{{$sed->nombre_sede}}', '{{$dep->id_departamentosede}}' , '{{$dep->nombre_departamento}}')">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-plus-lg mb-1" viewBox="0 0 16 16">
+                                                                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                                                            </svg>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                        <?php        
                                                             }else{
                                                                 echo " ";
                                                             }
-                                                        @endphp
-                                                    @endforeach 
+                                                        ?>    
+                                                    @endforeach
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center align-middle">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <a href="{{route('sedes.edit', $sed->id_sede)}}" class="btn colorQA">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill mb-1" viewBox="0 0 16 16">
+                                                            <a href="{{route('sedes.edit', $sed->id_sede)}}" class="btn btn-sm colorQA">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pen-fill mb-1" viewBox="0 0 16 16">
                                                                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
                                                                 </svg>
                                                             </a>
                                                         </div>
                                                         <div class="col">
-                                                            <form id="form_eliminar_sede" name="form_eliminar_sede" action="{{route('sedes.destroy', $sed)}}" method="POST">
+                                                            <form id="form_eliminar_sede" name="form_eliminar_sede" class="form_eliminar_sede" action="{{route('sedes.destroy', $sed)}}" method="POST">
                                                                 @csrf  
                                                                 @method('delete')
-                                                                <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                <button class="btn btn-sm btn-danger" type="submit">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                                                     </svg>
@@ -171,11 +212,213 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td colspan="6" class="px-5">
+                                                    @php
+                                                        $anterior = 'inicio';
+                                                    @endphp
+                                                    @foreach($areadeptos as $areas)
+                                                        @if($areas->nombre_sede == $sed->nombre_sede)
+                                                            <?php
+                                                                if($areas->id_departamentosede != $anterior){
+                                                                    echo "<table class='table table-bordered'>";
+                                                                        echo "<thead class='table-secondary text-center'>";
+                                                                            echo "<tr>";
+                                                                                echo "<th colspan='3'>DEPARTAMENTO: {$areas->nombre_departamento}</th>";
+                                                                                $anterior = $areas->id_departamentosede;
+                                                                            echo"</tr>";
+                                                                            echo "<tr>";
+                                                                                echo "<th style='width: 24.60%'>ÁREA</th>";
+                                                                                echo "<th>DESCRIPCION</th>";
+                                                                                echo "<th style='width: 16.60%'>ACCIONES</th>";
+                                                                            echo "</tr>";
+                                                                        echo "</thead>";
+                                                                        echo "<tbody>";
+                                                                            $area = 'inicio';
+                                                                            foreach ($areadeptos as $key => $areadep) {
+                                                                                if($areadep->departamentosede_id == $anterior && $areadep->id_areadepartamentosede != $area){
+                                                                                    $id_area = 'vacio';
+                                                                            ?>    
+                                                                                    <tr>
+                                                                                        <td>{{$areadep->nombre_area}}</td>
+                                                                                        <td>{{$areadep->descripcion}}</td>
+                                                                                        <td class="text-center">
+                                                                                            <div class="row">
+                                                                                                <div class="col">
+
+                                                                                                    <button class="btn colorQA btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#editAreaModal" onclick="capturarEdit('{{$sed->nombre_sede}}', '{{$areadep->id_areadepartamentosede}}', '{{$areadep->departamentosede_id}}' , '{{$areadep->nombre_departamento}}' , '{{$areadep->nombre_area}}' , '{{$areadep->descripcion}}')">
+                                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pen-fill mb-1" viewBox="0 0 16 16">
+                                                                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                                                                                        </svg>
+                                                                                                    </button>
+                                                                                                    <div class="modal fade" id="editAreaModal" tabindex="-1" aria-labelledby="editAreaModalLabel" aria-hidden="true">
+                                                                                                        <div class="modal-dialog modal-dialog-centered">
+                                                                                                            <div class="modal-content">
+                                                                                                                <div class="modal-header">
+                                                                                                                    <h5 class="modal-title w-100 text-center"  name="editAreaModalLabel" id="editAreaModalLabel">EDITAR ÁREA</h5>
+                                                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                                                </div>
+
+                                                                                                                <form  id="form_edit_areadepartamento" name="form_edit_areadepartamento" class="form_edit_areadepartamento" action="{{route('areadepto.update', $areadep)}}" method="POST">
+                                                                                                                    @csrf
+                                                                                                                    @method('put')
+                                                                                                                    <div class="modal-body">
+                                                                                                                        <div class="row">
+                                                                                                                            <div class="col-md">
+                                                                                                                                <label class="text-center" for="">INGRESE LA INFORMACIÓN SOLICITADA:</label>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <br>
+                                                                                                                        <div class="row">
+                                                                                                                            <div class="col-md">
+                                                                                                                                <div class="form-floating">
+                                                                                                                                    
+                                                                                                                                    <input type="text" name="nombre_empresa_deptoarea_edit" id="nombre_empresa_deptoarea_edit" value="{{$empresa->nombre_empresa}}" class="form-control" disabled>
+                                                                                                                                    <label for="">EMPRESA:</label>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-md">
+                                                                                                                                <div class="form-floating">
+                                                                                                                                    
+                                                                                                                                    <input type="text" name="nombre_sede_deptoarea_edit" id="nombre_sede_deptoarea_edit" class="form-control" disabled>
+                                                                                                                                    <label for="">SEDE:</label>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <br>
+                                                                                                                        <div class="row">
+                                                                                                                            <div class="col-md">
+                                                                                                                                <div class="form-floating">
+                                                                                                                                    <input type="number" name="id_deptoarea_edit" id="id_deptoarea_edit" hidden>
+                                                                                                                                    <input type="text" name="nombre_deptoarea_edit" id="nombre_deptoarea_edit" class="form-control" disabled>
+                                                                                                                                    <label for="">DEPARTAMENTO:</label>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-md">
+                                                                                                                                <div class="form-floating">
+                                                                                                                                    <input type="number" name="id_areadepartamentosede" id="id_areadepartamentosede" hidden>
+                                                                                                                                    <input type="text" name="nombre_area_edit" id="nombre_area_edit"  class="form-control"  style="text-transform:uppercase">
+                                                                                                                                    <label for="">NOMBRE DEL ÁREA:</label>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        <br>
+                                                                                                                        <div class="row">
+                                                                                                                            <div class="col-md">
+                                                                                                                                <label for="">DESCRIPCIÓN DEL ÁREA:</label>
+                                                                                                                                <textarea class="form-control" id="descripcion_area_edit" name="descripcion_area_edit" style="text-transform:uppercase"></textarea>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                    <div class="modal-footer">
+                                                                                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
+                                                                                                                        <button type="submit" class="btn colorQA"  data-bs-dismiss="modal" >GUARDAR</button>
+                                                                                                                    </div>
+                                                                                                                </form>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col">
+                                                                                                    <form id="form_eliminar_areadepto" name="form_eliminar_areadepto" class="form_eliminar_areadepto" action="{{route('areadepto.destroy', $areadep)}}" method="POST">
+                                                                                                        @csrf  
+                                                                                                        @method('delete')
+                                                                                                        <button class="btn btn-sm btn-danger" type="submit">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                                                                            </svg>
+                                                                                                        </button>
+                                                                                                    </form>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                            <?php
+                                                                                }else{
+                                                                                    echo " ";
+                                                                                }
+                                                                            }
+                                                                            
+                                                                        echo "</tbody>";
+                                                                    echo "</table>";
+                                                                }else{
+                                                                    echo " ";
+                                                                }
+                                                            
+                                                            ?>
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                            </tr>
+                                            <div class="modal fade" id="nuevaAreaModal" tabindex="-1" aria-labelledby="nuevaAreaModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title w-100 text-center"  name="nuevaAreaModalLabel" id="nuevaAreaModalLabel">CREAR ÁREA</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form  id="form_create_areadepartamento" name="form_create_areadepartamento" class="form_create_areadepartamento" action="{{route('areadepto.save')}}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-md">
+                                                                        <label class="text-center" for="">INGRESE LA INFORMACIÓN SOLICITADA:</label>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="col-md">
+                                                                        <div class="form-floating">
+                                                                            <input type="number" name="id_empresa_deptoarea"  id="id_empresa_deptoarea" value="{{$empresa->id_empresa}}" hidden>
+                                                                            <input type="text" name="nombre_empresa_deptoarea" id="nombre_empresa_deptoarea" value="{{$empresa->nombre_empresa}}" class="form-control" disabled>
+                                                                            <label for="">EMPRESA:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md">
+                                                                        <div class="form-floating">
+                                                                            <input type="text" name="nombre_sede_deptoarea" id="nombre_sede_deptoarea" class="form-control" disabled>
+                                                                            <label for="">SEDE:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="col-md">
+                                                                        <div class="form-floating">
+                                                                            <input type="number" name="id_departamentosede" id="id_departamentosede" hidden>
+                                                                            <input type="text" name="nombre_departamentosede" id="nombre_departamentosede"  class="form-control" disabled>
+                                                                            <label for="">DEPARTAMENTO:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md">
+                                                                        <div class="form-floating">
+                                                                            <input type="text" name="nombre_area" id="nombre_area"  class="form-control" style="text-transform:uppercase">
+                                                                            <label for="">NOMBRE DEL ÁREA:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="col-md">
+                                                                        <label for="">DESCRIPCIÓN DEL ÁREA:</label>
+                                                                        <textarea class="form-control" id="descripcion_area" name="descripcion_area" style="text-transform:uppercase"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
+                                                                <button type="submit" class="btn colorQA"  data-bs-dismiss="modal" >GUARDAR</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach 
+                                            </table>
+                                </div>
+                                <div class="col"></div> 
                             </div>
-                            
                         </div>
                         <!-- //////////////////// PESTAÑA DE TRABAJADORES //////////////// -->
                         <div class="tab-pane" id="trabajador" role="tabpanel" aria-labelledby="trabajador-tab">
@@ -190,38 +433,37 @@
                                 <div class="col"></div>
                             </div>
                             <h4 class="card-title text-center">TRABAJADORES SUBSCRITOS A LA EMPRESA: {{$empresa->nombre_empresa}}</h4>
-                            <br></br>
+                            <br>
                             @php
                                 $check = 'inicial';
                             @endphp 
                             @foreach($trabajador as $trab)
                                 @php
-                                    if($trab->nombre_sede != $check ){
+                                    if($trab->nombre_sede != $check){
                                         echo "<table class='table table-hover table-bordered px-4'>";
                                             echo "<h4 class='card-title text-center'>{$trab->nombre_sede}</h4>";  
                                             $check = strval($trab->nombre_sede);
                                             echo "<thead class='table-active text-center'>";    
-                                                echo "<th style='width: 20.60%'>TRABAJADOR</th>";
-                                                echo "<th style='width: 11.60%'>TIPO IDEN.</th>";
-                                                echo "<th>No. IDEN.</th>";    
-                                                echo "<th>GÉNERO</th>";
-                                                echo "<th>EMAIL</th>";
-                                                echo "<th>TELEFONO</th>";
-                                                echo "<th style='width: 6.60%'>PERFIL LABORAL</th>";
+                                                echo "<th class='align-middle' style='width: 20.60%'>TRABAJADOR</th>";
+                                                echo "<th class='align-middle' style='width: 11.60%'>TIPO IDEN.</th>";
+                                                echo "<th class='align-middle'>No. IDEN.</th>";    
+                                                echo "<th class='align-middle'>GÉNERO</th>";
+                                                echo "<th class='align-middle'>EMAIL</th>";
+                                                echo "<th class='align-middle'>TELEFONO</th>";
+                                                echo "<th class='align-middle' style='width: 6.60%'>PERFIL LABORAL</th>";
                                                
-                                                echo "<th style='width: 12.60%'>ACCIONES</th>";
+                                                echo "<th class='align-middle' style='width: 12.60%'>ACCIONES</th>";
                                             echo "</thead>";
                                     }
                                 @endphp
-                                    
                                 <tr>
-                                    <td>{{$trab->primer_nombre_trabajador}} {{$trab->segundo_nombre_trabajador}} {{$trab->primer_apellido_trabajador}} {{$trab->segundo_apellido_trabajador}}</td>
-                                    <td>{{$trab->tipo_iden_trabajador}}</td>
-                                    <td>{{$trab->cedula_trabajador}}</td>
-                                    <td>{{$trab->genero_trabajador}}</td>
-                                    <td>{{$trab->email_trabajador}}</td>
-                                    <td>{{$trab->telefono_trabajador}}</td>
-                                    <td>{{$trab->tipo_trabajador}}</td>
+                                    <td class="align-middle">{{$trab->primer_nombre_trabajador}} {{$trab->segundo_nombre_trabajador}} {{$trab->primer_apellido_trabajador}} {{$trab->segundo_apellido_trabajador}}</td>
+                                    <td class="align-middle">{{$trab->tipo_iden_trabajador}}</td>
+                                    <td class="align-middle">{{$trab->cedula_trabajador}}</td>
+                                    <td class="align-middle">{{$trab->genero_trabajador}}</td>
+                                    <td class="align-middle">{{$trab->email_trabajador}}</td>
+                                    <td class="align-middle">{{$trab->telefono_trabajador}}</td>
+                                    <td class="align-middle">{{$trab->tipo_trabajador}}</td>
                                     <!-- <td>@if($trab->aula_virtual == "ON")
                                         A.VIRUTAL 
                                         @endif
@@ -229,7 +471,7 @@
                                         DOSIMETRÍA
                                         @endif
                                     </td> -->
-                                    <td class="text-center">
+                                    <td class="text-center align-middle">
                                         <div class="row">
                                             <div class="col">
                                                 <a href="{{route('trabajadores.edit', $trab->id_trabajador)}}" class="btn colorQA">
@@ -239,7 +481,7 @@
                                                 </a>
                                             </div>
                                             <div class="col">
-                                                <form id="form_eliminar_trabajador" name="form_eliminar_trabajador" action="{{route('trabajadores.destroy', $trab)}}" method="POST">
+                                                <form class="form_eliminar_trabajador" id="form_eliminar_trabajador" name="form_eliminar_trabajador" action="{{route('trabajadores.destroy', $trab)}}" method="POST">
                                                     @csrf  
                                                     @method('delete')
                                                     <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
@@ -260,7 +502,7 @@
                         </div>
                         <!-- //////////////////// PESTAÑA DE CONTACTOS //////////////// -->
                         <div class="tab-pane" id="contacto" role="tabpanel" aria-labelledby="contacto-tab">
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col">
                                     <a href="{{route('contactos.create', $empresa->id_empresa)}}" class="btn colorQA btn-sm m-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
@@ -269,7 +511,8 @@
                                     </a>
                                 </div>
                                 <div class="col"></div>
-                            </div>
+                            </div> --}}
+                            <BR></BR>
                             <h4 class="card-title text-center">CONTACTOS SUBSCRITOS A LA EMPRESA: {{$empresa->nombre_empresa}}</h4>
                             @php
                                 $check2 = 'inicial';
@@ -281,25 +524,25 @@
                                             echo "<h4 class='card-title text-center pt-3'>{$cont->nombre_sede}</h4>";
                                             $check2 = strval($cont->nombre_sede);
                                             echo "<thead class='table-active text-center'>";    
-                                                echo "<th style='width: 20.60%'>CONTACTO</th>";
-                                                echo "<th style='width: 10.60%'>TIPO IDEN.</th>";
-                                                echo "<th >N. IDEN</th>";    
-                                                echo "<th>GÉNERO</th>";
-                                                echo "<th style='width: 15.60%'>EMAIL</th>";
-                                                echo "<th style='width: 9.60%'>TELEFONO</th>";
-                                                echo "<th>PERFIL LABORAL</th>";
-                                                echo "<th style='width: 11.10%'>ACCIONES</th>";
+                                                echo "<th class='align-middle' style='width: 20.60%'>CONTACTO</th>";
+                                                echo "<th class='align-middle' style='width: 10.60%'>TIPO IDEN.</th>";
+                                                echo "<th class='align-middle'>N. IDEN</th>";    
+                                                echo "<th class='align-middle'>GÉNERO</th>";
+                                                echo "<th class='align-middle' style='width: 15.60%'>EMAIL</th>";
+                                                echo "<th class='align-middle' style='width: 9.60%'>TELEFONO</th>";
+                                                echo "<th class='align-middle'>PERFIL LABORAL</th>";
+                                                echo "<th class='align-middle' style='width: 11.10%'>ACCIONES</th>";
                                             echo "</thead>";
                                     }
                                 @endphp
                                 <tr>
-                                    <td>{{$cont->primer_nombre_contacto}} {{$cont->segundo_nombre_contacto}} {{$cont->primer_apellido_contacto}} {{$cont->segundo_apellido_contacto}}</td>
-                                    <td>{{$cont->tipo_iden_contacto}}</td>
-                                    <td>{{$cont->cedula_contacto}}</td>
-                                    <td>{{$cont->genero_contacto}}</td>
-                                    <td>{{$cont->correo_contacto}}</td>
-                                    <td>{{$cont->telefono_contacto}}</td>
-                                    <td>
+                                    <td class="align-middle">{{$cont->primer_nombre_contacto}} {{$cont->segundo_nombre_contacto}} {{$cont->primer_apellido_contacto}} {{$cont->segundo_apellido_contacto}}</td>
+                                    <td class="align-middle">{{$cont->tipo_iden_contacto}}</td>
+                                    <td class="align-middle">{{$cont->cedula_contacto}}</td>
+                                    <td class="align-middle">{{$cont->genero_contacto}}</td>
+                                    <td class="align-middle">{{$cont->correo_contacto}}</td>
+                                    <td class="align-middle">{{$cont->telefono_contacto}}</td>
+                                    <td class="align-middle">
                                         {{$cont->profesion_contacto}}
                                         <br> 
                                         @if($cont->lider_ava == 'TRUE')
@@ -310,7 +553,7 @@
                                             <B>(LIDER DOSIMETRÍA)</B>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center align-middle">
                                         <div class="row">
                                             <div class="col">
                                                 <a href="{{route('contactos.edit', $cont->id_contacto)}}" class="btn colorQA">
@@ -351,7 +594,62 @@ crossorigin="anonymous">
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
+@if(session('guardar')== 'ok')
+    <script>
+        Swal.fire(
+        'GUARDADA!',
+        'SE HA GUARDADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
+@if(session('actualizar')== 'ok')
+    <script>
+        Swal.fire(
+        'ACTUALIZADA!',
+        'SE HA ACTUALIZADO CON ÉXITO.',
+        'success'
+        /* confirmButtonColor: '#1A9980', */
+        )
+    </script>
+@endif
+@if(session('eliminar')== 'ok')
+    <script>
+        Swal.fire(
+        'ELIMINADO!',
+        'SE HA ELIMINADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
+@if(session('eliminada')== 'ok')
+    <script>
+        Swal.fire(
+        'AREA ELIMINADA!',
+        'SE HA ELIMINADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
+@if(session('guardada')== 'ok')
+    <script>
+        Swal.fire(
+        'ÁREA GUARDADA!',
+        'SE HA GUARDADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
+@if(session('actualizada')== 'ok')
+    <script>
+        Swal.fire(
+        'ÁREA ACTUALIZADA!',
+        'SE HA ACTUALIZADO CON ÉXITO.',
+        'success'
+        /* confirmButtonColor: '#1A9980', */
+        )
+    </script>
+@endif
 <script type="text/javascript">
     $(document).ready(function(){
 
@@ -371,16 +669,30 @@ crossorigin="anonymous">
                 confirmButtonText: 'SI!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                   /*  Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                    ) */
+                   
                     this.submit();
                 }
             })
         })
-        $('#form_eliminar_sede').submit(function(e){
+        
+        $('.eliminar_depto').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: 'SEGURO QUE DESEA ELIMINAR ESTA ESPECIALIDAD O DEPARTAMENTO DE LA SEDE?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1A9980',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit(); 
+                }
+            })
+        })
+    
+        $('.form_eliminar_sede').submit(function(e){
             e.preventDefault();
             Swal.fire({
                 text: "SEGURO QUE DESEA ELIMINAR ESTA SEDE??",
@@ -388,20 +700,16 @@ crossorigin="anonymous">
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'SI!'
+                confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                   /*  Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                    ) */
+                   
                     this.submit();
                 }
             })
         })
         
-        $('#form_eliminar_trabajador').submit(function(e){
+        $('.form_eliminar_trabajador').submit(function(e){
             e.preventDefault();
             Swal.fire({
                 text: "SEGURO QUE DESEA ELIMINAR ESTE TRABAJADOR??",
@@ -412,11 +720,7 @@ crossorigin="anonymous">
                 confirmButtonText: 'SI!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                   /*  Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                    ) */
+                   
                     this.submit();
                 }
             })
@@ -441,6 +745,86 @@ crossorigin="anonymous">
                 }
             })
         })
+        $('.form_eliminar_areadepto').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "SEGURO QUE DESEA ELIMINAR ESTA ÁREA??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
+        $('.form_create_areadepartamento').submit(function(e){
+            e.preventDefault(); 
+            Swal.fire({
+                text: "SEGURO QUE DESEA GUARDAR ESTA ÁREA??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
+        $('.form_edit_areadepartamento').submit(function(e){
+            e.preventDefault(); 
+            Swal.fire({
+                text: "SEGURO QUE DESEA ACTUALIZAR LA INFORMACIÓN DE ESTA ÁREA??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
     })
+</script>
+<script type="text/javascript">
+    function capturar(d, e, f)
+        {
+            let nombre_sede = d;
+            let id_depto = e; 
+            let nombre_depto = f;
+            /* alert (nombre_sede); */
+            document.getElementById("nombre_sede_deptoarea").value = nombre_sede;
+            document.getElementById("id_departamentosede").value = id_depto;
+            document.getElementById("nombre_departamentosede").value= nombre_depto;
+            /* console.log(value) */
+        }
+</script>
+<script type="text/javascript">
+    function capturarEdit(c, d, e, f, g, h)
+        {
+            let nombre_sede = c;
+            let id_area = d;
+            let id_depto = e; 
+            let nombre_depto = f;
+            let nombre_area = g;
+            let descrip_area = h;
+            /* alert (id_sede); */
+            document.getElementById("nombre_sede_deptoarea_edit").value = nombre_sede;
+            document.getElementById("id_deptoarea_edit").value = id_depto;
+            document.getElementById("nombre_deptoarea_edit").value= nombre_depto;
+            document.getElementById("id_areadepartamentosede").value = id_area;
+            document.getElementById("nombre_area_edit").value = nombre_area;
+            document.getElementById("descripcion_area_edit").value = descrip_area;
+            
+        }
 </script>
 @endsection()

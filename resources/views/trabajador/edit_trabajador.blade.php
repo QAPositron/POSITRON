@@ -178,7 +178,7 @@
                         <button class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR </button>
                     </div>
                     <div class="col d-grid gap-2">
-                    <a href="{{route('empresas.search')}}" class="btn btn-danger" type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                    <a href="{{route('empresas.info', $trabajador->sede->empresa->id_empresa)}}" class="btn btn-danger" type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                     </div>
                     <div class="col"></div>
                 </div>
@@ -204,14 +204,10 @@ $(document).ready(function(){
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'SI!'
+            confirmButtonText: 'SI, SEGURO!'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                'ACTUALIZADO!',
-                'SE HA ACTUALIZADO EL TRABAJADOR.',
-                'success'
-                )
+                
                 this.submit(); 
             }
         })

@@ -22,9 +22,9 @@
                     <div class="col-8">
                         <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="--BUSCAR--" autofocus style="text-transform:uppercase;">
                     </div>
-                    <div class="col">
+                    {{-- <div class="col">
                         <input class="btn colorQA" type="submit" id="submit" name="submit" value="BUSCAR">
-                    </div>
+                    </div> --}}
                 </div>
             </form>
         </div>
@@ -135,10 +135,10 @@ crossorigin="anonymous">
         })
     })
 </script>
-{{-- <script type="text/javascript">
-    function Eliminar(evt) {
-        evt.preventDefault();
-    }
-</script> --}}
+<script type="text/javascript">
+    $(document).ready(function(){
+        
+    })
+</script>
 
 @endsection()

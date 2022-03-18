@@ -16,6 +16,11 @@ class Empresa extends Model
         return $this->hasMany(Sede::class, 'id_sede');
     }
 
+    public function trabajador(){
+        /* return $this->hasMany('App\Models\Sede'); */
+        return $this->hasMany(Trabajador::class, 'id_trabajador');
+    }
+
     public function trabajadordosimetro(){
         /* return $this->hasMany('App\Models\Sede'); */
         return $this->hasMany(Trabajadordosimetro::class, 'id_trabajadordosimetro');

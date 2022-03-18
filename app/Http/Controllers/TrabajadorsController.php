@@ -35,6 +35,7 @@ class TrabajadorsController extends Controller
         ]);
         
         $trabajador = new Trabajador();
+        $trabajador->empresa_id                     = $request->id_empresas;
         $trabajador->primer_nombre_trabajador       = strtoupper($request->primer_nombre_trabajador);
         $trabajador->segundo_nombre_trabajador      = strtoupper($request->segundo_nombre_trabajador);
         $trabajador->primer_apellido_trabajador     = strtoupper($request->primer_apellido_trabajador);
@@ -56,8 +57,8 @@ class TrabajadorsController extends Controller
         $trabajadorsede->sede_id         = $request->id_sedes;
         
         $trabajadorsede->save();
-        return redirect()->route('empresas.search');
-        /* return $trabajador; */
+        return redirect()->route('empresas.info', $request->id_empresas)->with('guardar', 'ok');
+        /* return $request; */
     }
     
     
@@ -95,10 +96,12 @@ class TrabajadorsController extends Controller
         $trabajador->save();
         
         
-        return redirect()->route('empresas.search');
+        return redirect()->route('empresas.info', $request->id_empresas)->with('actualizar', 'ok');
     }
     public function destroy(Trabajador $trabajador){
+       /* return $trabajador; */
+       
         $trabajador->delete();
-        return redirect()->route('empresas.search')->with('eliminar', 'ok');
+        return redirect()->route('empresas.info', $trabajador->empresa_id)->with('eliminar', 'ok');
     }
 }

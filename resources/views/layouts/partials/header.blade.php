@@ -24,6 +24,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#">CONTROLES C.</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{request()->routeIs('contacto.*') ? 'active' : ''}}" href="{{route('contactos.search')}}">CONTACTOS</a>
+          </li>
         </ul>
         <span class="navbar-text me-5">
           MODULO DOSÍMETRIA

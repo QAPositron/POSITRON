@@ -15,6 +15,10 @@ class CreateTrabajadorsTable extends Migration
     {
         Schema::create('trabajadors', function (Blueprint $table) {
             $table->bigIncrements('id_trabajador')->unique();
+
+            $table-> unsignedBigInteger('empresa_id');
+            $table-> foreign('empresa_id')->references('id_empresa')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
+
             $table->string('primer_nombre_trabajador', 15);
             $table->string('segundo_nombre_trabajador', 15);
             $table->string('primer_apellido_trabajador', 15);
