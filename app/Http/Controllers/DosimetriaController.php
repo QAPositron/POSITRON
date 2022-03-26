@@ -89,6 +89,7 @@ class DosimetriaController extends Controller
 
         return view('dosimetria.crear_contratos_dosimetria', compact('empresa'));
     } */
+
     public function selectdepa(Request $request){
         $departamentos = DB::table('departamentosedes')
             ->where('sede_id', $request->sede_id)
@@ -98,6 +99,7 @@ class DosimetriaController extends Controller
     }
 
     public function saveContratodosi(Request $request){
+        /* return $request; */
 
         $request->validate([
             'codigo_contrato'               => 'required',
@@ -372,16 +374,16 @@ class DosimetriaController extends Controller
         return redirect()->route('asignadosicontrato.create', ['asigdosicont' =>$contratoId, 'mesnumber'=> $mesnumber]);
     }
     public function deleteDosimetro($idWork, $contratoId, $mesnumber) {
-    $dosiTrabajador = Trabajadordosimetro::where('trabajador_id', $idWork)
-        ->select("dosimetro_id", "holder_id")
-    ->get();
+        $dosiTrabajador = Trabajadordosimetro::where('trabajador_id', $idWork)
+            ->select("dosimetro_id", "holder_id")
+            ->get();
         $result = DB::table('holders')
             ->where('id_holder', $dosiTrabajador[0]['holder_id'])
             ->update([
                 'estado_holder' => 'STOCK'
             ]);
-    /*$dosimetrosTrabajadores = Trabajadordosimetro::where('trabajador_id', $idWork)
-    ->delete();*/
+        /*$dosimetrosTrabajadores = Trabajadordosimetro::where('trabajador_id', $idWork)
+        ->delete();*/
         $resultDosimetros = DB::table('trabajadordosimetros')
             ->where('trabajador_id', $idWork)
             ->where('mes_asignacion', ($mesnumber-1))
@@ -794,8 +796,10 @@ class DosimetriaController extends Controller
 
         $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'contratoDosi', 'fechainiciodositrabaj', 'trabajadoresaisgxmeses'));
         $pdf->setPaper('8.5x14', 'landscape');
+        /* return $dosicontrolasig; */
         return $pdf->stream();
-        /* return $trabajadoresaisgxmeses; */
+       /*  return $contratoDosi; */
+
     }
 
 

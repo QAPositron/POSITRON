@@ -13,6 +13,7 @@ use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\SedesController;
 use App\Http\Controllers\TrabajadoresController;
 use App\Http\Controllers\TrabajadorsController;
+use App\Http\Livewire\FormTrabajador;
 use App\Models\Areadepartamentosede;
 use App\Models\Departamentosede;
 use App\Models\Holder;
@@ -72,6 +73,7 @@ Route::delete('areadeptodestroy/{area}', [AreadepartamentosedeController::class,
 
 /////////RUTAS PARA EL CRUD DE TRABAJADORES///////
 
+/* Route::get('trabajadores/{empresa}/create', FormTrabajador::class)->name('trabajadores.create'); */
 Route::get('trabajadores/{trabajador}/create', [TrabajadorsController::class, 'create'])->name('trabajadores.create');
 /* Route::get('/trabaja',[TrabajadorsController::class, 'select']); */
 Route::post('trabajadores', [TrabajadorsController::class, 'save'])->name('trabajadores.save');

@@ -246,7 +246,7 @@
 
                                             </tr>
 
-                                            @endforeach
+                                        @endforeach
                                     @elseif(count($dosimetrosControlAsignadosAnteriores)>0)
                                         @foreach($dosimetrosControlAsignadosAnteriores as $control)
                                             <tr>
@@ -331,7 +331,7 @@
                                             </tr>
 
                                         @endforeach
-                                        @else
+                                    @else
                                         @for($i=0; $i<$contdosisededepto->dosi_control-count($dosimetrosControl); $i++)
                                             <tr>
 
@@ -384,46 +384,45 @@
                                                 <td>
                                                     @if (count($dosimetrosControl) > 0)
 
-                                                            <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control{{$control->dosimetro_id}}" autofocus style="text-transform:uppercase">
-                                                                @foreach($dosimetrosControl as $control)
-                                                                    @if($control->ocupacion=='T')
-                                                                        <option selected hidden value="T">TELETERAPIA</option>
-                                                                        @elseif($control->ocupacion=='B')
-                                                                        <option selected hidden value="B">BRAQUITERAPIA</option>
-                                                                        @elseif($control->ocupacion=='N')
-                                                                        <option selected hidden value="N">MEDICINA NUCLEAR</option>
-                                                                        @elseif($control->ocupacion=='G')
-                                                                        <option selected hidden value="G">GAMAGRAFIA INDUSTRIAL</option>
-                                                                        @elseif($control->ocupacion=='F')
-                                                                        <option selected hidden value="F">MEDIDORES FIJOS</option>
-                                                                        @elseif($control->ocupacion=='I')
-                                                                        <option selected hidden value="I">INVESTIGACIÓN</option>
-                                                                        @elseif($control->ocupacion=='D')
-                                                                        <option selected hidden value="D">DENSÍMETRO NUCLEAR</option>
-                                                                        @elseif($control->ocupacion=='M')
-                                                                        <option selected hidden value="M">MEDIDORES MÓVILES</option>
-                                                                        @elseif($control->ocupacion=='E')
-                                                                        <option selected hidden value="E">DOCENCIA</option>
-                                                                        @elseif($control->ocupacion=='P')
-                                                                        <option selected hidden value="P">PERFILAJE Y REGISTRO</option>
-                                                                        @elseif($control->ocupacion=='T')
-                                                                        <option selected hidden value="T">TRAZADORES</option>
-                                                                        @elseif($control->ocupacion=='H')
-                                                                        <option selected hidden value="H">HEMODINAMIA</option>
-                                                                        @elseif($control->ocupacion=='RX')
-                                                                        <option selected hidden value="X">RX PERIAPICALES</option>
-                                                                        @elseif($control->ocupacion=='R')
-                                                                        <option selected hidden value="R">RADIODIAGNÓSTICO</option>
-                                                                        @elseif($control->ocupacion=='S')
-                                                                        <option selected hidden value="S">FLUOROSCOPÍA</option>
-                                                                        @elseif($control->ocupacion=='AM')
-                                                                        <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                                        @elseif($control->ocupacion=='AI')
-                                                                        <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                                    @endif
-                                                                @endforeach
-                                                            </select>
-
+                                                        <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control{{$control->dosimetro_id}}" autofocus style="text-transform:uppercase">
+                                                            @foreach($dosimetrosControl as $control)
+                                                                @if($control->ocupacion=='T')
+                                                                    <option selected hidden value="T">TELETERAPIA</option>
+                                                                    @elseif($control->ocupacion=='B')
+                                                                    <option selected hidden value="B">BRAQUITERAPIA</option>
+                                                                    @elseif($control->ocupacion=='N')
+                                                                    <option selected hidden value="N">MEDICINA NUCLEAR</option>
+                                                                    @elseif($control->ocupacion=='G')
+                                                                    <option selected hidden value="G">GAMAGRAFIA INDUSTRIAL</option>
+                                                                    @elseif($control->ocupacion=='F')
+                                                                    <option selected hidden value="F">MEDIDORES FIJOS</option>
+                                                                    @elseif($control->ocupacion=='I')
+                                                                    <option selected hidden value="I">INVESTIGACIÓN</option>
+                                                                    @elseif($control->ocupacion=='D')
+                                                                    <option selected hidden value="D">DENSÍMETRO NUCLEAR</option>
+                                                                    @elseif($control->ocupacion=='M')
+                                                                    <option selected hidden value="M">MEDIDORES MÓVILES</option>
+                                                                    @elseif($control->ocupacion=='E')
+                                                                    <option selected hidden value="E">DOCENCIA</option>
+                                                                    @elseif($control->ocupacion=='P')
+                                                                    <option selected hidden value="P">PERFILAJE Y REGISTRO</option>
+                                                                    @elseif($control->ocupacion=='T')
+                                                                    <option selected hidden value="T">TRAZADORES</option>
+                                                                    @elseif($control->ocupacion=='H')
+                                                                    <option selected hidden value="H">HEMODINAMIA</option>
+                                                                    @elseif($control->ocupacion=='RX')
+                                                                    <option selected hidden value="X">RX PERIAPICALES</option>
+                                                                    @elseif($control->ocupacion=='R')
+                                                                    <option selected hidden value="R">RADIODIAGNÓSTICO</option>
+                                                                    @elseif($control->ocupacion=='S')
+                                                                    <option selected hidden value="S">FLUOROSCOPÍA</option>
+                                                                    @elseif($control->ocupacion=='AM')
+                                                                    <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
+                                                                    @elseif($control->ocupacion=='AI')
+                                                                    <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
                                                     @else
 
                                                         <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control{{$i}}" autofocus style="text-transform:uppercase">

@@ -1,5 +1,6 @@
 @extends('layouts.plantillabase')
-@section('contenido')
+@section('contenido').
+
 
 <h3 class="text-center ">{{$empresa->nombre_empresa}}</h3>
 <div class="row">
@@ -15,6 +16,8 @@
                         <h5 class="modal-title w-100 text-center" id="nueva_empresaModalLabel">CREAR CONTRATO PARA LA EMPRESA:{{$empresa->nombre_empresa}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
+                    {{-- @livewire('form-contratodosimetria', ['empresa' =>$empresa, 'sedes' =>$sedes]) --}}
                     <form action="{{route('contratosdosi.save')}}" method="POST">
                         @csrf
                         <div class="modal-body">
@@ -50,7 +53,7 @@
                                 <div class="row">
                                     <div class="col-md">
                                         <div class="form-floating my-3">
-                                            <input type="date" name="fecha_inicio_contrato" id="fecha_inicio_contrato" class="form-control"  autofocus >
+                                            <input type="date" name="fecha_inicio_contrato" id="fecha_inicio_contrato" class="form-control" onchange="fechafinalcontrato();" autofocus>
                                             <label for="floatingInputGrid">FECHA DE INICIO:</label>
                                             @error('fecha_inicio_contrato')
                                                 <small>*{{$message}}</small>
@@ -59,20 +62,20 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating my-3">
-                                            <input type="date" name="fecha_finalizacion_contrato" id="fecha_finalizacion_contrato" class="form-control"  autofocus >
-                                            <label for="floatingInputGrid">FECHA DE FINALIZACIÓN:</label>
+                                            <input type="date" name="fecha_finalizacion_contrato" id="fecha_finalizacion_contrato" class="form-control " autofocus >
+                                            <label for="floatingInputGrid" >FECHA DE FINALIZACIÓN</label>
                                             @error('fecha_finalizacion_contrato')
                                                 <small>*{{$message}}</small>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
-
+                
                             </div>
                             <div class="col-md">
                                 <hr>
                                 <label class="text-center ms-4">ASIGNE A ESTE CONTRATO UNA O MÁS SEDES:</label>
-
+                
                                 <div class="row mt-2">
                                     <div class="col-md text-center">
                                         <button onclick="readySede()" class="btn btn-sm colorQA" id="agregar">AGREGAR SEDE </button>
@@ -155,27 +158,28 @@
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </div>
-
+                
                                             </div>
                                         </div>
-
+                
                                         <div class="" id="contenedorDepto0">
-
+                
                                         </div>
                                     </div>
                                 </div>
-
+                
                                 <div id="contenedor">
-
+                
                                 </div>
-
+                
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                            <button type="submit" class="btn colorQA"  data-bs-dismiss="modal">GUARDAR</button>
+                            <button wire:click="save" type="submit" class="btn colorQA"  data-bs-dismiss="modal">GUARDAR</button>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>
@@ -222,7 +226,23 @@ integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
 </script>
 
+
 <script type="text/javascript">
+    function fechafinalcontrato(){
+        var fecha_inicio = new Date(document.getElementById('fecha_inicio_contrato').value);
+        alert(fecha_inicio);
+        var fecha_final_año = fecha_inicio.getFullYear()+1;
+        var mm = fecha_inicio.getMonth()+1;
+        var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+        var dd = fecha_inicio.getDate();
+        var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+        var fecha_final = fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia;
+        console.log(fecha_final);
+        document.getElementById("fecha_finalizacion_contrato").value = fecha_final;
+    }
+
+
+
     let sedesNumber = 1;
     let depaNumber = 1;
     let agregar = document.getElementById('agregar');
@@ -357,7 +377,16 @@ crossorigin="anonymous">
         })
     })
 
+
+    $(document).ready(function(){
+        $('#codigo_contrato').on('change', function(){
+            var codigo = $(this).val();
+            alert(codigo);
+        })
+    })
+
 </script>
+
 
 
 @endsection

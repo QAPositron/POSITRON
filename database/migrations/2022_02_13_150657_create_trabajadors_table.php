@@ -30,8 +30,7 @@ class CreateTrabajadorsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('telefono_trabajador', 15);
             $table->string('tipo_trabajador', 15);
-            $table->string('aula_virtual', 15);
-            $table->string('dosimetria', 15);
+            
 
             $table->timestamps(); // crea dos coulmas create_at y update_at cada que re introduce y se actualiza un registro se guarada la fecha y hora en que se realizo el registro
         });

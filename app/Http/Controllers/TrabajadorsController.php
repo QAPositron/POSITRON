@@ -57,7 +57,7 @@ class TrabajadorsController extends Controller
         $trabajadorsede->sede_id         = $request->id_sedes;
         
         $trabajadorsede->save();
-        return redirect()->route('empresas.info', $request->id_empresas)->with('guardar', 'ok');
+        return redirect()->route('empresas.info', $request->id_empresas);
         /* return $request; */
     }
     

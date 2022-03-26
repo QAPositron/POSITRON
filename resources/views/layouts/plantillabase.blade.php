@@ -67,8 +67,10 @@
         border-color: white;
       }
      
-    </style>
-
+      </style>
+    
+    
+    @livewireStyles
   </head>
   <body>
     <!-- ///////////////HEADER NAV/////////// -->
@@ -79,16 +81,20 @@
     <div class="container mt-5 p-auto ">
         @yield('contenido')
     </div>
-
+    @livewireScripts
+    
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script> -->
-    <!-- <script src="../js/bootstrap.min.js"></script> -->
-
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <!-- <script src="assets/plugins/global/plugins.bundle.js"></script> -->
+
+    
+    
+
+
+    
+    
   </body>
 </html>

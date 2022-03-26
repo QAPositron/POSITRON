@@ -69,10 +69,10 @@
         <td>Email:dosimetria.qapositron@gmail.com</td>
     </tr>
     <tr>
-        <td style="padding-bottom:9px;">Sitio web: www.qapositron.com</td>
+        <td style="padding-bottom:5px;">Sitio web: www.qapositron.com</td>
     </tr>
     <tr>
-        <th style="font-size: 11px; border: solid 0.4px #000; padding:8px;">
+        <th style="font-size: 11px; border: solid 0.4px #000; padding:5px;">
             @foreach($contratoDosi as $cont)
                 {{$cont->nombre_empresa}} - SEDE: {{$cont->nombre_sede}}
             @endforeach 
@@ -148,7 +148,7 @@
         @endforeach 
         </td>
         <td colspan="2" rowspan="3" style="width: 94px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="195" height="60" style="top:55px;">
+            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="195" height="52" style="top:54px; ">
         </td>
     </tr>
     <tr>
@@ -243,7 +243,7 @@
                 <!--  /////////DOSIS DEL PERIODO///// -->
                 <td style="padding:2px; border:0.1px solid black;">{{$dosicontrol->Hp10_calc_dose}}</td>
                 <td style="padding:2px; border:0.1px solid black;">{{$dosicontrol->Hp007_calc_dose}}</td>
-                <td style="padding:2px; border:0.1px solid black;"></td>
+                <td style="padding:2px; border:0.1px solid black;">{{$dosicontrol->Hp3_calc_dose}}</td>
 
                 <!-- ///////DOSIS ACUMULADA 12 MESES ANTERIORES/////// -->
                 <td style="padding:2px; border:0.1px solid black;"></td>
@@ -256,110 +256,111 @@
                 <td style="padding:2px; border:0.1px solid black;"></td>
 
             </tr>
-        @endforeach
-        @foreach($trabajdosiasig as $dositrabj)
-            <tr >
-                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->dosimetro->codigo_dosimeter}}</td>
-                <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->trabajador->primer_apellido_trabajador}} {{$dositrabj->trabajador->segundo_apellido_trabajador}}</td>
-                <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->trabajador->primer_nombre_trabajador}} {{$dositrabj->trabajador->segundo_nombre_trabajador}}</td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->trabajador->genero_trabajador}}</td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->ocupacion}}</td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->trabajador->cedula_trabajador}}</td>
-                <td style="padding:2px; border:0.1px solid black;">
-                    @foreach($fechainiciodositrabaj as $fec)
-                        @if($dositrabj->trabajador->id_trabajador == $fec->trabajador_id)
-                            @php
-                                $datefix = date('d-m-Y',strtotime($fec->primer_dia_uso));
-                            @endphp
-                            {{$datefix}}
+        
+            @foreach($trabajdosiasig as $dositrabj)
+                <tr >
+                    <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->dosimetro->codigo_dosimeter}}</td>
+                    <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->trabajador->primer_apellido_trabajador}} {{$dositrabj->trabajador->segundo_apellido_trabajador}}</td>
+                    <td style="padding:2px; border:0.1px solid black;">{{$dositrabj->trabajador->primer_nombre_trabajador}} {{$dositrabj->trabajador->segundo_nombre_trabajador}}</td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->trabajador->genero_trabajador}}</td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->ocupacion}}</td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->trabajador->cedula_trabajador}}</td>
+                    <td style="padding:2px; border:0.1px solid black;">
+                        @foreach($fechainiciodositrabaj as $fec)
+                            @if($dositrabj->trabajador->id_trabajador == $fec->trabajador_id)
+                                @php
+                                    $datefix = date('d-m-Y',strtotime($fec->primer_dia_uso));
+                                @endphp
+                                {{$datefix}}
+                            @endif
+                        @endforeach
+                    </td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">
+                        @php
+                            $datefix = date('d-m-Y',strtotime($dositrabj->primer_dia_uso));
+                        @endphp
+                        {{$datefix}}
+                    </td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">
+                        @php
+                            $datefix = date('d-m-Y',strtotime($dositrabj->ultimo_dia_uso));
+                        @endphp
+                        {{$datefix}}
+                    </td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">
+                        @foreach($contratoDosi as $cont)
+                            {{$cont->periodo_recambio}}
+                        @endforeach
+                    </td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">
+                        @if($dositrabj->dosimetro->tipo_dosimetro == 'EZCLIP')
+                            {{$dositrabj->holder->tipo_holder}}
+                        @else
+                            {{$dositrabj->dosimetro->tipo_dosimetro}}
                         @endif
-                    @endforeach
-                </td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">
-                    @php
-                        $datefix = date('d-m-Y',strtotime($dositrabj->primer_dia_uso));
-                    @endphp
-                    {{$datefix}}
-                </td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">
-                    @php
-                        $datefix = date('d-m-Y',strtotime($dositrabj->ultimo_dia_uso));
-                    @endphp
-                    {{$datefix}}
-                </td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">
-                    @foreach($contratoDosi as $cont)
-                        {{$cont->periodo_recambio}}
-                    @endforeach
-                </td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">
-                    @if($dositrabj->dosimetro->tipo_dosimetro == 'EZCLIP')
-                        {{$dositrabj->holder->tipo_holder}}
-                    @else
-                        {{$dositrabj->dosimetro->tipo_dosimetro}}
-                    @endif
-                </td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->energia}}</td>
+                    </td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->energia}}</td>
 
-                <!--  /////////DOSIS DEL PERIODO///// -->
-                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->Hp10_calc_dose}}</td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->Hp007_calc_dose}}</td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">{{$dositrabj->Hp3_calc_dose}}</td>
+                    <!--  /////////DOSIS DEL PERIODO///// -->
+                    <td style="padding:2px; border:0.1px solid black;" align="center">@if($dositrabj->Hp10_calc_dose == NULL)  @else {{$dositrabj->Hp10_calc_dose - $dosicontrol->Hp10_calc_dose}} @endif</td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">@if($dositrabj->Hp007_calc_dose == NULL)  @else {{$dositrabj->Hp007_calc_dose - $dosicontrol->Hp007_calc_dose}} @endif</td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">@if($dositrabj->Hp3_calc_dose == NULL)  @else {{$dositrabj->Hp3_calc_dose - $dosicontrol->Hp3_calc_dose}} @endif</td>
 
-                <!-- ///////DOSIS ACUMULADA 12 MESES ANTERIORES/////// -->
-                <td style="padding:2px; border:0.1px solid black;" align="center">
-                    @php
-                        $sumaHp10calcdose = 0;
-                    @endphp
-                    @foreach($trabajadoresaisgxmeses as $mesesdositrab)
-                        @for($i=0; $i< count($mesesdositrab); $i++)
-                            @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
-                                @php
-                                    $sumaHp10calcdose += $mesesdositrab[$i]->Hp10_calc_dose;
-                                @endphp
-                            @endif
-                        @endfor
-                    @endforeach
-                    {{$sumaHp10calcdose}}
-                </td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">
-                    @php
-                        $sumaHp007calcdose = 0;
-                    @endphp
-                    @foreach($trabajadoresaisgxmeses as $mesesdositrab)
-                        @for($i=0; $i< count($mesesdositrab); $i++)
-                            @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
-                                @php
-                                    $sumaHp007calcdose += $mesesdositrab[$i]->Hp007_calc_dose;
-                                @endphp
-                            @endif
-                        @endfor
-                    @endforeach
-                    {{$sumaHp007calcdose}}
-                </td>
-                <td style="padding:2px; border:0.1px solid black;" align="center">
-                    @php
-                        $sumaHp3calcdose = 0;
-                    @endphp
-                    @foreach($trabajadoresaisgxmeses as $mesesdositrab)
-                        @for($i=0; $i< count($mesesdositrab); $i++)
-                            @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
-                                @php
-                                    $sumaHp3calcdose += $mesesdositrab[$i]->Hp3_calc_dose;
-                                @endphp
-                            @endif
-                        @endfor
-                    @endforeach
-                    {{$sumaHp3calcdose}}
-                </td>
+                    <!-- ///////DOSIS ACUMULADA 12 MESES ANTERIORES/////// -->
+                    <td style="padding:2px; border:0.1px solid black;" align="center">
+                        @php
+                            $sumaHp10calcdose = 0;
+                        @endphp
+                        @foreach($trabajadoresaisgxmeses as $mesesdositrab)
+                            @for($i=0; $i< count($mesesdositrab); $i++)
+                                @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                    @php
+                                        $sumaHp10calcdose += $mesesdositrab[$i]->Hp10_calc_dose;
+                                    @endphp
+                                @endif
+                            @endfor
+                        @endforeach
+                        {{$sumaHp10calcdose}}
+                    </td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">
+                        @php
+                            $sumaHp007calcdose = 0;
+                        @endphp
+                        @foreach($trabajadoresaisgxmeses as $mesesdositrab)
+                            @for($i=0; $i< count($mesesdositrab); $i++)
+                                @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                    @php
+                                        $sumaHp007calcdose += $mesesdositrab[$i]->Hp007_calc_dose;
+                                    @endphp
+                                @endif
+                            @endfor
+                        @endforeach
+                        {{$sumaHp007calcdose}}
+                    </td>
+                    <td style="padding:2px; border:0.1px solid black;" align="center">
+                        @php
+                            $sumaHp3calcdose = 0;
+                        @endphp
+                        @foreach($trabajadoresaisgxmeses as $mesesdositrab)
+                            @for($i=0; $i< count($mesesdositrab); $i++)
+                                @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                    @php
+                                        $sumaHp3calcdose += $mesesdositrab[$i]->Hp3_calc_dose;
+                                    @endphp
+                                @endif
+                            @endfor
+                        @endforeach
+                        {{$sumaHp3calcdose}}
+                    </td>
 
-                <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
-                <td style="padding:2px; border:0.1px solid black;"></td>
-                <td style="padding:2px; border:0.1px solid black;"></td>
-                <td style="padding:2px; border:0.1px solid black;"></td>
+                    <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
+                    <td style="padding:2px; border:0.1px solid black;"></td>
+                    <td style="padding:2px; border:0.1px solid black;"></td>
+                    <td style="padding:2px; border:0.1px solid black;"></td>
 
-            </tr>
-        @endforeach
+                </tr>
+            @endforeach
+        @endforeach    
     </tbody>
 </table>
 
