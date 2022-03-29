@@ -359,6 +359,7 @@ class DosimetriaController extends Controller
     }
     public function deleteDosimetro($idWork, $contratoId, $mesnumber) {
         $dosiTrabajador = Trabajadordosimetro::where('trabajador_id', $idWork)
+            ->where('mes_asignacion', ($mesnumber-1))
             ->select("dosimetro_id", "holder_id")
             ->get();
         $result = DB::table('holders')
@@ -374,6 +375,7 @@ class DosimetriaController extends Controller
             ->update([
                 'dosimetro_uso' => 'FALSE'
             ]);
+
         return $this->callAction('patchDosimetroDelete', ['idDosimetro' =>$dosiTrabajador[0]['dosimetro_id'],
             'contratoId'=> $contratoId, 'mesnumber'=>$mesnumber ]);
     }
@@ -657,7 +659,7 @@ class DosimetriaController extends Controller
         if($request->estado_uso == 'TRUE'){
 
             $dosiestado = Dosimetro::find($trabjasig->dosimetro->id_dosimetro);
-    
+
             $dosiestado->estado_dosimetro = 'STOCK';
             $dosiestado->save();
         }
@@ -666,7 +668,7 @@ class DosimetriaController extends Controller
 
             $dosiholderestado->estado_holder = 'STOCK';
             $dosiholderestado->save();
-        } 
+        }
 
         return redirect()->route('asignadosicontrato.info', ["asigdosicont" => $request->id_contratodosimetriasededepto, "mesnumber" => $request->mes_asignacion])->with('actualizar', 'ok');
         /* return $request; */
@@ -712,13 +714,13 @@ class DosimetriaController extends Controller
         $dosicontasig->verification_date                   = $request->verification_Date;
         $dosicontasig->verification_required_on_or_before  = $request->verification_required_before;
         $dosicontasig->remaining_days_available_for_use    = $request->remaining_days_available_use;
-        
+
         $dosicontasig->save();
 
         if($request->estado_uso == 'TRUE'){
 
             $dosiestado = Dosimetro::find($dosicontasig->dosimetro->id_dosimetro);
-    
+
             $dosiestado->estado_dosimetro = 'STOCK';
             $dosiestado->save();
         }
@@ -733,14 +735,14 @@ class DosimetriaController extends Controller
 
     public function pdf($id, $mesnumber){
 
-        /* SELECT * FROM `contratodosimetriasededeptos` INNER JOIN contratodosimetriasedes ON contratodosimetriasededeptos.contratodosimetriasede_id = contratodosimetriasedes.id_contratodosimetriasede 
-        INNER JOIN contactosedes ON contratodosimetriasedes.sede_id = contactosedes.sede_id 
-        INNER JOIN contactos ON contactosedes.contacto_id = contactos.id_contacto 
-        INNER JOIN sedes ON contratodosimetriasedes.sede_id = sedes.id_sede 
-        INNER JOIN colmunicipios on sedes.municipiocol_id = colmunicipios.id_municipiocol 
-        INNER JOIN coldepartamentos ON colmunicipios.departamentocol_id = coldepartamentos.id_departamentocol 
-        INNER JOIN dosimetriacontratos ON contratodosimetriasedes.contratodosimetria_id = dosimetriacontratos.id_contratodosimetria 
-        INNER JOIN empresas ON dosimetriacontratos.empresa_id = empresas.id_empresa 
+        /* SELECT * FROM `contratodosimetriasededeptos` INNER JOIN contratodosimetriasedes ON contratodosimetriasededeptos.contratodosimetriasede_id = contratodosimetriasedes.id_contratodosimetriasede
+        INNER JOIN contactosedes ON contratodosimetriasedes.sede_id = contactosedes.sede_id
+        INNER JOIN contactos ON contactosedes.contacto_id = contactos.id_contacto
+        INNER JOIN sedes ON contratodosimetriasedes.sede_id = sedes.id_sede
+        INNER JOIN colmunicipios on sedes.municipiocol_id = colmunicipios.id_municipiocol
+        INNER JOIN coldepartamentos ON colmunicipios.departamentocol_id = coldepartamentos.id_departamentocol
+        INNER JOIN dosimetriacontratos ON contratodosimetriasedes.contratodosimetria_id = dosimetriacontratos.id_contratodosimetria
+        INNER JOIN empresas ON dosimetriacontratos.empresa_id = empresas.id_empresa
         WHERE contratodosimetriasededeptos.id_contdosisededepto = 1 AND contactos.lider_dosimetria='TRUE'; */
         $contratoDosi = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id','=','contratodosimetriasedes.id_contratodosimetriasede')
         ->join('contactosedes', 'contratodosimetriasedes.sede_id', '=', 'contactosedes.sede_id')
@@ -763,7 +765,7 @@ class DosimetriaController extends Controller
         for($i=0; $i<count($trabajdosiasig); $i++){
             $fechainiciodositrabaj[]=Trabajadordosimetro::where('trabajador_id','=', $trabajdosiasig[$i]->trabajador_id)->first();
         }
-       
+
         /* SELECT * FROM `dosicontrolcontdosisedes` INNER JOIN contratodosimetriasededeptos ON dosicontrolcontdosisedes.contdosisededepto_id = contratodosimetriasededeptos.id_contdosisededepto
         INNER JOIN departamentosedes ON contratodosimetriasededeptos.departamentosede_id = departamentosedes.id_departamentosede; */
         $dosicontrolasig = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
