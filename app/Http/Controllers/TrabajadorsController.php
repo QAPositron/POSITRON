@@ -17,7 +17,7 @@ class TrabajadorsController extends Controller
         return view('trabajador.crear_trabajador', compact('sedes', 'empresa'));
     }
 
-    public function save(Request $request){
+    /* public function save(Request $request){
 
         $request->validate([
             'id_empresas'                   => 'required',
@@ -58,8 +58,8 @@ class TrabajadorsController extends Controller
         
         $trabajadorsede->save();
         return redirect()->route('empresas.info', $request->id_empresas);
-        /* return $request; */
-    }
+        
+    } */
     
     
     public function edit(Trabajadorsede $trabajador){

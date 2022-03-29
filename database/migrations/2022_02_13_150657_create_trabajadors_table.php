@@ -20,7 +20,7 @@ class CreateTrabajadorsTable extends Migration
             $table-> foreign('empresa_id')->references('id_empresa')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
 
             $table->string('primer_nombre_trabajador', 15);
-            $table->string('segundo_nombre_trabajador', 15);
+            $table->string('segundo_nombre_trabajador', 15)->nullable();
             $table->string('primer_apellido_trabajador', 15);
             $table->string('segundo_apellido_trabajador', 15);
             $table->integer('cedula_trabajador')->unique();

@@ -10,7 +10,7 @@
                     <input wire:model="id_empresa" type="number" class="form-control @error('id_empresa') is-invalid @enderror"   name="id_empresas" id="id_empresas" hidden>
                     <label for="floatingSelectGrid">EMPRESA:</label>
                     @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                    {{$id_empresa}}
+                    
                     
                 </div>
             </div>

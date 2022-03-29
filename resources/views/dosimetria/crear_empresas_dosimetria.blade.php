@@ -13,31 +13,7 @@
                             <h5 class="modal-title w-100 text-center" id="nueva_empresaModalLabel">NUEVA EMPRESA</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{route('empresasdosi.save')}}" method="POST">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="col-md">
-                                    <label class="text-center">AL SELECCIONAR UNA EMPRESA Y GUARDAR SE PODRAN CREAR CONTRATOS EN ELLA</label>
-                                    <BR></BR>
-                                    <div class="form-floating">
-                                    <select class="form-select" name="id_empresa" id="id_empresa">
-                                        <option value="">--SELECCIONE--</option>
-                                        @foreach($empresa as $emp)
-                                            <option value ="{{$emp->id_empresa}}">{{$emp->nombre_empresa}}</option>
-                                        @endforeach
-                                    </select>
-                                    <label for="floatingSelectGrid">EMPRESA:</label>
-                                    @error('id_sedes')
-                                        <small>*{{$message}}</small>
-                                    @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                                <button type="submit" class="btn colorQA"  data-bs-dismiss="modal" >GUARDAR</button>
-                            </div>
-                        </form>
+                        @livewire('form-crear-empresa-dosimetria', ['empresas' => $empresas])
                     </div> 
                 </div>
             </div>
@@ -107,16 +83,6 @@
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous">
 </script>
-<script type="text/javascript">
-    /* function obtenerEmpresa(idEmpresa){
-        alert('el valor obtenido es' +idEmpresa);
-        if($.trim(idEmpresa) != ''){
-            $.get('prueba4',{idEmpresa : idEmpresa}, function(empresa){
-                console.log(empresa);
-                var emp = JSON.parse(empresa);
-                $('#tbody_empresasdosi').prepend('<tr><td><a class="link-dark" href="">'+emp.nombre_empresa+'</a></td><td>'+emp.num_iden_empresa+ +emp.DV+'</td><td>--</td><td>--</td><td>--</td><td>--</td><td><button class="btn colorQA btn-sm"type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/></svg></button></td></tr>');
-            });
-        }
-    } */
-</script>
+
+
 @endsection()

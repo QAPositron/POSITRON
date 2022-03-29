@@ -25,6 +25,12 @@ class FormTrabajador extends Component
     public $teléfono;
     public $perfil_laboral;
 
+    
+    public function mount($empresa){
+        
+        $this->nombre_empresa = $empresa->nombre_empresa;
+        $this->id_empresa     = $empresa->id_empresa;
+    }
 
     protected $rules = [
         'id_empresa'           => 'required',
@@ -40,11 +46,6 @@ class FormTrabajador extends Component
         'perfil_laboral'       => 'required'
     ];
 
-    public function mount($empresa){
-
-        $this->nombre_empresa = $empresa->nombre_empresa;
-        $this->id_empresa     = $empresa->id_empresa;
-    }
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);

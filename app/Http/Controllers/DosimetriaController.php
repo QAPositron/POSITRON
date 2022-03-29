@@ -34,13 +34,13 @@ class DosimetriaController extends Controller
         return view('dosimetria.empresas_dosimetria', compact('empresa'));
     } */
     public function createEmpresa(){
-        $empresa = Empresa::all();
+        $empresas = Empresa::all();
         $empresaDosi = ContratosDosimetriaEmpresa::all();
-        return view('dosimetria.crear_empresas_dosimetria', compact('empresa', 'empresaDosi'));
+        return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi'));
     }
-    public function saveEmpresa(Request $request){
+    /* public function saveEmpresa(Request $request){
 
-        $request->validate([
+         $request->validate([
             'id_empresa'      => 'required',
         ]);
         $empresaDosi = new ContratosDosimetriaEmpresa();
@@ -52,16 +52,15 @@ class DosimetriaController extends Controller
         $empresaDosi->numtotal_dosi_ezclip         = 0;
 
         $empresaDosi->save();
-
-        /* return $empresaDosi; */
-        return redirect()->route('empresasdosi.create');
-    }
+        return redirect()->route('empresasdosi.create'); 
+    } */
 
     public function createlistContrato($id){
         $empresa = Empresa::find($id);
         $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
         ->get();
-        /* SELECT * FROM `departamentosedes` INNER JOIN sedes on departamentosedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
+        /* SELECT * FROM `departamentosedes` INNER JOIN sedes on departamentosedes.sede_id = sedes.id_sede INNER 
+        JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
         $sedes = Sede::leftJoin('contratodosimetriasedes', 'sedes.id_sede', '=', 'contratodosimetriasedes.sede_id')
         ->where('sedes.empresas_id', $id)
         ->whereNull('contratodosimetriasedes.sede_id')
@@ -74,22 +73,7 @@ class DosimetriaController extends Controller
         /* return $sedes; */
     }
 
-    /* public function listarContratosdosi($id){
-        $empresa = Empresa::find($id);
-        $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
-        ->get();
-        return view('dosimetria.listar_contratos_dosimetria', compact('empresa', 'dosimetriacontrato'));
-
-    } */
-
-    /* public function createContrato($id){
-        $empresa = Empresa::find($id);
-
-
-
-        return view('dosimetria.crear_contratos_dosimetria', compact('empresa'));
-    } */
-
+    
     public function selectdepa(Request $request){
         $departamentos = DB::table('departamentosedes')
             ->where('sede_id', $request->sede_id)
