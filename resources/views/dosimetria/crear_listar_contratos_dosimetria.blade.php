@@ -70,12 +70,12 @@
                                         </div>
                                     </div>
                                 </div>
-                
+
                             </div>
                             <div class="col-md">
                                 <hr>
                                 <label class="text-center ms-4">ASIGNE A ESTE CONTRATO UNA O MÁS SEDES:</label>
-                
+
                                 <div class="row mt-2">
                                     <div class="col-md text-center">
                                         <button onclick="readySede()" class="btn btn-sm colorQA" id="agregar">AGREGAR SEDE </button>
@@ -118,10 +118,10 @@
                                             <div class="row ">
                                                 <div class="col-md-3">
                                                     <div class="form-floating mt-4">
-                                                        <select class="form-select"  id="departamento_sede">
+                                                        <select class="form-select" id="departamento_sede">
                                                             <option value="">--SELECCIONE--</option>
                                                             @foreach($departamentos as $depa)
-                                                                <option value ="{{$depa->id_departamentosede}}">{{$depa->nombre_departamento}}</option>
+                                                                <option required value ="{{$depa->id_departamentosede}}">{{$depa->nombre_departamento}}</option>
                                                             @endforeach
                                                         </select>
                                                         <label for="floatingSelectGrid">DEPARTAMENTO:</label>
@@ -132,54 +132,54 @@
                                                 </div>
                                                 <div class="col-md">
                                                     <label for="" class="text-center">No. DOSÍM. C. ENTERO</label>
-                                                    <input type="number" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
+                                                    <input type="number" required id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
                                                     @error('num_dosi_ce_contrato_sede')
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="col-md">
                                                     <label for="" class="text-center">No. DOSÍM. AMBIENTAL</label>
-                                                    <input type="number" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
+                                                    <input type="number" required id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
                                                     @error('num_dosi_ambiental_contrato_sede')
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="col-md">
                                                     <label for="" class="text-center">No. DOSÍM. CONTROL</label>
-                                                    <input type="number" id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
+                                                    <input type="number" required id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
                                                     @error('num_dosi_caso_contrato_sede')
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </div>
                                                 <div class="col-md">
                                                     <label for="" class="text-center">No. DOSÍM. EZCLIP</label>
-                                                    <input type="number"  id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
+                                                    <input type="number" required id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
                                                     @error('num_dosi_ezclip_contrato_sede')
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </div>
-                
+
                                             </div>
                                         </div>
-                
+
                                         <div class="" id="contenedorDepto0">
-                
+
                                         </div>
                                     </div>
                                 </div>
-                
+
                                 <div id="contenedor">
-                
+
                                 </div>
-                
+
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                            <button wire:click="save" type="submit" class="btn colorQA"  data-bs-dismiss="modal">GUARDAR</button>
+                            <button wire:click="save" type="submit" class="btn colorQA" >GUARDAR</button>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
         </div>
