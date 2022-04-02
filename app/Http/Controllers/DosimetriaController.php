@@ -57,14 +57,11 @@ class DosimetriaController extends Controller
 
     public function createlistContrato($id){
         $empresa = Empresa::find($id);
-        $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)
-        ->get();
-        /* SELECT * FROM `departamentosedes` INNER JOIN sedes on departamentosedes.sede_id = sedes.id_sede INNER 
-        JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
-        $sedes = Sede::leftJoin('contratodosimetriasedes', 'sedes.id_sede', '=', 'contratodosimetriasedes.sede_id')
-        ->where('sedes.empresas_id', $id)
-        ->whereNull('contratodosimetriasedes.sede_id')
-        ->get();
+        $dosimetriacontrato = Dosimetriacontrato::where('dosimetriacontratos.empresa_id', $id)->get();
+        $sedes = Sede::where('sedes.empresas_id', $id)->get();
+        /* $first = Sede::leftJoin('contratodosimetriasedes', 'sedes.id_sede', '=', 'contratodosimetriasedes.sede_id')->where('sedes.empresas_id', $id);
+        $sedes = Sede::rightJoin('contratodosimetriasedes', 'sedes.id_sede', '=', 'contratodosimetriasedes.sede_id')->where('sedes.empresas_id', $id)->union($first)->get(); */
+        
         $departamentos = Departamentosede::join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('empresas.id_empresa', $id)
@@ -85,13 +82,13 @@ class DosimetriaController extends Controller
     public function saveContratodosi(Request $request){
         /* return $request; */
 
-        $request->validate([
+        /* $request->validate([
             'codigo_contrato'               => 'required',
             'fecha_inicio_contrato'         => 'required',
             'periodo_recambio_contrato'     => 'required',
 
 
-        ]);
+        ]); */
         $contratoDosi = new Dosimetriacontrato();
 
         $contratoDosi->codigo_contrato              = $request->codigo_contrato;
@@ -129,7 +126,7 @@ class DosimetriaController extends Controller
                 break;
             }
         }
-        return redirect()->route('detallecontrato.create', $contratoDosi->id_contratodosimetria);
+        return redirect()->route('detallecontrato.create', $contratoDosi->id_contratodosimetria);       
     }
 
     public function  createTrabajadorSede(Request $request) {

@@ -15,7 +15,7 @@
                 <label for="floatingSelectGrid">EMPRESA:</label>
                 @error('empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                 </div>
-                {{$empresa}}
+                
             </div>
         </div>
         <div class="modal-footer">
