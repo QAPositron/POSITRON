@@ -34,10 +34,10 @@ class EmpresasController extends Controller
     public function save(Request $request){
         
         $request->validate([
-            'nombre_empresa'      => 'required',
+            'nombre_empresa'      => 'required|unique:empresas,nombre_empresa',
             'tipo_empresa'        => 'required',              
             'tipoIden_empresa'    => 'required',  
-            'numero_ident'        => 'required|max:10',
+            'numero_ident'        => 'required|max:10|unique:empresas,num_iden_empresa',
              
             'actividad_empresa'   => 'required|max:4',
             'respoIva_empresa'    => 'required',    

@@ -5,7 +5,7 @@
     <div class="col-10">
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3">EDITAR EMPRESA</h2>
-            
+             
             <form class="m-4"  id="form_edit_empresa" name="form_edit_empresa" action="{{route('empresas.update', $empresa)}}" method="POST">
                 
                 @csrf

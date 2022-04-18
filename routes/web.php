@@ -114,18 +114,26 @@ Route::delete('holders/{holder}', [HolderController::class, 'destroy'])->name('h
 Route::get('empresasdosicreate', [DosimetriaController::class, 'createEmpresa'])->name('empresasdosi.create');
 Route::post('empresasdosi', [DosimetriaController::class, 'saveEmpresa'])->name('empresasdosi.save');
 
-Route::get('contratosdosilistar/{empresadosi}/listar', [DosimetriaController::class, 'listarContratosdosi'])->name('contratosdosi.listar');
+/* Route::get('contratosdosilistar/{empresadosi}/listar', [DosimetriaController::class, 'listarContratosdosi'])->name('contratosdosi.listar'); */
 Route::get('contratosdosicreate/{empresadosi}/create', [DosimetriaController::class, 'createContrato'])->name('contratosdosi.create');
+
 Route::get('contratodosisedecreate/{contratodosi}/create', [DosimetriaController::class, 'createSedeContrato'])->name('contratosdosisede.create');
 
-Route::get('/contratosdosicreatelist/{contratodosi}/contratodosidepa',[DosimetriaController::class,'selectdepa']);
-
-Route::post('contratosdosi', [DosimetriaController::class, 'saveContratodosi'])->name('contratosdosi.save');
+Route::get('/contratosdosicreatelist/{contratodosi}/createlist/contratodosidepa',[DosimetriaController::class,'selectdepa']);
 /* Route::post('contratosdosisede', [DosimetriaController::class, 'saveSedeContrato'])->name('contratosdosisede.save'); */
 
 Route::get('contratosdosicreatelist/{empresadosi}/createlist', [DosimetriaController::class, 'createlistContrato'])->name('contratosdosi.createlist');
+Route::get('contratosdosicreatelist/{empresadosi}/createlist/create', [DosimetriaController::class, 'createContratodosi'])->name('contratosdosi.create');
+Route::post('contratosdosi', [DosimetriaController::class, 'saveContratodosi'])->name('contratosdosi.save');
+Route::get('contratosdosicreatelist/{empresadosi}/{contratodosi}/edit', [DosimetriaController::class, 'editContratodosi'])->name('contratosdosi.edit');
+Route::put('contratosdosicreatelist/{contratodosi}/update', [DosimetriaController::class, 'updateContratodosi'])->name('contratosdosi.update');
+Route::delete('contratosdosicreatelist/{empresadosi}/{contratodosi}/destroy', [DosimetriaController::class, 'destroyContratodosi'])->name('contratosdosi.destroy');
+Route::put('contratosdosicreatelist/{contratodosisede}/{contratodosisededepto}/update', [DosimetriaController::class, 'updateContsedepto'])->name('contratosdosisededepto.update');
+Route::get('/contratosdosicreatelist/{contratodosisede}/{contratodosisededepto}/contratodosidepa',[DosimetriaController::class,'selectdepa']);
 
 Route::get('detallecontrato/{detcont}/create', [DosimetriaController::class, 'createdetalleContrato'])->name('detallecontrato.create');
+Route::delete('detallecontrato/{detcont}/{contratodosisede}/{contratodosisededepto}/destroy', [DosimetriaController::class, 'destroyContdosisedepto'])->name('contratosdosisededepto.destroy');
+
 Route::get('detallesedecont/{detsedcont}/create',[DosimetriaController::class, 'createdetsedeContrato'])->name('detallesedecont.create');
 /////////RUTAS PARA EL CRUD DE ASIGNACION DOSIMETROS///////
 

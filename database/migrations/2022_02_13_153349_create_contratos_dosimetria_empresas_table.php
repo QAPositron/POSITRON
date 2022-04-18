@@ -20,7 +20,8 @@ class CreateContratosDosimetriaEmpresasTable extends Migration
             $table-> unsignedBigInteger('empresa_id');
             $table-> foreign('empresa_id')->references('id_empresa')->on('empresas')->onDelete('cascade')->onUpdate('cascade');
             
-            
+            $table->string('nombre_empresa', 40)->unique();
+            $table->integer('num_iden_empresa')->unique();
             $table->integer('numtotal_dosi_cuerpo_entero')->nullable();
             $table->integer('numtotal_dosi_control')->nullable();
             $table->integer('numtotal_dosi_ambiental')->nullable();

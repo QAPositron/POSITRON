@@ -16,7 +16,7 @@
                             <input type="text" class="form-control" name="nombre_empresa" id="nombre_empresa" value="{{old('nombre_empresa')}}" autofocus style="text-transform:uppercase">
                             <label for="floatingInput">NOMBRE</label>
                             @error('nombre_empresa')
-                                <small>*{{$message}}</small>
+                                <small class="text-danger">*{{$message}}</small>
                             @enderror
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <br>
+                <br> 
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">

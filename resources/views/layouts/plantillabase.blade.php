@@ -66,7 +66,39 @@
         background: #1A9980;
         border-color: white;
       }
-     
+      /* .formulario_input_incorrecto:focus{
+        
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(187, 41, 41, 1);
+       
+      }
+      .formulario_input_correcto:focus{
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
+      } */
+      .form-input-error{
+        margin-bottom: 0;
+        display: none;
+
+      }
+      .form-input-error-activo{
+        display: block;
+        color: red;
+        font-size: 12px;
+      }
+      .form-error-message{
+        display: none;
+      }
+      .form-error-message-activo{
+        display: block;
+      }
+      .btn-disable{
+        cursor: not-allowed;
+        pointer-events: none;
+
+        /*Button disabled - CSS color class*/
+        color: #c0c0c0;
+        background-color: #ffffff;
+
+      }
       </style>
     
     
