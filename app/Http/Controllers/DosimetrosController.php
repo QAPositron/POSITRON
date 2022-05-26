@@ -29,12 +29,13 @@ class DosimetrosController extends Controller
         $dosimetro->codigo_dosimeter        = $request->codigo_dosimetro;
         $dosimetro->fecha_ingreso_servicio  = $request->fecha_ingre_serv_dosimetro;
         $dosimetro->estado_dosimetro        = strtoupper($request->estado_dosimetro);
+        $dosimetro->uso_dosimetro           = '';
        
         $dosimetro->save();
 
     
-        /* return $dosimetro; */
-        return redirect()->route('dosimetros.search');
+        /* return $request; */
+        return redirect()->route('dosimetros.search')->with('guardar', 'ok');
     }
     public function search(){
 

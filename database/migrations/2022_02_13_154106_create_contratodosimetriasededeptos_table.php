@@ -24,10 +24,13 @@ class CreateContratodosimetriasededeptosTable extends Migration
             $table-> unsignedBigInteger('departamentosede_id');
             $table-> foreign('departamentosede_id')->references('id_departamentosede')->on('departamentosedes')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->integer('dosi_cuerpo_entero')->nullable();
             $table->integer('dosi_control')->nullable();
-            $table->integer('dosi_ambiental')->nullable();
-            $table->integer('dosi_ezclip')->nullable();
+            $table->integer('dosi_torax')->nullable();
+            $table->integer('dosi_area')->nullable();
+            $table->integer('dosi_caso')->nullable();
+            $table->integer('dosi_cristalino')->nullable();
+            $table->integer('dosi_muñeca')->nullable();
+            $table->integer('dosi_dedo')->nullable();
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3">CREAR DOSIMETRO</h2>
 
-            <form class="m-4"  action="{{route('dosimetros.save')}}" method="POST">
+            <form class="m-4" id="form_create_dosimetro" name="form_create_dosimetro" action="{{route('dosimetros.save')}}" method="POST">
 
                 @csrf
 
@@ -16,11 +16,9 @@
                         <div class="form-floating" >
                             <select class="form-select" name="tipo_dosimetro" id="tipo_dosimetro" value="{{old('tipo_dosimetro')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="CUERPO E.">CUERPO ENTERO</option>
+                                <option value="GENERAL">GENERAL</option>
+                                <option value="AMBIENTAL">ÁREA</option>
                                 <option value="EZCLIP">EZCLIP</option>
-                                <option value="AMBIENTAL">AMBIENTAL</option>
-                                <option value="CONTROL">CONTROL</option>
-
                             </select>
                             <label for="floatingInputGrid">TIPO:</label>
                             @error('tipo_dosimetro')
@@ -106,4 +104,31 @@
     </div>
     <div class="col"></div>
 </div>
+
+<script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#form_create_dosimetro').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "DESEA GUARDAR ESTE DOSIÍMETRO??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
+    })
+</script>
 @endsection

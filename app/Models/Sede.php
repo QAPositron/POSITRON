@@ -27,6 +27,10 @@ class Sede extends Model
         return $this->hasMany(Contactosede::class, 'id_contactosede');
     }
 
+    //relacion uno a muchos con personasede
+    public function personasede(){
+        return $this->hasMany(Personasedes::class, 'id_personasede');
+    }
 
     public function trabajadordosimetro(){
         /* return $this->hasMany('App\Models\Sede'); */

@@ -9,6 +9,7 @@ use App\Http\Controllers\DosimetrosController;
 use App\Http\Controllers\EmpresasController;
 use App\Http\Controllers\HolderController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\SedesController;
 use App\Http\Controllers\TrabajadoresController;
@@ -92,6 +93,10 @@ Route::get('contactos/{contacto}/edit', [ContactosController::class, 'edit'])->n
 Route::put('contactos/{contacto}', [ContactosController::class, 'update'])->name('contactos.update');
 Route::delete('contactos/{contacto}', [ContactosController::class, 'destroy'])->name('contactos.destroy');
 
+/////////RUTAS PARA EL CRUD DE PERSONAS//////
+Route::get('personas/search', [PersonaController::class, 'search'])->name('personas.search');
+Route::get('personas/search', [PersonaController::class, 'create'])->name('personas.create');
+
 /////////RUTAS PARA EL CRUD DE DOSIMETROS///////
 Route::get('dosimetros/search', [DosimetrosController::class, 'search'])->name('dosimetros.search');
 
@@ -137,15 +142,33 @@ Route::delete('detallecontrato/{detcont}/{contratodosisede}/{contratodosisededep
 Route::get('detallesedecont/{detsedcont}/create',[DosimetriaController::class, 'createdetsedeContrato'])->name('detallesedecont.create');
 /////////RUTAS PARA EL CRUD DE ASIGNACION DOSIMETROS///////
 
+/////KATE//// 
+Route::get('asignadosicontratom1/{asigdosicont}/{mesnumber}/create', [DosimetriaController::class, 'asignaDosiContratoM1'])->name('asignadosicontratom1.create');
+Route::post('asignadosicontratom1/{asigdosicont}/{mesnumber}/', [DosimetriaController::class, 'saveAsignacionDosiContratoM1'])->name('asignadosicontratom1.save');
+
+Route::get('asignadosicontratomn/{asigdosicont}/{mesnumber}/create', [DosimetriaController::class, 'asignaDosiContratoMn'])->name('asignadosicontratomn.create');
+Route::post('asignadosicontratomn/{asigdosicont}/{mesnumber}/', [DosimetriaController::class, 'saveAsignacionDosiContratoMn'])->name('asignadosicontratomn.save');
+Route::get('asignadosicontratomn/{asigdosicont}/{mesnumber}/clear', [DosimetriaController::class, 'clearAsignacionAnteriorMn'])->name('asignadosicontratomn.clear');
+/////////////
+
 Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/create', [DosimetriaController::class, 'asignaDosiContrato'])->name('asignadosicontrato.create');
 Route::post('asignadosicontrato', [DosimetriaController::class, 'saveAsignacionDosiContrato'])->name('asignadosicontrato.save');
 
 Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/info', [DosimetriaController::class, 'info'])->name('asignadosicontrato.info');
 // para eliminar y editar en ruta info
-Route::patch('asignadosicontrato/{idWork}/{contratoId}/{mesnumber}/update', [DosimetriaController::class, 'updateInfo'])->name('asignadosicontrato.updateInfo');
-Route::delete('asignadosicontrato/{idWork}/{contratoId}/{mesnumber}/delete', [DosimetriaController::class, 'deleteInfo'])->name('asignadosicontrato.deleteInfo');
+/* Route::patch('asignadosicontrato/{idWork}/{contratoId}/{mesnumber}/update', [DosimetriaController::class, 'updateInfo'])->name('asignadosicontrato.updateInfo'); */
+/* Route::delete('asignadosicontrato/{idWork}/{contratoId}/{mesnumber}/delete', [DosimetriaController::class, 'deleteInfo'])->name('asignadosicontrato.deleteInfo'); */
+
+
+///////////----------RUTA PARA ELIMINAR ASIGNACIONES DE DOSIMETROS KATEEE -----///////////////////
+Route::put('asignadosicontrato/{id}/{mesnumber}/update', [DosimetriaController::class, 'updateFechasAsigContrato'])->name('asignadosicontrato.updatefechas');
+
+Route::delete('asignadosicontrato/{id}/destroycontrol', [DosimetriaController::class, 'destroyControlasig'])->name('asigdosicont.destroyInfoControl');
+Route::delete('asignadosicontrato/{id}/destroytrabajador', [DosimetriaController::class, 'destroyTrabajadorasig'])->name('asigdosicont.destroyInfoTrabajador');
+
 
 ///////DELETE DOSIMETRO FOR WORK////////
+
 Route::delete('eliminatedDosiForWork/{idWork}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteDosimetro'])->name('dosimetroWork.destroy');
 Route::delete('eliminatedDosiControl/{idDosiControl}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteDosimetroControl'])->name('dosimetroControl.destroy');
 Route::delete('eliminatedTrabajadorSede/{idWork}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteTrabajadorSede'])->name('trabajadorSede.destroy');
@@ -157,12 +180,17 @@ Route::patch('editDosimetroDelete/{idDosimetro}/{contratoId}/{mesnumber}',
 
 /////////RUTAS PARA EL CRUD DE LA LECTURA DE DOSIMETROS///////
 Route::get('lecturadosi/{lecdosi}/create', [DosimetriaController::class, 'lecturadosi'])->name('lecturadosi.create');
+Route::get('lecturadosi/{lecdosi}/{lecdosicontrol}/create', [DosimetriaController::class, 'lecturadosicontrl'])->name('lecturadosicontrl.create');
 Route::put('lecturadosi/{lecdosi}', [DosimetriaController::class, 'savelecturadosi'])->name('lecturadosi.save');
 Route::get('lecturadosi/{lecdosicont}/edit', [DosimetriaController::class, 'editlecturadosi'])->name('lecturadosi.edit');
+Route::get('lecturadosi/{lecdosi}/getextraviado',[DosimetriaController::class,'getextraviado']);
 
 Route::get('lecturadosicontrol/{lecdosicont}/create', [DosimetriaController::class, 'lecturadosicontrol'])->name('lecturadosicontrol.create');
 Route::put('lecturadosicontrol/{lecdosicont}', [DosimetriaController::class, 'savelecturadosicontrol'])->name('lecturadosicontrol.save');
 Route::get('lecturadosicontrol/{lecdosicont}/edit', [DosimetriaController::class, 'editlecturadosicontrol'])->name('lecturadosicontrol.edit');
+
+Route::get('lecturadosiarea/{lecdosicont}/create', [DosimetriaController::class, 'lecturadosiarea'])->name('lecturadosiarea.create');
+Route::put('lecturadosiarea/{lecdosicont}', [DosimetriaController::class, 'savelecturadosiarea'])->name('lecturadosiarea.save');
 
 /////////RUTAS PARA LOS REPORTES O INFORMES DE DOSIMETRIA///////
 Route::get('repodosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');

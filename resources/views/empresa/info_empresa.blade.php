@@ -1,5 +1,8 @@
 @extends('layouts.plantillabase')
 @section('contenido')
+
+{{---------------- TOCO CAMBIARLE EL NOMBRE A "DEPARTAMENTOS" POR "ESPECIALIDADES 
+que son las distintas especialidades que tiene la empresa como odontologia, oncologia, etc," ------------}}
     
     <div class="row">
         <div class="col"></div>
@@ -75,8 +78,8 @@
                                                     <div class="col"></div>
                                                     <div class="col">
                                                         <a href="{{route('empresas.edit', $empresa->id_empresa)}}" class="btn colorQA btn-sm">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-pen-fill mb-1" viewBox="0 0 16 16">
-                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                             </svg> EDITAR
                                                         </a>
                                                     </div>
@@ -130,12 +133,12 @@
                                                             echo  "<tr>";
                                                                 echo "<th rowspan='2' class='align-middle'>MUNICIPIO</th>";
                                                                 echo "<th rowspan='2' class='align-middle'>DIRECCIÓN</th>";
-                                                                echo "<th colspan='3' class='align-middle'>DEPARTAMENTOS</th>";
+                                                                echo "<th colspan='3' class='align-middle'>ESPECIALIDADES</th>";
                                                                 echo "<th rowspan='2' class='align-middle' style='width: 14.60%'>ACCIONES</th>";
                                                             echo "</tr>";
                                                             echo "<tr>";
                                                                 echo "<th class='align-middle' style='font-size:13px; width: 10.50%;'>NOMBRE</th>";
-                                                                echo "<th class='align-middle' style='font-size:13px;'>ELIMINAR <br> DEPTO.</th>";
+                                                                echo "<th class='align-middle' style='font-size:13px;'>ELIMINAR <br> ESP.</th>";
                                                                 echo "<th class='align-middle' style='font-size:13px;'>CREAR <br> ÁREA</th>";
                                                             echo "</tr>";
                                                         echo "</thead>";
@@ -192,8 +195,8 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <a href="{{route('sedes.edit', $sed->id_sede)}}" class="btn btn-sm colorQA">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pen-fill mb-1" viewBox="0 0 16 16">
-                                                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                                 </svg>
                                                             </a>
                                                         </div>
@@ -214,17 +217,20 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="6" class="px-5">
+                                                   
                                                     @php
                                                         $anterior = 'inicio';
+                                                        $checke = '0';
                                                     @endphp
                                                     @foreach($areadeptos as $areas)
                                                         @if($areas->nombre_sede == $sed->nombre_sede)
                                                             <?php
                                                                 if($areas->id_departamentosede != $anterior){
+
                                                                     echo "<table class='table table-bordered'>";
                                                                         echo "<thead class='table-secondary text-center'>";
                                                                             echo "<tr>";
-                                                                                echo "<th colspan='3'>DEPARTAMENTO: {$areas->nombre_departamento}</th>";
+                                                                                echo "<th colspan='3'>ESPECIALIDAD: {$areas->nombre_departamento}</th>";
                                                                                 $anterior = $areas->id_departamentosede;
                                                                             echo"</tr>";
                                                                             echo "<tr>";
@@ -247,8 +253,8 @@
                                                                                                 <div class="col">
 
                                                                                                     <button class="btn colorQA btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#editAreaModal" onclick="capturarEdit('{{$sed->nombre_sede}}', '{{$areadep->id_areadepartamentosede}}', '{{$areadep->departamentosede_id}}' , '{{$areadep->nombre_departamento}}' , '{{$areadep->nombre_area}}' , '{{$areadep->descripcion}}')">
-                                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pen-fill mb-1" viewBox="0 0 16 16">
-                                                                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                                                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                                                                         </svg>
                                                                                                     </button>
                                                                                                     <div class="modal fade" id="editAreaModal" tabindex="-1" aria-labelledby="editAreaModalLabel" aria-hidden="true">
@@ -345,9 +351,16 @@
                                                                 }else{
                                                                     echo " ";
                                                                 }
-                                                            
                                                             ?>
+                                                        @else
+                                                            @php
+                                                                if($checke=='0'){
+                                                                    echo "NO HAY ÁREAS EN ESTA SEDE !!"; 
+                                                                    $checke = '1';
+                                                                }
+                                                            @endphp
                                                         @endif
+                                                    
                                                     @endforeach
                                                 </td>
                                             </tr>
@@ -475,8 +488,8 @@
                                         <div class="row">
                                             <div class="col">
                                                 <a href="{{route('trabajadores.edit', $trab->id_trabajador)}}" class="btn colorQA">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                     </svg>
                                                 </a>
                                             </div>
@@ -557,8 +570,8 @@
                                         <div class="row">
                                             <div class="col">
                                                 <a href="{{route('contactos.edit', $cont->id_contacto)}}" class="btn colorQA">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                     </svg>
                                                 </a>
                                             </div>

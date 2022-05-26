@@ -7,7 +7,7 @@
             <h2 class="text-center mt-3">ASIGNAR DOSÍMETRO</h2>
             <h3 class="text-center">MES {{ Request()->mesnumber  }} </h3>
             <h3 class="text-center">DEPARTAMENTO {{ $contdosisededepto->departamentosede->nombre_departamento }} </h3>
-
+            
             <form class="m-4" action="{{route('asignadosicontrato.save')}}" method="POST">
                 @csrf
                 <input hidden name="mesNumber1" id="mesNumber1" value="{{ Request()->mesnumber  }}" />
@@ -16,10 +16,6 @@
                         <div class="form-floating ">
                             <input type="text" class="form-control" name="id_empresa_asigdosim" id="id_empresa_asigdosim" value="{{ $contdosisededepto->contratodosimetriasede->sede->empresa->id_empresa}}" hidden>
                             <input type="text" class="form-control" name="nombre_empresa_asigdosim" id="nombre_empresa_asigdosim" value="{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}" readonly>
-
-                            <!-- <select class="form-select" name="id_empresa_asigdosim" id="id_empresa_asigdosim"  autofocus aria-label="Floating label select example" >
-                                <option value ="{{ $contdosisededepto->contratodosimetriasede->sede->empresa->id_empresa}}">{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}</option>
-                            </select> -->
                             <label for="floatingSelectGrid">EMPRESA:</label>
                         </div>
                     </div>
@@ -27,9 +23,6 @@
                         <div class="form-floating">
                             <input type="text" class="form-control" name="id_sede_asigdosim" id="id_sede_asigdosim" value="{{$contdosisededepto->contratodosimetriasede->sede->id_sede}}" hidden>
                             <input type="text" class="form-control" name="nombre_sede_asigdosim" id="nombre_sede_asigdosim" value="{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}" readonly>
-                            <!-- <select class="form-select" name="id_sede_asigdosim" id="id_sede_asigdosim" autofocus aria-label="Floating label select example">
-                                <option value ="{{ $contdosisededepto->contratodosimetriasede->sede->id_sede}}">{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</option>
-                            </select> -->
                             <label for="floatingSelectGrid">SEDE:</label>
                         </div>
                     </div>
@@ -40,7 +33,7 @@
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead class="text-center">
-                                    <th colspan="4">CONTRATO No. {{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</th>
+                                    <th colspan="4" style="font-size: 20px">CONTRATO No. {{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</th>
                                 </thead>
                                 <tbody>
                                     <tr class="text-center">
@@ -87,22 +80,34 @@
                     <div class="col-md">
                         <div class="form-floating">
                             @if(count($dosimetrosControl)>0)
-                            <input disabled value="{{$dosimetrosControl[0]['primer_dia_uso']}}" type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" >
-                            <label for="floatingInputGrid">PRIMER DÍA</label>
-                            @else
-                                <input type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" >
+                                <input disabled value="{{$dosimetrosControl[0]['primer_dia_uso']}}" type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" >
                                 <label for="floatingInputGrid">PRIMER DÍA</label>
+                                @error('primerDia_asigdosim')
+                                    <small class="invalid-feedback">*{{$message}}</small>
+                                @enderror
+                            @else
+                                <input type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" >
+                                <label for="floatingInputGrid">PRIMER DÍA</label>
+                                @error('primerDia_asigdosim')
+                                    <small class="invalid-feedback">*{{$message}}</small>
+                                @enderror
                             @endif
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
                             @if(count($dosimetrosControl)>0)
-                            <input disabled value="{{$dosimetrosControl[0]['ultimo_dia_uso']}}" type="date" class="form-control" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
-                            <label for="floatingInputGrid">ULTIMO DÍA:</label>
-                            @else
-                                <input type="date" class="form-control" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
+                                <input disabled value="{{$dosimetrosControl[0]['ultimo_dia_uso']}}" type="date" class="form-control @error('ultimoDia_asigdosim') is-invalid @enderror" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
                                 <label for="floatingInputGrid">ULTIMO DÍA:</label>
+                                @error('ultimoDia_asigdosim')
+                                    <small class="invalid-feedback">*{{$message}}</small>
+                                @enderror
+                            @else
+                                <input type="date" class="form-control @error('ultimoDia_asigdosim') is-invalid @enderror" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
+                                <label for="floatingInputGrid">ULTIMO DÍA:</label>
+                                @error('ultimoDia_asigdosim')
+                                    <small class="invalid-feedback">*{{$message}}</small>
+                                @enderror
                             @endif
                         </div>
                     </div>
@@ -111,8 +116,11 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
+                            <input type="date" class="form-control @error('fecha_envio_dosim_asignado') is-invalid @enderror" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
                             <label for="floatingInputGrid">FECHA ENVIO</label>
+                            @error('fecha_envio_dosim_asignado')
+                                <small class="invalid-feedback">*{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md">
@@ -147,8 +155,6 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="table table-responsive text-center">
-
-
                             <br>
                             <table class="table table-bordered" id="tablaDosimetros">
                                 <thead class="text-center">
@@ -157,10 +163,10 @@
                                     <th style='width: 10.20%'>No. IDEN.</th>
                                     <th style='width: 16.40%'>DOSÍMETRO</th>
                                     <th style='width: 16.40%'>HOLDER</th>
-                                    <th style='width: 16.60%'>OCUPACIÓN</th>
+                                    <th style='width: 20.60%'>OCUPACIÓN</th>
                                     <th>ACCIONES</th>
-                                </thead>
-                                <tbody>
+                                </thead>    
+                                <tbody> 
                                     @if (count($dosimetrosControl) > 0)
                                         @foreach($dosimetrosControl as $control)
                                             <tr>
@@ -174,78 +180,71 @@
 
                                                 <td colspan="2">CONTROL</td>
                                                 <td>
-                                                        <select class="form-select" data-placeholder="Select " name="id_dosimetro_asigdosim_control[]" id="id_dosimetro_asigdosim_control{{$control->dosimetro_id}}"  autofocus aria-label="Floating label select example">
-                                                            @foreach($dosimetros as $dosi)>
-
-                                                                @if( $control->dosimetro_id == $dosi->id_dosimetro  )
-                                                                    <option selected  value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
+                                                    <select class="form-select" data-placeholder="Select" name="id_dosimetro_asigdosim_control[]" id="id_dosimetro_asigdosim_control{{$control->dosimetro_id}}" autofocus aria-label="Floating label select example">
+                                                        @foreach($dosimetros as $dosi)
+                                                            @if($control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value ="{{$dosi->id_dosimetro}}">{{$dosi->codigo_dosimeter}} - {{$dosi->tipo_dosimetro}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
                                                     @error('id_dosimetro_asigdosim_control')
-                                                    <small>*{{$message}}</small>
+                                                        <small>*{{$message}}</small>
                                                     @enderror
                                                 </td>
                                                 <td class="text-center">N.A.</td>
                                                 <td>
-
-                                                        <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control{{$control->dosimetro_id}}" autofocus style="text-transform:uppercase">
-                                                            @foreach($dosimetros as $dosi)
-                                                                @if($control->ocupacion=='T' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="T">TELETERAPIA</option>
-                                                                @elseif($control->ocupacion=='B' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="B">BRAQUITERAPIA</option>
-                                                                @elseif($control->ocupacion=='N' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="N">MEDICINA NUCLEAR</option>
-                                                                @elseif($control->ocupacion=='G' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="G">GAMAGRAFIA INDUSTRIAL</option>
-                                                                @elseif($control->ocupacion=='F' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="F">MEDIDORES FIJOS</option>
-                                                                @elseif($control->ocupacion=='I' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="I">INVESTIGACIÓN</option>
-                                                                @elseif($control->ocupacion=='D' &&  $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="D">DENSÍMETRO NUCLEAR</option>
-                                                                @elseif($control->ocupacion=='M' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="M">MEDIDORES MÓVILES</option>
-                                                                @elseif($control->ocupacion=='E' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="E">DOCENCIA</option>
-                                                                @elseif($control->ocupacion=='P' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="P">PERFILAJE Y REGISTRO</option>
-                                                                @elseif($control->ocupacion=='TR' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="T">TRAZADORES</option>
-                                                                @elseif($control->ocupacion=='H' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="H">HEMODINAMIA</option>
-                                                                @elseif($control->ocupacion=='X' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="X">RX PERIAPICALES</option>
-                                                                @elseif($control->ocupacion=='R' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="R">RADIODIAGNÓSTICO</option>
-                                                                @elseif($control->ocupacion=='S' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="S">FLUOROSCOPÍA</option>
-                                                                @elseif($control->ocupacion=='AM' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="AM">APLICACIONES MÉDICAS</option>
-                                                                @elseif($control->ocupacion=='AI' && $control->dosimetro_id == $dosi->id_dosimetro)
-                                                                    <option selected  value="AI">APLICACIONES INDUSTRIALES</option>
-                                                                @endif
-                                                            @endforeach
-                                                        </select>
+                                                    <select class="form-select" name="ocupacion_asigdosim_control[]" id="ocupacion_asigdosim_control{{$control->dosimetro_id}}" autofocus style="text-transform:uppercase">
+                                                        @foreach($dosimetros as $dosi)
+                                                            @if($control->ocupacion=='T' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="T">TELETERAPIA</option>
+                                                            @elseif($control->ocupacion=='B' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="B">BRAQUITERAPIA</option>
+                                                            @elseif($control->ocupacion=='N' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="N">MEDICINA NUCLEAR</option>
+                                                            @elseif($control->ocupacion=='G' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="G">GAMAGRAFIA INDUSTRIAL</option>
+                                                            @elseif($control->ocupacion=='F' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="F">MEDIDORES FIJOS</option>
+                                                            @elseif($control->ocupacion=='I' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="I">INVESTIGACIÓN</option>
+                                                            @elseif($control->ocupacion=='D' &&  $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="D">DENSÍMETRO NUCLEAR</option>
+                                                            @elseif($control->ocupacion=='M' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="M">MEDIDORES MÓVILES</option>
+                                                            @elseif($control->ocupacion=='E' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="E">DOCENCIA</option>
+                                                            @elseif($control->ocupacion=='P' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="P">PERFILAJE Y REGISTRO</option>
+                                                            @elseif($control->ocupacion=='TR' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="T">TRAZADORES</option>
+                                                            @elseif($control->ocupacion=='H' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="H">HEMODINAMIA</option>
+                                                            @elseif($control->ocupacion=='X' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="X">RX PERIAPICALES</option>
+                                                            @elseif($control->ocupacion=='R' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="R">RADIODIAGNÓSTICO</option>
+                                                            @elseif($control->ocupacion=='S' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="S">FLUOROSCOPÍA</option>
+                                                            @elseif($control->ocupacion=='AM' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="AM">APLICACIONES MÉDICAS</option>
+                                                            @elseif($control->ocupacion=='AI' && $control->dosimetro_id == $dosi->id_dosimetro)
+                                                                <option selected  value="AI">APLICACIONES INDUSTRIALES</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
                                                     @error('ocupacion_asigdosim_control')
                                                     <small>*{{$message}}</small>
                                                     @enderror
                                                 </td>
                                                 <td>
-
-
-                                                        <button data-bs-toggle="modal" data-bs-target="#dosimetroControl{{$control->id_dosicontrolcontdosisedes}}" class="btn btn-danger btn-sm" type="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                            </svg>
-                                                        </button>
-
+                                                    <button data-bs-toggle="modal" data-bs-target="#dosimetroControl{{$control->id_dosicontrolcontdosisedes}}" class="btn btn-danger btn-sm" type="button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                        </svg>
+                                                    </button>
                                                 </td>
-
                                             </tr>
-
                                         @endforeach
                                     @elseif(count($dosimetrosControlAsignadosAnteriores)>0)
                                         @foreach($dosimetrosControlAsignadosAnteriores as $control)
@@ -838,6 +837,17 @@
                             </button>
                         </div>
                     </div>
+                    <div class="col">
+                        <div class="d-grip gap-2 col-6 mx-auto">
+                            {{-- <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="ESTE ES EL CONTENIDO DEL POPOVER" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button> --}}
+                            <a href="{{route('detallesedecont.create', $contdosisededepto->id_contdosisededepto)}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                </svg> 
+                                <br> CANCELAR ASIGNACIÓN
+                            </a>
+                        </div>
+                    </div>
                     <div class="col"></div>
                 </div>
             </form>
@@ -990,7 +1000,9 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous">
     </script>
-    <script type="">
+   
+   {{-- <script src="https://unpkg.com/@popperjs/core@2"></script> --}}
+    <script type="text/javascript">
         $(document).ready(function() {
 
             @foreach($trabajadores as $trab)
@@ -1226,5 +1238,17 @@
                }
            }
 
+        /* var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl);
+        }); */
+
+
+        $(document).ready(function() {
+            $('[data-bs-toggle="popover"]').popover({
+                
+                trigger: 'hover'
+            });
+        })
     </script>
 @endsection

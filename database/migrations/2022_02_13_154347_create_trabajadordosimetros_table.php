@@ -20,7 +20,7 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table-> unsignedBigInteger('contratodosimetriasede_id');
             $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
 
-            $table-> unsignedBigInteger('trabajador_id');
+            $table-> unsignedBigInteger('trabajador_id')->nullable();
             $table-> foreign('trabajador_id')->references('id_trabajador')->on('trabajadors')->onDelete('cascade')->onUpdate('cascade');
 
             $table-> unsignedBigInteger('dosimetro_id');
@@ -67,6 +67,15 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table->date('verification_date')->nullable();
             $table->date('verification_required_on_or_before')->nullable();
             $table->integer('remaining_days_available_for_use')->nullable();
+            $table->string('nota1', 10)->nullable();
+            $table->string('nota2', 10)->nullable();
+            $table->string('nota3', 10)->nullable();
+            $table->string('nota4', 10)->nullable();
+            $table->string('nota5', 10)->nullable();
+            $table->string('DNL', 10)->nullable();
+            $table->string('EU', 10)->nullable();
+            $table->string('DPL', 10)->nullable();
+            $table->string('DSU', 10)->nullable();
             $table->timestamps();
         });
     }

@@ -14,5 +14,8 @@ class Areadepartamentosede extends Model
     public function departamentosede(){
         return $this->belongsTo(Departamentosede::class, 'departamentosede_id', 'id_departamentosede');
     }
+    public function dosiareacontdosisede(){
+        return $this->hasMany(Dosiareacontdosisede::class, 'id_dosiareacontdosisedes');
+    }
 
 }

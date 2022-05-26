@@ -2,7 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Areadepartamentosede;
 use App\Models\Coldepartamento;
+use App\Models\Departamentosede;
+use App\Models\Trabajador;
+use App\Models\Trabajadorsede;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +22,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ColmunicipioSeeder::class);
         $this->call(DosimetroSeeder::class);
         $this->call(HolderSeeder::class);
+        $this->call(EmpresaSeeder::class);
+        $this->call(SedeSeeder::class);
+        $this->call(DepartamentosedeSeeder::class);
+        $this->call(AreadepartamentosedeSeeder::class);
+        $this->call(TrabajadorsSeeder::class);
+        $this->call(TrabajadorsedeSeeder::class);
     }
 }

@@ -3,9 +3,9 @@
 
     <div class="row">
         <div class="col"></div>
-        <div class="col-8">
+        <div class="col-11">
             <div class="card text-dark bg-light">
-                <h2 class="text-center mt-3" id="nueva_empresaModalLabel">CREAR CONTRATO DE DOSIMETRÍA <br> PARA LA EMPRESA:{{$empresa->nombre_empresa}}</h2>
+                <h2 class="text-center mt-3" id="nueva_empresaModalLabel">CREAR CONTRATO DE DOSIMETRÍA <br> PARA LA EMPRESA <br> {{$empresa->nombre_empresa}}</h2>
             
                 <form class="m-4" action="{{route('contratosdosi.save')}}"  method="POST" id="form_contrato_dosi">
                     @csrf
@@ -103,7 +103,7 @@
                                     <div class="col-md"></div>
                                 </div>
                                 <div hidden id="clonarDepto">
-                                    <div class="row ">
+                                    <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-floating mt-4">
                                                 <select class="form-select"  id="departamento_sede">
@@ -112,34 +112,41 @@
                                                         <option value ="{{$depa->id_departamentosede}}">{{$depa->nombre_departamento}}</option>
                                                     @endforeach
                                                 </select>
-                                                <label for="floatingSelectGrid">DEPARTAMENTO:</label>
+                                                <label for="floatingSelectGrid">ESPECIALIDAD:</label>
                                                 
                                             </div>
                                         </div>
                                         <div class="col-md">
-                                            <label for="" class="text-center">No. DOSÍM. C. ENTERO</label>
-                                            <input type="number" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
-                                            
-                                        </div>
-                                        <div class="col-md">
-                                            <label for="" class="text-center">No. DOSÍM. AMBIENTAL</label>
-                                            <input type="number" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
-                                            
-                                        </div>
-                                        <div class="col-md">
                                             <label for="" class="text-center">No. DOSÍM. CONTROL</label>
-                                            <input type="number" id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
-                                            
+                                            <input type="number" id="num_dosi_control_contrato_sede"  class="form-control text-center" autofocus >
                                         </div>
                                         <div class="col-md">
-                                            <label for="" class="text-center">No. DOSÍM. EZCLIP</label>
-                                            <input type="number"  id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
-                                            
+                                            <label for="" class="text-center">No. DOSÍM. TÓRAX</label>
+                                            <input type="number" id="num_dosi_torax_contrato_sede"  class="form-control text-center" autofocus >
                                         </div>
-        
+                                        <div class="col-md">
+                                            <label for="" class="text-center">No. DOSÍM. ÁREA</label>
+                                            <input type="number" id="num_dosi_area_contrato_sede"  class="form-control text-center" autofocus >
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="" class="text-center">No. DOSÍM. CASO</label>
+                                            <input type="number" id="num_dosi_caso_contrato_sede"  class="form-control text-center" autofocus >
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="" class="text-center">No. DOSÍM. CRISTALINO</label>
+                                            <input type="number"  id="num_dosi_cristalino_contrato_sede"  class="form-control text-center" autofocus>
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="" class="text-center">No. DOSÍM. MUÑECA</label>
+                                            <input type="number"  id="num_dosi_muneca_contrato_sede"  class="form-control text-center" autofocus>
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="" class="text-center">No. DOSÍM. DEDO</label>
+                                            <input type="number"  id="num_dosi_dedo_contrato_sede" class="form-control text-center" autofocus>
+                                        </div>
                                     </div>
+                                    <br>
                                 </div>
-        
                                 <div class="" id="contenedorDepto0">
         
                                 </div>
@@ -229,22 +236,33 @@ crossorigin="anonymous">
         console.log(contenidoDepto);
         contenidoDepto.appendChild(clonDepto).setAttribute("id", `depa${depaNumber}`);
         document.getElementById(`depa${depaNumber}`).removeAttribute("hidden");
-
+        
         document.getElementById(`depa${depaNumber}`).querySelector(`#departamento_sede`)
             .setAttribute("name", `departamentos_sede${sedesNumber-1}[]`);
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ce_contrato_sede`)
-            .setAttribute("name", `dosimetro_cuerpoEntero_sede${sedesNumber-1}[]`);
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_contrato_sede`)
+        .setAttribute("name", `dosimetro_control_sede${sedesNumber-1}[]`);
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ambiental_contrato_sede`)
-            .setAttribute("name", `dosimetro_ambiental_sede${sedesNumber-1}[]`);
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_torax_contrato_sede`)
+            .setAttribute("name", `dosimetro_torax_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_area_contrato_sede`)
+            .setAttribute("name", `dosimetro_area_sede${sedesNumber-1}[]`);
 
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_caso_contrato_sede`)
             .setAttribute("name", `dosimetro_caso_sede${sedesNumber-1}[]`);
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ezclip_contrato_sede`)
-            .setAttribute("name", `dosimetro_ezclip_sede${sedesNumber-1}[]`);
+        /* document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ezclip_contrato_sede`)
+            .setAttribute("name", `dosimetro_ezclip_sede${sedesNumber-1}[]`); */
+            
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_cristalino_contrato_sede`)
+            .setAttribute("name", `dosimetro_cristalino_sede${sedesNumber-1}[]`);
 
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_muneca_contrato_sede`)
+            .setAttribute("name", `dosimetro_muneca_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_dedo_contrato_sede`)
+            .setAttribute("name", `dosimetro_dedo_sede${sedesNumber-1}[]`);
         depaNumber++;
         ///////////////
         
@@ -260,7 +278,7 @@ crossorigin="anonymous">
                     $.get('contratodosidepa', {sede_id: sede_id}, function (depas) {
                         console.log('departamentos', depas)
                         $('#departamento_sede').empty();
-                        $('#departamento_sede').append("<option value=''> --SELECCIONE UN DEPARTAMENTO-- </option>");
+                        $('#departamento_sede').append("<option value=''> --SELECCIONE UNA ESPECIALIDAD-- </option>");
                         $.each(JSON.parse(depas), function (index, value) {
                             $('#departamento_sede').append("<option value='" + value.id_departamentosede + "'>" + value.nombre_departamento + "</option>")
                         })

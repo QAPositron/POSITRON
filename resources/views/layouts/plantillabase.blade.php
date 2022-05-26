@@ -66,18 +66,19 @@
         background: #1A9980;
         border-color: white;
       }
-      /* .formulario_input_incorrecto:focus{
-        
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(187, 41, 41, 1);
-       
-      }
-      .formulario_input_correcto:focus{
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
-      } */
+      
       .form-input-error{
         margin-bottom: 0;
         display: none;
 
+      }
+      .dosisnaranja{
+        border-color: orange;
+        box-shadow: inset 0 1px 1px rgba(194, 20, 34, 0.075), 0 0 8px rgb(224, 69, 8);
+      }
+      .dosisroja{
+        border-color: red;
+        box-shadow: inset 0 1px 1px rgba(194, 20, 34, 0.075), 0 0 8px rgb(245, 6, 6);
       }
       .form-input-error-activo{
         display: block;
@@ -93,12 +94,19 @@
       .btn-disable{
         cursor: not-allowed;
         pointer-events: none;
-
-        /*Button disabled - CSS color class*/
         color: #c0c0c0;
         background-color: #ffffff;
-
       }
+      .btn-circle{
+        width: 50px;
+        height: 50px;
+        padding: 6px 0px;
+        border-radius: 25px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.42857;
+      }
+
       </style>
     
     
@@ -126,6 +134,9 @@
       })
     </script>
 
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

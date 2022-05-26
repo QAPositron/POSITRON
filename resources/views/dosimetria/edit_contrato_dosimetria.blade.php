@@ -1,14 +1,14 @@
 @extends('layouts.plantillabase')
 @section('contenido')
 <div class="row">
-    <div class="col"></div>
-    <div class="col-10">
+    <div class="col-md"></div>
+    <div class="col-md-14">
 
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3" id="nueva_empresaModalLabel">EDITAR CONTRATO DE DOSIMETRÍA <br> PARA LA EMPRESA: <i>{{$contrato->empresa->nombre_empresa}}</i> </h2>
             <div class="row">
                 <div class="col"></div>
-                <div class="col-9">
+                <div class="col-11 ">
                     <div class="card w-150">
         
                         <form class="m-4" action="{{route('contratosdosi.update', $contrato)}}"  method="POST" id="form_contrato_dosi">
@@ -18,7 +18,7 @@
                                 <div class="col-md">
                                     <div class="form-floating my-3" id="codigo_contrato">
                                         <input type="text" name="empresa_contrato" hidden id="empresa_contrato" value="{{$contrato->empresa->id_empresa}}">
-                                        <input type="number" name="codigo_contrato" id="codigo_contrato_input" class="form-control @error('codigo_contrato') is-invalid @enderror"  value="{{$contrato->codigo_contrato}}" autofocus >
+                                        <input type="number" name="codigo_contrato" id="codigo_contrato_input" class="form-control @error('codigo_contrato') is-invalid @enderror"  value="{{$contrato->codigo_contrato}}" autofocus readonly>
                                         <label for="floatingInputGrid">CODIGO:</label>
                                         @error('codigo_contrato')
                                             <small class="invalid-feedback">*{{$message}}</small>
@@ -112,29 +112,37 @@
                                                             <option value ="{{$depa->id_departamentosede}}">{{$depa->nombre_departamento}}</option>
                                                         @endforeach
                                                     </select>
-                                                    <label for="floatingSelectGrid">DEPARTAMENTO:</label>
+                                                    <label for="floatingSelectGrid">ESPECIALIDAD:</label>
                                                     
                                                 </div>
                                             </div>
                                             <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. C. ENTERO</label>
-                                                <input type="number" id="num_dosi_ce_contrato_sede" class="form-control" autofocus >
-                                                
-                                            </div>
-                                            <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. AMBIENTAL</label>
-                                                <input type="number" id="num_dosi_ambiental_contrato_sede" class="form-control" autofocus >
-                                                
-                                            </div>
-                                            <div class="col-md">
                                                 <label for="" class="text-center">No. DOSÍM. CONTROL</label>
-                                                <input type="number" id="num_dosi_caso_contrato_sede" class="form-control" autofocus >
-                                                
+                                                <input type="number" id="num_dosi_control_contrato_sede" class="form-control text-center" autofocus>
                                             </div>
                                             <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. EZCLIP</label>
-                                                <input type="number"  id="num_dosi_ezclip_contrato_sede" class="form-control" autofocus >
-                                                
+                                                <label for="" class="text-center">No. DOSÍM. TÓRAX</label>
+                                                <input type="number" id="num_dosi_torax_contrato_sede" class="form-control text-center" autofocus>
+                                            </div>
+                                            <div class="col-md">
+                                                <label for="" class="text-center">No. DOSÍM. ÁREA</label>
+                                                <input type="number" id="num_dosi_area_contrato_sede" class="form-control text-center" autofocus>
+                                            </div>
+                                            <div class="col-md">
+                                                <label for="" class="text-center">No. DOSÍM. CASO</label>
+                                                <input type="number" id="num_dosi_caso_contrato_sede"  class="form-control text-center" autofocus >
+                                            </div>
+                                            <div class="col-md">
+                                                <label for="" class="text-center">No. DOSÍM. CRISTALINO</label>
+                                                <input type="number"  id="num_dosi_cristalino_contrato_sede"  class="form-control text-center" autofocus>
+                                            </div>
+                                            <div class="col-md">
+                                                <label for="" class="text-center">No. DOSÍM. MUÑECA</label>
+                                                <input type="number"  id="num_dosi_muneca_contrato_sede"  class="form-control text-center" autofocus>
+                                            </div>
+                                            <div class="col-md">
+                                                <label for="" class="text-center">No. DOSÍM. DEDO</label>
+                                                <input type="number"  id="num_dosi_dedo_contrato_sede" class="form-control text-center" autofocus>
                                             </div>
             
                                         </div>
@@ -177,18 +185,21 @@
                 <div class="col-md m-4">
                     <table class="table table-responsive hover table-bordered">
                         <thead class="table-active text-center">
-                            <th class='align-middle' >SEDE</th>
-                            <th class='align-middle' >DEPTO.</th>
-                            <th class='align-middle' style='width: 11.60%'>No. DOSÍM. C. ENTERO</th>
-                            <th class='align-middle' style='width: 11.60%'>No. DOSÍM. AMBIENTAL</th>
-                            <th class='align-middle' style='width: 11.60%'>No. DOSÍM. CONTROL</th>
-                            <th class='align-middle' style='width: 11.60%'>No. DOSÍM. EZCLIP</th>
-                            <th class='align-middle' style='width: 13.90%'>ACCIONES</th>
+                            <th class='align-middle' style='width: 180px' >SEDE</th>
+                            <th class='align-middle' style='width: 200px' >ESP.</th>
+                            <th class='align-middle' >No. DOSÍM. CONTROL</th>
+                            <th class='align-middle' >No. DOSÍM. TÓRAX</th>
+                            <th class='align-middle' >No. DOSÍM. ÁREA</th>
+                            <th class='align-middle' >No. DOSÍM. CASO</th>
+                            <th class='align-middle' >No. DOSÍM. CRISTALINO</th>
+                            <th class='align-middle' >No. DOSÍM. MUÑECA</th>
+                            <th class='align-middle' >No. DOSÍM. DEDO</th>
+                            <th class='align-middle' style='width: 15.90px'>ACCIONES</th>
                         </thead>
                         {{-- @livewire('form-update-contdosisedepto', ['contrato'=>$contrato, 'sedes'=>$sedes, 'sedesdeptos' => $sedesdeptos]) --}}
                         <tbody>
                             @foreach($sedesdeptos as $sedepto)
-                                <form action="{{route('contratosdosisededepto.update',  ['contratodosisede' => $sedepto->id_contratodosimetriasede, 'contratodosisededepto'=>$sedepto->id_contdosisededepto])}}"  method="POST" id="form_contrato_dosi_sedesdepto">
+                                <form action="{{route('contratosdosisededepto.update',  ['contratodosisede' => $sedepto->id_contratodosimetriasede, 'contratodosisededepto'=>$sedepto->id_contdosisededepto])}}"  method="POST" id="form_contrato_dosi_sedesdepto" class="form_contrato_dosi_sedesdepto">
                                     @csrf
                                     @method('put')
                                     
@@ -213,18 +224,8 @@
                                                     <option value="{{$sedepto->id_departamentosede}}">--{{$sedepto->nombre_departamento}}--</option>
                                                     
                                                 </select>
-                                                <label for="floatingSelectGrid">DEPARTAMENTO:</label>
+                                                <label for="floatingSelectGrid">ESPECLIALIDAD:</label>
                                             </div> 
-                                        </td>
-                                        <td class="text-center align-middle">
-                                            <div class="col-md">
-                                                <input type="number" id="num_dosi_ce_contrato_sede"  name="num_dosi_ce_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_cuerpo_entero}}" autofocus >
-                                            </div>
-                                        </td>
-                                        <td class="text-center align-middle">
-                                            <div class="col-md">
-                                                <input type="number" id="num_dosi_ambiental_contrato_sede" name="num_dosi_ambiental_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_ambiental}}" autofocus >
-                                            </div>
                                         </td>
                                         <td class="text-center align-middle">
                                             <div class="col-md">
@@ -233,7 +234,32 @@
                                         </td>
                                         <td class="text-center align-middle">
                                             <div class="col-md">
-                                                <input type="number"  id="num_dosi_ezclip_contrato_sede" name="num_dosi_ezclip_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_ezclip}}" autofocus >
+                                                <input type="number" id="num_dosi_torax_contrato_sede"  name="num_dosi_torax_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_torax}}" autofocus >
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="col-md">
+                                                <input type="number" id="num_dosi_area_contrato_sede" name="num_dosi_area_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_area}}" autofocus >
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="col-md">
+                                                <input type="number"  id="num_dosi_caso_contrato_sede" name="num_dosi_caso_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_caso}}" autofocus >
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="col-md">
+                                                <input type="number"  id="num_dosi_cristalino_contrato_sede" name="num_dosi_cristalino_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_cristalino}}" autofocus >
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="col-md">
+                                                <input type="number"  id="num_dosi_muneca_contrato_sede" name="num_dosi_muneca_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_muñeca}}" autofocus >
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="col-md">
+                                                <input type="number"  id="num_dosi_dedo_contrato_sede" name="num_dosi_dedo_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_dedo}}" autofocus >
                                             </div>
                                         </td>
                                         <td class="text-center align-middle">
@@ -263,7 +289,7 @@
         </div>
         <br>
     </div>
-    <div class="col"></div>
+    <div class="col-md"></div>
 </div>
 <script
 src="https://code.jquery.com/jquery-3.6.0.js"
@@ -353,18 +379,28 @@ crossorigin="anonymous">
         document.getElementById(`depa${depaNumber}`).querySelector(`#departamento_sede`)
             .setAttribute("name", `departamentos_sede${sedesNumber-1}[]`);
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ce_contrato_sede`)
-            .setAttribute("name", `dosimetro_cuerpoEntero_sede${sedesNumber-1}[]`);
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_contrato_sede`)
+            .setAttribute("name", `dosimetro_control_sede${sedesNumber-1}[]`);
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ambiental_contrato_sede`)
-            .setAttribute("name", `dosimetro_ambiental_sede${sedesNumber-1}[]`);
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_torax_contrato_sede`)
+            .setAttribute("name", `dosimetro_torax_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_area_contrato_sede`)
+            .setAttribute("name", `dosimetro_area_sede${sedesNumber-1}[]`);
 
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_caso_contrato_sede`)
             .setAttribute("name", `dosimetro_caso_sede${sedesNumber-1}[]`);
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ezclip_contrato_sede`)
-            .setAttribute("name", `dosimetro_ezclip_sede${sedesNumber-1}[]`);
+        /* document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ezclip_contrato_sede`)
+            .setAttribute("name", `dosimetro_ezclip_sede${sedesNumber-1}[]`); */
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_cristalino_contrato_sede`)
+            .setAttribute("name", `dosimetro_cristalino_sede${sedesNumber-1}[]`);
 
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_muneca_contrato_sede`)
+            .setAttribute("name", `dosimetro_muneca_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_dedo_contrato_sede`)
+            .setAttribute("name", `dosimetro_dedo_sede${sedesNumber-1}[]`);
         depaNumber++;
         ///////////////
         
@@ -380,7 +416,7 @@ crossorigin="anonymous">
                     $.get('contratodosidepa', {sede_id: sede_id}, function (depas) {
                         console.log('departamentos', depas)
                         $('#departamento_sede').empty();
-                        $('#departamento_sede').append("<option value=''> --SELECCIONE UN DEPARTAMENTO-- </option>");
+                        $('#departamento_sede').append("<option value=''> --SELECCIONE UNA ESPECIALIDAD-- </option>");
                         $.each(JSON.parse(depas), function (index, value) {
                             $('#departamento_sede').append("<option value='" + value.id_departamentosede + "'>" + value.nombre_departamento + "</option>")
                         })
@@ -447,10 +483,10 @@ crossorigin="anonymous">
             })
         });
 
-        $('#form_contrato_dosi_sedesdepto').submit(function(e){
+        $('.form_contrato_dosi_sedesdepto').submit(function(e){
             e.preventDefault();
             Swal.fire({
-                text: "SEGURO QUE DESEA ACTUALIZAR LAS SEDES Y DEPARTAMENTOS ASOCIADOS O LAS CANTIDADES DE DOSÍMETROS DE ESTE CONTRATO??",
+                text: "SEGURO QUE DESEA ACTUALIZAR LAS SEDES, ESPECIALIDADES O LAS CANTIDADES DE DOSÍMETROS EN ESTE CONTRATO??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

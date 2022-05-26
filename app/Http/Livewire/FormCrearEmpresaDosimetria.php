@@ -19,13 +19,18 @@ class FormCrearEmpresaDosimetria extends Component
     protected $rules = [
 
         'empresa' => 'required|unique:App\Models\ContratosDosimetriaEmpresa,empresa_id,',
+        
     ];
+
+    protected $messages =[
+        'empresa.contactodosi' => 'PRIMERO DEBE ASIGNAR UN CONTACTO COMO LÍDER DOSIMETRÍA ANTES DE GUARDAR LA EMPRESA',
+    ]; 
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
-
+ 
     public function saveEmpresa(){
 
         $this->validate();
