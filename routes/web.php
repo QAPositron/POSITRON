@@ -9,6 +9,7 @@ use App\Http\Controllers\DosimetrosController;
 use App\Http\Controllers\EmpresasController;
 use App\Http\Controllers\HolderController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NovedadesController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\SedesController;
@@ -196,8 +197,23 @@ Route::put('lecturadosiarea/{lecdosicont}', [DosimetriaController::class, 'savel
 Route::get('repodosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');
 
 
-/* Route::get('asignadosicreate', [AsignarDosimetroController::class, 'create'])->name('asignadosis.create');
-Route::get('asignadosi', [AsignarDosimetroController::class, 'save'])->name('asignadosis.save'); */
+
+////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA //////////////
+Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');
+Route::get('/novedades/contratoDosi', [NovedadesController::class, 'contratoDosimetria']);
+Route::get('/novedades/sedescontDosi', [NovedadesController::class, 'sedescontDosimetria']);
+Route::get('/novedades/especialidadescontDosi', [NovedadesController::class, 'especialidadescontDosimetria']);
+Route::get('/novedades/contdosisededepto/', [NovedadesController::class, 'contratodosi']);
+Route::get('/novedades/mesescontdosisededepto/', [NovedadesController::class, 'mesescontDosimetria']);
+Route::get('/novedades/mesactualcontdosisededepto/', [NovedadesController::class, 'mesactualcontDosimetria']);
+Route::get('/novedades/dosiasginadosmesactual/', [NovedadesController::class, 'dosiasginadosmesactual']);
+Route::get('/novedades/dosiasginadoscontrolmesactual/', [NovedadesController::class, 'dosiasginadoscontrolmesactual']);
+Route::get('/novedades/trabajadoresempresa/', [NovedadesController::class, 'trabajadoresempresa']);
+Route::get('/novedades/dosimetros/', [NovedadesController::class, 'dosimetrosdisponibles']);
+
+/* Route::get('/novedades/cantidadDosimesant/', [NovedadesController::class, 'cantidadDosimetrosmesactual']);*/
+Route::get('novedades/novedades', [NovedadesController::class, 'savecambiocantdosim'])->name('cambiocantdosim.save'); 
+
 
 
 Route::get('/prueba1', [PruebaController::class,'index']);

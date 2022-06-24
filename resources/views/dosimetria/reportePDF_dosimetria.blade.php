@@ -71,7 +71,7 @@
         <td>Email:dosimetria.qapositron@gmail.com</td>
     </tr>
     <tr>
-        <td style="padding-bottom:13px;">Sitio web: www.qapositron.com</td>
+        <td style="padding-bottom:22px;">Sitio web: www.qapositron.com</td>
     </tr>
     <tr>
         <th style="font-size: 11px; border: solid 0.4px #000; padding:5px;">
@@ -82,15 +82,15 @@
     </tr>
 </table>
 
-<table style="position:absolute; top:0px; left:710px; border-collapse:collapse; font-size: 8px;" cellpadding="4">
+<table style="position:absolute; top:0px; left:710px; border-collapse:collapse; font-size: 9px;" cellpadding="4">
     <tr>
-        <td style="border:0.1px solid black;">No. de Cuenta</td>
+        <td style="border:0.1px solid black; text-align: right;">No. de Cuenta</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
         @foreach($contratoDosi as $cont)
             {{$cont->codigo_contrato}}
         @endforeach
         </td>
-        <td style="border:0.1px solid black;">Fecha recibo dosím.</td>
+        <td style="border:0.1px solid black; text-align: right;">Fecha recibo dosím.</td>
         <td style="width: 94px; border:0.1px solid black; color:#2646FA;" align="center">
             @php
                 $chek = 'inicial';
@@ -107,12 +107,12 @@
                 @endphp
             @endforeach
         </td>
-        <td rowspan="6" style="width: 145px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="140"> 
+        <td rowspan="6" style="width: 130px; border:0.1px solid black;">
+            <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="120" style="top:20px; "> 
         </td>
     </tr>
     <tr>
-        <td style="border:0.1px solid black;">Código Depto.</td>
+        <td style="border:0.1px solid black; text-align: right;">Código Depto.</td>
         <td style="width: 94px; border:0.1px solid black; color:#2646FA;" align="center">
             {{-- @php
                 $chek = 'inicial';
@@ -131,7 +131,7 @@
                 {{$cont->nombre_departamento}}
             @endforeach
         </td>
-        <td style="border:0.1px solid black;">Fecha del reporte</td>
+        <td style="border:0.1px solid black; text-align: right;">Fecha del reporte</td>
         <td style="width: 94px; border:0.1px solid black; color:#2646FA;" align="center">
         @php
             $fecha = date("d-m-Y");
@@ -140,27 +140,27 @@
         </td>
     </tr>
     <tr>
-        <td style="border:0.1px solid black;"> NIT Entidad Usuaria</td>
+        <td style="border:0.1px solid black; text-align: right;"> NIT Entidad Usuaria</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
             @foreach($contratoDosi as $cont)
                 {{$cont->num_iden_empresa}}
             @endforeach 
         </td>
-        <td colspan="2" rowspan="1" style="width: 50px; border:0.1px solid black;" align="center">Vo.Bo. / QA POSITRON S.A.S</td>
+        <td colspan="2" rowspan="1" style="width: 50px; border:0.1px solid black;" align="center">Vo.Bo. / <b>DIEGO F. APONTE CASTAÑEDA</b> </td>
     </tr>
     <tr>
-        <td style="border:0.1px solid black;">Municipio / Depto</td>
+        <td style="border:0.1px solid black; text-align: right;">Municipio / Depto</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
         @foreach($contratoDosi as $cont)
             {{$cont->nombre_municol}} - {{$cont->abreviatura_deptocol}}
         @endforeach 
         </td>
         <td colspan="2" rowspan="3" style="width: 94px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="52" style="top:54px; ">
+            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="48" style="top:68px; ">
         </td>
     </tr>
     <tr>
-        <td style="border:0.1px solid black;">Persona Contacto</td>
+        <td style="border:0.1px solid black; text-align: right;">Persona Contacto</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
             @foreach($contratoDosi as $cont)
                 {{$cont->primer_nombre_contacto}} {{$cont->primer_apellido_contacto}} {{$cont->segundo_apellido_contacto}}
@@ -169,7 +169,7 @@
        
     </tr>
     <tr>
-        <td style="border:0.1px solid black;">Cargo del contacto</td>
+        <td style="border:0.1px solid black; text-align: right;">Cargo del contacto</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
             @foreach($contratoDosi as $cont)
                 {{$cont->profesion_contacto}}
@@ -189,8 +189,8 @@
     <thead style="background-color:#DADADA;">
         <tr align="center">
             <th rowspan="2" style="width:60px; border:1px solid black;">Código Dosímetro </th>
-            <th rowspan="2" style="width:133px; padding:5px; border:1px solid black;">Apellido(s)</th>
-            <th rowspan="2" style="width:133px; padding:5px; border:1px solid black;">Nombre(s)</th>
+            <th rowspan="2" style="width:135px; padding:5px; border:1px solid black;">Apellido(s)</th>
+            <th rowspan="2" style="width:135px; padding:5px; border:1px solid black;">Nombre(s)</th>
             <th rowspan="2" style="width:5px; border:1px solid black;"><p class="anchoCell">Género</p></th>
             <th rowspan="2" style="width:5px; border:1px solid black;"><p class="anchoCell">Ocupación</p></th>
             <th rowspan="2" style="width:60px; padding:5px; border:1px solid black;">Documento de Identidad</th>

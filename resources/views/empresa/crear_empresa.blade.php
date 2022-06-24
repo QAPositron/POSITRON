@@ -245,7 +245,7 @@
 
 <script type="text/javascript"> 
     function ShowSelected(){
-        var option =document.getElementById("tipoIden_empresa").value;
+        var option = document.getElementById("tipoIden_empresa").value;
         var tipo = document.getElementById("tipoIden_empresa");
         var selected = tipo.options[tipo.selectedIndex].text;
         document.getElementById("numero_identificacion").innerHTML = selected;
@@ -256,7 +256,6 @@
             labelInput.style.visibility="visible";
         }else{
             inputText.style.visibility="hidden";
-            
             labelInput.style.visibility="hidden";
         }
     }

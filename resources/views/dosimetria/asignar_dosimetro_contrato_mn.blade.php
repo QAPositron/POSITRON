@@ -5,15 +5,14 @@
     <div class="col-md-15">
         <div class="card text-dark bg-light">
             <br>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel">ASIGNACIÓN DOSÍMETROS <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>MES {{$mesnumber}} <br> ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}} </h3>
-            <form action="{{route('asignadosicontratomn.save', ['asigdosicont'=> $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion_mn" name="form-nueva-asignacion_mn" class="form-nueva-asignacion_mn m-4">
+            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel">ASIGNACIÓN DOSÍMETROS <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ) <br> ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}} </h3>
+            <form action="{{route('asignadosicontratomn.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion_mn" name="form-nueva-asignacion_mn" class="form-nueva-asignacion_mn m-4">
                 @csrf
                 <div class="row g-2 mx-3">
                     <div class="col-md">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead>
-                
                                     <tr class="text-center">
                                         <th>DOSíMETROS</th>
                                         <th>CONTRATADOS</th>
@@ -22,31 +21,31 @@
                                 <tbody>
                                     <tr>
                                         <th>CONTROL:</th>
-                                        <td class="text-center">{{$contdosisededepto->dosi_control}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_control}}</td>
                                     </tr>
                                     <tr>
                                         <th>TÓRAX:</th>
-                                        <td class="text-center">{{$contdosisededepto->dosi_torax}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_torax}}</td>
                                     </tr>
                                     <tr>
                                         <th>ÁREA:</th>
-                                        <td class="text-center">{{$contdosisededepto->dosi_area}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_area}}</td>
                                     </tr>
                                     <tr>
                                         <th>CASO:</th>
-                                        <td class="text-center">{{$contdosisededepto->dosi_caso}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_caso}}</td>
                                     </tr>
                                     <tr>
                                         <th>CRISTALINO:</th>
-                                        <td class="text-center">{{$contdosisededepto->dosi_cristalino}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_cristalino}}</td>
                                     </tr>
                                     <tr>
                                         <th>MUÑECA:</th>
-                                        <td class="text-center">{{$contdosisededepto->dosi_muñeca}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
                                     </tr>
                                     <tr>
                                         <th>DEDO:</th>
-                                        <td class="text-center">{{$contdosisededepto->dosi_dedo}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -128,7 +127,7 @@
                                     <input type="number" name="id_departamento_asigdosim" id="id_departamento_asigdosim" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                     <input type="number" name="id_contrato_asigdosim_sede" id="id_contrato_asigdosim_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
                                     
-                                    {{--///Filas creadas segun la cantidad de dosimetros tipo control asignados en EL MES ANTERIOR/////// --}}
+                                    {{--///Filas creadas segun la cantidad de dosimetros tipo control asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
                                     @foreach($dosicontrolmesant as $dosicontrolant)
                                         <tr>
                                             <td colspan='2' class='align-middle'>CONTROL</td>
@@ -203,8 +202,48 @@
                                             <td></td>
                                         </tr>
                                     @endforeach
-
-                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo area asignados en EL MES ANTERIOR/////// --}}
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_control - count($dosicontrolmesant)); $i++)
+                                            <tr>
+                                                <td colspan='2' class='align-middle'>CONTROL</td>
+                                                <td class='align-middle'>
+                                                    <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresGeneral as $dosigenlib)
+                                                            <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle'>N.A.</td>
+                                                <td>
+                                                    <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        @endfor
+                                    @endif
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CONTROL/////// --}}
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo AREA asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dosiareamesant as $dosiareant)
                                         <tr>
                                             <td>
@@ -297,7 +336,63 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo caso asignados en EL MES ANTERIOR/////// --}}
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo AREA asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_area - count($dosiareamesant)); $i++)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select id_area_asigdosimArea"  name="id_area_asigdosimArea[]" id="id_area_asigdosimArea" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($areaSede as $area)
+                                                            <option  value ="{{$area->id_areadepartamentosede}}">{{$area->nombre_area}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>ÁREA</td>
+                                                <td>
+                                                    <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresAmbiental as $dosiamblib)
+                                                            <option value="{{$dosiamblib->id_dosimetro}}">{{$dosiamblib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>N.A</td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button id="changeArea" class="btn colorQA"  type="button" onclick="changueArea('{{$dosiareant->areadepartamentosede_id}}');">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endfor
+                                    @endif
+                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  AREA/////// --}}
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo CASO asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dosicasomesant as $dosicasoant)
                                         <tr>
                                             <td>
@@ -381,7 +476,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeCaso" class="btn colorQA"  type="button" onclick="changueCaso('{{$dosicasoant->trabajador_id}}');">
+                                                <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->trabajador_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -390,7 +485,64 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo  torax  asignados en EL MES ANTERIOR/////// --}}
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo TORAX asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_caso - count($dosicasomesant)); $i++)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select"  name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        
+                                                        @foreach($trabajadoreSede as $trabsed)
+                                                            <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>CASO</td>
+                                                <td>
+                                                    <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresGeneral as $dosigenlib)
+                                                            <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>N.A</td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->trabajador_id}}');">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endfor
+                                    @endif
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CASO/////// --}}
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo  TORAX  asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dositoraxmesant as $dositoraxant)
                                         <tr>
                                             <td>
@@ -474,7 +626,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeTorax" class="btn colorQA"  type="button" onclick="changueTorax('{{$dositoraxant->trabajador_id}}');">
+                                                <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->trabajador_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -483,7 +635,63 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo  cristalino asignados en EL MES ANTERIOR/////// --}}
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo TORAX asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_torax - count($dositoraxmesant)); $i++)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select"  name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($trabajadoreSede as $trabsed)
+                                                            <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>TÓRAX</td>
+                                                <td>
+                                                    <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresGeneral as $dosigenlib)
+                                                            <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>N.A</td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->trabajador_id}}');">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endfor
+                                    @endif
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  TORAX/////// --}}
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo  CRISTALINO asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dosicristalinomesant as $dosicristalinoant)
                                         <tr>
                                             <td>
@@ -574,7 +782,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeCristalino" class="btn colorQA"  type="button" onclick="changueCristalino('{{$dosicristalinoant->trabajador_id}}');">
+                                                <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->trabajador_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -583,7 +791,71 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo  muñeca asignados en EL MES ANTERIOR/////// --}}
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CRISTALINO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_cristalino - count($dosicristalinomesant)); $i++)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select"  name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($trabajadoreSede as $trabsed)
+                                                            <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>CRISTALINO</td>
+                                                <td>
+                                                    <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                            <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($holderLibresCristalino as $holibcris)
+                                                            <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->trabajador_id}}');">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endfor
+                                    
+                                    @endif
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CRISTALINO/////// --}}
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo  MUÑECA asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dosimuñecamesant as $dosimuñecant)
                                         <tr>
                                             <td>
@@ -674,7 +946,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeMuneca" class="btn colorQA"  type="button" onclick="changueMuneca('{{$dosimuñecant->trabajador_id}}');">
+                                                <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->trabajador_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -683,7 +955,70 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo dedo asignados en EL MES ANTERIOR/////// --}}
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo MUÑECA asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_muñeca - count($dosimuñecamesant)); $i++)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($trabajadoreSede as $trabsed)
+                                                            <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>MUÑECA</td>
+                                                <td>
+                                                    <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                            <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select"  name="id_holder_asigdosimMuneca[]" id="id_holder_asigdosimMuneca" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($holderLibresExtrem as $holibexm)
+                                                            <option value="{{$holibexm->id_holder}}">{{$holibexm->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->trabajador_id}}');">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endfor
+                                    @endif
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas para LA CANTIDAD DE DOSIMETROS tipo  MUÑECA/////// --}}
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo DEDO asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dosidedomesant as $dosidedoant)
                                         <tr>
                                             <td>
@@ -774,7 +1109,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeDedo" class="btn colorQA"  type="button" onclick="changueDedo('{{$dosidedoant->trabajador_id}}');">
+                                                <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->trabajador_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -783,6 +1118,69 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo DEDO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_dedo - count($dosidedomesant)); $i++)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select"  name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($trabajadoreSede as $trabsed)
+                                                            <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>DEDO</td>
+                                                <td>
+                                                    <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                            <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($holderLibresAnillo as $holibanillo)
+                                                            <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->trabajador_id}}');">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endfor
+                                    @endif
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas para LA CANTIDAD DE DOSIMETROS tipo  DEDO/////// --}}
                                 </tbody>
                             </table>
                         </div>
@@ -836,6 +1234,27 @@
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+            // Creamos array con los meses del año
+            const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+            let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}");
+            /* fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset()); */
+            console.log(fecha);
+            for($i=0; $i<=13; $i++){
+                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
+                var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                console.log(fechaesp); 
+                if("{{$mesnumber}}" == $i){
+                    
+                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
+                } 
+            }
+            
+    })
+
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
 @if(session('clear')== 'ok')
@@ -980,27 +1399,46 @@ crossorigin="anonymous">
 
 </script>
 
-
-
-
 <script type="text/javascript">
-$(document).ready(function(){
+    $(document).ready(function(){
 
-    $('#limpiar_asig').click(function(e){
-        e.preventDefault();
-        Swal.fire({
-            text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL MES ANTERIOR?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33    ',
-            confirmButtonText: 'SI, SEGURO!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "{{route('asignadosicontratomn.clear',['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $mesnumber] )}}";
-            }
+        $('#limpiar_asig').click(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL MES ANTERIOR?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33    ',
+                confirmButtonText: 'SI, SEGURO!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{route('asignadosicontratomn.clear',['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $mesnumber] )}}";
+                }
+            })
         })
     })
-})
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#form-nueva-asignacion_mn').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
+    })
+</script>
+
 @endsection

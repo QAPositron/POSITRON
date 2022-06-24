@@ -28,10 +28,11 @@
                 <table class="table table-bordered ">
                     <thead class="table-active">
                         <tr >
-                            <th colspan="4" class=" text-center">ESPECIALIDAD: {{$dosisededeptocontra->departamentosede->nombre_departamento}}</th>
+                            <th colspan="5" class=" text-center">ESPECIALIDAD: {{$dosisededeptocontra->departamentosede->nombre_departamento}}</th>
                         </tr>
                         <tr>
-                            <th class="text-center align-middle" style='width: 20.90%' >MESES</th>
+                            <th class="text-center align-middle" style='width: 9.90%'>NÚMERO</th>
+                            <th class="text-center align-middle" style='width: 22.90%' >MESES</th>
                             <th class="text-center align-middle" style='width: 18.90%' >TRABAJADORES ASIGNADOS</th>
                             <th class="text-center align-middle" style='width: 18.90%' >DOSÍMETROS DISPONIBLES</th>
                             <th class="text-center align-middle">ACCIONES</th>
@@ -39,14 +40,25 @@
                     </thead>
                     <tbody>
 
-                        @for($i=0; $i< 12; $i++)
+                        @for($i=0; $i<12; $i++)
+                            
                             <tr>
+                                <th class="text-center align-middle">
+                                    {{$i+1}}
+                                </th>
                                 <th class="align-middle">
-                                    <a class="link-dark" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i+1 ])}}">MES {{$i+1}} </a><br>
+                                   {{--  <a class="link-dark" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i+1 ])}}">MES {{$i+1}} </a><br> --}}
                                     @if($i==0)
-                                        <span>{{date("d-m-Y",strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio))}}</span>
+                                        <a class="link-dark" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i+1 ])}}">
+                                            @php
+                                                $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                                                echo $meses[date("m", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ;
+                                            @endphp
+                                        </a>
                                     @else
-                                        <span>{{date("d-m-Y",strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio."+ ".(30*$i)." days" ))}}</span>
+                                        <a class="link-dark" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i+1 ])}}">
+                                            <span id="mes{{$i}}"></span>
+                                        </a>
                                     @endif
                                 </th>
                                 <td class="text-center align-middle">
@@ -54,8 +66,8 @@
                                         $lenghtData = 0;
                                         foreach($trabjasigcontra as $trab){
                                             if ($trab->mes_asignacion == ($i+1)) {
-                                            $lenghtData += 1 ;
-                                           }
+                                                $lenghtData += 1 ;
+                                            }
                                         }
                                         echo "$lenghtData";
                                     @endphp
@@ -63,7 +75,11 @@
                                 <td class="text-center align-middle">
                                     @php
                                         $lenghtData = 0;
-                                        $suma = $dosisededeptocontra->dosi_torax + $dosisededeptocontra->dosi_control + $dosisededeptocontra->dosi_area + $dosisededeptocontra->dosi_caso + $dosisededeptocontra->dosi_cristalino + $dosisededeptocontra->dosi_muñeca + $dosisededeptocontra->dosi_dedo;
+                                        if($mescontdosisededepto->mes_asignacion == $i+1 || $mescontdosisededepto->mes_asignacion <= $i+1){
+                                            $suma = $mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_control + $mescontdosisededepto->dosi_caso + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_dedo;
+                                        }else{
+                                            $suma = $dosisededeptocontra->dosi_torax + $dosisededeptocontra->dosi_control + $dosisededeptocontra->dosi_area + $dosisededeptocontra->dosi_caso + $dosisededeptocontra->dosi_cristalino + $dosisededeptocontra->dosi_muñeca + $dosisededeptocontra->dosi_dedo;
+                                        }
                                         foreach($trabjasigcontra as $trab){
                                             //esto esta bien PERO, recuerda que los dosimetros de control falta sumarlos, esos no se asignan al trabajador sino a la sede
                                             if ($trab->mes_asignacion == ($i+1)) {
@@ -79,7 +95,6 @@
                                         @if($mesTotal[$i]>0)
                                             @if(  $i == '0' )
                                                 <div class="col-md text-center">
-
                                                     <a onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn  btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
@@ -175,6 +190,24 @@ crossorigin="anonymous">
     </script>
 @endif
 
+<script type="text/javascript">
+    $(document).ready(function(){
+            // Creamos array con los meses del año
+            const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+            let fecha = new Date("{{$dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}");
+            fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset());
+            console.log(fecha)
+            for($i=1; $i<=11; $i++){
 
+                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
+                var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                document.getElementById('mes'+$i).innerHTML = fechaesp;
+                
+                console.log(fechaesp); 
+            }
+            
+         
+    })
 
+</script>
 @endsection

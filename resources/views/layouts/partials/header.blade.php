@@ -14,11 +14,12 @@
             <a class="nav-link {{request()->routeIs('empresas.*') ? 'active' : ''}}"  href="{{route('empresas.search')}}">ADMINISTRACIÓN</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle {{request()->routeIs('dosimetria.*') ? 'active' : ''}}" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">DOSIMETRÍA</a>
+            <a class="nav-link dropdown-toggle {{request()->routeIs('holders.*') || request()->routeIs('dosimetros.*') || request()->routeIs('empresasdosi.*') || request()->routeIs('contratosdosi.*') || request()->routeIs('contratosdosisede.*') || request()->routeIs('contratosdosisededepto.*') || request()->routeIs('detallesedecont.*') || request()->routeIs('detallecontrato.*') || request()->routeIs('asignadosicontratom1.*') || request()->routeIs('asignadosicontratomn.*') || request()->routeIs('asignadosicontrato.*') || request()->routeIs('asigdosicont.*') || request()->routeIs('lecturadosi.*') || request()->routeIs('lecturadosicontrl.*') || request()->routeIs('lecturadosicontrol.*') || request()->routeIs('lecturadosiarea.*') ? 'active' : ''}}" 
+            href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">DOSIMETRÍA</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{{route('empresasdosi.create')}}">EMPRESAS</a></li>
               <li><a class="dropdown-item" href="{{route('dosimetros.search')}}">BUSCAR</a></li>
-              
+              <li><a class="dropdown-item" href="{{route('novedadesdosim.create')}}">NOVEDADES</a></li>
             </ul>
           </li>
           <li class="nav-item">

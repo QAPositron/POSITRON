@@ -5,7 +5,16 @@
     <div class="col-md-15">
         <div class="card text-dark bg-light">
             <br>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel">ASIGNACIÓN DOSÍMETROS <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>MES {{$mesnumber}} <br> ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}} </h3>
+            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel">ASIGNACIÓN DOSÍMETROS <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
+                MES {{$mesnumber}}
+                ( <span>
+                    @php  
+                        $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                        echo $meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio));
+                    @endphp
+                </span> )<br>
+                ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}} 
+            </h3>
             <form action="{{route('asignadosicontratom1.save', ['asigdosicont'=> $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion" name="form-nueva-asignacion" class="form-nueva-asignacion m-4">
                 @csrf
                 
@@ -532,10 +541,27 @@
         $('#id_area_asigdosimArea').select2();
         $('#id_dosimetro_asigdosimArea').select2();
         $('#ocupacion_asigdosimArea').select2();
-        
-        
     });
+</script>
 
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#form-nueva-asignacion').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "DESEA GUARDAR ESTA EMPRESA??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
+    })
 </script>
 @endsection
