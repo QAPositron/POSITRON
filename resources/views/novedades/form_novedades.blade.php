@@ -552,9 +552,21 @@
         res.push({"id_contdosisededepto" : id_contdosisededepto});
         res.push({"id_contratodosimetriasede" : id_contratodosimetriasede});
         
-        $.get('novedades', {request: res}, function(data){
+        /* $.get('novedades', {request: res}, function(data){
             console.log(data);
-        })
+        }) */
+        $.ajax({
+            url: "novedades",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            method: 'post',
+            data: { request : res },           
+            beforeSend : function(data){
+                console.log(data)
+            },
+            success: function(data){
+                console.log(data)
+            } 
+        });
     }
 
 </script>

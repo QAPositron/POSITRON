@@ -126,85 +126,52 @@ class NovedadesController extends Controller
     } */
     public function savecambiocantdosim(Request $request){
         
-        /* echo $request; */
-        return $request;
+        /* return $request[6]['mes']; */
+        foreach($request as $req){
+
+            $id = $req['mes'];
+            
+            return $id;
+        }
         
-            /* foreach($request as $req){
-                if($req->name['id_trabajador_asig'] != ' '){
-
-                    $newasignacionDosimetro = new Trabajadordosimetro(); 
-
-                    $newasignacionDosimetro->contratodosimetriasede_id = $req->id_contratodosimetriasede;
-                    $newasignacionDosimetro->contdosisededepto_id      = $req->id_contdosisededepto;
-                    $newasignacionDosimetro->mes_asignacion            = $req->mes;
-
-                    if($req->name == 'id_trabajador_asig'){
-                        $newasignacionDosimetro->trabajador_id         = $req->value;
-                    }
-                    if($req->name == 'id_ubicacion_asig'){
-                        $newasignacionDosimetro->ubicacion             = $req->value;
-                    }
-                    if($req->name == 'id_dosimetro_asig'){
-                        $newasignacionDosimetro->dosimetro_id          = $req->value;
-                    }
-                    if($req->name == 'id_holder_asig'){
-                        $newasignacionDosimetro->holder_id             = $req->value;
-                    }
-                    if($req->name == 'ocupacion_asig'){
-                        $newasignacionDosimetro->ocupacion             = $req->value;
-                    }
-                    $newasignacionDosimetro->save();
-                }
-                
-                return $newasignacionDosimetro;
-            }    */
-
-
-
-        /* $mesantcantdosimetrosasignados = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $request->contdosisededepto_id)
-        ->where('mes_asignacion', '=', $request->mesacambiar)
-        ->latest()->first();
-
-        if(empty($mesantcantdosimetrosasignados)){    
-            
-            $request->validate([
-            'mesacambiar'                 => 'required',
-            'contdosisededepto_id'        => 'required',              
-            ]);
-            $meschangecantdosim = new Mesescontdosisedeptos();
-
-            $meschangecantdosim->contdosisededepto_id       = $request->contdosisededepto_id;
-            $meschangecantdosim->mes_asignacion             = $request->mesacambiar;
-            $meschangecantdosim->dosi_control               = $request->num_dosi_control_contrato_sede;
-            $meschangecantdosim->dosi_torax                 = $request->num_dosi_torax_contrato_sede;
-            $meschangecantdosim->dosi_area                  = $request->num_dosi_area_contrato_sede;
-            $meschangecantdosim->dosi_caso                  = $request->num_dosi_caso_contrato_sede;
-            $meschangecantdosim->dosi_cristalino            = $request->num_dosi_cristalino_contrato_sede;
-            $meschangecantdosim->dosi_muñeca                = $request->num_dosi_muneca_contrato_sede;
-            $meschangecantdosim->dosi_dedo                  = $request->num_dosi_dedo_contrato_sede;
-            $meschangecantdosim->save();
-            
-            return redirect()->route('novedadesdosim.create')->with('guardar', 'ok');
-            
-        }else{
-            
-            $mescantdosiasig = Mesescontdosisedeptos::find($mesantcantdosimetrosasignados->id_mescontdosisededepto);
-           
-            $mescantdosiasig->dosi_control    = $request->num_dosi_control_contrato_sede;
-            $mescantdosiasig->dosi_torax      = $request->num_dosi_torax_contrato_sede;
-            $mescantdosiasig->dosi_area       = $request->num_dosi_area_contrato_sede;
-            $mescantdosiasig->dosi_caso       = $request->num_dosi_caso_contrato_sede;
-            $mescantdosiasig->dosi_cristalino = $request->num_dosi_cristalino_contrato_sede;
-            $mescantdosiasig->dosi_muñeca     = $request->num_dosi_muneca_contrato_sede; 
-            $mescantdosiasig->dosi_dedo       = $request->num_dosi_dedo_contrato_sede;
-    
-            $mescantdosiasig->save();
-
-            return redirect()->back();
+        
+        /* $count = count($request, COUNT_RECURSIVE);
+        return $count; */
+        /* for($i=0; $i< $request; $i++){
+            return $request[1];
         } */
+        
+            /* $value = $req["value"];
+            echo $value; */
+        
+            /*if($req->name['id_trabajador_asig'] != ' '){
 
+                $newasignacionDosimetro = new Trabajadordosimetro(); 
 
-       
+                $newasignacionDosimetro->contratodosimetriasede_id = $req->id_contratodosimetriasede;
+                $newasignacionDosimetro->contdosisededepto_id      = $req->id_contdosisededepto;
+                $newasignacionDosimetro->mes_asignacion            = $req->mes;
+
+                if($req->name == 'id_trabajador_asig'){
+                    $newasignacionDosimetro->trabajador_id         = $req->value;
+                }
+                if($req->name == 'id_ubicacion_asig'){
+                    $newasignacionDosimetro->ubicacion             = $req->value;
+                }
+                if($req->name == 'id_dosimetro_asig'){
+                    $newasignacionDosimetro->dosimetro_id          = $req->value;
+                }
+                if($req->name == 'id_holder_asig'){
+                    $newasignacionDosimetro->holder_id             = $req->value;
+                }
+                if($req->name == 'ocupacion_asig'){
+                    $newasignacionDosimetro->ocupacion             = $req->value;
+                }
+                $newasignacionDosimetro->save();
+            }
+            
+            return $newasignacionDosimetro; */
+    
         
     }
 }

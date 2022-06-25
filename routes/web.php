@@ -212,7 +212,7 @@ Route::get('/novedades/trabajadoresempresa/', [NovedadesController::class, 'trab
 Route::get('/novedades/dosimetros/', [NovedadesController::class, 'dosimetrosdisponibles']);
 
 /* Route::get('/novedades/cantidadDosimesant/', [NovedadesController::class, 'cantidadDosimetrosmesactual']);*/
-Route::get('novedades/novedades', [NovedadesController::class, 'savecambiocantdosim'])->name('cambiocantdosim.save'); 
+Route::post('novedades/novedades', [NovedadesController::class, 'savecambiocantdosim'])->name('cambiocantdosim.save'); 
 
 
 
