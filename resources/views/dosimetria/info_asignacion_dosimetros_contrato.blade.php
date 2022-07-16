@@ -62,7 +62,7 @@
 </div>--}}
 
 {{-- -------------ALERTAS QUE INDICAN SI FALTAN DOSIMETROS POR ASIGNAR--------------}}
-<div class="row">
+{{-- <div class="row">
     <div class="col-md"></div>
     <div class="col-md-5">
         @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
@@ -142,7 +142,7 @@
         
     </div>
     <div class="col-md"></div>
-</div>
+</div> --}}
 {{-- <div class="row">
     <div class="col-md"></div>
     <div class="col-md text-center">

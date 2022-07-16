@@ -212,8 +212,11 @@ Route::get('/novedades/trabajadoresempresa/', [NovedadesController::class, 'trab
 Route::get('/novedades/dosimetros/', [NovedadesController::class, 'dosimetrosdisponibles']);
 
 /* Route::get('/novedades/cantidadDosimesant/', [NovedadesController::class, 'cantidadDosimetrosmesactual']);*/
-Route::post('novedades/novedades', [NovedadesController::class, 'savecambiocantdosim'])->name('cambiocantdosim.save'); 
+Route::post('novedades/novedadesmesact', [NovedadesController::class, 'savecambiocantdosim'])->name('cambiocantdosim.save');
+Route::post('novedades/novedadesmesig', [NovedadesController::class, 'savemesiguientecambiocantdosim'])->name('cambiocantdosimesig.save');
+Route::get('novedades/limpiar/', [NovedadesController::class, 'clearAsignacionAnteriorMn']);
 
+/* Route::get('novedades/{asigdosicont}/{mesnumber}/clear', [NovedadesController::class, 'clearAsignacionAnteriorMn'])->name('asignadosicontratomn.clear'); */
 
 
 Route::get('/prueba1', [PruebaController::class,'index']);

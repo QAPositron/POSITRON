@@ -1085,7 +1085,7 @@ class DosimetriaController extends Controller
                 ->update([
                     'estado_dosimetro' => 'EN LECTURA',
                 ]);
-
+                
             }
         }
 

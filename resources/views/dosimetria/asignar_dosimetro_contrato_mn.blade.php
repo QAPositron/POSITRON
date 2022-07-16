@@ -132,7 +132,7 @@
                                         <tr>
                                             <td colspan='2' class='align-middle'>CONTROL</td>
                                             <td class='align-middle'>
-                                                <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" >
+                                                <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" @if($dosicontrolant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicontrolant->dosimetro_uso != 'FALSE') {{$dosicontrolant->dosimetro_id}} @endif"> @if($dosicontrolant->dosimetro_uso != 'FALSE') {{$dosicontrolant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
@@ -141,7 +141,7 @@
                                             </td>
                                             <td class='align-middle'>N.A.</td>
                                             <td>
-                                                <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" style="text-transform:uppercase">
+                                                <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" style="text-transform:uppercase" @if($dosicontrolant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicontrolant->dosimetro_uso != 'FALSE')
                                                         @if($dosicontrolant->ocupacion=='T')
                                                             <option selected hidden value="T">TELETERAPIA</option>
@@ -259,7 +259,7 @@
                                             </td>
                                             <td>ÁREA</td>
                                             <td>
-                                                <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea">
+                                                <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosiareant->dosimetro_uso != 'FALSE'){{$dosiareant->dosimetro_id}}@endif">@if($dosiareant->dosimetro_uso != 'FALSE'){{$dosiareant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresAmbiental as $dosiamblib)
                                                         <option value="{{$dosiamblib->id_dosimetro}}">{{$dosiamblib->codigo_dosimeter}}</option>
@@ -268,7 +268,7 @@
                                             </td>
                                             <td>N.A</td>
                                             <td>
-                                                <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" style="text-transform:uppercase">
+                                                <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" style="text-transform:uppercase" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosiareant->dosimetro_uso != 'FALSE')
                                                         @if($dosiareant->ocupacion=='T')
                                                             <option selected hidden value="T">TELETERAPIA</option>
@@ -408,7 +408,7 @@
                                             </td>
                                             <td>CASO</td>
                                             <td>
-                                                <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso">
+                                                <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicasoant->dosimetro_uso != 'FALSE') {{$dosicasoant->dosimetro_id}} @endif">@if($dosicasoant->dosimetro_uso != 'FALSE') {{$dosicasoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
@@ -417,7 +417,7 @@
                                             </td>
                                             <td>N.A</td>
                                             <td>
-                                                <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" style="text-transform:uppercase">
+                                                <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" style="text-transform:uppercase" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicasoant->dosimetro_uso != 'FALSE')
                                                         @if($dosicasoant->ocupacion=='T')
                                                             <option selected hidden value="T">TELETERAPIA</option>
@@ -558,7 +558,7 @@
                                             </td>
                                             <td>TÓRAX</td>
                                             <td>
-                                                <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax">
+                                                <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dositoraxant->dosimetro_uso != 'FALSE') {{$dositoraxant->dosimetro_id}}@endif">@if($dositoraxant->dosimetro_uso != 'FALSE') {{$dositoraxant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
@@ -567,7 +567,7 @@
                                             </td>
                                             <td>N.A</td>
                                             <td>
-                                                <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" style="text-transform:uppercase">
+                                                <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" style="text-transform:uppercase" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dositoraxant->dosimetro_uso != 'FALSE')
                                                         @if($dositoraxant->ocupacion=='T')
                                                             <option selected hidden value="T">TELETERAPIA</option>
@@ -707,7 +707,7 @@
                                             </td>
                                             <td>CRISTALINO</td>
                                             <td>
-                                                <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino">
+                                                <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->dosimetro_id}}@endif">@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
                                                         <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
@@ -715,7 +715,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino">
+                                                <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->holder_id}}@endif">@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->holder->codigo_holder}}@else ---- @endif</option>
                                                     @foreach($holderLibresCristalino as $holibcris)
                                                         <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
@@ -723,7 +723,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino">
+                                                <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicristalinoant->dosimetro_uso != 'FALSE')
                                                         @if($dosicristalinoant->ocupacion=='T')
                                                             <option selected hidden value="T">TELETERAPIA</option>
@@ -871,7 +871,7 @@
                                             </td>
                                             <td>MUÑECA</td>
                                             <td>
-                                                <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca">
+                                                <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->dosimetro_id}}@endif">@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
                                                         <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
@@ -879,7 +879,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select"  name="id_holder_asigdosimMuneca[]" id="id_holder_asigdosimMuneca">
+                                                <select class="form-select"  name="id_holder_asigdosimMuneca[]" id="id_holder_asigdosimMuneca" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->holder_id}}@endif">@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->holder->codigo_holder}}@else ---- @endif</option>
                                                     @foreach($holderLibresExtrem as $holibexm)
                                                         <option value="{{$holibexm->id_holder}}">{{$holibexm->codigo_holder}}</option>
@@ -887,7 +887,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca"  style="text-transform:uppercase">
+                                                <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca"  style="text-transform:uppercase" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosimuñecant->dosimetro_uso != 'FALSE')
                                                         @if($dosimuñecant->ocupacion=='T')
                                                             <option selected hidden value="T">TELETERAPIA</option>
@@ -1034,7 +1034,7 @@
                                             </td>
                                             <td>DEDO</td>
                                             <td>
-                                                <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo">
+                                                <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo"  @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro_id}}@endif">@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
                                                         <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
@@ -1042,7 +1042,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo" >
+                                                <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo" @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif >
                                                     <option value="@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->holder_id}}@endif">@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->holder->codigo_holder}}@else ---- @endif</option>
                                                     @foreach($holderLibresAnillo as $holibanillo)
                                                         <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
@@ -1050,7 +1050,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo">
+                                                <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosidedoant->dosimetro_uso != 'FALSE')
                                                         @if($dosidedoant->ocupacion=='T')
                                                             <option selected hidden value="T">TELETERAPIA</option>
@@ -1238,20 +1238,20 @@ crossorigin="anonymous">
 
 <script type="text/javascript">
     $(document).ready(function(){
-            // Creamos array con los meses del año
-            const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-            let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}");
-            /* fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset()); */
-            console.log(fecha);
-            for($i=0; $i<=13; $i++){
-                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
-                var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-                console.log(fechaesp); 
-                if("{{$mesnumber}}" == $i){
-                    
-                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
-                } 
-            }
+        // Creamos array con los meses del año
+        const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+        let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}");
+        /* fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset()); */
+        console.log(fecha);
+        for($i=0; $i<=13; $i++){
+            var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
+            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+            console.log(fechaesp); 
+            if("{{$mesnumber}}" == $i){
+                
+                document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
+            } 
+        }
             
     })
 
@@ -1264,10 +1264,14 @@ crossorigin="anonymous">
         'SE HA ACTUALIZADO CON ÉXITO.',
         'success'
         )
+        
     </script>
 @endif  
 
+
 <script type="text/javascript">
+   
+
     function changueArea(area){
         
         Swal.fire({
