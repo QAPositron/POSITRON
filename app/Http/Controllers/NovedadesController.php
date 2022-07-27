@@ -27,6 +27,7 @@ class NovedadesController extends Controller
         ->get();
         $holdersDisponibles = Holder::where('estado_holder', '=', 'STOCK')
         ->get();
+
         return view('novedades.form_novedades', compact('empresasDosi', 'dosimetrosDisponibles', 'holdersDisponibles', 'dosimetrosDisponiblesEzclip'));
     }
     public function contratoDosimetria(Request $request){
@@ -69,6 +70,11 @@ class NovedadesController extends Controller
         $mesescontratodosi = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $request->especialidad_id)->get();
         return response()->json($mesescontratodosi);
         echo "MESES" +$mesescontratodosi;
+    }
+    public function meseschangecontratoDosi(Request $request){
+        $meseschange = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $request->especialidad_id)
+        ->get();
+        return response()->json($meseschange);
     }
     public function mesactualcontDosimetria(Request $request){
         /* return $request;  */
@@ -122,103 +128,221 @@ class NovedadesController extends Controller
    
     public function savecambiocantdosim(Request $request){
 
+        $dosi_control = $request->dosi_control;
+        $dosi_torax= $request->dosi_torax;
+        $dosi_area = $request->dosi_area; /////////FALTA TODO LO RELACIONADO CON DOSIMETROS TIPO CASO Y AREA
+        $dosi_caso = $request->dosi_caso;
+        $dosi_cristalino = $request->dosi_cristalino;
+        $dosi_muñeca = $request->dosi_muñeca;
+        $dosi_dedo = $request->dosi_dedo;
+        
         for($i=0; $i<count($request->id_trabajador_asig); $i++){
-
-            $newasignacionDosimetro = new Trabajadordosimetro();
-    
-            $newasignacionDosimetro->contratodosimetriasede_id = $request->id_contratodosimetriasede;
-            $newasignacionDosimetro->trabajador_id             = $request->id_trabajador_asig[$i];
-            $newasignacionDosimetro->dosimetro_id              = $request->id_dosimetro_asig[$i];
-            $newasignacionDosimetro->holder_id                 = $request->id_holder_asig[$i];
-            $newasignacionDosimetro->contdosisededepto_id      = $request->id_contdosisededepto;
-            $newasignacionDosimetro->mes_asignacion            = $request->mestrabj_asig;
-            $newasignacionDosimetro->dosimetro_uso             = 'TRUE';
-            /*$newasignacionDosimetro->primer_dia_uso
-            $newasignacionDosimetro->ultimo_dia_uso 
-            $newasignacionDosimetro->fecha_dosim_enviado */
-            $newasignacionDosimetro->ocupacion                 = $request->ocupacion_asig[$i];
-            $newasignacionDosimetro->ubicacion                 = $request->id_ubicacion_asig[$i];
-            $newasignacionDosimetro->energia                   = 'F';
-            $newasignacionDosimetro->save();
             
-            $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asig[$i])
-            ->update([
-                'estado_dosimetro' => 'EN USO',
-                'uso_dosimetro' => $request->id_ubicacion_asig[$i]  
-            ]);
-            $updateHolder = Holder::where('id_holder', '=', $request->id_holder_asig[$i])
-            ->update([
-                'estado_holder' => 'EN USO'
-            ]);
-
+            if($request->id_ubicacion_asig[$i] == 'CONTROL'){
+                $newasignacionDosimetroControl = new Dosicontrolcontdosisede();
+    
+                $newasignacionDosimetroControl->dosimetro_id              = $request->id_dosimetro_asig[$i];
+                $newasignacionDosimetroControl->contratodosimetriasede_id = $request->id_contratodosimetriasede;
+                $newasignacionDosimetroControl->contdosisededepto_id      = $request->id_contdosisededepto;
+                $newasignacionDosimetroControl->mes_asignacion            = $request->mestrabj_asig;
+                $newasignacionDosimetroControl->dosimetro_uso             = 'TRUE';
+                $newasignacionDosimetroControl->primer_dia_uso            = $request->primerDia_asigdosim;
+                $newasignacionDosimetroControl->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+                $newasignacionDosimetroControl->fecha_dosim_enviado       = $request->fecha_dosim_enviado;
+                $newasignacionDosimetroControl->ocupacion                 = $request->ocupacion_asig[$i];
+                $newasignacionDosimetroControl->energia                   = 'F';
+                $newasignacionDosimetroControl->save();
+    
+                $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asig[$i])
+                ->update([
+                    'estado_dosimetro' => 'EN USO',
+                    'uso_dosimetro' => 'CONTROL'
+                ]);
+                $updateEstadoDosimControlmesig = Dosicontrolcontdosisede::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
+                    ->where('contdosisededepto_id', $request->id_contdosisededepto)
+                    ->where('mes_asignacion', ($request->mestrabj_asig)-1)
+                    ->update([
+                        'estado_dosimetro' => 'EN LECTURA',
+                ]); 
+                $dosi_control += 1;
+            }else{
+                $newasignacionDosimetro = new Trabajadordosimetro();
+        
+                $newasignacionDosimetro->contratodosimetriasede_id = $request->id_contratodosimetriasede;
+                $newasignacionDosimetro->trabajador_id             = $request->id_trabajador_asig[$i];
+                $newasignacionDosimetro->dosimetro_id              = $request->id_dosimetro_asig[$i];
+                $newasignacionDosimetro->holder_id                 = $request->id_holder_asig[$i];
+                $newasignacionDosimetro->contdosisededepto_id      = $request->id_contdosisededepto;
+                $newasignacionDosimetro->mes_asignacion            = $request->mestrabj_asig;
+                $newasignacionDosimetro->dosimetro_uso             = 'TRUE';
+                $newasignacionDosimetro->primer_dia_uso            = $request->primerDia_asigdosim;
+                $newasignacionDosimetro->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+                $newasignacionDosimetro->fecha_dosim_enviado       = $request->fecha_dosim_enviado;
+                $newasignacionDosimetro->ocupacion                 = $request->ocupacion_asig[$i];
+                $newasignacionDosimetro->ubicacion                 = $request->id_ubicacion_asig[$i];
+                $newasignacionDosimetro->energia                   = 'F';
+                $newasignacionDosimetro->save();
+                
+                $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asig[$i])
+                ->update([
+                    'estado_dosimetro' => 'EN USO',
+                    'uso_dosimetro' => $request->id_ubicacion_asig[$i]  
+                ]);
+                $updateHolder = Holder::where('id_holder', '=', $request->id_holder_asig[$i])
+                ->update([
+                    'estado_holder' => 'EN USO'
+                ]);
+                if($request->id_ubicacion_asig[$i] == 'MUÑECA'){
+                    $dosi_muñeca += 1 ;
+                } 
+                if($request->id_ubicacion_asig[$i] == 'DEDO'){
+                    $dosi_dedo += 1 ;
+                }
+                if($request->id_ubicacion_asig[$i] == 'CRISTALINO'){
+                    $dosi_cristalino += 1 ;
+                }
+                if($request->id_ubicacion_asig[$i] == 'TORAX'){
+                    $dosi_torax += 1 ;
+                }
+            }
         } 
-       
+        $newMesescontdosisedeptos = new Mesescontdosisedeptos();
+        $newMesescontdosisedeptos->contdosisededepto_id = $request->id_contdosisededepto;
+        $newMesescontdosisedeptos->mes_asignacion       = $request->mestrabj_asig;
+        $newMesescontdosisedeptos->dosi_control         = $dosi_control;
+        $newMesescontdosisedeptos->dosi_torax           = $dosi_torax;
+        $newMesescontdosisedeptos->dosi_area            = $dosi_area;
+        $newMesescontdosisedeptos->dosi_caso            = $dosi_caso;
+        $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino;
+        $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca;
+        $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo;    
+        $newMesescontdosisedeptos->save();
         return back()->with('guardar', 'ok');
-        /*return $request;*/
+        /* return $request; */
     }
     public function savemesiguientecambiocantdosim(Request $request){
-       
-        for($i=0; $i<count($request->id_trabajador_asig); $i++){
-            $newasignacion = new Trabajadordosimetro();
+        $dosi_control = 0;
+        $dosi_torax= 0;
+        $dosi_area = 0; /////////FALTA TODO LO RELACIONADO CON DOSIMETROS TIPO CASO Y AREA
+        $dosi_caso = 0;
+        $dosi_cristalino = 0;
+        $dosi_muñeca = 0;
+        $dosi_dedo = 0;
+
+        if(!empty($request->id_trabajador_asig)){
+
+            for($i=0; $i<count($request->id_trabajador_asig); $i++){
     
-            $newasignacion->contratodosimetriasede_id = $request->contratodosimetriasede;
-            $newasignacion->trabajador_id             = $request->id_trabajador_asig[$i];
-            $newasignacion->dosimetro_id              = $request->id_dosimetro_asig[$i];
-            $newasignacion->holder_id                 = $request->id_holder_asig[$i];
-            $newasignacion->contdosisededepto_id      = $request->contdosisededepto;
-            $newasignacion->mes_asignacion            = $request->mes_asig_siguiente;
-            $newasignacion->dosimetro_uso             = 'TRUE';
-            /*$newasignacionDosimetro->primer_dia_uso
-            $newasignacionDosimetro->ultimo_dia_uso 
-            $newasignacionDosimetro->fecha_dosim_enviado */
-            $newasignacion->ocupacion                 = $request->ocupacion_asig[$i];
-            $newasignacion->ubicacion                 = $request->id_ubicacion_asig[$i];
-            $newasignacion->energia                   = 'F';
-            $newasignacion->save();
-
-            $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asig[$i])
-            ->update([
-                'estado_dosimetro' => 'EN USO',
-                'uso_dosimetro' => $request->id_ubicacion_asig[$i]  
-            ]);
-            $updateHolder = Holder::where('id_holder', '=', $request->id_holder_asig[$i])
-            ->update([
-                'estado_holder' => 'EN USO'
-            ]);
-            $updateEstadoDosimasigmesig = Trabajadordosimetro::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
-                ->where('contdosisededepto_id', $request->contdosisededepto)
-                ->where('mes_asignacion', ($request->mes_asig_siguiente)-1)
-                ->update([
-                    'estado_dosimetro' => 'EN LECTURA',
-            ]); 
+                if($request->id_ubicacion_asig[$i] == 'CONTROL'){
+                    $newasignacionDosimetroControl = new Dosicontrolcontdosisede();
+    
+                    $newasignacionDosimetroControl->dosimetro_id              = $request->id_dosimetro_asig[$i];
+                    $newasignacionDosimetroControl->contratodosimetriasede_id = $request->contratodosimetriasede;
+                    $newasignacionDosimetroControl->contdosisededepto_id      = $request->contdosisededepto;
+                    $newasignacionDosimetroControl->mes_asignacion            = $request->mes_asig_siguiente;
+                    $newasignacionDosimetroControl->dosimetro_uso             = 'TRUE';
+                    $newasignacionDosimetroControl->primer_dia_uso            = $request->primerDia_asigdosim;
+                    $newasignacionDosimetroControl->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+                    $newasignacionDosimetroControl->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
+                    $newasignacionDosimetroControl->ocupacion                 = $request->ocupacion_asig[$i];
+                    $newasignacionDosimetroControl->energia                   = 'F';
+                    $newasignacionDosimetroControl->save();
+    
+                    $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asig[$i])
+                    ->update([
+                        'estado_dosimetro' => 'EN USO',
+                        'uso_dosimetro' => 'CONTROL'
+                    ]);
+                    $updateEstadoDosimControlmesig = Dosicontrolcontdosisede::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
+                        ->where('contdosisededepto_id', $request->contdosisededepto)
+                        ->where('mes_asignacion', ($request->mes_asig_siguiente)-1)
+                        ->update([
+                            'estado_dosimetro' => 'EN LECTURA',
+                    ]); 
+                    $dosi_control += 1;
+                }else{
+    
+                    $newasignacion = new Trabajadordosimetro();
+            
+                    $newasignacion->contratodosimetriasede_id    = $request->contratodosimetriasede;
+                    $newasignacion->trabajador_id                = $request->id_trabajador_asig[$i];
+                    $newasignacion->dosimetro_id                 = $request->id_dosimetro_asig[$i];
+                    $newasignacion->holder_id                    = $request->id_holder_asig[$i];
+                    $newasignacion->contdosisededepto_id         = $request->contdosisededepto;
+                    $newasignacion->mes_asignacion               = $request->mes_asig_siguiente;
+                    $newasignacion->dosimetro_uso                = 'TRUE';
+                    $newasignacion->primer_dia_uso               = $request->primerDia_asigdosim;
+                    $newasignacion->ultimo_dia_uso               = $request->ultimoDia_asigdosim;
+                    $newasignacion->fecha_dosim_enviado          = $request->fecha_envio_dosim_asignado;
+                    $newasignacion->ocupacion                    = $request->ocupacion_asig[$i];
+                    $newasignacion->ubicacion                    = $request->id_ubicacion_asig[$i];
+                    $newasignacion->energia                      = 'F';
+                    $newasignacion->save();
+    
+                    $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asig[$i])
+                    ->update([
+                        'estado_dosimetro' => 'EN USO',
+                        'uso_dosimetro' => $request->id_ubicacion_asig[$i]  
+                    ]);
+                    $updateHolder = Holder::where('id_holder', '=', $request->id_holder_asig[$i])
+                    ->update([
+                        'estado_holder' => 'EN USO'
+                    ]);
+                    $updateEstadoDosimasigmesig = Trabajadordosimetro::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
+                        ->where('contdosisededepto_id', $request->contdosisededepto)
+                        ->where('mes_asignacion', ($request->mes_asig_siguiente)-1)
+                        ->update([
+                            'estado_dosimetro' => 'EN LECTURA',
+                    ]);
+                    if($request->id_ubicacion_asig[$i] == 'MUÑECA'){
+                        $dosi_muñeca += 1 ;
+                    } 
+                    if($request->id_ubicacion_asig[$i] == 'DEDO'){
+                        $dosi_dedo += 1 ;
+                    }
+                    if($request->id_ubicacion_asig[$i] == 'CRISTALINO'){
+                        $dosi_cristalino += 1 ;
+                    }
+                    if($request->id_ubicacion_asig[$i] == 'TORAX'){
+                        $dosi_torax += 1 ;
+                    }
+                }
+    
+            }
         }
-        for($i=0; $i<count($request->id_dosimetro_asigdosimControl); $i++){
-            $newasignacionAntiguaControl = new Dosicontrolcontdosisede();
+        ////GUARDAR SI HAY UN CONTROL EN UNA ASIGNACION ANTIGUA///////
+        if(!empty($request->id_dosimetro_asigdosimControl)){
 
-            $newasignacionAntiguaControl->dosimetro_id              = $request->id_dosimetro_asigdosimControl[$i];
-            $newasignacionAntiguaControl->contratodosimetriasede_id = $request->contratodosimetriasede;
-            $newasignacionAntiguaControl->contdosisededepto_id      = $request->contdosisededepto;
-            $newasignacionAntiguaControl->mes_asignacion            = $request->mes_asig_siguiente;
-            $newasignacionAntiguaControl->dosimetro_uso             = 'TRUE';
-            /* $newasignacionAntiguaControl->primer_dia_uso            = $request->;
-            $newasignacionAntiguaControl->ultimo_dia_uso            = $request->;
-            $newasignacionAntiguaControl->fecha_dosim_enviado       = $request->; */
-            $newasignacionAntiguaControl->ocupacion                 = $request->ocupacion_asigdosimControl[$i];
-            $newasignacionAntiguaControl->energia                   = 'F';
-            $newasignacionAntiguaControl->save();
+            for($i=0; $i<count($request->id_dosimetro_asigdosimControl); $i++){
+                $newasignacionAntiguaControl = new Dosicontrolcontdosisede();
 
-            $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimControl[$i])
-            ->update([
-                'estado_dosimetro' => 'EN USO',
-                'uso_dosimetro' => $request->id_ubicacion_asig[$i]  
-            ]);
-            $updateEstadoDosimControlmesig = Dosicontrolcontdosisede::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
-                ->where('contdosisededepto_id', $request->contdosisededepto)
-                ->where('mes_asignacion', ($request->mes_asig_siguiente)-1)
+                $newasignacionAntiguaControl->dosimetro_id              = $request->id_dosimetro_asigdosimControl[$i];
+                $newasignacionAntiguaControl->contratodosimetriasede_id = $request->contratodosimetriasede;
+                $newasignacionAntiguaControl->contdosisededepto_id      = $request->contdosisededepto;
+                $newasignacionAntiguaControl->mes_asignacion            = $request->mes_asig_siguiente;
+                $newasignacionAntiguaControl->dosimetro_uso             = 'TRUE';
+                $newasignacionAntiguaControl->primer_dia_uso            = $request->primerDia_asigdosim;
+                $newasignacionAntiguaControl->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+                $newasignacionAntiguaControl->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
+                $newasignacionAntiguaControl->ocupacion                 = $request->ocupacion_asigdosimControl[$i];
+                $newasignacionAntiguaControl->energia                   = 'F';
+                $newasignacionAntiguaControl->save();
+
+                $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimControl[$i])
                 ->update([
-                    'estado_dosimetro' => 'EN LECTURA',
-            ]); 
+                    'estado_dosimetro' => 'EN USO',
+                    'uso_dosimetro' => 'CONTROL'
+                ]);
+                $updateEstadoDosimControlmesig = Dosicontrolcontdosisede::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
+                    ->where('contdosisededepto_id', $request->contdosisededepto)
+                    ->where('mes_asignacion', ($request->mes_asig_siguiente)-1)
+                    ->update([
+                        'estado_dosimetro' => 'EN LECTURA',
+                ]); 
+                $dosi_control += 1 ;
+            }
         }
+        //////GUARDAR SI HAY UN TORAX QUE TIENE HOLDER EN NULL EN UNA ASIGNACION ANTIGUA//////
         for($i=0; $i<count($request->id_trabj_asigdosim_null); $i++){
             $newasignacionAntiguaNull = new Trabajadordosimetro();
 
@@ -229,9 +353,9 @@ class NovedadesController extends Controller
             $newasignacionAntiguaNull->contdosisededepto_id      = $request->contdosisededepto;
             $newasignacionAntiguaNull->mes_asignacion            = $request->mes_asig_siguiente;
             $newasignacionAntiguaNull->dosimetro_uso             = 'TRUE';
-            /*$newasignacionAntiguaNull->primer_dia_uso
-            $newasignacionAntiguaNull->ultimo_dia_uso 
-            $newasignacionAntiguaNull->fecha_dosim_enviado */
+            $newasignacionAntiguaNull->primer_dia_uso            = $request->primerDia_asigdosim;
+            $newasignacionAntiguaNull->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+            $newasignacionAntiguaNull->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
             $newasignacionAntiguaNull->ocupacion                 = $request->id_ocupacion_asigdosim_null[$i];
             $newasignacionAntiguaNull->ubicacion                 = $request->ubicacion_asigdosim_null[$i];
             $newasignacionAntiguaNull->energia                   = 'F';
@@ -248,7 +372,11 @@ class NovedadesController extends Controller
                 ->update([
                     'estado_dosimetro' => 'EN LECTURA',
             ]); 
+            if($request->ubicacion_asigdosim_null[$i] == 'TORAX'){
+                $dosi_torax += 1 ;
+            }
         }
+        ////GUARDAR SI ES UN DOSIMETRO CRISTALINO,MUÑECA,DEDO DE UNA ASIGNACION ANTIGUA///
         for($i=0; $i<count($request->id_trabj_asigdosim); $i++){
             $newasignacionAntigua = new Trabajadordosimetro();
 
@@ -259,9 +387,9 @@ class NovedadesController extends Controller
             $newasignacionAntigua->contdosisededepto_id      = $request->contdosisededepto;
             $newasignacionAntigua->mes_asignacion            = $request->mes_asig_siguiente;
             $newasignacionAntigua->dosimetro_uso             = 'TRUE';
-            /*$newasignacionAntiguaNull->primer_dia_uso
-            $newasignacionAntiguaNull->ultimo_dia_uso 
-            $newasignacionAntiguaNull->fecha_dosim_enviado */
+            $newasignacionAntigua->primer_dia_uso            = $request->primerDia_asigdosim;
+            $newasignacionAntigua->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+            $newasignacionAntigua->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
             $newasignacionAntigua->ocupacion                 = $request->id_ocupacion_asigdosim[$i];
             $newasignacionAntigua->ubicacion                 = $request->ubicacion_asigdosim[$i];
             $newasignacionAntigua->energia                   = 'F';
@@ -282,9 +410,31 @@ class NovedadesController extends Controller
                 ->update([
                     'estado_dosimetro' => 'EN LECTURA',
             ]); 
-        }   
+            if($request->ubicacion_asigdosim[$i] == 'MUÑECA'){
+                $dosi_muñeca += 1 ;
+            } 
+            if($request->ubicacion_asigdosim[$i] == 'DEDO'){
+                $dosi_dedo += 1 ;
+            }
+            if($request->ubicacion_asigdosim[$i] == 'CRISTALINO'){
+                $dosi_cristalino += 1 ;
+            }
+        }  
+        $newMesescontdosisedeptos = new Mesescontdosisedeptos();
+        $newMesescontdosisedeptos->contdosisededepto_id = $request->contdosisededepto;
+        $newMesescontdosisedeptos->mes_asignacion       = $request->mes_asig_siguiente;
+        $newMesescontdosisedeptos->dosi_control         = $dosi_control;
+        $newMesescontdosisedeptos->dosi_torax           = $dosi_torax;
+        $newMesescontdosisedeptos->dosi_area            = $dosi_area;
+        $newMesescontdosisedeptos->dosi_caso            = $dosi_caso;
+        $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino;
+        $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca;
+        $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo;    
+        $newMesescontdosisedeptos->save();
+
         return back()->with('guardar', 'ok');
-        /* return $request; */
+        /*return $request;
+        return $dosi_torax;*/
     }
 
     public function clearAsignacionAnteriorMn(Request $request){

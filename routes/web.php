@@ -9,6 +9,7 @@ use App\Http\Controllers\DosimetrosController;
 use App\Http\Controllers\EmpresasController;
 use App\Http\Controllers\HolderController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MesescontdosisedeptosController;
 use App\Http\Controllers\NovedadesController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\PruebaController;
@@ -216,7 +217,7 @@ Route::post('novedades/novedadesmesact', [NovedadesController::class, 'savecambi
 Route::post('novedades/novedadesmesig', [NovedadesController::class, 'savemesiguientecambiocantdosim'])->name('cambiocantdosimesig.save');
 Route::get('novedades/limpiar/', [NovedadesController::class, 'clearAsignacionAnteriorMn']);
 
-/* Route::get('novedades/{asigdosicont}/{mesnumber}/clear', [NovedadesController::class, 'clearAsignacionAnteriorMn'])->name('asignadosicontratomn.clear'); */
+Route::get('novedades/meseschangecontratoDosi', [NovedadesController::class, 'meseschangecontratoDosi']);
 
 
 Route::get('/prueba1', [PruebaController::class,'index']);

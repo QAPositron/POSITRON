@@ -1717,6 +1717,7 @@ class DosimetriaController extends Controller
         ->select("*")
         ->get();
 
+
         $trabajdosiasig= Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
@@ -1738,13 +1739,17 @@ class DosimetriaController extends Controller
         $dosiareasig = Dosiareacontdosisede::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
+        
+        $mesescantdosi = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)
+        ->where('mes_asignacion', '<=', $mesnumber)->latest()->first();
+        
 
         for($i=0; $i<count($trabajdosiasig); $i++){
 
             $trabajadoresaisgxmeses[] = Trabajadordosimetro::where('trabajador_id', '=', $trabajdosiasig[$i]->trabajador_id)->get();
         }
 
-        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'fechainiciodositrabaj', 'trabajadoresaisgxmeses'));
+        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'fechainiciodositrabaj', 'trabajadoresaisgxmeses', 'mesescantdosi', 'mesnumber'));
         $pdf->setPaper('8.5x14', 'landscape');
         /* return $pdf->stream(); */
         
@@ -1763,7 +1768,7 @@ class DosimetriaController extends Controller
         }
 
         /* return !$contratoDosi->isEmpty() ? $pdf->stream() : redirect()->route('detallesedecont.create', $id)->with('fallo', 'ok'); */
-        /* return $id; */
+        /* return $trabajdosiasig; */
 
     }
 

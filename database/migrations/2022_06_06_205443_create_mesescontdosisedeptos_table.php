@@ -28,6 +28,7 @@ class CreateMesescontdosisedeptosTable extends Migration
             $table->integer('dosi_cristalino')->nullable();
             $table->integer('dosi_muñeca')->nullable();
             $table->integer('dosi_dedo')->nullable();
+            $table->text('nota_cambiodosim')->nullable();
 
             $table->timestamps();
         });

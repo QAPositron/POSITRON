@@ -92,10 +92,12 @@
         </td>
         <td style="border:0.1px solid black; text-align: right;">Fecha recibo dosím.</td>
         <td style="width: 94px; border:0.1px solid black; color:#2646FA;" align="center">
+
             @php
-                $chek = 'inicial';
+                $chek = null;
             @endphp      
             @foreach($trabajdosiasig as $trabj)
+                
                 @php
                     if($trabj->fecha_dosim_recibido != $chek){
                         $datefix = date('d-m-Y',strtotime($trabj->fecha_dosim_recibido));
@@ -105,6 +107,7 @@
                         echo " ";
                     }
                 @endphp
+                
             @endforeach
         </td>
         <td rowspan="6" style="width: 130px; border:0.1px solid black;">
@@ -796,7 +799,7 @@
             {{-- <b>(1) En el caso que usuario haya sido desactivado y reactivado posteriormente, la fecha indicada en este campo será la de la ultima reactivación. Nota 9. Se refleja periodo de uso extendido según indicación sobre fechas reales de uso y por solicitud expresa del cliente.
             Este ajuste no implica <br> cambio en el histórico de dosis.
             En caso de necesitar cualquier aclaración respecto a la información aquí dispuesta favor hacer la consulta al correo electrónico reportes@dosimetrix.com.</b> --}}
-            <b>NOTAS:</b> <b>1 =</b> Ninguna (No se tiene ninguna nota), <b>2 =</b> Extraviado (No llegó el dosímetro a nuestras instalaciones y se declara extraviado), <b> 3 =</b> Supera dosis permitida de 1,67 mSv (Tórax), 41,6 mSv (Anillo) y 12,5 mSv (Cristalino) (La lectura indica que superó el nivel de dosis permitido para un periodo mensual), <b>4 =</b> Dosímetro reprocesado (Se realiza segunda lectura a petición del usuario), <b>5 =</b> Control no utilizado en la evaluación (Lectura del dosímetro de Control, no restada en la evaluación).
+            <b>NOTAS:</b> <b>1 =</b> Ninguna (No se tiene ninguna nota), <b>2 =</b> Extraviado (No llegó el dosímetro a nuestras instalaciones y se declara extraviado), <b> 3 =</b> Supera dosis permitida de 1,67 mSv (Tórax), 41,6 mSv (Anillo) y 12,5 mSv (Cristalino) (La lectura indica que superó el nivel de dosis permitido para un periodo mensual), <b>4 =</b> Dosímetro reprocesado (Se realiza segunda lectura a petición del usuario), <b>5 =</b> Control no utilizado en la evaluación (Lectura del dosímetro de Control, no restada en la evaluación), <b>6 =</b> Dosímetro contaminado por material radioactivo.
         </p>
     </div>
     <p style="position:absolute; top:680px; border:solid 0.1px #000; width: 1255px; height:25px; padding:5px 5px 5px 5px; text-align:justify; margin:0px;">
@@ -877,6 +880,27 @@
         </table>
         <br>
     </div>
+    <p style="text-align:justify; border:solid 0.3px #000; width: 1255px; padding:5px 5px 5px 5px; margin:0px;"> 
+        <b>OBSERVACIONES DEL PERIODO:</b> <br>
+            En este informe se encuentran los reportes de dosis de radiación correspondientes al periodo comprendido entre: 
+            
+            @foreach($trabajdosiasig as $dositrabj)
+                @php
+                    $datefix = date('d-m-Y',strtotime($dositrabj->primer_dia_uso));
+                    $datefix2 = date('d-m-Y',strtotime($dositrabj->ultimo_dia_uso));
+                @endphp
+                <b>{{$datefix}} y {{$datefix2}}</b> 
+                @break
+            @endforeach
+            <br>
+            @if(empty($dosicontrolasig))
+                -   Se analizaron {{count($trabajdosiasig)}} dosímetros personales y {{count($dosicontrolasig)}} dosímetros de control.
+            @else
+                -   Se analizaron {{count($trabajdosiasig)}} dosímetros personales.
+            @endif
+            
+           
+    </p>
 </div>
 
 {{-- <div style="position:absolute; width: 100%; height:20px; page-break-before: always; font-size: 12px;">
