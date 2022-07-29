@@ -1,5 +1,6 @@
 @extends('layouts.plantillabase')
 @section('contenido')
+
 <div class="row pt-5">
     <div class="col-md">
         <div class="card text-dark bg-light">
@@ -235,13 +236,13 @@
                                 <div class="row g-2">
                                     <div class="col-md">
                                         <div class="form-floating">
-                                            <input value="" type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" >
+                                            <input type="date" class="form-control" name="primerDia_asigdosim2" id="primerDia_asigdosim2" onchange="fechaUltimoDia();" >
                                             <label for="floatingInputGrid">PRIMER DÍA</label>
                                         </div>
                                     </div>
                                     <div class="col-md">
                                         <div class="form-floating">
-                                            <input value="" type="date" class="form-control" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
+                                            <input type="date" class="form-control" name="ultimoDia_asigdosim2" id="ultimoDia_asigdosim2" >
                                             <label for="floatingInputGrid">ULTIMO DÍA:</label>
                                         </div>
                                     </div>
@@ -289,12 +290,13 @@
                                     
                                 <div class="row">
                                     <div class="col"></div>
-                                    <div class="col">
-                                        <label for="floatingInputGrid">NOTAS Y OBSERVACIONES: </label>
+                                    <div class="col-6">
+                                        <label for="floatingInputGrid"> <b>NOTAS Y OBSERVACIONES:</b>  </label>
                                         <input type="textarea" class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros">
                                     </div>
                                     <div class="col"></div>
                                 </div>
+                                <br>
                                 <div class="row">
                                     <div class="col"></div>
                                     <div class="col">
@@ -427,7 +429,7 @@
                 });
             }
         })
-
+var myFechaInicial;
         $('#contratos_empresadosi').on('change', function(){
             var contrato_id = $(this).val();
             if($.trim(contrato_id) != ''){
@@ -436,6 +438,9 @@
                     console.log("INFORMACION DEL CONTRATO"+contratodosi[0].id_contratodosimetria);
                     var fechainicio = contratodosi[0].fecha_inicio;
                     var fechafinal = contratodosi[0].fecha_finalizacion;
+                    console.log(fechainicio);
+                    myFechaInicial = new Date(fechainicio);
+                    console.log(myFechaInicial);
                     document.getElementById("fechainicio_contratodosi").value = fechainicio;
                     document.getElementById("fechafin_contratodosi").value = fechafinal;
                     
@@ -491,14 +496,24 @@
                     const vacio = JSON.stringify(mesactual_trabjasig);
                     $('#mesacambiar').empty();
                     $('#mesacambiar').append("<option value=''>--</option>");
+                    const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+                     
                     if(vacio == '{}'){
-                        $('#mesacambiar').append("<option value='1'> 1 </option>");
+                        
+                        var r = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+1));
+                        var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                        $('#mesacambiar').append("<option value='1'> 1 -  </option>");
                     }else{
+                        
                         $.each(mesactual_trabjasig, function(index, value){
+                            var r = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+value));  
+                            var r2 = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+value+1));    
+                            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                            var fechaesp2 = meses[r2.getMonth()] + ' DE ' + r.getUTCFullYear();
 
                             var siguientemes = value+1;
-                            $('#mesacambiar').append("<option value='"+ value + "'>" + value + "</option>");
-                            $('#mesacambiar').append("<option value='"+ siguientemes + "'>" + siguientemes + "</option>"); 
+                            $('#mesacambiar').append("<option value='"+ value + "'>" + value + " ("+ fechaesp + ")" + "</option>");
+                            $('#mesacambiar').append("<option value='"+ siguientemes + "'>" + siguientemes + " ("+ fechaesp2 + ")" + "</option>"); 
                         })
                     }
 
@@ -647,19 +662,19 @@
                                                 </td>
                                                 <td class='align-middle'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
                                                 <td class='align-middle'>
-                                                    <select class="form-select"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
+                                                    <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
                                                         <option value="`+asignacionesmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                         ${selectDosimetrosEzclip.innerHTML}
                                                     </select>
                                                 </td>
                                                 <td class='align-middle'>
-                                                    <select class="form-select"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
+                                                    <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
                                                         <option value="`+asignacionesmesactual[i].id_holder+`">`+codigo_holder+`</option>
                                                         ${selectHolders.innerHTML}
                                                     </select>
                                                 </td>
                                                 <td class='align-middle'>
-                                                    <select class="form-select"  name="id_ocupacion_asigdosim[]" id="id_ocupacion_asigdosim" ${dis} >
+                                                    <select class="form-select cambiar"  name="id_ocupacion_asigdosim[]" id="id_ocupacion_asigdosim" ${dis} >
                                                         <option value="`+asignacionesmesactual[i].ocupacion+`">`+ocupacion+`</option>
                                                         <option value="T">T = TELETERAPIA</option>
                                                         <option value="BQ">BQ = BRAQUITERAPIA</option>
@@ -703,14 +718,14 @@
                                                 </td>
                                                 <td class='align-middle'><input type="text" name="ubicacion_asigdosim_null[]" id="ubicacion_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
                                                 <td class='align-middle'>
-                                                    <select class="form-select"  name="id_dosimetro_asigdosim_null[]" id="id_dosimetro_asigdosim_null" ${dis}>
+                                                    <select class="form-select cambiar"  name="id_dosimetro_asigdosim_null[]" id="id_dosimetro_asigdosim_null" ${dis}>
                                                         <option value="`+asignacionesmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                         ${selectDosimetros.innerHTML}
                                                     </select>
                                                 </td>
                                                 <td class='align-middle'> NA </td>
                                                 <td class='align-middle'>
-                                                    <select class="form-select"  name="id_ocupacion_asigdosim_null[]" id="id_ocupacion_asigdosim_null" ${dis}>
+                                                    <select class="form-select cambiar"  name="id_ocupacion_asigdosim_null[]" id="id_ocupacion_asigdosim_null" ${dis}>
                                                         <option value="`+asignacionesmesactual[i].ocupacion+`">`+ocupacion+`</option>
                                                         <option value="T">T = TELETERAPIA</option>
                                                         <option value="BQ">BQ = BRAQUITERAPIA</option>
@@ -1047,30 +1062,27 @@
         alert("ESTE ES EL MES"+mes+"ESTE ES EL ID DEL DEPTO"+contdosisededepto_id+"ESTE ES EL ID DE LA SEDE"+contratodosimetriasede_id);
         $.get('limpiar', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: mes}, function(asignacioneslimpias){
             console.log(asignacioneslimpias);
-            for(var i=0; i<asignacioneslimpias.length; i++){
-                celdas = document.getElementById(asignacioneslimpias[i].id_trabajadordosimetro).cells;
-                console.log(celdas);
-
-                /* var data = $(obj).parents('tr').find('select').val();
-                console.log(data)    */
-                /* celdas[i].prop('disabled', true); */
-                for(var j=0; j<celdas.length; j++){
-                    tds = console.log(celdas[j]);
-                    
-                }
-                /* $("#id_dosimetro_asigdosim").prop('disabled', false);
-                $("#id_holder_asigdosim").prop('disabled', false);
-                $("#id_ocupacion_asigdosim").prop('disabled', false); 
-
-                if(asignacioneslimpias[i].ubicacion == 'TORAX'){
-
-                    $("#id_dosimetro_asigdosim_null").prop('disabled', false);
-                    $("#id_ocupacion_asigdosim_null").prop('disabled', false);
-                } */
-            } 
+            //se toman todos los elementos a los cuales se les va a cambiar la propiedad disbled, estos tienen la misma propiedad llamada 'cambiar'
+            var cambiarElement = document.querySelectorAll('.cambiar');
+            cambiarElement.forEach(function(element){
+                
+                element.disabled = false;
+                element.options.item(0).text = "---";
+                element.options.item(0).value = null;
+            });
+            
 
         })
         
+    }
+    function fechaUltimoDia(){
+        var fecha_inicio = new Date(document.getElementById("primerDia_asigdosim2").value);
+        /* var fecha = fecha_inicio.toUTCString() */;
+        console.log(fecha_inicio);
+        var fecha_final_mes = fecha_inicio.getDate()+30;
+        /* var fecha_final = fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia; */
+        /* document.getElementById('ultimoDia_asigdosim2').value = fecha_final_mes; */
+    
     }
     function eliminarEzclip(ezclip, ubicacion){
         
