@@ -13,5 +13,11 @@ class Personasperfiles extends Model
     public function persona(){
         return $this->belongsTo(Persona::class,'persona_id', 'id_persona');
     }
+
+    public function perfiles(){
+        /* return $this->hasMany('App\Models\Sede'); */
+        return $this->belongsTo(Perfiles::class, 'perfil_id', 'id_perfil');
+    }
+
     
 }

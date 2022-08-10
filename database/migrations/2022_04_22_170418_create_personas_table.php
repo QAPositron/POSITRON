@@ -26,6 +26,7 @@ class CreatePersonasTable extends Migration
             $table->string('telefono_persona', 15);
             $table->string('lider_ava', 15)->nullable();
             $table->string('lider_dosimetria', 15)->nullable();
+            $table->string('lider_controlescalidad', 15)->nullable();
             $table->timestamps();
         });
     }

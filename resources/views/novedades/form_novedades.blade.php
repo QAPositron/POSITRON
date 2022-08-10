@@ -193,6 +193,16 @@
 
                                                     </tbody>
                                                 </table>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col"></div>
+                                                    <div class="col-6">
+                                                        <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
+                                                        <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea>
+                                                    </div>
+                                                    <div class="col"></div>
+                                                </div>
+                                                <br>
                                                 <div class="row">
                                                     <div class="col"></div>
                                                     <div class="col">
@@ -291,8 +301,13 @@
                                 <div class="row">
                                     <div class="col"></div>
                                     <div class="col-6">
+<<<<<<< HEAD
                                         <label for="floatingInputGrid"> <b>NOTAS Y OBSERVACIONES:</b>  </label>
                                         <input type="textarea" class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros">
+=======
+                                        <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
+                                        <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea>
+>>>>>>> 6078b58ef2badab6945daad611368f3a7a075d34
                                     </div>
                                     <div class="col"></div>
                                 </div>
@@ -480,15 +495,19 @@ var myFechaInicial;
                 $.get('meseschangecontratoDosi', {especialidad_id: especialidad_id}, function(todoslos_meses){
                     console.log(todoslos_meses);
                     for(var i=0; i<todoslos_meses.length; i++){
-                        var tr = `<tr>
-                                <td class='align-middle text-center'>`+todoslos_meses[i].mes_asignacion+`</td>
-                                <td class='align-middle text-center'>`+todoslos_meses[i].dosi_control+`</td>
-                                <td class='align-middle text-center'>`+todoslos_meses[i].dosi_torax+`</td>
-                                <td class='align-middle text-center'>`+todoslos_meses[i].dosi_cristalino+`</td>
-                                <td class='align-middle text-center'>`+todoslos_meses[i].dosi_muñeca+`</td>
-                                <td class='align-middle text-center'>`+todoslos_meses[i].dosi_dedo+`</td>
-                            </tr>`;
-                        $("#tabla_meses").append(tr);
+                        if(todoslos_meses[i].dosi_control == null && todoslos_meses[i].dosi_torax == null && todoslos_meses[i].dosi_cristalino == null && todoslos_meses[i].dosi_muñeca == null && todoslos_meses[i].dosi_dedo == null){
+
+                        }else{
+                            var tr = `<tr>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].mes_asignacion+`</td>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_control+`</td>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_torax+`</td>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_cristalino+`</td>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_muñeca+`</td>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_dedo+`</td>
+                                </tr>`;
+                            $("#tabla_meses").append(tr);
+                        }
                     }
                 })
                 $.get('mesactualcontdosisededepto', {especialidad_id: especialidad_id}, function(mesactual_trabjasig){
@@ -567,14 +586,14 @@ var myFechaInicial;
                                         var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`">
                                                 <td colspan='2' style='width: 75px' class='align-middle'>CONTROL</td>
                                                 <td style='width: 190px' class='align-middle'>
-                                                    <select class="form-select"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
+                                                    <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
                                                         <option value="`+asignacionescontrolmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                         ${selectDosimetros.innerHTML}
                                                     </select>
                                                 </td>
                                                 <td style='width: 163px' class='align-middle'>NA</td>
                                                 <td style='width: 185px' class='align-middle'>
-                                                    <select class="form-select" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" ${disacont} >
+                                                    <select class="form-select cambiar" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" ${disacont} >
                                                         <option value="`+asignacionescontrolmesactual[i].ocupacion+`">`+ocupacion+`</option>
                                                         <option value="T">T = TELETERAPIA</option>
                                                         <option value="BQ">BQ = BRAQUITERAPIA</option>
@@ -1076,12 +1095,25 @@ var myFechaInicial;
         
     }
     function fechaUltimoDia(){
+<<<<<<< HEAD
         var fecha_inicio = new Date(document.getElementById("primerDia_asigdosim2").value);
         /* var fecha = fecha_inicio.toUTCString() */;
         console.log(fecha_inicio);
         var fecha_final_mes = fecha_inicio.getDate()+30;
         /* var fecha_final = fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia; */
         /* document.getElementById('ultimoDia_asigdosim2').value = fecha_final_mes; */
+=======
+        
+        var fecha = new Date(document.getElementById("primerDia_asigdosim2").value);
+        fecha.setDate(fecha.getDate()+30);
+        console.log(fecha);
+        var dia = fecha.getDate();
+        var mes = fecha.getMonth()+1;
+        var mm = (mes < 10 ? '0' : '')+mes;
+        var año = fecha.getFullYear();
+        document.getElementById("ultimoDia_asigdosim2").value = año+'-'+mm+'-'+dia;
+        
+>>>>>>> 6078b58ef2badab6945daad611368f3a7a075d34
     
     }
     function eliminarEzclip(ezclip, ubicacion){

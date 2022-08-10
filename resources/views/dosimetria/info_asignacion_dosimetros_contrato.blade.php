@@ -329,7 +329,7 @@
                             </tr>
                         @endforeach --}}
                         @foreach($trabjasignados as $trabasig)
-                            <tr>
+                            <tr id='{{$trabasig->id_trabajadordosimetro}}'>
                                 <td class='align-middle'>@if(!empty($trabasig->trabajador->primer_nombre_trabajador)){{$trabasig->trabajador->primer_nombre_trabajador}} {{$trabasig->trabajador->segundo_nombre_trabajador}} {{$trabasig->trabajador->primer_apellido_trabajador}} {{$trabasig->trabajador->segundo_apellido_trabajador}}@endif </td>
                                 <td class='align-middle'>@if(!empty($trabasig->trabajador->cedula_trabajador)) {{$trabasig->trabajador->cedula_trabajador}}@endif </td>
                                 <td class='align-middle'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
@@ -342,7 +342,6 @@
                                 </td>
                                 <td class='align-middle'>{{$trabasig->ocupacion}}</td>
                                 <td class='align-middle'>{{$trabasig->ubicacion}}</td>
-                                
                                 <td class='align-middle'>
                                     @if($trabasig->nota2 == 'TRUE')
                                         {{'NP'}}
@@ -390,9 +389,9 @@
                                 </td>
                                 <td class='align-middle'></td>
                                 <td class='align-middle'>
-                                    @for($i=1; $i<=5; $i++)
+                                    @for($i=1; $i<=6; $i++)
                                         @if($trabasig->{"nota$i"} == 'TRUE')
-                                            {{$i}}
+                                            {{$i}})
                                         @endif 
                                     @endfor
                                 </td>
@@ -435,7 +434,7 @@
                         @endforeach
                     @else
                         @foreach($dosicontrolasig as $dosicontasig)
-                            <tr>
+                            <tr id="{{$dosicontasig->id_dosicontrolcontdosisedes}}">
                                 <td class='align-middle'>CONTROL</td>
                                 <td class='align-middle'>N.A.</td>
                                 <td class='align-middle'>{{$dosicontasig->dosimetro->codigo_dosimeter}}</td>
@@ -489,7 +488,7 @@
                                 </td>
                                 <td class='align-middle'></td>
                                 <td class='align-middle'>
-                                    @for($i=1; $i<=5; $i++)
+                                    @for($i=1; $i<=6; $i++)
                                         @if($dosicontasig->{"nota$i"} == 'TRUE')
                                             {{$i}})
                                         @endif 
@@ -587,7 +586,7 @@
                                 </tr>
                             @endforeach --}}
                             @foreach($trabjasignados as $trabasig)
-                                <tr>
+                                <tr id='{{$trabasig->id_trabajadordosimetro}}'>
                                     <td class='align-middle'>@if(!empty($trabasig->trabajador->primer_nombre_trabajador)){{$trabasig->trabajador->primer_nombre_trabajador}} {{$trabasig->trabajador->segundo_nombre_trabajador}} {{$trabasig->trabajador->primer_apellido_trabajador}} {{$trabasig->trabajador->segundo_apellido_trabajador}}@endif </td>
                                     <td class='align-middle'>@if(!empty($trabasig->trabajador->cedula_trabajador)) {{$trabasig->trabajador->cedula_trabajador}}@endif </td>
                                     <td class='align-middle'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
@@ -648,7 +647,7 @@
                                     </td>
                                     <td class='align-middle'></td>
                                     <td class='align-middle'>
-                                        @for($i=1; $i<=5; $i++)
+                                        @for($i=1; $i<=6; $i++)
                                             @if($trabasig->{"nota$i"} == 'TRUE')
                                                 {{$i}})
                                             @endif 
@@ -702,7 +701,78 @@
 </div>
 <br>
 <br>
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md-8 ">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading"> <b>OBSERVACIONES:</b> </h4>
+            @php
+                $nota3 = 'vacio';
+                $nota5 = 'vacio';
+                $nota6 = 'vacio';
+            @endphp
+            @foreach($trabjasignados as $trabasig)
+                @php
+                    if($trabasig->nota3 == 'TRUE' &&  $trabasig->nota3 != $nota3){
+                        echo "<p>- SE RECOMIENDA REVISAR EL LIMITE DE LAS DOSIS PERMITIDAS</p>";
+                        $nota3 = $trabasig->nota3;
+                    }
+                    if($trabasig->nota5 == 'TRUE' && $trabasig->nota5 != $nota5){
+                        echo "<p>- CONTROL NO UTILIZADO EN LA EVALUACIÓN</p>";
+                        $nota5 = $trabasig->nota5;
+                    }
+                    if($trabasig->nota6 == 'TRUE' &&  $trabasig->nota6 != $nota6){
+                        echo "<p>-  DOSÍMETRO CONTAMINADO CON MATERIAL RADIOACTIVO SE RECOMIENDA HACER INVESTIGACIÓN</p>";
+                        $nota6 = $trabasig->nota6;  
+                    }
 
+                @endphp
+            @endforeach
+            @if(!empty($observacionesDelMes))
+                @foreach($observacionesDelMes as $observaciones)
+                    @if($observaciones->nota_cambiodosim != null)
+                        <p>- {{$observaciones->nota_cambiodosim}}</p>
+                    @endif
+                @endforeach
+            @endif
+            <br>
+            <div class="row">
+                <div class="col-md"></div>
+                <div class="col-md d-grid gap-2">
+                    <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_observacionModal" >NUEVA OBSERVACIÓN</button>
+                    <div class="modal fade" id="nueva_observacionModal" tabindex="-1" aria-labelledby="nueva_observacionModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title w-100 text-center" id="nueva_observacionModalLabel">NUEVA OBSERVACIÓN</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{route('asigdosicont.saveObservacionMesAsigdosim')}}" method="POST" id="form_crear_observacionmes" name="form_crear_observacionmes" class="form_crear_observacionmes">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="col-md">
+                                            <label class="text-center">INGRESE LAS OBSERVACIONES O NOTAS PERTINENTES AL MES:</label>
+                                            <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea> 
+                                            <input type="number" hidden value="{{$mesnumber}}" name="mesnumber" id="mesnumber">
+                                            <input type="number" hidden value="{{$contdosisededepto->id_contdosisededepto}}" name="id_contdosisededepto" id="id_contdosisededepto">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
+                                        <button type="submit" class="btn colorQA"  data-bs-dismiss="modal" >GUARDAR</button>
+                                    </div>
+                                </form>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md"></div>
+</div>
 
 
 
@@ -807,6 +877,7 @@ crossorigin="anonymous">
         
     })
 </script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         // Creamos array con los meses del año
@@ -825,8 +896,53 @@ crossorigin="anonymous">
 
             } 
         }
+          
+        var trab = [];
+        var trabajadores = <?php echo json_encode($trabjasignados);  ?>;
+        console.log(trabajadores);
+        
+        trabajadores.forEach(function(value, index) {
+            trab[index] = value;
+            console.log(trab[index]);
+            if(trab[index].Hp3_calc_dose != 'NULL'){
+                if(trab[index].ubicacion == 'CRISTALINO' && trab[index].Hp3_calc_dose >= 12.5){
+                    alert('ALERTA ROJA CRISTALINO');
+                    let trhp3 = document.getElementById(trab[index].id_trabajadordosimetro);
+                    console.log("HP3"+trhp3);
+                    trhp3.classList.add("trdosisroja");
+                }
+            }
+            if(trab[index].Hp007_calc_dose != 'NULL'){
+                if(trab[index].ubicacion == 'MUÑECA' && trab[index].Hp007_calc_dose >= 41.6){
+                    alert('ALERTA ROJA MUÑECA');
+                    let trhp007 = document.getElementById(trab[index].id_trabajadordosimetro);
+                    trhp007.classList.add("trdosisroja");
+                }
+                if(trab[index].ubicacion == 'DEDO' && trab[index].Hp007_calc_dose >= 41.6){
+                    alert('ALERTA ROJA DEDO');
+                    let trhp007 = document.getElementById(trab[index].id_trabajadordosimetro);
+                    trhp007.classList.add("trdosisroja");
+                }
+            } 
+            if(trab[index].Hp10_calc_dose != 'NULL' ){
+                if(trab[index].ubicacion == 'TORAX'  && trab[index].Hp10_calc_dose >= 1.67){
+                    alert('ALERTA ROJA TORAX');
+                    let trhp10 = document.getElementById(trab[index].id_trabajadordosimetro);
+                    console.log("HP10"+trhp10);
+                    trhp10.classList.add("trdosisroja");
+                }
+                if(trab[index].ubicacion == 'CASO'  && trab[index].Hp10_calc_dose >= 1.67){
+                    alert('ALERTA ROJA CASO');
+                    let trHP10 = document.getElementById(trab[index].id_trabajadordosimetro);
+                    trHP10.classList.add("trdosisroja");
+                }
+            }           
+                
             
+        });
+        
     })
-
 </script>
+
+
 @endsection

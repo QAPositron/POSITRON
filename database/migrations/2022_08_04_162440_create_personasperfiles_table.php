@@ -13,13 +13,16 @@ class CreatePersonasperfilesTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('personasperfiles', function (Blueprint $table) {
             $table->bigIncrements('id_personaperfil');
 
-            $table-> unsignedBigInteger('persona_id');
-            $table-> foreign('persona_id')->references('id_persona')->on('personas')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('persona_id');
+            $table->foreign('persona_id')->references('id_persona')->on('personas')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->string('perfil_persona', 50);
+            $table-> unsignedBigInteger('perfil_id');
+            $table-> foreign('perfil_id')->references('id_perfil')->on('perfiles')->onDelete('cascade')->onUpdate('cascade');
+                        
             $table->timestamps();
         });
     }

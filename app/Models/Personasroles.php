@@ -13,4 +13,9 @@ class Personasroles extends Model
     public function persona(){
         return $this->belongsTo(Persona::class,'persona_id', 'id_persona');
     }
+
+    
+    public function roles(){
+        return $this->belongsTo(Roles::class,'rol_id', 'id_rol');
+    }
 }

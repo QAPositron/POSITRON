@@ -1322,14 +1322,16 @@ class DosimetriaController extends Controller
         $mescontdosisededepto = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)->latest()->first();
         $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
-        ->get();
+        ->get();    
         $dosiareasignados = Dosiareacontdosisede::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
         $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
-        
+        $observacionesDelMes = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
        /*  $dosimetros = Dosimetro::leftJoin('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
             ->whereNull('trabajadordosimetros.dosimetro_uso')
             ->orWhere(function ($query) {
@@ -1372,8 +1374,8 @@ class DosimetriaController extends Controller
             ->where('ubicacion', 'DEDO')
             ->where('mes_asignacion', $mesnumber)
             ->count();
-        return view('dosimetria.info_asignacion_dosimetros_contrato', compact('mesnumber','contdosisededepto', 'mescontdosisededepto', 'dosiareasignados', 'trabjasignados', 'dosicontrolasig','DosiControlAsignados', 'DosiToraxAsignados', 'DosiCasoAsignados', 'DosiCristalinoAsignados', 'DosiMuñecaAsignados', 'DosiDedoAsignados'));
-        /* return $contdosisededepto; */
+        return view('dosimetria.info_asignacion_dosimetros_contrato', compact('mesnumber','contdosisededepto', 'mescontdosisededepto', 'dosiareasignados', 'trabjasignados', 'observacionesDelMes', 'dosicontrolasig','DosiControlAsignados', 'DosiToraxAsignados', 'DosiCasoAsignados', 'DosiCristalinoAsignados', 'DosiMuñecaAsignados', 'DosiDedoAsignados'));
+        /* return $dosicontrolasig; */
     }
 
     /* public function updateInfo($idWork, $contratoId, $mesnumber, Request $request) {
@@ -1472,6 +1474,16 @@ class DosimetriaController extends Controller
         /* return $mesnumber; */
         return redirect()->back()->with('actualizado', 'ok');
     }
+    public function saveObservacionMesAsigdosim(Request $request){
+        $newMesescontdosisedeptos = new Mesescontdosisedeptos();
+        $newMesescontdosisedeptos->contdosisededepto_id = $request->id_contdosisededepto;
+        $newMesescontdosisedeptos->mes_asignacion       = $request->mesnumber;
+        $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);
+        $newMesescontdosisedeptos->save();
+        
+        /* return $request; */
+        return back()->with('crear', 'ok');
+    }
     public function destroyControlasig($id){
         $new_estado = 'STOCK';
         $liberar_dosim = Dosicontrolcontdosisede::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
@@ -1520,9 +1532,7 @@ class DosimetriaController extends Controller
         }else{    
             $request->validate([
                 'measurement_date'              => 'required',
-                /* 'zeroLevel_date'                => 'required',
-                'verification_Date'             => 'required',
-                'verification_required_before'  => 'required', */
+            
             ]);
         }
 
@@ -1549,6 +1559,7 @@ class DosimetriaController extends Controller
         $trabjasig->nota3                               = $request->nota3;
         $trabjasig->nota4                               = $request->nota4;
         $trabjasig->nota5                               = $request->nota5;
+        $trabjasig->nota6                               = $request->nota6;
         $trabjasig->DNL                                 = $request->dnl;
         $trabjasig->EU                                  = $request->eu;
         $trabjasig->DPL                                 = $request->dpl;
@@ -1741,7 +1752,8 @@ class DosimetriaController extends Controller
         ->get();
         
         $mesescantdosi = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)
-        ->where('mes_asignacion', '<=', $mesnumber)->latest()->first();
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
         
 
         for($i=0; $i<count($trabajdosiasig); $i++){
@@ -1763,12 +1775,12 @@ class DosimetriaController extends Controller
             $date = date("m-Y");				
             /* $mesDesc = date("%e %B %Y", strtotime($newDate)); */
 
-            return $pdf->stream("RPD_".$date."_".substr($empresa, 0, 4)."-".substr($sede, 0, 4)."-".$contratoDosi[$i]->nombre_departamento.".pdf");
+           /*  return $pdf->stream("RPD_".$date."_".substr($empresa, 0, 4)."-".substr($sede, 0, 4)."-".$contratoDosi[$i]->nombre_departamento.".pdf"); */
             /* return $newDate; */
         }
 
-        /* return !$contratoDosi->isEmpty() ? $pdf->stream() : redirect()->route('detallesedecont.create', $id)->with('fallo', 'ok'); */
-        /* return $trabajdosiasig; */
+        return !$contratoDosi->isEmpty() ? $pdf->stream() : redirect()->route('detallesedecont.create', $id)->with('fallo', 'ok'); 
+        /* return $mesescantdosi; */
 
     }
 

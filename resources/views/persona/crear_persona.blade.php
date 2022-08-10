@@ -2,64 +2,85 @@
 @section('contenido')
 <div class="row">
     <div class="col"></div>
-    <div class="col-7">
-        <div class="card text-dark bg-light">
+    <div class="col-8">
+        <div class="card text-dark bg-light ">
             <h2 class="text-center mt-3">CREAR PERSONA</h2>
-            <form class="m-4" id="form_create_contacto" name="form_create_contacto" action="{{route('contactos.save')}}" method="POST">
-
+            <br>
+            <form class="m-4" id="form_create_contacto" name="form_create_contacto" action="{{route('personas.save')}}" method="POST">
                 @csrf
                 <div class="row g-2">
-                    <div class="col-md">
+                    <div class="col-md-5">
+                        <label for="">PERFIL LABORAL:</label>
                         <div class="form-floating">
-                            <select class="form-select" name="pelfil_persona" id="pelfil_persona" style="text-transform:uppercase;">
-                                <option value="{{old('perfil_persona')}}">--SELECCIONE--</option>
-                                <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
+                            <select class="form-select" name="perfil_personas[]" id="perfil_personas" autofocus aria-label="Floating label select example"  multiple="true" >
+                                @foreach($perfiles as $perf)
+                                    <option value ="{{$perf->id_perfil}}">{{$perf->nombre_perfil}}</option>
+                                @endforeach 
+                                {{-- <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
                                 <option value="CALIDAD">CALIDAD</option>
                                 <option value="BIOMÉDICA">BIOMÉDICA</option>
                                 <option value="FÍSICA MÉDICA">FÍSICA MÉDICA</option>
                                 <option value="CONTABILIDAD">CONTABILIDAD</option>
-                                <option value="SUBGERENCIA">SUBGERENCIA</option>
-                                <option value="GERENCIA">GERENCIA</option>
+                                <option value="SUBGERENCIA">    </option>
+                                <option value="GERENCIA">GERENCIA</option> --}}
                             </select>
-                            <label for="">PERFIL:</label>
-                            @error('pelfil_persona')
+                            @error('perfil_personas')
                                 <small>*{{$message}}</small>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md">
+                    <div class="col-md d-flex align-items-center">
+                        <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_perfilModal" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="">ROL:</label>
                         <div class="form-floating">
-                            <select class="form-select" name="rol_persona" id="rol_persona" style="text-transform:uppercase;">
-                                <option value="{{old('rol_persona')}}">--SELECCIONE--</option>
-                                <option value="ESTUDIANTE">ESTUDIANTE</option>
+                            <select class="form-select" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
+                                @foreach($roles as $rol)
+                                    <option value ="{{$rol->id_rol}}">{{$rol->nombre_rol}}</option>
+                                @endforeach 
+                                {{-- <option value="ESTUDIANTE">ESTUDIANTE</option>
                                 <option value="CONTACTO">CONTACTO</option>
                                 <option value="TOE">TRABAJADOR OCUPACIONALMENTE EXPUESTO (TOE)</option>
-                                <option value="OPR">OFICIAL DE PROTECCIÓN RADIOLÓGICA (OPR)</option>
+                                <option value="OPR">OFICIAL DE PROTECCIÓN RADIOLÓGICA (OPR)</option> --}}
                             </select>
-                            <label for="">ROL:</label>
-                            @error('rol_persona')
+                            @error('rol_personas')
                                 <small>*{{$message}}</small>
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md d-flex align-items-center">
+                        <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_rolModal" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
+            
                 <br>
+                {{-- <input hidden type="number" name="id_perfiles[]" id="id_perfiles" value="">
+                <input hidden type="number" name="id_roles[]" id="id_roles" value=""> --}}
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating text-wrap">
-                            <input type="text" class="form-control"  name="primer_nombre_contacto" id="primer_nombre_contacto" value="{{old('primer_nombre_contacto')}}" autofocus style="text-transform:uppercase;">
+                            <input type="text" class="form-control @error('primer_nombre_persona') is-invalid @enderror"  name="primer_nombre_persona" id="primer_nombre_persona" value="{{old('primer_nombre_persona')}}" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid">PRIMER NOMBRE:</label>
-                            @error('primer_nombre_contacto')
-                                <small>*{{$message}}</small>
+                            @error('primer_nombre_persona')
+                                <span class="invalid-feedback">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating text-wrap">
-                            <input type="text" class="form-control"  name="segundo_nombre_contacto" id="segundo_nombre_contacto" value="{{old('segundo_nombre_contacto')}}" autofocus style="text-transform:uppercase;">
+                            <input type="text" class="form-control @error('segundo_nombre_persona') is-invalid @enderror"  name="segundo_nombre_persona" id="segundo_nombre_persona" value="{{old('segundo_nombre_persona')}}" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid">SEGUNDO NOMBRE:</label>
-                            @error('segundo_nombre_contacto')
-                                <small>*{{$message}}</small>
+                            @error('segundo_nombre_persona')
+                                <span class="invalid-feedback">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -68,19 +89,19 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating text-wrap">
-                            <input type="text" class="form-control"  name="primer_apellido_contacto" id="primer_apellido_contacto" value="{{old('primer_apellido_contacto')}}" autofocus style="text-transform:uppercase;">
+                            <input type="text" class="form-control @error('primer_apellido_persona') is-invalid @enderror"  name="primer_apellido_persona" id="primer_apellido_persona" value="{{old('primer_apellido_persona')}}" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid">PRIMER APELLIDO:</label>
-                            @error('primer_apellido_contacto')
-                                <small>*{{$message}}</small>
+                            @error('primer_apellido_persona')
+                                <span class="invalid-feedback">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating text-wrap">
-                            <input type="text" class="form-control"  name="segundo_apellido_contacto" id="segundo_apellido_contacto" value="{{old('segundo_apellido_contacto')}}" autofocus style="text-transform:uppercase;">
+                            <input type="text" class="form-control @error('segundo_apellido_persona') is-invalid @enderror"  name="segundo_apellido_persona" id="segundo_apellido_persona" value="{{old('segundo_apellido_persona')}}" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid">SEGUNDO APELLIDO:</label>
-                            @error('segundo_apellido_contacto')
-                                <small>*{{$message}}</small>
+                            @error('segundo_apellido_persona')
+                                <span class="invalid-feedback">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -89,7 +110,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" name="tipoIden_contacto" id="tipoIden_contacto" value="{{old('tipoIden_contacto')}}" autofocus style="text-transform:uppercase">
+                            <select class="form-select @error('tipoIden_persona') is-invalid @enderror" name="tipoIden_persona" id="tipoIden_persona" value="{{old('tipoIden_persona')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
                                 <option value="CÉDULA DE CIUDADANIA">CÉDULA DE CIUDADANIA</option>
                                 <option value="TARJETA DE IDENTIDAD">TARJETA DE IDENTIDAD</option>
@@ -100,17 +121,17 @@
                                 <option value="PASAPORTE">PASAPORTE</option>
                             </select>
                             <label for="floatingInputGrid">TIPO DE IDENTIFICACIÓN:</label>
-                            @error('tipoIden_contacto')
-                                <small>*{{$message}}</small>
+                            @error('tipoIden_persona')
+                                <span class="invalid-feedback">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating text-wrap">
-                            <input type="text" class="form-control"  name="cedula_contacto" id="cedula_contacto" value="{{old('cedula_contacto')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">CEDULA:</label>
-                            @error('cedula_contacto')
-                                <small>*{{$message}}</small>
+                            <input type="text" class="form-control @error('cedula_persona') is-invalid @enderror"  name="cedula_persona" id="cedula_persona" value="{{old('cedula_persona')}}" autofocus style="text-transform:uppercase;">
+                            <label for="floatingInputGrid">N° DE IDENTIFICACIÓN:</label>
+                            @error('cedula_persona')
+                                <span class="invalid-feedback">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -119,24 +140,24 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating ">
-                            <select class="form-select" name="genero_contacto" id="genero_contacto" style="text-transform:uppercase;">
-                                <option value="{{old('genero_contacto')}}">--SELECCIONE--</option>
+                            <select class="form-select @error('genero_persona') is-invalid @enderror" name="genero_persona" id="genero_persona" style="text-transform:uppercase;">
+                                <option value="{{old('genero_persona')}}">--SELECCIONE--</option>
                                 <option value="femenino">FEMENINO</option>
                                 <option value="masculino">MASCULINO</option>
                                 <option value="otro">OTRO</option>
                             </select>
                             <label for="floatingInputGrid">GÉNERO:</label>
-                            @error('genero_contacto')
-                                <small>*{{$message}}</small>
+                            @error('genero_persona')
+                                <span class="invalid-feedback">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating text-wrap">
-                            <input type="email" class="form-control" name="correo_contacto" id="correo_contacto" value="{{old('correo_contacto')}}" autofocus style="text-transform:uppercase;">
+                            <input type="email" class="form-control @error('correo_persona') is-invalid @enderror" name="correo_persona" id="correo_persona" value="{{old('correo_persona')}}" autofocus style="text-transform:uppercase;">
                             <label for="">CORREO:</label>
-                            @error('correo_contacto')
-                                <small>*{{$message}}</small>
+                            @error('correo_persona')
+                                <span class="invalid-feedback">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -145,32 +166,14 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating text-wrap">
-                            <input type="numeric" class="form-control"  name="telefono_contacto" id="telefono_contacto" value="{{old('telefono_trabajador')}}" autofocus style="text-transform:uppercase;">
+                            <input type="number" class="form-control @error('telefono_persona') is-invalid @enderror"  name="telefono_persona" id="telefono_persona" value="{{old('telefono_persona')}}" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid">TELÉFONO:</label>
-                            @error('telefono_contacto')
-                                <small>*{{$message}}</small>
+                            @error('telefono_persona')
+                                <span class="invalid-feedback">*{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <select class="form-select" name="profesion_contacto" id="profesion_contacto" style="text-transform:uppercase;">
-                                <option value="{{old('profesion_contacto')}}">--SELECCIONE--</option>
-                                <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
-                                <option value="CALIDAD">CALIDAD</option>
-                                <option value="BIOMÉDICA">BIOMÉDICA</option>
-                                <option value="OFICIAL DE PROTECCIÓN READIOLÓGICA">OFICIAL DE PROTECCIÓN RADIOLÓGICA</option>
-                                <option value="FÍSICA MÉDICA">FÍSICA MÉDICA</option>
-                                <option value="CONTABILIDAD">CONTABILIDAD</option>
-                                <option value="SUBGERENCIA">SUBGERENCIA</option>
-                                <option value="GERENCIA">GERENCIA</option>
-                            </select>
-                            <label for="">PERFIL LABORAL:</label>
-                            @error('profesion_contacto')
-                                <small>*{{$message}}</small>
-                            @enderror
-                        </div>
-                    </div>
+                    <div class="col-md"></div>
                 </div>
                 <BR>
                 <label for="">SELECCIONE SI DESEA RELACIONAR ESTE CONTACTO A UNA EMPRESA Y SUS SEDES</label>
@@ -183,38 +186,39 @@
                                 <option value="">--SELECCIONE--</option>
                                 @foreach($empresas as $emp)
                                     <option value ="{{ $emp->id_empresa }}">{{$emp->nombre_empresa}}</option>
-                                @endforeach
+                                @endforeach 
                             </select>
                             <label for="floatingSelectGrid">EMPRESA:</label>
-                            @error('id_empresas')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            
                         </div>
                     </div>
-                    <div class="col-md" id="div_municipio">
+                    <div class="col-md" >
                         <label for="floatingSelectGrid">SEDE:</label>
                         <div class="spinner_sede text-center" id="spinner_sede">
 
                         </div>
-
                         <div class="form-floating" id="sede_empresa" name="sede_empresa">
                             <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
                                 
                             </select>
-                            @error('id_sedes')
-                            <small>*{{$message}}</small>
-                        @enderror
+                            
                         </div>
                     </div>
                 </div>
                 <br>
-               
-
                 <BR>
                 <label for="">A CONTINUACIÓN, SELECCIONE SI ESTE CONTACTO ES EL LÍDER O ENCARGADO DE LOS SERVICIOS:</label>
+                
                 <div class="row g-2">
                     <div class="col-md"></div>
                     <div class="col-md text-center">
+                        <br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_contcal" name="lider_contcal">
+                            <label class="form-check-label" for="defaultCheck1">
+                                CONTROLES DE CALIDAD
+                            </label>
+                        </div>
                         <div class="form-check">
                             <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava">
                             <label class="form-check-label" for="defaultCheck1">
@@ -248,13 +252,82 @@
     </div>
     <div class="col"></div>
 </div>
+<div class="modal fade" id="nueva_perfilModal" tabindex="-1" aria-labelledby="nueva_perfilModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center" id="nueva_perfilModalLabel">NUEVO PERFIL LABORAL</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @livewire('form-personas-perfiles')
+            
+        </div> 
+    </div>
+</div>
+<div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 text-center" id="nueva_rolModalLabel">NUEVO ROL</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @livewire('form-personas-roles')
+            
+        </div> 
+    </div>
+</div>
 <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('guardar')== 'ok')
+    <script>
+        Swal.fire(
+        'GUARDADO!',
+        'SE HA GUARDADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
 <script type="text/javascript">
+    $(document).ready(function(){
+        $('#form_crear_perfil').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "DESEA GUARDAR ESTE PERFIL LABORAL??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
+    });
+    $(document).ready(function(){
+        $('#form_crear_rol').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "DESEA GUARDAR ESTE ROL??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
+    });
     $(document).ready(function(){
         $('#id_empresas').on('change', function(){
             $('#sede_empresa').fadeOut();
@@ -276,12 +349,24 @@ crossorigin="anonymous">
             }
 
         });
-    })
+    });
+    
 </script>
 
 <script type="text/javascript">
     $(document).ready(() => {
 
+        $('#rol_personas').select2({
+            placeholder:"SELECCIONE LOS ROLES",
+            tags: true,
+            tokenSeparators: ['/',',',',',','," "]
+        });
+        
+        $('#perfil_personas').select2({
+            placeholder:"SELECCIONE LOS PERFILES LABORALES",
+            tags: true,
+            tokenSeparators: ['/',',',',',','," "]
+        });
         $('#id_sedes').select2({
             placeholder:"SELECCIONE LAS SEDES",
             tags: true,

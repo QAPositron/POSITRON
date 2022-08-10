@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Empresa;
+use App\Models\Empresa; 
 use App\Models\Trabajador;
 use App\Models\Trabajadorsede;
 use Livewire\Component;

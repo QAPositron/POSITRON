@@ -433,6 +433,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                 <div class="col"></div> 
                             </div>
                         </div>
+                        
                         <!-- //////////////////// PESTAÑA DE TRABAJADORES //////////////// -->
                         <div class="tab-pane" id="trabajador" role="tabpanel" aria-labelledby="trabajador-tab">
                             <div class="row">
