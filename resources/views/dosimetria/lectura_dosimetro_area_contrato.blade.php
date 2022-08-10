@@ -1,5 +1,5 @@
 @extends('layouts.plantillabase')
-@section('contenido')
+@section('contenido') 
 
 <div class="row">
     <div class="col-md">
@@ -196,6 +196,14 @@
                                                             @endif
                                                             <label class="form-check-label" for="reverseCheck1">5 = Control no utilizado en la evaluación</label> 
                                                         </div>
+                                                        {{-- <div class="form-check">
+                                                            @if($dosiareasig->nota6 == 'TRUE')
+                                                                <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota6" checked disabled>
+                                                            @else
+                                                                <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota6" disabled>
+                                                            @endif
+                                                            <label class="form-check-label" for="reverseCheck1">6 = Dosímetro contaminado</label> 
+                                                        </div> --}}
                                                         <div class="form-check">
                                                             @if($dosiareasig->DNL == 'TRUE')
                                                                 <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dnl"  checked disabled>
@@ -248,6 +256,10 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota5">
                                                             <label class="form-check-label" for="reverseCheck1">5 = Control no utilizado en la evaluación </label> 
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="nota6checked" name="nota6">
+                                                            <label class="form-check-label" for="reverseCheck1">6 = Dosímetro contaminado</label> 
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="TRUE" id="dnl_id" name="dnl">

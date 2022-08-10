@@ -11,8 +11,14 @@ use App\Http\Controllers\HolderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MesescontdosisedeptosController;
 use App\Http\Controllers\NovedadesController;
+use App\Http\Controllers\PerfilesController;
+use App\Http\Controllers\PerfilespersonasController;
 use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\PersonasedesController;
+use App\Http\Controllers\PersonasperfilesController;
+use App\Http\Controllers\PersonasrolesController;
 use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SedesController;
 use App\Http\Controllers\TrabajadoresController;
 use App\Http\Controllers\TrabajadorsController;
@@ -86,7 +92,7 @@ Route::delete('trabajadores/{trabajador}', [TrabajadorsController::class, 'destr
 
 /////////RUTAS PARA EL CRUD DE CONTACTOS///////
 Route::get('contactos/search', [ContactosController::class, 'search'])->name('contactos.search');
-Route::get('contactos/selectsedes', [ContactosController::class, 'selectsedes']);
+/* Route::get('contactos/selectsedes', [ContactosController::class, 'selectsedes']); */
 Route::get('contactos/{contacto}/selectsedes', [ContactosController::class, 'selectsedes']);
 
 Route::get('contactos/create', [ContactosController::class, 'create'])->name('contactos.create');
@@ -95,10 +101,26 @@ Route::get('contactos/{contacto}/edit', [ContactosController::class, 'edit'])->n
 Route::put('contactos/{contacto}', [ContactosController::class, 'update'])->name('contactos.update');
 Route::delete('contactos/{contacto}', [ContactosController::class, 'destroy'])->name('contactos.destroy');
 
+/////////RUTAS PARA EL CRUD DE PERFILES/////
+Route::post('perfiles', [PerfilesController::class, 'save'])->name('perfiles.save');
+
+
+/////////RUTAS PARA EL CRUD DE ROLES/////
+Route::post('roles', [RolesController::class, 'save'])->name('roles.save');
+
 /////////RUTAS PARA EL CRUD DE PERSONAS//////
 Route::get('personas/search', [PersonaController::class, 'search'])->name('personas.search');
-Route::get('personas/search', [PersonaController::class, 'create'])->name('personas.create');
+Route::get('personas/create', [PersonaController::class, 'create'])->name('personas.create');
+Route::get('personas/selectsedes', [PersonaController::class, 'selectsedes']);
+Route::post('personas', [PersonaController::class, 'save'])->name('personas.save');
+Route::get('personas/{persona}/edit', [PersonaController::class, 'edit'])->name('personas.edit');
+Route::get('/personas/{edit}/selectsed', [PersonaController::class, 'selectsedes']);
+Route::put('personas/{persona}', [PersonaController::class, 'update'])->name('personas.update');
+Route::delete('personas/{persona}', [PersonaController::class, 'destroy'])->name('personas.destroy');
 
+Route::delete('personasperfil/{personaperfil}', [PersonasperfilesController::class, 'destroy'])->name('personaperfil.destroy');
+Route::delete('personasrol/{personarol}', [PersonasrolesController::class, 'destroy'])->name('personarol.destroy');
+Route::delete('personasede/{personasede}', [PersonasedesController::class, 'destroy'])->name('personasede.destroy');
 /////////RUTAS PARA EL CRUD DE DOSIMETROS///////
 Route::get('dosimetros/search', [DosimetrosController::class, 'search'])->name('dosimetros.search');
 
@@ -157,6 +179,7 @@ Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/create', [DosimetriaCo
 Route::post('asignadosicontrato', [DosimetriaController::class, 'saveAsignacionDosiContrato'])->name('asignadosicontrato.save');
 
 Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/info', [DosimetriaController::class, 'info'])->name('asignadosicontrato.info');
+
 // para eliminar y editar en ruta info
 /* Route::patch('asignadosicontrato/{idWork}/{contratoId}/{mesnumber}/update', [DosimetriaController::class, 'updateInfo'])->name('asignadosicontrato.updateInfo'); */
 /* Route::delete('asignadosicontrato/{idWork}/{contratoId}/{mesnumber}/delete', [DosimetriaController::class, 'deleteInfo'])->name('asignadosicontrato.deleteInfo'); */
@@ -168,6 +191,8 @@ Route::put('asignadosicontrato/{id}/{mesnumber}/update', [DosimetriaController::
 Route::delete('asignadosicontrato/{id}/destroycontrol', [DosimetriaController::class, 'destroyControlasig'])->name('asigdosicont.destroyInfoControl');
 Route::delete('asignadosicontrato/{id}/destroytrabajador', [DosimetriaController::class, 'destroyTrabajadorasig'])->name('asigdosicont.destroyInfoTrabajador');
 
+///////////----------RUTA PARA AÑADIR OBSERVACIONES DEL MES SOBRE LAS ASIGNACIONES DE DOSIMETROS KATEEE -----///////////////////
+Route::post('asignadosicontrato/saveObservacionMesAsigdosim', [DosimetriaController::class, 'saveObservacionMesAsigdosim'])->name('asigdosicont.saveObservacionMesAsigdosim');
 
 ///////DELETE DOSIMETRO FOR WORK////////
 

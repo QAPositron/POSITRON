@@ -216,6 +216,8 @@ class NovedadesController extends Controller
         $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino;
         $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca;
         $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo;    
+        $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);
+
         $newMesescontdosisedeptos->save();
         return back()->with('guardar', 'ok');
         /* return $request; */
@@ -241,8 +243,8 @@ class NovedadesController extends Controller
                     $newasignacionDosimetroControl->contdosisededepto_id      = $request->contdosisededepto;
                     $newasignacionDosimetroControl->mes_asignacion            = $request->mes_asig_siguiente;
                     $newasignacionDosimetroControl->dosimetro_uso             = 'TRUE';
-                    $newasignacionDosimetroControl->primer_dia_uso            = $request->primerDia_asigdosim;
-                    $newasignacionDosimetroControl->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+                    $newasignacionDosimetroControl->primer_dia_uso            = $request->primerDia_asigdosim2;
+                    $newasignacionDosimetroControl->ultimo_dia_uso            = $request->ultimoDia_asigdosim2;
                     $newasignacionDosimetroControl->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                     $newasignacionDosimetroControl->ocupacion                 = $request->ocupacion_asig[$i];
                     $newasignacionDosimetroControl->energia                   = 'F';
@@ -271,8 +273,8 @@ class NovedadesController extends Controller
                     $newasignacion->contdosisededepto_id         = $request->contdosisededepto;
                     $newasignacion->mes_asignacion               = $request->mes_asig_siguiente;
                     $newasignacion->dosimetro_uso                = 'TRUE';
-                    $newasignacion->primer_dia_uso               = $request->primerDia_asigdosim;
-                    $newasignacion->ultimo_dia_uso               = $request->ultimoDia_asigdosim;
+                    $newasignacion->primer_dia_uso               = $request->primerDia_asigdosim2;
+                    $newasignacion->ultimo_dia_uso               = $request->ultimoDia_asigdosim2;
                     $newasignacion->fecha_dosim_enviado          = $request->fecha_envio_dosim_asignado;
                     $newasignacion->ocupacion                    = $request->ocupacion_asig[$i];
                     $newasignacion->ubicacion                    = $request->id_ubicacion_asig[$i];
@@ -321,8 +323,8 @@ class NovedadesController extends Controller
                 $newasignacionAntiguaControl->contdosisededepto_id      = $request->contdosisededepto;
                 $newasignacionAntiguaControl->mes_asignacion            = $request->mes_asig_siguiente;
                 $newasignacionAntiguaControl->dosimetro_uso             = 'TRUE';
-                $newasignacionAntiguaControl->primer_dia_uso            = $request->primerDia_asigdosim;
-                $newasignacionAntiguaControl->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+                $newasignacionAntiguaControl->primer_dia_uso            = $request->primerDia_asigdosim2;
+                $newasignacionAntiguaControl->ultimo_dia_uso            = $request->ultimoDia_asigdosim2;
                 $newasignacionAntiguaControl->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $newasignacionAntiguaControl->ocupacion                 = $request->ocupacion_asigdosimControl[$i];
                 $newasignacionAntiguaControl->energia                   = 'F';
@@ -353,8 +355,8 @@ class NovedadesController extends Controller
             $newasignacionAntiguaNull->contdosisededepto_id      = $request->contdosisededepto;
             $newasignacionAntiguaNull->mes_asignacion            = $request->mes_asig_siguiente;
             $newasignacionAntiguaNull->dosimetro_uso             = 'TRUE';
-            $newasignacionAntiguaNull->primer_dia_uso            = $request->primerDia_asigdosim;
-            $newasignacionAntiguaNull->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+            $newasignacionAntiguaNull->primer_dia_uso            = $request->primerDia_asigdosim2;
+            $newasignacionAntiguaNull->ultimo_dia_uso            = $request->ultimoDia_asigdosim2;
             $newasignacionAntiguaNull->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
             $newasignacionAntiguaNull->ocupacion                 = $request->id_ocupacion_asigdosim_null[$i];
             $newasignacionAntiguaNull->ubicacion                 = $request->ubicacion_asigdosim_null[$i];
@@ -387,8 +389,8 @@ class NovedadesController extends Controller
             $newasignacionAntigua->contdosisededepto_id      = $request->contdosisededepto;
             $newasignacionAntigua->mes_asignacion            = $request->mes_asig_siguiente;
             $newasignacionAntigua->dosimetro_uso             = 'TRUE';
-            $newasignacionAntigua->primer_dia_uso            = $request->primerDia_asigdosim;
-            $newasignacionAntigua->ultimo_dia_uso            = $request->ultimoDia_asigdosim;
+            $newasignacionAntigua->primer_dia_uso            = $request->primerDia_asigdosim2;
+            $newasignacionAntigua->ultimo_dia_uso            = $request->ultimoDia_asigdosim2;
             $newasignacionAntigua->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
             $newasignacionAntigua->ocupacion                 = $request->id_ocupacion_asigdosim[$i];
             $newasignacionAntigua->ubicacion                 = $request->ubicacion_asigdosim[$i];
@@ -429,7 +431,8 @@ class NovedadesController extends Controller
         $newMesescontdosisedeptos->dosi_caso            = $dosi_caso;
         $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino;
         $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca;
-        $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo;    
+        $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo;  
+        $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);  
         $newMesescontdosisedeptos->save();
 
         return back()->with('guardar', 'ok');

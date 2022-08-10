@@ -15,7 +15,7 @@ class ContactosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search()
+    public function search() 
     {
         $contactos = Contacto::all();
         $contactosede = Contacto::leftjoin('contactosedes', 'contactos.id_contacto', '=', 'contactosedes.contacto_id')
@@ -109,7 +109,7 @@ class ContactosController extends Controller
 
     public function update(Request $request, Contacto $contacto){
         /* return $request; */
-         $request->validate([
+        $request->validate([
             
             'primer_nombre_contacto'      => 'required',              
             'primer_apellido_contacto'    => 'required',

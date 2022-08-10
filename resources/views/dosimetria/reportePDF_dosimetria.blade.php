@@ -82,7 +82,7 @@
     </tr>
 </table>
 
-<table style="position:absolute; top:0px; left:710px; border-collapse:collapse; font-size: 9px;" cellpadding="4">
+<table style="position:absolute; top:0px; left:713px; border-collapse:collapse; font-size: 9px;" cellpadding="4">
     <tr>
         <td style="border:0.1px solid black; text-align: right;">No. de Cuenta</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
@@ -111,7 +111,7 @@
             @endforeach
         </td>
         <td rowspan="6" style="width: 130px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="120" style="top:20px; "> 
+            <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="127" style="top:25px;"> 
         </td>
     </tr>
     <tr>
@@ -159,7 +159,7 @@
         @endforeach 
         </td>
         <td colspan="2" rowspan="3" style="width: 94px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="48" style="top:68px; ">
+            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="48" style="top:70px; ">
         </td>
     </tr>
     <tr>
@@ -188,12 +188,12 @@
 <!-- ////////////////////FIN ENCABEZADO/////////////// -->
 
 <!-- ////////////////////CUERPO/////////////// -->
-<table style="top:130px; border-collapse:collapse;" cellspacing="4" cellpadding="0">
+<table style="top:140px; border-collapse:collapse;" cellspacing="4" cellpadding="0" class="tablaPrincipal">
     <thead style="background-color:#DADADA;">
         <tr align="center">
             <th rowspan="2" style="width:60px; border:1px solid black;">Código Dosímetro </th>
-            <th rowspan="2" style="width:135px; padding:5px; border:1px solid black;">Apellido(s)</th>
-            <th rowspan="2" style="width:135px; padding:5px; border:1px solid black;">Nombre(s)</th>
+            <th rowspan="2" style="width:125px; padding:5px; border:1px solid black;">Apellido(s)</th>
+            <th rowspan="2" style="width:125px; padding:5px; border:1px solid black;">Nombre(s)</th>
             <th rowspan="2" style="width:5px; border:1px solid black;"><p class="anchoCell">Género</p></th>
             <th rowspan="2" style="width:5px; border:1px solid black;"><p class="anchoCell">Ocupación</p></th>
             <th rowspan="2" style="width:60px; padding:5px; border:1px solid black;">Documento de Identidad</th>
@@ -205,20 +205,20 @@
             <th colspan="3" style="width:120px; padding:5px; border:1px solid black;">Dosis del Período<br>(mSv)</th>
             <th colspan="3" style="width:120px; padding:5px; border:1px solid black;">Dosis acumulada 12 meses anteriores (mSv)</th>
             <th colspan="3" style="width:120px; padding:5px; border:1px solid black;">Dosis acumulada desde ingreso al servicio (mSv)</th>
-            <th rowspan="2" style="width:30px; border:1px solid black;">Nota</th>
+            <th rowspan="2" style="width:50px; border:1px solid black;">Nota</th>
         </tr>
         <tr align="center">
-            <th style="padding:5px; border:1px solid black;">Primer Día</th>
-            <th style="padding:5px; border:1px solid black;">Último Día</th>
-            <th style="padding:5px; border:1px solid black;">Hp(10)</th>
-            <th style="padding:5px; border:1px solid black;">Hp(0.07)</th>
-            <th style="padding:5px; border:1px solid black;">Hp(3)</th>
-            <th style="padding:5px; border:1px solid black;">Hp(10)</th>
-            <th style="padding:5px; border:1px solid black;">Hp(0.07)</th>
-            <th style="padding:5px; border:1px solid black;">Hp(3)</th>
-            <th style="padding:5px; border:1px solid black;">Hp(10)</th>
-            <th style="padding:5px; border:1px solid black;">Hp(0.07)</th>
-            <th style="padding:5px; border:1px solid black;">Hp(3)</th>
+            <th style="width:50px; padding:5px; border:1px solid black;">Primer Día</th>
+            <th style="width:50px; padding:5px; border:1px solid black;">Último Día</th>
+            <th style="width:30px; padding:5px; border:1px solid black;">Hp(10)</th>
+            <th style="width:30px; padding:5px; border:1px solid black;">Hp(0.07)</th>
+            <th style="width:30px; padding:5px; border:1px solid black;">Hp(3)</th>
+            <th style="width:30px; padding:5px; border:1px solid black;">Hp(10)</th>
+            <th style="width:30px; padding:5px; border:1px solid black;">Hp(0.07)</th>
+            <th style="width:30px; padding:5px; border:1px solid black;">Hp(3)</th>
+            <th style="width:30px; padding:5px; border:1px solid black;">Hp(10)</th>
+            <th style="width:30px; padding:5px; border:1px solid black;">Hp(0.07)</th>
+            <th style="width:30px; padding:5px; border:1px solid black;">Hp(3)</th>
         </tr>
     </thead>
     <tbody style="color:#2646FA;">
@@ -438,7 +438,7 @@
                     <td  style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
                     
                             
-                        @for($i=1; $i<=5; $i++)
+                        @for($i=1; $i<=6; $i++)
                             @if($dositrabj->{"nota$i"} == 'TRUE')
                                 {{$i}})
                             @endif 
@@ -513,7 +513,7 @@
 
                     <!-- //////////NOTAS//////// -->
                     <td  style="padding-top:5px; padding-bottom:5px; border-right:1px solid black;">
-                        @for($i=1; $i<=5; $i++)
+                        @for($i=1; $i<=6; $i++)
                             @if($dosicontrol->{"nota$i"} == 'TRUE')
                                 {{$i}})
                             @endif 
@@ -733,7 +733,7 @@
                         
                         <!-- //////////NOTAS//////// -->
                         <td  style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
-                            @for($i=1; $i<=5; $i++)
+                            @for($i=1; $i<=6; $i++)
                                 @if($dositrabj->{"nota$i"} == 'TRUE')
                                     {{$i}})
                                 @endif 
@@ -896,9 +896,29 @@
             @if(empty($dosicontrolasig))
                 -   Se analizaron {{count($trabajdosiasig)}} dosímetros personales y {{count($dosicontrolasig)}} dosímetros de control.
             @else
-                -   Se analizaron {{count($trabajdosiasig)}} dosímetros personales.
+                -   Se analizaro    n {{count($trabajdosiasig)}} dosímetros personales.
             @endif
-            
+            <br>
+            @if(empty($mesescantdosi))
+                @foreach($mesescantdosi as $mesesobs)
+                    - {{$mesesobs->nota_cambiodosim}} <br>
+                @endforeach
+            @endif
+            @foreach($trabajdosiasig as $dositrabj)
+                @if($dositrabj->nota3 == 'TRUE')
+                    - Se recomienda revisar el límite de las dosis permitidas.
+                    <br>
+                @endif
+                @if($dositrabj->nota5 == 'TRUE')
+                    - Control no utilizado en la evaluación.
+                    <br>
+                @endif
+                @if($dositrabj->nota6 == 'TRUE')
+                    - Dosímetro contaminado con material radioactivo, se recomienda hacer investigación.
+                    <br>
+                @endif
+                @break
+            @endforeach
            
     </p>
 </div>

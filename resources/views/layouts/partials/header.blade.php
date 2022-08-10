@@ -23,7 +23,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">CONTROLES C.</a>
+            <a class="nav-link" href="{{route('personas.search')}}">PERSONAS</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{request()->routeIs('contacto.*') ? 'active' : ''}}" href="{{route('contactos.search')}}">CONTACTOS</a>

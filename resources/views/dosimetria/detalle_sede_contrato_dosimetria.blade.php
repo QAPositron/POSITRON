@@ -23,7 +23,7 @@
 
     <div class="row">
         <div class="col"></div>
-        <div class="col-8">
+        <div class="col-6">
             <div class="table table-responsive p-4">
                 <table class="table table-bordered ">
                     <thead class="table-active">
@@ -32,9 +32,9 @@
                         </tr>
                         <tr>
                             <th class="text-center align-middle" style='width: 9.90%'>NÚMERO</th>
-                            <th class="text-center align-middle" style='width: 22.90%' >MESES</th>
-                            <th class="text-center align-middle" style='width: 18.90%' >TRABAJADORES ASIGNADOS</th>
-                            <th class="text-center align-middle" style='width: 18.90%' >DOSÍMETROS DISPONIBLES</th>
+                            <th class="text-center align-middle" style='width: 40.50%' >MESES</th>
+                            {{-- <th class="text-center align-middle" style='width: 18.90%' >TRABAJADORES ASIGNADOS</th>
+                            <th class="text-center align-middle" style='width: 18.90%' >DOSÍMETROS DISPONIBLES</th> --}}
                             <th class="text-center align-middle">ACCIONES</th>
                         </tr>
                     </thead>
@@ -61,7 +61,7 @@
                                         </a>
                                     @endif
                                 </th>
-                                <td class="text-center align-middle">
+                                {{-- <td class="text-center align-middle">
                                     @php
                                         $lenghtData = 0;
                                         foreach($trabjasigcontra as $trab){
@@ -71,8 +71,8 @@
                                         }
                                         echo "$lenghtData";
                                     @endphp
-                                </td>
-                                <td class="text-center align-middle">
+                                </td> --}}
+                                {{-- <td class="text-center align-middle">
                                     @php
                                         $lenghtData = 0;
                                         if($mescontdosisededepto->mes_asignacion == $i+1 || $mescontdosisededepto->mes_asignacion <= $i+1){
@@ -89,16 +89,16 @@
                                         $resul = $suma - $lenghtData;
                                         echo "$resul";
                                     @endphp
-                                </td>
-                                <td class="align-middle">
-                                    <div class="row">
+                                </td> --}}
+                                <td class='align-middle'>
+                                    <div class="row"> 
                                         @if($mesTotal[$i]>0)
                                             @if(  $i == '0' )
                                                 <div class="col-md text-center">
                                                     <a onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn  btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                                                        </svg> ASIGNAR M1
+                                                        </svg> <br> ASIGNAR
                                                     </a>
                                                 </div> 
                                                 <div class="col-md text-center">
@@ -106,7 +106,7 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-                                                        </svg> INFORMES
+                                                        </svg> <br> INFORMES
                                                     </a>
                                                 </div> 
                                             @else
@@ -114,7 +114,7 @@
                                                     <a onclick="return false" style="background-color: #a0aec0"  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                                                        </svg> ASIGNAR MN
+                                                        </svg> <br> ASIGNAR
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
@@ -122,17 +122,17 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-                                                        </svg> INFORMES
+                                                        </svg> <br> INFORMES
                                                     </a>
                                                 </div>
                                             @endif
                                         @else
                                             @if(  $i == '0' )
                                                 <div class="col-md text-center">
-                                                    <a  href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn btn-danger btn-sm">
+                                                    <a  href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn colorQA btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                                                        </svg> ASIGNAR M1
+                                                        </svg> <br> ASIGNAR
                                                     </a>
                                                 </div> 
                                                 <div class="col-md text-center">
@@ -140,15 +140,15 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-                                                        </svg> INFORMES
+                                                        </svg> <br> INFORMES
                                                     </a>
                                                 </div> 
                                             @else
                                                 <div class="col-md text-center">
-                                                    <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn btn-warning btn-sm">
+                                                    <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn colorQA btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                                                        </svg> ASIGNAR MN
+                                                        </svg> <br> ASIGNAR
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
@@ -156,7 +156,7 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-                                                        </svg> INFORMES
+                                                        </svg> <br> INFORMES
                                                     </a>
                                                 </div>
                                             @endif

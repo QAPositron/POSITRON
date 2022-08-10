@@ -72,6 +72,7 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table->string('nota3', 10)->nullable();
             $table->string('nota4', 10)->nullable();
             $table->string('nota5', 10)->nullable();
+            $table->string('nota6', 10)->nullable();
             $table->string('DNL', 10)->nullable();
             $table->string('EU', 10)->nullable();
             $table->string('DPL', 10)->nullable();

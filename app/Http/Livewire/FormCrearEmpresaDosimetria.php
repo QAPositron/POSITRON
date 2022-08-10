@@ -19,7 +19,7 @@ class FormCrearEmpresaDosimetria extends Component
     protected $rules = [
 
         'empresa' => 'required|unique:App\Models\ContratosDosimetriaEmpresa,empresa_id,',
-        
+         
     ];
 
     protected $messages =[

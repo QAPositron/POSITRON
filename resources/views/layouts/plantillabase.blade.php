@@ -80,6 +80,9 @@
         border-color: red;
         box-shadow: inset 0 1px 1px rgba(194, 20, 34, 0.075), 0 0 8px rgb(245, 6, 6);
       }
+      .trdosisroja{
+        color: red;
+      }
       .form-input-error-activo{
         display: block;
         color: red;
