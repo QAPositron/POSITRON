@@ -29,37 +29,36 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md d-flex align-items-center">
+                    <div class="col-md d-flex align-items-center ">
                         <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_perfilModal" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
                         </button>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <label for="">ROL:</label>
                         <div class="form-floating">
                             <select class="form-select" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
                                 @foreach($roles as $rol)
                                     <option value ="{{$rol->id_rol}}">{{$rol->nombre_rol}}</option>
                                 @endforeach 
-                                {{-- <option value="ESTUDIANTE">ESTUDIANTE</option>
-                                <option value="CONTACTO">CONTACTO</option>
-                                <option value="TOE">TRABAJADOR OCUPACIONALMENTE EXPUESTO (TOE)</option>
-                                <option value="OPR">OFICIAL DE PROTECCIÓN RADIOLÓGICA (OPR)</option> --}}
+                                
                             </select>
                             @error('rol_personas')
                                 <small>*{{$message}}</small>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md d-flex align-items-center">
+                    {{-- /////////TEMPORALMENTE DESHABILITADO POR INDECISION////////////// AHORA SOLO HAY 4 ROLES FIJOS////// --}}
+                    {{-- <div class="col-md d-flex align-items-center">
                         <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_rolModal" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
                         </button>
-                    </div>
+                    </div> --}}
+                    {{-- ///////////////////////////////////////////////////////////////////// --}}
                 </div>
             
                 <br>
@@ -242,7 +241,7 @@
                         <input class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar" value="GUARDAR">
                     </div>
                     <div class="col d-grid gap-2">
-                        <a href="{{route('contactos.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                        <a href="{{route('personas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                     </div>
                     <div class="col"></div>
                 </div>
@@ -264,7 +263,8 @@
         </div> 
     </div>
 </div>
-<div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
+{{-- //////////////// MODAL DESHABILITADO YA LOS ROLES SON FIJOS ////////////////////////// --}}
+{{-- <div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -275,7 +275,7 @@
             
         </div> 
     </div>
-</div>
+</div> --}}
 <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -379,7 +379,7 @@ crossorigin="anonymous">
         $('#form_create_contacto').submit(function(e){
             e.preventDefault();
             Swal.fire({
-                text: "DESEA GUARDAR ESTE CONTACTO??",
+                text: "DESEA GUARDAR ESTA PERSONA??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

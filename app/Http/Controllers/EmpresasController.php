@@ -9,6 +9,9 @@ use App\Models\Contacto;
 use App\Models\Contactosede;
 use App\Models\Departamentosede;
 use App\Models\Empresa;
+use App\Models\Persona;
+use App\Models\Personasperfiles;
+use App\Models\Personasroles;
 use App\Models\Sede;
 use App\Models\Trabajador;
 use Illuminate\Http\Request;
@@ -140,23 +143,53 @@ class EmpresasController extends Controller
         ->where('empresas_id', '=', $empresa->id_empresa)
         ->orderBy('nombre_departamento', 'ASC')
         ->get();
-        $trabajador = Trabajador::join('trabajadorsedes','trabajadors.id_trabajador', '=', 'trabajadorsedes.trabajador_id')
+        /* $trabajador = Trabajador::join('trabajadorsedes','trabajadors.id_trabajador', '=', 'trabajadorsedes.trabajador_id')
         ->join('sedes','trabajadorsedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('empresas.id_empresa', '=', $empresa->id_empresa)
         ->orderBy('sedes.id_sede')
         ->select("*")
-        ->get();
+        ->get(); */
+        /* SELECT * FROM `personas` INNER join personasroles ON personas.id_persona = personasroles.persona_id 
+        INNER JOIN roles ON personasroles.rol_id = roles.id_rol 
+        INNER JOIN personasedes ON personas.id_persona = personasedes.persona_id 
+        INNER JOIN sedes ON personasedes.sede_id = sedes.id_sede
+         where roles.nombre_rol = 'TOE' OR roles.nombre_rol = 'OPR' AND sedes.empresas_id = 1; */
+        $trabajadorDosim = Persona::join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
+        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
+        ->join('sedes', 'personasedes.sede_id', 'sedes.id_sede')
+        ->where('sedes.empresas_id', '=', $empresa->id_empresa)
+        ->where(function($query) {
+            $query->orWhere('roles.nombre_rol', 'TOE')
+                  ->orWhere('roles.nombre_rol', 'OPR');
+        })->orderBy('sedes.id_sede')->get();
+        $personasperfiles = Personasperfiles::all();
+        $personasroles = Personasroles::all();
+        $estudianteAva = Persona::join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
+        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
+        ->join('sedes', 'personasedes.sede_id', 'sedes.id_sede')
+        ->where('sedes.empresas_id', '=', $empresa->id_empresa)
+        ->where('roles.nombre_rol',  '=', 'ESTUDIANTE')
+        ->orderBy('sedes.id_sede')->get(); 
         /* SELECT * FROM `contactos` INNER JOIN contactosedes ON contactos.id_contacto = contactosedes.id_contactosede INNER JOIN sedes ON contactosedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa ORDER BY sedes.id_sede; */
-        $contacto = Contactosede::join('contactos', 'contactosedes.contacto_id', '=', 'contactos.id_contacto')
+       /*  $contacto = Contactosede::join('contactos', 'contactosedes.contacto_id', '=', 'contactos.id_contacto')
         ->join('sedes', 'contactosedes.sede_id', '=', 'sedes.id_sede') 
         ->join('empresas','sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('empresas.id_empresa', '=', $empresa->id_empresa)
         ->orderBy('sedes.id_sede')
         ->select("*")
-        ->get();
-        /* return $areadeptos; */
-        return view('empresa.info_empresa', compact('empresa' ,'sede', 'trabajador', 'contacto', 'departamentos', 'areadeptos'));
+        ->get(); */
+        $contacto = Persona::join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
+        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
+        ->join('sedes', 'personasedes.sede_id', 'sedes.id_sede')
+        ->where('sedes.empresas_id', '=', $empresa->id_empresa)
+        ->where('roles.nombre_rol',  '=', 'CONTACTO')
+        ->orderBy('sedes.id_sede')->get(); 
+        /* return $trabajadorDosim; */
+        return view('empresa.info_empresa', compact('empresa' ,'sede', 'trabajadorDosim', 'personasperfiles', 'personasroles', 'estudianteAva', 'contacto', 'departamentos', 'areadeptos'));
     }
    
 }

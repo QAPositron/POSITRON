@@ -21,6 +21,12 @@ class SedeSeeder extends Seeder
             'municipiocol_id' => '1',
             'direccion_sede' => 'CALLE 300'
         ]);
-            
+        Sede::insert([
+
+            'empresas_id' => '2',
+            'nombre_sede' => 'SAN JUAN',
+            'municipiocol_id' => '50',
+            'direccion_sede' => 'CALLE 321'
+        ]);
     }
 }

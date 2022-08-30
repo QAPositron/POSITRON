@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Personasedes extends Model
 {
-    use HasFactory;
+    use HasFactory; 
     protected $primaryKey = 'id_personasede';
     
     public function persona(){

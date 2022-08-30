@@ -21,4 +21,8 @@ class Persona extends Model
     public function personasedes(){
         return $this->hasMany(Personasedes::class, 'id_personasede');
     }
+     //relacion uno a muchs con trabajadordosimetro
+     public function trabajadordosimetro(){
+        return $this->hasMany(Trabajadordosimetro::class, 'id_trabajadordosimetro');
+    }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.plantillabase')
-@section('contenido')
+@section('contenido') 
     <div class="row">
         <div class="col"></div>
         <div class="col"></div>

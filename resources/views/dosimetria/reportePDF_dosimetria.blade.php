@@ -71,7 +71,7 @@
         <td>Email:dosimetria.qapositron@gmail.com</td>
     </tr>
     <tr>
-        <td style="padding-bottom:22px;">Sitio web: www.qapositron.com</td>
+        <td style="padding-bottom:12px;">Sitio web: www.qapositron.com</td>
     </tr>
     <tr>
         <th style="font-size: 11px; border: solid 0.4px #000; padding:5px;">
@@ -111,7 +111,7 @@
             @endforeach
         </td>
         <td rowspan="6" style="width: 130px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="127" style="top:25px;"> 
+            <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="127" style="top:15px;"> 
         </td>
     </tr>
     <tr>
@@ -146,7 +146,7 @@
         <td style="border:0.1px solid black; text-align: right;"> NIT Entidad Usuaria</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
             @foreach($contratoDosi as $cont)
-                {{$cont->num_iden_empresa}}
+                {{$cont->num_iden_empresa}} 
             @endforeach 
         </td>
         <td colspan="2" rowspan="1" style="width: 50px; border:0.1px solid black;" align="center">Vo.Bo. / <b>DIEGO F. APONTE CASTAÑEDA</b> </td>
@@ -159,14 +159,14 @@
         @endforeach 
         </td>
         <td colspan="2" rowspan="3" style="width: 94px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="48" style="top:70px; ">
+            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="48" style="top:65px; ">
         </td>
     </tr>
     <tr>
         <td style="border:0.1px solid black; text-align: right;">Persona Contacto</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
-            @foreach($contratoDosi as $cont)
-                {{$cont->primer_nombre_contacto}} {{$cont->primer_apellido_contacto}} {{$cont->segundo_apellido_contacto}}
+            @foreach($personaEncargada as $per)
+                {{$per->primer_nombre_persona}} {{$per->primer_apellido_persona}} {{$per->segundo_apellido_persona}}
             @endforeach
         </td>
        
@@ -174,8 +174,8 @@
     <tr>
         <td style="border:0.1px solid black; text-align: right;">Cargo del contacto</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
-            @foreach($contratoDosi as $cont)
-                {{$cont->profesion_contacto}}
+            @foreach($personaEncargada as $per)
+                {{$per->nombre_perfil}}
             @endforeach
         </td>
     </tr>
@@ -273,21 +273,21 @@
             @foreach($trabajdosiasig as $dositrabj)
                 <tr>
                     <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-left:1px solid black; border-right:1px solid black;" align="center">{{$dositrabj->dosimetro->codigo_dosimeter}}</td>
-                    <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->trabajador_id == NULL) @else {{$dositrabj->trabajador->primer_apellido_trabajador}} {{$dositrabj->trabajador->segundo_apellido_trabajador}} @endif</td>
-                    <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->trabajador_id == NULL) @else {{$dositrabj->trabajador->primer_nombre_trabajador}} {{$dositrabj->trabajador->segundo_nombre_trabajador}} @endif</td>
-                    <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->trabajador_id == NULL) @else {{$dositrabj->trabajador->genero_trabajador}} @endif</td>
+                    <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->primer_apellido_persona}} {{$dositrabj->persona->segundo_apellido_persona}} @endif</td>
+                    <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->primer_nombre_persona}} {{$dositrabj->persona->segundo_nombre_persona}} @endif</td>
+                    <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->genero_persona == 'FEMENINO' ? 'F' : 'M'}}@endif</td>
                     <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">{{$dositrabj->ocupacion}}</td>
-                    <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->trabajador_id == NULL) @else {{$dositrabj->trabajador->cedula_trabajador}} @endif</td>
+                    <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->cedula_persona}} @endif</td>
                     <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
                         @foreach($fechainiciodositrabaj as $fec)
                             @php
                                 $ckek = 0;
                             @endphp
-                            @if($dositrabj->trabajador_id == $fec->trabajador_id && $chek != $fec->trabajador_id)
+                            @if($dositrabj->persona_id == $fec->persona_id && $chek != $fec->persona_id)
                                 @php
                                 
                                     $datefix = date('d-m-Y',strtotime($fec->primer_dia_uso));
-                                    $chek = $fec->trabajador_id;
+                                    $chek = $fec->persona_id;
                                     echo $datefix;
                                 @endphp
                                 {{-- {{$datefix}} --}}
@@ -388,7 +388,7 @@
                         @endphp
                         @foreach($trabajadoresaisgxmeses as $mesesdositrab)
                             @for($i=0; $i< count($mesesdositrab); $i++)
-                                @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                @if($dositrabj->persona->id_persona == $mesesdositrab[$i]->persona_id)
                                     {{-- {{$mesesdositrab[$i]->Hp10_calc_dose}} --}}
                                     @php
                                         $sumaHp10calcdose += $mesesdositrab[$i]->Hp10_calc_dose;
@@ -404,7 +404,7 @@
                         @endphp
                         @foreach($trabajadoresaisgxmeses as $mesesdositrab)
                             @for($i=0; $i< count($mesesdositrab); $i++)
-                                @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                @if($dositrabj->persona->id_persona == $mesesdositrab[$i]->persona_id)
                                     @php
                                         $sumaHp007calcdose += $mesesdositrab[$i]->Hp007_calc_dose;
                                     @endphp
@@ -419,7 +419,7 @@
                         @endphp
                         @foreach($trabajadoresaisgxmeses as $mesesdositrab)
                             @for($i=0; $i< count($mesesdositrab); $i++)
-                                @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                @if($dositrabj->persona->id_persona == $mesesdositrab[$i]->persona_id)
                                     @php
                                         $sumaHp3calcdose += $mesesdositrab[$i]->Hp3_calc_dose;
                                     @endphp
@@ -570,21 +570,21 @@
                 @foreach($trabajdosiasig as $dositrabj)
                     <tr>
                         <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-left:1px solid black; border-right:1px solid black;" align="center">{{$dositrabj->dosimetro->codigo_dosimeter}}</td>
-                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->trabajador_id == NULL) @else {{$dositrabj->trabajador->primer_apellido_trabajador}} {{$dositrabj->trabajador->segundo_apellido_trabajador}} @endif</td>
-                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->trabajador_id == NULL) @else {{$dositrabj->trabajador->primer_nombre_trabajador}} {{$dositrabj->trabajador->segundo_nombre_trabajador}} @endif</td>
-                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->trabajador_id == NULL) @else {{$dositrabj->trabajador->genero_trabajador}} @endif</td>
+                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->primer_apellido_persona}} {{$dositrabj->persona->segundo_apellido_persona}} @endif</td>
+                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->primer_nombre_persona}} {{$dositrabj->persona->segundo_nombre_persona}} @endif</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->genero_persona == 'FEMENINO' ? 'F' : 'M'}} @endif</td>
                         <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">{{$dositrabj->ocupacion}}</td>
-                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->trabajador_id == NULL) @else {{$dositrabj->trabajador->cedula_trabajador}} @endif</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->cedula_persona}} @endif</td>
                         <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
                             @foreach($fechainiciodositrabaj as $fec)
                                 @php
                                     $ckek = 0;
                                 @endphp
-                                @if($dositrabj->trabajador_id == $fec->trabajador_id && $chek != $fec->trabajador_id)
+                                @if($dositrabj->persona_id == $fec->persona_id && $chek != $fec->persona_id)
                                     @php
                                     
                                         $datefix = date('d-m-Y',strtotime($fec->primer_dia_uso));
-                                        $chek = $fec->trabajador_id;
+                                        $chek = $fec->persona_id;
                                         echo $datefix;
                                     @endphp
                                     {{-- {{$datefix}} --}}
@@ -685,7 +685,7 @@
                             @endphp
                             @foreach($trabajadoresaisgxmeses as $mesesdositrab)
                                 @for($i=0; $i< count($mesesdositrab); $i++)
-                                    @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                    @if($dositrabj->persona->id_persona == $mesesdositrab[$i]->persona_id)
                                         {{-- {{$mesesdositrab[$i]->Hp10_calc_dose}} --}}
                                         @php
                                             $sumaHp10calcdose += $mesesdositrab[$i]->Hp10_calc_dose;
@@ -701,7 +701,7 @@
                             @endphp
                             @foreach($trabajadoresaisgxmeses as $mesesdositrab)
                                 @for($i=0; $i< count($mesesdositrab); $i++)
-                                    @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                    @if($dositrabj->persona->id_persona == $mesesdositrab[$i]->persona_id)
                                         @php
                                             $sumaHp007calcdose += $mesesdositrab[$i]->Hp007_calc_dose;
                                         @endphp
@@ -716,7 +716,7 @@
                             @endphp
                             @foreach($trabajadoresaisgxmeses as $mesesdositrab)
                                 @for($i=0; $i< count($mesesdositrab); $i++)
-                                    @if($dositrabj->trabajador->id_trabajador == $mesesdositrab[$i]->trabajador_id)
+                                    @if($dositrabj->persona->id_persona == $mesesdositrab[$i]->persona_id)
                                         @php
                                             $sumaHp3calcdose += $mesesdositrab[$i]->Hp3_calc_dose;
                                         @endphp
@@ -893,10 +893,10 @@
                 @break
             @endforeach
             <br>
-            @if(empty($dosicontrolasig))
+            @if(!empty($dosicontrolasig))
                 -   Se analizaron {{count($trabajdosiasig)}} dosímetros personales y {{count($dosicontrolasig)}} dosímetros de control.
             @else
-                -   Se analizaro    n {{count($trabajdosiasig)}} dosímetros personales.
+                -   Se analizaron {{count($trabajdosiasig)}} dosímetros personales.
             @endif
             <br>
             @if(empty($mesescantdosi))

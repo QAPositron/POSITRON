@@ -17,145 +17,8 @@
 <br>
 <h4 class="text-center">CONTRATO No. {{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->codigo_contrato}} <br> <h5 class="text-center">ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}}</h5></h4>
 <br>
-{{--<div class="row g-2 mx-3">
-    <div class="col-md">
-        <div class="table table-responsive">
-             <table class="table table-sm table-bordered">
-                <thead>
 
-                    <tr class="text-center">
-                        <th>DOSíMETROS</th>
-                        <th>CONTRATADOS</th>
-                        <th>ASIGNADOS</th>
-                        <th>PENDIENTES</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>C. ENTERO:</th>
-                        <td class="text-center">{{$contdosisededepto->dosi_cuerpo_entero}}</td>
-                        <td class="text-center">{{$DosiCuerpoAsignados}}</td>
-                        <td class="text-center">{{$contdosisededepto->dosi_cuerpo_entero - $DosiCuerpoAsignados}}</td>
-                    </tr>
-                    <tr>
-                        <th>AMBIENTE:</th>
-                        <td class="text-center">{{$contdosisededepto->dosi_ambiental}}</td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                    </tr>
-                    <tr>
-                        <th>CONTROL:</th>
-                        <td class="text-center">{{$contdosisededepto->dosi_control}}</td>
-                        <td class="text-center">{{$DosiControlAsignados}}</td>
-                        <td class="text-center">{{$contdosisededepto->dosi_control - $DosiControlAsignados}}</td>
-                    </tr>
-                    <tr>
-                        <th>EzCLIP:</th>
-                        <td class="text-center">{{$contdosisededepto->dosi_ezclip}}</td>
-                        <td class="text-center">{{$DosiEzclipAsignados}}</td>
-                        <td class="text-center">{{$contdosisededepto->dosi_ezclip - $DosiEzclipAsignados}}</td>
-                    </tr>
-                </tbody>
-            </table> 
-        </div>
-    </div>
-</div>--}}
 
-{{-- -------------ALERTAS QUE INDICAN SI FALTAN DOSIMETROS POR ASIGNAR--------------}}
-{{-- <div class="row">
-    <div class="col-md"></div>
-    <div class="col-md-5">
-        @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
-            @if($mescontdosisededepto->dosi_torax - $DosiToraxAsignados != 0)
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$mescontdosisededepto->dosi_torax - $DosiToraxAsignados}} DOSÍMETROS DE UBICACIÓN TÓRAX!!</b>
-                </div>
-            @endif
-            @if($mescontdosisededepto->dosi_control - $DosiControlAsignados != 0)
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$mescontdosisededepto->dosi_control - $DosiControlAsignados}} DOSÍMETROS DE UBICACIÓN CONTROL!!</b>
-                </div>
-            @endif
-            @if($mescontdosisededepto->dosi_cristalino - $DosiCristalinoAsignados != 0)
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$mescontdosisededepto->dosi_cristalino - $DosiCristalinoAsignados}} DOSÍMETROS DE UBICACIÓN CRISTALINO!!</b>
-                </div>
-            @endif
-            @if($mescontdosisededepto->dosi_muñeca - $DosiMuñecaAsignados != 0)
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$mescontdosisededepto->dosi_muñeca - $DosiMuñecaAsignados}} DOSÍMETROS DE UBICACIÓN MUÑECA!!</b>
-                </div>
-            @endif
-            @if($mescontdosisededepto->dosi_dedo - $DosiDedoAsignados != 0)
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$mescontdosisededepto->dosi_dedo - $DosiDedoAsignados}} DOSÍMETROS DE UBICACIÓN DEDO!!</b>
-                </div>
-            @endif
-        @else
-            @if($contdosisededepto->dosi_torax - $DosiToraxAsignados != 0)
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$contdosisededepto->dosi_torax - $DosiToraxAsignados}} DOSÍMETROS DE UBICACIÓN TÓRAX!!</b>
-                </div>
-            @endif
-            @if($contdosisededepto->dosi_control - $DosiControlAsignados != 0)
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$contdosisededepto->dosi_control - $DosiControlAsignados}} DOSÍMETROS DE UBICACIÓN CONTROL!!</b>
-                </div>
-            @endif
-            @if($contdosisededepto->dosi_cristalino - $DosiCristalinoAsignados != 0)
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$contdosisededepto->dosi_cristalino - $DosiCristalinoAsignados}} DOSÍMETROS DE UBICACIÓN CRISTALINO!!</b>
-                </div>
-            @endif
-            @if($contdosisededepto->dosi_muñeca - $DosiMuñecaAsignados != 0)
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$contdosisededepto->dosi_muñeca - $DosiMuñecaAsignados}} DOSÍMETROS DE UBICACIÓN MUÑECA!!</b>
-                </div>
-            @endif
-            @if($contdosisededepto->dosi_dedo - $DosiDedoAsignados != 0)    
-                <div class="alert alert-warning text-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                    </svg>  <b> FALTA POR ASIGNAR {{$contdosisededepto->dosi_dedo - $DosiDedoAsignados}} DOSÍMETROS DE UBICACIÓN DEDO!!</b>
-                </div>
-            @endif
-        @endif
-        
-        
-    </div>
-    <div class="col-md"></div>
-</div> --}}
-{{-- <div class="row">
-    <div class="col-md"></div>
-    <div class="col-md text-center">
-        
-            <button type="submit" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nuevaAsignacionModal" autofocus>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                </svg>  ASIGNAR FALTANTES
-            </button>
-        
-    </div>
-    <div class="col-md"></div>
-</div> --}}
 
 
 <br>
@@ -173,30 +36,7 @@
 </h3>
 <br>
 
-{{-- ///////ALERTAS AMARILLAS QUE ESTABAN DUPLICADAS////////// --}}
 
-{{-- <div class="row">
-    <div class="col-md"></div>
-    <div class="col-md-5">
-        @if($dosicontrolasig->isEmpty())
-            <div class="alert alert-warning text-center" role="alert">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
-                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
-                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
-                  </svg> <b> NO HAY DOSÍMETRO DE CONTROL ASIGNADO !!</b>
-            </div>
-        @endif
-        @if($trabjasignados->isEmpty())
-            <div class="alert alert-warning text-center" role="alert">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
-                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
-                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
-                </svg> <b> NO HAY TRABAJADORES ASIGNADOS !!</b>
-            </div>
-        @endif
-    </div>
-    <div class="col-md"></div>
-</div> --}}
 
 
 @if(count($trabjasignados)>0 || count($dosicontrolasig)>0)
@@ -234,13 +74,7 @@
                     </svg> EDITAR FECHAS
                 </button>
             </div>
-            {{-- <div class="col-md text-center">
-                <button type="submit" class="btn colorQA">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                    </svg>  ASIGNAR FALTANTES
-                </button>
-            </div> --}}
+           
             <div class="col-md"></div>
         </div>
     </form>
@@ -330,8 +164,8 @@
                         @endforeach --}}
                         @foreach($trabjasignados as $trabasig)
                             <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                <td class='align-middle'>@if(!empty($trabasig->trabajador->primer_nombre_trabajador)){{$trabasig->trabajador->primer_nombre_trabajador}} {{$trabasig->trabajador->segundo_nombre_trabajador}} {{$trabasig->trabajador->primer_apellido_trabajador}} {{$trabasig->trabajador->segundo_apellido_trabajador}}@endif </td>
-                                <td class='align-middle'>@if(!empty($trabasig->trabajador->cedula_trabajador)) {{$trabasig->trabajador->cedula_trabajador}}@endif </td>
+                                <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                <td class='align-middle'>@if(!empty($trabasig->persona->cedula_trabajador)) {{$trabasig->persona->cedula_persona}}@endif </td>
                                 <td class='align-middle'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
                                 <td class='align-middle'>
                                     @if($trabasig->holder_id == '')
@@ -587,8 +421,8 @@
                             @endforeach --}}
                             @foreach($trabjasignados as $trabasig)
                                 <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                    <td class='align-middle'>@if(!empty($trabasig->trabajador->primer_nombre_trabajador)){{$trabasig->trabajador->primer_nombre_trabajador}} {{$trabasig->trabajador->segundo_nombre_trabajador}} {{$trabasig->trabajador->primer_apellido_trabajador}} {{$trabasig->trabajador->segundo_apellido_trabajador}}@endif </td>
-                                    <td class='align-middle'>@if(!empty($trabasig->trabajador->cedula_trabajador)) {{$trabasig->trabajador->cedula_trabajador}}@endif </td>
+                                    <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                    <td class='align-middle'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
                                     <td class='align-middle'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
                                     <td class='align-middle'>
                                         @if($trabasig->holder_id == '')

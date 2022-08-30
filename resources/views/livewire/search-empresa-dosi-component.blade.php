@@ -1,5 +1,5 @@
-<div>
-    <div class="row">
+<div> 
+    <div class="row"> 
         <div class="col"></div>
         <div class="col">
             <div class="card text-dark bg-light" style="max-width: 25rem;">

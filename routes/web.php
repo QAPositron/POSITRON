@@ -113,7 +113,9 @@ Route::get('personas/search', [PersonaController::class, 'search'])->name('perso
 Route::get('personas/create', [PersonaController::class, 'create'])->name('personas.create');
 Route::get('personas/selectsedes', [PersonaController::class, 'selectsedes']);
 Route::post('personas', [PersonaController::class, 'save'])->name('personas.save');
-Route::get('personas/{persona}/edit', [PersonaController::class, 'edit'])->name('personas.edit');
+Route::get('personas/{empresa}/{trabestucont}/create',[PersonaController::class, 'createTrabEstuContEmp'])->name('personasEmpresa.create');
+Route::post('personasEmpresa', [PersonaController::class, 'savePersonasEmpresa'])->name('personasEmpresa.save');
+Route::get('personas/{persona}/{trabestucont}/{empresa}/edit', [PersonaController::class, 'edit'])->name('personas.edit');
 Route::get('/personas/{edit}/selectsed', [PersonaController::class, 'selectsedes']);
 Route::put('personas/{persona}', [PersonaController::class, 'update'])->name('personas.update');
 Route::delete('personas/{persona}', [PersonaController::class, 'destroy'])->name('personas.destroy');
@@ -222,7 +224,8 @@ Route::put('lecturadosiarea/{lecdosicont}', [DosimetriaController::class, 'savel
 /////////RUTAS PARA LOS REPORTES O INFORMES DE DOSIMETRIA///////
 Route::get('repodosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');
 
-
+/////////RUTAS PARA LAS ETIQUETAS DE DOSIMETRIA ///////
+Route::get('etiquetasdosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfEtiquetas'])->name('etiquetasdosimetria.pdf');
 
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA //////////////
 Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');

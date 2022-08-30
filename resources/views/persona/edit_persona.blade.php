@@ -5,79 +5,95 @@
     <div class="col"></div>
     <div class="col-8">
         <div class="card text-dark bg-light">
-            <h2 class="text-center mt-3">EDITAR PERSONA</h2>
-
+            @if($id ==  0)
+                <h2 class="text-center mt-3">EDITAR PERSONA</h2>
+            @elseif($id == 1)
+                <h3 class="text-center mt-3">EDITAR TRABAJADOR DOSIMETRIA PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
+            @elseif($id == 2)
+                <h3 class="text-center mt-3">EDITAR ESTUDIANTE DE A. VIRTUAL PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
+            @elseif($id== 3)
+                <h3 class="text-center mt-3">EDITAR CONTACTO PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
+            @endif
             <br>
 
-            <label for="" class="mx-4">LA SIGUIENTES SON LOS PERFILES LABORALES O ROLES QUE PERTENECEN A ESTA PERSONA:</label>
             <br>
             <br>
-            <div class="row mx-4">
+            <div class="row mx-3">
+                <label for="" >LA SIGUIENTES SON LOS PERFILES LABORALES O ROLES QUE PERTENECEN A ESTA PERSONA:</label>
+                <br>
+                <br>
                 <div class="col-md">
-                    @forEach($personasperfil as $personperf)
-                        <div class="row">
-                            <div class="col-md"></div>
-                            <div class="col-md-8">
-                                <div class="form-floating text-wrap">
-                                    <input type="text" class="form-control"  name="id_perfil" id="id_perfil"  value="{{$personperf->perfiles->nombre_perfil}}" autofocus style="text-transform:uppercase;" disabled>
-                                    <label for="floatingSelectGrid">PERFIL LABORAL:</label>
-                                    @error('id_perfil')
-                                        <small>*{{$message}}</small>
-                                    @enderror
+                    @if(count($personasperfil)== 0)
+                        <b><label for="">NO HAY PERFILES RELACIONADOS </label></b>
+                    @else
+                        @forEach($personasperfil as $personperf)
+                            <div class="row">
+                                <div class="col-md"></div>
+                                <div class="col-md-8">
+                                    <div class="form-floating text-wrap">
+                                        <input type="text" class="form-control"  name="id_perfil" id="id_perfil"  value="{{$personperf->perfiles->nombre_perfil}}" autofocus style="text-transform:uppercase;" disabled>
+                                        <label for="floatingSelectGrid">PERFIL LABORAL:</label>
+                                        @error('id_perfil')
+                                            <small>*{{$message}}</small>
+                                        @enderror
+                                    </div>
                                 </div>
+                                <div class="col-md d-flex align-items-center">
+                                    <form class="form_eliminar_personaperfil" id="form_eliminar_personaperfil" name="form_eliminar_personaperfil" action="{{route('personaperfil.destroy', $personperf->id_personaperfil)}}" method="POST">
+                                        @csrf  
+                                        @method('delete')
+                                        <button class="btn btn-danger"  type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-md"></div>
                             </div>
-                            <div class="col-md d-flex align-items-center">
-                                <form class="form_eliminar_personaperfil" id="form_eliminar_personaperfil" name="form_eliminar_personaperfil" action="{{route('personaperfil.destroy', $personperf->id_personaperfil)}}" method="POST">
-                                    @csrf  
-                                    @method('delete')
-                                    <button class="btn btn-danger"  type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                        </svg>
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-md"></div>
-                        </div>
-                        <br>
-                    @endforeach
+                            <br>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="col-md">
-                    @forEach($personasrol as $personrol)
-                        <div class="row">
-                            <div class="col-md"></div>
-                            <div class="col-md-8">
-                                <div class="form-floating text-wrap">
-                                    <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->nombre_rol}}" autofocus style="text-transform:uppercase;" disabled>
-                                    <label for="floatingSelectGrid">ROL:</label>
-                                    @error('id_rol')
-                                        <small>*{{$message}}</small>
-                                    @enderror
+                    @if(count($personasrol)== 0)
+                        <b><label for="">NO HAY ROLES RELACIONADOS </label></b>
+                    @else
+                        @forEach($personasrol as $personrol)
+                            <div class="row">
+                                <div class="col-md"></div>
+                                <div class="col-md-8">
+                                    <div class="form-floating text-wrap">
+                                        <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->nombre_rol}}" autofocus style="text-transform:uppercase;" disabled>
+                                        <label for="floatingSelectGrid">ROL:</label>
+                                        @error('id_rol')
+                                            <small>*{{$message}}</small>
+                                        @enderror
+                                    </div>
                                 </div>
+                                <div class="col-md d-flex align-items-center">
+                                    <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
+                                        @csrf  
+                                        @method('delete')
+                                        <button class="btn btn-danger"  type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-md"></div>
                             </div>
-                            <div class="col-md d-flex align-items-center">
-                                <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
-                                    @csrf  
-                                    @method('delete')
-                                    <button class="btn btn-danger"  type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                        </svg>
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-md"></div>
-                        </div>
-                        <br>
-                    @endforeach
+                            <br>
+                        @endforeach
+                    @endif
                 </div>
             </div>
-            <br><br>
             <div class="row mx-3">
                 @if(count($personasede)== 0)
-                    <label for="">NO HAY EMPRESAS Y SEDES RELACIONADAS</label>
+                    <b><label for="">NO HAY EMPRESAS Y SEDES RELACIONADAS</label></b>
                 @else
                     <div class="col-md">
                         <label for="">LA SIGUIENTES SON LAS EMPRESAS Y SEDES RELACIONADAS:</label>
@@ -113,7 +129,7 @@
                     
                 @endif
             </div>
-            <br>
+            
             <form class="m-4" id='form_edit_persona' name='form_edit_persona' action="{{route('personas.update', $persona)}}" method="POST">
                 @csrf
                 @method('put') 
@@ -129,13 +145,7 @@
                                 @foreach($perfiles as $perf)
                                     <option value ="{{$perf->id_perfil}}">{{$perf->nombre_perfil}}</option>
                                 @endforeach 
-                                {{-- <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
-                                <option value="CALIDAD">CALIDAD</option>
-                                <option value="BIOMÉDICA">BIOMÉDICA</option>
-                                <option value="FÍSICA MÉDICA">FÍSICA MÉDICA</option>
-                                <option value="CONTABILIDAD">CONTABILIDAD</option>
-                                <option value="SUBGERENCIA">    </option>
-                                <option value="GERENCIA">GERENCIA</option> --}}
+                               
                             </select>
                             
                         </div>
@@ -147,28 +157,27 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <label for="">ROL:</label>
                         <div class="form-floating">
                             <select class="form-select" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true">
                                 @foreach($roles as $rol)
                                     <option value ="{{$rol->id_rol}}">{{$rol->nombre_rol}}</option>
                                 @endforeach 
-                                {{-- <option value="ESTUDIANTE">ESTUDIANTE</option>
-                                <option value="CONTACTO">CONTACTO</option>
-                                <option value="TOE">TRABAJADOR OCUPACIONALMENTE EXPUESTO (TOE)</option>
-                                <option value="OPR">OFICIAL DE PROTECCIÓN RADIOLÓGICA (OPR)</option> --}}
+                                
                             </select>
                             
                         </div>
                     </div>
-                    <div class="col-md d-flex align-items-center">
+                    {{-- /////////TEMPORALMENTE DESHABILITADO POR INDECISION////////////// AHORA SOLO HAY 4 ROLES FIJOS////// --}}
+                    {{-- <div class="col-md d-flex align-items-center">
                         <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_rolModal" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
                         </button>
-                    </div>
+                    </div> --}}
+                    {{-- ///////////////////////////////////////////////////////////////////// --}}
                 </div>
                 <br>
                 <div class="row g-2">
@@ -356,9 +365,15 @@
                     <div class="col d-grid gap-2">
                         <button class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR </button>
                     </div>
-                    <div class="col d-grid gap-2">
-                        <a href="{{route('personas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
-                    </div>
+                    @if(!empty($empresa))
+                        <div class="col d-grid gap-2">
+                            <a href="{{route('empresas.info', $empresa->id_empresa)}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                        </div>
+                    @else
+                        <div class="col d-grid gap-2">
+                            <a href="{{route('personas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                        </div>
+                    @endif
                     <div class="col"></div>
                 </div>
             </form>
@@ -380,7 +395,8 @@
         </div> 
     </div>
 </div>
-<div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
+{{-- //////////////// MODAL DESHABILITADO YA LOS ROLES SON FIJOS ////////////////////////// --}}
+{{-- <div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -390,7 +406,7 @@
             @livewire('form-personas-roles')    
         </div> 
     </div>
-</div>
+</div> --}}
 <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

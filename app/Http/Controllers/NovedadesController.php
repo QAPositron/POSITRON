@@ -10,6 +10,7 @@ use App\Models\Dosimetriacontrato;
 use App\Models\Dosimetro;
 use App\Models\Holder;
 use App\Models\Mesescontdosisedeptos;
+use App\Models\Persona;
 use App\Models\Trabajador;
 use App\Models\Trabajadordosimetro;
 use Illuminate\Http\Request;
@@ -99,7 +100,7 @@ class NovedadesController extends Controller
         ->where('contdosisededepto_id', '=', $request->contdosisededepto_id)
         ->where('mes_asignacion', '=', $request->mes)
         ->get();*/
-        $dosiasginadosmesactual = Trabajadordosimetro::join('trabajadors', 'trabajadordosimetros.trabajador_id', '=', 'trabajadors.id_trabajador')
+        $dosiasginadosmesactual = Trabajadordosimetro::join('personas', 'trabajadordosimetros.persona_id', '=', 'personas.id_persona')
         ->join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
         ->leftjoin('holders', 'trabajadordosimetros.holder_id', '=', 'holders.id_holder')
         ->where('contratodosimetriasede_id', '=', $request->contratodosimetriasede_id)
@@ -119,9 +120,21 @@ class NovedadesController extends Controller
     }
     public function trabajadoresempresa(Request $request){
         /* return $request; */
-        $trabajadores = Trabajador::where('empresa_id', '=', $request->id_empresa)
-        ->select('id_trabajador','primer_nombre_trabajador', 'segundo_nombre_trabajador', 'primer_apellido_trabajador', 'segundo_apellido_trabajador')
-        ->get();
+        $trabajadores = Persona::join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
+        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
+        ->join('sedes', 'personasedes.sede_id', 'sedes.id_sede')
+        ->where('sedes.empresas_id', '=', $request->id_empresa)
+        ->where(function($query) {
+            $query->orWhere('roles.nombre_rol', 'TOE')
+                  ->orWhere('roles.nombre_rol', 'OPR');
+        })->orderBy('sedes.id_sede')->get();
+        
+       /*  Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
+        ->join('sedes', 'personasedes.sede_id', '=', 'sedes.id_sede')
+        ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
+        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->where('sedes.empresa_id', '=', $request->id_empresa) */
         return response()->json($trabajadores);
         
     } 
@@ -169,7 +182,7 @@ class NovedadesController extends Controller
                 $newasignacionDosimetro = new Trabajadordosimetro();
         
                 $newasignacionDosimetro->contratodosimetriasede_id = $request->id_contratodosimetriasede;
-                $newasignacionDosimetro->trabajador_id             = $request->id_trabajador_asig[$i];
+                $newasignacionDosimetro->persona_id                = $request->id_trabajador_asig[$i];
                 $newasignacionDosimetro->dosimetro_id              = $request->id_dosimetro_asig[$i];
                 $newasignacionDosimetro->holder_id                 = $request->id_holder_asig[$i];
                 $newasignacionDosimetro->contdosisededepto_id      = $request->id_contdosisededepto;
@@ -267,7 +280,7 @@ class NovedadesController extends Controller
                     $newasignacion = new Trabajadordosimetro();
             
                     $newasignacion->contratodosimetriasede_id    = $request->contratodosimetriasede;
-                    $newasignacion->trabajador_id                = $request->id_trabajador_asig[$i];
+                    $newasignacion->persona_id                   = $request->id_trabajador_asig[$i];
                     $newasignacion->dosimetro_id                 = $request->id_dosimetro_asig[$i];
                     $newasignacion->holder_id                    = $request->id_holder_asig[$i];
                     $newasignacion->contdosisededepto_id         = $request->contdosisededepto;
@@ -349,7 +362,7 @@ class NovedadesController extends Controller
             $newasignacionAntiguaNull = new Trabajadordosimetro();
 
             $newasignacionAntiguaNull->contratodosimetriasede_id = $request->contratodosimetriasede;
-            $newasignacionAntiguaNull->trabajador_id             = $request->id_trabj_asigdosim_null[$i];
+            $newasignacionAntiguaNull->persona_id                = $request->id_trabj_asigdosim_null[$i];
             $newasignacionAntiguaNull->dosimetro_id              = $request->id_dosimetro_asigdosim_null[$i];
             $newasignacionAntiguaNull->holder_id                 = null;
             $newasignacionAntiguaNull->contdosisededepto_id      = $request->contdosisededepto;
@@ -383,7 +396,7 @@ class NovedadesController extends Controller
             $newasignacionAntigua = new Trabajadordosimetro();
 
             $newasignacionAntigua->contratodosimetriasede_id = $request->contratodosimetriasede;
-            $newasignacionAntigua->trabajador_id             = $request->id_trabj_asigdosim[$i];
+            $newasignacionAntigua->persona_id                = $request->id_trabj_asigdosim[$i];
             $newasignacionAntigua->dosimetro_id              = $request->id_dosimetro_asigdosim[$i];
             $newasignacionAntigua->holder_id                 = $request->id_holder_asigdosim[$i];
             $newasignacionAntigua->contdosisededepto_id      = $request->contdosisededepto;
@@ -433,11 +446,7 @@ class NovedadesController extends Controller
         $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino;
         $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca;
         $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo;  
-<<<<<<< HEAD
-        $newMesescontdosisedeptos->nota_cambiodosim     = $request->nota_cambio_dosimetros;
-=======
         $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);  
->>>>>>> 6078b58ef2badab6945daad611368f3a7a075d34
         $newMesescontdosisedeptos->save();
 
         return back()->with('guardar', 'ok');
@@ -458,7 +467,7 @@ class NovedadesController extends Controller
         ->update([
             'dosimetro_uso' => 'FALSE'
         ]);
-        $dosiasginadosmesactual = Trabajadordosimetro::join('trabajadors', 'trabajadordosimetros.trabajador_id', '=', 'trabajadors.id_trabajador')
+        $dosiasginadosmesactual = Trabajadordosimetro::join('personas', 'trabajadordosimetros.persona_id', '=', 'personas.id_persona')
         ->join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
         ->leftjoin('holders', 'trabajadordosimetros.holder_id', '=', 'holders.id_holder')
         ->where('contratodosimetriasede_id', '=', $request->contratodosimetriasede_id)
