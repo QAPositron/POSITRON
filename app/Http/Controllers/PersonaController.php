@@ -112,8 +112,19 @@ class PersonaController extends Controller
                 $personaSedes->save();
             }
         }
+        if(!empty($request->id_sedes_add)){
+            for($i=0; $i<count($request->id_sedes_add); $i++){
+                $personaSedesAdd = new Personasedes();
+    
+                $personaSedesAdd->persona_id   = $persona->id_persona;
+                $personaSedesAdd->sede_id      = $request->id_sedes_add[$i];
+    
+                $personaSedesAdd->save();
+            }
+        }
         
         return redirect()->route('personas.search')->with('guardar', 'ok');
+        /* return $request; */
     }
     public function createTrabEstuContEmp(Empresa $empresa, $id){
         $perfiles = Perfiles::all();
