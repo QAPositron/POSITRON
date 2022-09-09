@@ -77,13 +77,13 @@
                             echo "<tr>";
                                 echo "<th class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
                                 echo "<th class='align-middle' style='width: 8.90%'>MES</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL</th>";    
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. TÓRAX</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CRISTALINO</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ANILLO</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. MUÑECA</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL</th>";    
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ÁREA</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CASO</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CRISTALINO</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. MUÑECA</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. DEDO</th>";
                                 echo "<th class='align-middle'>ACCIONES</th>";
                             echo "</tr>";
                         echo "</thead>";
@@ -91,14 +91,14 @@
             @endphp
             <tr>
                 <td class="text-center align-middle"> <a class="link-dark" href="{{route('detallesedecont.create', $dosicontsedep->id_contdosisededepto)}}">{{$dosicontsedep->nombre_departamento}}</a></td>
-                <td class="text-center align-middle">{{$dosicontsedep->mes_asignado}}</td>
-                <td class="text-center align-middle">{{$dosicontsedep->dosi_control}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->mes_actual}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_torax}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_cristalino}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_dedo}}</td> 
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_muñeca}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_control}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_area}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_caso}}</td>
-                <td class="text-center align-middle">{{$dosicontsedep->dosi_cristalino}}</td>
-                <td class="text-center align-middle">{{$dosicontsedep->dosi_muñeca}}</td>
-                <td class="text-center align-middle">{{$dosicontsedep->dosi_dedo}}</td> 
                 <td class="text-center align-middle">
                     <div class="row">
                         <div class="col">

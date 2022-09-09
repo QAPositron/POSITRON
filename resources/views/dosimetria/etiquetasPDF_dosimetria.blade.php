@@ -47,16 +47,16 @@
                 $topTexto4 = 44;
                 $topFecha1 = 67;
                 $topFecha2 = 76;
-                $topCode = 46;
+                $topCode = 43;
                 $left1 = 9;
                 $left2 = 220;
                 $left3 = 431;
                 $leftFecha1 = 60;
                 $leftFecha2 = 271;
                 $leftFecha3 = 482;
-                $leftCode1 = 149;
-                $leftCode2 = 360;
-                $leftCode3 = 580;
+                $leftCode1 = 154;
+                $leftCode2 = 365;
+                $leftCode3 = 576;
             @endphp
 
             @for($i=2; $i< $contador; $i=$i+3)
@@ -89,7 +89,7 @@
                     <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha1}}px;">{{$datefix2}}</div>
                     <div class="code" style="top:{{$topCode}}px; left:{{$leftCode1}}px;">
                         @php
-                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-2]->dosimetro->codigo_dosimeter, 'C128',0.8,15);
+                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-2]->id_trabajadordosimetro, 'C39',1.1,13);
                         @endphp
                     </div> 
 
@@ -108,7 +108,7 @@
                     <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha2}}px;">{{$datefix2}}</div>
                     <div class="code" style="top:{{$topCode}}px; left:{{$leftCode2}}px;">
                         @php
-                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-1]->dosimetro->codigo_dosimeter, 'C128',0.8,15);
+                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-1]->id_trabajadordosimetro, 'C39',1.1,13);
                         @endphp
                     </div> 
 
@@ -127,7 +127,7 @@
                     <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha3}}px;">{{$datefix2}}</div>
                     <div class="code" style="top:{{$topCode}}px; left:{{$leftCode3}}px;">
                         @php
-                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-0]->dosimetro->codigo_dosimeter, 'C128',0.8,15);
+                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-0]->id_trabajadordosimetro, 'C39',1.1,13);
                         @endphp
                     </div> 
                 @endif
@@ -164,7 +164,7 @@
                 <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha1}}px;">{{$datefix2}}</div>
                 <div class="code" style="top:{{$topCode}}px; left:{{$leftCode1}}px;">
                     @php
-                        echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->dosimetro->codigo_dosimeter, 'C128',0.8,15);
+                        echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->id_trabajadordosimetro, 'C39',1.1,13);
                     @endphp
                 </div>
                 
@@ -195,7 +195,7 @@
                 <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha1}}px;">{{$datefix2}}</div>
                 <div class="code" style="top:{{$topCode}}px; left:{{$leftCode1}}px;">
                     @php
-                        echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-2]->dosimetro->codigo_dosimeter, 'C128',0.8,15);
+                        echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-2]->id_trabajadordosimetro, 'C39',1.1,13);
                     @endphp
                 </div> 
 
@@ -214,79 +214,13 @@
                 <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha2}}px;">{{$datefix2}}</div>
                 <div class="code" style="top:{{$topCode}}px; left:{{$leftCode2}}px;">
                     @php
-                        echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->dosimetro->codigo_dosimeter, 'C128',0.8,15);
+                        echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->id_trabajadordosimetro, 'C39',1.1,13);
                     @endphp
                 </div> 
             @endif
             
         </table> 
-        {{-- @foreach($trabajdosiasig as $key => $trab) 
-            @php
-                $top = 14;
-                $left = 9;
-            @endphp
-            @if($key == 0) 
-                <div class="texto" style="top:{{$top}}px; left:{{$left}}px;">{{$trab->persona->primer_apellido_persona}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</div>  
-                
-                @foreach($contratodosi as $contdosi)
-                    <div class="texto" style="top:24px; left: 9px;">{{$contdosi->nombre_empresa}}</div>
-                    <div class="texto" style="top:35px; left: 9px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                @endforeach
-                <div class="texto" style="top:44px; left: 9px; font-size: 8px;">No. {{$trab->dosimetro->codigo_dosimeter}}</div>
-                @php
-                    $datefix1 = date('d-m-Y',strtotime($trab->primer_dia_uso));
-                    $datefix2 = date('d-m-Y',strtotime($trab->ultimo_dia_uso));
-                @endphp
-                <div class="fecha" style="top:67px; left: 60px;">{{$datefix1}}</div>  
-                <div class="fecha" style="top:76px; left: 60px; background: yellow;">{{$datefix2}}</div>
-                <div class="code" style="top:46px; left:149px;">
-                    @php
-                        echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.8,15);
-                    @endphp
-                </div> 
-            @endif
-            
-            @if($key == 1)
-                <div class="texto" style="top:14px; left: 220px;">{{$trab->persona->primer_apellido_persona}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</div>  
-                
-                @foreach($contratodosi as $contdosi)
-                    <div class="texto" style="top:24px; left: 220px;">{{$contdosi->nombre_empresa}}</div>
-                    <div class="texto" style="top:35px; left: 220px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                @endforeach
-                <div class="texto" style="top:44px; left: 220px;">No. {{$trab->dosimetro->codigo_dosimeter}}</div>
-                @php
-                    $datefix1 = date('d-m-Y',strtotime($trab->primer_dia_uso));
-                    $datefix2 = date('d-m-Y',strtotime($trab->ultimo_dia_uso));
-                @endphp
-                <div class="fecha" style="top:67px; left: 271px;">{{$datefix1}} AL</div>  
-                <div class="fecha" style="top:76px; left: 271px; background: yellow;">{{$datefix2}}</div>
-                <div class="code" style="top:46px; left:360px;">
-                    @php
-                        echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.8,15);
-                    @endphp
-                </div>
-            @endif
-            @if($key == 2)
-                <div class="texto" style="top:14px; left: 431px;">{{$trab->persona->primer_apellido_persona}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</div>  
-                @foreach($contratodosi as $contdosi)
-                    <div class="texto" style="top: 24px; left: 431px;">{{$contdosi->nombre_empresa}} - {{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                    <div class="texto" style="top:35px; left: 431px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                @endforeach
-                <div class="texto" style="top:44px; left: 431px;">No. {{$trab->dosimetro->codigo_dosimeter}}</div>
-                @php
-                    $datefix1 = date('d-m-Y',strtotime($trab->primer_dia_uso));
-                    $datefix2 = date('d-m-Y',strtotime($trab->ultimo_dia_uso));
-                @endphp
-                <div class="fecha" style="top:67px; left: 482px;">{{$datefix1}} AL</div>  
-                <div class="fecha" style="top:76px; left: 482px;">{{$datefix2}}</div>
-                <div class="code" style="top:46px; left:580px;">
-                    @php
-                        echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.8,15);
-                    @endphp
-                </div>
-            @endif
-            
-        @endforeach --}}
+        
 
     </div>
     

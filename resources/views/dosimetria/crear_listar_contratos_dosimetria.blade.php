@@ -9,8 +9,8 @@
             </svg>
         </a>
     </div> 
-    <div class="col-md">
-        <h2 class="text-center "> DOSIMETRÍA DE <br> <i>{{$empresa->nombre_empresa}}</i> </h2> 
+    <div class="col-md-5">
+        <h2 class="text-center "> CONTRATOS DE DOSIMETRÍA PARA <br> <i>{{$empresa->nombre_empresa}}</i> </h2> 
     </div>
     <div class="col-md"></div>
 </div>
@@ -28,9 +28,9 @@
 <div class="row">
     <div class="col"></div>
     <div class="col-9">
-        <h3 class="text-center">LISTADO DE CONTRATOS</h3>
+        {{-- <h3 class="text-center">LISTADO DE CONTRATOS</h3> --}}
         <div class="table table-responsive p-4 ">
-            <table class="table table-bordered">
+            <table class="table table-bordered contratosdosi">
                 <thead class ="text-center">
                     <tr>
                         <th>No. CONTRATO</th>
@@ -133,6 +133,30 @@ crossorigin="anonymous">
                 }
             })
         })
+        
+        $('.contratosdosi').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "NO HAY REGISTROS",
+                "info": "MOSTRANDO REGISTROS DEL  _START_ AL _END_ DE UN TOTAL DE  _TOTAL_ REGISTROS",
+                "infoEmpty": "MOSTRANDO 0 to 0 DE 0 REGISTROS",
+                "infoFiltered": "(FILTRADO DE UN TOTAL DE _MAX_ REGISTROS)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "MOSTRAR _MENU_ REGISTROS",
+                "loadingRecords": "CARGANDO...",
+                "processing": "PROCESANDO...",
+                "search": "BUSCAR:",
+                "zeroRecords": "NO SE ENCONTRARON RESULTADOS",
+                "paginate": {
+                    "first": "PRIMERO",
+                    "last": "ÚLTIMO",
+                    "next": "SIGUIENTE",
+                    "previous": "ANTERIOR"
+                }   
+            },
+        });
+    
     })
    
 

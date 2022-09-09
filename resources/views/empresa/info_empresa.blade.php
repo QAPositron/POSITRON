@@ -944,7 +944,7 @@ crossorigin="anonymous">
         })
         
     })
-    $(document).ready( function () {
+    $(document).ready( function ()  {
         $('.trabajadores').DataTable({
             language: {
                 "decimal": "",

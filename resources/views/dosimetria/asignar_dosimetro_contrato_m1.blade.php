@@ -4,8 +4,9 @@
     <div class="col-md"></div>
     <div class="col-md-15">
         <div class="card text-dark bg-light">
+            <h2 class="modal-title w-100 text-center">ASIGNACIÓN DOSÍMETROS</h2>
             <br>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel">ASIGNACIÓN DOSÍMETROS <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
+            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"> <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
                 MES {{$mesnumber}}
                 ( <span>
                     @php  
@@ -15,7 +16,7 @@
                 </span> )<br>
                 ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}} 
             </h3>
-            <form action="{{route('asignadosicontratom1.save', ['asigdosicont'=> $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion" name="form-nueva-asignacion" class="form-nueva-asignacion m-4">
+            <form action="{{route('asignadosicontratom1.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion" name="form-nueva-asignacion" class="form-nueva-asignacion m-4">
                 @csrf
                 
                 {{-- <label class="text-center mx-5">INGRESE LA INFORMACIÓN CORRESPONDIENTE PARA REALIZAR LAS ASIGNACIONES QUE ESTAN PENDIENTES EN EL CONTRATO DE DOSIMETRÍA:</label> --}}
@@ -564,7 +565,7 @@
         $('#form-nueva-asignacion').submit(function(e){
             e.preventDefault();
             Swal.fire({
-                text: "DESEA GUARDAR ESTA EMPRESA??",
+                text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

@@ -227,6 +227,8 @@ Route::get('repodosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::
 /////////RUTAS PARA LAS ETIQUETAS DE DOSIMETRIA ///////
 Route::get('etiquetasdosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfEtiquetas'])->name('etiquetasdosimetria.pdf');
 
+////////////RUTAS PARA LA REVISION DE DOSIMETROS ASIGNADOS/////////
+Route::get('revisiondosimetria/{deptodosi}/{mesnumber}/revision', [DosimetriaController::class, 'revisionDosimetria'])->name('revisiondosimetria.check');
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA //////////////
 Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');
 Route::get('/novedades/contratoDosi', [NovedadesController::class, 'contratoDosimetria']);

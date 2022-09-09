@@ -149,6 +149,7 @@ class NovedadesController extends Controller
         $dosi_muñeca = $request->dosi_muñeca;
         $dosi_dedo = $request->dosi_dedo;
         
+        
         for($i=0; $i<count($request->id_trabajador_asig); $i++){
             
             if($request->id_ubicacion_asig[$i] == 'CONTROL'){
@@ -222,16 +223,28 @@ class NovedadesController extends Controller
         $newMesescontdosisedeptos = new Mesescontdosisedeptos();
         $newMesescontdosisedeptos->contdosisededepto_id = $request->id_contdosisededepto;
         $newMesescontdosisedeptos->mes_asignacion       = $request->mestrabj_asig;
-        $newMesescontdosisedeptos->dosi_control         = $dosi_control;
-        $newMesescontdosisedeptos->dosi_torax           = $dosi_torax;
-        $newMesescontdosisedeptos->dosi_area            = $dosi_area;
-        $newMesescontdosisedeptos->dosi_caso            = $dosi_caso;
-        $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino;
-        $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca;
-        $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo;    
+        $newMesescontdosisedeptos->dosi_control         = $dosi_control == null ? 0 : $dosi_control;
+        $newMesescontdosisedeptos->dosi_torax           = $dosi_torax == null ? 0 : $dosi_torax;
+        $newMesescontdosisedeptos->dosi_area            = $dosi_area == null ? 0 : $dosi_area; 
+        $newMesescontdosisedeptos->dosi_caso            = $dosi_caso == null ? 0 : $dosi_caso;
+        $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino == null ? 0 : $dosi_cristalino;
+        $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca == null ? 0 : $dosi_muñeca;
+        $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo == null ? 0 : $dosi_dedo;    
         $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);
 
         $newMesescontdosisedeptos->save();
+
+        $updatecontratoDosisedepto = Contratodosimetriasededepto::where('id_contdosisededepto', $request->id_contdosisededepto)
+        ->update([
+            'mes_actual'    => $request->mestrabj_asig,
+            'dosi_control'  => $dosi_control == null ? 0 : $dosi_control,
+            'dosi_torax'    => $dosi_torax == null ? 0 : $dosi_torax,
+            'dosi_area'     => $dosi_area == null ? 0 : $dosi_area,
+            'dosi_caso'     => $dosi_caso == null ? 0 : $dosi_caso,
+            'dosi_cristalino' => $dosi_cristalino == null ? 0 : $dosi_cristalino,
+            'dosi_muñeca'   => $dosi_muñeca == null ? 0 : $dosi_muñeca,
+            'dosi_dedo'     => $dosi_dedo == null ? 0 : $dosi_dedo
+        ]);
         return back()->with('guardar', 'ok');
         /* return $request; */
     }
@@ -449,9 +462,22 @@ class NovedadesController extends Controller
         $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);  
         $newMesescontdosisedeptos->save();
 
+        $updatecontratoDosisedepto = Contratodosimetriasededepto::where('id_contdosisededepto', $request->contdosisededepto)
+        ->update([
+            'mes_actual'    => $request->mes_asig_siguiente,
+            'dosi_control'  => $dosi_control,
+            'dosi_torax'    => $dosi_torax ,
+            'dosi_area'     => $dosi_area,
+            'dosi_caso'     => $dosi_caso,
+            'dosi_cristalino' => $dosi_cristalino,
+            'dosi_muñeca'   => $dosi_muñeca,
+            'dosi_dedo'     => $dosi_dedo
+        ]);
+        
         return back()->with('guardar', 'ok');
-        /*return $request;
-        return $dosi_torax;*/
+
+        /* return $request; */
+        
     }
 
     public function clearAsignacionAnteriorMn(Request $request){

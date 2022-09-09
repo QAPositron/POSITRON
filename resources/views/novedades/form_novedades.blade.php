@@ -102,13 +102,13 @@
                             <thead class ="text-center">
                                 <tr>
                                     <th>MESES</th>
-                                    <th>DOSIM. CONTROL</th>
                                     <th>DOSIM. TÓRAX</th>
-                                    {{-- <th>DOSIM. ÁREA</th>
-                                    <th>DOSIM. CASO</th> --}}
                                     <th>DOSIM. CRISTALINO</th>
+                                    <th>DOSIM. ANILLO</th>
                                     <th>DOSIM. MUÑECA</th>
-                                    <th>DOSIM. DEDO</th>
+                                    <th>DOSIM. CONTROL</th>
+                                    <th>DOSIM. ÁREA</th>
+                                    <th>DOSIM. CASO</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla_meses">
@@ -490,6 +490,7 @@ var myFechaInicial;
             var especialidad_id = $(this).val();
             if($.trim(especialidad_id) != ''){
                 $.get('meseschangecontratoDosi', {especialidad_id: especialidad_id}, function(todoslos_meses){
+                    console.log("ESTOS SON TODOS LOS MESES");
                     console.log(todoslos_meses);
                     for(var i=0; i<todoslos_meses.length; i++){
                         if(todoslos_meses[i].dosi_control == null && todoslos_meses[i].dosi_torax == null && todoslos_meses[i].dosi_cristalino == null && todoslos_meses[i].dosi_muñeca == null && todoslos_meses[i].dosi_dedo == null){
@@ -497,11 +498,13 @@ var myFechaInicial;
                         }else{
                             var tr = `<tr>
                                     <td class='align-middle text-center'>`+todoslos_meses[i].mes_asignacion+`</td>
-                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_control+`</td>
                                     <td class='align-middle text-center'>`+todoslos_meses[i].dosi_torax+`</td>
                                     <td class='align-middle text-center'>`+todoslos_meses[i].dosi_cristalino+`</td>
-                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_muñeca+`</td>
                                     <td class='align-middle text-center'>`+todoslos_meses[i].dosi_dedo+`</td>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_muñeca+`</td>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_control+`</td>
+                                    <td class='align-middle text-center'></td>
+                                    <td class='align-middle text-center'></td>
                                 </tr>`;
                             $("#tabla_meses").append(tr);
                         }
@@ -638,9 +641,12 @@ var myFechaInicial;
                                         $("#tr_control").append(tr);
                                         
                                         dosi_control += 1;
+                                        console.log("EL VALOR DEL DOSI CONTROL PARA EL MES ACTUAL");
+                                        console.log(dosi_control);
                                     } 
+                                    document.getElementById("dosi_control").value = dosi_control;
                                 }
-                                
+                                        
                             });
                             $.get('dosiasginadosmesactual', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: value}, function(asignacionesmesactual){
                                 console.log(asignacionesmesactual);
@@ -823,7 +829,8 @@ var myFechaInicial;
                                             dosi_dedo += 1;
                                         }
                                         
-                                        document.getElementById("dosi_control").value = dosi_control;
+                                        /* document.getElementById("dosi_control").value = dosi_control; */
+                                        
                                         document.getElementById("dosi_torax").value = dosi_torax;
                                         document.getElementById("dosi_cristalino").value = dosi_cristalino;
                                         document.getElementById("dosi_muñeca").value = dosi_muñeca;
@@ -928,13 +935,13 @@ var myFechaInicial;
                             <td style="width: 14.50%">
                                 <select class="form-select"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
-                                    <option value="CONTROL">CONTROL</option>
                                     <option value="TORAX">TORAX</option>
+                                    <option value="CRISTALINO">CRISTALINO</option>
+                                    <option value="DEDO">ANILLO</option>
+                                    <option value="MUÑECA">MUÑECA</option>
+                                    <option value="CONTROL">CONTROL</option>
                                     <option value="AREA">ÁREA</option>
                                     <option value="CASO">CASO</option>
-                                    <option value="CRISTALINO">CRISTALINO</option>
-                                    <option value="MUÑECA">MUÑECA</option>
-                                    <option value="DEDO">DEDO</option>
                                 </select>
                             </td> 
                             <td style="width: 15.0%">
@@ -1001,13 +1008,13 @@ var myFechaInicial;
                             <td style="width: 14.50%">
                                 <select class="form-select"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
-                                    <option value="CONTROL">CONTROL</option>
                                     <option value="TORAX">TORAX</option>
+                                    <option value="CRISTALINO">CRISTALINO</option>
+                                    <option value="DEDO">ANILLO</option>
+                                    <option value="MUÑECA">MUÑECA</option>
+                                    <option value="CONTROL">CONTROL</option>
                                     <option value="AREA">ÁREA</option>
                                     <option value="CASO">CASO</option>
-                                    <option value="CRISTALINO">CRISTALINO</option>
-                                    <option value="MUÑECA">MUÑECA</option>
-                                    <option value="DEDO">DEDO</option>
                                 </select>
                             </td> 
                             <td style="width: 15.0%">

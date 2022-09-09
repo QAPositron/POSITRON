@@ -716,15 +716,15 @@ crossorigin="anonymous">
     $(document).ready(function(){
         // Creamos array con los meses del año
         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-        let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}");
+        let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
         /* fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset()); */
         console.log(fecha);
         for($i=0; $i<=13; $i++){
             var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
             var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
             console.log(fechaesp); 
-            if('{{ Request()->mesnumber}}' == $i && '{{ Request()->mesnumber}}' != 1){
-                
+            /* if('{{ Request()->mesnumber}}' == $i && '{{ Request()->mesnumber}}' != 1){ */
+            if('{{ Request()->mesnumber}}' == ($i+1) ){  
             
                 document.getElementById('mes{{ Request()->mesnumber}}').innerHTML = fechaesp;
 

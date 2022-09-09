@@ -33,9 +33,9 @@
       .bg-danger{
         color: white;
       }
-      tr:hover{
+      /* tr:hover{
         background-color: rgba(26, 153, 128, 0.1);
-      }
+      } */
       input[type=number]::-webkit-inner-spin-button,
       input[type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -84,6 +84,12 @@
       }
       .trdosisroja{
         color: red;
+      }
+      .trcorrect{
+        /* background-color: #1A9980;
+        color: orange; */
+        box-shadow: inset 0 1px 1px rgba(194, 20, 34, 0.075), 0 0 8px rgb(245, 6, 6);
+                        
       }
       .form-input-error-activo{
         display: block;
