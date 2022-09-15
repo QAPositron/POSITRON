@@ -1881,7 +1881,7 @@ class DosimetriaController extends Controller
         $pdf->setPaper('A4', 'portrait');
         
         return $pdf->stream();
-        /* return $contratodosi; */
+       /*  return view('dosimetria.etiquetasPDF1_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig')); */
     }
     public function revisionDosimetria($id, $mesnumber){
         $contdosisededepto = Contratodosimetriasededepto::find($id);

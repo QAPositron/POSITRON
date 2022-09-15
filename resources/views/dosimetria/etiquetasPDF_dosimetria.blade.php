@@ -1,4 +1,7 @@
 <style>
+    *{
+        margin: 0px;
+    }
     .caja{
         position: relative;
         display: inline-block;
@@ -25,412 +28,686 @@
         position: absolute;
         transform: rotate(-90deg);
     }
-    .img{
+    .img_torax{
         height: auto;
         width: auto;
         max-width: 191px;
         max-height: 86px;
     }
+    .img_cristalino{
+        height: auto;
+        width: auto;
+        max-width: 236px;
+        max-height: 43px;
+    }
+    .img_anillo{
+        height: auto;
+        width: auto;
+        max-width: 236px;
+        max-height: 43px;
+    }
+    .contenedor_torax{
+        /* background: red; */
+        width: 195px;
+        height: 88px;
+    }
+    .contenedor_cristalino{
+        /* background: red; */
+        width: 240px;
+        height: 45px;
+    }
+    .contenedor_anillo{
+        /* background: red; */
+        width: 240px;
+        height: 45px;
+    }
+    .nombre_torax{
+        position: relative; 
+        bottom: 83px;
+        right: 0px;
+        font-size: 8px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 170px;
+        text-align:right; 
+    }
+    .empresa_torax{
+        position: relative; 
+        bottom: 84px;
+        left: 35px;
+        font-size: 8px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: yellow; */
+        width: 135px;
+        text-align:right; 
+    }
+    .sede_torax{
+        position: relative; 
+        bottom: 85px;
+        left: 35px;
+        font-size: 8px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 135px;
+        text-align:right; 
+    }
+    .codigo_torax{
+        position: relative; 
+        bottom: 85px;
+        left: 35px;
+        font-size: 8px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: yellow; */
+        width: 135px;
+        text-align:right; 
+    }
+    .primerdia_torax{
+        position: relative; 
+        bottom: 70px;
+        left: 54px;
+        font-size: 7px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 38px;
+        text-align:left; 
+    }
+    .ultimodia_torax{
+        position: relative; 
+        bottom: 70px;
+        left: 54px;
+        font-size: 7px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 38px;
+        text-align:left;
+    }
+    .codigobar_torax{
+        transform: rotate(-90deg);
+        position: relative; 
+        bottom: 112px;
+        left: 147px;
+        /* background: yellow; */
+        width: 70px;
+    }
+    td{
+        height: 80px;
+        /* background: orange; */
+    }
+    
+    .empresa_cristalino, .empresa_anillo{
+        position: relative; 
+        bottom: 43px;
+        left: 28px;
+        font-size: 7px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: yellow; */
+        width: 90px;
+        text-align:center;
+    }
+    .nombre_cristalino, .nombre_anillo{
+        position: relative; 
+        bottom: 43px;
+        left: 28px;
+        font-size: 7px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 90px;
+        text-align:center;
+    }
+    .cedula_cristalino, .cedula_anillo{
+        position: relative; 
+        bottom: 44px;
+        left: 28px;
+        font-size: 6px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: violet; */
+        width: 90px;
+        text-align:center;
+    }
+    .codigo_cristalino, .codigo_anillo{
+        position: relative; 
+        bottom: 46px;
+        left: 28px;
+        font-size: 6px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 90px;
+        text-align:center;
+    }
+    .codigobar_cristalino, .codigobar_anillo{
+        position: relative; 
+        bottom: 61px;
+        left: 40px;
+        /* background: red; */
+        width: 100px;
+        text-align:center;
+    }
+    .codigobar_cristalino_hijo{
+        /* position: relative; 
+        bottom: 61px;
+        width: 65px;*/
+        position: absolute; 
+        
+        /* background: blue; */
+        
+    }
+    .primerdia_cristalino, .primerdia_anillo{
+        position: relative; 
+        bottom: 61px;
+        left: 122px;
+        font-size: 6px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 85px;
+        text-align:center;
+    }
+    .ultimodia_cristalino, .ultimodia_anillo{
+        position: relative; 
+        bottom: 61px;
+        left: 119px;
+        font-size: 6px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 85px;
+        text-align:center;
+    }
 </style>
 
 <body>
-    @php
-        $contadorTorax = 0;
-        $contadorCristalino = 0;
-        $contadorMuñeca = 0;
-        $contadorAnillo = 0;
-        foreach ($trabajdosiasig as $trabj) {
-            if($trabj->ubicacion == 'TORAX'){
-                $contadorTorax += 1; 
-            }elseif($trabj->ubicacion == 'CRISTALINO'){
-                $contadorCristalino += 1; 
-            }elseif($trabj->ubicacion == 'MUÑECA'){
-                $contadorMuñeca += 1; 
-            }elseif($trabj->ubicacion == 'DEDO'){
-                $contadorAnillo += 1; 
-            }
-
-
-        }
-        
-    @endphp
-    @if($contadorTorax != 0)
+    
+    
         <div class="caja">
             <table style="position:absolute; top:0px; margin: 0 auto; border-collapse:collapse;" cellpadding="10">
                 @php
                     
-                    /* $contador = 5; */
-                    $topTexto1 = 14;
-                    $topTexto2 = 24;
-                    $topTexto3 = 35;
-                    $topTexto4 = 44;
-                    $topFecha1 = 67;
-                    $topFecha2 = 76;
-                    $topCode = 43;
-                    $left1 = 9;
-                    $left2 = 220;
-                    $left3 = 431;
-                    $leftFecha1 = 60;
-                    $leftFecha2 = 271;
-                    $leftFecha3 = 482;
-                    $leftCode1 = 154;
-                    $leftCode2 = 365;
-                    $leftCode3 = 576;
+                    $contador = count($trabajdosiasig);
+                    
                 @endphp
-
-                @for($i=2; $i< $contadorTorax; $i=$i+3)
-                    @if($i <= $contadorTorax)
+                @for($i=2; $i< $contador; $i=$i+3)
+                    
+                    @if($i <= $contador)
                         <tr>
+                            {{-- ////////PRIMERA CELDA ////////// --}}
                             <td style=" border:0.1px solid black; text-align:right;">
-                            <img src="{{asset('imagenes/2.png')}}"class="img" style="border:1px solid black;">
+                                
+                                @if($trabajdosiasig[$i-2]->ubicacion == 'TORAX')
+                                    <div class="contenedor_torax">
+                                        <img src="{{asset('imagenes/2.png')}}" class="img_torax" style="border:1px solid black;">
+                                        {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
+                                        <div class="nombre_torax" > <b>{{$trabajdosiasig[$i-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-2]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$i-2]->persona->cedula_persona}}</b> </div>
+                                        @foreach($contratodosi as $contdosi)
+                                            <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
+                                            <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
+                                        @endforeach
+                                        <div class="codigo_torax" >No. {{$trabajdosiasig[$i-2]->dosimetro->codigo_dosimeter}}</div>
+                                        @php
+                                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->primer_dia_uso));
+                                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->ultimo_dia_uso));
+                                        @endphp
+                                        <div class="primerdia_torax" >{{$datefix1}}</div>  
+                                        <div class="ultimodia_torax" >{{$datefix2}}</div>
+                                        <div class="codigobar_torax">
+                                            @php
+                                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-2]->id_trabajadordosimetro, 'C39',1.1,15);
+                                            @endphp
+                                        </div>
+                                    </div>
+                                @elseif($trabajdosiasig[$i-2]->ubicacion == 'CRISTALINO')
+                                    <div class="contenedor_cristalino">
+                                        <img src="{{asset('imagenes/DOSIMETRIA_CRISTALINO_V3/2.png')}}" class= "img_cristalino" style="border:1px solid black;">
+                                        {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                        @foreach($contratodosi as $contdosi)
+                                            <div class="empresa_cristalino" >{{$contdosi->nombre_empresa}}</div>
+                                            {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                        @endforeach
+                                        <div class="nombre_cristalino"> <b>{{$trabajdosiasig[$i-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-2]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$i-2]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                        <div class="cedula_cristalino">CC. {{$trabajdosiasig[$i-2]->persona->cedula_persona}}</div>
+                                        <div class="codigo_cristalino" >No. {{$trabajdosiasig[$i-2]->dosimetro->codigo_dosimeter}}</div>
+                                        @php
+                                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->primer_dia_uso));
+                                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->ultimo_dia_uso));
+                                        @endphp
+                                        <div class="primerdia_cristalino" >Inicia {{$datefix1}}</div> 
+                                        <div class="ultimodia_cristalino" >Finaliza {{$datefix2}}</div>
+                                        <div class="codigobar_cristalino">
+                                            @php
+                                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-2]->id_trabajadordosimetro, 'C39',1,12);
+                                            @endphp
+                                        </div>
+                                    </div>
+                                @elseif($trabajdosiasig[$i-2]->ubicacion == 'DEDO')
+                                    <div class="contenedor_anillo">
+                                        <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
+                                        {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                        @foreach($contratodosi as $contdosi)
+                                            <div class="empresa_anillo" >{{$contdosi->nombre_empresa}}</div>
+                                            {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                        @endforeach
+                                        <div class="nombre_anillo"> <b>{{$trabajdosiasig[$i-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-2]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$i-2]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                        <div class="cedula_anillo">CC. {{$trabajdosiasig[$i-2]->persona->cedula_persona}}</div>
+                                        <div class="codigo_anillo" >No. {{$trabajdosiasig[$i-2]->dosimetro->codigo_dosimeter}}</div>
+                                        @php
+                                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->primer_dia_uso));
+                                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->ultimo_dia_uso));
+                                        @endphp
+                                        <div class="primerdia_anillo" >Inicia {{$datefix1}}</div> 
+                                        <div class="ultimodia_anillo" >Finaliza {{$datefix2}}</div>
+                                        <div class="codigobar_anillo">
+                                            @php
+                                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-2]->id_trabajadordosimetro, 'C39',1,12);
+                                            @endphp
+                                        </div>
+                                    </div>
+                                @endif
+                                    
                             </td>
-                            
+                            {{-- ////////SEGUNDA CELDA ////////// --}}
                             <td style=" border:0.1px solid black; text-align:right;">
-                                <img src="{{asset('imagenes/2.png')}}" class="img" style="border:1px solid black;">
+                                
+                                @if($trabajdosiasig[$i-1]->ubicacion == 'TORAX')
+                                    <div class="contenedor_torax">
+                                        <img src="{{asset('imagenes/2.png')}}" class="img_torax" style="border:1px solid black;">
+                                        {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
+                                        <div class="nombre_torax"> <b> {{$trabajdosiasig[$i-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-1]->persona->segundo_apellido_persona, 0,1)}}. {{$trabajdosiasig[$i-1]->persona->primer_nombre_persona}}, CC.: {{$trabajdosiasig[$i-1]->persona->cedula_persona}}</b></div>
+                                        @foreach($contratodosi as $contdosi)
+                                            <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
+                                            <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
+                                        @endforeach
+                                        <div class="codigo_torax" >No. {{$trabajdosiasig[$i-1]->dosimetro->codigo_dosimeter}}</div>
+                                        @php
+                                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->primer_dia_uso));
+                                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->ultimo_dia_uso));
+                                        @endphp
+                                        <div class="primerdia_torax" >{{$datefix1}}</div>
+                                        <div class="ultimodia_torax" >{{$datefix2}}</div>
+                                        <div class="codigobar_torax">
+                                            @php
+                                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-1]->id_trabajadordosimetro, 'C39',1.1,15);
+                                            @endphp
+                                        </div>
+                                    </div>
+                                @elseif($trabajdosiasig[$i-1]->ubicacion == 'CRISTALINO')
+                                    <div class="contenedor_cristalino">
+                                        <img src="{{asset('imagenes/DOSIMETRIA_CRISTALINO_V3/2.png')}}" class= "img_cristalino" style="border:1px solid black;">
+                                        {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                        @foreach($contratodosi as $contdosi)
+                                            <div class="empresa_cristalino" >{{$contdosi->nombre_empresa}}</div>
+                                            {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                        @endforeach
+                                        <div class="nombre_cristalino"> <b>{{$trabajdosiasig[$i-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-1]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$i-1]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                        <div class="cedula_cristalino">CC. {{$trabajdosiasig[$i-1]->persona->cedula_persona}}</div>
+                                        <div class="codigo_cristalino" >No. {{$trabajdosiasig[$i-1]->dosimetro->codigo_dosimeter}}</div>
+                                        @php
+                                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->primer_dia_uso));
+                                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->ultimo_dia_uso));
+                                        @endphp
+                                        <div class="primerdia_cristalino" >Inicia {{$datefix1}}</div> 
+                                        <div class="ultimodia_cristalino" >Finaliza {{$datefix2}}</div>
+                                        <div class="codigobar_cristalino">
+                                            @php
+                                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-1]->id_trabajadordosimetro, 'C39',1,12);
+                                            @endphp
+                                        </div>
+                                    </div>
+                                @elseif($trabajdosiasig[$i-1]->ubicacion == 'DEDO')
+                                    <div class="contenedor_anillo">
+                                        <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
+                                        {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                        @foreach($contratodosi as $contdosi)
+                                            <div class="empresa_anillo" >{{$contdosi->nombre_empresa}}</div>
+                                            {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                        @endforeach
+                                        <div class="nombre_anillo"> <b>{{$trabajdosiasig[$i-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-1]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$i-1]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                        <div class="cedula_anillo">CC. {{$trabajdosiasig[$i-1]->persona->cedula_persona}}</div>
+                                        <div class="codigo_anillo" >No. {{$trabajdosiasig[$i-1]->dosimetro->codigo_dosimeter}}</div>
+                                        @php
+                                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->primer_dia_uso));
+                                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->ultimo_dia_uso));
+                                        @endphp
+                                        <div class="primerdia_anillo" >Inicia {{$datefix1}}</div> 
+                                        <div class="ultimodia_anillo" >Finaliza {{$datefix2}}</div>
+                                        <div class="codigobar_anillo">
+                                            @php
+                                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-1]->id_trabajadordosimetro, 'C39',1,12);
+                                            @endphp
+                                        </div>
+                                    </div>
+                                @endif
+                                    
+                                
                             </td>
-
+                            {{-- ////////TERCERA CELDA ////////// --}}
                             <td style=" border:0.1px solid black; text-align:right;">
-                                <img src="{{asset('imagenes/2.png')}}" class="img" style="border:1px solid black;">
+                                
+                                @if($trabajdosiasig[$i-0]->ubicacion == 'TORAX')
+                                    <div class="contenedor_torax">
+                                        <img src="{{asset('imagenes/2.png')}}" class="img_torax" style="border:1px solid black;">
+                                        {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
+                                        <div class="nombre_torax"> <b> {{$trabajdosiasig[$i-0]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-0]->persona->segundo_apellido_persona, 0,1)}}. {{$trabajdosiasig[$i-0]->persona->primer_nombre_persona}}, CC.: {{$trabajdosiasig[$i-0]->persona->cedula_persona}}</b></div>
+                                        @foreach($contratodosi as $contdosi)
+                                            <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
+                                            <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
+                                        @endforeach
+                                        <div class="codigo_torax" >No. {{$trabajdosiasig[$i-0]->dosimetro->codigo_dosimeter}}</div>
+                                        @php
+                                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->primer_dia_uso));
+                                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->ultimo_dia_uso));
+                                        @endphp
+                                        <div class="primerdia_torax" >{{$datefix1}}</div>
+                                        <div class="ultimodia_torax" >{{$datefix2}}</div>
+                                        <div class="codigobar_torax">
+                                            @php
+                                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-0]->id_trabajadordosimetro, 'C39',1.1,15);
+                                            @endphp
+                                        </div>
+                                    </div>
+                                @elseif($trabajdosiasig[$i-0]->ubicacion == 'CRISTALINO')
+                                    <div class="contenedor_cristalino" >
+                                        <img src="{{asset('imagenes/DOSIMETRIA_CRISTALINO_V3/2.png')}}" class= "img_cristalino" style="border:1px solid black;">
+                                        {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                        @foreach($contratodosi as $contdosi)
+                                            <div class="empresa_cristalino" >{{$contdosi->nombre_empresa}}</div>
+                                            {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                        @endforeach
+                                        <div class="nombre_cristalino"> <b>{{$trabajdosiasig[$i-0]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-0]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-0]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$i-0]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                        <div class="cedula_cristalino">CC. {{$trabajdosiasig[$i-0]->persona->cedula_persona}}</div>
+                                        <div class="codigo_cristalino" >No. {{$trabajdosiasig[$i-0]->dosimetro->codigo_dosimeter}}</div>
+                                        @php
+                                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->primer_dia_uso));
+                                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->ultimo_dia_uso));
+                                        @endphp
+                                        <div class="primerdia_cristalino" >Inicia {{$datefix1}}</div> 
+                                        <div class="ultimodia_cristalino" >Finaliza {{$datefix2}}</div>
+                                        <div class="codigobar_cristalino">
+                                            @php
+                                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-0]->id_trabajadordosimetro, 'C39',1,12);
+                                            @endphp
+                                        </div>
+                                    </div>
+                                @elseif($trabajdosiasig[$i-0]->ubicacion == 'DEDO')
+                                    <div class="contenedor_anillo" >
+                                        <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
+                                        {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                        @foreach($contratodosi as $contdosi)
+                                            <div class="empresa_anillo" >{{$contdosi->nombre_empresa}}</div>
+                                            {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                        @endforeach
+                                        <div class="nombre_anillo"> <b>{{$trabajdosiasig[$i-0]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-0]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-0]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$i-0]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                        <div class="cedula_anillo">CC. {{$trabajdosiasig[$i-0]->persona->cedula_persona}}</div>
+                                        <div class="codigo_anillo" >No. {{$trabajdosiasig[$i-0]->dosimetro->codigo_dosimeter}}</div>
+                                        @php
+                                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->primer_dia_uso));
+                                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->ultimo_dia_uso));
+                                        @endphp
+                                        <div class="primerdia_anillo" >Inicia {{$datefix1}}</div> 
+                                        <div class="ultimodia_anillo" >Finaliza {{$datefix2}}</div>
+                                        <div class="codigobar_anillo">
+                                            @php
+                                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-0]->id_trabajadordosimetro, 'C39',1,12);
+                                            @endphp
+                                        </div>
+                                    </div>
+                                @endif
+                                    
                             </td>
                         </tr>
-                        {{-- //////////////PARA LA 1 //////////////// --}}
-                        <div class="texto" style="top:{{$topTexto1}}px; left:{{$left1}}px;">{{$trabajdosiasig[$i-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-2]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$i-2]->persona->cedula_persona}}</div>
-                        @foreach($contratodosi as $contdosi)
-                            <div class="texto" style="top:{{$topTexto2}}px; left: {{$left1}}px;">{{$contdosi->nombre_empresa}}</div>
-                            <div class="texto" style="top:{{$topTexto3}}px; left: {{$left1}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                        @endforeach
-                        <div class="texto" style="top:{{$topTexto4}}px; left: {{$left1}}px; font-size: 8px;">No. {{$trabajdosiasig[$i-2]->dosimetro->codigo_dosimeter}}</div>
-                        @php
-                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->primer_dia_uso));
-                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->ultimo_dia_uso));
-                        @endphp
-                        <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha1}}px;">{{$datefix1}}</div>  
-                        <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha1}}px;">{{$datefix2}}</div>
-                        <div class="code" style="top:{{$topCode}}px; left:{{$leftCode1}}px;">
-                            @php
-                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-2]->id_trabajadordosimetro, 'C39',1.5,13);
-                            @endphp
-                        </div> 
-
-                        {{-- //////////////////////// PARA LA 2/////////// --}}
-                        <div class="texto" style="top:{{$topTexto1}}px; left:{{$left2}}px;">{{$trabajdosiasig[$i-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-1]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$i-1]->persona->cedula_persona}}</div>
-                        @foreach($contratodosi as $contdosi)
-                            <div class="texto" style="top:{{$topTexto2}}px; left: {{$left2}}px;">{{$contdosi->nombre_empresa}}</div>
-                            <div class="texto" style="top:{{$topTexto3}}px; left: {{$left2}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                        @endforeach
-                        <div class="texto" style="top:{{$topTexto4}}px; left: {{$left2}}px; font-size: 8px;">No. {{$trabajdosiasig[$i-1]->dosimetro->codigo_dosimeter}}</div>
-                        @php
-                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->primer_dia_uso));
-                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->ultimo_dia_uso));
-                        @endphp
-                        <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha2}}px;">{{$datefix1}}</div>  
-                        <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha2}}px;">{{$datefix2}}</div>
-                        <div class="code" style="top:{{$topCode}}px; left:{{$leftCode2}}px;">
-                            @php
-                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-1]->id_trabajadordosimetro, 'C39',1.5,13);
-                            @endphp
-                        </div> 
-
-                        {{-- ////////////PARA LA 3/////////////// --}}
-                        <div class="texto" style="top:{{$topTexto1}}px; left:{{$left3}}px;">{{$trabajdosiasig[$i-0]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-0]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-0]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$i-0]->persona->cedula_persona}}</div>
-                        @foreach($contratodosi as $contdosi)
-                            <div class="texto" style="top:{{$topTexto2}}px; left: {{$left3}}px;">{{$contdosi->nombre_empresa}}</div>
-                            <div class="texto" style="top:{{$topTexto3}}px; left: {{$left3}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                        @endforeach
-                        <div class="texto" style="top:{{$topTexto4}}px; left: {{$left3}}px; font-size: 8px;">No. {{$trabajdosiasig[$i-0]->dosimetro->codigo_dosimeter}}</div>
-                        @php
-                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->primer_dia_uso));
-                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->ultimo_dia_uso));
-                        @endphp
-                        <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha3}}px;">{{$datefix1}}</div>  
-                        <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha3}}px;">{{$datefix2}}</div>
-                        <div class="code" style="top:{{$topCode}}px; left:{{$leftCode3}}px;">
-                            @php
-                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-0]->id_trabajadordosimetro, 'C39',1.5,13);
-                            @endphp
-                        </div> 
+                       
+                        
                     @endif
-                    @php
-                        $topTexto1 = $topTexto1+107;
-                        $topTexto2 = $topTexto2+107;
-                        $topTexto3 = $topTexto3+107;
-                        $topTexto4 = $topTexto4+107;
-                        $topFecha1 = $topFecha1+107;
-                        $topFecha2 = $topFecha2+107;
-                        $topCode =   $topCode+107;
-                    @endphp
-                @endfor
-                @if($contadorTorax %3 == 1)
-                    <tr>
-                        <td style=" border:0.1px solid black; text-align:right;">
-                            <img src="{{asset('imagenes/2.png')}}" class="img" style="border:1px solid black;">
-                        </td>    
-                        <td></td>  
-                        <td></td>          
-                    </tr>
-
-                    <div class="texto" style="top:{{$topTexto1}}px; left:{{$left1}}px;">{{$trabajdosiasig[$contadorTorax-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contadorTorax-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contadorTorax-1]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contadorTorax-1]->persona->cedula_persona}}</div> 
-                    @foreach($contratodosi as $contdosi)
-                        <div class="texto" style="top:{{$topTexto2}}px; left: {{$left1}}px;">{{$contdosi->nombre_empresa}}</div>
-                        <div class="texto" style="top:{{$topTexto3}}px; left: {{$left1}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                    @endforeach
-                    <div class="texto" style="top:{{$topTexto4}}px; left: {{$left1}}px; font-size: 8px;  ">No. {{$trabajdosiasig[$contadorTorax-1]->dosimetro->codigo_dosimeter}}</div>
-                    @php
-                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contadorTorax-1]->primer_dia_uso));
-                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contadorTorax-1]->ultimo_dia_uso));
-                    @endphp
-                    <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha1}}px;">{{$datefix1}}</div>  
-                    <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha1}}px;">{{$datefix2}}</div>
-                    <div class="code" style="top:{{$topCode}}px; left:{{$leftCode1}}px;">
-                        @php
-                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contadorTorax-1]->id_trabajadordosimetro, 'C39',1.5,13);
-                        @endphp
-                    </div>
                     
-                @elseif($contadorTorax %3 == 2)
+                @endfor
+                
+                @if($contador %3 == 1)
                     <tr>
+                        
+                        {{-- ////////PRIMERA CELDA ////////// --}}
                         <td style=" border:0.1px solid black; text-align:right;">
-                            <img src="{{asset('imagenes/2.png')}}" class="img" style="border:1px solid black;">
-                        </td>    
-                        <td style=" border:0.1px solid black; text-align:right;">
-                            <img src="{{asset('imagenes/2.png')}}" class="img" style="border:1px solid black;">
+                                
+                            @if($trabajdosiasig[$contador-1]->ubicacion == 'TORAX')
+                                <div class="contenedor_torax">
+                                    <img src="{{asset('imagenes/2.png')}}" class="img_torax" style="border:1px solid black;">
+                                    {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
+                                    <div class="nombre_torax" > <b>{{$trabajdosiasig[$contador-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contador-1]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contador-1]->persona->cedula_persona}}</b> </div>
+                                    @foreach($contratodosi as $contdosi)
+                                        <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
+                                        <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
+                                    @endforeach
+                                    <div class="codigo_torax" >No. {{$trabajdosiasig[$contador-1]->dosimetro->codigo_dosimeter}}</div>
+                                    @php
+                                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->primer_dia_uso));
+                                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->ultimo_dia_uso));
+                                    @endphp
+                                    <div class="primerdia_torax" >{{$datefix1}}</div>  
+                                    <div class="ultimodia_torax" >{{$datefix2}}</div>
+                                    <div class="codigobar_torax">
+                                        @php
+                                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->id_trabajadordosimetro, 'C39',1.1,15);
+                                        @endphp
+                                    </div>
+                                </div>
+                            @elseif($trabajdosiasig[$contador-1]->ubicacion == 'CRISTALINO')
+                                <div class="contenedor_cristalino">
+                                    <img src="{{asset('imagenes/DOSIMETRIA_CRISTALINO_V3/2.png')}}" class= "img_cristalino" style="border:1px solid black;">
+                                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                    @foreach($contratodosi as $contdosi)
+                                        <div class="empresa_cristalino" >{{$contdosi->nombre_empresa}}</div>
+                                        {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                    @endforeach
+                                    <div class="nombre_cristalino"> <b>{{$trabajdosiasig[$contador-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contador-1]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                    <div class="cedula_cristalino">CC. {{$trabajdosiasig[$contador-1]->persona->cedula_persona}}</div>
+                                    <div class="codigo_cristalino" >No. {{$trabajdosiasig[$contador-1]->dosimetro->codigo_dosimeter}}</div>
+                                    @php
+                                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->primer_dia_uso));
+                                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->ultimo_dia_uso));
+                                    @endphp
+                                    <div class="primerdia_cristalino" >Inicia {{$datefix1}}</div> 
+                                    <div class="ultimodia_cristalino" >Finaliza {{$datefix2}}</div>
+                                    <div class="codigobar_cristalino">
+                                        @php
+                                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->id_trabajadordosimetro, 'C39',1,12);
+                                        @endphp
+                                    </div>
+                                </div>
+                            @elseif($trabajdosiasig[$contador-1]->ubicacion == 'DEDO')
+                                <div class="contenedor_anillo">
+                                    <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
+                                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                    @foreach($contratodosi as $contdosi)
+                                        <div class="empresa_anillo" >{{$contdosi->nombre_empresa}}</div>
+                                        {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                    @endforeach
+                                    <div class="nombre_anillo"> <b>{{$trabajdosiasig[$contador-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contador-1]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                    <div class="cedula_anillo">CC. {{$trabajdosiasig[$contador-1]->persona->cedula_persona}}</div>
+                                    <div class="codigo_anillo" >No. {{$trabajdosiasig[$contador-1]->dosimetro->codigo_dosimeter}}</div>
+                                    @php
+                                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->primer_dia_uso));
+                                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->ultimo_dia_uso));
+                                    @endphp
+                                    <div class="primerdia_anillo" >Inicia {{$datefix1}}</div> 
+                                    <div class="ultimodia_anillo" >Finaliza {{$datefix2}}</div>
+                                    <div class="codigobar_anillo">
+                                        @php
+                                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->id_trabajadordosimetro, 'C39',1,12);
+                                        @endphp
+                                    </div>
+                                </div>
+                            @endif
+                                
                         </td> 
+                        {{-- ////////SEGUNDA CELDA ////////// --}}
+                        <td></td>  
+                        {{-- ////////TERCERA CELDA ////////// --}}
                         <td></td>          
                     </tr>
-                    {{-- <div class="texto" style="top:{{$topTexto1}}px; left:{{$left1}}px;">{{$trabajdosiasig[$contador-2]->persona->primer_apellido_persona}}, {{$trabajdosiasig[$contador-2]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contador-2]->persona->cedula_persona}}</div> 
-                    <div class="texto" style="top:{{$topTexto1}}px; left:{{$left2}}px;">{{$trabajdosiasig[$contador-1]->persona->primer_apellido_persona}}, {{$trabajdosiasig[$contador-1]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contador-1]->persona->cedula_persona}}</div> --}}
-                    {{-- //////////////////////// PARA LA 2/////////// --}}
-                    <div class="texto" style="top:{{$topTexto1}}px; left:{{$left1}}px;">{{$trabajdosiasig[$contadorTorax-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contadorTorax-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contadorTorax-2]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contadorTorax-2]->persona->cedula_persona}}</div>
-                    @foreach($contratodosi as $contdosi)
-                        <div class="texto" style="top:{{$topTexto2}}px; left: {{$left1}}px;">{{$contdosi->nombre_empresa}}</div>
-                        <div class="texto" style="top:{{$topTexto3}}px; left: {{$left1}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                    @endforeach
-                    <div class="texto" style="top:{{$topTexto4}}px; left: {{$left1}}px; font-size: 8px;">No. {{$trabajdosiasig[$contadorTorax-2]->dosimetro->codigo_dosimeter}}</div>
-                    @php
-                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contadorTorax-2]->primer_dia_uso));
-                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contadorTorax-2]->ultimo_dia_uso));
-                    @endphp
-                    <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha1}}px;">{{$datefix1}}</div>  
-                    <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha1}}px;">{{$datefix2}}</div>
-                    <div class="code" style="top:{{$topCode}}px; left:{{$leftCode1}}px;">
-                        @php
-                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contadorTorax-2]->id_trabajadordosimetro, 'C39',1.5,13);
-                        @endphp
-                    </div> 
 
-                    {{-- ////////////PARA LA 3/////////////// --}}
-                    <div class="texto" style="top:{{$topTexto1}}px; left:{{$left2}}px;">{{$trabajdosiasig[$contadorTorax-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contadorTorax-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contadorTorax-1]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contadorTorax-1]->persona->cedula_persona}}</div>
-                    @foreach($contratodosi as $contdosi)
-                        <div class="texto" style="top:{{$topTexto2}}px; left: {{$left2}}px;">{{$contdosi->nombre_empresa}}</div>
-                        <div class="texto" style="top:{{$topTexto3}}px; left: {{$left2}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                    @endforeach
-                    <div class="texto" style="top:{{$topTexto4}}px; left: {{$left2}}px; font-size: 8px;  ">No. {{$trabajdosiasig[$contadorTorax-1]->dosimetro->codigo_dosimeter}}</div>
-                    @php
-                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contadorTorax-1]->primer_dia_uso));
-                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contadorTorax-1]->ultimo_dia_uso));
-                    @endphp
-                    <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha2}}px;">{{$datefix1}}</div>  
-                    <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha2}}px;">{{$datefix2}}</div>
-                    <div class="code" style="top:{{$topCode}}px; left:{{$leftCode2}}px;">
-                        @php
-                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contadorTorax-1]->id_trabajadordosimetro, 'C39',1.5,13);
-                        @endphp
-                    </div> 
+                @elseif($contador %3 == 2)
+                    <tr>
+                        
+                        {{-- ////////PRIMERA CELDA ////////// --}}
+                        <td style=" border:0.1px solid black; text-align:right;">
+                                
+                            @if($trabajdosiasig[$contador-2]->ubicacion == 'TORAX')
+                                <div class="contenedor_torax">
+                                    <img src="{{asset('imagenes/2.png')}}" class="img_torax" style="border:1px solid black;">
+                                    {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
+                                    <div class="nombre_torax" > <b>{{$trabajdosiasig[$contador-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contador-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contador-2]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contador-2]->persona->cedula_persona}}</b> </div>
+                                    @foreach($contratodosi as $contdosi)
+                                        <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
+                                        <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
+                                    @endforeach
+                                    <div class="codigo_torax" >No. {{$trabajdosiasig[$contador-2]->dosimetro->codigo_dosimeter}}</div>
+                                    @php
+                                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contador-2]->primer_dia_uso));
+                                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contador-2]->ultimo_dia_uso));
+                                    @endphp
+                                    <div class="primerdia_torax" >{{$datefix1}}</div>  
+                                    <div class="ultimodia_torax" >{{$datefix2}}</div>
+                                    <div class="codigobar_torax">
+                                        @php
+                                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-2]->id_trabajadordosimetro, 'C39',1.1,15);
+                                        @endphp
+                                    </div>
+                                </div>
+                            @elseif($trabajdosiasig[$contador-2]->ubicacion == 'CRISTALINO')
+                                <div class="contenedor_cristalino">
+                                    <img src="{{asset('imagenes/DOSIMETRIA_CRISTALINO_V3/2.png')}}" class= "img_cristalino" style="border:1px solid black;">
+                                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                    @foreach($contratodosi as $contdosi)
+                                        <div class="empresa_cristalino" >{{$contdosi->nombre_empresa}}</div>
+                                        {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                    @endforeach
+                                    <div class="nombre_cristalino"> <b>{{$trabajdosiasig[$contador-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contador-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contador-2]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$contador-2]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                    <div class="cedula_cristalino">CC. {{$trabajdosiasig[$contador-2]->persona->cedula_persona}}</div>
+                                    <div class="codigo_cristalino" >No. {{$trabajdosiasig[$contador-2]->dosimetro->codigo_dosimeter}}</div>
+                                    @php
+                                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contador-2]->primer_dia_uso));
+                                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contador-2]->ultimo_dia_uso));
+                                    @endphp
+                                    <div class="primerdia_cristalino" >Inicia {{$datefix1}}</div> 
+                                    <div class="ultimodia_cristalino" >Finaliza {{$datefix2}}</div>
+                                    <div class="codigobar_cristalino">
+                                        @php
+                                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-2]->id_trabajadordosimetro, 'C39',1,12);
+                                        @endphp
+                                    </div>
+                                </div>
+                            @elseif($trabajdosiasig[$contador-2]->ubicacion == 'DEDO')
+                                <div class="contenedor_anillo">
+                                    <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
+                                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                    @foreach($contratodosi as $contdosi)
+                                        <div class="empresa_anillo" >{{$contdosi->nombre_empresa}}</div>
+                                        {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                    @endforeach
+                                    <div class="nombre_anillo"> <b>{{$trabajdosiasig[$contador-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contador-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contador-2]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$contador-2]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                    <div class="cedula_anillo">CC. {{$trabajdosiasig[$contador-2]->persona->cedula_persona}}</div>
+                                    <div class="codigo_anillo" >No. {{$trabajdosiasig[$contador-2]->dosimetro->codigo_dosimeter}}</div>
+                                    @php
+                                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contador-2]->primer_dia_uso));
+                                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contador-2]->ultimo_dia_uso));
+                                    @endphp
+                                    <div class="primerdia_anillo" >Inicia {{$datefix1}}</div> 
+                                    <div class="ultimodia_anillo" >Finaliza {{$datefix2}}</div>
+                                    <div class="codigobar_anillo">
+                                        @php
+                                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-2]->id_trabajadordosimetro, 'C39',1,12);
+                                        @endphp
+                                    </div>
+                                </div>
+                            @endif
+                                
+                        </td> 
+                        {{-- ////////SEGUNDA CELDA ////////// --}}
+                        <td style=" border:0.1px solid black; text-align:right;">
+                                
+                            @if($trabajdosiasig[$contador-1]->ubicacion == 'TORAX')
+                                <div class="contenedor_torax">
+                                    <img src="{{asset('imagenes/2.png')}}" class="img_torax" style="border:1px solid black;">
+                                    {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
+                                    <div class="nombre_torax"> <b> {{$trabajdosiasig[$contador-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_apellido_persona, 0,1)}}. {{$trabajdosiasig[$contador-1]->persona->primer_nombre_persona}}, CC.: {{$trabajdosiasig[$contador-1]->persona->cedula_persona}}</b></div>
+                                    @foreach($contratodosi as $contdosi)
+                                        <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
+                                        <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
+                                    @endforeach
+                                    <div class="codigo_torax" >No. {{$trabajdosiasig[$contador-1]->dosimetro->codigo_dosimeter}}</div>
+                                    @php
+                                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->primer_dia_uso));
+                                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->ultimo_dia_uso));
+                                    @endphp
+                                    <div class="primerdia_torax" >{{$datefix1}}</div>
+                                    <div class="ultimodia_torax" >{{$datefix2}}</div>
+                                    <div class="codigobar_torax">
+                                        @php
+                                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->id_trabajadordosimetro, 'C39',1.1,15);
+                                        @endphp
+                                    </div>
+                                </div>
+                            @elseif($trabajdosiasig[$contador-1]->ubicacion == 'CRISTALINO')
+                                <div class="contenedor_cristalino">
+                                    <img src="{{asset('imagenes/DOSIMETRIA_CRISTALINO_V3/2.png')}}" class= "img_cristalino" style="border:1px solid black;">
+                                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                    @foreach($contratodosi as $contdosi)
+                                        <div class="empresa_cristalino" >{{$contdosi->nombre_empresa}}</div>
+                                        {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                    @endforeach
+                                    <div class="nombre_cristalino"> <b>{{$trabajdosiasig[$contador-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contador-1]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                    <div class="cedula_cristalino">CC. {{$trabajdosiasig[$contador-1]->persona->cedula_persona}}</div>
+                                    <div class="codigo_cristalino" >No. {{$trabajdosiasig[$contador-1]->dosimetro->codigo_dosimeter}}</div>
+                                    @php
+                                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->primer_dia_uso));
+                                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->ultimo_dia_uso));
+                                    @endphp
+                                    <div class="primerdia_cristalino" >Inicia {{$datefix1}}</div> 
+                                    <div class="ultimodia_cristalino" >Finaliza {{$datefix2}}</div>
+                                    <div class="codigobar_cristalino">
+
+                                        @php
+                                            echo "<div class='codigobar_cristalino_hijo'>";
+                                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->id_trabajadordosimetro, 'C39',1,12);
+                                            echo "</div>";
+                                        @endphp
+                                        
+                                    </div>
+                                </div>
+                            @elseif($trabajdosiasig[$contador-1]->ubicacion == 'DEDO')
+                                <div class="contenedor_anillo">
+                                    <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
+                                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                                    @foreach($contratodosi as $contdosi)
+                                        <div class="empresa_anillo" >{{$contdosi->nombre_empresa}}</div>
+                                        {{-- <div class="sede_cristalino" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div> --}}
+                                    @endforeach
+                                    <div class="nombre_anillo"> <b>{{$trabajdosiasig[$contador-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contador-1]->persona->primer_nombre_persona}} {{substr($trabajdosiasig[$contador-1]->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                                    <div class="cedula_anillo">CC. {{$trabajdosiasig[$contador-1]->persona->cedula_persona}}</div>
+                                    <div class="codigo_anillo" >No. {{$trabajdosiasig[$contador-1]->dosimetro->codigo_dosimeter}}</div>
+                                    @php
+                                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->primer_dia_uso));
+                                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contador-1]->ultimo_dia_uso));
+                                    @endphp
+                                    <div class="primerdia_anillo" >Inicia {{$datefix1}}</div> 
+                                    <div class="ultimodia_anillo" >Finaliza {{$datefix2}}</div>
+                                    <div class="codigobar_anillo">
+                                        @php
+                                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contador-1]->id_trabajadordosimetro, 'C39',1,12);
+                                        @endphp
+                                    </div>
+                                </div>
+                            @endif
+                                
+                        </td>
+                        {{-- ////////TERCERA CELDA ////////// --}}
+                        <td></td>          
+                    </tr>
+                    
                 @endif
                 
             </table> 
         </div>
-    @endif
-<br>
-<br>
-<br>
-    @if($contadorCristalino != 0 )
-        <div class="caja">
-            <table style="position:absolute; top:0px; margin: 0 auto; border-collapse:collapse;" cellpadding="10">
-                @php
-                    
-                    /* $contador = 5; */
-                    /* $topTexto1 = 14;
-                    $topTexto2 = 24;
-                    $topTexto3 = 35;
-                    $topTexto4 = 44;
-                    $topFecha1 = 67;
-                    $topFecha2 = 76;
-                    $topCode = 43;
-                    $left1 = 9;
-                    $left2 = 220;
-                    $left3 = 431;
-                    $leftFecha1 = 60;
-                    $leftFecha2 = 271;
-                    $leftFecha3 = 482;
-                    $leftCode1 = 154;
-                    $leftCode2 = 365;
-                    $leftCode3 = 576; */
-                @endphp
-
-                @for($i=2; $i< $contadorCristalino; $i=$i+3)
-                    @if($i <= $contadorCristalino)
-                        <tr>
-                            <td style=" border:0.1px solid black; text-align:right;">
-                            <img src="{{asset('imagenes/DOSIMETRIA ANILLO V3/2.png')}}"class="img" style="border:1px solid black;">
-                            </td>
-                            
-                            <td style=" border:0.1px solid black; text-align:right;">
-                                <img src="{{asset('imagenes/DOSIMETRIA ANILLO V3/2.png')}}" class="img" style="border:1px solid black;">
-                            </td>
-
-                            <td style=" border:0.1px solid black; text-align:right;">
-                                <img src="{{asset('imagenes/DOSIMETRIA ANILLO V3/2.png')}}" class="img" style="border:1px solid black;">
-                            </td>
-                        </tr>
-                        {{-- //////////////PARA LA 1 //////////////// --}}
-                        {{-- <div class="texto" style="top:{{$topTexto1}}px; left:{{$left1}}px;">{{$trabajdosiasig[$i-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-2]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$i-2]->persona->cedula_persona}}</div>
-                        @foreach($contratodosi as $contdosi)
-                            <div class="texto" style="top:{{$topTexto2}}px; left: {{$left1}}px;">{{$contdosi->nombre_empresa}}</div>
-                            <div class="texto" style="top:{{$topTexto3}}px; left: {{$left1}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                        @endforeach
-                        <div class="texto" style="top:{{$topTexto4}}px; left: {{$left1}}px; font-size: 8px;">No. {{$trabajdosiasig[$i-2]->dosimetro->codigo_dosimeter}}</div>
-                        @php
-                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->primer_dia_uso));
-                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-2]->ultimo_dia_uso));
-                        @endphp
-                        <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha1}}px;">{{$datefix1}}</div>  
-                        <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha1}}px;">{{$datefix2}}</div>
-                        <div class="code" style="top:{{$topCode}}px; left:{{$leftCode1}}px;">
-                            @php
-                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-2]->id_trabajadordosimetro, 'C39',1.5,13);
-                            @endphp
-                        </div> --}} 
-
-                        {{-- //////////////////////// PARA LA 2/////////// --}}
-                        {{-- <div class="texto" style="top:{{$topTexto1}}px; left:{{$left2}}px;">{{$trabajdosiasig[$i-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-1]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$i-1]->persona->cedula_persona}}</div>
-                        @foreach($contratodosi as $contdosi)
-                            <div class="texto" style="top:{{$topTexto2}}px; left: {{$left2}}px;">{{$contdosi->nombre_empresa}}</div>
-                            <div class="texto" style="top:{{$topTexto3}}px; left: {{$left2}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                        @endforeach
-                        <div class="texto" style="top:{{$topTexto4}}px; left: {{$left2}}px; font-size: 8px;">No. {{$trabajdosiasig[$i-1]->dosimetro->codigo_dosimeter}}</div>
-                        @php
-                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->primer_dia_uso));
-                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-1]->ultimo_dia_uso));
-                        @endphp
-                        <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha2}}px;">{{$datefix1}}</div>  
-                        <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha2}}px;">{{$datefix2}}</div>
-                        <div class="code" style="top:{{$topCode}}px; left:{{$leftCode2}}px;">
-                            @php
-                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-1]->id_trabajadordosimetro, 'C39',1.5,13);
-                            @endphp
-                        </div>  --}}
-
-                        {{-- ////////////PARA LA 3/////////////// --}}
-                        {{-- <div class="texto" style="top:{{$topTexto1}}px; left:{{$left3}}px;">{{$trabajdosiasig[$i-0]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$i-0]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$i-0]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$i-0]->persona->cedula_persona}}</div>
-                        @foreach($contratodosi as $contdosi)
-                            <div class="texto" style="top:{{$topTexto2}}px; left: {{$left3}}px;">{{$contdosi->nombre_empresa}}</div>
-                            <div class="texto" style="top:{{$topTexto3}}px; left: {{$left3}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                        @endforeach
-                        <div class="texto" style="top:{{$topTexto4}}px; left: {{$left3}}px; font-size: 8px;">No. {{$trabajdosiasig[$i-0]->dosimetro->codigo_dosimeter}}</div>
-                        @php
-                            $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->primer_dia_uso));
-                            $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$i-0]->ultimo_dia_uso));
-                        @endphp
-                        <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha3}}px;">{{$datefix1}}</div>  
-                        <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha3}}px;">{{$datefix2}}</div>
-                        <div class="code" style="top:{{$topCode}}px; left:{{$leftCode3}}px;">
-                            @php
-                                echo DNS1D::getBarcodeHTML($trabajdosiasig[$i-0]->id_trabajadordosimetro, 'C39',1.5,13);
-                            @endphp
-                        </div>  --}}
-                    @endif
-                    {{-- @php
-                        $topTexto1 = $topTexto1+107;
-                        $topTexto2 = $topTexto2+107;
-                        $topTexto3 = $topTexto3+107;
-                        $topTexto4 = $topTexto4+107;
-                        $topFecha1 = $topFecha1+107;
-                        $topFecha2 = $topFecha2+107;
-                        $topCode =   $topCode+107;
-                    @endphp --}}
-                @endfor
-                @if($contadorCristalino %3 == 1)
-                    <tr>
-                        <td style=" border:0.1px solid black; text-align:right;">
-                            <img src="{{asset('imagenes/DOSIMETRIA ANILLO V3/2.png')}}" class="img" style="border:1px solid black;">
-                        </td>    
-                        <td></td>  
-                        <td></td>          
-                    </tr>
-
-                    {{-- <div class="texto" style="top:{{$topTexto1}}px; left:{{$left1}}px;">{{$trabajdosiasig[$contadorCristalino-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contadorCristalino-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contadorCristalino-1]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contadorCristalino-1]->persona->cedula_persona}}</div> 
-                    @foreach($contratodosi as $contdosi)
-                        <div class="texto" style="top:{{$topTexto2}}px; left: {{$left1}}px;">{{$contdosi->nombre_empresa}}</div>
-                        <div class="texto" style="top:{{$topTexto3}}px; left: {{$left1}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                    @endforeach
-                    <div class="texto" style="top:{{$topTexto4}}px; left: {{$left1}}px; font-size: 8px;  ">No. {{$trabajdosiasig[$contadorCristalino-1]->dosimetro->codigo_dosimeter}}</div>
-                    @php
-                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contadorCristalino-1]->primer_dia_uso));
-                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contadorCristalino-1]->ultimo_dia_uso));
-                    @endphp
-                    <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha1}}px;">{{$datefix1}}</div>  
-                    <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha1}}px;">{{$datefix2}}</div>
-                    <div class="code" style="top:{{$topCode}}px; left:{{$leftCode1}}px;">
-                        @php
-                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contadorCristalino-1]->id_trabajadordosimetro, 'C39',1.5,13);
-                        @endphp
-                    </div> --}}
-                    
-                @elseif($contadorCristalino %3 == 2)
-                    <tr>
-                        <td style=" border:0.1px solid black; text-align:right;">
-                            <img src="{{asset('imagenes/DOSIMETRIA ANILLO V3/2.png')}}" class="img" style="border:1px solid black;">
-                        </td>    
-                        <td style=" border:0.1px solid black; text-align:right;">
-                            <img src="{{asset('imagenes/DOSIMETRIA ANILLO V3/2.png')}}" class="img" style="border:1px solid black;">
-                        </td> 
-                        <td></td>          
-                    </tr>
-                    {{-- <div class="texto" style="top:{{$topTexto1}}px; left:{{$left1}}px;">{{$trabajdosiasig[$contador-2]->persona->primer_apellido_persona}}, {{$trabajdosiasig[$contador-2]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contador-2]->persona->cedula_persona}}</div> 
-                    <div class="texto" style="top:{{$topTexto1}}px; left:{{$left2}}px;">{{$trabajdosiasig[$contador-1]->persona->primer_apellido_persona}}, {{$trabajdosiasig[$contador-1]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contador-1]->persona->cedula_persona}}</div> --}}
-                    {{-- //////////////////////// PARA LA 2/////////// --}}
-                    {{-- <div class="texto" style="top:{{$topTexto1}}px; left:{{$left1}}px;">{{$trabajdosiasig[$contadorCristalino-2]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contadorCristalino-2]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contadorCristalino-2]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contadorCristalino-2]->persona->cedula_persona}}</div>
-                    @foreach($contratodosi as $contdosi)
-                        <div class="texto" style="top:{{$topTexto2}}px; left: {{$left1}}px;">{{$contdosi->nombre_empresa}}</div>
-                        <div class="texto" style="top:{{$topTexto3}}px; left: {{$left1}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                    @endforeach
-                    <div class="texto" style="top:{{$topTexto4}}px; left: {{$left1}}px; font-size: 8px;">No. {{$trabajdosiasig[$contadorCristalino-2]->dosimetro->codigo_dosimeter}}</div>
-                    @php
-                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contadorCristalino-2]->primer_dia_uso));
-                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contadorCristalino-2]->ultimo_dia_uso));
-                    @endphp
-                    <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha1}}px;">{{$datefix1}}</div>  
-                    <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha1}}px;">{{$datefix2}}</div>
-                    <div class="code" style="top:{{$topCode}}px; left:{{$leftCode1}}px;">
-                        @php
-                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contadorCristalino-2]->id_trabajadordosimetro, 'C39',1.5,13);
-                        @endphp
-                    </div>  --}}
-
-                    {{-- ////////////PARA LA 3/////////////// --}}
-                    {{-- <div class="texto" style="top:{{$topTexto1}}px; left:{{$left2}}px;">{{$trabajdosiasig[$contadorCristalino-1]->persona->primer_apellido_persona}} {{substr($trabajdosiasig[$contadorCristalino-1]->persona->segundo_apellido_persona, 0,1)}}, {{$trabajdosiasig[$contadorCristalino-1]->persona->primer_nombre_persona}}. CC. {{$trabajdosiasig[$contadorCristalino-1]->persona->cedula_persona}}</div>
-                    @foreach($contratodosi as $contdosi)
-                        <div class="texto" style="top:{{$topTexto2}}px; left: {{$left2}}px;">{{$contdosi->nombre_empresa}}</div>
-                        <div class="texto" style="top:{{$topTexto3}}px; left: {{$left2}}px; font-size: 8px;">{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                    @endforeach
-                    <div class="texto" style="top:{{$topTexto4}}px; left: {{$left2}}px; font-size: 8px;  ">No. {{$trabajdosiasig[$contadorCristalino-1]->dosimetro->codigo_dosimeter}}</div>
-                    @php
-                        $datefix1 = date('d/m/Y',strtotime($trabajdosiasig[$contadorCristalino-1]->primer_dia_uso));
-                        $datefix2 = date('d/m/Y',strtotime($trabajdosiasig[$contadorCristalino-1]->ultimo_dia_uso));
-                    @endphp
-                    <div class="fecha" style="top:{{$topFecha1}}px; left: {{$leftFecha2}}px;">{{$datefix1}}</div>  
-                    <div class="fecha" style="top:{{$topFecha2}}px; left: {{$leftFecha2}}px;">{{$datefix2}}</div>
-                    <div class="code" style="top:{{$topCode}}px; left:{{$leftCode2}}px;">
-                        @php
-                            echo DNS1D::getBarcodeHTML($trabajdosiasig[$contadorCristalino-1]->id_trabajadordosimetro, 'C39',1.5,13);
-                        @endphp
-                    </div>  --}}
-                @endif
+    
+    
                 
-            </table> 
-        </div>
-    @endif
+            
+    
 
     
     
