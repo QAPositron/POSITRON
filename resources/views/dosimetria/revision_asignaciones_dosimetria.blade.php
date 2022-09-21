@@ -25,7 +25,7 @@
 </div>
 <br>
 <br>
-<div class="row ">
+{{-- <div class="row">
     <div class="col-md"></div>
     <div class="col-md-5">
         <div class="row">
@@ -38,8 +38,8 @@
                         <div class="col-md"></div>
                         <div class="col-md-8">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="dosi_control" name="dosi_control">
-                                <label class="form-check-label" for="defaultCheck1">
+                                <input class="form-check-input" type="checkbox" id="dosi_control" name="dosi_control" onchange="validarCheckbox();">
+                                <label class="form-check-label" for="defaultCheck1">    
                                     DOSIMETRO DE CONTROL
                                 </label>
                             </div>
@@ -72,6 +72,40 @@
                 </div>
             </div>
             <div class="col"></div>
+        </div>
+    </div>
+    <div class="col-md"></div>
+</div> --}}
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md-5">
+        <div class="card text-dark bg-light">
+            <div class="row">
+                <div class="col-md m-3">
+                    <h6 class="pt-4 text-center">CÓDIGO DE LA ETIQUETA </h6>
+                    <br>
+                    <input class="form-control" type="number" name="codigo_etiqueta" id="codigo_etiqueta" placeholder="-DIGITE UN CODIGO-" autofocus >
+                </div>
+                <div class="col-md m-3">
+                    <h6 class="pt-4 text-center">CÓDIGO DEL DOSÍMETRO </h6>
+                    <br>
+                    <input class="form-control" type="number" name="codigo_dosimetro" id="codigo_dosimetro" placeholder="-DIGITE UN CODIGO-" autofocus >
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md"></div>
+                <div class="col-md-6 ">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="dosi_control" name="dosi_control" onchange="validarCheckbox();">
+                        <label class="form-check-label" for="defaultCheck1">    
+                            DOSIMETRO DE CONTROL
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md"></div>
+            </div>
+            <br>
         </div>
     </div>
     <div class="col-md"></div>
@@ -218,18 +252,148 @@ crossorigin="anonymous">
 
 </script>
 <script type="text/javascript">
+    function validarCheckbox(){
+        const checkbox = document.getElementById('dosi_control');
+        if(checkbox.checked){
+            console.log('checkbox esta seleccionado');
+            $('#codigo_etiqueta').on('change', function(){
+                var codigo = $(this).val();
+                console.log(codigo);
+                ///////////// CON DOSIMETRO DE CONTROL///////////
+                var check = 0;
+                @foreach($dosicontrolasig as $dosicontasig)
+                    if(codigo == '{{$dosicontasig->id_dosicontrolcontdosisedes}}' ){
+                        check = 1;
+                        console.log("si existe ese codigo DE DOSIMETRO CONTROL");
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'CORRECTO!!',
+                        text: 'SI EXISTE EL REGISTRO DE DOSÍMETRO CONTROL EN ESTE MES DEL CONTRATO',
+                        showConfirmButton: false,
+                        timer: 3000
+                        })
+                        document.getElementById("codigo_etiqueta").value = "";
+                    }
+                @endforeach
+                if(check == 0){
+                    console.log("no existe ese codigo");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!!',
+                        text: 'NO EXISTE ESTE REGISTRO DE DOSÍMETRO CONTROL PARA ESTE MES DEL CONTRATO',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    document.getElementById("codigo_etiqueta").value = "";
+                }
+            }) 
+        } else {
+            console.log('checkbox NO esta seleccionado');
+        }
+    }
     $(document).ready(function(){
         @foreach($trabjasignados as $trabj)
             if('{{$trabj->revision}}' == 'TRUE'){
                 let tr = document.getElementById('{{$trabj->id_trabajadordosimetro}}'); 
-                tr.style.boxShadow = "0px 0px 20px 5px rgb(109, 250, 100)";
+                tr.style.boxShadow = "0px 0px 7px 1px rgb(26, 153, 128)";  
             }
         @endforeach
-        if ($('#dia1').prop('checked') ) {
+        
+        if ($('#dosi_control').prop('checked') ) {
             console.log("Checkbox seleccionado");
         }else{
             console.log("Checkbox no seleccionado");
+            $('#codigo_etiqueta').on('change', function(){
+                var codigoEtiq = $(this).val();
+                console.log(codigoEtiq);
+                document.getElementById("codigo_dosimetro").value = "";
+
+                $('#codigo_dosimetro').on('change', function(){
+                    var codigoDosi = document.getElementById('codigo_dosimetro').value; 
+                    console.log(codigoDosi);
+                    if(codigoDosi != ''){
+                        $.get('dosimetro',{codigo_dosi : codigoDosi}, function(dosimetro){
+                            console.log(dosimetro);
+                            if(dosimetro.length != 0){
+                                var check = 0;
+                                @foreach($trabjasignados as $trabj)
+                                    if(codigoEtiq == codigoDosi && codigoDosi == '{{$trabj->dosimetro->codigo_dosimeter}}' && dosimetro[0].uso_dosimetro == '{{$trabj->ubicacion}}' && dosimetro[0].estado_dosimetro == 'EN USO'){
+                                        console.log("SI SE HIZO MATCH");
+                                        check = 1;
+                                        /* Swal.fire({
+                                            icon: 'success',
+                                            title: 'CORRECTO!!',
+                                            text: 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO Y ADEMAS COINCIDE LA UBICACIÓN Y ESTADO',
+                                            showConfirmButton: false,
+                                            timer: 4000
+                                        })
+                                        document.getElementById("codigo_dosimetro").value = "";
+                                        document.getElementById("codigo_etiqueta").value = "";
+                                        $.get('trabajadordosimetro', {id_trabajadordosimetro: '{{$trabj->id_trabajadordosimetro}}'}, function(trabajadordosi){
+                                            console.log("SE HIZO EL CHECK"+trabajadordosi);
+                                        }) */
+                                    }
+                                @endforeach  
+                                if(check == 0){
+                                    console.log("NO SE HIZO MATCH");
+                                    /* Swal.fire({
+                                        icon: 'error',
+                                        title: 'ERROR!!',
+                                        text: 'NO SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    })
+                                    document.getElementById("codigo_dosimetro").value = "";
+                                    document.getElementById("codigo_etiqueta").value = ""; */
+                                }
+                            }else{
+                                /* Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!!',
+                                    text: 'NO EXISTE NINGUN DOSÍMETRO CON ESE CODIGO',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                })
+                                document.getElementById("codigo_dosimetro").value = "";
+                                document.getElementById("codigo_etiqueta").value = ""; */
+                                console.log("NO EXISTE");
+                            }
+                        })
+                    }
+                })
+
+             /* ///////////// SIN DOSIMETRO DE CONTROL///////////
+                var check = 0;
+                
+                @foreach($trabjasignados as $trabj)
+                    if(codigo == '{{$trabj->id_trabajadordosimetro}}' ){
+                        check = 1;
+                        console.log("si existe ese codigo");
+                        
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'CORRECTO!!',
+                            text: 'SI EXISTE EL REGISTRO EN ESTE MES DEL CONTRATO',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        document.getElementById("codigo_etiqueta").value = "";
+                    }
+                @endforeach
+                if(check == 0){
+                    console.log("no existe ese codigo");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!!',
+                        text: 'NO EXISTE ESTE REGISTRO PARA ESTE MES DEL CONTRATO',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    document.getElementById("codigo_etiqueta").value = "";
+                } */
+            })
         }
+        
         /*if( document.getElementById('dosi_control').checked){
             alert('seleccionado');
              $('#codigo_etiqueta').on('change', function(){
@@ -300,7 +464,7 @@ crossorigin="anonymous">
             }) */
         
         
-        $('#codigo_dosimetro').on('change', function(){
+        /* $('#codigo_dosimetro').on('change', function(){
             var codigo_dosi = $(this).val();
             console.log(codigo_dosi);
             if(codigo_dosi != ''){
@@ -324,7 +488,7 @@ crossorigin="anonymous">
                                 let tr = document.getElementById('{{$trabj->id_trabajadordosimetro}}'); 
                                 tr.style.boxShadow = "0px 0px 20px 5px rgb(109, 250, 100)";
                                 cheq = 1;
-                                /* alert('SI EXISTE EL DOSIMETRO'); */
+                                
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'CORRECTO!!',
@@ -339,7 +503,7 @@ crossorigin="anonymous">
                             }
                         @endforeach
                         if(cheq == 0){
-                            /* alert('NO ESTA RELACIONADO'); */
+                            
                             Swal.fire({
                                 icon: 'error',
                                 title: 'ERROR!!',
@@ -363,7 +527,7 @@ crossorigin="anonymous">
                 })
             }
 
-        })
+        }) */
         
     })
 </script>

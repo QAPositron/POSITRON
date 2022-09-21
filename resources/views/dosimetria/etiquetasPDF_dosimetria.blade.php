@@ -103,7 +103,7 @@
     }
     .primerdia_torax{
         position: relative; 
-        bottom: 70px;
+        bottom: 69px;
         left: 54px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
@@ -113,7 +113,7 @@
     }
     .ultimodia_torax{
         position: relative; 
-        bottom: 70px;
+        bottom: 69px;
         left: 54px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
@@ -124,7 +124,7 @@
     .codigobar_torax{
         transform: rotate(-90deg);
         position: relative; 
-        bottom: 112px;
+        bottom: 118px;
         left: 147px;
         /* background: yellow; */
         width: 70px;
@@ -177,10 +177,11 @@
     .codigobar_cristalino, .codigobar_anillo{
         position: relative; 
         bottom: 61px;
-        left: 40px;
-        /* background: red; */
+        left: 50px;
+        /* background-color: red; */
         width: 100px;
-        text-align:center;
+       /*  text-align:center; */
+       
     }
     .codigobar_cristalino_hijo{
         /* position: relative; 

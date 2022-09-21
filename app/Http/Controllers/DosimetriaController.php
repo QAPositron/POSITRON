@@ -1877,11 +1877,11 @@ class DosimetriaController extends Controller
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
         /* return $dosicontrolasig; */
-        $pdf = PDF::loadView('dosimetria.etiquetasPDF_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig'));
-        $pdf->setPaper('A4', 'portrait');
-        
+        /* $pdf = PDF::loadView('dosimetria.etiquetasPDF_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig')); */
+        $pdf =  PDF::loadView('dosimetria.etiquetasPDF1_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig'));
+        /* $pdf->setPaper('A4', 'portrait'); */
+        $pdf->setPaper( array(0, 0,306.141,2834.645), 'portrait'); 
         return $pdf->stream();
-       /*  return view('dosimetria.etiquetasPDF1_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig')); */
     }
     public function revisionDosimetria($id, $mesnumber){
         $contdosisededepto = Contratodosimetriasededepto::find($id);
