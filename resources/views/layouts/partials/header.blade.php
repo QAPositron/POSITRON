@@ -19,6 +19,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{{route('empresasdosi.create')}}">EMPRESAS</a></li>
               <li><a class="dropdown-item" href="{{route('dosimetros.search')}}">INVENTARIO</a></li>
+              <li><a class="dropdown-item" href="{{route('revisiondosimetria.create')}}">REVISIÓN</a></li>
               <li><a class="dropdown-item" href="{{route('novedadesdosim.create')}}">NOVEDADES</a></li>
             </ul>
           </li>

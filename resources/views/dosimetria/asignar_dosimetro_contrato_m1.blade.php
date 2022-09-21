@@ -4,9 +4,9 @@
     <div class="col-md"></div>
     <div class="col-md-15">
         <div class="card text-dark bg-light">
-            <h2 class="modal-title w-100 text-center">ASIGNACIÓN DOSÍMETROS</h2>
             <br>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"> <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
+            <h2 class="text-center">ASIGNACIÓN DOSÍMETROS</h2>
+            <h3 class="text-center" id="nueva_empresaModalLabel"> <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
                 MES {{$mesnumber}}
                 ( <span>
                     @php  
@@ -25,7 +25,7 @@
                     <div class="col-md">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
-                                <thead>
+                                <thead class="table-active">
                 
                                     <tr class="text-center">
                                         <th>DOSíMETROS</th>
@@ -58,7 +58,7 @@
                                         <td class="text-center">{{$contdosisededepto->dosi_muñeca}}</td>
                                     </tr>
                                     <tr>
-                                        <th>DEDO:</th>
+                                        <th>ANILLO:</th>
                                         <td class="text-center">{{$contdosisededepto->dosi_dedo}}</td>
                                     </tr>
                                 </tbody>
@@ -129,7 +129,7 @@
                     <div class="col-md">
                         <div class="table table-responsive text-center">
                             <table class="table table-bordered" id="tablaAsignacionDosimetrosm1">
-                                <thead class="text-center">
+                                <thead class=" table-active text-center">
                                     <th style='width: 28.20%'>TRABAJADOR / ÁREA</th>
                                     <th style='width: 16.40%'>UBICACIÓN</th>
                                     <th style='width: 16.40%'>DOSÍMETRO</th>
@@ -461,7 +461,7 @@
                                                             @endforeach
                                                         </select>
                                                     </td>
-                                                    <td>DEDO</td>
+                                                    <td>ANILLO</td>
                                                     <td>
                                                         <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                             <option value="">----</option>

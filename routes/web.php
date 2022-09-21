@@ -229,6 +229,13 @@ Route::get('etiquetasdosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaControl
 
 ////////////RUTAS PARA LA REVISION DE DOSIMETROS ASIGNADOS/////////
 Route::get('revisiondosimetria/{deptodosi}/{mesnumber}/revision', [DosimetriaController::class, 'revisionDosimetria'])->name('revisiondosimetria.check');
+Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetro',[DosimetriaController::class, 'revisionDosimetro']);
+Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/trabajadordosimetro',[DosimetriaController::class, 'revisionCheck']);
+
+Route::get('revisiondosimetria/create', [DosimetriaController::class, 'revisionDosimetriaGeneral'])->name('revisiondosimetria.create');
+Route::get('/revisiondosimetria/dosimetro', [DosimetriaController::class, 'revisionDosimetro']);
+Route::get('/revisiondosimetria/trabajadordosimetro',[DosimetriaController::class, 'revisionCheck']);
+
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA //////////////
 Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');
 Route::get('/novedades/contratoDosi', [NovedadesController::class, 'contratoDosimetria']);

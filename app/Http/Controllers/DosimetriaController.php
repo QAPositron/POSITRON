@@ -983,14 +983,14 @@ class DosimetriaController extends Controller
                 $asigdosimDedo->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimDedo->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
                 $asigdosimDedo->ocupacion                 = $request->ocupacion_asigdosimDedo[$i];
-                $asigdosimDedo->ubicacion                 = 'DEDO';
+                $asigdosimDedo->ubicacion                 = 'ANILLO';
                 $asigdosimDedo->energia                   = $request->energia_asigdosim;
     
                 $asigdosimDedo->save();
                 $estadoDosimDedo = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimDedo[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
-                    'uso_dosimetro'    => 'DEDO'
+                    'uso_dosimetro'    => 'ANILLO'
                 ]);
                 $estadoHolderDedo = Holder::where('id_holder', '=', $request->id_holder_asigdosimDedo[$i])
                 ->update([
@@ -1076,7 +1076,7 @@ class DosimetriaController extends Controller
         ->get();
         $dosidedomesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', $mesnumber-1)
-        ->where('ubicacion', 'DEDO')
+        ->where('ubicacion', 'ANILLO')
         ->get();
         
         
@@ -1373,14 +1373,14 @@ class DosimetriaController extends Controller
                 $asigdosimDedo->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimDedo->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
                 $asigdosimDedo->ocupacion                 = $request->ocupacion_asigdosimDedo[$i];
-                $asigdosimDedo->ubicacion                 = 'DEDO';
+                $asigdosimDedo->ubicacion                 = 'ANILLO';
                 $asigdosimDedo->energia                   = $request->energia_asigdosim;
     
                 $asigdosimDedo->save();
                 $estadoDosimDedo = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimDedo[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
-                    'uso_dosimetro'    => 'DEDO'
+                    'uso_dosimetro'    => 'ANILLO'
                 ]);
                 $estadoHolderDedo = Holder::where('id_holder', '=', $request->id_holder_asigdosimDedo[$i])
                 ->update([
@@ -1451,7 +1451,7 @@ class DosimetriaController extends Controller
             ->count();
         $DosiDedoAsignados = Trabajadordosimetro::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
             ->where('contdosisededepto_id', $id)
-            ->where('ubicacion', 'DEDO')
+            ->where('ubicacion', 'ANILLO')
             ->where('mes_asignacion', $mesnumber)
             ->count();
         return view('dosimetria.info_asignacion_dosimetros_contrato', compact('mesnumber','contdosisededepto', 'mescontdosisededepto', 'dosiareasignados', 'trabjasignados', 'observacionesDelMes', 'dosicontrolasig','DosiControlAsignados', 'DosiToraxAsignados', 'DosiCasoAsignados', 'DosiCristalinoAsignados', 'DosiMuñecaAsignados', 'DosiDedoAsignados'));
@@ -1895,5 +1895,20 @@ class DosimetriaController extends Controller
         /* return $contdosisededepto; */
         return view('dosimetria.revision_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber'));
     }
-
+    public function revisionDosimetro(Request $request){
+        $dosimetro = Dosimetro::where('codigo_dosimeter', '=', $request->codigo_dosi)->get();
+        return response()->json($dosimetro);
+    }
+    public function revisionDosimetriaGeneral(){
+        $trabajdosiasig = Trabajadordosimetro::all();
+        $dosimetros = Dosimetro::all();
+        return view('dosimetria.revision_asignaciones_dosimetria_general', compact('trabajdosiasig', 'dosimetros') );
+    }
+    public function revisionCheck(Request $request){
+        $trabajadordosimetro = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $request->id_trabajadordosimetro)
+        ->update([
+            'revision' => 'TRUE'
+        ]);
+        return response()->json($trabajadordosimetro);
+    }
 }

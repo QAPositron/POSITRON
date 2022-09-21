@@ -275,7 +275,7 @@
                                             @endphp
                                         </div>
                                     </div>
-                                @elseif($trabajdosiasig[$i-2]->ubicacion == 'DEDO')
+                                @elseif($trabajdosiasig[$i-2]->ubicacion == 'ANILLO')
                                     <div class="contenedor_anillo">
                                         <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
                                         {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
@@ -349,7 +349,7 @@
                                             @endphp
                                         </div>
                                     </div>
-                                @elseif($trabajdosiasig[$i-1]->ubicacion == 'DEDO')
+                                @elseif($trabajdosiasig[$i-1]->ubicacion == 'ANILLO')
                                     <div class="contenedor_anillo">
                                         <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
                                         {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
@@ -424,7 +424,7 @@
                                             @endphp
                                         </div>
                                     </div>
-                                @elseif($trabajdosiasig[$i-0]->ubicacion == 'DEDO')
+                                @elseif($trabajdosiasig[$i-0]->ubicacion == 'ANILLO')
                                     <div class="contenedor_anillo" >
                                         <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
                                         {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
@@ -508,7 +508,7 @@
                                         @endphp
                                     </div>
                                 </div>
-                            @elseif($trabajdosiasig[$contador-1]->ubicacion == 'DEDO')
+                            @elseif($trabajdosiasig[$contador-1]->ubicacion == 'ANILLO')
                                 <div class="contenedor_anillo">
                                     <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
                                     {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
@@ -591,7 +591,7 @@
                                         @endphp
                                     </div>
                                 </div>
-                            @elseif($trabajdosiasig[$contador-2]->ubicacion == 'DEDO')
+                            @elseif($trabajdosiasig[$contador-2]->ubicacion == 'ANILLO')
                                 <div class="contenedor_anillo">
                                     <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
                                     {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
@@ -669,7 +669,7 @@
                                         
                                     </div>
                                 </div>
-                            @elseif($trabajdosiasig[$contador-1]->ubicacion == 'DEDO')
+                            @elseif($trabajdosiasig[$contador-1]->ubicacion == 'ANILLO')
                                 <div class="contenedor_anillo">
                                     <img src="{{asset('imagenes/DOSIMETRIA_ANILLO_V3/2.png')}}" class= "img_anillo" style="border:1px solid black;">
                                     {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}

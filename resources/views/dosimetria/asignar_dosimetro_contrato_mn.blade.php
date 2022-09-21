@@ -12,7 +12,7 @@
                     <div class="col-md">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
-                                <thead>
+                                <thead class="table-active">
                                     <tr class="text-center">
                                         <th>DOSíMETROS</th>
                                         <th>CONTRATADOS</th>
@@ -114,7 +114,7 @@
                     <div class="col-md">
                         <div class="table table-responsive text-center">
                             <table  class="table table-bordered" id="tablaAsignacionDosimetrosmn">
-                                <thead class="text-center">
+                                <thead class="table-active text-center">
                                     <th style='width: 28.20%' >TRABAJADOR / ÁREA</th>
                                     <th style='width: 16.40%'>UBICACIÓN</th>
                                     <th style='width: 16.40%'>DOSÍMETRO</th>

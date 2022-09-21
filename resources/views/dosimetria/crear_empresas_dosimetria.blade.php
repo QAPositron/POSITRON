@@ -27,7 +27,7 @@
         <div class="col-11">
             <div class="table table-responsive p-4 ">
                 <table class="table table-bordered empresasdosi">
-                    <thead class ="text-center">
+                    <thead class ="table-active text-center">
                         <tr>
                             <th >EMPRESA</th>
                             <th style='width: 15.60%'>TIPO. IDEN</th>

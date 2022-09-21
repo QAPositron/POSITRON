@@ -31,7 +31,7 @@
         {{-- <h3 class="text-center">LISTADO DE CONTRATOS</h3> --}}
         <div class="table table-responsive p-4 ">
             <table class="table table-bordered contratosdosi">
-                <thead class ="text-center">
+                <thead class ="table-active text-center">
                     <tr>
                         <th>No. CONTRATO</th>
                         <th style='width: 15.60%'>FECHA INICIO</th>

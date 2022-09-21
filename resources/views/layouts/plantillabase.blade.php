@@ -16,7 +16,7 @@
      <!-- DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/POSITRON/public/DataTables/datatables.min.css"/>
 
-    
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.4/css/fixedHeader.bootstrap.css">
 
 
     <title>CREATE</title>
@@ -155,7 +155,7 @@
 
     <!-- DataTables JS -->
     <script type="text/javascript" src= "<?php $_SERVER['DOCUMENT_ROOT'] ?>/POSITRON/public/DataTables/datatables.min.js"></script>
-    
+    <script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.js"></script>
 
 
     
