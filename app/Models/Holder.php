@@ -14,5 +14,8 @@ class Holder extends Model
     public function trabajadordosimetro(){
         return $this->hasOne(Trabajadordosimetro::class, 'holder_id', 'id_holder');
     }
-
+    //relacion uno a muchos con trabajador dosiemtro
+    public function temptrabajdosimrev(){
+        return $this->hasOne(Temptrabajdosimrev::class, 'holder_id', 'id_holder');
+    }
 }

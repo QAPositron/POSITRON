@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Trabajadordosimetro extends Model
+class Temptrabajdosimrev extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_trabajadordosimetro';
-
+    protected $primaryKey = 'id_temptrabajdosimrev';
+    
     //Relacion uno a muchos (inversa) con dosimetros
     public function dosimetro(){
         return $this->belongsTo(Dosimetro::class, 'dosimetro_id', 'id_dosimetro');
@@ -18,8 +18,8 @@ class Trabajadordosimetro extends Model
     /* public function trabajador(){
         return $this->belongsTo(Trabajador::class, 'trabajador_id', 'id_trabajador');
     } */
-    //Relacion uno a muchos (inversa) con personas
-    public function persona(){
+     //Relacion uno a muchos (inversa) con personas
+     public function persona(){
         return $this->belongsTo(Persona::class, 'persona_id', 'id_persona');
     }
     //Relacion uno a uno (inversa) con holder

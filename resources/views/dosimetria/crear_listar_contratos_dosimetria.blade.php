@@ -139,7 +139,7 @@ crossorigin="anonymous">
                 "decimal": "",
                 "emptyTable": "NO HAY REGISTROS",
                 "info": "MOSTRANDO REGISTROS DEL  _START_ AL _END_ DE UN TOTAL DE  _TOTAL_ REGISTROS",
-                "infoEmpty": "MOSTRANDO 0 to 0 DE 0 REGISTROS",
+                "infoEmpty": "MOSTRANDO 0 DE 0 REGISTROS",
                 "infoFiltered": "(FILTRADO DE UN TOTAL DE _MAX_ REGISTROS)",
                 "infoPostFix": "",
                 "thousands": ",",

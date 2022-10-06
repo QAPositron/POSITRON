@@ -10,26 +10,7 @@
     </div>
     <div class="col"></div>
 </div>
-{{-- <div class="row">
-    <div class="col"></div>
-    <div class="col">
-        <div class="card text-dark bg-light" style="max-width: 25rem;">
-            <h3 class="pt-4 text-center">BUSCAR</h3>
-            <form class="m-4"action="">
-                <label for="exampleFormControlInput1" class="form-label">PALABRA CLAVE: </label>
-                <div class="row">
-                    <div class="col-8">
-                        <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="--BUSCAR--" autofocus style="text-transform:uppercase;">
-                    </div>
-                    <div class="col">
-                        <input class="btn colorQA" type="submit" id="submit" name="submit" value="BUSCAR">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="col"></div>
-</div> --}}
+
     
 <div class="row pt-3" id ="salida">
     <h2 class="text-center">TODAS LAS EMPRESAS</h2>
@@ -137,7 +118,7 @@ crossorigin="anonymous">
                 "decimal": "",
                 "emptyTable": "NO HAY REGISTROS",
                 "info": "MOSTRANDO REGISTROS DEL  _START_ AL _END_ DE UN TOTAL DE  _TOTAL_ REGISTROS",
-                "infoEmpty": "MOSTRANDO 0 to 0 DE 0 REGISTROS",
+                "infoEmpty": "MOSTRANDO 0 DE 0 REGISTROS",
                 "infoFiltered": "(FILTRADO DE UN TOTAL DE _MAX_ REGISTROS)",
                 "infoPostFix": "",
                 "thousands": ",",

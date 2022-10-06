@@ -22,6 +22,10 @@ class Contratodosimetriasededepto extends Model
     public function trabajadordosimetro(){
         return $this->hasMany(Trabajadordosimetro::class, 'id_trabajadordosimetro');
     }
+    //relacion uno a muchos con la tabla trabajadordosimetros
+    public function temptrabajdosimrev(){
+        return $this->hasMany(Temptrabajdosimrev::class, 'id_temptrabajdosimrev');
+    }
      //Relacion uno a muchos (inversa) con departamentosede
     public function departamentosede(){
         return $this->belongsTo(Departamentosede::class, 'departamentosede_id', 'id_departamentosede');

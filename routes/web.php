@@ -231,10 +231,17 @@ Route::get('etiquetasdosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaControl
 Route::get('revisiondosimetria/{deptodosi}/{mesnumber}/revision', [DosimetriaController::class, 'revisionDosimetria'])->name('revisiondosimetria.check');
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetro',[DosimetriaController::class, 'revisionDosimetro']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/trabajadordosimetro',[DosimetriaController::class, 'revisionCheck']);
+Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetroControl',[DosimetriaController::class, 'revisionCheckControl']);
+
 
 Route::get('revisiondosimetria/create', [DosimetriaController::class, 'revisionDosimetriaGeneral'])->name('revisiondosimetria.create');
+Route::get('/revisiondosimetria/asignaciones', [DosimetriaController::class, 'asignaciones']);
 Route::get('/revisiondosimetria/dosimetro', [DosimetriaController::class, 'revisionDosimetro']);
-Route::get('/revisiondosimetria/trabajadordosimetro',[DosimetriaController::class, 'revisionCheck']);
+Route::get('/revisiondosimetria/trabajdosimetro',[DosimetriaController::class, 'revisionCheckGeneral']);
+Route::get('/revisiondosimetria/controldosimetro',[DosimetriaController::class, 'revisionCheckControlGeneral']);
+Route::get('/revisiondosimetria/asignacionesControl', [DosimetriaController::class, 'asignacionesControl']);
+
+Route::get('certificadorevisiondosimetria/{empresa}/pdf', [DosimetriaController::class, 'pdfCertificadorevision'])->name('certificadorevision.pdf');
 
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA //////////////
 Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');
