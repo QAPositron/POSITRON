@@ -31,16 +31,16 @@
         <tbody>
             @foreach($temptrabjdosimrev as $temptrabj)
                 <tr>
-                    <td>{{$temptrabj->persona->primer_nombre_persona}} {{$temptrabj->persona->segundo_nombre_persona}} {{$temptrabj->persona->primer_apellido_persona}} {{$temptrabj->persona->segundo_apellido_persona}}</td>
+                    <td>@if(!empty($temptrabj->persona->primer_nombre_persona)){{$temptrabj->persona->primer_nombre_persona}} {{$temptrabj->persona->segundo_nombre_persona}} {{$temptrabj->persona->primer_apellido_persona}} {{$temptrabj->persona->segundo_apellido_persona}}@else CONTROL @endif</td>
                     <td style="text-align: center;">{{$temptrabj->dosimetro->codigo_dosimeter}}</td>
                     <td style="text-align: center;">
-                        @if($temptrabj->holder_id == '')
+                        @if($temptrabj->holder_id == '' || $temptrabj->holder_id == 'NULL')
                             N.A.
                         @else
                             {{$temptrabj->holder->codigo_holder}}
                         @endif
                     </td>
-                    <td style="text-align: center;">{{$temptrabj->ubicacion}}</td>
+                    <td style="text-align: center;">@if(!empty($temptrabj->ubicacion)){{$temptrabj->ubicacion}}  @else N.A. @endif</td>
                     <td style="text-align: center;">{{$temptrabj->mes_asignacion}}</td>
                     <td style="text-align: center;">{{$temptrabj->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</td>
                     <td style="text-align: center;">{{$temptrabj->contratodosimetriasede->sede->nombre_sede}}</td>

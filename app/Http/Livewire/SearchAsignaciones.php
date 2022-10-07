@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\ContratosDosimetriaEmpresa;
+use App\Models\Dosicontrolcontdosisede;
 use App\Models\Dosimetro;
 use App\Models\Empresa;
 use App\Models\Temptrabajdosimrev;
@@ -18,7 +19,8 @@ class SearchAsignaciones extends Component
     public $empresa;
     protected $listeners = ['NOEXISTE' => 'existDosimetro',
                             'MATCH' => 'match',
-                            'NOMATCH' => 'nomatch'
+                            'NOMATCH' => 'nomatch',
+                            'MATCHCONTROL' =>'matchcontrol'
                         ];
 
     public function existDosimetro(){
@@ -49,9 +51,37 @@ class SearchAsignaciones extends Component
         $newTemptrabajdosimrev->fecha_dosim_devuelto      = $trabdosiasig->fecha_dosim_devuelto;
         $newTemptrabajdosimrev->ocupacion                 = $trabdosiasig->ocupacion;
         $newTemptrabajdosimrev->ubicacion                 = $trabdosiasig->ubicacion;
-        $newTemptrabajdosimrev->energia                   = $trabdosiasig->energi;
+        $newTemptrabajdosimrev->energia                   = $trabdosiasig->energia;
         $newTemptrabajdosimrev->save();
         $this->emit('alert', 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO Y ADEMAS COINCIDE LA UBICACIÓN Y ESTADO');
+        $this->reset(['search', 'dosimetro']);
+        
+    }
+    public function matchcontrol($id){
+        $updateMatch = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $id)
+        ->update([
+            'revision' => 'TRUE'
+        ]);
+        $dosicontrol = Dosicontrolcontdosisede::find($id);
+        $newTempdosimcontrolrev = new Temptrabajdosimrev();
+
+        $newTempdosimcontrolrev->contratodosimetriasede_id = $dosicontrol->contratodosimetriasede_id;
+        $newTempdosimcontrolrev->persona_id                = NULL;
+        $newTempdosimcontrolrev->dosimetro_id              = $dosicontrol->dosimetro_id;
+        $newTempdosimcontrolrev->holder_id                 = NULL;
+        $newTempdosimcontrolrev->contdosisededepto_id      = $dosicontrol->contdosisededepto_id;
+        $newTempdosimcontrolrev->mes_asignacion            = $dosicontrol->mes_asignacion;
+        $newTempdosimcontrolrev->dosimetro_uso             = $dosicontrol->dosimetro_uso;
+        $newTempdosimcontrolrev->primer_dia_uso            = $dosicontrol->primer_dia_uso;
+        $newTempdosimcontrolrev->ultimo_dia_uso            = $dosicontrol->ultimo_dia_uso;
+        $newTempdosimcontrolrev->fecha_dosim_enviado       = $dosicontrol->fecha_dosim_enviado;
+        $newTempdosimcontrolrev->fecha_dosim_recibido      = $dosicontrol->fecha_dosim_recibido;
+        $newTempdosimcontrolrev->fecha_dosim_devuelto      = $dosicontrol->fecha_dosim_devuelto;
+        $newTempdosimcontrolrev->ocupacion                 = $dosicontrol->ocupacion;
+        $newTempdosimcontrolrev->ubicacion                 = NULL;
+        $newTempdosimcontrolrev->energia                   = $dosicontrol->energia;
+        $newTempdosimcontrolrev->save();
+        $this->emit('alert', 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO DE CONTROL');
         $this->reset(['search', 'dosimetro']);
         
     }
@@ -61,6 +91,7 @@ class SearchAsignaciones extends Component
         $this->reset(['search', 'dosimetro']);
         
     }
+    
     public function limpiar(){
         $limpiartemptrabjdosimrev = Temptrabajdosimrev::all();
         foreach($limpiartemptrabjdosimrev as $limpiartemp){
@@ -86,10 +117,21 @@ class SearchAsignaciones extends Component
         ->where('codigo_dosimeter', 'like', '%' . $this->search .'%')
         ->select('trabajadordosimetros.id_trabajadordosimetro', 'trabajadordosimetros.ubicacion', 'trabajadordosimetros.mes_asignacion','personas.primer_nombre_persona', 'personas.segundo_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'dosimetros.codigo_dosimeter', 'trabajadordosimetros.holder_id', 'holders.codigo_holder', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentosedes.nombre_departamento')
         ->get();
+        $dosicontrol = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+        ->join('contratodosimetriasedes', 'dosicontrolcontdosisedes.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
+        ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
+        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
+        ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
+        ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
+        ->whereNull('dosicontrolcontdosisedes.revision')
+        ->where('empresas.nombre_empresa', '=', $this->empresa)
+        ->where('codigo_dosimeter', 'like', '%' . $this->search .'%')
+        ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentosedes.nombre_departamento')
+        ->get();
         $temptrabajdosimrev = Temptrabajdosimrev::all();
         $empresa = $this->empresa;
-        /* $this->emit('variable',$trabajdosiasig); */
-        return view('livewire.search-asignaciones', compact('trabajdosiasig', 'temptrabajdosimrev', 'empresasDosi', 'empresa'));
+        return view('livewire.search-asignaciones', compact('trabajdosiasig', 'dosicontrol', 'temptrabajdosimrev', 'empresasDosi', 'empresa'));
     }
 }
     

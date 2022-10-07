@@ -1965,16 +1965,16 @@ class DosimetriaController extends Controller
         return response()->json($asignacionesall);
     }
     
-    public function revisionCheckGeneral(Request $request){
+    /* public function revisionCheckGeneral(Request $request){
         $trabajadordosim = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $request->id_trabajadordosimetro)
         ->update([
             'revision' => 'TRUE'
         ]);
         
         return response()->json($trabajadordosim);
-    }
+    } */
     
-    public function asignacionesControl(){
+    public function asignacionesControl(Request $request){
         $asignacionesControlall = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
         ->join('contratodosimetriasedes', 'dosicontrolcontdosisedes.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
@@ -1982,9 +1982,9 @@ class DosimetriaController extends Controller
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
-        /* ->where('dosicontrolcontdosisedes.dosimetro_uso', '=', 'TRUE') */
         ->whereNull('dosicontrolcontdosisedes.revision')
-        ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'empresas.nombre_empresa', 'departamentosedes.nombre_departamento')
+        ->where('empresas.nombre_empresa', '=', $request->empresa)
+        ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentosedes.nombre_departamento')
         ->get();
         
         return response()->json($asignacionesControlall);
