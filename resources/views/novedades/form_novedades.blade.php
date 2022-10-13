@@ -34,7 +34,7 @@
                         <select class="form-select" name="empresaDosimetria" id="empresaDosimetria" value="" autofocus style="text-transform:uppercase;">
                             <option value="">--SELECCIONE--</option>
                             @foreach($empresasDosi as $empdosi)
-                                <option value="{{$empdosi->id_contratodosimetria_emp}}">{{$empdosi->nombre_empresa}}</option>
+                                <option value="{{$empdosi->empresa_id}}">{{$empdosi->nombre_empresa}}</option>
                             @endforeach
                         </select>
                         <label for="floatingInputGrid">EMPRESA:</label>
@@ -398,8 +398,9 @@
 
         $('#empresaDosimetria').on('change', function(){
             var empresa_id = $(this).val();
+            console.log(empresa_id);
             if($.trim(empresa_id) != ''){
-                $.get('contratoDosi', {empresa_id: empresa_id}, function(contratos){
+                $.get('contratoDosim', {empresa_id: empresa_id}, function(contratos){
                     console.log(contratos);
                     $('#contratos_empresadosi').empty();
                     $('#contratos_empresadosi').append("<option value=''>--SELECCIONE UN CONTRATO--</option>");

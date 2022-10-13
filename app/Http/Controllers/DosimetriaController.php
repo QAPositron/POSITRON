@@ -1998,11 +1998,12 @@ class DosimetriaController extends Controller
     } */
     
     public function pdfCertificadorevision($empresa){
+       /*  return $empresa; */
         $empresa = Empresa::where('nombre_empresa', '=', $empresa)->get();
         $temptrabjdosimrev = Temptrabajdosimrev::all();
         $pdf =  PDF::loadView('dosimetria.certificadoPDF_revision_dosimetria', compact('temptrabjdosimrev', 'empresa'));
         $pdf->setPaper('A4', 'portrait');
-        /* $pdf->setPaper( array(0, 0,306.141,2834.645), 'portrait');  */
+        
         return $pdf->stream();
         /* return $empresa; */
     }

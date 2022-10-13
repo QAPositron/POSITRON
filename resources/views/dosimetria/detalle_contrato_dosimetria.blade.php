@@ -90,7 +90,7 @@
                 }
             @endphp
             <tr>
-                <td class="text-center align-middle"> <a class="link-dark" href="{{route('detallesedecont.create', $dosicontsedep->id_contdosisededepto)}}">{{$dosicontsedep->nombre_departamento}}</a></td>
+                <td class="text-center align-middle"> <a class="btn btn-outline-primary rounded-pill" href="{{route('detallesedecont.create', $dosicontsedep->id_contdosisededepto)}}">{{$dosicontsedep->nombre_departamento}}</a></td>
                 <td class="text-center align-middle">{{$dosicontsedep->mes_actual}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_torax}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_cristalino}}</td>

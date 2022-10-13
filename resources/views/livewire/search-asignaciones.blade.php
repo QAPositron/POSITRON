@@ -18,12 +18,12 @@
                         <div class="form-group">
                             <h5 class="pt-4 text-center">EMPRESA </h5>
                             <select class="form-select" wire:model="empresa" name="empresa_dosi" id="empresa_dosi" autofocus >
-                                <option value="">--SELECCIONE--</option>
+                                <option value="NULL">--SELECCIONE--</option>
                                 @forEach($empresasDosi as $empresas)
                                     <option value ="{{$empresas->nombre_empresa}}">{{$empresas->nombre_empresa}}</option>
                                 @endforeach
                             </select>
-                            
+                            {{$empresa}}
                         </div>
                         
                     </div>
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="col-md text-center">
-            @if( $empresa == '')
+            @if( $empresa == '' || $empresa == 'NULL')
                 <a type="button" class="btn btn-circle " onclick="return false"  style="background-color: #a0aec0" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-pdf pt-1" viewBox="0 0 16 16">
                         <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -87,7 +87,7 @@
             
             <h4 class="text-center">INFORMACIÓN DE TODAS LAS ASIGNACIONES</h4>
             <div class="table table-responsive p-2">
-                <table class="table table-bordered asignaciones" style="font-size: 12px;">
+                <table class="table table-bordered asignaciones" id="tablaAsignaciones" style="font-size: 12px;">
                     <thead>
                         <tr class="table-active text-center">
                             <th class='align-middle py-4'>TRABAJADOR</th>
@@ -101,33 +101,32 @@
                         </tr>
                     </thead>
                     <tbody id="asignaciones">
-                        @foreach($trabajdosiasig as $trab)
-                            <tr id="{{$trab->id_trabajadordosimetro}}">
-                                <td class='align-middle' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->primer_nombre_persona}} {{$trab->segundo_nombre_persona}} {{$trab->primer_apellido_persona}} {{$trab->segundo_apellido_persona}}</td>
-                                <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->codigo_dosimeter}}</td>
-                                <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>
-                                    @if($trab->holder_id == '')
-                                        N.A.
-                                    @else
-                                        {{$trab->codigo_holder}}
-                                    @endif
-                                </td>
-                                <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->ubicacion}}</td>
-                                <td id="mes{{$trab->mes_asignacion}}" class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>
-                                    @if($trab->mes_asignacion == 1)
-                                        @php
-                                            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                                            echo $meses[date("m", strtotime($trab->fecha_inicio))]." DE ".date("Y", strtotime($trab->fecha_inicio)) ;
-                                        @endphp
-                                    @else
-                                        
-                                    @endif 
-                                </td>
-                                <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->codigo_contrato}}</td>
-                                <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->nombre_sede}}</td>
-                                <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->nombre_departamento}}</td>
+                        @if(count($trabajdosiasig) == 0 || $empresa == 'NULL')
+                            <tr>
+                                <td colspan ="8" class='align-middle text-center'>NO HAY REGISTROS</td>
                             </tr>
-                        @endforeach
+                        @else
+                            @foreach($trabajdosiasig as $trab)
+                                <tr id="{{$trab->id_trabajadordosimetro}}">
+                                    <td class='align-middle' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->primer_nombre_persona}} {{$trab->segundo_nombre_persona}} {{$trab->primer_apellido_persona}} {{$trab->segundo_apellido_persona}}</td>
+                                    <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->codigo_dosimeter}}</td>
+                                    <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>
+                                        @if($trab->holder_id == '')
+                                            N.A.
+                                        @else
+                                            {{$trab->codigo_holder}}
+                                        @endif
+                                    </td>
+                                    <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->ubicacion}}</td>
+                                    <td id="mes{{$trab->codigo_dosimeter}}" class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>
+                                        
+                                    </td>
+                                    <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->codigo_contrato}}</td>
+                                    <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->nombre_sede}}</td>
+                                    <td class='align-middle text-center' @if($trab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$trab->nombre_departamento}}</td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -157,7 +156,9 @@
                                     <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>CONTROL</td>
                                     <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->codigo_dosimeter}}</td>
                                     <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->codigo_contrato}}</td>
-                                    <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->mes_asignacion}}</td>
+                                    <td id="mes{{$dosicont->codigo_dosimeter}}" class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>
+                                    
+                                    </td>
                                     <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->nombre_sede}}</td>
                                     <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->nombre_departamento}}</td>
                                 </tr>
@@ -233,35 +234,54 @@ crossorigin="anonymous">
 <script type="text/javascript">
 
     $(document).ready( function () {
+        $('#empresa_dosi').on('change', function(){
+            var empresa = document.querySelector('#empresa_dosi').value;
+            console.log(empresa);
+            if(empresa == 'NULL'){
+                $('#tablaAsignaciones').detach();
+            }
+        })
         // Creamos array con los meses del año
         var meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-        Livewire.on('meses', function(trabajdosiasig){
-            var check = 0;
+        
+        Livewire.on('mesesTrab', function(trabajdosiasig){
+           
             trabajdosiasig.forEach(function (element){
-                
                 var fecha = new Date(element.fecha_inicio);
-                console.log("ESTA ES LA FECHA"+fecha); 
                 var fechaHora = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()+1, 0, 0, 0, 0);
                 console.log("ESTA ES LA FECHA HORA" + fechaHora);
-                /* let fecha = new Date("element.fecha_inicio, 00:00:00");*/
-                    
                 
                 for($i=0; $i<=11; $i++){
                     var r = new Date(new Date(fechaHora).setMonth(fechaHora.getMonth()+$i));
                     var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-                    console.log(r + fechaesp + "ESTA ES LA I"+($i+1)); 
                     if(element.mes_asignacion == ($i+1)){
-                        
-                        document.getElementById('mes'+element.mes_asignacion).innerHTML = fechaesp;
+                        console.log(r + fechaesp + "ESTA ES LA I"+($i+1)); 
+                        console.log("ESTOS SON LOS MESES EN LAS ASIGNACIONES" +element.primer_nombre_persona +element.mes_asignacion);
+                        document.getElementById('mes'+element.codigo_dosimeter).innerHTML = fechaesp;
                     } 
-                }
+                } 
             });
             
             
         });
-        
-        
-       
+        Livewire.on('mesesCont', function(dosicontrol){
+            dosicontrol.forEach(function (element){
+                var fecha = new Date(element.fecha_inicio);
+                var fechaHora = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()+1, 0, 0, 0, 0);
+                console.log("ESTA ES LA FECHA HORA CONTROL" + fechaHora);
+                
+                for($i=0; $i<=11; $i++){
+                    var r = new Date(new Date(fechaHora).setMonth(fechaHora.getMonth()+$i));
+                    var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                    if(element.mes_asignacion == ($i+1)){
+                        console.log(r + fechaesp + "ESTA ES LA I"+($i+1)); 
+                        console.log("ESTOS SON LOS MESES EN LAS ASIGNACIONES" +element.mes_asignacion);
+                        document.getElementById('mes'+element.codigo_dosimeter).innerHTML = fechaesp;
+                    } 
+                } 
+            });
+            
+        });
 
         $('#dosi_control').on('change', function(){
             var codigoEtiq = document.querySelector('#codigo_etiqueta').value;

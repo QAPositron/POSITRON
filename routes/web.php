@@ -116,7 +116,7 @@ Route::post('personas', [PersonaController::class, 'save'])->name('personas.save
 Route::get('personas/{empresa}/{trabestucont}/create',[PersonaController::class, 'createTrabEstuContEmp'])->name('personasEmpresa.create');
 Route::post('personasEmpresa', [PersonaController::class, 'savePersonasEmpresa'])->name('personasEmpresa.save');
 Route::get('personas/{persona}/{trabestucont}/{empresa}/edit', [PersonaController::class, 'edit'])->name('personas.edit');
-Route::get('/personas/{edit}/selectsed', [PersonaController::class, 'selectsedes']);
+Route::get('/personas/{persona}/{trabestucont}/{empresa}/selectsed', [PersonaController::class, 'selectsedes']);
 Route::put('personas/{persona}', [PersonaController::class, 'update'])->name('personas.update');
 Route::delete('personas/{persona}', [PersonaController::class, 'destroy'])->name('personas.destroy');
 
@@ -246,7 +246,7 @@ Route::get('certificadorevisiondosimetria/{empresa}/pdf', [DosimetriaController:
 
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA //////////////
 Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');
-Route::get('/novedades/contratoDosi', [NovedadesController::class, 'contratoDosimetria']);
+Route::get('/novedades/contratoDosim', [NovedadesController::class, 'contratoDosimetria']);
 Route::get('/novedades/sedescontDosi', [NovedadesController::class, 'sedescontDosimetria']);
 Route::get('/novedades/especialidadescontDosi', [NovedadesController::class, 'especialidadescontDosimetria']);
 Route::get('/novedades/contdosisededepto/', [NovedadesController::class, 'contratodosi']);
