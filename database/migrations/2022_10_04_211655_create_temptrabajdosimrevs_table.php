@@ -16,6 +16,9 @@ class CreateTemptrabajdosimrevsTable extends Migration
         Schema::create('temptrabajdosimrevs', function (Blueprint $table) {
             $table->bigincrements('id_temptrabajdosimrev')->unique();
             
+            $table-> unsignedBigInteger('trabajcontdosimetro_id');
+            $table-> foreign('trabajcontdosimetro_id')->references('id_trabajadordosimetro')->on('trabajadordosimetros')->onDelete('cascade')->onUpdate('cascade');
+
             $table-> unsignedBigInteger('contratodosimetriasede_id');
             $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
 

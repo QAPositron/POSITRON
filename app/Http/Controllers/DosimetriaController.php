@@ -1989,13 +1989,14 @@ class DosimetriaController extends Controller
         
         return response()->json($asignacionesControlall);
     }
-    public function revisionCheckControlGeneral(Request $request){
+    /* public function revisionCheckControlGeneral(Request $request){
         $dosicontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes)
         ->update([
             'revision' => 'TRUE'
         ]);
         return response()->json($dosicontrol);
-    }
+    } */
+    
     public function pdfCertificadorevision($empresa){
         $empresa = Empresa::where('nombre_empresa', '=', $empresa)->get();
         $temptrabjdosimrev = Temptrabajdosimrev::all();

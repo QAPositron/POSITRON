@@ -117,7 +117,13 @@
         font-size: 12px;
         line-height: 1.42857;
       }
-
+      .dataTables_wrapper   .dataTables_filter{
+          float: right
+      }
+    
+      .dataTables_wrapper  .dataTables_length{
+          float: left
+      }
       </style>
     
     

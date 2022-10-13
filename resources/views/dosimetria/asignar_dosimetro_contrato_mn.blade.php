@@ -44,7 +44,7 @@
                                         <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
                                     </tr>
                                     <tr>
-                                        <th>DEDO:</th>
+                                        <th>ANILLO:</th>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
                                     </tr>
                                 </tbody>
@@ -1069,7 +1069,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>DEDO</td>
+                                            <td>ANILLO</td>
                                             <td>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo"  @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro_id}}@endif">@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
@@ -1170,7 +1170,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>DEDO</td>
+                                                <td>ANILLO</td>
                                                 <td>
                                                     <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -1421,7 +1421,7 @@ crossorigin="anonymous">
     function changueDedo(dedo){
         
         Swal.fire({
-            title: 'DESEA CAMBIAR EL TRABAJADOR DE UN DOSÍMETRO TIPO "DEDO"?',
+            title: 'DESEA CAMBIAR EL TRABAJADOR DE UN DOSÍMETRO TIPO "ANILLO"?',
             text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO",
             icon: 'warning',
             showCancelButton: true,

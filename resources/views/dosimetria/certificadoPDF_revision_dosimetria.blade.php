@@ -14,18 +14,23 @@
     <img src="{{asset('imagenes/VerdeSF.png')}}" width="200" style="position:relative; left:420px; top:-30px;">
     <h3 style="position:relative; top:-40px;text-align: center; button:200px;">CERTIFICADO DE VERIFICACIÓN DE DOSIMENTRO PERSONAL</h3>
     <p style="position:relative; top:-30px; text-align:justify;">QA POSITRON S.A.S le notifica a la institución {{$empresa[0]->nombre_empresa}} con NIT: {{$empresa[0]->num_iden_empresa}}-{{$empresa[0]->DV}} que los dosímetros entregados han pasado por el proceso de verificación tanto de etiqueta, dosímetro y usuario final satisfactoriamente. A continuación, evidencia de la verificación: </p>
-                {{--- y-4' >CONT.</th> --}}
-    <table style=" margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; " cellpadding="4">
+                
+    <table style=" margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; font-size:9px;" cellpadding="4">
         <thead>
             <tr>
-                <th style="width: 20%;">TRABAJADOR</th>
-                <th>DOSÍMETRO</th>
-                <th>HOLDER</th>
-                <th>UBICACIÓN</th>
-                <th>MES</th>
-                <th>CONTRATO</th>
-                <th>SEDE</th>
-                <th>ESPECIALIDAD</th>
+                <th rowspan="2" style="width: 20%;">TRABAJADOR</th>
+                <th rowspan="2">DOSÍMETRO</th>
+                <th rowspan="2">HOLDER</th>
+                <th rowspan="2">UBICACIÓN</th>
+                <th rowspan="2">MES</th>
+                <th rowspan="2">CONTRATO</th>
+                <th rowspan="2">SEDE</th>
+                <th rowspan="2">ESP.</th>
+                <th colspan="2">PERIODO DE USO</th>
+            </tr>
+            <tr>
+                <th>PRIMER DÍA</th>
+                <th>ÚLTIMO DÍA</th>
             </tr>
         </thead>
         <tbody>
@@ -45,6 +50,18 @@
                     <td style="text-align: center;">{{$temptrabj->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</td>
                     <td style="text-align: center;">{{$temptrabj->contratodosimetriasede->sede->nombre_sede}}</td>
                     <td style="text-align: center;">{{$temptrabj->contratodosimetriasededepto->departamentosede->nombre_departamento}}</td>
+                    <td style="text-align: center;">
+                        @php
+                            $datefix = date('d-m-Y',strtotime($temptrabj->primer_dia_uso));
+                        @endphp
+                        {{$datefix}}
+                    </td>
+                    <td style="text-align: center;">
+                        @php
+                            $datefix = date('d-m-Y',strtotime($temptrabj->ultimo_dia_uso));
+                        @endphp
+                        {{$datefix}}
+                    </td>
                 </tr>
             @endforeach
         </tbody>

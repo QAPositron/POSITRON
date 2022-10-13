@@ -240,7 +240,8 @@ Route::get('/revisiondosimetria/dosimetro', [DosimetriaController::class, 'revis
 Route::get('/revisiondosimetria/trabajdosimetro',[DosimetriaController::class, 'revisionCheckGeneral']);
 Route::get('/revisiondosimetria/controldosimetro',[DosimetriaController::class, 'revisionCheckControlGeneral']);
 Route::get('/revisiondosimetria/asignacionesControl', [DosimetriaController::class, 'asignacionesControl']);
-
+Route::get('/revisiondosimetria/controldosimetro',[DosimetriaController::class, 'revisionCheckControlGeneral']);
+Route::get('/revisiondosimetria/eliminarevisado', [DosimetriaController::class, 'eliminarevision']);
 Route::get('certificadorevisiondosimetria/{empresa}/pdf', [DosimetriaController::class, 'pdfCertificadorevision'])->name('certificadorevision.pdf');
 
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA //////////////

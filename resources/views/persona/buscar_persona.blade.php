@@ -139,6 +139,7 @@
                 })
             })
             $('#personas').DataTable({
+                
                 language: {
                     "decimal": "",
                     "emptyTable": "NO HAY REGISTROS",
@@ -159,6 +160,8 @@
                         "previous": "ANTERIOR"
                     }   
                 },
+                /* "dom": '<lf<t>ip>' */
+                   
             });
             
         })
