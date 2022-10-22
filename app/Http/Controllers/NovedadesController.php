@@ -433,11 +433,7 @@ class NovedadesController extends Controller
         $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino;
         $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca;
         $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo;  
-<<<<<<< HEAD
-        $newMesescontdosisedeptos->nota_cambiodosim     = $request->nota_cambio_dosimetros;
-=======
         $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);  
->>>>>>> 6078b58ef2badab6945daad611368f3a7a075d34
         $newMesescontdosisedeptos->save();
 
         return back()->with('guardar', 'ok');

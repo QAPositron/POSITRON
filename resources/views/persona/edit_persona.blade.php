@@ -9,75 +9,85 @@
 
             <br>
 
-            <label for="" class="mx-4">LA SIGUIENTES SON LOS PERFILES LABORALES O ROLES QUE PERTENECEN A ESTA PERSONA:</label>
             <br>
             <br>
-            <div class="row mx-4">
+            <div class="row mx-3">
+                <label for="" >LA SIGUIENTES SON LOS PERFILES LABORALES O ROLES QUE PERTENECEN A ESTA PERSONA:</label>
+                <br>
+                <br>
                 <div class="col-md">
-                    @forEach($personasperfil as $personperf)
-                        <div class="row">
-                            <div class="col-md"></div>
-                            <div class="col-md-8">
-                                <div class="form-floating text-wrap">
-                                    <input type="text" class="form-control"  name="id_perfil" id="id_perfil"  value="{{$personperf->perfiles->nombre_perfil}}" autofocus style="text-transform:uppercase;" disabled>
-                                    <label for="floatingSelectGrid">PERFIL LABORAL:</label>
-                                    @error('id_perfil')
-                                        <small>*{{$message}}</small>
-                                    @enderror
+                    @if(count($personasperfil)== 0)
+                        <b><label for="">NO HAY PERFILES RELACIONADOS </label></b>
+                    @else
+                        @forEach($personasperfil as $personperf)
+                            <div class="row">
+                                <div class="col-md"></div>
+                                <div class="col-md-8">
+                                    <div class="form-floating text-wrap">
+                                        <input type="text" class="form-control"  name="id_perfil" id="id_perfil"  value="{{$personperf->perfiles->nombre_perfil}}" autofocus style="text-transform:uppercase;" disabled>
+                                        <label for="floatingSelectGrid">PERFIL LABORAL:</label>
+                                        @error('id_perfil')
+                                            <small>*{{$message}}</small>
+                                        @enderror
+                                    </div>
                                 </div>
+                                <div class="col-md d-flex align-items-center">
+                                    <form class="form_eliminar_personaperfil" id="form_eliminar_personaperfil" name="form_eliminar_personaperfil" action="{{route('personaperfil.destroy', $personperf->id_personaperfil)}}" method="POST">
+                                        @csrf  
+                                        @method('delete')
+                                        <button class="btn btn-danger"  type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-md"></div>
                             </div>
-                            <div class="col-md d-flex align-items-center">
-                                <form class="form_eliminar_personaperfil" id="form_eliminar_personaperfil" name="form_eliminar_personaperfil" action="{{route('personaperfil.destroy', $personperf->id_personaperfil)}}" method="POST">
-                                    @csrf  
-                                    @method('delete')
-                                    <button class="btn btn-danger"  type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                        </svg>
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-md"></div>
-                        </div>
-                        <br>
-                    @endforeach
+                            <br>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="col-md">
-                    @forEach($personasrol as $personrol)
-                        <div class="row">
-                            <div class="col-md"></div>
-                            <div class="col-md-8">
-                                <div class="form-floating text-wrap">
-                                    <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->nombre_rol}}" autofocus style="text-transform:uppercase;" disabled>
-                                    <label for="floatingSelectGrid">ROL:</label>
-                                    @error('id_rol')
-                                        <small>*{{$message}}</small>
-                                    @enderror
+                    @if(count($personasrol)== 0)
+                        <b><label for="">NO HAY ROLES RELACIONADOS </label></b>
+                    @else
+                        @forEach($personasrol as $personrol)
+                            <div class="row">
+                                <div class="col-md"></div>
+                                <div class="col-md-8">
+                                    <div class="form-floating text-wrap">
+                                        <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->nombre_rol}}" autofocus style="text-transform:uppercase;" disabled>
+                                        <label for="floatingSelectGrid">ROL:</label>
+                                        @error('id_rol')
+                                            <small>*{{$message}}</small>
+                                        @enderror
+                                    </div>
                                 </div>
+                                <div class="col-md d-flex align-items-center">
+                                    <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
+                                        @csrf  
+                                        @method('delete')
+                                        <button class="btn btn-danger"  type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-md"></div>
                             </div>
-                            <div class="col-md d-flex align-items-center">
-                                <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
-                                    @csrf  
-                                    @method('delete')
-                                    <button class="btn btn-danger"  type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                        </svg>
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-md"></div>
-                        </div>
-                        <br>
-                    @endforeach
+                            <br>
+                        @endforeach
+                    @endif
                 </div>
             </div>
             <br><br>
             <div class="row mx-3">
                 @if(count($personasede)== 0)
-                    <label for="">NO HAY EMPRESAS Y SEDES RELACIONADAS</label>
+                    <b><label for="">NO HAY EMPRESAS Y SEDES RELACIONADAS</label></b>
                 @else
                     <div class="col-md">
                         <label for="">LA SIGUIENTES SON LAS EMPRESAS Y SEDES RELACIONADAS:</label>

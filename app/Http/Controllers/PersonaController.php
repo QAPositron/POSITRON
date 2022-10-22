@@ -81,30 +81,35 @@ class PersonaController extends Controller
         $persona->lider_controlescalidad    = $request->lider_contcal;
 
         $persona->save();
-        for($i=0; $i<count($request->perfil_personas); $i++){
-            $personasPerfiles = new Personasperfiles();
-            
-            $personasPerfiles->persona_id = $persona->id_persona;
-            $personasPerfiles->perfil_id  = $request->perfil_personas[$i];
-            
-            $personasPerfiles->save();
+        if(!empty($request->perfil_personas)){
+            for($i=0; $i<count($request->perfil_personas); $i++){
+                $personasPerfiles = new Personasperfiles();
+                
+                $personasPerfiles->persona_id = $persona->id_persona;
+                $personasPerfiles->perfil_id  = $request->perfil_personas[$i];
+                
+                $personasPerfiles->save();
+            }
         }
-
-        for($i=0; $i<count($request->rol_personas); $i++){
-            $personasRoles = new Personasroles();
-
-            $personasRoles->persona_id  = $persona->id_persona;
-            $personasRoles->rol_id      = $request->rol_personas[$i];
-
-            $personasRoles->save();
+        if(!empty($request->rol_personas)){
+            for($i=0; $i<count($request->rol_personas); $i++){
+                $personasRoles = new Personasroles();
+    
+                $personasRoles->persona_id  = $persona->id_persona;
+                $personasRoles->rol_id      = $request->rol_personas[$i];
+    
+                $personasRoles->save();
+            }
         }
-        for($i=0; $i<count($request->id_sedes); $i++){
-            $personaSedes = new Personasedes();
-
-            $personaSedes->persona_id   = $persona->id_persona;
-            $personaSedes->sede_id      = $request->id_sedes[$i];
-
-            $personaSedes->save();
+        if(!empty($request->id_sedes)){
+            for($i=0; $i<count($request->id_sedes); $i++){
+                $personaSedes = new Personasedes();
+    
+                $personaSedes->persona_id   = $persona->id_persona;
+                $personaSedes->sede_id      = $request->id_sedes[$i];
+    
+                $personaSedes->save();
+            }
         }
 
         return redirect()->route('personas.search')->with('guardar', 'ok');

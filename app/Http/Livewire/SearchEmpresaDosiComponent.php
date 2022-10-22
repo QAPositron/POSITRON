@@ -15,8 +15,8 @@ class SearchEmpresaDosiComponent extends Component
     {
         /* $empresaDosi = ContratosDosimetriaEmpresa::all(); */
         $empresaDosi = ContratosDosimetriaEmpresa::where('nombre_empresa', 'like', '%' . $this->search . '%')
-                                                ->orWhere('num_iden_empresa', 'like', '%' . $this->search . '%')
-                                                ->get();
+        ->orWhere('num_iden_empresa', 'like', '%' . $this->search . '%')
+        ->get();
         return view('livewire.search-empresa-dosi-component', compact('empresaDosi'));
     }
 }
