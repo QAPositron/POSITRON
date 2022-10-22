@@ -54,7 +54,7 @@ class SedesController extends Controller
             $deptosede = new Departamentosede();
 
             $deptosede->sede_id                 = $sede->id_sede;
-            $deptosede->nombre_departamento     = $request->multiple_select_depsede[$i];
+            $deptosede->departamento_id         = $request->multiple_select_depsede[$i];
             
             $deptosede->save();
         }

@@ -7,6 +7,7 @@ use App\Models\Coldepartamento;
 use App\Models\Colmunicipio;
 use App\Models\Contacto;
 use App\Models\Contactosede;
+use App\Models\Departamento;
 use App\Models\Departamentosede;
 use App\Models\Empresa;
 use App\Models\Persona;
@@ -133,11 +134,13 @@ class EmpresasController extends Controller
     public function info(Empresa $empresa){
         /* SELECT * FROM trabajadors INNER JOIN trabajadorsedes ON trabajadors.id_trabajador = trabajadorsedes.trabajador_id INNER JOIN sedes ON trabajadorsedes.sede_id = sedes.id_sede INNER JOIN empresas ON sedes.empresas_id = empresas.id_empresa WHERE empresas.id_empresa = 1; */
         $sede = Sede::where('empresas_id', $empresa->id_empresa)->get();
-        $departamentos = Departamentosede::join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
+        $departamentos = Departamento::join('departamentosedes', 'departamentos.id_departamento', '=', 'departamentosedes.departamento_id')
+        ->join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
         ->where('empresas_id', '=', $empresa->id_empresa)
         ->select('nombre_departamento', 'sede_id', 'id_departamentosede')
         ->get();
         $areadeptos = Areadepartamentosede::join('departamentosedes', 'areadepartamentosedes.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
+        ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
         ->join('sedes','departamentosedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('empresas_id', '=', $empresa->id_empresa)

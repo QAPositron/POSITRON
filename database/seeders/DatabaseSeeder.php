@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HolderSeeder::class);
         $this->call(EmpresaSeeder::class);
         $this->call(SedeSeeder::class);
+        $this->call(DepartamentoSeeder::class);
         $this->call(DepartamentosedeSeeder::class);
         $this->call(AreadepartamentosedeSeeder::class);
        /*  $this->call(TrabajadorsSeeder::class);

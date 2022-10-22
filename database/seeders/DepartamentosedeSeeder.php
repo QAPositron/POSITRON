@@ -16,12 +16,9 @@ class DepartamentosedeSeeder extends Seeder
     {
         Departamentosede::insert([
             'sede_id' => '1',
-            'nombre_departamento' => 'ODON',
+            'departamento_id' => '1',
             
         ]);
-        Departamentosede::insert([
-            'sede_id' => '1',
-            'nombre_departamento' => 'CIRU',
-        ]);
+        
     }
 }

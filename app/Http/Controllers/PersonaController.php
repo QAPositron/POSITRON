@@ -97,13 +97,8 @@ class PersonaController extends Controller
                 $personasRoles = new Personasroles();
     
                 $personasRoles->persona_id  = $persona->id_persona;
-<<<<<<< HEAD
-                $personasRoles->rol_id      = $request->rol_personas[$i];
-    
-=======
                     $personasRoles->rol_id      = $request->rol_personas[$i];
         
->>>>>>> 09313f106824dd5ef754906ad37c05996286f3aa
                 $personasRoles->save();
             }
         }

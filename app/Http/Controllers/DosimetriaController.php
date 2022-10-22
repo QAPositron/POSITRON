@@ -8,6 +8,7 @@ use App\Models\ContratoDosimetria;
 use App\Models\Contratodosimetriasede;
 use App\Models\Contratodosimetriasededepto;
 use App\Models\ContratosDosimetriaEmpresa;
+use App\Models\Departamento;
 use App\Models\Departamentosede;
 use App\Models\Dosiareacontdosisede;
 use App\Models\Dosicontrolcontdosisede;
@@ -82,10 +83,11 @@ class DosimetriaController extends Controller
         /* return $sedes; */
     }
 /* ------------------------------------------------------------------------------- */
-    public function createContratodosi($id){
+    public function createContratodosi($id){ 
         $empresa = Empresa::find($id);
         $sedes = Sede::where('sedes.empresas_id', $id)->get();
-        $departamentos = Departamentosede::join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
+        $departamentos = Departamento::join('departamentosedes', 'departamentos.id_departamento', '=', 'departamentosedes.departamento_id')
+        ->join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('empresas.id_empresa', $id)
         ->get();
@@ -93,7 +95,7 @@ class DosimetriaController extends Controller
     }
     
     public function selectdepa(Request $request){
-        $departamentos = DB::table('departamentosedes')
+        $departamentos = Departamento::join('departamentosedes', 'departamentos.id_departamento', '=', 'departamentosedes.departamento_id')
             ->where('sede_id', $request->sede_id)
             ->select("*")
             ->get();
@@ -369,6 +371,7 @@ class DosimetriaController extends Controller
             ->join('sedes', 'sede_id', '=', 'id_sede')
             ->join('contratodosimetriasededeptos', 'id_contratodosimetriasede', '=', 'contratodosimetriasede_id')
             ->join('departamentosedes', 'departamentosede_id', '=', 'id_departamentosede')
+            ->join('departamentos', 'departamento_id', '=', 'id_departamento')
             ->select('nombre_empresa', 'nombre_sede', 'codigo_contrato','fecha_inicio', 'fecha_finalizacion', 'periodo_recambio','nombre_departamento', 'mes_actual', 'dosi_torax', 'dosi_control', 'dosi_area', 'dosi_caso', 'dosi_cristalino', 'dosi_muñeca', 'dosi_dedo', 'id_contdosisededepto', 'contratodosimetriasede_id', 'id_contratodosimetria') 
             ->where('id_contratodosimetria', '=', $id)
             ->get();

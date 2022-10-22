@@ -15,17 +15,17 @@ class AreadepartamentosedeSeeder extends Seeder
     public function run()
     {
         Areadepartamentosede::insert([
-            'departamentosede_id' => '2',
+            'departamentosede_id' => '1',
             'nombre_area' => 'AREA 1',
             'descripcion' => 'PRIMER AREA', 
         ]);
         Areadepartamentosede::insert([
-            'departamentosede_id' => '2',
+            'departamentosede_id' => '1',
             'nombre_area' => 'AREA 2',
             'descripcion' => 'SEGUNDA AREA', 
         ]);
         Areadepartamentosede::insert([
-            'departamentosede_id' => '2',
+            'departamentosede_id' => '1',
             'nombre_area' => 'AREA 3',
             'descripcion' => 'TERCER AREA', 
         ]);

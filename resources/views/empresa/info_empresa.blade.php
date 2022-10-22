@@ -151,7 +151,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                                 <td class="text-center align-middle">{{$sed->municipios->nombre_municol}} / {{$sed->municipios->coldepartamento->abreviatura_deptocol}}</td>  
                                                 <td class="text-center align-middle">{{$sed->direccion_sede}}</td>
                                                 <td colspan="3" class="text-center align-middle">
-                                                    @foreach($departamentos as $dep)
+                                                    @foreach($departamentos as $dep) 
                                                         @php
                                                             $chek = 'inicial';
                                                         @endphp

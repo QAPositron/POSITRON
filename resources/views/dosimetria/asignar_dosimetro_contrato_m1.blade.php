@@ -22,55 +22,46 @@
                 {{-- <label class="text-center mx-5">INGRESE LA INFORMACIÓN CORRESPONDIENTE PARA REALIZAR LAS ASIGNACIONES QUE ESTAN PENDIENTES EN EL CONTRATO DE DOSIMETRÍA:</label> --}}
                 
                 <div class="row g-2 mx-3">
-                    <div class="col-md">    
+                    <div class="col-md"></div>
+                    <div class="col-md-6">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
-                
                                     <tr class="text-center">
-                                        <th>DOSíMETROS</th>
-                                        <th>CONTRATADOS</th>
+                                        <th colspan='7'>DOSíMETROS CONTRATADOS</th>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <th>CONTROL</th>
+                                        <th>TÓRAX</th>
+                                        <th>ÁREA</th>
+                                        <th>CASO</th>
+                                        <th>CRISTALINO</th>
+                                        <th>MUÑECA</th>
+                                        <th>ANILLO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th>CONTROL:</th>
                                         <td class="text-center">{{$contdosisededepto->dosi_control}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>TÓRAX:</th>
                                         <td class="text-center">{{$contdosisededepto->dosi_torax}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>ÁREA:</th>
                                         <td class="text-center">{{$contdosisededepto->dosi_area}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CASO:</th>
                                         <td class="text-center">{{$contdosisededepto->dosi_caso}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CRISTALINO:</th>
                                         <td class="text-center">{{$contdosisededepto->dosi_cristalino}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>MUÑECA:</th>
                                         <td class="text-center">{{$contdosisededepto->dosi_muñeca}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>ANILLO:</th>
                                         <td class="text-center">{{$contdosisededepto->dosi_dedo}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    <div class="col-md"></div>
+
                 </div>
                  
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input value="" type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" >
+                            <input value="" type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" onchange="fechaultimodia();" >
                             <label for="floatingInputGrid">PRIMER DÍA</label>
                             @error('primerDia_asigdosim')
                                 <small class="invalid-feedback">*{{$message}}</small>
@@ -558,6 +549,32 @@
         $('#id_dosimetro_asigdosimArea').select2();
         $('#ocupacion_asigdosimArea').select2();
     });
+    function fechaultimodia(){
+        var fecha = document.getElementById("primerDia_asigdosim").value;
+        var fecha_inicio = new Date(fecha);
+        fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
+        alert(fecha_inicio);
+        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
+            var fecha_final_año = fecha_inicio.getFullYear();
+            var mm = fecha_inicio.getMonth() + 2;
+            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            var dd = fecha_inicio.getDate();
+            /* console.log(dd); */
+            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
+            
+            console.log(fecha_final);
+            var fechaFinaly = fecha_final.getFullYear();
+            console.log(fechaFinaly);
+            var fechaFinalm = fecha_final.getMonth()+1;
+            console.log(fechaFinalm);
+            var fechaFinald = fecha_final.getDate();
+            console.log(fechaFinald);
+            var fechaFinalymd = fechaFinaly+'-'+fechaFinalm+'-'+fechaFinald;
+            console.log(fechaFinalymd);
+            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
+        }
+    };
 </script>
 
 <script type="text/javascript">
