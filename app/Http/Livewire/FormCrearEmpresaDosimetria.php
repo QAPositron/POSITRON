@@ -11,10 +11,13 @@ class FormCrearEmpresaDosimetria extends Component
     
     public $empresa;
      
-    public $numtotal_dosi_cuerpo_entero;
+    public $numtotal_dosi_torax;
+    public $numtotal_dosi_cristalino;
+    public $numtotal_dosi_dedo;
+    public $numtotal_dosi_muñeca;
     public $numtotal_dosi_control;
     public $numtotal_dosi_ambiental;
-    public $numtotal_dosi_ezclip;
+    public $numtotal_dosi_caso;
     
     protected $rules = [
 
@@ -39,16 +42,19 @@ class FormCrearEmpresaDosimetria extends Component
         $empresaDosi->empresa_id                  = $this->empresa;
         $empresaDosi->nombre_empresa              = $empresaDosi->empresa->nombre_empresa;
         $empresaDosi->num_iden_empresa            = $empresaDosi->empresa->num_iden_empresa;
-        $empresaDosi->numtotal_dosi_cuerpo_entero = $this->numtotal_dosi_cuerpo_entero  = 0;
+        $empresaDosi->numtotal_dosi_torax         = $this->numtotal_dosi_torax          = 0;
+        $empresaDosi->numtotal_dosi_cristalino    = $this->numtotal_dosi_cristalino     = 0;
+        $empresaDosi->numtotal_dosi_dedo          = $this->numtotal_dosi_dedo           = 0;
+        $empresaDosi->numtotal_dosi_muñeca        = $this->numtotal_dosi_muñeca         = 0;
         $empresaDosi->numtotal_dosi_control       = $this->numtotal_dosi_control        = 0;
         $empresaDosi->numtotal_dosi_ambiental     = $this->numtotal_dosi_ambiental      = 0;
-        $empresaDosi->numtotal_dosi_ezclip        = $this->numtotal_dosi_ezclip         = 0;
+        $empresaDosi->numtotal_dosi_caso          = $this->numtotal_dosi_caso           = 0;
         $empresaDosi->save();
 
         redirect()->route('empresasdosi.create');
         $this->emit('alert', 'LA EMPRESA SE GUARDÓ EN DOSIMETRÍA EXITOSAMENTE!!');
 
-        return $this->reset(['empresa', 'numtotal_dosi_cuerpo_entero', 'numtotal_dosi_control', 'numtotal_dosi_ambiental', 'numtotal_dosi_ezclip']);
+        return $this->reset(['empresa', 'numtotal_dosi_torax', 'numtotal_dosi_cristalino', 'numtotal_dosi_dedo', 'numtotal_dosi_muñeca', 'numtotal_dosi_control', 'numtotal_dosi_ambiental', 'numtotal_dosi_caso']);
     }
     
     public function render()

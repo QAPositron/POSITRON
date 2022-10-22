@@ -10,49 +10,30 @@
     </div>
     <div class="col"></div>
 </div>
-<div class="row">
-    <div class="col"></div>
-    <div class="col">
-        <div class="card text-dark bg-light" style="max-width: 25rem;">
-            <h3 class="pt-4 text-center">BUSCAR</h3>
-            <form class="m-4"action="">
-                <label for="exampleFormControlInput1" class="form-label">PALABRA CLAVE: </label>
-                <div class="row">
-                    <div class="col-8">
-                        <input class="form-control" type="text" name="busqueda" id="busqueda" placeholder="--BUSCAR--" autofocus style="text-transform:uppercase;">
-                    </div>
-                    <div class="col">
-                        <input class="btn colorQA" type="submit" id="submit" name="submit" value="BUSCAR">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="col"></div>
-</div>
+
     
-<div class="row pt-5" id ="salida">
-    <h3 class="text-center">TODAS LAS EMPRESAS</h3>
+<div class="row pt-3" id ="salida">
+    <h2 class="text-center">TODAS LAS EMPRESAS</h2>
     <BR></BR>
-    <table class="table table-responsive hover table-bordered">
+    <table class="table table-responsive hover table-bordered" id="empresas">
         <thead class="table-active text-center">
             <th scope='col'  style='width: 18.60%'>NOMBRE</th>
-            <th scope='col'>N. IDENTIFICACIÓN</th>
             <th scope='col'>TIPO IDENTIFICACIÓN</th>
+            <th scope='col'>N. IDENTIFICACIÓN</th>
             <th scope='col'>CIUDAD</th>
             <th scope='col'>DIRECCIÓN</th>
             <th scope='col'>EMAIL</th>
-            <th scope='col' style='width: 9.60%'>ACCIONES</th>
+            <th scope='col' style='width: 12.60%'>ACCIONES</th>
         </thead>
         @foreach($empresa as $emp)
             <tr>
-                <td><a class="link-dark" href="{{route('empresas.info', $emp->id_empresa)}}">{{$emp->nombre_empresa}}</a></td>
-                <td>{{$emp->num_iden_empresa}}  {{$emp->DV}}</td>
-                <td>{{$emp->tipo_identificacion_empresa}}</td>
-                <td>{{$emp->municipios->nombre_municol}}</td>
-                <td>{{$emp->direccion_empresa}}</td>
-                <td>{{$emp->email_empresa}}</td>
-                <td>
+                <td class="align-middle"><a class="link-dark" href="{{route('empresas.info', $emp->id_empresa)}}">{{$emp->nombre_empresa}}</a></td>
+                <td class="align-middle">{{$emp->tipo_identificacion_empresa}}</td>
+                <td class="align-middle text-center">{{$emp->num_iden_empresa}}  {{$emp->DV}}</td>
+                <td class="align-middle text-center">{{$emp->municipios->nombre_municol}}</td>
+                <td class="align-middle text-center">{{$emp->direccion_empresa}}</td>
+                <td class="align-middle text-center">{{$emp->email_empresa}}</td>
+                <td class="align-middle text-center">
                     <div class="row">
                         <div class="col">
                             <a href="{{route('empresas.edit', $emp->id_empresa)}}" class="btn colorQA">
@@ -85,6 +66,7 @@ integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @if(session('guardar')== 'ok')
     <script>
         Swal.fire(
@@ -131,6 +113,28 @@ crossorigin="anonymous">
                 }
             })
         })
+        $('#empresas').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "NO HAY REGISTROS",
+                "info": "MOSTRANDO REGISTROS DEL  _START_ AL _END_ DE UN TOTAL DE  _TOTAL_ REGISTROS",
+                "infoEmpty": "MOSTRANDO 0 DE 0 REGISTROS",
+                "infoFiltered": "(FILTRADO DE UN TOTAL DE _MAX_ REGISTROS)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "MOSTRAR _MENU_ REGISTROS",
+                "loadingRecords": "CARGANDO...",
+                "processing": "PROCESANDO...",
+                "search": "BUSCAR:",
+                "zeroRecords": "NO SE ENCONTRARON RESULTADOS",
+                "paginate": {
+                    "first": "PRIMERO",
+                    "last": "ÚLTIMO",
+                    "next": "SIGUIENTE",
+                    "previous": "ANTERIOR"
+                }   
+            },
+        });
     })
 </script>
 

@@ -244,7 +244,11 @@ crossorigin="anonymous">
         // Creamos array con los meses del año
         var meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
         
+<<<<<<< HEAD
         Livewire.on('mesesTrab', function(trabajdosiasig){ 
+=======
+        Livewire.on('mesesTrab', function(trabajdosiasig){
+>>>>>>> 09313f106824dd5ef754906ad37c05996286f3aa
            
             trabajdosiasig.forEach(function (element){
                 var fecha = new Date(element.fecha_inicio);

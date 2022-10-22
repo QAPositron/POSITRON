@@ -29,37 +29,36 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md d-flex align-items-center">
+                    <div class="col-md d-flex align-items-center ">
                         <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_perfilModal" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
                         </button>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <label for="">ROL:</label>
                         <div class="form-floating">
                             <select class="form-select" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
                                 @foreach($roles as $rol)
                                     <option value ="{{$rol->id_rol}}">{{$rol->nombre_rol}}</option>
                                 @endforeach 
-                                {{-- <option value="ESTUDIANTE">ESTUDIANTE</option>
-                                <option value="CONTACTO">CONTACTO</option>
-                                <option value="TOE">TRABAJADOR OCUPACIONALMENTE EXPUESTO (TOE)</option>
-                                <option value="OPR">OFICIAL DE PROTECCIÓN RADIOLÓGICA (OPR)</option> --}}
+                                
                             </select>
                             @error('rol_personas')
                                 <small>*{{$message}}</small>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md d-flex align-items-center">
+                    {{-- /////////TEMPORALMENTE DESHABILITADO POR INDECISION////////////// AHORA SOLO HAY 4 ROLES FIJOS////// --}}
+                    {{-- <div class="col-md d-flex align-items-center">
                         <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_rolModal" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
                         </button>
-                    </div>
+                    </div> --}}
+                    {{-- ///////////////////////////////////////////////////////////////////// --}}
                 </div>
             
                 <br>
@@ -192,6 +191,13 @@
                             
                         </div>
                     </div>
+                    <div class="col-md-1 d-flex align-items-center">
+                        <button type="button" class="btn colorQA"  id="agregar" name="agregar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
                     <div class="col-md" >
                         <label for="floatingSelectGrid">SEDE:</label>
                         <div class="spinner_sede text-center" id="spinner_sede">
@@ -206,6 +212,9 @@
                     </div>
                 </div>
                 <br>
+                <div id="otraEmpresa">
+
+                </div>
                 <BR>
                 <label for="">A CONTINUACIÓN, SELECCIONE SI ESTE CONTACTO ES EL LÍDER O ENCARGADO DE LOS SERVICIOS:</label>
                 
@@ -264,7 +273,8 @@
         </div> 
     </div>
 </div>
-<div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
+{{-- //////////////// MODAL DESHABILITADO YA LOS ROLES SON FIJOS ////////////////////////// --}}
+{{-- <div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -275,7 +285,7 @@
             
         </div> 
     </div>
-</div>
+</div> --}}
 <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -350,6 +360,81 @@ crossorigin="anonymous">
 
         });
     });
+   
+    $(document).ready(function(){
+        var i = 1;
+        $("#agregar").click(function(){
+
+            $("#otraEmpresa").append(
+                '<div class="row g-2" id="row'+i+'">'
+                    +'<div class="col-md">'
+                        +'<div class="form-floating">'
+                            +'<select class="form-select" name="id_empresas_add[]" id="id_empresas'+i+'">'
+                                +'<option value="">--SELECCIONE--</option>'
+                                +'@foreach($empresas as $emp)'
+                                    +'<option value ="{{ $emp->id_empresa }}">{{$emp->nombre_empresa}}</option>'
+                                +'@endforeach'
+                            +'</select>'
+                            +'<label for="floatingSelectGrid">EMPRESA:</label>'
+                            
+                        +'</div>'
+                    +'</div>'
+                    +'<div class="col-md-1 d-flex align-items-center">'    
+                        +'<button id="remove'+i+'" class="btn btn-danger"  type="button">'
+                            +'<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">'
+                                +'<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'
+                            +'</svg>'
+                        +'</button>'
+                    +'</div>'
+                    +'<div class="col-md">'
+                        +'<label for="floatingSelectGrid">SEDE:</label>'
+                        +'<div class="spinner_sede text-center" id="spinner_sede'+i+'"></div>'
+                        +'<div class="form-floating" id="sede_empresa'+i+'" name="sede_empresa">'
+                            +'<select class="form-select" id="id_sedes'+i+'" name="id_sedes_add[]" autofocus aria-label="Floating label select example"  multiple="true">'
+                                
+                            +'</select>'
+                        +'</div>'
+                    +'</div>'
+                    
+                +'</div>'
+                +'<br>'
+            );
+            
+            $('#id_empresas'+i).on('change', function(){
+                
+                $('#sede_empresa'+(i-1)).fadeOut();
+                $('#spinner_sede'+(i-1)).html('<div class="spinner-border text-secondary" id="spinner'+(i-1)+'" role="status"></div>');
+                var empresa_id = $(this).val();
+                var padre = document.getElementById("spinner_sede"+(i-1));
+                var hijo = document.getElementById("spinner"+(i-1));
+                if($.trim(empresa_id) != ''){
+                    $.get('selectsedes',{empresa_id : empresa_id}, function(sedes){
+                        console.log(sedes);
+                        var remove = padre.removeChild(hijo);
+                        $('#sede_empresa'+(i-1)).fadeIn();
+                        $('#id_sedes'+(i-1)).empty();
+                        $('#id_sedes'+(i-1)).append("<option value=''>--SELECCIONE UNA SEDE--</option>");
+                        $.each(sedes, function(index, value){
+                            $('#id_sedes'+(i-1)).append("<option value='"+ index + "'>" + value + "</option>");
+                        })
+                    });
+                }
+
+            });
+            $('#remove'+i).click(function(){
+                $('#row'+(i-1)).remove();
+                
+            })
+            $('#id_sedes'+i).select2({
+                placeholder:"SELECCIONE LAS SEDES",
+                tags: true,
+                tokenSeparators: ['/',',',',',','," "]
+            });
+            i++;
+        }); 
+    });
+
+   
     
 </script>
 
@@ -372,6 +457,7 @@ crossorigin="anonymous">
             tags: true,
             tokenSeparators: ['/',',',',',','," "]
         });
+        
     });
 </script>
 <script type="text/javascript">
@@ -379,7 +465,7 @@ crossorigin="anonymous">
         $('#form_create_contacto').submit(function(e){
             e.preventDefault();
             Swal.fire({
-                text: "DESEA GUARDAR ESTE CONTACTO??",
+                text: "DESEA GUARDAR ESTA PERSONA??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -393,5 +479,6 @@ crossorigin="anonymous">
             })
         })
     })
+    
 </script>
 @endsection

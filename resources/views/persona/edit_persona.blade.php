@@ -5,8 +5,15 @@
     <div class="col"></div>
     <div class="col-8">
         <div class="card text-dark bg-light">
-            <h2 class="text-center mt-3">EDITAR PERSONA</h2>
-
+            @if($id ==  0)
+                <h2 class="text-center mt-3">EDITAR PERSONA</h2>
+            @elseif($id == 1)
+                <h3 class="text-center mt-3">EDITAR TRABAJADOR DOSIMETRIA PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
+            @elseif($id == 2)
+                <h3 class="text-center mt-3">EDITAR ESTUDIANTE DE A. VIRTUAL PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
+            @elseif($id== 3)
+                <h3 class="text-center mt-3">EDITAR CONTACTO PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
+            @endif
             <br>
 
             <br>
@@ -84,7 +91,6 @@
                     @endif
                 </div>
             </div>
-            <br><br>
             <div class="row mx-3">
                 @if(count($personasede)== 0)
                     <b><label for="">NO HAY EMPRESAS Y SEDES RELACIONADAS</label></b>
@@ -123,7 +129,7 @@
                     
                 @endif
             </div>
-            <br>
+            
             <form class="m-4" id='form_edit_persona' name='form_edit_persona' action="{{route('personas.update', $persona)}}" method="POST">
                 @csrf
                 @method('put') 
@@ -139,13 +145,7 @@
                                 @foreach($perfiles as $perf)
                                     <option value ="{{$perf->id_perfil}}">{{$perf->nombre_perfil}}</option>
                                 @endforeach 
-                                {{-- <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
-                                <option value="CALIDAD">CALIDAD</option>
-                                <option value="BIOMÉDICA">BIOMÉDICA</option>
-                                <option value="FÍSICA MÉDICA">FÍSICA MÉDICA</option>
-                                <option value="CONTABILIDAD">CONTABILIDAD</option>
-                                <option value="SUBGERENCIA">    </option>
-                                <option value="GERENCIA">GERENCIA</option> --}}
+                               
                             </select>
                             
                         </div>
@@ -157,28 +157,27 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <label for="">ROL:</label>
                         <div class="form-floating">
                             <select class="form-select" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true">
                                 @foreach($roles as $rol)
                                     <option value ="{{$rol->id_rol}}">{{$rol->nombre_rol}}</option>
                                 @endforeach 
-                                {{-- <option value="ESTUDIANTE">ESTUDIANTE</option>
-                                <option value="CONTACTO">CONTACTO</option>
-                                <option value="TOE">TRABAJADOR OCUPACIONALMENTE EXPUESTO (TOE)</option>
-                                <option value="OPR">OFICIAL DE PROTECCIÓN RADIOLÓGICA (OPR)</option> --}}
+                                
                             </select>
                             
                         </div>
                     </div>
-                    <div class="col-md d-flex align-items-center">
+                    {{-- /////////TEMPORALMENTE DESHABILITADO POR INDECISION////////////// AHORA SOLO HAY 4 ROLES FIJOS////// --}}
+                    {{-- <div class="col-md d-flex align-items-center">
                         <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_rolModal" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
                         </button>
-                    </div>
+                    </div> --}}
+                    {{-- ///////////////////////////////////////////////////////////////////// --}}
                 </div>
                 <br>
                 <div class="row g-2">
@@ -366,9 +365,15 @@
                     <div class="col d-grid gap-2">
                         <button class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR </button>
                     </div>
-                    <div class="col d-grid gap-2">
-                        <a href="{{route('personas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
-                    </div>
+                    @if(!empty($empresa))
+                        <div class="col d-grid gap-2">
+                            <a href="{{route('empresas.info', $empresa->id_empresa)}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                        </div>
+                    @else
+                        <div class="col d-grid gap-2">
+                            <a href="{{route('personas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                        </div>
+                    @endif
                     <div class="col"></div>
                 </div>
             </form>
@@ -390,7 +395,8 @@
         </div> 
     </div>
 </div>
-<div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
+{{-- //////////////// MODAL DESHABILITADO YA LOS ROLES SON FIJOS ////////////////////////// --}}
+{{-- <div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -400,7 +406,7 @@
             @livewire('form-personas-roles')    
         </div> 
     </div>
-</div>
+</div> --}}
 <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

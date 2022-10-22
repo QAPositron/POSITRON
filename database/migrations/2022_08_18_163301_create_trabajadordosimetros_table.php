@@ -13,7 +13,6 @@ class CreateTrabajadordosimetrosTable extends Migration
      */
     public function up()
     {
-        
         Schema::create('trabajadordosimetros', function (Blueprint $table) {
             $table->bigincrements('id_trabajadordosimetro')->unique();
             
@@ -22,6 +21,9 @@ class CreateTrabajadordosimetrosTable extends Migration
 
             $table-> unsignedBigInteger('trabajador_id')->nullable();
             $table-> foreign('trabajador_id')->references('id_trabajador')->on('trabajadors')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('persona_id')->nullable();
+            $table-> foreign('persona_id')->references('id_persona')->on('personas')->onDelete('cascade')->onUpdate('cascade');
 
             $table-> unsignedBigInteger('dosimetro_id');
             $table-> foreign('dosimetro_id')->references('id_dosimetro')->on('dosimetros')->onDelete('cascade')->onUpdate('cascade');
@@ -77,6 +79,7 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table->string('EU', 10)->nullable();
             $table->string('DPL', 10)->nullable();
             $table->string('DSU', 10)->nullable();
+            $table->string('revision', 10)->nullable();
             $table->timestamps();
         });
     }

@@ -21,7 +21,11 @@ class SearchAsignaciones extends Component
                             'MATCH' => 'match',
                             'NOMATCH' => 'nomatch',
                             'MATCHCONTROL' =>'matchcontrol',
+<<<<<<< HEAD
                             'ELIMINAR' => 'eliminarevision'
+=======
+                            'ELIMINAR' =>' eliminarevision'
+>>>>>>> 09313f106824dd5ef754906ad37c05996286f3aa
                         ];
 
     public function existDosimetro(){
@@ -124,6 +128,10 @@ class SearchAsignaciones extends Component
     }
     public function render()
     {   
+<<<<<<< HEAD
+=======
+
+>>>>>>> 09313f106824dd5ef754906ad37c05996286f3aa
         $empresasDosi = ContratosDosimetriaEmpresa::all();
         $trabajdosiasig = Trabajadordosimetro::join('personas', 'trabajadordosimetros.persona_id', '=', 'personas.id_persona')
         ->join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')

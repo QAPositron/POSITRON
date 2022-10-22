@@ -9,8 +9,8 @@
             </svg>
         </a>
     </div> 
-    <div class="col-md">
-        <h2 class="text-center "> DOSIMETRÍA DE <br> <i>{{$empresa->nombre_empresa}}</i> </h2> 
+    <div class="col-md-5">
+        <h2 class="text-center "> CONTRATOS DE DOSIMETRÍA PARA <br> <i>{{$empresa->nombre_empresa}}</i> </h2> 
     </div>
     <div class="col-md"></div>
 </div>
@@ -27,26 +27,26 @@
 <BR></BR>
 <div class="row">
     <div class="col"></div>
-    <div class="col-9">
-        <h3 class="text-center">LISTADO DE CONTRATOS</h3>
+    <div class="col-7">
+        {{-- <h3 class="text-center">LISTADO DE CONTRATOS</h3> --}}
         <div class="table table-responsive p-4 ">
-            <table class="table table-bordered">
-                <thead class ="text-center">
+            <table class="table table-bordered contratosdosi">
+                <thead class ="table-active text-center">
                     <tr>
                         <th>No. CONTRATO</th>
                         <th style='width: 15.60%'>FECHA INICIO</th>
                         <th style='width: 15.60%'>FECHA FINALIZACIÓN</th>
-                        <th style='width: 15.60%'>P. RECAMBIO</th>
-                        <th style='width: 15.60%'>ACCIONES</th>
+                        <th style='width: 20.60%'>P. RECAMBIO</th>
+                        <th style='width: 20.60%'>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($dosimetriacontrato as $dosicont)
                         <tr>
-                            <td class="align-middle"><a class="link-dark" href="{{route('detallecontrato.create', $dosicont->id_contratodosimetria)}}">{{$dosicont->codigo_contrato}}</a></td>
+                            <td class="align-middle"><a class="btn btn-outline-primary rounded-pill" href="{{route('detallecontrato.create', $dosicont->id_contratodosimetria)}}">{{$dosicont->codigo_contrato}}</a></td>
                             <td class="align-middle">{{$dosicont->fecha_inicio}}</td>
                             <td class="align-middle">{{$dosicont->fecha_finalizacion}}</td>
-                            <td class="align-middle">{{$dosicont->periodo_recambio}}</td>
+                            <td class="align-middle text-center">{{$dosicont->periodo_recambio}}</td>
                             <td class="text-center">
                                 <div class="row">
                                     <div class="col">
@@ -133,6 +133,30 @@ crossorigin="anonymous">
                 }
             })
         })
+        
+        $('.contratosdosi').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "NO HAY REGISTROS",
+                "info": "MOSTRANDO REGISTROS DEL  _START_ AL _END_ DE UN TOTAL DE  _TOTAL_ REGISTROS",
+                "infoEmpty": "MOSTRANDO 0 DE 0 REGISTROS",
+                "infoFiltered": "(FILTRADO DE UN TOTAL DE _MAX_ REGISTROS)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "MOSTRAR _MENU_ REGISTROS",
+                "loadingRecords": "CARGANDO...",
+                "processing": "PROCESANDO...",
+                "search": "BUSCAR:",
+                "zeroRecords": "NO SE ENCONTRARON RESULTADOS",
+                "paginate": {
+                    "first": "PRIMERO",
+                    "last": "ÚLTIMO",
+                    "next": "SIGUIENTE",
+                    "previous": "ANTERIOR"
+                }   
+            },
+        });
+    
     })
    
 

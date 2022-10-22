@@ -4,15 +4,15 @@
     <div class="col-md"></div>
     <div class="col-md-15">
         <div class="card text-dark bg-light">
-            <br>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel">ASIGNACIÓN DOSÍMETROS <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ) <br> ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}} </h3>
+            <h2 class="modal-title w-100 text-center">ASIGNACIÓN DOSÍMETROS</h2>
+            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ), ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}} </h3>
             <form action="{{route('asignadosicontratomn.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion_mn" name="form-nueva-asignacion_mn" class="form-nueva-asignacion_mn m-4">
                 @csrf
                 <div class="row g-2 mx-3">
                     <div class="col-md">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
-                                <thead>
+                                <thead class="table-active">
                                     <tr class="text-center">
                                         <th>DOSíMETROS</th>
                                         <th>CONTRATADOS</th>
@@ -44,7 +44,7 @@
                                         <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
                                     </tr>
                                     <tr>
-                                        <th>DEDO:</th>
+                                        <th>ANILLO:</th>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
                                     </tr>
                                 </tbody>
@@ -114,7 +114,7 @@
                     <div class="col-md">
                         <div class="table table-responsive text-center">
                             <table  class="table table-bordered" id="tablaAsignacionDosimetrosmn">
-                                <thead class="text-center">
+                                <thead class="table-active text-center">
                                     <th style='width: 28.20%' >TRABAJADOR / ÁREA</th>
                                     <th style='width: 16.40%'>UBICACIÓN</th>
                                     <th style='width: 16.40%'>DOSÍMETRO</th>
@@ -396,12 +396,17 @@
                                     @foreach($dosicasomesant as $dosicasoant)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso_mesant" value="{{$dosicasoant->trabajador_id}}" hidden>
-                                                <select class="form-select"  name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso{{$dosicasoant->trabajador_id}}" disabled>
-                                                    <option value="{{$dosicasoant->trabajador_id}}"> @if($dosicasoant->trabajador_id != NULL) {{$dosicasoant->trabajador->primer_nombre_trabajador}} {{$dosicasoant->trabajador->segundo_nombre_trabajador}} {{$dosicasoant->trabajador->primer_apellido_trabajador}} {{$dosicasoant->trabajador->segundo_apellido_trabajador}} @endif </option>
-                                                    @foreach($trabajadoreSede as $trabsed)
+                                                <input type="number" name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso_mesant" value="{{$dosicasoant->persona_id}}" hidden>
+                                                <select class="form-select"  name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso{{$dosicasoant->persona_id}}" disabled>
+                                                    <option value="{{$dosicasoant->persona_id}}"> @if($dosicasoant->persona_id != NULL) {{$dosicasoant->persona->primer_nombre_persona}} {{$dosicasoant->persona->segundo_nombre_persona}} {{$dosicasoant->persona->primer_apellido_persona}} {{$dosicasoant->persona->segundo_apellido_persona}} @endif </option>
+                                                    {{-- @foreach($trabajadoreSede as $trabsed)
                                                         @if($trabsed->trabajador->id_trabajador != $dosicasoant->trabajador_id)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endif
+                                                    @endforeach --}}
+                                                    @foreach($personaSede as $persed)
+                                                        @if($persed->id_persona != $dosicasoant->persona_id)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endif
                                                     @endforeach
                                                 </select>
@@ -476,7 +481,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->trabajador_id}}');">
+                                                <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -485,7 +490,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo TORAX asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CASO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
                                     @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_caso - count($dosicasomesant)); $i++)
                                             <tr>
@@ -493,8 +498,11 @@
                                                     <select class="form-select"  name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         
-                                                        @foreach($trabajadoreSede as $trabsed)
+                                                        {{-- @foreach($trabajadoreSede as $trabsed)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach --}}
+                                                        @foreach($personaSede as $persed)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>
@@ -531,7 +539,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->trabajador_id}}');">
+                                                    <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                             <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                             <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -546,12 +554,17 @@
                                     @foreach($dositoraxmesant as $dositoraxant)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax_mesant" value="{{$dositoraxant->trabajador_id}}" hidden>
-                                                <select class="form-select"  name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax{{$dositoraxant->trabajador_id}}" disabled>
-                                                    <option value="{{$dositoraxant->trabajador_id}}">@if($dositoraxant->trabajador_id != NULL) {{$dositoraxant->trabajador->primer_nombre_trabajador}} {{$dositoraxant->trabajador->segundo_nombre_trabajador}} {{$dositoraxant->trabajador->primer_apellido_trabajador}} {{$dositoraxant->trabajador->segundo_apellido_trabajador}} @endif</option>
-                                                    @foreach($trabajadoreSede as $trabsed)
+                                                <input type="number" name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax_mesant" value="{{$dositoraxant->persona_id}}" hidden>
+                                                <select class="form-select"  name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax{{$dositoraxant->persona_id}}" disabled>
+                                                    <option value="{{$dositoraxant->persona_id}}">@if($dositoraxant->persona_id != NULL) {{$dositoraxant->persona->primer_nombre_persona}} {{$dositoraxant->persona->segundo_nombre_persona}} {{$dositoraxant->persona->primer_apellido_persona}} {{$dositoraxant->persona->segundo_apellido_persona}} @endif</option>
+                                                    {{-- @foreach($trabajadoreSede as $trabsed)
                                                         @if($trabsed->trabajador->id_trabajador != $dositoraxant->trabajador_id)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endif
+                                                    @endforeach --}}
+                                                    @foreach($personaSede as $persed)
+                                                        @if($persed->id_persona != $dositoraxant->persona_id)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endif
                                                     @endforeach
                                                 </select>
@@ -626,7 +639,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->trabajador_id}}');">
+                                                <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -642,8 +655,11 @@
                                                 <td>
                                                     <select class="form-select"  name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
-                                                        @foreach($trabajadoreSede as $trabsed)
+                                                        {{-- @foreach($trabajadoreSede as $trabsed)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach --}}
+                                                        @foreach($personaSede as $persed)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>
@@ -680,7 +696,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->trabajador_id}}');">
+                                                    <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                             <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                             <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -695,12 +711,17 @@
                                     @foreach($dosicristalinomesant as $dosicristalinoant)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino_mesant" value="{{$dosicristalinoant->trabajador_id}}" hidden>
-                                                <select class="form-select"  name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino{{$dosicristalinoant->trabajador_id}}" disabled>
-                                                    <option value="{{$dosicristalinoant->trabajador_id}}">@if($dosicristalinoant->trabajador_id != NULL) {{$dosicristalinoant->trabajador->primer_nombre_trabajador}} {{$dosicristalinoant->trabajador->segundo_nombre_trabajador}} {{$dosicristalinoant->trabajador->primer_apellido_trabajador}} {{$dosicristalinoant->trabajador->segundo_apellido_trabajador}} @endif</option>
-                                                    @foreach($trabajadoreSede as $trabsed)
+                                                <input type="number" name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino_mesant" value="{{$dosicristalinoant->persona_id}}" hidden>
+                                                <select class="form-select"  name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino{{$dosicristalinoant->persona_id}}" disabled>
+                                                    <option value="{{$dosicristalinoant->persona_id}}">@if($dosicristalinoant->persona_id != NULL) {{$dosicristalinoant->persona->primer_nombre_persona}} {{$dosicristalinoant->persona->segundo_nombre_persona}} {{$dosicristalinoant->persona->primer_apellido_persona}} {{$dosicristalinoant->persona->segundo_apellido_persona}} @endif</option>
+                                                    {{-- @foreach($trabajadoreSede as $trabsed)
                                                         @if($trabsed->trabajador->id_trabajador != $dosicristalinoant->trabajador_id)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endif
+                                                    @endforeach --}}
+                                                    @foreach($personaSede as $persed)
+                                                        @if($persed->id_persona != $dosicristalinoant->persona_id)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endif
                                                     @endforeach
                                                 </select>
@@ -782,7 +803,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->trabajador_id}}');">
+                                                <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -798,8 +819,11 @@
                                                 <td>
                                                     <select class="form-select"  name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
-                                                        @foreach($trabajadoreSede as $trabsed)
+                                                        {{-- @foreach($trabajadoreSede as $trabsed)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach --}}
+                                                        @foreach($personaSede as $persed)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>
@@ -843,7 +867,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->trabajador_id}}');">
+                                                    <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                             <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                             <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -859,12 +883,17 @@
                                     @foreach($dosimuñecamesant as $dosimuñecant)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca_mesant" value="{{$dosimuñecant->trabajador_id}}" hidden>
-                                                <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca{{$dosimuñecant->trabajador_id}}" disabled>
-                                                    <option value="{{$dosimuñecant->trabajador_id}}">@if($dosimuñecant->trabajador_id != NULL) {{$dosimuñecant->trabajador->primer_nombre_trabajador}} {{$dosimuñecant->trabajador->segundo_nombre_trabajador}} {{$dosimuñecant->trabajador->primer_apellido_trabajador}} {{$dosimuñecant->trabajador->segundo_apellido_trabajador}} @endif</option>
-                                                    @foreach($trabajadoreSede as $trabsed)
+                                                <input type="number" name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca_mesant" value="{{$dosimuñecant->persona_id}}" hidden>
+                                                <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca{{$dosimuñecant->persona_id}}" disabled>
+                                                    <option value="{{$dosimuñecant->persona_id}}">@if($dosimuñecant->persona_id != NULL) {{$dosimuñecant->persona->primer_nombre_persona}} {{$dosimuñecant->persona->segundo_nombre_persona}} {{$dosimuñecant->persona->primer_apellido_persona}} {{$dosimuñecant->persona->segundo_apellido_persona}} @endif</option>
+                                                    {{-- @foreach($trabajadoreSede as $trabsed)
                                                         @if($trabsed->trabajador->id_trabajador != $dosimuñecant->trabajador_id)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endif
+                                                    @endforeach --}}
+                                                    @foreach($personaSede as $persed)
+                                                        @if($persed->id_persona != $dosimuñecant->persona_id)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endif
                                                     @endforeach
                                                 </select>
@@ -946,7 +975,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->trabajador_id}}');">
+                                                <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -962,8 +991,11 @@
                                                 <td>
                                                     <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
-                                                        @foreach($trabajadoreSede as $trabsed)
+                                                        {{-- @foreach($trabajadoreSede as $trabsed)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach --}}
+                                                        @foreach($personaSede as $persed)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>
@@ -1007,7 +1039,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->trabajador_id}}');">
+                                                    <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                             <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                             <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -1022,17 +1054,22 @@
                                     @foreach($dosidedomesant as $dosidedoant)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo_mesant" value="{{$dosidedoant->trabajador_id}}" hidden>
-                                                <select class="form-select"  name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo{{$dosidedoant->trabajador_id}}" disabled>
-                                                    <option value="{{$dosidedoant->trabajador_id}}">@if($dosidedoant->trabajador_id != NULL) {{$dosidedoant->trabajador->primer_nombre_trabajador}} {{$dosidedoant->trabajador->segundo_nombre_trabajador}} {{$dosidedoant->trabajador->primer_apellido_trabajador}} {{$dosidedoant->trabajador->segundo_apellido_trabajador}} @endif</option>
-                                                    @foreach($trabajadoreSede as $trabsed)
+                                                <input type="number" name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo_mesant" value="{{$dosidedoant->persona_id}}" hidden>
+                                                <select class="form-select"  name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo{{$dosidedoant->persona_id}}" disabled>
+                                                    <option value="{{$dosidedoant->persona_id}}">@if($dosidedoant->persona_id != NULL) {{$dosidedoant->persona->primer_nombre_persona}} {{$dosidedoant->persona->segundo_nombre_persona}} {{$dosidedoant->persona->primer_apellido_persona}} {{$dosidedoant->persona->segundo_apellido_persona}} @endif</option>
+                                                    {{-- @foreach($trabajadoreSede as $trabsed)
                                                         @if($trabsed->trabajador->id_trabajador != $dosidedoant->trabajador_id)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endif
+                                                    @endforeach --}}
+                                                    @foreach($personaSede as $persed)
+                                                        @if($persed->id_persona != $dosidedoant->persona_id)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endif
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>DEDO</td>
+                                            <td>ANILLO</td>
                                             <td>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo"  @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro_id}}@endif">@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
@@ -1109,7 +1146,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->trabajador_id}}');">
+                                                <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -1125,12 +1162,15 @@
                                                 <td>
                                                     <select class="form-select"  name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
-                                                        @foreach($trabajadoreSede as $trabsed)
+                                                        {{-- @foreach($trabajadoreSede as $trabsed)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
+                                                        @endforeach --}}
+                                                        @foreach($personaSede as $persed)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>DEDO</td>
+                                                <td>ANILLO</td>
                                                 <td>
                                                     <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -1170,7 +1210,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->trabajador_id}}');">
+                                                    <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                             <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                             <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
@@ -1240,14 +1280,14 @@ crossorigin="anonymous">
     $(document).ready(function(){
         // Creamos array con los meses del año
         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-        let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}");
-        /* fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset()); */
+        let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
+        
         console.log(fecha);
         for($i=0; $i<=13; $i++){
             var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
             var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-            console.log(fechaesp); 
-            if("{{$mesnumber}}" == $i){
+            console.log(r + fechaesp + "ESTA ES LA I"+($i+1)); 
+            if("{{$mesnumber}}" == ($i+1)){
                 
                 document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
             } 
@@ -1381,7 +1421,7 @@ crossorigin="anonymous">
     function changueDedo(dedo){
         
         Swal.fire({
-            title: 'DESEA CAMBIAR EL TRABAJADOR DE UN DOSÍMETRO TIPO "DEDO"?',
+            title: 'DESEA CAMBIAR EL TRABAJADOR DE UN DOSÍMETRO TIPO "ANILLO"?',
             text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO",
             icon: 'warning',
             showCancelButton: true,

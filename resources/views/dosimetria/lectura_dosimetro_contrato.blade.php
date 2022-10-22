@@ -47,27 +47,27 @@
                                     <input type="text" class="form-control" name="empresaLectDosim" id="empresaLectDosim" value="{{$trabjasig->contratodosimetriasede->sede->empresa->nombre_empresa}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>NOMBRES:</b> </label>
-                                    <input type="text"  class="form-control" name="nombrestrabLectDosim" id="nombrestrabLectDosim" value="{{$trabjasig->trabajador->primer_nombre_trabajador}} {{$trabjasig->trabajador->segundo_nombre_trabajador}}" readonly>
+                                    <input type="text"  class="form-control" name="nombrestrabLectDosim" id="nombrestrabLectDosim" value="{{$trabjasig->persona->primer_nombre_persona}} {{$trabjasig->persona->segundo_nombre_persona}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>EMAIL:</b> </label>
-                                    <input type="text"  class="form-control" name="correotrabLectDosim" id="correotrabLectDosim" value="{{$trabjasig->trabajador->email_trabajador}}" readonly>
+                                    <input type="text"  class="form-control" name="correotrabLectDosim" id="correotrabLectDosim" value="{{$trabjasig->persona->email_persona}}" readonly>
                                 </div>
                                 <div class="col-md-2 m-4">
                                     <label for="floatingInputGrid"> <b>NÚM. IDEN.:</b> </label>
                                     <input type="text" style="width: 120px;" class="form-control" name="numIdenEmpresaLectDosim" id="numIdenEmpresaLectDosim" value="{{$trabjasig->contratodosimetriasede->sede->empresa->num_iden_empresa}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>APELLIDOS:</b> </label>
-                                    <input type="text" class="form-control" name="apellidostrabLectDosim" id="apellidostrabLectDosim" value="{{$trabjasig->trabajador->primer_apellido_trabajador}} {{$trabjasig->trabajador->segundo_apellido_trabajador}}" readonly>
+                                    <input type="text" class="form-control" name="apellidostrabLectDosim" id="apellidostrabLectDosim" value="{{$trabjasig->persona->primer_apellido_persona}} {{$trabjasig->persona->segundo_apellido_persona}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>TELÉFONO:</b> </label>
-                                    <input type="text" style="width: 150px;" class="form-control" name="telefonotrabLectDosim" id="telefonotrabLectDosim" value="{{$trabjasig->trabajador->telefono_trabajador}}" readonly>
+                                    <input type="text" style="width: 150px;" class="form-control" name="telefonotrabLectDosim" id="telefonotrabLectDosim" value="{{$trabjasig->persona->telefono_persona}}" readonly>
                                 </div>
                                 <div class="col m-4">
                                     <label for="floatingInputGrid"> <b>SEDE:</b> </label>
                                     <input type="text"  class="form-control" name="sedeLectDosim" id="sedeLectDosim" value="{{$trabjasig->contratodosimetriasede->sede->nombre_sede}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>GÉNERO:</b> </label>
-                                    <input type="text" style="width: 130px;" class="form-control" name="generoLectDosim" id="generoLectDosim" value="{{$trabjasig->trabajador->genero_trabajador}}" readonly>
+                                    <input type="text" style="width: 130px;" class="form-control" name="generoLectDosim" id="generoLectDosim" value="{{$trabjasig->persona->genero_persona}}" readonly>
                                     
                                 </div>
                                 <div class="col-md-2 m-4">
@@ -75,7 +75,7 @@
                                     <input type="text"  class="form-control text-center" name="deptoLectDosim" id="deptoLectDosim" value="{{$trabjasig->contratodosimetriasededepto->departamentosede->nombre_departamento}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>CEDULA:</b> </label>
-                                    <input type="text"  class="form-control" name="cedulatrabLectDosim" id="cedulatrabLectDosim" value="{{$trabjasig->trabajador->cedula_trabajador}}" readonly>
+                                    <input type="text"  class="form-control" name="cedulatrabLectDosim" id="cedulatrabLectDosim" value="{{$trabjasig->persona->cedula_persona}}" readonly>
                                 </div>
                                 <div class="col-md m-4"></div>
                             </div>
@@ -127,7 +127,7 @@
                         <div class="tab-pane" id="lectura" role="tabpanel" aria-labelledby="lectura-tab">
                             
                             <h4 class="card-title text-center pt-3">CÓDIGO DEL DOSÍMETRO: {{$trabjasig->dosimetro->codigo_dosimeter}} - UBICACIÓN: {{$trabjasig->ubicacion}}</h4>
-                            <h4 class="card-title text-center">TRABAJADOR: {{$trabjasig->trabajador->primer_nombre_trabajador}} {{$trabjasig->trabajador->segundo_nombre_trabajador}} {{$trabjasig->trabajador->primer_apellido_trabajador}} {{$trabjasig->trabajador->segundo_apellido_trabajador}}</h4>
+                            <h4 class="card-title text-center">TRABAJADOR: {{$trabjasig->persona->primer_nombre_persona}} {{$trabjasig->persona->segundo_nombre_persona}} {{$trabjasig->persona->primer_apellido_persona}} {{$trabjasig->persona->segundo_apellido_persona}}</h4>
                             <BR></BR>
                             <Label class="mx-5">INGRESE LA INFORMACIÓN DE LA LECTURA DEL DOSÍMETRO ASIGNADO:</Label>
                             <BR></BR>

@@ -13,8 +13,10 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     
     <!-- <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/> -->
+     <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/POSITRON/public/DataTables/datatables.min.css"/>
 
-    
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.4/css/fixedHeader.bootstrap.css">
 
 
     <title>CREATE</title>
@@ -31,9 +33,9 @@
       .bg-danger{
         color: white;
       }
-      tr:hover{
+      /* tr:hover{
         background-color: rgba(26, 153, 128, 0.1);
-      }
+      } */
       input[type=number]::-webkit-inner-spin-button,
       input[type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -83,6 +85,12 @@
       .trdosisroja{
         color: red;
       }
+      .trcorrect{
+        /* background-color: #1A9980;
+        color: orange; */
+        box-shadow: inset 0 1px 1px rgba(194, 20, 34, 0.075), 0 0 8px rgb(245, 6, 6);
+                        
+      }
       .form-input-error-activo{
         display: block;
         color: red;
@@ -109,7 +117,13 @@
         font-size: 12px;
         line-height: 1.42857;
       }
-
+      .dataTables_wrapper   .dataTables_filter{
+          float: right
+      }
+    
+      .dataTables_wrapper  .dataTables_length{
+          float: left
+      }
       </style>
     
     
@@ -145,9 +159,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-
-    
-    
+    <!-- DataTables JS -->
+    <script type="text/javascript" src= "<?php $_SERVER['DOCUMENT_ROOT'] ?>/POSITRON/public/DataTables/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.js"></script>
 
 
     

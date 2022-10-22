@@ -34,7 +34,7 @@
                         <select class="form-select" name="empresaDosimetria" id="empresaDosimetria" value="" autofocus style="text-transform:uppercase;">
                             <option value="">--SELECCIONE--</option>
                             @foreach($empresasDosi as $empdosi)
-                                <option value="{{$empdosi->id_contratodosimetria_emp}}">{{$empdosi->nombre_empresa}}</option>
+                                <option value="{{$empdosi->empresa_id}}">{{$empdosi->nombre_empresa}}</option>
                             @endforeach
                         </select>
                         <label for="floatingInputGrid">EMPRESA:</label>
@@ -102,13 +102,13 @@
                             <thead class ="text-center">
                                 <tr>
                                     <th>MESES</th>
-                                    <th>DOSIM. CONTROL</th>
                                     <th>DOSIM. TÓRAX</th>
-                                    {{-- <th>DOSIM. ÁREA</th>
-                                    <th>DOSIM. CASO</th> --}}
                                     <th>DOSIM. CRISTALINO</th>
+                                    <th>DOSIM. ANILLO</th>
                                     <th>DOSIM. MUÑECA</th>
-                                    <th>DOSIM. DEDO</th>
+                                    <th>DOSIM. CONTROL</th>
+                                    <th>DOSIM. ÁREA</th>
+                                    <th>DOSIM. CASO</th>
                                 </tr>
                             </thead>
                             <tbody id="tabla_meses">
@@ -301,13 +301,10 @@
                                 <div class="row">
                                     <div class="col"></div>
                                     <div class="col-6">
-<<<<<<< HEAD
-                                        <label for="floatingInputGrid"> <b>NOTAS Y OBSERVACIONES:</b>  </label>
-                                        <input type="textarea" class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros">
-=======
+
                                         <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
                                         <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea>
->>>>>>> 6078b58ef2badab6945daad611368f3a7a075d34
+
                                     </div>
                                     <div class="col"></div>
                                 </div>
@@ -401,8 +398,9 @@
 
         $('#empresaDosimetria').on('change', function(){
             var empresa_id = $(this).val();
+            console.log(empresa_id);
             if($.trim(empresa_id) != ''){
-                $.get('contratoDosi', {empresa_id: empresa_id}, function(contratos){
+                $.get('contratoDosim', {empresa_id: empresa_id}, function(contratos){
                     console.log(contratos);
                     $('#contratos_empresadosi').empty();
                     $('#contratos_empresadosi').append("<option value=''>--SELECCIONE UN CONTRATO--</option>");
@@ -493,6 +491,7 @@ var myFechaInicial;
             var especialidad_id = $(this).val();
             if($.trim(especialidad_id) != ''){
                 $.get('meseschangecontratoDosi', {especialidad_id: especialidad_id}, function(todoslos_meses){
+                    console.log("ESTOS SON TODOS LOS MESES");
                     console.log(todoslos_meses);
                     for(var i=0; i<todoslos_meses.length; i++){
                         if(todoslos_meses[i].dosi_control == null && todoslos_meses[i].dosi_torax == null && todoslos_meses[i].dosi_cristalino == null && todoslos_meses[i].dosi_muñeca == null && todoslos_meses[i].dosi_dedo == null){
@@ -500,11 +499,13 @@ var myFechaInicial;
                         }else{
                             var tr = `<tr>
                                     <td class='align-middle text-center'>`+todoslos_meses[i].mes_asignacion+`</td>
-                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_control+`</td>
                                     <td class='align-middle text-center'>`+todoslos_meses[i].dosi_torax+`</td>
                                     <td class='align-middle text-center'>`+todoslos_meses[i].dosi_cristalino+`</td>
-                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_muñeca+`</td>
                                     <td class='align-middle text-center'>`+todoslos_meses[i].dosi_dedo+`</td>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_muñeca+`</td>
+                                    <td class='align-middle text-center'>`+todoslos_meses[i].dosi_control+`</td>
+                                    <td class='align-middle text-center'></td>
+                                    <td class='align-middle text-center'></td>
                                 </tr>`;
                             $("#tabla_meses").append(tr);
                         }
@@ -641,9 +642,12 @@ var myFechaInicial;
                                         $("#tr_control").append(tr);
                                         
                                         dosi_control += 1;
+                                        console.log("EL VALOR DEL DOSI CONTROL PARA EL MES ACTUAL");
+                                        console.log(dosi_control);
                                     } 
+                                    document.getElementById("dosi_control").value = dosi_control;
                                 }
-                                
+                                        
                             });
                             $.get('dosiasginadosmesactual', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: value}, function(asignacionesmesactual){
                                 console.log(asignacionesmesactual);
@@ -674,9 +678,9 @@ var myFechaInicial;
 
                                             var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
                                                 <td class='align-middle'>
-                                                    <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim" class="form-control" value="`+asignacionesmesactual[i].id_trabajador+`" hidden>
+                                                    <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
                                                     <select class="form-select"  name="id_trabj_asigdosim[]" id="id_trabj_asigdosim" disabled>
-                                                        <option value="`+asignacionesmesactual[i].id_trabajador+`">`+asignacionesmesactual[i].primer_nombre_trabajador+` `+asignacionesmesactual[i].primer_apellido_trabajador+` `+asignacionesmesactual[i].segundo_apellido_trabajador+` `+`</option>
+                                                        <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
                                                     </select>
                                                 </td>
                                                 <td class='align-middle'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
@@ -730,9 +734,9 @@ var myFechaInicial;
                                         }else{
                                             var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
                                                 <td class='align-middle'>
-                                                    <input type="text" name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].id_trabajador+`" hidden>
+                                                    <input type="text" name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
                                                     <select class="form-select"  name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null" disabled>
-                                                        <option value="`+asignacionesmesactual[i].id_trabajador+`">`+asignacionesmesactual[i].primer_nombre_trabajador+` `+asignacionesmesactual[i].primer_apellido_trabajador+` `+asignacionesmesactual[i].segundo_apellido_trabajador+` `+`</option>
+                                                        <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
                                                     </select>
                                                 </td>
                                                 <td class='align-middle'><input type="text" name="ubicacion_asigdosim_null[]" id="ubicacion_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
@@ -796,7 +800,7 @@ var myFechaInicial;
                                         if(asignacionesmesactual[i].codigo_holder != null){
 
                                             var tr = `<tr>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_trabajador+` `+asignacionesmesactual[i].primer_apellido_trabajador+` `+asignacionesmesactual[i].segundo_apellido_trabajador+` `+`</td>
+                                                <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
                                                 <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
                                                 <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
                                                 <td class='align-middle'>`+asignacionesmesactual[i].codigo_holder+`</td>
@@ -806,7 +810,7 @@ var myFechaInicial;
                                             $("#body_asignaciones").append(tr);
                                         }else{
                                             var tr = `<tr>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_trabajador+` `+asignacionesmesactual[i].primer_apellido_trabajador+` `+asignacionesmesactual[i].segundo_apellido_trabajador+` `+`</td>
+                                                <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
                                                 <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
                                                 <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
                                                 <td class='align-middle'> NA </td>
@@ -826,7 +830,8 @@ var myFechaInicial;
                                             dosi_dedo += 1;
                                         }
                                         
-                                        document.getElementById("dosi_control").value = dosi_control;
+                                        /* document.getElementById("dosi_control").value = dosi_control; */
+                                        
                                         document.getElementById("dosi_torax").value = dosi_torax;
                                         document.getElementById("dosi_cristalino").value = dosi_cristalino;
                                         document.getElementById("dosi_muñeca").value = dosi_muñeca;
@@ -873,8 +878,8 @@ var myFechaInicial;
             console.log("ESTOS SON LOS TRABAJADORES" + vacio);
             for(var i = 0; i < trabajadores.length; i++){
                 option = document.createElement("option");
-                option.value = trabajadores[i].id_trabajador;
-                option.text = trabajadores[i].primer_nombre_trabajador+` `+trabajadores[i].primer_apellido_trabajador+` `+trabajadores[i].segundo_apellido_trabajador;
+                option.value = trabajadores[i].id_persona;
+                option.text = trabajadores[i].primer_nombre_persona+` `+trabajadores[i].primer_apellido_persona+` `+trabajadores[i].segundo_apellido_persona;
                 selectTrabajadores.appendChild(option);
             }
             console.log(selectTrabajadores.innerHTML);
@@ -931,13 +936,13 @@ var myFechaInicial;
                             <td style="width: 14.50%">
                                 <select class="form-select"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
-                                    <option value="CONTROL">CONTROL</option>
                                     <option value="TORAX">TORAX</option>
+                                    <option value="CRISTALINO">CRISTALINO</option>
+                                    <option value="DEDO">ANILLO</option>
+                                    <option value="MUÑECA">MUÑECA</option>
+                                    <option value="CONTROL">CONTROL</option>
                                     <option value="AREA">ÁREA</option>
                                     <option value="CASO">CASO</option>
-                                    <option value="CRISTALINO">CRISTALINO</option>
-                                    <option value="MUÑECA">MUÑECA</option>
-                                    <option value="DEDO">DEDO</option>
                                 </select>
                             </td> 
                             <td style="width: 15.0%">
@@ -1004,13 +1009,13 @@ var myFechaInicial;
                             <td style="width: 14.50%">
                                 <select class="form-select"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
-                                    <option value="CONTROL">CONTROL</option>
                                     <option value="TORAX">TORAX</option>
+                                    <option value="CRISTALINO">CRISTALINO</option>
+                                    <option value="DEDO">ANILLO</option>
+                                    <option value="MUÑECA">MUÑECA</option>
+                                    <option value="CONTROL">CONTROL</option>
                                     <option value="AREA">ÁREA</option>
                                     <option value="CASO">CASO</option>
-                                    <option value="CRISTALINO">CRISTALINO</option>
-                                    <option value="MUÑECA">MUÑECA</option>
-                                    <option value="DEDO">DEDO</option>
                                 </select>
                             </td> 
                             <td style="width: 15.0%">
@@ -1095,14 +1100,7 @@ var myFechaInicial;
         
     }
     function fechaUltimoDia(){
-<<<<<<< HEAD
-        var fecha_inicio = new Date(document.getElementById("primerDia_asigdosim2").value);
-        /* var fecha = fecha_inicio.toUTCString() */;
-        console.log(fecha_inicio);
-        var fecha_final_mes = fecha_inicio.getDate()+30;
-        /* var fecha_final = fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia; */
-        /* document.getElementById('ultimoDia_asigdosim2').value = fecha_final_mes; */
-=======
+
         
         var fecha = new Date(document.getElementById("primerDia_asigdosim2").value);
         fecha.setDate(fecha.getDate()+30);
@@ -1113,7 +1111,7 @@ var myFechaInicial;
         var año = fecha.getFullYear();
         document.getElementById("ultimoDia_asigdosim2").value = año+'-'+mm+'-'+dia;
         
->>>>>>> 6078b58ef2badab6945daad611368f3a7a075d34
+
     
     }
     function eliminarEzclip(ezclip, ubicacion){

@@ -22,10 +22,13 @@ class CreateContratosDosimetriaEmpresasTable extends Migration
             
             $table->string('nombre_empresa', 40)->unique();
             $table->integer('num_iden_empresa')->unique();
-            $table->integer('numtotal_dosi_cuerpo_entero')->nullable();
+            $table->integer('numtotal_dosi_torax')->nullable();
+            $table->integer('numtotal_dosi_cristalino')->nullable();
+            $table->integer('numtotal_dosi_dedo')->nullable();
+            $table->integer('numtotal_dosi_muñeca')->nullable();
             $table->integer('numtotal_dosi_control')->nullable();
             $table->integer('numtotal_dosi_ambiental')->nullable();
-            $table->integer('numtotal_dosi_ezclip')->nullable();
+            $table->integer('numtotal_dosi_caso')->nullable();
             
             $table->timestamps();
         });

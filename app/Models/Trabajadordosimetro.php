@@ -15,8 +15,12 @@ class Trabajadordosimetro extends Model
         return $this->belongsTo(Dosimetro::class, 'dosimetro_id', 'id_dosimetro');
     }
     //Relacion uno a muchos (inversa) con trabajadores
-    public function trabajador(){
+    /* public function trabajador(){
         return $this->belongsTo(Trabajador::class, 'trabajador_id', 'id_trabajador');
+    } */
+    //Relacion uno a muchos (inversa) con personas
+    public function persona(){
+        return $this->belongsTo(Persona::class, 'persona_id', 'id_persona');
     }
     //Relacion uno a uno (inversa) con holder
     public function holder(){
