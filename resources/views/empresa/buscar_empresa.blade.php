@@ -12,7 +12,7 @@
 </div>
 
     
-<div class="row pt-3" id ="salida">
+<div class="row pt-3" id ="salida"> 
     <h2 class="text-center">TODAS LAS EMPRESAS</h2>
     <BR></BR>
     <table class="table table-responsive hover table-bordered" id="empresas">
@@ -27,7 +27,7 @@
         </thead>
         @foreach($empresa as $emp)
             <tr>
-                <td class="align-middle"><a class="link-dark" href="{{route('empresas.info', $emp->id_empresa)}}">{{$emp->nombre_empresa}}</a></td>
+                <td class="align-middle"><a class="btn btn-outline-primary rounded-pill" href="{{route('empresas.info', $emp->id_empresa)}}">{{$emp->nombre_empresa}}</a></td>
                 <td class="align-middle">{{$emp->tipo_identificacion_empresa}}</td>
                 <td class="align-middle text-center">{{$emp->num_iden_empresa}}  {{$emp->DV}}</td>
                 <td class="align-middle text-center">{{$emp->municipios->nombre_municol}}</td>

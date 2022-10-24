@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col"></div>
     <div class="col-10">
-        <div class="card text-dark bg-light">
+        <div class="card text-dark bg-light"> 
             <h2 class="text-center mt-3">CREAR EMPRESA</h2>
             
             <form class="m-4"  id="form_create_empresa" name="form_create_empresa" action="{{route('empresas.save')}}" method="POST">
@@ -13,24 +13,20 @@
                 <div class="row g-2">
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" name="nombre_empresa" id="nombre_empresa" value="{{old('nombre_empresa')}}" autofocus style="text-transform:uppercase">
+                            <input type="text" class="form-control @error('nombre_empresa') is-invalid @enderror" name="nombre_empresa" id="nombre_empresa" value="{{old('nombre_empresa')}}" autofocus style="text-transform:uppercase">
                             <label for="floatingInput">NOMBRE</label>
-                            @error('nombre_empresa')
-                                <small class="text-danger">*{{$message}}</small>
-                            @enderror
+                            @error('nombre_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating" >
-                            <select class="form-select" name="tipo_empresa" id="tipo_empresa" value="{{old('tipo_empresa')}}" autofocus style="text-transform:uppercase">
+                            <select class="form-select @error('tipo_empresa') is-invalid @enderror" name="tipo_empresa" id="tipo_empresa" value="{{old('tipo_empresa')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="persona natural">PERSONA NATURAL</option>
-                                <option value="persona juridica">PERSONA JURIDICA</option>
+                                <option value="persona natural" @if (old('tipo_empresa') == "persona natural") {{ 'selected' }} @endif>PERSONA NATURAL</option>
+                                <option value="persona juridica" @if (old('tipo_empresa') == "persona juridica") {{ 'selected' }} @endif>PERSONA JURIDICA</option>
                             </select>
                             <label for="floatingInputGrid">TIPO:</label>
-                            @error('tipo_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('tipo_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -38,38 +34,34 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" name="tipoIden_empresa" id="tipoIden_empresa" value="{{old('tipoIden_empresa')}}" autofocus onchange="ShowSelected();" style="text-transform:uppercase">
+                            <select class="form-select @error('tipoIden_empresa') is-invalid @enderror" name="tipoIden_empresa" id="tipoIden_empresa" value="{{old('tipoIden_empresa')}}" autofocus onchange="ShowSelected();" style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="NIT">NIT</option>
-                                <option value="CÉDULA DE CIUDADANIA">CÉDULA DE CIUDADANIA</option>
-                                <option value="TARJETA DE IDENTIDAD">TARJETA DE IDENTIDAD</option>
-                                <option value="REGISTRO CIVIL">REGISTRO CIVIL</option>
-                                <option value="PASAPORTE">PASAPORTE</option>
-                                <option value="CÉDULA DE EXTRANJERÍA">CÉDULA DE EXTRANJERÍA</option>
-                                <option value="TARJETA DE EXTRANJERÍA">TARJETA DE EXTRANJERÍA</option>
-                                <option value="DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO">DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO</option>
+                                <option value="NIT" @if (old('tipoIden_empresa') == "NIT") {{ 'selected' }} @endif>NIT</option>
+                                <option value="CÉDULA DE CIUDADANIA" @if (old('tipoIden_empresa') == "CÉDULA DE CIUDADANIA") {{ 'selected' }} @endif>CÉDULA DE CIUDADANIA</option>
+                                <option value="TARJETA DE IDENTIDAD" @if (old('tipoIden_empresa') == "TARJETA DE IDENTIDAD") {{ 'selected' }} @endif>TARJETA DE IDENTIDAD</option>
+                                <option value="REGISTRO CIVIL" @if (old('tipoIden_empresa') == "REGISTRO CIVIL") {{ 'selected' }} @endif>REGISTRO CIVIL</option>
+                                <option value="PASAPORTE" @if (old('tipoIden_empresa') == "PASAPORTE") {{ 'selected' }} @endif>PASAPORTE</option>
+                                <option value="CÉDULA DE EXTRANJERÍA" @if (old('tipoIden_empresa') == "CÉDULA DE EXTRANJERÍA") {{ 'selected' }} @endif>CÉDULA DE EXTRANJERÍA</option>
+                                <option value="TARJETA DE EXTRANJERÍA" @if (old('tipoIden_empresa') == "TARJETA DE EXTRANJERÍA") {{ 'selected' }} @endif>TARJETA DE EXTRANJERÍA</option>
+                                <option value="DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO" @if (old('tipoIden_empresa') == "DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO") {{ 'selected' }} @endif>DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO</option>
                             </select>
                             <label for="floatingInputGrid">TIPO DE IDENTIFICACIÓN:</label>
-                            @error('tipoIden_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('tipoIden_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <!------------------ CAMPO QUE CAMBIA DINAMICAMENTE----->
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="number" name="numero_ident" id="numero_ident" class="form-control" value="{{old('numero_ident')}}" autofocus > 
-                            <label for="floatingInputGrid" id="numero_identificacion"></label>
-                            @error('numero_ident')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <input type="number" name="numero_ident" id="numero_ident" class="form-control @error('numero_ident') is-invalid @enderror" value="{{old('numero_ident')}}" autofocus > 
+                            <label for="floatingInputGrid" id="numero_identificacion">{{old('tipoIden_empresa')}}</label>
+                            @error('numero_ident') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md-1">
                         <div class="form-floating" >
-                            <input type="number" name="nitdv_empresa" id="nitdv_empresa" class="form-control" value="{{old('nitdv_empresa')}}" autofocus style="visibility: hidden"> 
-                            <label for="floatingInputGrid" name="label_nit_dv_empresa" id="label_nit_dv_empresa" style="visibility: hidden">DV:</label>
-                            
+                            <input type="number" name="nitdv_empresa" id="nitdv_empresa" class="form-control @error('nitdv_empresa') is-invalid @enderror" value="{{old('nitdv_empresa')}}" autofocus @if(old('tipoIden_empresa') == 'NIT') style="visibility:visible" @else style="visibility: hidden" @endif style="visibility: hidden"> 
+                            <label for="floatingInputGrid" name="label_nit_dv_empresa" id="label_nit_dv_empresa"autofocus @if(old('tipoIden_empresa') == 'NIT') style="visibility:visible" @else style="visibility: hidden" @endif style="visibility: hidden">DV:</label>
+                            @error('nitdv_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <!------------------------------------------>
@@ -78,40 +70,34 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating" >
-                            <input type="number" name="actividad_empresa" id="actividad_empresa" class="form-control" value="{{old('actividad_empresa')}}" autofocus >
+                            <input type="number" name="actividad_empresa" id="actividad_empresa" class="form-control @error('actividad_empresa') is-invalid @enderror" value="{{old('actividad_empresa')}}" autofocus >
                             <label for="floatingInputGrid">ACTIVIDAD ECONÓMICA PRINCIPAL:</label>
-                            @error('actividad_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('actividad_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" name="respoIva_empresa" id="respoIva_empresa" value="{{old('respoIva_empresa')}}" autofocus style="text-transform:uppercase;">
+                            <select class="form-select @error('respoIva_empresa') is-invalid @enderror" name="respoIva_empresa" id="respoIva_empresa" value="{{old('respoIva_empresa')}}" autofocus style="text-transform:uppercase;">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="NO RESPONSABLE DE IVA">NO RESPONSABLE DE IVA</option>
-                                <option value="RESPONSABLE DE IVA">RESONSABLE DE IVA</option>
+                                <option value="NO RESPONSABLE DE IVA" @if (old('respoIva_empresa') == "NO RESPONSABLE DE IVA") {{ 'selected' }} @endif>NO RESPONSABLE DE IVA</option>
+                                <option value="RESPONSABLE DE IVA" @if (old('respoIva_empresa') == "RESPONSABLE DE IVA") {{ 'selected' }} @endif>RESONSABLE DE IVA</option>
                             </select>
                             <label for="floatingInputGrid">RESPONSABILIDAD IVA:</label>
-                            @error('respoIva_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('respoIva_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating" >
-                            <select class="form-select" name="respoFiscal_empresa" id="respoFiscal_empresa" value="{{old('respoFiscal_empresa')}}" autofocus style="text-transform:uppercase;">
+                            <select class="form-select @error('respoFiscal_empresa') is-invalid @enderror" name="respoFiscal_empresa" id="respoFiscal_empresa" value="{{old('respoFiscal_empresa')}}" autofocus style="text-transform:uppercase;">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="NO RESPONSABLE (R-99-PN)">NO RESPONSABLE (R-99-PN)</option>
-                                <option value="REGIMEN SIMPLE DE TRIBUTACIÓN (O-47)">REGIMEN SIMPLE DE TRIBUTACIÓN (O-47)</option>
-                                <option value="GRAN CONTRIBUYENTE (O-13)">GRAN CONTRIBUYENTE (O-13)</option>
-                                <option value="AUTORRETENEDOR (O-15)">AUTORRETENEDOR (O-15)</option>
-                                <option value="AGENTE DE RETENCIÓN IVA(O-23)">AGENTE DE RETENCIÓN IVA(O-23)</option>
+                                <option value="NO RESPONSABLE (R-99-PN)" @if (old('respoFiscal_empresa') == "NO RESPONSABLE (R-99-PN)") {{ 'selected' }} @endif>NO RESPONSABLE (R-99-PN)</option>
+                                <option value="REGIMEN SIMPLE DE TRIBUTACIÓN (O-47)" @if (old('respoFiscal_empresa') == "REGIMEN SIMPLE DE TRIBUTACIÓN (O-47)") {{ 'selected' }} @endif>REGIMEN SIMPLE DE TRIBUTACIÓN (O-47)</option>
+                                <option value="GRAN CONTRIBUYENTE (O-13)" @if (old('respoFiscal_empresa') == "GRAN CONTRIBUYENTE (O-13)") {{ 'selected' }} @endif>GRAN CONTRIBUYENTE (O-13)</option>
+                                <option value="AUTORRETENEDOR (O-15)" @if (old('respoFiscal_empresa') == "AUTORRETENEDOR (O-15)") {{ 'selected' }} @endif>AUTORRETENEDOR (O-15)</option>
+                                <option value="AGENTE DE RETENCIÓN IVA(O-23)" @if (old('respoFiscal_empresa') == "AGENTE DE RETENCIÓN IVA(O-23)") {{ 'selected' }} @endif>AGENTE DE RETENCIÓN IVA(O-23)</option>
                             </select>
                             <label for="floatingInputGrid">RESPONSABILIDAD FISCAL:</label>
-                            @error('respoFiscal_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('respoFiscal_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -119,29 +105,23 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="number" name="telefono_empresa" id="telefono_empresa" class="form-control" value="{{old('telefono_empresa')}}" autofocus>
+                            <input type="number" name="telefono_empresa" id="telefono_empresa" class="form-control @error('telefono_empresa') is-invalid @enderror" value="{{old('telefono_empresa')}}" autofocus>
                             <label for="floatingInputGrid">TELÉFONO:</label>
-                            @error('telefono_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('telefono_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div> 
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="email" name="correo_empresa" id="correo_empresa" class="form-control" value="{{old('correo_empresa')}}" autofocus style="text-transform:uppercase;"> 
+                            <input type="email" name="correo_empresa" id="correo_empresa" class="form-control @error('correo_empresa') is-invalid @enderror" value="{{old('correo_empresa')}}" autofocus style="text-transform:uppercase;"> 
                             <label for="floatingInputGrid">CORREO ELECTRONICO:</label>
-                            @error('correo_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('correo_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="text" name="direccion_empresa" id="direccion_empresa" class="form-control" value="{{old('direccion_empresa')}}" autofocus style="text-transform:uppercase;"> 
+                            <input type="text" name="direccion_empresa" id="direccion_empresa" class="form-control @error('direccion_empresa') is-invalid @enderror" value="{{old('direccion_empresa')}}" autofocus style="text-transform:uppercase;"> 
                             <label for="floatingInputGrid">DIRECCIÓN:</label>
-                            @error('direccion_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('direccion_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -156,15 +136,13 @@
                     <div class="col-md">
                         <div class="form-group">
                             <label for="floatingInputGrid">DEPARTAMENTO:</label>
-                            <select class="form-control"  name="departamento_empresa" id="departamento_empresa" value="{{old('departamento_empresa')}}" autofocus style="text-transform:uppercase">
+                            <select class="form-control @error('departamento_empresa') is-invalid @enderror"  name="departamento_empresa" id="departamento_empresa" value="{{old('departamento_empresa')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
                                 @foreach($departamentoscol as $depacol)
-                                    <option value="{{$depacol->id_departamentocol}}">{{$depacol->nombre_deptocol}}</option>
+                                    <option value="{{$depacol->id_departamentocol}}" @if (old('departamento_empresa') == $depacol->id_departamentocol) {{ 'selected' }} @endif>{{$depacol->nombre_deptocol}}</option>
                                 @endforeach
                             </select>
-                            @error('departamento_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('departamento_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md" id="div_municipio">
@@ -174,12 +152,10 @@
                         
                         <div class="form-group" id="municipio_empresa" name="municipio_empresa" >
                             <label for="floatingInputGrid">MUNICIPIO:</label>
-                            <select class="form-control" name="ciudad_empresa" id="ciudad_empresa" value="{{old('ciudad_empresa')}}" autofocus style="text-transform:uppercase">
+                            <select class="form-control @error('ciudad_empresa') is-invalid @enderror" name="ciudad_empresa" id="ciudad_empresa" value="{{old('ciudad_empresa')}}" autofocus style="text-transform:uppercase">
 
                             </select>
-                            @error('ciudad_empresa')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('ciudad_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -216,6 +192,29 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        var olddepto = '{{old('departamento_empresa')}}';
+        var oldciudad = '{{old('ciudad_empresa')}}';
+
+        console.log("ESTE ES LA CIUDAD"+oldciudad);
+        console.log("ESTE ES EL DEPTO"+olddepto);
+
+        if('{{old('ciudad_empresa')}}' == ''){
+            console.log("si esta vacio");
+            console.log('{{old('ciudad_empresa')}}');
+        }else{
+            console.log("no esta vacio");
+            console.log('{{old('ciudad_empresa')}}');
+            @foreach($municipioscol as $muni)
+                if('{{$muni->id_municipiocol}}' == oldciudad){
+                    console.log('{{$muni->nombre_municol}}');
+                    $('#ciudad_empresa').append("<option value='{{$muni->id_municipiocol}}'>" +'--{{$muni->nombre_municol}}--' + "</option>");
+                }
+            @endforeach
+            @foreach($municipioscol as $muni)
+                $('#ciudad_empresa').append("<option value='{{$muni->id_municipiocol}}'>" +'{{$muni->nombre_municol}}' + "</option>");
+            @endforeach
+        }
+
         $('#departamento_empresa').on('change', function(){
             $('#municipio_empresa').fadeOut();
             $('#spinner_municipio').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');

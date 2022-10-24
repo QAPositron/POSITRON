@@ -16,13 +16,15 @@ use App\Models\Personasroles;
 use App\Models\Sede;
 use App\Models\Trabajador;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class EmpresasController extends Controller
 {
     
     public function create(){
         $departamentoscol = Coldepartamento::all();
-        return view('empresa.crear_empresa', compact('departamentoscol'));
+        $municipioscol = Colmunicipio::all();
+        return view('empresa.crear_empresa', compact('departamentoscol', 'municipioscol'));
         /* return $departamentoscol; */
     }
 
@@ -43,10 +45,10 @@ class EmpresasController extends Controller
             'tipoIden_empresa'    => 'required',  
             'numero_ident'        => 'required|max:10|unique:empresas,num_iden_empresa',
              
-            'actividad_empresa'   => 'required|max:4',
+            'actividad_empresa'   => 'required|max:4|min:4',
             'respoIva_empresa'    => 'required',    
             'respoFiscal_empresa' => 'required',
-            'telefono_empresa'    => 'required|max:10',
+            'telefono_empresa'    => 'required|max:10|min:10',
             'correo_empresa'      => 'required',
             'direccion_empresa'   => 'required',
             'pais_empresa'        => 'required',
@@ -90,20 +92,20 @@ class EmpresasController extends Controller
     public function update(Request $request, Empresa $empresa){
         
         $request->validate([
-            'nombre_empresa'      => 'required',
-            'tipo_empresa'        => 'required',              
-            'tipoIden_empresa'    => 'required',  
-            'numero_ident'        => 'required|max:10',
+            'nombre_empresa'      => ['required', Rule::unique('empresas', 'nombre_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
+            'tipo_empresa'        => ['required'],              
+            'tipoIden_empresa'    => ['required'],     
+            'numero_ident'        => ['required', 'max:10', Rule::unique('empresas', 'num_iden_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
              
-            'actividad_empresa'   => 'required|max:4',
-            'respoIva_empresa'    => 'required',    
-            'respoFiscal_empresa' => 'required',
-            'telefono_empresa'    => 'required|max:10',
-            'correo_empresa'      => 'required',
-            'direccion_empresa'   => 'required',
-            'pais_empresa'        => 'required',
-            'ciudad_empresa'      => 'required',
-            'departamento_empresa'=> 'required',
+            'actividad_empresa'   => ['required', 'max:4', 'min:4'],
+            'respoIva_empresa'    => ['required'],       
+            'respoFiscal_empresa' => ['required'],   
+            'telefono_empresa'    => ['required', 'max:10', 'min:10'],
+            'correo_empresa'      => ['required'],   
+            'direccion_empresa'   => ['required'],   
+            'pais_empresa'        => ['required'],   
+            'ciudad_empresa'      => ['required'],   
+            'departamento_empresa'=> ['required']
         ]);
         
         $empresa->nombre_empresa                    = strtoupper($request->nombre_empresa);

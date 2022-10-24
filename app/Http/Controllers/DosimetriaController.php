@@ -445,7 +445,15 @@ class DosimetriaController extends Controller
             $mes9Assign, $mes10Assign,
             $mes11Assign, $mes12Assign
         ];
-        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto'));
+        $mes1AssignRev = Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', 1)
+            ->select("trabajadordosimetros.revision")
+            ->get();
+        $mesAssignRev2 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', 2)
+            ->select("trabajadordosimetros.revision")
+            ->get();
+        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesAssignRev2'));
         /* return $mescontdosisededepto; */
     }
 

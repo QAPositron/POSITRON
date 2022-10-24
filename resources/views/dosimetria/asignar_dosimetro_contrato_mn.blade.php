@@ -5,57 +5,51 @@
     <div class="col-md-15">
         <div class="card text-dark bg-light">
             <h2 class="modal-title w-100 text-center">ASIGNACIÓN DOSÍMETROS</h2>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ), ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}} </h3>
+            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ), ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} </h3>
             <form action="{{route('asignadosicontratomn.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion_mn" name="form-nueva-asignacion_mn" class="form-nueva-asignacion_mn m-4">
                 @csrf
+
+                <br>
                 <div class="row g-2 mx-3">
-                    <div class="col-md">    
+                    <div class="col-md"></div>
+                    <div class="col-md-6">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
                                     <tr class="text-center">
-                                        <th>DOSíMETROS</th>
-                                        <th>CONTRATADOS</th>
+                                        <th colspan='7'>DOSíMETROS CONTRATADOS</th>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <th>CONTROL</th>
+                                        <th>TÓRAX</th>
+                                        <th>ÁREA</th>
+                                        <th>CASO</th>
+                                        <th>CRISTALINO</th>
+                                        <th>MUÑECA</th>
+                                        <th>ANILLO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th>CONTROL:</th>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_control}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>TÓRAX:</th>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_torax}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>ÁREA:</th>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_area}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CASO:</th>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_caso}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CRISTALINO:</th>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_cristalino}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>MUÑECA:</th>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>ANILLO:</th>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    <div class="col-md"></div>
                 </div>
+                <br>
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input value="" type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" >
+                            <input value="" type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" onchange="fechaultimodia();">
                             <label for="floatingInputGrid">PRIMER DÍA</label>
                             @error('primerDia_asigdosim')
                                 <small class="invalid-feedback">*{{$message}}</small>
@@ -1311,7 +1305,32 @@ crossorigin="anonymous">
 
 <script type="text/javascript">
    
-
+    function fechaultimodia(){
+        var fecha = document.getElementById("primerDia_asigdosim").value;
+        var fecha_inicio = new Date(fecha);
+        fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
+        alert(fecha_inicio);
+        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
+            var fecha_final_año = fecha_inicio.getFullYear();
+            var mm = fecha_inicio.getMonth() + 2;
+            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            var dd = fecha_inicio.getDate();
+            /* console.log(dd); */
+            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
+            
+            console.log(fecha_final);
+            var fechaFinaly = fecha_final.getFullYear();
+            console.log(fechaFinaly);
+            var fechaFinalm = fecha_final.getMonth()+1;
+            console.log(fechaFinalm);
+            var fechaFinald = fecha_final.getDate();
+            console.log(fechaFinald);
+            var fechaFinalymd = fechaFinaly+'-'+fechaFinalm+'-'+fechaFinald;
+            console.log(fechaFinalymd);
+            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
+        }
+    };
     function changueArea(area){
         
         Swal.fire({

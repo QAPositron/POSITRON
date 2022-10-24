@@ -57,35 +57,7 @@
                                         <span id="mes{{$i}}"></span>
                                     @endif
                                 </th>
-                                {{-- <td class="text-center align-middle">
-                                    @php
-                                        $lenghtData = 0;
-                                        foreach($trabjasigcontra as $trab){
-                                            if ($trab->mes_asignacion == ($i+1)) {
-                                                $lenghtData += 1 ;
-                                            }
-                                        }
-                                        echo "$lenghtData";
-                                    @endphp
-                                </td> --}}
-                                {{-- <td class="text-center align-middle">
-                                    @php
-                                        $lenghtData = 0;
-                                        if($mescontdosisededepto->mes_asignacion == $i+1 || $mescontdosisededepto->mes_asignacion <= $i+1){
-                                            $suma = $mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_control + $mescontdosisededepto->dosi_caso + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_dedo;
-                                        }else{
-                                            $suma = $dosisededeptocontra->dosi_torax + $dosisededeptocontra->dosi_control + $dosisededeptocontra->dosi_area + $dosisededeptocontra->dosi_caso + $dosisededeptocontra->dosi_cristalino + $dosisededeptocontra->dosi_muñeca + $dosisededeptocontra->dosi_dedo;
-                                        }
-                                        foreach($trabjasigcontra as $trab){
-                                            //esto esta bien PERO, recuerda que los dosimetros de control falta sumarlos, esos no se asignan al trabajador sino a la sede
-                                            if ($trab->mes_asignacion == ($i+1)) {
-                                            $lenghtData += 1 ;
-                                            }
-                                        }
-                                        $resul = $suma - $lenghtData;
-                                        echo "$resul";
-                                    @endphp
-                                </td> --}}
+                                
                                 <td class='align-middle'>
                                     <div class="row"> 
                                         @if($mesTotal[$i]>0)
@@ -106,11 +78,23 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                                                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                                                        </svg> <br> REVISIÓN
-                                                    </a>
+                                                    @foreach($mes1AssignRev as $mes1)
+                                                        @if($mes1->revision == NULL)
+                                                            <a class="btn bg-danger btn-sm boton-alert"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                                                </svg> <br> REVISIÓN
+                                                            </a>
+                                                            @break
+                                                        @else
+                                                            <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                                                </svg> <br> REVISIÓN
+                                                            </a>
+                                                            @break
+                                                        @endif
+                                                    @endforeach
                                                 </div>
                                                 <div class="col-md text-center">
                                                     <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i+1 ])}}">
@@ -146,11 +130,29 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn colorQA btn-sm boton-alert" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
+                                                    {{$i+1}}
+                                                    {{-- @foreach($mesAssignRev . $i+1 as $mes)
+                                                        @if($mes->revision == NULL)
+                                                            <a class="btn bg-warning btn-sm boton-alert"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                                                </svg> <br> REVISIÓN
+                                                            </a>
+                                                            @break
+                                                        @else
+                                                            <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                                                </svg> <br> REVISIÓN
+                                                            </a>
+                                                            @break
+                                                        @endif
+                                                    @endforeach --}}
+                                                    {{-- <a class="btn bg-primary btn-sm boton-alert" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                                                             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                                                         </svg> <br> REVISIÓN
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                                 <div class="col-md text-center">
                                                     <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i+1 ])}}">

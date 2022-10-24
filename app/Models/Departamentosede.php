@@ -23,5 +23,8 @@ class Departamentosede extends Model
     public function areadepartamentosede(){
         return $this->hasMany(Areadepartamentosede::class, 'id_areadepartamentosede');
     }
-
+    public function departamento(){
+        /* return $this->belongsTo('App\Models\Empresa'); */
+        return $this->belongsTo(Departamento::class, 'departamento_id', 'id_departamento');
+    }
 }
