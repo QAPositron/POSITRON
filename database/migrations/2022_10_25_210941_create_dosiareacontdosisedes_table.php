@@ -13,6 +13,7 @@ class CreateDosiareacontdosisedesTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('dosiareacontdosisedes', function (Blueprint $table) {
             $table->bigincrements('id_dosiareacontdosisedes')->unique();
 

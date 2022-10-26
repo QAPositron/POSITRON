@@ -19,7 +19,7 @@ class FormDepartamento extends Component
     }
     
     public function save(){
-
+ 
         $this->validate();
 
         $depto = new Departamento();
@@ -28,6 +28,7 @@ class FormDepartamento extends Component
         $depto->save();
         return back()->with('guardar', 'ok');
     }
+
     public function render()
     {
         return view('livewire.form-departamento');

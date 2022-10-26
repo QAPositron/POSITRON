@@ -3,6 +3,7 @@
 use App\Http\Controllers\AreadepartamentosedeController;
 use App\Http\Controllers\AsignarDosimetroController;
 use App\Http\Controllers\ContactosController;
+use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\DepartamentosedesController;
 use App\Http\Controllers\DosimetriaController;
 use App\Http\Controllers\DosimetrosController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\TrabajadoresController;
 use App\Http\Controllers\TrabajadorsController;
 use App\Http\Livewire\FormTrabajador;
 use App\Models\Areadepartamentosede;
+use App\Models\Departamento;
 use App\Models\Departamentosede;
 use App\Models\Holder;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +71,8 @@ Route::get('sedes/{sede}/create', [SedesController::class, 'create'])->name('sed
 Route::get('/sedes/{sede}/sedesdeptomuni', [SedesController::class, 'selectmunicipios']);
 
 Route::post('sedes', [SedesController::class, 'save'])->name('sedes.save');
+Route::post('departamentos', [DepartamentoController::class, 'save'])->name('departamento.save');
+
 Route::get('sedes/{sede}/edit', [SedesController::class, 'edit'])->name('sedes.edit');
 Route::put('sedes/{sede}', [SedesController::class, 'update'])->name('sedes.update');
 Route::delete('sedes/{sede}', [SedesController::class, 'destroy'])->name('sedes.destroy');
@@ -222,6 +226,7 @@ Route::get('lecturadosiarea/{lecdosicont}/create', [DosimetriaController::class,
 Route::put('lecturadosiarea/{lecdosicont}', [DosimetriaController::class, 'savelecturadosiarea'])->name('lecturadosiarea.save');
 
 /////////RUTAS PARA LOS REPORTES O INFORMES DE DOSIMETRIA///////
+
 Route::get('repodosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');
 
 /////////RUTAS PARA LAS ETIQUETAS DE DOSIMETRIA ///////

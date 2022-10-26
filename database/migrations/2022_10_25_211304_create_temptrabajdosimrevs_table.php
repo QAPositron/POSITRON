@@ -13,6 +13,7 @@ class CreateTemptrabajdosimrevsTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('temptrabajdosimrevs', function (Blueprint $table) {
             $table->bigincrements('id_temptrabajdosimrev')->unique();
             

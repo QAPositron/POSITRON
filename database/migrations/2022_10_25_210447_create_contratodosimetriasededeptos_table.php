@@ -13,6 +13,7 @@ class CreateContratodosimetriasededeptosTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('contratodosimetriasededeptos', function (Blueprint $table) {
             $table->bigincrements('id_contdosisededepto')->unique();
 

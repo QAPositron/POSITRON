@@ -13,6 +13,7 @@ class CreateAreadepartamentosedesTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('areadepartamentosedes', function (Blueprint $table) {
             $table->bigincrements('id_areadepartamentosede')->unique();
             

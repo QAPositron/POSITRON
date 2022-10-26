@@ -13,6 +13,7 @@ class CreateMesescontdosisedeptosTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('mesescontdosisedeptos', function (Blueprint $table) {
             $table->bigincrements('id_mescontdosisededepto')->unique();
 

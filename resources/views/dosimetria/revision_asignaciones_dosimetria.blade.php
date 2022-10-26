@@ -213,10 +213,11 @@ crossorigin="anonymous">
         @endforeach
         @foreach($dosicontrolasig as $dosicont)
             if('{{$dosicont->revision}}' == 'TRUE'){
-                let tr = document.getElementById('C{{$dosicont->id_dosicontrolcontdosisedes}}'); 
+                let tr = document.getElementById('{{$dosicont->id_dosicontrolcontdosisedes}}'); 
                 tr.style.boxShadow = "0px 0px 7px 1px rgb(26, 153, 128)";  
             }
         @endforeach
+
         $('#dosi_control').on('change', function(){
             var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
             const js = document.querySelector('#dosi_control').checked;
@@ -297,22 +298,23 @@ crossorigin="anonymous">
 
         function consultarTrabDosi(){
             var codigoDosi = document.getElementById('codigo_dosimetro').value; 
-            console.log(codigoDosi);
+            console.log("DOSIMETRO" + codigoDosi);
             if(codigoDosi != ''){
                 $.get('dosimetro',{codigo_dosi : codigoDosi}, function(dosimetro){
                     console.log(dosimetro);
                     if(dosimetro.length != 0){
                         var check = 0;
                         var codigoEtiq = document.getElementById("codigo_etiqueta").value;
+                        console.log("ETIQUETA" +codigoEtiq)
                         console.log(check);
                         @foreach($trabjasignados as $trabj)
-                            if(codigoEtiq == codigoDosi && codigoDosi == '{{$trabj->dosimetro->codigo_dosimeter}}' && dosimetro[0].uso_dosimetro == '{{$trabj->ubicacion}}' && dosimetro[0].estado_dosimetro == 'EN USO'){
+                            if(codigoEtiq == codigoDosi && codigoDosi == '{{$trabj->dosimetro->codigo_dosimeter}}' && dosimetro[0].uso_dosimetro == '{{$trabj->ubicacion}}'){
                                 console.log("SI SE HIZO MATCH");
                                 check = 1;
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'CORRECTO!!',
-                                    text: 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO Y ADEMAS COINCIDE LA UBICACIÓN Y ESTADO',
+                                    text: 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO Y ADEMAS COINCIDE LA UBICACIÓN',
                                     showConfirmButton: false,
                                     timer: 4000
                                 })
@@ -353,6 +355,12 @@ crossorigin="anonymous">
                         document.querySelector('#dosi_control').disabled= false;
                         console.log("NO EXISTE");
                     }
+                    document.getElementById("codigo_dosi").innerHTML = dosimetro[0].codigo_dosimeter;
+                    document.getElementById("tipo_dosi").innerHTML =  dosimetro[0].tipo_dosimetro;
+                    document.getElementById("tecnologia_dosi").innerHTML = dosimetro[0].tecnologia_dosimetro;
+                    document.getElementById("estado_dosi").innerHTML = dosimetro[0].estado_dosimetro;
+                    document.getElementById("uso_dosi").innerHTML = dosimetro[0].uso_dosimetro;
+                    
                 })
             }
         }

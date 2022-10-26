@@ -343,6 +343,9 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                                                                             </div>
                                                                                         </td>
                                                                                     </tr>
+                                                                                    @php
+                                                                                        $checke = '1';
+                                                                                    @endphp
                                                                             <?php
                                                                                 }else{
                                                                                     echo " ";

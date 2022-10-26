@@ -2,24 +2,15 @@
 
 namespace App\Http\Livewire;
 
-<<<<<<< HEAD
-=======
 use App\Models\Perfiles;
 use App\Models\Persona;
 use App\Models\Personasedes;
 use App\Models\Personasperfiles;
 use App\Models\Personasroles;
->>>>>>> 09313f106824dd5ef754906ad37c05996286f3aa
 use Livewire\Component;
 
 class SearchPersonasComponent extends Component
 {
-<<<<<<< HEAD
-    public function render()
-    {
-        $persona = Persona::where('')
-        return view('livewire.search-personas-component');
-=======
     public $search;
     public function render()
     {
@@ -45,6 +36,5 @@ class SearchPersonasComponent extends Component
 
         return view('livewire.search-personas-component', compact('persona', 'personasedes', 'personasperfiles', 'personasroles'));
        
->>>>>>> 09313f106824dd5ef754906ad37c05996286f3aa
     }
 }

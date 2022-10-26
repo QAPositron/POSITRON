@@ -446,14 +446,54 @@ class DosimetriaController extends Controller
             $mes11Assign, $mes12Assign
         ];
         $mes1AssignRev = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 1)
-            ->select("trabajadordosimetros.revision")
-            ->get();
+        ->where('mes_asignacion', 1)
+        ->select("trabajadordosimetros.revision")
+        ->get();
         $mesAssignRev2 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 2)
-            ->select("trabajadordosimetros.revision")
-            ->get();
-        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesAssignRev2'));
+        ->where('mes_asignacion', 2)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev3 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 3)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev4 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 4)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev5 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 5)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev6 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 6)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev7 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 7)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev8 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 8)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev9 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 9)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev10 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 10)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev11 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 11)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        $mesAssignRev12 = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', 12)
+        ->select("trabajadordosimetros.revision")
+        ->get();
+        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesAssignRev2', 'mesAssignRev3', 'mesAssignRev4', 'mesAssignRev5', 'mesAssignRev6', 'mesAssignRev7', 'mesAssignRev8', 'mesAssignRev9', 'mesAssignRev10', 'mesAssignRev11', 'mesAssignRev12',));
         /* return $mescontdosisededepto; */
     }
 
@@ -1800,7 +1840,8 @@ class DosimetriaController extends Controller
     public function pdf($id, $mesnumber){
 
         
-        $contratoDosi = Departamentosede::join('contratodosimetriasededeptos', 'departamentosedes.id_departamentosede', '=', 'contratodosimetriasededeptos.departamentosede_id')
+        $contratoDosi = Departamento::join('departamentosedes', 'departamentos.id_departamento', '=', 'departamentosedes.departamento_id')
+        ->join('contratodosimetriasededeptos', 'departamentosedes.id_departamentosede', '=', 'contratodosimetriasededeptos.departamentosede_id')
         ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id','=','contratodosimetriasedes.id_contratodosimetriasede')
         ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
         ->join('colmunicipios', 'sedes.municipiocol_id', '=', 'colmunicipios.id_municipiocol')
@@ -1808,7 +1849,7 @@ class DosimetriaController extends Controller
         ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
         ->join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
         ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $id)
-        ->select('empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato', 'departamentosedes.nombre_departamento', 'empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio')
+        ->select('empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato', 'departamentos.nombre_departamento', 'empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio')
         ->get();
 
         $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
@@ -1857,7 +1898,7 @@ class DosimetriaController extends Controller
         $pdf->setPaper('8.5x14', 'landscape');
         
         
-        /* return $trabajadoresaisgxmeses; */
+        
         for($i=0; $i<count($contratoDosi); $i++ ){
             
             $empresa = $contratoDosi[$i]->nombre_empresa;
@@ -1866,8 +1907,15 @@ class DosimetriaController extends Controller
             $newDate = date("m-Y", strtotime($fecha));
             $date = date("m-Y");				
             /* $mesDesc = date("%e %B %Y", strtotime($newDate)); */
-
-            /* return $pdf->stream("RPD_".$date."_".substr($empresa, 0, 4)."-".substr($sede, 0, 4)."-".$contratoDosi[$i]->nombre_departamento.".pdf"); */
+            /* $var = 0;
+            foreach($trabajdosiasig as $trab){
+                if($trab->Hp007_calc_dose != 'NULL' || $trab->Hp10_calc_dose != 'NULL' || $trab->Hp3_calc_dose != 'NULL' || $trab->EzClip_calc_dose != 'NULL'){
+                    return $pdf->with('fallo', 'ok')->stream("RPD_".$date."_".substr($empresa, 0, 4)."-".substr($sede, 0, 4)."-".$contratoDosi[$i]->nombre_departamento.".pdf");
+                    break;
+                }else{
+                    return $pdf->stream("RPD_".$date."_".substr($empresa, 0, 4)."-".substr($sede, 0, 4)."-".$contratoDosi[$i]->nombre_departamento.".pdf");
+                }
+            } */
             /* return $newDate; */
         }
         /* return $contratoDosi; */

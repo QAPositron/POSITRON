@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Coldepartamento;
 use App\Models\Colmunicipio;
+use App\Models\Departamento;
 use App\Models\Departamentosede;
 use App\Models\Empresa;
 use App\Models\Sede;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SedesController extends Controller
 {
     public function create($id){
-        $empresa = Empresa::find($id);
+        $empresa = Empresa::find($id); 
         $departamentoscol = Coldepartamento::all();
         /* return $empresa; */
-        return view('sede.crear_sede', compact('empresa', 'departamentoscol'));
+        $especialidades = Departamento::all();
+        $municipioscol = Colmunicipio::all();
+        return view('sede.crear_sede', compact('empresa', 'departamentoscol', 'especialidades', 'municipioscol'));
     }
 
     public function selectmunicipios(Request $request)
@@ -31,12 +35,11 @@ class SedesController extends Controller
     public function save(Request $request){
         
         $request->validate([
-            'id_empresa'                => 'required',
-            'nombre_sede'               => 'required',
-            'municipio_sede'            => 'required',              
-            'departamento_sede'         => 'required',  
-            'direccion_sede'            => 'required',
-            'multiple_select_depsede'   => 'required',
+            'id_empresa'                => ['required'], 
+            'nombre_sede'               => ['required', Rule::unique('sedes', 'nombre_sede')->where(fn ($query) => $query->where('empresas_id', $request->id_empresa))], 
+            'municipio_sede'            => ['required'],              
+            'departamento_sede'         => ['required'],  
+            'direccion_sede'            => ['required'] 
            
         ]);
         
@@ -66,16 +69,17 @@ class SedesController extends Controller
     public function edit(Sede $sede){
         $departamentoscol = Coldepartamento::all();
         $deptos = Departamentosede::where('sede_id', '=', $sede->id_sede)->get();
-        return view('sede.edit_sede', compact('sede', 'departamentoscol', 'deptos'));
+        $especialidades = Departamento::all();
+        return view('sede.edit_sede', compact('sede', 'departamentoscol', 'deptos', 'especialidades'));
     }
 
     public function update(Request $request, Sede $sede){
         
         $request->validate([
             
-            'nombre_sede'           => 'required',
-            'municipio_sede'        => 'required',              
-            'direccion_sede'        => 'required',
+            'nombre_sede'           => ['required',  Rule::unique('sedes', 'nombre_sede')->ignore($sede->id_sede, 'id_sede')->where(fn ($query) => $query->where('empresas_id', $request->id_empresa))], 
+            'municipio_sede'        => ['required'],               
+            'direccion_sede'        => ['required'], 
            
         ]);
 
@@ -94,8 +98,8 @@ class SedesController extends Controller
     
                 $deptosede = new Departamentosede();
     
-                $deptosede->sede_id                 = $sede->id_sede;
-                $deptosede->nombre_departamento     = $request->multiple_select_depsede[$i];
+                $deptosede->sede_id             = $sede->id_sede;
+                $deptosede->departamento_id     = $request->multiple_select_depsede[$i];
                 
                 $deptosede->save();
             }
