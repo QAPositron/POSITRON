@@ -447,53 +447,49 @@ class DosimetriaController extends Controller
         ];
         $mes1AssignRev = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 1)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev2 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 2)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev3 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 3)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev4 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 4)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev5 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 5)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev6 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 6)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev7 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 7)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev8 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 8)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev9 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 9)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev10 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 10)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev11 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 11)
-        ->select("trabajadordosimetros.revision")
         ->get();
         $mesAssignRev12 = Trabajadordosimetro::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', 12)
-        ->select("trabajadordosimetros.revision")
         ->get();
-        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesAssignRev2', 'mesAssignRev3', 'mesAssignRev4', 'mesAssignRev5', 'mesAssignRev6', 'mesAssignRev7', 'mesAssignRev8', 'mesAssignRev9', 'mesAssignRev10', 'mesAssignRev11', 'mesAssignRev12',));
+        $mesesAssig = [
+            $mes1AssignRev, $mesAssignRev2,
+            $mesAssignRev3, $mesAssignRev4,
+            $mesAssignRev5, $mesAssignRev6,
+            $mesAssignRev7, $mesAssignRev8,
+            $mesAssignRev9, $mesAssignRev10,
+            $mesAssignRev11, $mesAssignRev12
+        ];
+        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
         /* return $mescontdosisededepto; */
     }
 

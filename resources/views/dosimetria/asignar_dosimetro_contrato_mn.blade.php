@@ -1310,23 +1310,36 @@ crossorigin="anonymous">
         var fecha_inicio = new Date(fecha);
         fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
         alert(fecha_inicio);
+        console.log("FECHA INICIO"+fecha_inicio);
         if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
             var fecha_final_año = fecha_inicio.getFullYear();
+            console.log(fecha_final_año);
             var mm = fecha_inicio.getMonth() + 2;
             var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            if(fecha_final_mes == 13){
+                fecha_final_mes = '01' ;
+            }
+            console.log("MES "+fecha_final_mes);
             var dd = fecha_inicio.getDate();
-            /* console.log(dd); */
             var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            console.log("DIA" + fecha_final_dia);
             var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            
-            console.log(fecha_final);
-            var fechaFinaly = fecha_final.getFullYear();
+            console.log("ESTA ES LA FECHA FINAL" + fecha_final);
+
+            if(fecha_final_mes == 01){
+                var fechaFinaly = fecha_final.getFullYear() + 1;
+                console.log("AÑO"+fechaFinaly);
+            }else{
+                var fechaFinaly = fecha_final.getFullYear();
+            }
             console.log(fechaFinaly);
             var fechaFinalm = fecha_final.getMonth()+1;
-            console.log(fechaFinalm);
+            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
+            console.log(fechaFinalmm);
             var fechaFinald = fecha_final.getDate();
-            console.log(fechaFinald);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalm+'-'+fechaFinald;
+            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
+            console.log(fechaFinaldd);
+            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
             console.log(fechaFinalymd);
             document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
         }

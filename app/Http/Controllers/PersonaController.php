@@ -9,8 +9,9 @@ use App\Models\Personasedes;
 use App\Models\Personasperfiles;
 use App\Models\Personasroles;
 use App\Models\Roles;
-use App\Models\Sede;
+use App\Models\Sede; 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PersonaController extends Controller
 {
@@ -55,14 +56,14 @@ class PersonaController extends Controller
 
         $request->validate([
             
-            'primer_nombre_persona'      => 'required',              
-            'primer_apellido_persona'    => 'required',
-            'segundo_apellido_persona'   => 'required',
-            'tipoIden_persona'           => 'required',
-            'cedula_persona'             => 'required|unique:App\Models\Persona,cedula_persona,',    
-            'genero_persona'             => 'required',
-            'correo_persona'             => 'required',
-            'telefono_persona'           => 'required|max:12',
+            'primer_nombre_persona'      => ['required'],              
+            'primer_apellido_persona'    => ['required'],
+            'segundo_apellido_persona'   => ['required'],
+            'tipoIden_persona'           => ['required'],
+            'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],    
+            'genero_persona'             => ['required'],
+            'correo_persona'             => ['required', 'email'],
+            'telefono_persona'           => ['required', 'min:10', 'max:10'],
             
         ]);
 
@@ -137,14 +138,14 @@ class PersonaController extends Controller
 
         $request->validate([
             
-            'primer_nombre_persona'      => 'required',              
-            'primer_apellido_persona'    => 'required',
-            'segundo_apellido_persona'   => 'required',
-            'tipoIden_persona'           => 'required',
-            'cedula_persona'             => 'required|unique:App\Models\Persona,cedula_persona,',    
-            'genero_persona'             => 'required',
-            'correo_persona'             => 'required',
-            'telefono_persona'           => 'required|max:12',
+            'primer_nombre_persona'      => ['required'],
+            'primer_apellido_persona'    => ['required'],
+            'segundo_apellido_persona'   => ['required'],
+            'tipoIden_persona'           => ['required'],
+            'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],
+            'genero_persona'             => ['required'],
+            'correo_persona'             => ['required', 'email'],
+            'telefono_persona'           => ['required', 'min:10', 'max:10'],
             
         ]);
 
@@ -219,14 +220,14 @@ class PersonaController extends Controller
         /*return $request;*/
         $request->validate([
             
-            'primer_nombre_persona'      => 'required',              
-            'primer_apellido_persona'    => 'required',
-            'segundo_apellido_persona'   => 'required',
-            'tipoIden_persona'           => 'required',
-            'cedula_persona'             => 'required',    
-            'genero_persona'             => 'required',
-            'correo_persona'             => 'required',
-            'telefono_persona'           => 'required|max:12',
+            'primer_nombre_persona'      => ['required'],             
+            'primer_apellido_persona'    => ['required'],
+            'segundo_apellido_persona'   => ['required'],
+            'tipoIden_persona'           => ['required'],
+            'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')->ignore($persona->id_persona, 'id_persona')],    
+            'genero_persona'             => ['required'],
+            'correo_persona'             => ['required', 'email'],
+            'telefono_persona'           => ['required', 'min:10', 'max:10'],
             
         ]);
         $persona->primer_nombre_persona     = strtoupper($request->primer_nombre_persona);

@@ -133,7 +133,7 @@
                                 <option value="{{old('genero_persona')}}">--SELECCIONE--</option>
                                 <option value="femenino" @if (old('genero_persona') == "femenino") {{ 'selected' }} @endif>FEMENINO</option>
                                 <option value="masculino" @if (old('genero_persona') == "masculino") {{ 'selected' }} @endif>MASCULINO</option>
-                                <option value="otro">OTRO</option>
+                                <option value="otro" @if (old('genero_persona') == "otro") {{ 'selected' }} @endif>OTRO</option>
                             </select>
                             <label for="floatingInputGrid">* GÉNERO:</label>
                             @error('genero_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
@@ -176,13 +176,13 @@
                         <label for="floatingSelectGrid">SEDE:</label>
                         
                         <div class="form-floating" id="sede_empresa" name="sede_empresa">
-                            <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
+                            <select class="form-select @error('id_sedes') is-invalid @enderror" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
                                 <option value="">--SELECCIONE--</option>
                                 @foreach($sedes as $sede)
-                                    <option value ="{{ $sede->id_sede }}">{{$sede->nombre_sede}}</option>
+                                    <option value ="{{ $sede->id_sede }}" {{ in_array($sede->id_sede, (array) old('id_sedes', [])) ? "selected" : "" }}>{{$sede->nombre_sede}}</option>
                                 @endforeach 
                             </select>
-                            
+                            @error('id_sedes') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -195,19 +195,19 @@
                     <div class="col-md text-center">
                         <br>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_contcal" name="lider_contcal">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_contcal" name="lider_contcal" @if(old('lider_contcal') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
                                 CONTROLES DE CALIDAD
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava">
+                            <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava" @if(old('lider_ava') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
                                 AULA VIRTUAL
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria" @if(old('lider_dosimetria') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
                                 DOSIMETRÍA
                             </label>

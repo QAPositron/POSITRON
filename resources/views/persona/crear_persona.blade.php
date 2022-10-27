@@ -12,9 +12,9 @@
                     <div class="col-md-5">
                         <label for="">PERFIL LABORAL:</label>
                         <div class="form-floating">
-                            <select class="form-select" name="perfil_personas[]" id="perfil_personas" autofocus aria-label="Floating label select example"  multiple="true" >
+                            <select class="form-select @error('perfil_personas') is-invalid @enderror" name="perfil_personas[]" id="perfil_personas" autofocus aria-label="Floating label select example"  multiple="true" >
                                 @foreach($perfiles as $perf)
-                                    <option value ="{{$perf->id_perfil}}">{{$perf->nombre_perfil}}</option>
+                                    <option value ="{{$perf->id_perfil}}" {{ in_array($perf->id_perfil, (array) old('perfil_personas', [])) ? "selected" : "" }}>{{$perf->nombre_perfil}}</option>
                                 @endforeach 
                                 {{-- <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
                                 <option value="CALIDAD">CALIDAD</option>
@@ -24,9 +24,7 @@
                                 <option value="SUBGERENCIA">    </option>
                                 <option value="GERENCIA">GERENCIA</option> --}}
                             </select>
-                            @error('perfil_personas')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('perfil_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md d-flex align-items-center ">
@@ -39,15 +37,13 @@
                     <div class="col-md-6">
                         <label for="">ROL:</label>
                         <div class="form-floating">
-                            <select class="form-select" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
+                            <select class="form-select @error('rol_personas') is-invalid @enderror" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
                                 @foreach($roles as $rol)
-                                    <option value ="{{$rol->id_rol}}">{{$rol->nombre_rol}}</option>
+                                    <option value ="{{$rol->id_rol}}" {{ in_array($rol->id_rol, (array) old('rol_personas', [])) ? "selected" : "" }}>{{$rol->nombre_rol}}</option>
                                 @endforeach 
                                 
                             </select>
-                            @error('rol_personas')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            @error('rol_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     {{-- /////////TEMPORALMENTE DESHABILITADO POR INDECISION////////////// AHORA SOLO HAY 4 ROLES FIJOS////// --}}
@@ -68,19 +64,15 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="text" class="form-control @error('primer_nombre_persona') is-invalid @enderror"  name="primer_nombre_persona" id="primer_nombre_persona" value="{{old('primer_nombre_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">PRIMER NOMBRE:</label>
-                            @error('primer_nombre_persona')
-                                <span class="invalid-feedback">*{{ $message }}</span>
-                            @enderror
+                            <label for="floatingInputGrid">* PRIMER NOMBRE:</label>
+                            @error('primer_nombre_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="text" class="form-control @error('segundo_nombre_persona') is-invalid @enderror"  name="segundo_nombre_persona" id="segundo_nombre_persona" value="{{old('segundo_nombre_persona')}}" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid">SEGUNDO NOMBRE:</label>
-                            @error('segundo_nombre_persona')
-                                <span class="invalid-feedback">*{{ $message }}</span>
-                            @enderror
+                            @error('segundo_nombre_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -89,19 +81,15 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="text" class="form-control @error('primer_apellido_persona') is-invalid @enderror"  name="primer_apellido_persona" id="primer_apellido_persona" value="{{old('primer_apellido_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">PRIMER APELLIDO:</label>
-                            @error('primer_apellido_persona')
-                                <span class="invalid-feedback">*{{ $message }}</span>
-                            @enderror
+                            <label for="floatingInputGrid">* PRIMER APELLIDO:</label>
+                            @error('primer_apellido_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="text" class="form-control @error('segundo_apellido_persona') is-invalid @enderror"  name="segundo_apellido_persona" id="segundo_apellido_persona" value="{{old('segundo_apellido_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">SEGUNDO APELLIDO:</label>
-                            @error('segundo_apellido_persona')
-                                <span class="invalid-feedback">*{{ $message }}</span>
-                            @enderror
+                            <label for="floatingInputGrid">* SEGUNDO APELLIDO:</label>
+                            @error('segundo_apellido_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -111,27 +99,24 @@
                         <div class="form-floating">
                             <select class="form-select @error('tipoIden_persona') is-invalid @enderror" name="tipoIden_persona" id="tipoIden_persona" value="{{old('tipoIden_persona')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="CÉDULA DE CIUDADANIA">CÉDULA DE CIUDADANIA</option>
-                                <option value="TARJETA DE IDENTIDAD">TARJETA DE IDENTIDAD</option>
-                                <option value="REGISTRO CIVIL">REGISTRO CIVIL</option>
-                                <option value="TARJETA DE EXTRANJERÍA">TARJETA DE EXTRANJERÍA</option>
-                                <option value="DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO">DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO</option>
-                                <option value="CÉDULA DE EXTRANJERÍA">CÉDULA DE EXTRANJERÍA</option>
-                                <option value="PASAPORTE">PASAPORTE</option>
+                                <option value="CÉDULA DE CIUDADANIA" @if (old('tipoIden_persona') == "CÉDULA DE CIUDADANIA") {{ 'selected' }} @endif>CÉDULA DE CIUDADANIA</option>
+                                <option value="TARJETA DE IDENTIDAD" @if (old('tipoIden_persona') == "TARJETA DE IDENTIDAD") {{ 'selected' }} @endif>TARJETA DE IDENTIDAD</option>
+                                <option value="REGISTRO CIVIL" @if (old('tipoIden_persona') == "REGISTRO CIVIL") {{ 'selected' }} @endif>REGISTRO CIVIL</option>
+                                <option value="TARJETA DE EXTRANJERÍA" @if (old('tipoIden_persona') == "TARJETA DE EXTRANJERÍA") {{ 'selected' }} @endif>TARJETA DE EXTRANJERÍA</option>
+                                <option value="DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO" @if (old('tipoIden_persona') == "DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO") {{ 'selected' }} @endif>DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO</option>
+                                <option value="CÉDULA DE EXTRANJERÍA" @if (old('tipoIden_persona') == "CÉDULA DE EXTRANJERÍA") {{ 'selected' }} @endif>CÉDULA DE EXTRANJERÍA</option>
+                                <option value="PASAPORTE"  @if (old('tipoIden_persona') == "PASAPORTE") {{ 'selected' }} @endif>PASAPORTE</option>
                             </select>
-                            <label for="floatingInputGrid">TIPO DE IDENTIFICACIÓN:</label>
-                            @error('tipoIden_persona')
-                                <span class="invalid-feedback">*{{ $message }}</span>
-                            @enderror
+                            <label for="floatingInputGrid">* TIPO DE IDENTIFICACIÓN:</label>
+                            @error('tipoIden_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="text" class="form-control @error('cedula_persona') is-invalid @enderror"  name="cedula_persona" id="cedula_persona" value="{{old('cedula_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">N° DE IDENTIFICACIÓN:</label>
-                            @error('cedula_persona')
-                                <span class="invalid-feedback">*{{ $message }}</span>
-                            @enderror
+                            <label for="floatingInputGrid">* N° DE IDENTIFICACIÓN:</label>
+                            @error('cedula_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -141,23 +126,19 @@
                         <div class="form-floating ">
                             <select class="form-select @error('genero_persona') is-invalid @enderror" name="genero_persona" id="genero_persona" style="text-transform:uppercase;">
                                 <option value="{{old('genero_persona')}}">--SELECCIONE--</option>
-                                <option value="femenino">FEMENINO</option>
-                                <option value="masculino">MASCULINO</option>
-                                <option value="otro">OTRO</option>
+                                <option value="femenino" @if (old('genero_persona') == "femenino") {{ 'selected' }} @endif>FEMENINO</option>
+                                <option value="masculino" @if (old('genero_persona') == "masculino") {{ 'selected' }} @endif>MASCULINO</option>
+                                <option value="otro" @if (old('genero_persona') == "otro") {{ 'selected' }} @endif>OTRO</option>
                             </select>
-                            <label for="floatingInputGrid">GÉNERO:</label>
-                            @error('genero_persona')
-                                <span class="invalid-feedback">*{{ $message }}</span>
-                            @enderror
+                            <label for="floatingInputGrid">* GÉNERO:</label>
+                            @error('genero_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="email" class="form-control @error('correo_persona') is-invalid @enderror" name="correo_persona" id="correo_persona" value="{{old('correo_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="">CORREO:</label>
-                            @error('correo_persona')
-                                <span class="invalid-feedback">*{{ $message }}</span>
-                            @enderror
+                            <label for="">* CORREO:</label>
+                            @error('correo_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -166,10 +147,8 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="number" class="form-control @error('telefono_persona') is-invalid @enderror"  name="telefono_persona" id="telefono_persona" value="{{old('telefono_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">TELÉFONO:</label>
-                            @error('telefono_persona')
-                                <span class="invalid-feedback">*{{ $message }}</span>
-                            @enderror
+                            <label for="floatingInputGrid">* TELÉFONO:</label>
+                            @error('telefono_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md"></div>
@@ -181,14 +160,14 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <select  class="form-select" name="id_empresas" id="id_empresas">
+                            <select  class="form-select @error('id_empresa') is-invalid @enderror" name="id_empresas" id="id_empresas">
                                 <option value="">--SELECCIONE--</option>
                                 @foreach($empresas as $emp)
-                                    <option value ="{{ $emp->id_empresa }}">{{$emp->nombre_empresa}}</option>
+                                    <option value ="{{ $emp->id_empresa }}" @if (old('id_empresas') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option>
                                 @endforeach 
                             </select>
                             <label for="floatingSelectGrid">EMPRESA:</label>
-                            
+                            @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md-1 d-flex align-items-center">
@@ -198,7 +177,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="col-md" >
+                    <div class="col-md">
                         <label for="floatingSelectGrid">SEDE:</label>
                         <div class="spinner_sede text-center" id="spinner_sede">
 
@@ -207,7 +186,7 @@
                             <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
                                 
                             </select>
-                            
+                            @error('sede_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -223,19 +202,19 @@
                     <div class="col-md text-center">
                         <br>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_contcal" name="lider_contcal">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_contcal" name="lider_contcal" @if(old('lider_contcal') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
                                 CONTROLES DE CALIDAD
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava">
+                            <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava" @if(old('lider_ava') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
                                 AULA VIRTUAL
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria" @if(old('lider_dosimetria') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
                                 DOSIMETRÍA
                             </label>

@@ -130,8 +130,9 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    
-                                                    @foreach(${"mesAssignRev".$i+1} as $mes)
+                                                   
+                                                    {{-- @foreach(${"mesAssignRev".$i+1} as $mes) --}}
+                                                    @foreach($mesesAssig[$i] as $mes)
                                                         @if($mes->revision == NULL)
                                                             <a class="btn bg-warning btn-sm boton-alert"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
@@ -158,8 +159,8 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-
-                                                    <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}" target="_blank" onclick="alertInforme($i);">
+                                                    
+                                                    <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}" target="_blank" onclick="alertInforme('{{$i}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -201,6 +202,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
+                                                    
                                                     <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
@@ -241,6 +243,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
+                                                    
                                                     <a class="btn btn-sm boton-alert"  onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
@@ -299,21 +302,20 @@ crossorigin="anonymous">
          
     });
     function alertInforme(i){
-        console.log("ENTRO" + i);
-        $.get('sedesdeptomuni', {departamento_id: departamento_id}, function(municipios){
-                            console.log(municipios);
-        })
-        var check = 0;
-        @foreach(${"mesAssignRev"+mes} as $mes)
-            if($mes->Hp007_calc_dose == 'NULL' || $mes->Hp10_calc_dose == 'NULL' || $mes->Hp3_calc_dose == 'NULL' || $mes->EzClip_calc_dose == 'NULL'){
+        console.log("hoaaa");
+        var mesesAsing = {!! json_encode($mesesAssig) !!};
+        const mesesA = mesesAsing[i];
+        mesesA.forEach(mesw => {
+            console.log(mesw)
+            if(mesw.Hp007_calc_dose == null || mesw.Hp10_calc_dose == null || mesw.Hp3_calc_dose == null || mesw.EzClip_calc_dose == null){
+                
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'ALGUNOS DOSIMETROS NO TIENE REGISTRO DE LECTURA !!!',
                 })
             }
-            @break
-        @endforeach
+        });
     }
 </script>
 @endsection
