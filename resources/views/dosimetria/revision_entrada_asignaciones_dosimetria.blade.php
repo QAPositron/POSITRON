@@ -9,7 +9,7 @@
         </a>
     </div>
     <div class="col-md-8 ">
-        <h2 class="text-center">REVISIÓN DE SALIDA PARA DOSÍMETROS ASIGNADOS</h2>
+        <h2 class="text-center">REVISIÓN DE ENTRADA PARA DOSÍMETROS ASIGNADOS</h2>
         <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
             @if($mesnumber == 1)
                 MES 1 (@php

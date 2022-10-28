@@ -1834,7 +1834,6 @@ class DosimetriaController extends Controller
         /* return $request; */
     }
     public function pdf($id, $mesnumber){
-
         
         $contratoDosi = Departamento::join('departamentosedes', 'departamentos.id_departamento', '=', 'departamentosedes.departamento_id')
         ->join('contratodosimetriasededeptos', 'departamentosedes.id_departamentosede', '=', 'contratodosimetriasededeptos.departamentosede_id')
@@ -2061,5 +2060,16 @@ class DosimetriaController extends Controller
         
         return $pdf->stream();
         /* return $empresa; */
+    }
+    public function revisionDosimetriaEntrada($id, $mesnumber){
+        $contdosisededepto = Contratodosimetriasededepto::find($id);
+        $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $id)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
+        $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
+
+        return view('dosimetria.revision_entrada_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber'));
     }
 }
