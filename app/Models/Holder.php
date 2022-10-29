@@ -18,4 +18,10 @@ class Holder extends Model
     public function temptrabajdosimrev(){
         return $this->hasOne(Temptrabajdosimrev::class, 'holder_id', 'id_holder');
     }
+
+    //relacion uno a muchos con trabajador dosiemtro
+    public function temptrabajdosimentradarev(){
+        return $this->hasOne(Temptrabajdosimentradarev::class, 'holder_id', 'id_holder');
+    }
+
 }

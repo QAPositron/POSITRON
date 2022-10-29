@@ -2082,7 +2082,7 @@ class DosimetriaController extends Controller
     public function revisionCheckEntrada(Request $request){
         $trabajadordosimetro = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $request->id_trabajadordosimetro)
         ->update([
-            'revision_salida' => 'TRUE'
+            'revision_entrada' => 'TRUE'
         ]);
         
         return response()->json($trabajadordosimetro);

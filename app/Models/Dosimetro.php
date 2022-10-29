@@ -23,4 +23,7 @@ class Dosimetro extends Model
     public function temptrabajdosimrev(){
         return $this->hasMany(Temptrabajdosimrev::class, 'id_temptrabajdosimrev');
     }
+    public function temptrabajdosimentradarev(){
+        return $this->hasMany(Temptrabajdosimentradarev::class, 'id_temptrabajdosimentradarev');
+    }
 }

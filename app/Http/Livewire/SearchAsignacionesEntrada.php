@@ -133,7 +133,7 @@ class SearchAsignacionesEntrada extends Component
         ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
         ->where('empresas.nombre_empresa', '=', $this->empresa)
         ->where('dosimetros.codigo_dosimeter', 'like', '%'. $this->search .'%')
-        ->whereNull('trabajadordosimetros.revision_salida')
+        ->whereNull('trabajadordosimetros.revision_entrada')
         ->select('trabajadordosimetros.id_trabajadordosimetro', 'trabajadordosimetros.dosimetro_uso', 'trabajadordosimetros.ubicacion', 'trabajadordosimetros.mes_asignacion','personas.primer_nombre_persona', 'personas.segundo_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'dosimetros.codigo_dosimeter', 'trabajadordosimetros.holder_id', 'holders.codigo_holder', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentos.nombre_departamento', 'dosimetriacontratos.fecha_inicio')
         ->get();
         $dosicontrol = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
@@ -144,7 +144,7 @@ class SearchAsignacionesEntrada extends Component
         ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
         ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
-        ->whereNull('dosicontrolcontdosisedes.revision_salida')
+        ->whereNull('dosicontrolcontdosisedes.revision_entrada')
         ->where('empresas.nombre_empresa', '=', $this->empresa)
         ->where('codigo_dosimeter', 'like', '%' . $this->search .'%')
         ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.dosimetro_uso','dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentos.nombre_departamento', 'dosimetriacontratos.fecha_inicio')
