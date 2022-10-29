@@ -4,15 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Models\ContratosDosimetriaEmpresa;
 use App\Models\Dosicontrolcontdosisede;
-use App\Models\Dosimetro;
-use App\Models\Empresa;
 use App\Models\Temptrabajdosimrev;
 use App\Models\Trabajadordosimetro;
 use Livewire\Component;
 
-
-
-class SearchAsignaciones extends Component
+class SearchAsignacionesEntrada extends Component
 {
     public $search;
     public $dosimetro;
@@ -123,7 +119,7 @@ class SearchAsignaciones extends Component
         }
     }
     public function render()
-    {   
+    {
         $empresasDosi = ContratosDosimetriaEmpresa::all();
         $trabajdosiasig = Trabajadordosimetro::join('personas', 'trabajadordosimetros.persona_id', '=', 'personas.id_persona')
         ->join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
@@ -157,7 +153,6 @@ class SearchAsignaciones extends Component
         $empresa = $this->empresa;
         $this->emit('mesesTrab', $trabajdosiasig);
         $this->emit('mesesCont', $dosicontrol);
-        return view('livewire.search-asignaciones', compact('trabajdosiasig', 'dosicontrol', 'temptrabajdosimrev', 'empresasDosi', 'empresa'));
+        return view('livewire.search-asignaciones-entrada', compact('trabajdosiasig', 'dosicontrol', 'temptrabajdosimrev', 'empresasDosi', 'empresa'));
     }
 }
-    

@@ -1957,7 +1957,7 @@ class DosimetriaController extends Controller
     public function revisionCheck(Request $request){
         $trabajadordosimetro = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $request->id_trabajadordosimetro)
         ->update([
-            'revision' => 'TRUE'
+            'revision_salida' => 'TRUE'
         ]);
         
         return response()->json($trabajadordosimetro);
@@ -1965,7 +1965,7 @@ class DosimetriaController extends Controller
     public function revisionCheckControl(Request $request){
         $dosicontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes)
         ->update([
-            'revision' => 'TRUE'
+            'revision_salida' => 'TRUE'
         ]);
         return response()->json($dosicontrol);
     }
@@ -1997,7 +1997,7 @@ class DosimetriaController extends Controller
         ->get(); */
         
        
-        return view('dosimetria.revision_asignaciones_dosimetria_general1', );
+        return view('dosimetria.revision_asignaciones_dosimetria_general1');
         /* return view('dosimetria.revision_asignaciones_dosimetria_general', compact('trabajdosiasig', 'dosimetros', 'dosicontrolasig') ); */
         /* return $trabajdosiasig; */
     }
@@ -2012,7 +2012,7 @@ class DosimetriaController extends Controller
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->join('contratodosimetriasededeptos', 'trabajadordosimetros.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
-        ->whereNull('trabajadordosimetros.revision')
+        ->whereNull('trabajadordosimetros.revision_salida')
         ->where('empresas.nombre_empresa', '=', $request->empresa)
         ->select('trabajadordosimetros.id_trabajadordosimetro','trabajadordosimetros.ubicacion', 'trabajadordosimetros.ubicacion', 'trabajadordosimetros.mes_asignacion','personas.primer_nombre_persona', 'personas.segundo_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'dosimetros.codigo_dosimeter', 'holders.codigo_holder', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'empresas.nombre_empresa', 'departamentosedes.nombre_departamento')
         ->get();
@@ -2036,7 +2036,7 @@ class DosimetriaController extends Controller
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
-        ->whereNull('dosicontrolcontdosisedes.revision')
+        ->whereNull('dosicontrolcontdosisedes.revision_salida')
         ->where('empresas.nombre_empresa', '=', $request->empresa)
         ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentosedes.nombre_departamento')
         ->get();
@@ -2069,7 +2069,27 @@ class DosimetriaController extends Controller
         $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
-
+        /* return $contdosisededepto->departamentosede->departamento->nombre_departamento; */
         return view('dosimetria.revision_entrada_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber'));
     }
+    public function revisionCheckControlEntrada(Request $request){
+        $dosicontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes)
+        ->update([
+            'revision_entrada' => 'TRUE'
+        ]);
+        return response()->json($dosicontrol);
+    }
+    public function revisionCheckEntrada(Request $request){
+        $trabajadordosimetro = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $request->id_trabajadordosimetro)
+        ->update([
+            'revision_salida' => 'TRUE'
+        ]);
+        
+        return response()->json($trabajadordosimetro);
+    }
+    public function revisionDosimetriaEntradaGeneral(){
+        
+        return view('dosimetria.revision_asignaciones_dosimetria_general_entrada');
+        
+     }
 }

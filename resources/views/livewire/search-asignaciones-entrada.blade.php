@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md "></div>
         <div class="col-md-9 ">
-            <h2 class="text-center">REVISIÓN DE SALIDA GENERAL PARA DOSÍMETROS ASIGNADOS</h2>
+            <h2 class="text-center">REVISIÓN DE ENTRADA GENERAL PARA DOSÍMETROS ASIGNADOS</h2>
         </div>
         <div class="col-md text-center"></div>
     </div>

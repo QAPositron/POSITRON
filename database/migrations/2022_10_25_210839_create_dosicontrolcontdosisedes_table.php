@@ -68,7 +68,8 @@ class CreateDosicontrolcontdosisedesTable extends Migration
             $table->string('EU', 10)->nullable();
             $table->string('DPL', 10)->nullable();
             $table->string('DSU', 10)->nullable();
-            $table->string('revision', 10)->nullable();
+            $table->string('revision_salida', 10)->nullable();
+            $table->string('revision_entrada', 10)->nullable();
             $table->timestamps();
         });
     }

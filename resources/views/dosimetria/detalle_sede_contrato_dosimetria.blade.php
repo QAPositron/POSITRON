@@ -10,8 +10,9 @@
                 </svg>
             </a>
         </div>
-        <div class="col-md">
-            <h2 class="text-center">DOSIMETRÍA DE <br>  <i>{{$dosisededeptocontra->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i> </h2>
+        <div class="col-md-9">
+            <h2 class="text-center">DOSIMETRÍA DE</h2>
+            <h3 class="text-center"><i>{{$dosisededeptocontra->contratodosimetriasede->sede->empresa->nombre_empresa}} </i> - SEDE:<i> {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i> - ESPECIALIDAD: <i>{{$dosisededeptocontra->departamentosede->departamento->nombre_departamento}}</i></h3>
         </div>
         <div class="col-md"></div>
     </div>
@@ -27,9 +28,7 @@
             <div class="table table-responsive p-4">
                 <table class="table table-bordered ">
                     <thead class="table-active">
-                        <tr >
-                            <th colspan="5" class=" text-center">ESPECIALIDAD: {{$dosisededeptocontra->departamentosede->nombre_departamento}}</th>
-                        </tr>
+                        
                         <tr>
                             <th class="text-center align-middle" style='width: 8.90%'>NÚMERO</th>
                             <th class="text-center align-middle" style='width: 20.50%' >MESES</th>
@@ -79,7 +78,7 @@
                                                 </div>
                                                 <div class="col-md text-center">
                                                     @foreach($mes1AssignRev as $mes1)
-                                                        @if($mes1->revision == NULL)
+                                                        @if($mes1->revision_salida == NULL)
                                                             <a class="btn bg-warning btn-sm boton-alert"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                     <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
@@ -143,7 +142,7 @@
                                                    
                                                     {{-- @foreach(${"mesAssignRev".$i+1} as $mes) --}}
                                                     @foreach($mesesAssig[$i] as $mes)
-                                                        @if($mes->revision == NULL)
+                                                        @if($mes->revision_salida == NULL)
                                                             <a class="btn bg-warning btn-sm boton-alert"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                     <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>

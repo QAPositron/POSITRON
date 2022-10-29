@@ -10,16 +10,17 @@
     </div>
     <div class="col-md-8 ">
         <h2 class="text-center">REVISIÓN DE SALIDA PARA DOSÍMETROS ASIGNADOS</h2>
-        <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
+        <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i></h3>
+        <h3 class="text-center">
             @if($mesnumber == 1)
                 MES 1 (@php
                     $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
                     echo $meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ;
-                @endphp),  ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}}  </h3>
+                @endphp),  ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}}  
             @else
-                MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ),  ESPECIALIDAD: {{$contdosisededepto->departamentosede->nombre_departamento}}  </h3>
+                MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ),  ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}}
             @endif
-
+        </h3>
     </div>
     <div class="col-md "></div>
 </div>
@@ -206,13 +207,13 @@ crossorigin="anonymous">
     $(document).ready(function(){
         
         @foreach($trabjasignados as $trabj)
-            if('{{$trabj->revision}}' == 'TRUE'){
+            if('{{$trabj->revision_salida}}' == 'TRUE'){
                 let tr = document.getElementById('{{$trabj->id_trabajadordosimetro}}'); 
                 tr.style.boxShadow = "0px 0px 7px 1px rgb(26, 153, 128)";  
             }
         @endforeach
         @foreach($dosicontrolasig as $dosicont)
-            if('{{$dosicont->revision}}' == 'TRUE'){
+            if('{{$dosicont->revision_salida}}' == 'TRUE'){
                 let tr = document.getElementById('{{$dosicont->id_dosicontrolcontdosisedes}}'); 
                 tr.style.boxShadow = "0px 0px 7px 1px rgb(26, 153, 128)";  
             }

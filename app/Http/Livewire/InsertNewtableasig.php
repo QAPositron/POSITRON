@@ -16,7 +16,7 @@ class InsertNewtableasig extends Component
     public function render()
     {
         $trabajdosiasig = Trabajadordosimetro::join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
-        ->whereNull('trabajadordosimetros.revision')->get();
+        ->whereNull('trabajadordosimetros.revision_salida')->get();
         return view('livewire.insert-newtableasig', compact('trabajdosiasig'));
     }
 }
