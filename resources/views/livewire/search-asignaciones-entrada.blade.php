@@ -199,7 +199,7 @@
                         </tr>
                     </thead>
                     <tbody id="tbody_asignacionesok">
-                        @foreach($temptrabajdosimrev as $temptrab)
+                        @foreach($temptrabajdosimentradarev as $temptrab)
                             <tr id="{{$temptrab->id_temptrabajdosimrev}}">
                                 <td class='align-middle' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>@if(!empty($temptrab->persona->primer_nombre_persona)){{$temptrab->persona->primer_nombre_persona}} {{$temptrab->persona->segundo_nombre_persona}} {{$temptrab->persona->primer_apellido_persona}} {{$temptrab->persona->segundo_apellido_persona}} @else CONTROL @endif</td>
                                 <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->dosimetro->codigo_dosimeter}}</td>
@@ -207,7 +207,7 @@
                                 <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->mes_asignacion}}</td>
                                 <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</td>
                                 <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->contratodosimetriasede->sede->nombre_sede}}</td>
-                                <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->contratodosimetriasededepto->departamentosede->nombre_departamento}}</td>
+                                <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}</td>
                                 <td class='align-middle text-center'>
                                     <button class="btn btn-sm btn-danger" @if(!empty($temptrab->persona->primer_nombre_persona)) onclick="eliminar({{$temptrab->trabajcontdosimetro_id }}, 0)" @else onclick="eliminar({{$temptrab->trabajcontdosimetro_id }}, 1)" @endif>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
@@ -224,6 +224,57 @@
             
         </div>
         
+    </div>
+    <div class="row">
+        <div class="col-md"></div>
+        <div class="col-md-8 ">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading"> <b>OBSERVACIONES:</b> </h4>
+                
+                {{-- @if(!empty($observacionesDelMes))
+                    @foreach($observacionesDelMes as $observaciones)
+                        @if($observaciones->nota_cambiodosim != null)
+                            <p>- {{$observaciones->nota_cambiodosim}}</p>
+                        @endif
+                    @endforeach
+                @endif --}}
+                <br>
+                <div class="row">
+                    <div class="col-md"></div>
+                    <div class="col-md d-grid gap-2">
+                        <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_observacionModal" >NUEVA OBSERVACIÓN</button>
+                        <div class="modal fade" id="nueva_observacionModal" tabindex="-1" aria-labelledby="nueva_observacionModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title w-100 text-center" id="nueva_observacionModalLabel">NUEVA OBSERVACIÓN</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{route('observacionesrevsentradageneral.create')}}" method="POST" id="form_crear_observacionrevsentrada" name="form_crear_observacionrevsentrada" class="form_crear_observacionrevsentrada">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="col-md">
+                                                <label class="text-center">INGRESE LAS OBSERVACIONES O NOTAS PERTINENTES:</label>
+                                                <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea> 
+                                                {{-- <input type="number" hidden value="{{$mesnumber}}" name="mesnumber" id="mesnumber">
+                                                <input type="number" hidden value="{{$contdosisededepto->id_contdosisededepto}}" name="id_contdosisededepto" id="id_contdosisededepto"> --}}
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
+                                            <button type="submit" class="btn colorQA"  data-bs-dismiss="modal" >GUARDAR</button>
+                                        </div>
+                                    </form>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md"></div>
+                </div>
+    
+            </div>
+        </div>
+        <div class="col-md"></div>
     </div>
 </div>
 <script

@@ -4,6 +4,7 @@ use App\Http\Controllers\AreadepartamentosedeController;
 use App\Http\Controllers\AsignarDosimetroController;
 use App\Http\Controllers\ContactosController;
 use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\DepartamentosedeController;
 use App\Http\Controllers\DepartamentosedesController;
 use App\Http\Controllers\DosimetriaController;
 use App\Http\Controllers\DosimetrosController;
@@ -76,7 +77,7 @@ Route::post('departamentos', [DepartamentoController::class, 'save'])->name('dep
 Route::get('sedes/{sede}/edit', [SedesController::class, 'edit'])->name('sedes.edit');
 Route::put('sedes/{sede}', [SedesController::class, 'update'])->name('sedes.update');
 Route::delete('sedes/{sede}', [SedesController::class, 'destroy'])->name('sedes.destroy');
-Route::delete('empresas/{empresa}/{depto}/destroydepto', [DepartamentosedesController::class, 'destroydepa'])->name('sedesdepto.destroydepa');
+Route::delete('empresas/{empresa}/{depto}/destroydepto', [DepartamentosedeController::class, 'destroydepa'])->name('sedesdepto.destroydepa');
 
 /*------------RUTAS PARA EL CRUD DE LAS AREAS PARA LOS DEPARTAMENTOS-------------- */
 
@@ -248,6 +249,7 @@ Route::get('/revisiondosimetria/asignacionesControl', [DosimetriaController::cla
 Route::get('/revisiondosimetria/controldosimetro',[DosimetriaController::class, 'revisionCheckControlGeneral']);
 Route::get('/revisiondosimetria/eliminarevisado', [DosimetriaController::class, 'eliminarevision']);
 Route::get('certificadorevisiondosimetria/{empresa}/pdf', [DosimetriaController::class, 'pdfCertificadorevision'])->name('certificadorevision.pdf');
+
 ////////////RUTAS PARA LA REVISION ENTRADA DE DOSIMETROS ASIGNADOS/////////
 Route::get('revisiondosimetriaentrada/{deptodosi}/{mesnumber}/revisionEntrada', [DosimetriaController::class, 'revisionDosimetriaEntrada'])->name('revisiondosimetriaEntrada.check');
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/dosimetro', [DosimetriaController::class, 'revisionDosimetro']);
@@ -255,6 +257,11 @@ Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/dosimetroControlE
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/trabajadordosimetroEntrada',[DosimetriaController::class, 'revisionCheckEntrada']);
 
 Route::get('revisiondosimetriaentrada/create', [DosimetriaController::class, 'revisionDosimetriaEntradaGeneral'])->name('revisiondosimetriaentrada.create');
+Route::get('/revisiondosimetriaentrada/dosimetro', [DosimetriaController::class, 'revisionDosimetro']);
+Route::get('/revisiondosimetriaentrada/asignaciones', [DosimetriaController::class, 'asignacionesEntrada']);
+Route::get('/revisiondosimetriaentrada/asignacionesControl', [DosimetriaController::class, 'asignacionesControlEntrada']);
+
+Route::get('revisiondosimetriaentrada/create/observacion', [DosimetriaController::class, 'observacionesRevsEntradaGeneral'])->name('observacionesrevsentradageneral.create');
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA //////////////
 Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');
 Route::get('/novedades/contratoDosim', [NovedadesController::class, 'contratoDosimetria']);

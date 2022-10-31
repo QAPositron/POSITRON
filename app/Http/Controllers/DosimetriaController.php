@@ -2018,6 +2018,7 @@ class DosimetriaController extends Controller
         ->get();
         return response()->json($asignacionesall);
     }
+
     
     /* public function revisionCheckGeneral(Request $request){
         $trabajadordosim = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $request->id_trabajadordosimetro)
@@ -2091,5 +2092,41 @@ class DosimetriaController extends Controller
         
         return view('dosimetria.revision_asignaciones_dosimetria_general_entrada');
         
-     }
+    }
+    public function asignacionesEntrada(Request $request){
+        
+        $asignacionesall = Trabajadordosimetro::join('personas', 'trabajadordosimetros.persona_id', '=', 'personas.id_persona')
+        ->join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+        ->leftJoin('holders', 'trabajadordosimetros.holder_id', '=', 'holders.id_holder')
+        ->join('contratodosimetriasedes', 'trabajadordosimetros.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
+        ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
+        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
+        ->join('contratodosimetriasededeptos', 'trabajadordosimetros.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
+        ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
+        ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
+        ->whereNull('trabajadordosimetros.revision_entrada')
+        ->where('empresas.nombre_empresa', '=', $request->empresa)
+        ->select('trabajadordosimetros.id_trabajadordosimetro','trabajadordosimetros.ubicacion', 'trabajadordosimetros.ubicacion', 'trabajadordosimetros.mes_asignacion','personas.primer_nombre_persona', 'personas.segundo_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'dosimetros.codigo_dosimeter', 'holders.codigo_holder', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'empresas.nombre_empresa', 'departamentos.nombre_departamento')
+        ->get();
+        return response()->json($asignacionesall);
+    }
+    public function asignacionesControlEntrada(Request $request){
+        $asignacionesControlall = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+        ->join('contratodosimetriasedes', 'dosicontrolcontdosisedes.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
+        ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
+        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
+        ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
+        ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
+        ->whereNull('dosicontrolcontdosisedes.revision_entrada')
+        ->where('empresas.nombre_empresa', '=', $request->empresa)
+        ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentosedes.nombre_departamento')
+        ->get();
+        
+        return response()->json($asignacionesControlall);
+    }
+    public function observacionesRevsEntradaGeneral(Request $request){
+        return $request;
+    }
 }

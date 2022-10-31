@@ -844,7 +844,7 @@ crossorigin="anonymous">
             })
         })
     
-        $('.form_eliminar_sede').submit(function(e){
+        $('#form_eliminar_sede').submit(function(e){
             e.preventDefault();
             Swal.fire({
                 text: "SEGURO QUE DESEA ELIMINAR ESTA SEDE??",

@@ -109,6 +109,7 @@ class SedesController extends Controller
 
     public function destroy(Sede $sede){
         $sede->delete();
+       
         return redirect()->route('empresas.search')->with('eliminar', 'ok');
     }
     

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\ContratosDosimetriaEmpresa;
 use App\Models\Dosicontrolcontdosisede;
+use App\Models\Temptrabajdosimentradarev;
 use App\Models\Temptrabajdosimrev;
 use App\Models\Trabajadordosimetro;
 use Livewire\Component;
@@ -29,10 +30,10 @@ class SearchAsignacionesEntrada extends Component
     public function match($id){
         $updateMatch = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $id)
         ->update([
-            'revision_salida' => 'TRUE'
+            'revision_entrada' => 'TRUE'
         ]);
         $trabdosiasig = Trabajadordosimetro::find($id);
-        $newTemptrabajdosimrev = new Temptrabajdosimrev();
+        $newTemptrabajdosimrev = new Temptrabajdosimentradarev();
 
         $newTemptrabajdosimrev->trabajcontdosimetro_id    = $trabdosiasig->id_trabajadordosimetro;
         $newTemptrabajdosimrev->contratodosimetriasede_id = $trabdosiasig->contratodosimetriasede_id;
@@ -58,10 +59,10 @@ class SearchAsignacionesEntrada extends Component
     public function matchcontrol($id){
         $updateMatch = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $id)
         ->update([
-            'revision_salida' => 'TRUE'
+            'revision_entrada' => 'TRUE'
         ]);
         $dosicontrol = Dosicontrolcontdosisede::find($id);
-        $newTempdosimcontrolrev = new Temptrabajdosimrev();
+        $newTempdosimcontrolrev = new Temptrabajdosimentradarev();
 
         $newTempdosimcontrolrev->trabajcontdosimetro_id    = $dosicontrol->id_dosicontrolcontdosisedes;
         $newTempdosimcontrolrev->contratodosimetriasede_id = $dosicontrol->contratodosimetriasede_id;
@@ -93,7 +94,7 @@ class SearchAsignacionesEntrada extends Component
     }
     
     public function limpiar(){
-        $limpiartemptrabjdosimrev = Temptrabajdosimrev::all();
+        $limpiartemptrabjdosimrev = Temptrabajdosimentradarev::all();
         foreach($limpiartemptrabjdosimrev as $limpiartemp){
 
             $limpiartemp->delete();
@@ -103,17 +104,17 @@ class SearchAsignacionesEntrada extends Component
         if($control == 1){
             $eliminarRevisioncontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $id)
             ->update([
-                'revision_salida' =>  NULL
+                'revision_entrada' =>  NULL
             ]);
-            $eliminartempdosimcontrolrev = Temptrabajdosimrev::where('trabajcontdosimetro_id', '=', $id)->delete();
+            $eliminartempdosimcontrolrev = Temptrabajdosimentradarev::where('trabajcontdosimetro_id', '=', $id)->delete();
             $this->emit('alert', 'SE ELIMINO LA ASIGNACION REVISADA DE TIPO CONTROL');
             $this->emit('render');
         }else{
             $eliminarRevision = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $id)
             ->update([
-                'revision_salida' => NULL
+                'revision_entrada' => NULL
             ]);
-            $eliminartemptrabjdosimrev = Temptrabajdosimrev::where('trabajcontdosimetro_id', '=', $id)->delete();
+            $eliminartemptrabjdosimrev = Temptrabajdosimentradarev::where('trabajcontdosimetro_id', '=', $id)->delete();
             $this->emit('alert', 'SE ELIMINO LA ASIGNACION REVISADA');
             $this->emit('render');
         }
@@ -149,10 +150,10 @@ class SearchAsignacionesEntrada extends Component
         ->where('codigo_dosimeter', 'like', '%' . $this->search .'%')
         ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.dosimetro_uso','dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentos.nombre_departamento', 'dosimetriacontratos.fecha_inicio')
         ->get();
-        $temptrabajdosimrev = Temptrabajdosimrev::all();
+        $temptrabajdosimentradarev = Temptrabajdosimentradarev::all();
         $empresa = $this->empresa;
         $this->emit('mesesTrab', $trabajdosiasig);
         $this->emit('mesesCont', $dosicontrol);
-        return view('livewire.search-asignaciones-entrada', compact('trabajdosiasig', 'dosicontrol', 'temptrabajdosimrev', 'empresasDosi', 'empresa'));
+        return view('livewire.search-asignaciones-entrada', compact('trabajdosiasig', 'dosicontrol', 'temptrabajdosimentradarev', 'empresasDosi', 'empresa'));
     }
 }
