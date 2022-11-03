@@ -1922,6 +1922,7 @@ class DosimetriaController extends Controller
     }
     public function pdfEtiquetas($id, $mesnumber){
         $contratodosi = Contratodosimetriasededepto::join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id','=', 'departamentosedes.id_departamentosede')
+        ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
         ->join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('id_contdosisededepto', '=', $id)
@@ -2013,9 +2014,10 @@ class DosimetriaController extends Controller
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->join('contratodosimetriasededeptos', 'trabajadordosimetros.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
+        ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
         ->whereNull('trabajadordosimetros.revision_salida')
         ->where('empresas.nombre_empresa', '=', $request->empresa)
-        ->select('trabajadordosimetros.id_trabajadordosimetro','trabajadordosimetros.ubicacion', 'trabajadordosimetros.ubicacion', 'trabajadordosimetros.mes_asignacion','personas.primer_nombre_persona', 'personas.segundo_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'dosimetros.codigo_dosimeter', 'holders.codigo_holder', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'empresas.nombre_empresa', 'departamentosedes.nombre_departamento')
+        ->select('trabajadordosimetros.id_trabajadordosimetro','trabajadordosimetros.ubicacion', 'trabajadordosimetros.ubicacion', 'trabajadordosimetros.mes_asignacion','personas.primer_nombre_persona', 'personas.segundo_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'dosimetros.codigo_dosimeter', 'holders.codigo_holder', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'empresas.nombre_empresa', 'departamentos.nombre_departamento')
         ->get();
         return response()->json($asignacionesall);
     }

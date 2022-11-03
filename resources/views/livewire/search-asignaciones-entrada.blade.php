@@ -13,7 +13,7 @@
         <div class="col-md-7">
             <div class="card text-dark bg-light">
                 <div class="row">
-                    <div class="col-md"></div>
+                    <div class="col-md"></div> 
                     <div class="col-md">
                         <div class="form-group">
                             <h5 class="pt-4 text-center">EMPRESA </h5>
@@ -223,13 +223,13 @@
             <br>
             
         </div>
-        
+       
     </div>
     <div class="row">
         <div class="col-md"></div>
         <div class="col-md-8 ">
             <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading"> <b>OBSERVACIONES DE LAS ASIGNACIONES REVISADAS CORRESPONDIENTE AL </b> CONTRATO: {{$temptrabajdosimentradarev[0]->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}, SEDE: {{$temptrabajdosimentradarev[0]->contratodosimetriasede->sede->nombre_sede}}, ESP: {{$temptrabajdosimentradarev[0]->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}, MES: {{$temptrabajdosimentradarev[0]->mes_asignacion}}  </h4>
+                <h4 class="alert-heading">  @if(count($temptrabajdosimentradarev) == '0' )<b>OBSERVACIONES DE LAS ASIGNACIONES REVISADAS </b> @else <b>OBSERVACIONES DE LAS ASIGNACIONES REVISADAS CORRESPONDIENTE AL </b> CONTRATO: {{$temptrabajdosimentradarev[0]->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}, SEDE: {{$temptrabajdosimentradarev[0]->contratodosimetriasede->sede->nombre_sede}}, ESP: {{$temptrabajdosimentradarev[0]->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}, MES: {{$temptrabajdosimentradarev[0]->mes_asignacion}}   @endif</h4>
                 
                 @if(!empty($observacionesDelMes))
                     

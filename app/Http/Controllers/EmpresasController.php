@@ -40,19 +40,19 @@ class EmpresasController extends Controller
     public function save(Request $request){
         
         $request->validate([
-            'nombre_empresa'      => 'required|unique:empresas,nombre_empresa',
-            'tipo_empresa'        => 'required',              
-            'tipoIden_empresa'    => 'required',  
-            'numero_ident'        => 'required|max:10|unique:empresas,num_iden_empresa',
-             
-            'actividad_empresa'   => 'required|max:4|min:4',
-            'respoIva_empresa'    => 'required',    
-            'respoFiscal_empresa' => 'required',
-            'telefono_empresa'    => 'required|max:10|min:10',
-            'correo_empresa'      => 'required',
-            'direccion_empresa'   => 'required',
-            'pais_empresa'        => 'required',
-            'ciudad_empresa'      => 'required',
+            'nombre_empresa'      => ['required', Rule::unique('empresas', 'nombre_empresa')],
+            'tipo_empresa'        => ['required'],              
+            'tipoIden_empresa'    => ['required'], 
+            'numero_ident'        => ['required', 'max:10',  Rule::unique('empresas', 'num_iden_empresa')],
+            'nitdv_empresa'       => ['max:1'], 
+            'actividad_empresa'   => ['required', 'min:4', 'max:4'],
+            'respoIva_empresa'    => ['required'],   
+            'respoFiscal_empresa' => ['required'],
+            'telefono_empresa'    => ['required', 'max:10', 'min:10'],
+            'correo_empresa'      => ['required', 'email', 'max:10',  Rule::unique('empresas', 'email_empresa')],
+            'direccion_empresa'   => ['required'],
+            'pais_empresa'        => ['required'],
+            'ciudad_empresa'      => ['required']
             
         ]);
         
@@ -94,14 +94,14 @@ class EmpresasController extends Controller
         $request->validate([
             'nombre_empresa'      => ['required', Rule::unique('empresas', 'nombre_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
             'tipo_empresa'        => ['required'],              
-            'tipoIden_empresa'    => ['required'],     
+            'tipoIden_empresa'    => ['required'],   
             'numero_ident'        => ['required', 'max:10', Rule::unique('empresas', 'num_iden_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
-             
+            'nitdv_empresa'       => ['max:1'],  
             'actividad_empresa'   => ['required', 'max:4', 'min:4'],
             'respoIva_empresa'    => ['required'],       
             'respoFiscal_empresa' => ['required'],   
             'telefono_empresa'    => ['required', 'max:10', 'min:10'],
-            'correo_empresa'      => ['required'],   
+            'correo_empresa'      => ['required', 'email', Rule::unique('empresas', 'email_empresa')->ignore($empresa->id_empresa, 'id_empresa')],   
             'direccion_empresa'   => ['required'],   
             'pais_empresa'        => ['required'],   
             'ciudad_empresa'      => ['required'],   

@@ -304,7 +304,7 @@ crossorigin="anonymous">
                     console.log(dosimetro);
                     if(dosimetro.length != 0){
                         var check = 0;
-                        console.log(check);
+                        console.log(check); 
                         console.log("ESTE ES EL CODIGO DOSIMETRO" + codigoDosi);
                         console.log("ESTE ES EL CODIGO ETIQUETA" + codigoEtiq);
                         var empresa = @this.empresa;

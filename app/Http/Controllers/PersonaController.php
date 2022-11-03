@@ -62,7 +62,7 @@ class PersonaController extends Controller
             'tipoIden_persona'           => ['required'],
             'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],    
             'genero_persona'             => ['required'],
-            'correo_persona'             => ['required', 'email'],
+            'correo_persona'             => ['required', 'email', Rule::unique('personas', 'correo_persona')],
             'telefono_persona'           => ['required', 'min:10', 'max:10'],
             
         ]);
@@ -144,7 +144,7 @@ class PersonaController extends Controller
             'tipoIden_persona'           => ['required'],
             'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],
             'genero_persona'             => ['required'],
-            'correo_persona'             => ['required', 'email'],
+            'correo_persona'             => ['required', 'email', Rule::unique('personas', 'correo_persona')],
             'telefono_persona'           => ['required', 'min:10', 'max:10'],
             
         ]);
@@ -226,7 +226,7 @@ class PersonaController extends Controller
             'tipoIden_persona'           => ['required'],
             'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')->ignore($persona->id_persona, 'id_persona')],    
             'genero_persona'             => ['required'],
-            'correo_persona'             => ['required', 'email'],
+            'correo_persona'             => ['required', 'email', Rule::unique('personas', 'correo_persona')->ignore($persona->id_persona, 'id_persona')],
             'telefono_persona'           => ['required', 'min:10', 'max:10'],
             
         ]);

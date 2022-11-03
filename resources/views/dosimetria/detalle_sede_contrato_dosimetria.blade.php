@@ -132,7 +132,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}" target="_blank" onclick="alertInforme('1');">
+                                                    <a class="btn colorQA btn-sm boton-alert" {{-- href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}" --}} target="_blank" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -216,7 +216,7 @@
                                                 </div>
                                                 <div class="col-md text-center">
                                                     
-                                                    <a class="btn colorQA btn-sm boton-alert" {{-- href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}" target="_blank" --}} id="botoninfo" onclick="alertInforme('{{$i}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
+                                                    <a class="btn colorQA btn-sm boton-alert" {{-- href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1] )}}" target="_blank" --}} id="botoninfo" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -394,9 +394,9 @@ crossorigin="anonymous">
         console.log("hoaaa");
         console.log(depto);
         var host = window.location.host;
-        var path = "http://"+host+"/POSITRON/public/repodosimetria/1/3/pdf";
+        var path = "http://"+host+"/POSITRON/public/repodosimetria/"+depto+"/"+i+"/pdf";
         console.log(host+"/POSITRON/public/repodosimetria/1/3/pdf");
-        /* window.open(path, '_blank'); */
+        
         var mesesAsing = {!! json_encode($mesesAssig) !!};
         const mesesA = mesesAsing[i];
         mesesA.forEach(mesw => {
@@ -404,7 +404,44 @@ crossorigin="anonymous">
             if(mesw.ubicacion == 'TORAX'){
                 if(mesw.Hp007_calc_dose == null || mesw.Hp10_calc_dose == null || mesw.Hp3_calc_dose == null){
                     Swal.fire({
-                        text: "ALGUNOS DOSIMETROS NO TIENEN REGISTRO DE LECTURA !!!",
+                        title: "Oops!!",
+                        text: "ALGUNOS DOSIMETROS NO TIENEN REGISTRO DE LECTURA, DESEA VER EL INFORME ??",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#1A9980',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'SI, SEGURO!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.open(path, '_blank');
+                        }
+                    })
+                }else{
+                    window.open(path, '_blank');
+                }
+            }else if(mesw.ubicacion == 'CRISTALINO'){
+                if(mesw.Hp3_calc_dose == null){
+                    Swal.fire({
+                        title: "Oops!!",
+                        text: "ALGUNOS DOSIMETROS NO TIENEN REGISTRO DE LECTURA, DESEA VER EL INFORME ??",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#1A9980',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'SI, SEGURO!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.open(path, '_blank');
+                        }
+                    })
+                }else{
+                    window.open(path, '_blank');
+                }
+            }else if(mesw.ubicacion == 'ANILLO'){
+                if(mesw.Hp007_calc_dose == null){
+                    Swal.fire({
+                        title: "Oops!!",
+                        text: "ALGUNOS DOSIMETROS NO TIENEN REGISTRO DE LECTURA, DESEA VER EL INFORME ??",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#1A9980',
