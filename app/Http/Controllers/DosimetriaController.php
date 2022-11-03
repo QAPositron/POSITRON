@@ -22,6 +22,7 @@ use App\Models\Mesescontratodosimetriasedepto;
 use App\Models\Persona;
 use App\Models\Personasedes;
 use App\Models\Sede;
+use App\Models\Temptrabajdosimentradarev;
 use App\Models\Temptrabajdosimrev;
 use App\Models\Trabajador;
 use App\Models\Trabajadordosimetro;
@@ -2052,13 +2053,23 @@ class DosimetriaController extends Controller
         return response()->json($dosicontrol);
     } */
     
-    public function pdfCertificadorevision($empresa){
-       /*  return $empresa; */
-        $empresa = Empresa::where('nombre_empresa', '=', $empresa)->get();
+    public function pdfCertificadorevisionsalida($empresa, $deptodosi, $mesnumber){
+        /* return $mesnumber; */
+        if($empresa != 0){
+            $empresa = Empresa::where('nombre_empresa', '=', $empresa)->get();
+        }
         $temptrabjdosimrev = Temptrabajdosimrev::all();
-        $pdf =  PDF::loadView('dosimetria.certificadoPDF_revision_dosimetria', compact('temptrabjdosimrev', 'empresa'));
+        $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_salida', '=', 'TRUE')
+        ->get();
+        $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_salida', '=', 'TRUE')
+        ->get();
+        $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
+        $pdf =  PDF::loadView('dosimetria.certificadoPDF_revision_dosimetria', compact('temptrabjdosimrev', 'empresa', 'dosicontrolasig', 'trabjasignados', 'deptodosi', 'contdosisededepto'));
         $pdf->setPaper('A4', 'portrait');
-        
         return $pdf->stream();
         /* return $empresa; */
     }
@@ -2070,8 +2081,12 @@ class DosimetriaController extends Controller
         $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
+        $observacionesDelMes = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->select('nota_cambiodosim')
+        ->get();
         /* return $contdosisededepto->departamentosede->departamento->nombre_departamento; */
-        return view('dosimetria.revision_entrada_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber'));
+        return view('dosimetria.revision_entrada_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber', 'observacionesDelMes'));
     }
     public function revisionCheckControlEntrada(Request $request){
         $dosicontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes)
@@ -2127,6 +2142,33 @@ class DosimetriaController extends Controller
         return response()->json($asignacionesControlall);
     }
     public function observacionesRevsEntradaGeneral(Request $request){
-        return $request;
+        
+        $obsercacionentradanewmes = new Mesescontdosisedeptos;
+        $obsercacionentradanewmes->contdosisededepto_id = $request->id_contdosisededepto;
+        $obsercacionentradanewmes->mes_asignacion       = $request->mesnumber;
+        $obsercacionentradanewmes->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);
+        $obsercacionentradanewmes->save();
+
+        return back()->with('crear', 'ok');
+    }
+    public function pdfCertificadorevisionentrada($empresa, $deptodosi, $mesnumber){
+        /* return $mesnumber; */
+        if($empresa != 0){
+            $empresa = Empresa::where('nombre_empresa', '=', $empresa)->get();
+        }
+        $temptrabjdosimrevsentrada = Temptrabajdosimentradarev::all();
+        $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_salida', '=', 'TRUE')
+        ->get();
+        $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_salida', '=', 'TRUE')
+        ->get();
+        $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
+        $pdf =  PDF::loadView('dosimetria.certificadoPDF_revision_entrada_dosimetria', compact('temptrabjdosimrevsentrada', 'empresa', 'dosicontrolasig', 'trabjasignados', 'deptodosi', 'contdosisededepto'));
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream();
+        /* return $empresa; */
     }
 }

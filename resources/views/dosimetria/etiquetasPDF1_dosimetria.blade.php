@@ -102,27 +102,73 @@
     
     <div class="contenedor">
         @foreach($trabajdosiasig as $trab)
-            <div class="img">
-                <img src="{{asset('imagenes/2.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
-                <div class="nombre_torax" > <b>{{$trab->persona->primer_apellido_persona}} {{substr($trab->persona->segundo_apellido_persona, 0,1)}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</b> </div>
-                @foreach($contratodosi as $contdosi)
-                    <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
-                    <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
-                @endforeach
-                <div class="codigo_torax" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
-                @php
-                    $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
-                    $datefix2 = date('d/m/Y',strtotime($trab->ultimo_dia_uso));
-                @endphp
-                <div class="primerdia_torax" >{{$datefix1}}</div>  
-                <div class="ultimodia_torax" >{{$datefix2}}</div>
-                <div class="codigobar_torax">
+            @if($trab->ubicacion == 'TORAX')
+                <div class="img">
+                    <img src="{{asset('imagenes/2TORAX.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
+                    <div class="nombre_torax" > <b>{{$trab->persona->primer_apellido_persona}} {{substr($trab->persona->segundo_apellido_persona, 0,1)}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</b> </div>
+                    @foreach($contratodosi as $contdosi)
+                        <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
+                        <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
+                    @endforeach
+                    <div class="codigo_torax" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
                     @php
-                        echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.7,10);
+                        $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
+                        $datefix2 = date('d/m/Y',strtotime($trab->ultimo_dia_uso));
                     @endphp
+                    <div class="primerdia_torax" >{{$datefix1}}</div>  
+                    <div class="ultimodia_torax" >{{$datefix2}}</div>
+                    <div class="codigobar_torax">
+                        @php
+                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.7,10);
+                        @endphp
+                    </div>
                 </div>
-            </div>
+            @elseif($trab->ubicacion == 'CRISTALINO')
+                <div class="img">
+                    <img src="{{asset('imagenes/2CRISTALINO.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                    {{-- <div class="nombre_torax" > <b>{{$trab->persona->primer_apellido_persona}} {{substr($trab->persona->segundo_apellido_persona, 0,1)}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</b> </div>
+                    @foreach($contratodosi as $contdosi)
+                        <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
+                        <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
+                    @endforeach
+                    <div class="codigo_torax" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
+                    @php
+                        $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
+                        $datefix2 = date('d/m/Y',strtotime($trab->ultimo_dia_uso));
+                    @endphp
+                    <div class="primerdia_torax" >{{$datefix1}}</div>  
+                    <div class="ultimodia_torax" >{{$datefix2}}</div>
+                    <div class="codigobar_torax">
+                        @php
+                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.7,10);
+                        @endphp
+                    </div> --}}
+                </div>
+            @elseif($trab->ubicacion == 'ANILLO')
+                <div class="img">
+                    <img src="{{asset('imagenes/2ANILLO.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                    {{-- <div class="nombre_torax" > <b>{{$trab->persona->primer_apellido_persona}} {{substr($trab->persona->segundo_apellido_persona, 0,1)}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</b> </div>
+                    @foreach($contratodosi as $contdosi)
+                        <div class="empresa_torax" >{{$contdosi->nombre_empresa}}</div>
+                        <div class="sede_torax" >{{$contdosi->nombre_sede}} ESP: {{$contdosi->nombre_departamento}}</div>
+                    @endforeach
+                    <div class="codigo_torax" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
+                    @php
+                        $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
+                        $datefix2 = date('d/m/Y',strtotime($trab->ultimo_dia_uso));
+                    @endphp
+                    <div class="primerdia_torax" >{{$datefix1}}</div>  
+                    <div class="ultimodia_torax" >{{$datefix2}}</div>
+                    <div class="codigobar_torax">
+                        @php
+                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.7,10);
+                        @endphp
+                    </div> --}}
+                </div>
+            @endif
         @endforeach
         
     </div>

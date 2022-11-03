@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\ContratosDosimetriaEmpresa;
 use App\Models\Dosicontrolcontdosisede;
+use App\Models\Mesescontdosisedeptos;
 use App\Models\Temptrabajdosimentradarev;
 use App\Models\Temptrabajdosimrev;
 use App\Models\Trabajadordosimetro;
@@ -151,9 +152,10 @@ class SearchAsignacionesEntrada extends Component
         ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.dosimetro_uso','dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentos.nombre_departamento', 'dosimetriacontratos.fecha_inicio')
         ->get();
         $temptrabajdosimentradarev = Temptrabajdosimentradarev::all();
+        $observacionesDelMes = Mesescontdosisedeptos::all();
         $empresa = $this->empresa;
         $this->emit('mesesTrab', $trabajdosiasig);
         $this->emit('mesesCont', $dosicontrol);
-        return view('livewire.search-asignaciones-entrada', compact('trabajdosiasig', 'dosicontrol', 'temptrabajdosimentradarev', 'empresasDosi', 'empresa'));
+        return view('livewire.search-asignaciones-entrada', compact('trabajdosiasig', 'dosicontrol', 'temptrabajdosimentradarev', 'empresasDosi', 'empresa', 'observacionesDelMes'));
     }
 }

@@ -12,7 +12,7 @@
 </style>
 <body>
     <img src="{{asset('imagenes/VerdeSF.png')}}" width="200" style="position:relative; left:420px; top:-30px;">
-    <h3 style="position:relative; top:-40px;text-align: center; button:200px;">CERTIFICADO DE VERIFICACIÓN DE DOSIMENTRO PERSONAL</h3>
+    <h3 style="position:relative; top:-40px;text-align: center; button:200px;">CERTIFICADO DE VERIFICACIÓN DE ENTRADA DE DOSIMENTRO PERSONAL</h3>
     <p style="position:relative; top:-30px; text-align:justify;">QA POSITRON S.A.S le notifica a la institución @if(empty($empresa)){{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} con NIT: {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}} @else {{$empresa[0]->nombre_empresa}} con NIT: {{$empresa[0]->num_iden_empresa}}-{{$empresa[0]->DV}} @endif  que los dosímetros entregados han pasado por el proceso de verificación tanto de etiqueta, dosímetro y usuario final satisfactoriamente. A continuación, evidencia de la verificación: </p>
                 
     <table style=" margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; font-size:9px;" cellpadding="4">
@@ -92,7 +92,7 @@
                     </tr>
                 @endforeach
             @else
-                @foreach($temptrabjdosimrev as $temptrabj)
+                @foreach($temptrabjdosimrevsentrada as $temptrabj)
                     <tr>
                         <td>@if(!empty($temptrabj->persona->primer_nombre_persona)){{$temptrabj->persona->primer_nombre_persona}} {{$temptrabj->persona->segundo_nombre_persona}} {{$temptrabj->persona->primer_apellido_persona}} {{$temptrabj->persona->segundo_apellido_persona}}@else CONTROL @endif</td>
                         <td style="text-align: center;">{{$temptrabj->dosimetro->codigo_dosimeter}}</td>
@@ -125,6 +125,9 @@
             @endif
         </tbody>
     </table>
+    <br>
+    <br>
+    <p style="position:relative; top:-30px; text-align:justify;"> <b>OBSERVACIONES:</b> </p>
     <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="80" style="position:relative; top:400px;"> <br>
     <label style="position: relative; top:400px;">Diego Fernando Aponte Castañeda</label> <br>
     <label style="position: relative; top:400px;">Físico Médico</label> <br>

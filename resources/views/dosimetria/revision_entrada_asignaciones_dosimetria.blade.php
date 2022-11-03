@@ -59,7 +59,9 @@
             <br>
         </div>
     </div>
-    <div class="col-md"></div>
+    <div class="col-md ">
+        
+    </div>
 </div>
 <br>
 <br>
@@ -140,9 +142,9 @@
             <div class="card-header text-center">
                 <h4 class="card-title ">INFORMACIÓN DEL DOSÍMETRO</h4>
             </div>
-            <div class="card-body ">
-                <div class="table table-responsive p-4">
-                    <table class="table table-sm ">
+            <div class="card-body">
+                <div class="table table-responsive">
+                    <table class="table table-sm">
                         <tbody>
                             <tr>
                                 <td class="align-middle"><h6 class="text-end m-0">No. DOSÍMETRO :</h6></td>
@@ -166,13 +168,61 @@
                         </tbody>
                     </table>
                 </div>
-               
             </div>
-            
-            <br>
         </div>
     </div>
     
+</div>
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md-8 ">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading"> <b>OBSERVACIONES:</b> </h4>
+            
+            @if(!empty($observacionesDelMes))
+                @foreach($observacionesDelMes as $observaciones)
+                    @if($observaciones->nota_cambiodosim != null)
+                        <p>- {{$observaciones->nota_cambiodosim}}</p>
+                    @endif
+                @endforeach
+            @endif
+            <br>
+            <div class="row">
+                <div class="col-md"></div>
+                <div class="col-md d-grid gap-2">
+                    <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_observacionModal" >NUEVA OBSERVACIÓN</button>
+                    <div class="modal fade" id="nueva_observacionModal" tabindex="-1" aria-labelledby="nueva_observacionModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title w-100 text-center" id="nueva_observacionModalLabel">NUEVA OBSERVACIÓN</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{route('observacionesrevsentradageneral.create')}}" method="POST" id="form_crear_observacionrevsentrada" name="form_crear_observacionrevsentrada" class="form_crear_observacionrevsentrada">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="col-md">
+                                            <label class="text-center">INGRESE LAS OBSERVACIONES O NOTAS PERTINENTES:</label>
+                                            <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea> 
+                                            <input type="number" hidden value="{{$mesnumber}}" name="mesnumber" id="mesnumber">
+                                            <input type="number" hidden value="{{$contdosisededepto->id_contdosisededepto}}" name="id_contdosisededepto" id="id_contdosisededepto">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
+                                        <button type="submit" class="btn colorQA"  data-bs-dismiss="modal" >GUARDAR</button>
+                                    </div>
+                                </form>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md"></div>
 </div>
 
 
@@ -181,7 +231,16 @@ src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
 </script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('crear')== 'ok')
+    <script>
+        Swal.fire(
+        'GUARDADO!',
+        'SE HA GUARDADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
 <script type="text/javascript">
     $(document).ready(function(){
         // Creamos array con los meses del año
