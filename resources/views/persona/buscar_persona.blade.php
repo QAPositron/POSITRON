@@ -59,6 +59,17 @@
                                 {{$personrol->roles->nombre_rol}}
                             @endif
                         @endforeach
+                        <br>
+                        @if($person->lider_ava == 'TRUE')
+                            <B>(LIDER A. VIRTUAL)</B>
+                        <br>
+                        @endif
+                        @if($person->lider_dosimetria == 'TRUE')
+                            <B>(LIDER DOSIMETRÍA)</B>
+                        @endif
+                        @if($person->lider_controlescalidad == 'TRUE')
+                            <B>(LIDER C. CALIDAD)</B>
+                        @endif
                     </td>
                     <td  class="align-middle text-center">
                         <div class="row">

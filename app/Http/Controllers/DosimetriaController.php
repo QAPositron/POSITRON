@@ -1882,6 +1882,7 @@ class DosimetriaController extends Controller
         
         $mesescantdosi = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
+        ->select('nota_cambiodosim')        
         ->get();
         
 
@@ -1889,7 +1890,7 @@ class DosimetriaController extends Controller
 
             $trabajadoresaisgxmeses[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)->get();
         }
-
+        
         $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'fechainiciodositrabaj', 'trabajadoresaisgxmeses', 'mesescantdosi', 'mesnumber'));
         $pdf->setPaper('8.5x14', 'landscape');
         
@@ -1914,7 +1915,7 @@ class DosimetriaController extends Controller
             } */
             /* return $newDate; */
         }
-        /* return $contratoDosi; */
+        /* return $trabajadoresaisgxmeses; */
         return $pdf->stream();
         /* return !$contratoDosi->isEmpty() ? $pdf->stream() : redirect()->route('detallesedecont.create', $id)->with('fallo', 'ok'); */
         /* return $contratoDosi; */

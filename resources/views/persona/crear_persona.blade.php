@@ -16,13 +16,16 @@
                                 @foreach($perfiles as $perf)
                                     <option value ="{{$perf->id_perfil}}" {{ in_array($perf->id_perfil, (array) old('perfil_personas', [])) ? "selected" : "" }}>{{$perf->nombre_perfil}}</option>
                                 @endforeach 
-                                {{-- <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
-                                <option value="CALIDAD">CALIDAD</option>
+                                <option value="GERENCIA">GERENCIA</option>
+                                <option value="SUBGERENCIA">SUBGERENCIA</option>
                                 <option value="BIOMÉDICA">BIOMÉDICA</option>
                                 <option value="FÍSICA MÉDICA">FÍSICA MÉDICA</option>
+                                <option value="TECNÓLOGO">TECNÓLOGO</option>
+                                <option value="ENFERMERA">ENFERMERA</option>
+                                <option value="AUXILIAR DE ENFERMERIA">AUXILIAR DE ENFERMERIA</option>
+                                <option value="CALIDAD">CALIDAD</option>
                                 <option value="CONTABILIDAD">CONTABILIDAD</option>
-                                <option value="SUBGERENCIA">    </option>
-                                <option value="GERENCIA">GERENCIA</option> --}}
+                                <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
                             </select>
                             @error('perfil_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
@@ -318,6 +321,35 @@ crossorigin="anonymous">
         })
     });
     $(document).ready(function(){
+        $('#lider_dosimetria').on('change', function(){
+            var values="2";
+            var lider = document.getElementById("lider_dosimetria").value;
+            if(lider == 'TRUE'){
+
+                $.each(values.split(","), function(i,e){
+                    $("#rol_personas option[value='" + e + "']").prop("selected", true);
+                });
+            }
+            /* var selected = [];
+            for (var option of document.getElementById("rol_personas").options)
+            {
+                var sele = option.selected;
+                if (option.selected) {
+                    
+                    selected.push(option.value);
+                }
+            }
+            console.log(option.selected);
+            var roles = document.getElementById("rol_personas");
+            const indice = roles.selectedIndex;
+
+            const opcionSeleccionada = roles.options[indice];
+            for(var i=0; i<roles.options[indice].length; i++){
+
+                console.log("Texto:"+opcionSeleccionada.text[i]+ "Valor:" +opcionSeleccionada.value[i]);
+            } */
+            
+        })        
         $('#id_empresas').on('change', function(){
             $('#sede_empresa').fadeOut();
             $('#spinner_sede').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');

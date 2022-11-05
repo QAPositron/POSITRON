@@ -11,6 +11,7 @@ use App\Models\Personasroles;
 use App\Models\Roles;
 use App\Models\Sede; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
 class PersonaController extends Controller
@@ -53,7 +54,7 @@ class PersonaController extends Controller
     }
     
     public function save(Request $request){
-
+        
         $request->validate([
             
             'primer_nombre_persona'      => ['required'],              
@@ -66,7 +67,7 @@ class PersonaController extends Controller
             'telefono_persona'           => ['required', 'min:10', 'max:10'],
             
         ]);
-
+        
         $persona = new Persona();
 
         $persona->primer_nombre_persona     = strtoupper($request->primer_nombre_persona);
@@ -98,7 +99,7 @@ class PersonaController extends Controller
                 $personasRoles = new Personasroles();
     
                 $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = $request->rol_personas[$i];
+                $personasRoles->rol_id      = $request->rol_personas[$i];
         
                 $personasRoles->save();
             }
@@ -125,7 +126,6 @@ class PersonaController extends Controller
         }
         
         return redirect()->route('personas.search')->with('guardar', 'ok');
-        /* return $request; */
     }
     public function createTrabEstuContEmp(Empresa $empresa, $id){
         $perfiles = Perfiles::all();

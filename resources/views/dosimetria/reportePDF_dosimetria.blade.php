@@ -899,9 +899,11 @@
                 -   Se analizaron {{count($trabajdosiasig)}} dosímetros personales.
             @endif
             <br>
-            @if(empty($mesescantdosi))
+            @if(!empty($mesescantdosi))
                 @foreach($mesescantdosi as $mesesobs)
-                    - {{$mesesobs->nota_cambiodosim}} <br>
+                    @if($mesesobs->nota_cambiodosim != null)
+                        - {{$mesesobs->nota_cambiodosim}} <br>
+                    @endif
                 @endforeach
             @endif
             @foreach($trabajdosiasig as $dositrabj)
