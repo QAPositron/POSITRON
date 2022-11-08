@@ -52,13 +52,6 @@
                                 {{$personperf->perfiles->nombre_perfil}}
                             @endif
                         @endforeach
-                    </td>
-                    <td class="align-middle text-center">
-                        @foreach($personasroles as $personrol)
-                            @if($person->id_persona == $personrol->persona_id)
-                                {{$personrol->roles->nombre_rol}}
-                            @endif
-                        @endforeach
                         <br>
                         @if($person->lider_ava == 'TRUE')
                             <B>(LIDER A. VIRTUAL)</B>
@@ -70,6 +63,14 @@
                         @if($person->lider_controlescalidad == 'TRUE')
                             <B>(LIDER C. CALIDAD)</B>
                         @endif
+                    </td>
+                    <td class="align-middle text-center">
+                        @foreach($personasroles as $personrol)
+                            @if($person->id_persona == $personrol->persona_id)
+                                {{$personrol->roles->nombre_rol}}
+                            @endif
+                        @endforeach
+                        
                     </td>
                     <td  class="align-middle text-center">
                         <div class="row">

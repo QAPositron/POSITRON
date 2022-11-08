@@ -66,6 +66,7 @@ class PersonaController extends Controller
             'correo_persona'             => ['required', 'email', Rule::unique('personas', 'correo_persona')],
             'telefono_persona'           => ['required', 'min:10', 'max:10'],
             
+            /* 'lider_dosiemtria'           => [Rule::unique('personas', 'lider_dosimetria')->where(fn ($query) => $query->where('personasedes', 'sede_id'))], */
         ]);
         
         $persona = new Persona();

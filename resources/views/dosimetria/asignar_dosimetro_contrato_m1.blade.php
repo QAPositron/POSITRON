@@ -547,6 +547,42 @@
         $('#id_area_asigdosimArea').select2();
         $('#id_dosimetro_asigdosimArea').select2();
         $('#ocupacion_asigdosimArea').select2();
+        document.getElementById("primerDia_asigdosim").value = '{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}';
+
+        var fecha = document.getElementById("primerDia_asigdosim").value;
+        var fecha_inicio = new Date(fecha);
+        fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
+        alert(fecha_inicio);
+        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
+            var fecha_final_año = fecha_inicio.getFullYear();
+            var mm = fecha_inicio.getMonth() + 2;
+            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            if(fecha_final_mes == 13){
+                fecha_final_mes = '01' ;
+            } 
+            var dd = fecha_inicio.getDate();
+            /* console.log(dd); */
+            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
+            
+            console.log(fecha_final);
+            if(fecha_final_mes == 01){
+                var fechaFinaly = fecha_final.getFullYear() + 1;
+                console.log("AÑO"+fechaFinaly);
+            }else{
+                var fechaFinaly = fecha_final.getFullYear();
+            }
+            console.log(fechaFinaly);
+            var fechaFinalm = fecha_final.getMonth()+1;
+            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
+            console.log(fechaFinalmm);
+            var fechaFinald = fecha_final.getDate();
+            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
+            console.log(fechaFinaldd);
+            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
+            console.log(fechaFinalymd);
+            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
+        }
     });
     function fechaultimodia(){
         var fecha = document.getElementById("primerDia_asigdosim").value;

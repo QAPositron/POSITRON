@@ -15,8 +15,8 @@
                             <select class="form-select @error('perfil_personas') is-invalid @enderror" name="perfil_personas[]" id="perfil_personas" autofocus aria-label="Floating label select example"  multiple="true" >
                                 @foreach($perfiles as $perf)
                                     <option value ="{{$perf->id_perfil}}" {{ in_array($perf->id_perfil, (array) old('perfil_personas', [])) ? "selected" : "" }}>{{$perf->nombre_perfil}}</option>
-                                @endforeach 
-                                <option value="GERENCIA">GERENCIA</option>
+                                @endforeach  
+                                {{-- <option value="GERENCIA">GERENCIA</option>
                                 <option value="SUBGERENCIA">SUBGERENCIA</option>
                                 <option value="BIOMÉDICA">BIOMÉDICA</option>
                                 <option value="FÍSICA MÉDICA">FÍSICA MÉDICA</option>
@@ -25,7 +25,7 @@
                                 <option value="AUXILIAR DE ENFERMERIA">AUXILIAR DE ENFERMERIA</option>
                                 <option value="CALIDAD">CALIDAD</option>
                                 <option value="CONTABILIDAD">CONTABILIDAD</option>
-                                <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option>
+                                <option value="SEGURIDAD Y SALUD EN EL TRABAJO">SEGURIDAD Y SALUD EN EL TRABAJO</option> --}}
                             </select>
                             @error('perfil_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>

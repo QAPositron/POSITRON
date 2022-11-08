@@ -92,10 +92,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md mt-4">
-                                        <button onclick="addDepa()" type="button" class="btn btn-sm colorQA" id="agregarDepto1">AGREGAR DTO.</button>
+                                        <button onclick="addDepa()" type="button" class="btn btn-sm colorQA" id="agregarDepto1">AGREGAR ESP.</button>
                                     </div>
                                     <div class="col-md mt-4">
-                                        <button type="button" class="btn btn-sm bg-danger" id="agregar1" onclick="deleteDepa()">ELIMINAR DTO.</button>
+                                        <button type="button" class="btn btn-sm bg-danger" id="agregar1" onclick="deleteDepa()">ELIMINAR ESP.</button>
                                     </div>
                                     <div class="col-md"></div>
                                     <div class="col-md"></div>

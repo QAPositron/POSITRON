@@ -194,7 +194,7 @@
                             </select>
                             @error('id_sedes') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 <br>
                 <BR>

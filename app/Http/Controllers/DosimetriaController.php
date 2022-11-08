@@ -138,25 +138,25 @@ class DosimetriaController extends Controller
                     $contratoDosiSedeDepto->contratodosimetriasede_id = $contratoDosiSede->id_contratodosimetriasede;
                     $contratoDosiSedeDepto->departamentosede_id       = $request->input('departamentos_sede'.$i)[$x];
                     $contratoDosiSedeDepto->mes_actual                = 1;
-                    $contratoDosiSedeDepto->dosi_control              = $request->input('dosimetro_control_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_torax                = $request->input('dosimetro_torax_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_control              = $request->input('dosimetro_control_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_control_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_torax                = $request->input('dosimetro_torax_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_torax_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_area_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_caso_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_cristalino_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_dedo_sede'.$i)[$x];
                     $contratoDosiSedeDepto->save();
 
                     $mescontdosisedeDepto = new Mesescontdosisedeptos();
                     $mescontdosisedeDepto->contdosisededepto_id      = $contratoDosiSedeDepto->id_contdosisededepto;
                     $mescontdosisedeDepto->mes_asignacion            = $request->primer_mes_asignacion;
-                    $mescontdosisedeDepto->dosi_control              = $request->input('dosimetro_control_sede'.$i)[$x];
-                    $mescontdosisedeDepto->dosi_torax                = $request->input('dosimetro_torax_sede'.$i)[$x];
-                    $mescontdosisedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x];
-                    $mescontdosisedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x];
-                    $mescontdosisedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x];
-                    $mescontdosisedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x];
-                    $mescontdosisedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_control              = $request->input('dosimetro_control_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_control_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_torax                = $request->input('dosimetro_torax_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_torax_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_area_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_caso_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_cristalino_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_dedo_sede'.$i)[$x];
                     $mescontdosisedeDepto->save();
 
                     $numtotalEmpresasDosi = ContratosDosimetriaEmpresa::where('empresa_id', '=', $request->empresa_contrato)->get();
@@ -437,7 +437,7 @@ class DosimetriaController extends Controller
         $mes12Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
             ->where('mes_asignacion', 12)
             ->select("*")
-            ->count();
+            ->count(); 
         $mesTotal = [
             $mes1Assign, $mes2Assign,
             $mes3Assign, $mes4Assign,
@@ -490,6 +490,7 @@ class DosimetriaController extends Controller
             $mesAssignRev9, $mesAssignRev10,
             $mesAssignRev11, $mesAssignRev12
         ];
+        
         return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
         /* return $mescontdosisededepto; */
     }
@@ -1851,18 +1852,18 @@ class DosimetriaController extends Controller
         $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('personasedes', 'contratodosimetriasedes.sede_id', '=', 'personasedes.sede_id')
         ->join('personas', 'personasedes.persona_id', '=', 'personas.id_persona')
-        ->join('personasperfiles', 'personas.id_persona', '=', 'personasperfiles.persona_id')
-        ->join('perfiles', 'personasperfiles.perfil_id', '=', 'perfiles.id_perfil')
-        ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $id)
+        ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
+        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
         ->where('personas.lider_dosimetria', '=', 'TRUE')
-        ->select('personas.primer_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'perfiles.nombre_perfil')
+        ->where('roles.nombre_rol', '=', 'CONTACTO')
+        ->select('personas.primer_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'roles.nombre_rol')
         ->get();
 
         $trabajdosiasig= Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
 
-        /* $fechainiciodositrabaj = array(); */
+        $fechainiciodositrabaj = array();
         for($i=0; $i<count($trabajdosiasig); $i++){
             $fechainiciodositrabaj[]=Trabajadordosimetro::where('persona_id','=', $trabajdosiasig[$i]->persona_id)->first();
         }
@@ -1885,7 +1886,7 @@ class DosimetriaController extends Controller
         ->select('nota_cambiodosim')        
         ->get();
         
-
+        $trabajadoresaisgxmeses = array();
         for($i=0; $i<count($trabajdosiasig); $i++){
 
             $trabajadoresaisgxmeses[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)->get();
@@ -1915,10 +1916,10 @@ class DosimetriaController extends Controller
             } */
             /* return $newDate; */
         }
-        /* return $trabajadoresaisgxmeses; */
+        /* return $personaEncargada; */
         return $pdf->stream();
-        /* return !$contratoDosi->isEmpty() ? $pdf->stream() : redirect()->route('detallesedecont.create', $id)->with('fallo', 'ok'); */
-        /* return $contratoDosi; */
+       
+        
 
     }
     public function pdfEtiquetas($id, $mesnumber){
