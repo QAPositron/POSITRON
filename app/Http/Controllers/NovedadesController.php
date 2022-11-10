@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 class NovedadesController extends Controller
 {
     //
-    public function index(){
+    public function index(){ 
         $empresasDosi = ContratosDosimetriaEmpresa::all();
         $dosimetrosDisponibles = Dosimetro::where('estado_dosimetro', '=', 'STOCK')
         ->where('tipo_dosimetro', '=', 'GENERAL')
@@ -56,7 +56,7 @@ class NovedadesController extends Controller
         ->select('id_contdosisededepto', 'departamentosede_id')
         ->get();
         foreach($especialidadcontdosi as $especialidad){
-            $especialidadArray[$especialidad->id_contdosisededepto] = $especialidad->departamentosede->nombre_departamento;
+            $especialidadArray[$especialidad->id_contdosisededepto] = $especialidad->departamentosede->departamento->nombre_departamento;
         }
         return response()->json($especialidadArray);
         echo "CONSULTA REALIZADA".$especialidadArray;
