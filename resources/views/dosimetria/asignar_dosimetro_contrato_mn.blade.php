@@ -20,24 +20,24 @@
                                         <th colspan='7'>DOSíMETROS CONTRATADOS</th>
                                     </tr>
                                     <tr class="text-center">
-                                        <th>CONTROL</th>
                                         <th>TÓRAX</th>
+                                        <th>CRISTALINO</th>
+                                        <th>ANILLO</th>
+                                        <th>MUÑECA</th>
+                                        <th>CONTROL</th>
                                         <th>ÁREA</th>
                                         <th>CASO</th>
-                                        <th>CRISTALINO</th>
-                                        <th>MUÑECA</th>
-                                        <th>ANILLO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_control}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_torax}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_cristalino}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_control}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_area}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_caso}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_cristalino}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -433,6 +433,7 @@
             var sede_id = $(this).val();
             if($.trim(sede_id) != ''){
                 $.get('especialidadescontDosi', {sede_id: sede_id}, function(especialidades){
+                    console.log("ESTAS SON LAS ESPECIALIDADES");
                     console.log(especialidades);
                     $('#especialidades_empresadosi').empty();
                     $('#especialidades_empresadosi').append("<option value=''>--SELECCIONE UNA ESPECIALIDAD DEL CONTRATO--</option>");
@@ -650,6 +651,7 @@ var myFechaInicial;
                                         
                             });
                             $.get('dosiasginadosmesactual', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: value}, function(asignacionesmesactual){
+                                console.log("ESTAS SON LAS ASIGNACIONES DEL MES ACTUAL");
                                 console.log(asignacionesmesactual);
                                 $('#body_asignaciones').html("");
                                 
@@ -826,7 +828,7 @@ var myFechaInicial;
                                             dosi_cristalino += 1;
                                         }else if(asignacionesmesactual[i].ubicacion == 'MUÑECA'){
                                             dosi_muñeca += 1 ;
-                                        }else if(asignacionesmesactual[i].ubicacion == 'DEDO'){
+                                        }else if(asignacionesmesactual[i].ubicacion == 'ANILLO'){
                                             dosi_dedo += 1;
                                         }
                                         
@@ -938,7 +940,7 @@ var myFechaInicial;
                                     <option value="">----</option>
                                     <option value="TORAX">TORAX</option>
                                     <option value="CRISTALINO">CRISTALINO</option>
-                                    <option value="DEDO">ANILLO</option>
+                                    <option value="ANILLO">ANILLO</option>
                                     <option value="MUÑECA">MUÑECA</option>
                                     <option value="CONTROL">CONTROL</option>
                                     <option value="AREA">ÁREA</option>
@@ -1011,7 +1013,7 @@ var myFechaInicial;
                                     <option value="">----</option>
                                     <option value="TORAX">TORAX</option>
                                     <option value="CRISTALINO">CRISTALINO</option>
-                                    <option value="DEDO">ANILLO</option>
+                                    <option value="ANILLO">ANILLO</option>
                                     <option value="MUÑECA">MUÑECA</option>
                                     <option value="CONTROL">CONTROL</option>
                                     <option value="AREA">ÁREA</option>
@@ -1184,10 +1186,13 @@ var myFechaInicial;
 @endif
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#form_cambio_cantdosim').submit(function(e){
+        
+        
+       
+        $('#form_cambio_cantdosim').submit(function(e, mes){
             e.preventDefault();
             Swal.fire({
-                text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
+                text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL MES ACTUAL??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -1195,8 +1200,14 @@ var myFechaInicial;
                 confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                   
+                    var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
+                    var mes = document.getElementById("mesacambiar").value;
+                    var host = window.location.host;
+                    var path = "http://"+host+"/POSITRON/public/novedades/"+contdosisededepto_id+"/"+mes+"/reportePDFcambiodosim";
+                    
+                    window.open(path, '_blank');
                     this.submit();
+
                 }
             })
         })

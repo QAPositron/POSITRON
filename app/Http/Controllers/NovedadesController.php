@@ -13,6 +13,8 @@ use App\Models\Mesescontdosisedeptos;
 use App\Models\Persona;
 use App\Models\Trabajador;
 use App\Models\Trabajadordosimetro;
+
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class NovedadesController extends Controller
@@ -140,7 +142,7 @@ class NovedadesController extends Controller
     } 
    
     public function savecambiocantdosim(Request $request){
-
+        /* return $request; */
         $dosi_control = $request->dosi_control;
         $dosi_torax= $request->dosi_torax;
         $dosi_area = $request->dosi_area; /////////FALTA TODO LO RELACIONADO CON DOSIMETROS TIPO CASO Y AREA
@@ -209,7 +211,7 @@ class NovedadesController extends Controller
                 if($request->id_ubicacion_asig[$i] == 'MUÑECA'){
                     $dosi_muñeca += 1 ;
                 } 
-                if($request->id_ubicacion_asig[$i] == 'DEDO'){
+                if($request->id_ubicacion_asig[$i] == 'ANILLO'){
                     $dosi_dedo += 1 ;
                 }
                 if($request->id_ubicacion_asig[$i] == 'CRISTALINO'){
@@ -510,5 +512,21 @@ class NovedadesController extends Controller
         /* return response()->json($cleardositrabajasigmesant); */
         /* return $request; */
         /* return back(); */
+    }
+
+    public function reportePDFcambiodosim($deptodosi, $mesnumber){
+        
+        $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
+        $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
+        $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
+
+        $pdf =  PDF::loadView('novedades.reportePDF_novedad_cambiodosim', compact('deptodosi', 'mesnumber', 'dosicontrolasig', 'trabjasignados', 'contdosisededepto'));
+        $pdf->setPaper('A4', 'portrait');
+        
+        return $pdf->stream();
     }
 }

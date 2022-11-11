@@ -279,6 +279,8 @@ Route::get('/novedades/dosimetros/', [NovedadesController::class, 'dosimetrosdis
 
 /* Route::get('/novedades/cantidadDosimesant/', [NovedadesController::class, 'cantidadDosimetrosmesactual']);*/
 Route::post('novedades/novedadesmesact', [NovedadesController::class, 'savecambiocantdosim'])->name('cambiocantdosim.save');
+Route::get('novedades/{deptodosi}/{mesnumber}/reportePDFcambiodosim', [NovedadesController::class, 'reportePDFcambiodosim'])->name('reportePDFcambiodosim.pdf');
+
 Route::post('novedades/novedadesmesig', [NovedadesController::class, 'savemesiguientecambiocantdosim'])->name('cambiocantdosimesig.save');
 Route::get('novedades/limpiar/', [NovedadesController::class, 'clearAsignacionAnteriorMn']);
 
