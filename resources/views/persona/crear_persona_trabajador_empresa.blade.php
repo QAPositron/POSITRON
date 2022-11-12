@@ -320,7 +320,22 @@ crossorigin="anonymous">
             })
         })
     });
+    
     $(document).ready(function(){
+        /* $('#lider_dosimetria').on('change', function(){
+            var values="2";
+            var lider = document.getElementById("lider_dosimetria").value;
+            if(lider == 'TRUE'){
+                console.log("ESTE ES EL LIDER DE DOSIMETRIA" +lider)
+                var v = $("#rol_personas").val();
+                v.push('2');
+                console.log(v);
+                 
+                $.each(v.split(","), function(i,e){
+                    $(".rol_personas option[value='" + e + "']").prop("selected", true);
+                });
+            }
+        })   */     
         $('#id_empresas').on('change', function(){
             $('#sede_empresa').fadeOut();
             $('#spinner_sede').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');

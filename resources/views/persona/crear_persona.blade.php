@@ -205,19 +205,19 @@
                     <div class="col-md text-center">
                         <br>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_contcal" name="lider_contcal" @if(old('lider_contcal') == 'TRUE') checked="checked" @endif>
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_contcal" name="lider_contcal" disabled @if(old('lider_contcal') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
                                 CONTROLES DE CALIDAD
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava" @if(old('lider_ava') == 'TRUE') checked="checked" @endif>
+                            <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava" disabled @if(old('lider_ava') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
                                 AULA VIRTUAL
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria" @if(old('lider_dosimetria') == 'TRUE') checked="checked" @endif>
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria" disabled @if(old('lider_dosimetria') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
                                 DOSIMETRÍA
                             </label>
@@ -322,38 +322,21 @@ crossorigin="anonymous">
     });
     $(document).ready(function(){
         $('#lider_dosimetria').on('change', function(){
-            var values="2";
+            var values="2,";
             var lider = document.getElementById("lider_dosimetria").value;
             if(lider == 'TRUE'){
-
+                
                 $.each(values.split(","), function(i,e){
                     $("#rol_personas option[value='" + e + "']").prop("selected", true);
                 });
             }
-            /* var selected = [];
-            for (var option of document.getElementById("rol_personas").options)
-            {
-                var sele = option.selected;
-                if (option.selected) {
-                    
-                    selected.push(option.value);
-                }
-            }
-            console.log(option.selected);
-            var roles = document.getElementById("rol_personas");
-            const indice = roles.selectedIndex;
-
-            const opcionSeleccionada = roles.options[indice];
-            for(var i=0; i<roles.options[indice].length; i++){
-
-                console.log("Texto:"+opcionSeleccionada.text[i]+ "Valor:" +opcionSeleccionada.value[i]);
-            } */
-            
         })        
         $('#id_empresas').on('change', function(){
+
             $('#sede_empresa').fadeOut();
             $('#spinner_sede').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');
             var empresa_id = $(this).val();
+            console.log("estado de la empresa" + empresa_id)
             var padre = document.getElementById("spinner_sede");
             var hijo = document.getElementById("spinner");
             if($.trim(empresa_id) != ''){
@@ -367,8 +350,15 @@ crossorigin="anonymous">
                         $('#id_sedes').append("<option value='"+ index + "'>" + value + "</option>");
                     })
                 });
+            }else{
+                var remove = padre.removeChild(hijo);
+                $('#sede_empresa').fadeIn();
+                
             }
-
+            
+            $("#lider_contcal").removeAttr('disabled');
+            $("#lider_ava").removeAttr('disabled');
+            $("#lider_dosimetria").removeAttr('disabled');
         });
     });
    
@@ -430,7 +420,7 @@ crossorigin="anonymous">
                         })
                     });
                 }
-
+                
             });
             $('#remove'+i).click(function(){
                 $('#row'+(i-1)).remove();

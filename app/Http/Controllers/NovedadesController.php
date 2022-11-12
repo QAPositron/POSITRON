@@ -126,11 +126,11 @@ class NovedadesController extends Controller
         ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
         ->join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
         ->join('sedes', 'personasedes.sede_id', 'sedes.id_sede')
-        ->where('sedes.empresas_id', '=', $request->id_empresa)
+        ->where('sedes.nombre_sede', '=', $request->id_sede)
         ->where(function($query) {
             $query->orWhere('roles.nombre_rol', 'TOE')
                   ->orWhere('roles.nombre_rol', 'OPR');
-        })->orderBy('sedes.id_sede')->get();
+        })->get();
         
        /*  Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
         ->join('sedes', 'personasedes.sede_id', '=', 'sedes.id_sede')

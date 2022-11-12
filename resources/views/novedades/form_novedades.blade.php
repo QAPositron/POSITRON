@@ -130,7 +130,7 @@
 
                 </div>
                 <div class="col-md-1">
-                    <label for="" class="text-center align-middle">MES A CAMBIAR</label>
+                    <label for="" class="text-center align-middle">MES A MODIFICAR</label>
                 </div>
                 <div class="col d-grid gap-2">
                     <select class="form-select" name="mesacambiar" id="mesacambiar">
@@ -872,9 +872,11 @@ var myFechaInicial;
         var selectDosimetrosEzclip = document.createElement("select");
         var selectHolders = document.createElement("select");
         var id_empresa = document.getElementById("empresaDosimetria").value;
-
-       
-        $.get('trabajadoresempresa', {id_empresa: id_empresa}, function(trabajadores){
+        var sede = document.getElementById("sedes_empresadosi");
+        var id_sede = sede.options[sede.selectedIndex].text;
+        
+       console.log("SEDE:" +id_sede);
+        $.get('trabajadoresempresa', {id_sede: id_sede}, function(trabajadores){
             console.log(trabajadores);
             const vacio = JSON.stringify(trabajadores);
             console.log("ESTOS SON LOS TRABAJADORES" + vacio);
@@ -1002,8 +1004,8 @@ var myFechaInicial;
 
                         document.getElementById("tabla_adicional")
                         .insertRow(-1).innerHTML += 
-                            `<td style="width: 27.30%">
-                                <select class="form-select" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                            `<td style="width: 32.30%">
+                                <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
                                     ${selectTrabajadores.innerHTML}
                                 </select>
@@ -1055,7 +1057,7 @@ var myFechaInicial;
                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                 </select>
                             </td>   
-                            <td style="width: 24.80%">
+                            <td style="width: 15.80%">
                                 <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1253,6 +1255,15 @@ var myFechaInicial;
                 }
             })
         })
+    })
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#id_dosimetro_asig').select2();
+        
+        $('#empresaDosimetria').select2();
+
+        $('#id_trabajador_asig').select2();
     })
 </script>
 

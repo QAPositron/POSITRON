@@ -861,10 +861,10 @@ crossorigin="anonymous">
             })
         })
         
-        $('.form_eliminar_trabajador').submit(function(e){
+        $('.form_eliminar_persona').submit(function(e){
             e.preventDefault();
             Swal.fire({
-                text: "SEGURO QUE DESEA ELIMINAR ESTE TRABAJADOR??",
+                text: "SEGURO QUE DESEA ELIMINAR ESTA PERSONA??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
