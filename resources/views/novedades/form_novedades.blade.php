@@ -443,7 +443,7 @@
                 });
             }
         })
-var myFechaInicial;
+        var myFechaInicial;
         $('#contratos_empresadosi').on('change', function(){
             var contrato_id = $(this).val();
             if($.trim(contrato_id) != ''){
@@ -653,194 +653,232 @@ var myFechaInicial;
                             $.get('dosiasginadosmesactual', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: value}, function(asignacionesmesactual){
                                 console.log("ESTAS SON LAS ASIGNACIONES DEL MES ACTUAL");
                                 console.log(asignacionesmesactual);
-                                $('#body_asignaciones').html("");
                                 
-                                if(mes > value){
-                                    /* alert("ASIGNACIONES PARA EL MES SIGUIENTE AL ACTUAL"); */
-                                    for(var i=0; i<asignacionesmesactual.length; i++){
-                                        var id_dosimetro = asignacionesmesactual[i].id_dosimetro;
-                                        if(asignacionesmesactual[i].dosimetro_uso != 'FALSE'){
-                                            var dis = 'disabled';
-                                            var codigo_dosimeter = asignacionesmesactual[i].codigo_dosimeter;
-                                            var codigo_holder = asignacionesmesactual[i].codigo_holder;
-                                            var ocupacion = asignacionesmesactual[i].ocupacion;
-                                        }else{
-                                            var codigo_dosimeter = '---';
-                                            var codigo_holder = '---';
-                                            var ocupacion = '---';
-                                        }
-                                        var mestrabj_asig = document.getElementById("mesacambiar").value;
-                                        var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
-                                        var id_contratodosimetriasede =  document.getElementById("sedes_empresadosi").value; 
-                                        document.getElementById("mes_asig_siguiente").value = mestrabj_asig;
-                                        document.getElementById("contdosisededepto").value = id_contdosisededepto;
-                                        document.getElementById("contratodosimetriasede").value = id_contratodosimetriasede;
-                                        
-                                        if(asignacionesmesactual[i].codigo_holder != null){
+                                $('#body_asignaciones').html("");
+                                var sede = document.getElementById("sedes_empresadosi");
+                                var id_sede = sede.options[sede.selectedIndex].text;
+                                console.log("SEDE:" +id_sede);
 
-                                            var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
-                                                <td class='align-middle'>
-                                                    <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
-                                                    <select class="form-select"  name="id_trabj_asigdosim[]" id="id_trabj_asigdosim" disabled>
-                                                        <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
-                                                        <option value="`+asignacionesmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
-                                                        ${selectDosimetrosEzclip.innerHTML}
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
-                                                        <option value="`+asignacionesmesactual[i].id_holder+`">`+codigo_holder+`</option>
-                                                        ${selectHolders.innerHTML}
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select cambiar"  name="id_ocupacion_asigdosim[]" id="id_ocupacion_asigdosim" ${dis} >
-                                                        <option value="`+asignacionesmesactual[i].ocupacion+`">`+ocupacion+`</option>
-                                                        <option value="T">T = TELETERAPIA</option>
-                                                        <option value="BQ">BQ = BRAQUITERAPIA</option>
-                                                        <option value="MN">MN = MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GI = GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MF = MEDIDORES FIJOS</option>
-                                                        <option value="IV">IV = INVESTIGACIÓN</option>
-                                                        <option value="DN">DN = DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MM = MEDIDORES MÓVILES</option>
-                                                        <option value="E">E = DOCENCIA</option>
-                                                        <option value="PR">PR = PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TR = TRAZADORES</option>
-                                                        <option value="HD">HD = HEMODINAMIA</option>
-                                                        <option value="OD">OD = RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RX = RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FL = FLUOROSCOPIA</option>
-                                                        <option value="AM">AM = APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle'>
-                                                    <div class='row px-1'>
-                                                        <div class='col'>
-                                                            <button id="" class="btn btn-danger"  type="button"  onclick="eliminarEzclip(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>`;
-                                            $("#body_asignaciones2").append(tr);
-                                        }else{
-                                            var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
-                                                <td class='align-middle'>
-                                                    <input type="text" name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
-                                                    <select class="form-select"  name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null" disabled>
-                                                        <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle'><input type="text" name="ubicacion_asigdosim_null[]" id="ubicacion_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select cambiar"  name="id_dosimetro_asigdosim_null[]" id="id_dosimetro_asigdosim_null" ${dis}>
-                                                        <option value="`+asignacionesmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
-                                                        ${selectDosimetros.innerHTML}
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle'> NA </td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select cambiar"  name="id_ocupacion_asigdosim_null[]" id="id_ocupacion_asigdosim_null" ${dis}>
-                                                        <option value="`+asignacionesmesactual[i].ocupacion+`">`+ocupacion+`</option>
-                                                        <option value="T">T = TELETERAPIA</option>
-                                                        <option value="BQ">BQ = BRAQUITERAPIA</option>
-                                                        <option value="MN">MN = MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GI = GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MF = MEDIDORES FIJOS</option>
-                                                        <option value="IV">IV = INVESTIGACIÓN</option>
-                                                        <option value="DN">DN = DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MM = MEDIDORES MÓVILES</option>
-                                                        <option value="E">E = DOCENCIA</option>
-                                                        <option value="PR">PR = PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TR = TRAZADORES</option>
-                                                        <option value="HD">HD = HEMODINAMIA</option>
-                                                        <option value="OD">OD = RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RX = RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FL = FLUOROSCOPIA</option>
-                                                        <option value="AM">AM = APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle'>
-                                                    <div class='row px-1'>
+                                var selectTrabajadores = document.createElement("select");
+                                $.get('trabajadoresempresa', {id_sede: id_sede}, function(trabajadores){
+                                    console.log(trabajadores);
+                                    const vacio = JSON.stringify(trabajadores);
+                                    console.log("ESTOS SON LOS TRABAJADORES" + vacio);
+                                    for(var i = 0; i < trabajadores.length; i++){
+                                        option = document.createElement("option");
+                                        option.value = trabajadores[i].id_persona;
+                                        option.text = trabajadores[i].primer_nombre_persona+` `+trabajadores[i].primer_apellido_persona+` `+trabajadores[i].segundo_apellido_persona;
+                                        selectTrabajadores.appendChild(option);
+                                    }
+                                    console.log(selectTrabajadores.innerHTML);  
                                                        
-                                                        <div class='col'>    
-                                                            <button id="" class="btn btn-danger"  type="button" onclick="eliminarTorax(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                                                </svg>
-                                                            </button>
+                                    if(mes > value){
+                                        /* alert("ASIGNACIONES PARA EL MES SIGUIENTE AL ACTUAL"); */
+                                        for(var i=0; i<asignacionesmesactual.length; i++){
+                                            var id_dosimetro = asignacionesmesactual[i].id_dosimetro;
+                                            if(asignacionesmesactual[i].dosimetro_uso != 'FALSE'){
+                                                var dis = 'disabled';
+                                                var codigo_dosimeter = asignacionesmesactual[i].codigo_dosimeter;
+                                                var codigo_holder = asignacionesmesactual[i].codigo_holder;
+                                                var ocupacion = asignacionesmesactual[i].ocupacion;
+                                            }else{
+                                                var codigo_dosimeter = '---';
+                                                var codigo_holder = '---';
+                                                var ocupacion = '---';
+                                            }
+                                            var mestrabj_asig = document.getElementById("mesacambiar").value;
+                                            var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
+                                            var id_contratodosimetriasede =  document.getElementById("sedes_empresadosi").value; 
+                                            document.getElementById("mes_asig_siguiente").value = mestrabj_asig;
+                                            document.getElementById("contdosisededepto").value = id_contdosisededepto;
+                                            document.getElementById("contratodosimetriasede").value = id_contratodosimetriasede;
+                                            
+                                            if(asignacionesmesactual[i].codigo_holder != null){
+
+                                                var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
+                                                    <td class='align-middle'>
+                                                        <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim_mesdesp" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
+                                                        <select class="form-select"  name="id_trabj_asigdosim[]" id="id_trabj_asigdosim`+asignacionesmesactual[i].id_persona+`" disabled>
+                                                            <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
+                                                            ${selectTrabajadores.innerHTML}
+                                                        </select>
+                                                    </td>
+                                                    <td class='align-middle'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
+                                                    <td class='align-middle'>
+                                                        <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
+                                                            <option value="`+asignacionesmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
+                                                            ${selectDosimetrosEzclip.innerHTML}
+                                                        </select>
+                                                    </td>
+                                                    <td class='align-middle'>
+                                                        <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
+                                                            <option value="`+asignacionesmesactual[i].id_holder+`">`+codigo_holder+`</option>
+                                                            ${selectHolders.innerHTML}
+                                                        </select>
+                                                    </td>
+                                                    <td class='align-middle'>
+                                                        <select class="form-select cambiar"  name="id_ocupacion_asigdosim[]" id="id_ocupacion_asigdosim" ${dis} >
+                                                            <option value="`+asignacionesmesactual[i].ocupacion+`">`+ocupacion+`</option>
+                                                            <option value="T">T = TELETERAPIA</option>
+                                                            <option value="BQ">BQ = BRAQUITERAPIA</option>
+                                                            <option value="MN">MN = MEDICINA NUCLEAR</option>
+                                                            <option value="GI">GI = GAMMAGRAFÍA INDUSTRIAL</option>
+                                                            <option value="MF">MF = MEDIDORES FIJOS</option>
+                                                            <option value="IV">IV = INVESTIGACIÓN</option>
+                                                            <option value="DN">DN = DENSÍMETRO NUCLEAR</option>
+                                                            <option value="MM">MM = MEDIDORES MÓVILES</option>
+                                                            <option value="E">E = DOCENCIA</option>
+                                                            <option value="PR">PR = PERFILAJE Y REGISTRO</option>
+                                                            <option value="TR">TR = TRAZADORES</option>
+                                                            <option value="HD">HD = HEMODINAMIA</option>
+                                                            <option value="OD">OD = RAYOS X ODONTOLÓGICO</option>
+                                                            <option value="RX">RX = RADIODIAGNÓSTICO</option>
+                                                            <option value="FL">FL = FLUOROSCOPIA</option>
+                                                            <option value="AM">AM = APLICACIONES MÉDICAS</option>
+                                                            <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class='align-middle'>
+                                                        <div class='row px-1'>
+                                                            <div class='col'>
+                                                                <button id="" class="btn btn-danger"  type="button"  onclick="eliminarEzclip(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                            <div class='col'>    
+                                                                <button id="changeTrabajador" class="btn colorQA"  type="button" onclick="changueTrabajador(`+asignacionesmesactual[i].id_persona+`, '`+asignacionesmesactual[i].primer_nombre_persona+`', '`+asignacionesmesactual[i].primer_apellido_persona+`', '`+asignacionesmesactual[i].segundo_apellido_persona+`', '`+asignacionesmesactual[i].ubicacion+`');">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
+                                                    </td>
                                                 </tr>`;
                                                 $("#body_asignaciones2").append(tr);
+                                            }else{
+                                                var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
+                                                    <td class='align-middle'>
+                                                        <input type="text" name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null_mesdesp" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
+                                                        <select class="form-select"  name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null`+asignacionesmesactual[i].id_persona+`" disabled>
+                                                            <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
+                                                            ${selectTrabajadores.innerHTML}
+                                                        </select>
+                                                    </td>
+                                                    <td class='align-middle'><input type="text" name="ubicacion_asigdosim_null[]" id="ubicacion_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
+                                                    <td class='align-middle'>
+                                                        <select class="form-select cambiar"  name="id_dosimetro_asigdosim_null[]" id="id_dosimetro_asigdosim_null" ${dis}>
+                                                            <option value="`+asignacionesmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
+                                                            ${selectDosimetros.innerHTML}
+                                                        </select>
+                                                    </td>
+                                                    <td class='align-middle'> NA </td>
+                                                    <td class='align-middle'>
+                                                        <select class="form-select cambiar"  name="id_ocupacion_asigdosim_null[]" id="id_ocupacion_asigdosim_null" ${dis}>
+                                                            <option value="`+asignacionesmesactual[i].ocupacion+`">`+ocupacion+`</option>
+                                                            <option value="T">T = TELETERAPIA</option>
+                                                            <option value="BQ">BQ = BRAQUITERAPIA</option>
+                                                            <option value="MN">MN = MEDICINA NUCLEAR</option>
+                                                            <option value="GI">GI = GAMMAGRAFÍA INDUSTRIAL</option>
+                                                            <option value="MF">MF = MEDIDORES FIJOS</option>
+                                                            <option value="IV">IV = INVESTIGACIÓN</option>
+                                                            <option value="DN">DN = DENSÍMETRO NUCLEAR</option>
+                                                            <option value="MM">MM = MEDIDORES MÓVILES</option>
+                                                            <option value="E">E = DOCENCIA</option>
+                                                            <option value="PR">PR = PERFILAJE Y REGISTRO</option>
+                                                            <option value="TR">TR = TRAZADORES</option>
+                                                            <option value="HD">HD = HEMODINAMIA</option>
+                                                            <option value="OD">OD = RAYOS X ODONTOLÓGICO</option>
+                                                            <option value="RX">RX = RADIODIAGNÓSTICO</option>
+                                                            <option value="FL">FL = FLUOROSCOPIA</option>
+                                                            <option value="AM">AM = APLICACIONES MÉDICAS</option>
+                                                            <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class='align-middle'>
+                                                        <div class='row px-1'>
+                                                        
+                                                            <div class='col'>    
+                                                                <button id="" class="btn btn-danger"  type="button" onclick="eliminarTorax(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                            <div class='col'>    
+                                                                <button id="changeTrabajador" class="btn colorQA"  type="button" onclick="changueTrabajador(`+asignacionesmesactual[i].id_persona+`, '`+asignacionesmesactual[i].primer_nombre_persona+`', '`+asignacionesmesactual[i].primer_apellido_persona+`', '`+asignacionesmesactual[i].segundo_apellido_persona+`', '`+asignacionesmesactual[i].ubicacion+`');">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+                                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                        
+                                                    </td>
+                                                </tr>`;
+                                                $("#body_asignaciones2").append(tr);
+                                                
+                                            }
+                                        }
+                                    }else{
+                                        $('#body_asignaciones2').html("");
+                                        /* alert("ASIGNACIONES PARA EL MES ACTUAL"); */
+                                        for(var i=0; i<asignacionesmesactual.length; i++){
+                                            var fechaEnviado = asignacionesmesactual[i].fecha_dosim_enviado;
+                                            document.getElementById("fecha_dosim_enviado").value = fechaEnviado;
+                                            var primerDiaUso = asignacionesmesactual[i].primer_dia_uso;
+                                            document.getElementById("primerDia_asigdosim").value = primerDiaUso;
+                                            var ultimoDiaUso = asignacionesmesactual[i].ultimo_dia_uso;
+                                            document.getElementById("ultimoDia_asigdosim").value = ultimoDiaUso;
+
+                                            if(asignacionesmesactual[i].codigo_holder != null){
+
+                                                var tr = `<tr>
+                                                    <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
+                                                    <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
+                                                    <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
+                                                    <td class='align-middle'>`+asignacionesmesactual[i].codigo_holder+`</td>
+                                                    <td class='align-middle'>`+asignacionesmesactual[i].ocupacion+`</td>
+                                                    
+                                                </tr>`;
+                                                $("#body_asignaciones").append(tr);
+                                            }else{
+                                                var tr = `<tr>
+                                                    <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
+                                                    <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
+                                                    <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
+                                                    <td class='align-middle'> NA </td>
+                                                    <td class='align-middle'>`+asignacionesmesactual[i].ocupacion+`</td>
+                                                    
+                                                </tr>`;
+                                                $("#body_asignaciones").append(tr);
+                                                
+                                            }
+                                            if(asignacionesmesactual[i].ubicacion == 'TORAX'){
+                                                dosi_torax += 1;
+                                            }else if(asignacionesmesactual[i].ubicacion == 'CRISTALINO'){
+                                                dosi_cristalino += 1;
+                                            }else if(asignacionesmesactual[i].ubicacion == 'MUÑECA'){
+                                                dosi_muñeca += 1 ;
+                                            }else if(asignacionesmesactual[i].ubicacion == 'ANILLO'){
+                                                dosi_dedo += 1;
+                                            }
                                             
+                                            /* document.getElementById("dosi_control").value = dosi_control; */
+                                            
+                                            document.getElementById("dosi_torax").value = dosi_torax;
+                                            document.getElementById("dosi_cristalino").value = dosi_cristalino;
+                                            document.getElementById("dosi_muñeca").value = dosi_muñeca;
+                                            document.getElementById("dosi_dedo").value = dosi_dedo;
+
                                         }
                                     }
-                                }else{
-                                    $('#body_asignaciones2').html("");
-                                    /* alert("ASIGNACIONES PARA EL MES ACTUAL"); */
-                                    for(var i=0; i<asignacionesmesactual.length; i++){
-                                        var fechaEnviado = asignacionesmesactual[i].fecha_dosim_enviado;
-                                        document.getElementById("fecha_dosim_enviado").value = fechaEnviado;
-                                        var primerDiaUso = asignacionesmesactual[i].primer_dia_uso;
-                                        document.getElementById("primerDia_asigdosim").value = primerDiaUso;
-                                        var ultimoDiaUso = asignacionesmesactual[i].ultimo_dia_uso;
-                                        document.getElementById("ultimoDia_asigdosim").value = ultimoDiaUso;
-
-                                        if(asignacionesmesactual[i].codigo_holder != null){
-
-                                            var tr = `<tr>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].codigo_holder+`</td>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].ocupacion+`</td>
-                                                
-                                            </tr>`;
-                                            $("#body_asignaciones").append(tr);
-                                        }else{
-                                            var tr = `<tr>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
-                                                <td class='align-middle'> NA </td>
-                                                <td class='align-middle'>`+asignacionesmesactual[i].ocupacion+`</td>
-                                                
-                                            </tr>`;
-                                            $("#body_asignaciones").append(tr);
-                                            
-                                        }
-                                        if(asignacionesmesactual[i].ubicacion == 'TORAX'){
-                                            dosi_torax += 1;
-                                        }else if(asignacionesmesactual[i].ubicacion == 'CRISTALINO'){
-                                            dosi_cristalino += 1;
-                                        }else if(asignacionesmesactual[i].ubicacion == 'MUÑECA'){
-                                            dosi_muñeca += 1 ;
-                                        }else if(asignacionesmesactual[i].ubicacion == 'ANILLO'){
-                                            dosi_dedo += 1;
-                                        }
-                                        
-                                        /* document.getElementById("dosi_control").value = dosi_control; */
-                                        
-                                        document.getElementById("dosi_torax").value = dosi_torax;
-                                        document.getElementById("dosi_cristalino").value = dosi_cristalino;
-                                        document.getElementById("dosi_muñeca").value = dosi_muñeca;
-                                        document.getElementById("dosi_dedo").value = dosi_dedo;
-
-                                    }
-                                }
+                                });
                             });
                             
                         })
@@ -990,6 +1028,7 @@ var myFechaInicial;
                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                     </svg>
                                 </button>
+                                
                             </td>
                         `;
                     }else{
@@ -1104,7 +1143,6 @@ var myFechaInicial;
         
     }
     function fechaUltimoDia(){
-
         
         var fecha = new Date(document.getElementById("primerDia_asigdosim2").value);
         fecha.setDate(fecha.getDate()+30);
@@ -1114,7 +1152,6 @@ var myFechaInicial;
         var mm = (mes < 10 ? '0' : '')+mes;
         var año = fecha.getFullYear();
         document.getElementById("ultimoDia_asigdosim2").value = año+'-'+mm+'-'+dia;
-        
 
     
     }
@@ -1175,6 +1212,26 @@ var myFechaInicial;
             }
         })
     }
+    function changueTrabajador(id, primerNom, primerApe, segundoApe, ubicacion){
+        alert("SE SELECCIONO EL BOTON");
+        console.log("ESTE ES EL PRIMER NOMBRE"+primerNom);
+        Swal.fire({
+            title: 'DESEA CAMBIAR EL TRABAJADOR '+primerNom+' '+primerApe+' '+segundoApe+' DE UN DOSÍMETRO TIPO "'+ubicacion+'"?',
+            text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1A9980',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'SI, SEGURO!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                $("#id_trabj_asigdosim"+id).attr("disabled", false);
+                
+                    
+            }
+        })
+    }
 </script>
 @if(session('guardar')== 'ok')
     <script>
@@ -1189,8 +1246,6 @@ var myFechaInicial;
 <script type="text/javascript">
     $(document).ready(function(){
         
-        
-       
         $('#form_cambio_cantdosim').submit(function(e, mes){
             e.preventDefault();
             Swal.fire({
@@ -1228,7 +1283,12 @@ var myFechaInicial;
                 confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                   
+                    var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
+                    var mes = document.getElementById("mesacambiar").value;
+                    var host = window.location.host;
+                    var path = "http://"+host+"/POSITRON/public/novedades/"+contdosisededepto_id+"/"+mes+"/reportePDFcambiodosim";
+                    
+                    window.open(path, '_blank');
                     this.submit();
                 }
             })
@@ -1257,7 +1317,7 @@ var myFechaInicial;
         })
     })
 </script>
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $(document).ready(function(){
         $('#id_dosimetro_asig').select2();
         
@@ -1265,6 +1325,6 @@ var myFechaInicial;
 
         $('#id_trabajador_asig').select2();
     })
-</script>
+</script> --}}
 
 @endsection()

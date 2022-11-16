@@ -251,6 +251,7 @@ class NovedadesController extends Controller
         /* return $request; */
     }
     public function savemesiguientecambiocantdosim(Request $request){
+        return $request;
         $dosi_control = 0;
         $dosi_torax= 0;
         $dosi_area = 0; /////////FALTA TODO LO RELACIONADO CON DOSIMETROS TIPO CASO Y AREA
@@ -327,7 +328,7 @@ class NovedadesController extends Controller
                     if($request->id_ubicacion_asig[$i] == 'MUÑECA'){
                         $dosi_muñeca += 1 ;
                     } 
-                    if($request->id_ubicacion_asig[$i] == 'DEDO'){
+                    if($request->id_ubicacion_asig[$i] == 'ANILLO'){
                         $dosi_dedo += 1 ;
                     }
                     if($request->id_ubicacion_asig[$i] == 'CRISTALINO'){
@@ -448,7 +449,7 @@ class NovedadesController extends Controller
                 if($request->ubicacion_asigdosim[$i] == 'MUÑECA'){
                     $dosi_muñeca += 1 ;
                 } 
-                if($request->ubicacion_asigdosim[$i] == 'DEDO'){
+                if($request->ubicacion_asigdosim[$i] == 'ANILLO'){
                     $dosi_dedo += 1 ;
                 }
                 if($request->ubicacion_asigdosim[$i] == 'CRISTALINO'){
