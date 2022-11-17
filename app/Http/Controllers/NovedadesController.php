@@ -16,6 +16,7 @@ use App\Models\Trabajadordosimetro;
 
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class NovedadesController extends Controller
 {
@@ -142,7 +143,19 @@ class NovedadesController extends Controller
     } 
    
     public function savecambiocantdosim(Request $request){
-        /* return $request; */
+
+        return $request;
+        $validator = Validator::make($request->all(), [
+            'id_trabajador_asig.*' => ['required', 'min:6']
+        ]);
+        $request->validate([
+            
+            'id_trabajador_asig'      => ['required'],   
+            'id_ubicacion_asig'       => ['required'],
+            'id_dosimetro_asig'       => ['required'],
+            'id_holder_asig'          => ['required'],
+            
+        ]);
         $dosi_control = $request->dosi_control;
         $dosi_torax= $request->dosi_torax;
         $dosi_area = $request->dosi_area; /////////FALTA TODO LO RELACIONADO CON DOSIMETROS TIPO CASO Y AREA
@@ -251,7 +264,7 @@ class NovedadesController extends Controller
         /* return $request; */
     }
     public function savemesiguientecambiocantdosim(Request $request){
-        return $request;
+        /* return $request; */
         $dosi_control = 0;
         $dosi_torax= 0;
         $dosi_area = 0; /////////FALTA TODO LO RELACIONADO CON DOSIMETROS TIPO CASO Y AREA

@@ -313,7 +313,7 @@
                                     <div class="col"></div>
                                     <div class="col">
                                         <div class="d-grid gap-2 col-6 mx-auto">
-                                            <button id="assignBtn" class="btn colorQA" type="submit">
+                                            <button id="assignBtn" class="btn colorQA" type="submit" onclick="eliminartrabj(e);">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
                                                     <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
                                                 </svg> <br> GUARDAR ASIGNACIÓN
@@ -697,7 +697,7 @@
 
                                                 var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
                                                     <td class='align-middle'>
-                                                        <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim_mesdesp" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
+                                                        <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim_mesdesp`+asignacionesmesactual[i].id_persona+`" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
                                                         <select class="form-select"  name="id_trabj_asigdosim[]" id="id_trabj_asigdosim`+asignacionesmesactual[i].id_persona+`" disabled>
                                                             <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
                                                             ${selectTrabajadores.innerHTML}
@@ -970,13 +970,14 @@
                         document.getElementById("tr_newAsignacion2")
                         .insertRow(-1).innerHTML += 
                             `<td style="width: 27.30%">
-                                <select class="form-select" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                <select class="form-select @error('id_trabajador_asig') is-invalid @enderror" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
                                     ${selectTrabajadores.innerHTML}
                                 </select>
+                                @error('id_trabajador_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </td>
                             <td style="width: 14.50%">
-                                <select class="form-select"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
+                                <select class="form-select @error('id_ubicacion_asig') is-invalid @enderror"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
                                     <option value="TORAX">TORAX</option>
                                     <option value="CRISTALINO">CRISTALINO</option>
@@ -986,22 +987,25 @@
                                     <option value="AREA">ÁREA</option>
                                     <option value="CASO">CASO</option>
                                 </select>
+                                @error('id_ubicacion_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </td> 
                             <td style="width: 15.0%">
-                                <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <select class="form-select @error('id_dosimetro_asig') is-invalid @enderror"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
                                     ${selectDosimetrosEzclip.innerHTML}
                                     ${selectDosimetros.innerHTML}
                                 </select>
+                                @error('id_dosimetro_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </td>
                             <td style="width: 14.20%">
-                                <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
-                                    <option value="">----</option>
+                                <select class="form-select @error('id_holder_asig') is-invalid @enderror"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                    <option value="N.A">N.A</option>
                                     ${selectHolders.innerHTML}
                                 </select>
+                                @error('id_holder_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </td>
                             <td style="width: 14.20%">
-                                <select class="form-select" name="ocupacion_asig[]" id="ocupacion_asig" style="text-transform:uppercase">
+                                <select class="form-select @error('ocupacion_asig') is-invalid @enderror" name="ocupacion_asig[]" id="ocupacion_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
                                     <option value="T"> TELETERAPIA</option>
                                     <option value="BQ">BRAQUITERAPIA</option>
@@ -1021,6 +1025,7 @@
                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                 </select>
+                                @error('ocupacion_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </td>   
                             <td style="width: 24.80%">
                                 <button id="" class="btn btn-danger"  type="button" onclick="eliminarFilaform2(this)">
@@ -1227,8 +1232,8 @@
             if (result.isConfirmed) {
                 
                 $("#id_trabj_asigdosim"+id).attr("disabled", false);
-                
-                    
+                document.getElementById("id_trabj_asigdosim_mesdesp"+id).remove();
+
             }
         })
     }
