@@ -144,18 +144,19 @@ class NovedadesController extends Controller
    
     public function savecambiocantdosim(Request $request){
 
+        /* return $request; */
+        /* Validator::make($request->all(), [
+            'id_trabajador_asig.*'   => ['required', 'min:1'],
+            'id_ubicacion_asig.*'    => ['required'],
+            'id_dosimetro_asig.*'    => ['required', 'distinct'],
+            'id_holder_asig.*'       => ['required', 'distinct'],
+        ])->validate(); */
+        
+        /* $request->validate([
+            'id_trabajador_asig.*' => ['required']
+        ]); */
         return $request;
-        $validator = Validator::make($request->all(), [
-            'id_trabajador_asig.*' => ['required', 'min:6']
-        ]);
-        $request->validate([
-            
-            'id_trabajador_asig'      => ['required'],   
-            'id_ubicacion_asig'       => ['required'],
-            'id_dosimetro_asig'       => ['required'],
-            'id_holder_asig'          => ['required'],
-            
-        ]);
+
         $dosi_control = $request->dosi_control;
         $dosi_torax= $request->dosi_torax;
         $dosi_area = $request->dosi_area; /////////FALTA TODO LO RELACIONADO CON DOSIMETROS TIPO CASO Y AREA

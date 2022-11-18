@@ -146,6 +146,13 @@
             </div>
             <br>
             <br>
+            {{-- @if($errors->any())
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            @endif --}}
             <div class="row px-2">
                 <div class="col-md">
                     
@@ -697,7 +704,7 @@
 
                                                 var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
                                                     <td class='align-middle'>
-                                                        <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim_mesdesp`+asignacionesmesactual[i].id_persona+`" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
+                                                        <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim_mesdesp`+asignacionesmesactual[i].id_persona+`" class="form-control id_trabj_asigdosim" value="`+asignacionesmesactual[i].id_persona+`" hidden>
                                                         <select class="form-select"  name="id_trabj_asigdosim[]" id="id_trabj_asigdosim`+asignacionesmesactual[i].id_persona+`" disabled>
                                                             <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
                                                             ${selectTrabajadores.innerHTML}
@@ -970,14 +977,14 @@
                         document.getElementById("tr_newAsignacion2")
                         .insertRow(-1).innerHTML += 
                             `<td style="width: 27.30%">
-                                <select class="form-select @error('id_trabajador_asig') is-invalid @enderror" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                <select class="form-select " name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
                                     ${selectTrabajadores.innerHTML}
                                 </select>
-                                @error('id_trabajador_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                               
                             </td>
                             <td style="width: 14.50%">
-                                <select class="form-select @error('id_ubicacion_asig') is-invalid @enderror"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
+                                <select class="form-select"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
                                     <option value="TORAX">TORAX</option>
                                     <option value="CRISTALINO">CRISTALINO</option>
@@ -987,10 +994,9 @@
                                     <option value="AREA">ÁREA</option>
                                     <option value="CASO">CASO</option>
                                 </select>
-                                @error('id_ubicacion_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </td> 
                             <td style="width: 15.0%">
-                                <select class="form-select @error('id_dosimetro_asig') is-invalid @enderror"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
                                     ${selectDosimetrosEzclip.innerHTML}
                                     ${selectDosimetros.innerHTML}
@@ -998,11 +1004,11 @@
                                 @error('id_dosimetro_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </td>
                             <td style="width: 14.20%">
-                                <select class="form-select @error('id_holder_asig') is-invalid @enderror"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
-                                    <option value="N.A">N.A</option>
+                                <select class="form-select "  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    <option value="NA">N.A</option>
                                     ${selectHolders.innerHTML}
                                 </select>
-                                @error('id_holder_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </td>
                             <td style="width: 14.20%">
                                 <select class="form-select @error('ocupacion_asig') is-invalid @enderror" name="ocupacion_asig[]" id="ocupacion_asig" style="text-transform:uppercase">
@@ -1076,6 +1082,7 @@
                             <td style="width: 14.20%">
                                 <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
                                     <option value="">----</option>
+                                    <option value="NA">N.A</option>
                                     ${selectHolders.innerHTML}
                                 </select>
                             </td>
@@ -1237,6 +1244,20 @@
             }
         })
     }
+    /* document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("form_cambio_cantdosim").addEventListener('submit', validarFormulario); 
+    });
+    function validarFormulario(evento) {
+        evento.preventDefault();
+        
+        var trabajadores = $(".id_trabj_asigdosim").val();
+        console.log(trabajadores);
+        
+        
+        this.submit();
+    } */
+   
+
 </script>
 @if(session('guardar')== 'ok')
     <script>
@@ -1253,7 +1274,60 @@
         
         $('#form_cambio_cantdosim').submit(function(e, mes){
             e.preventDefault();
-            Swal.fire({
+            var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
+            trabajadores.forEach((elemento)=>{
+                var values = elemento.value;
+                if(values == ''){
+                    alert("FALTA SELECCIONAR ALGUN TRABAJADOR");
+                }
+            })
+            console.log("ESTOS SON LOS TRABAJADORES");
+            console.log(trabajadores);
+
+            var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
+            ubicacion.forEach((elemento)=>{
+                var values = elemento.value;
+                if(values == ''){
+                    alert("FALTA SELECCIONAR ALGUNA UBICACIÓN");
+                }
+            })
+            console.log("ESTAS SON LAS UBICACIONES");
+            console.log(ubicacion);
+            
+            var dosimetros = document.querySelectorAll('select[name="id_dosimetro_asig[]"]');
+            dosimetros.forEach((elemento)=>{
+                var values = elemento.value;
+                if(values == ''){
+                    alert("FALTA SELECCIONAR ALGUN DOSÍMETRO");
+                }
+            })
+            console.log("ESTOS SON LOS DOSIMETROS");
+            console.log(dosimetros); 
+
+            var holder = document.querySelectorAll('select[name="id_holder_asig[]"]');
+            holder.forEach((elemento)=>{
+                var values = elemento.value;
+                if(values == ''){
+                    alert("FALTA SELECCIONAR ALGUN HOLDER");
+                }
+            })
+            console.log("ESTAS SON LOS HOLDERS");
+            console.log(holder); 
+
+            var ocupaciones = document.querySelectorAll('select[name="ocupacion_asig[]"]');
+            ocupaciones.forEach((elemento)=>{
+                var values = elemento.value;
+                if(values == ''){
+                    alert("FALTA SELECCIONAR ALGUNA OCUPACION");
+                }
+            })
+            console.log("ESTAS SON LAS OCUPACIONES");
+            console.log(ocupaciones); 
+
+            if(trabajadores.length == 0 && ubicacion.length == 0 && dosimetros.length == 0 && holder.length == 0 && ocupaciones.length == 0){
+                alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA");
+            }
+            /* Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL MES ACTUAL??",
                 icon: 'warning',
                 showCancelButton: true,
@@ -1271,12 +1345,8 @@
                     this.submit();
 
                 }
-            })
-        })
-    })
-</script>
-<script type="text/javascript">
-    $(document).ready(function(){
+            }) */
+        });
         $('#form_cambio_cantdosim2').submit(function(e){
             e.preventDefault();
             Swal.fire({
@@ -1297,13 +1367,7 @@
                     this.submit();
                 }
             })
-        })
-    })
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-
+        });
         $('#limpiar_asig').click(function(e){
             e.preventDefault();
             Swal.fire({
@@ -1322,6 +1386,7 @@
         })
     })
 </script>
+
 {{-- <script type="text/javascript">
     $(document).ready(function(){
         $('#id_dosimetro_asig').select2();

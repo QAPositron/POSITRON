@@ -23,7 +23,7 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table-> unsignedBigInteger('trabajador_id')->nullable();
             $table-> foreign('trabajador_id')->references('id_trabajador')->on('trabajadors')->onDelete('cascade')->onUpdate('cascade');
 
-            $table-> unsignedBigInteger('persona_id')->nullable();
+            $table-> unsignedBigInteger('persona_id');
             $table-> foreign('persona_id')->references('id_persona')->on('personas')->onDelete('cascade')->onUpdate('cascade');
 
             $table-> unsignedBigInteger('dosimetro_id');
@@ -32,7 +32,7 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table-> unsignedBigInteger('holder_id')->nullable();
             $table-> foreign('holder_id')->references('id_holder')->on('holders')->onDelete('cascade')->onUpdate('cascade');
 
-            $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
+            $table-> unsignedBigInteger('contdosisededepto_id');
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
 
             
