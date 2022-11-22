@@ -1155,7 +1155,7 @@ class DosimetriaController extends Controller
         return redirect()->back()->with('clear', 'ok');
     }
     public function saveAsignacionDosiContratoMn($id, $mesnumber, Request $request){
-        return $request;
+        /* return $request; */
         
         
         $request->validate([

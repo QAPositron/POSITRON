@@ -144,18 +144,7 @@ class NovedadesController extends Controller
    
     public function savecambiocantdosim(Request $request){
 
-        /* return $request; */
-        /* Validator::make($request->all(), [
-            'id_trabajador_asig.*'   => ['required', 'min:1'],
-            'id_ubicacion_asig.*'    => ['required'],
-            'id_dosimetro_asig.*'    => ['required', 'distinct'],
-            'id_holder_asig.*'       => ['required', 'distinct'],
-        ])->validate(); */
-        
-        /* $request->validate([
-            'id_trabajador_asig.*' => ['required']
-        ]); */
-        return $request;
+       /*  return $request; */
 
         $dosi_control = $request->dosi_control;
         $dosi_torax= $request->dosi_torax;
@@ -201,7 +190,7 @@ class NovedadesController extends Controller
                 $newasignacionDosimetro->contratodosimetriasede_id = $request->id_contratodosimetriasede;
                 $newasignacionDosimetro->persona_id                = $request->id_trabajador_asig[$i];
                 $newasignacionDosimetro->dosimetro_id              = $request->id_dosimetro_asig[$i];
-                $newasignacionDosimetro->holder_id                 = $request->id_holder_asig[$i];
+                $newasignacionDosimetro->holder_id                 = $request->id_holder_asig[$i] == 'NA' ? NULL : $request->id_holder_asig[$i];
                 $newasignacionDosimetro->contdosisededepto_id      = $request->id_contdosisededepto;
                 $newasignacionDosimetro->mes_asignacion            = $request->mestrabj_asig;
                 $newasignacionDosimetro->dosimetro_uso             = 'TRUE';
@@ -266,6 +255,7 @@ class NovedadesController extends Controller
     }
     public function savemesiguientecambiocantdosim(Request $request){
         /* return $request; */
+
         $dosi_control = 0;
         $dosi_torax= 0;
         $dosi_area = 0; /////////FALTA TODO LO RELACIONADO CON DOSIMETROS TIPO CASO Y AREA

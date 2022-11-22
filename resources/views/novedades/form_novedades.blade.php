@@ -320,7 +320,7 @@
                                     <div class="col"></div>
                                     <div class="col">
                                         <div class="d-grid gap-2 col-6 mx-auto">
-                                            <button id="assignBtn" class="btn colorQA" type="submit" onclick="eliminartrabj(e);">
+                                            <button id="assignBtn" class="btn colorQA" type="submit">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
                                                     <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
                                                 </svg> <br> GUARDAR ASIGNACIÓN
@@ -585,10 +585,14 @@
                                     for(var i=0; i<asignacionescontrolmesactual.length; i++){
                                         if(asignacionescontrolmesactual[i].dosimetro_uso != 'FALSE'){
                                             var disacont = 'disabled';
+                                            var id_dosimetro = asignacionescontrolmesactual[i].id_dosimetro;
                                             var codigo_dosimeter = asignacionescontrolmesactual[i].codigo_dosimeter;
+                                            var id_ocupacion = asignacionescontrolmesactual[i].ocupacion;  
                                             var ocupacion = asignacionescontrolmesactual[i].ocupacion;
                                         }else{
+                                            var id_dosimetro = 'NULL';
                                             var codigo_dosimeter = '---';
+                                            var id_ocupacion = 'NULL';
                                             var ocupacion = '---';
                                         }
                                         
@@ -596,14 +600,14 @@
                                                 <td colspan='2' style='width: 75px' class='align-middle'>CONTROL</td>
                                                 <td style='width: 190px' class='align-middle'>
                                                     <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
-                                                        <option value="`+asignacionescontrolmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
+                                                        <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                         ${selectDosimetros.innerHTML}
                                                     </select>
                                                 </td>
                                                 <td style='width: 163px' class='align-middle'>NA</td>
                                                 <td style='width: 185px' class='align-middle'>
                                                     <select class="form-select cambiar" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" ${disacont} >
-                                                        <option value="`+asignacionescontrolmesactual[i].ocupacion+`">`+ocupacion+`</option>
+                                                        <option value="`+id_ocupacion+`">`+ocupacion+`</option>
                                                         <option value="T">T = TELETERAPIA</option>
                                                         <option value="BQ">BQ = BRAQUITERAPIA</option>
                                                         <option value="MN">MN = MEDICINA NUCLEAR</option>
@@ -682,15 +686,20 @@
                                     if(mes > value){
                                         /* alert("ASIGNACIONES PARA EL MES SIGUIENTE AL ACTUAL"); */
                                         for(var i=0; i<asignacionesmesactual.length; i++){
-                                            var id_dosimetro = asignacionesmesactual[i].id_dosimetro;
                                             if(asignacionesmesactual[i].dosimetro_uso != 'FALSE'){
                                                 var dis = 'disabled';
+                                                var id_dosimetro = asignacionesmesactual[i].id_dosimetro;
                                                 var codigo_dosimeter = asignacionesmesactual[i].codigo_dosimeter;
+                                                var id_holder = asignacionesmesactual[i].id_holder;
                                                 var codigo_holder = asignacionesmesactual[i].codigo_holder;
+                                                var id_ocupacion = asignacionesmesactual[i].ocupacion;
                                                 var ocupacion = asignacionesmesactual[i].ocupacion;
                                             }else{
+                                                var id_dosimetro = 'NULL';
                                                 var codigo_dosimeter = '---';
+                                                var id_holder = 'NULL';
                                                 var codigo_holder = '---';
+                                                var id_ocupacion = 'NULL';
                                                 var ocupacion = '---';
                                             }
                                             var mestrabj_asig = document.getElementById("mesacambiar").value;
@@ -713,19 +722,19 @@
                                                     <td class='align-middle'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
                                                     <td class='align-middle'>
                                                         <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
-                                                            <option value="`+asignacionesmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
+                                                            <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                             ${selectDosimetrosEzclip.innerHTML}
                                                         </select>
                                                     </td>
                                                     <td class='align-middle'>
                                                         <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
-                                                            <option value="`+asignacionesmesactual[i].id_holder+`">`+codigo_holder+`</option>
+                                                            <option value="`+id_holder+`">`+codigo_holder+`</option>
                                                             ${selectHolders.innerHTML}
                                                         </select>
                                                     </td>
                                                     <td class='align-middle'>
                                                         <select class="form-select cambiar"  name="id_ocupacion_asigdosim[]" id="id_ocupacion_asigdosim" ${dis} >
-                                                            <option value="`+asignacionesmesactual[i].ocupacion+`">`+ocupacion+`</option>
+                                                            <option value="`+id_ocupacion+`">`+ocupacion+`</option>
                                                             <option value="T">T = TELETERAPIA</option>
                                                             <option value="BQ">BQ = BRAQUITERAPIA</option>
                                                             <option value="MN">MN = MEDICINA NUCLEAR</option>
@@ -769,7 +778,7 @@
                                             }else{
                                                 var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
                                                     <td class='align-middle'>
-                                                        <input type="text" name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null_mesdesp" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
+                                                        <input type="text" name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null_mesdesp`+asignacionesmesactual[i].id_persona+`" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
                                                         <select class="form-select"  name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null`+asignacionesmesactual[i].id_persona+`" disabled>
                                                             <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
                                                             ${selectTrabajadores.innerHTML}
@@ -778,14 +787,14 @@
                                                     <td class='align-middle'><input type="text" name="ubicacion_asigdosim_null[]" id="ubicacion_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
                                                     <td class='align-middle'>
                                                         <select class="form-select cambiar"  name="id_dosimetro_asigdosim_null[]" id="id_dosimetro_asigdosim_null" ${dis}>
-                                                            <option value="`+asignacionesmesactual[i].id_dosimetro+`">`+codigo_dosimeter+`</option>
+                                                            <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                             ${selectDosimetros.innerHTML}
                                                         </select>
                                                     </td>
                                                     <td class='align-middle'> NA </td>
                                                     <td class='align-middle'>
                                                         <select class="form-select cambiar"  name="id_ocupacion_asigdosim_null[]" id="id_ocupacion_asigdosim_null" ${dis}>
-                                                            <option value="`+asignacionesmesactual[i].ocupacion+`">`+ocupacion+`</option>
+                                                            <option value="`+id_ocupacion+`">`+ocupacion+`</option>
                                                             <option value="T">T = TELETERAPIA</option>
                                                             <option value="BQ">BQ = BRAQUITERAPIA</option>
                                                             <option value="MN">MN = MEDICINA NUCLEAR</option>
@@ -1236,26 +1245,20 @@
             cancelButtonColor: '#d33',
             confirmButtonText: 'SI, SEGURO!'
         }).then((result) => {
-            if (result.isConfirmed) {
-                
+            if (result.isConfirmed && ubicacion !== 'TORAX') {
+                console.log("NO ES TORAX");
                 $("#id_trabj_asigdosim"+id).attr("disabled", false);
                 document.getElementById("id_trabj_asigdosim_mesdesp"+id).remove();
 
+            }else{
+                console.log("ES TORAX");
+                console.log(id);
+                $("#id_trabj_asigdosim_null"+id).attr("disabled", false);
+                document.getElementById("id_trabj_asigdosim_null_mesdesp"+id).remove();
             }
         })
     }
-    /* document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("form_cambio_cantdosim").addEventListener('submit', validarFormulario); 
-    });
-    function validarFormulario(evento) {
-        evento.preventDefault();
-        
-        var trabajadores = $(".id_trabj_asigdosim").val();
-        console.log(trabajadores);
-        
-        
-        this.submit();
-    } */
+    
    
 
 </script>
@@ -1269,65 +1272,101 @@
     </script>
 
 @endif
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         
         $('#form_cambio_cantdosim').submit(function(e, mes){
             e.preventDefault();
             var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
-            trabajadores.forEach((elemento)=>{
-                var values = elemento.value;
-                if(values == ''){
-                    alert("FALTA SELECCIONAR ALGUN TRABAJADOR");
-                }
-            })
-            console.log("ESTOS SON LOS TRABAJADORES");
+            console.log("ESTAS SON LOS TRABAJADORES");
             console.log(trabajadores);
+            for(var i = 0; i < trabajadores.length; i++) {
+                var values = trabajadores[i].value;
+                if(values == ''){
+                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN TRABAJADOR",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                }
+                
+            };
 
             var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
-            ubicacion.forEach((elemento)=>{
-                var values = elemento.value;
-                if(values == ''){
-                    alert("FALTA SELECCIONAR ALGUNA UBICACIÓN");
-                }
-            })
             console.log("ESTAS SON LAS UBICACIONES");
             console.log(ubicacion);
+            for(var i = 0; i < ubicacion.length; i++) {
+                var values = ubicacion[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUNA UBICACIÓN"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA UBICACIÓN",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
             
             var dosimetros = document.querySelectorAll('select[name="id_dosimetro_asig[]"]');
-            dosimetros.forEach((elemento)=>{
-                var values = elemento.value;
-                if(values == ''){
-                    alert("FALTA SELECCIONAR ALGUN DOSÍMETRO");
-                }
-            })
             console.log("ESTOS SON LOS DOSIMETROS");
             console.log(dosimetros); 
-
-            var holder = document.querySelectorAll('select[name="id_holder_asig[]"]');
-            holder.forEach((elemento)=>{
-                var values = elemento.value;
+            for(var i = 0; i < dosimetros.length; i++) {
+                var values = dosimetros[i].value;
                 if(values == ''){
-                    alert("FALTA SELECCIONAR ALGUN HOLDER");
+                    /* alert("FALTA SELECCIONAR ALGUN DOSÍMETRO"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN DOSÍMETRO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
                 }
-            })
+            };
+           
+            var holder = document.querySelectorAll('select[name="id_holder_asig[]"]');
             console.log("ESTAS SON LOS HOLDERS");
             console.log(holder); 
+            for(var i = 0; i < holder.length; i++) {
+                var values = holder[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+           
 
             var ocupaciones = document.querySelectorAll('select[name="ocupacion_asig[]"]');
-            ocupaciones.forEach((elemento)=>{
-                var values = elemento.value;
-                if(values == ''){
-                    alert("FALTA SELECCIONAR ALGUNA OCUPACION");
-                }
-            })
             console.log("ESTAS SON LAS OCUPACIONES");
-            console.log(ocupaciones); 
+            console.log(ocupaciones);  
+            for(var i = 0; i < ocupaciones.length; i++) {
+                var values = ocupaciones[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            
 
             if(trabajadores.length == 0 && ubicacion.length == 0 && dosimetros.length == 0 && holder.length == 0 && ocupaciones.length == 0){
-                alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA");
-            }
-            /* Swal.fire({
+                /* alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA"); */
+                return Swal.fire({
+                                title:"OPRIMA EL BOTÓN DE NUEVO DOSÍMETRO",
+                                text: "INGRESE LA INFORMACIÓN SOLICITADA",
+                                icon: 'error'
+                            });
+            };
+
+            Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL MES ACTUAL??",
                 icon: 'warning',
                 showCancelButton: true,
@@ -1345,10 +1384,200 @@
                     this.submit();
 
                 }
-            }) */
+            })
         });
-        $('#form_cambio_cantdosim2').submit(function(e){
+
+        $('#form_cambio_cantdosim2').submit(function(e, mes){
             e.preventDefault();
+            //////VALIDACIONES PARA LAS ASIGNACIONES DEL MES ANTERIOR  LAS ANTIGUAS///////////////////
+            var dosimetrosControl_antg = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
+            console.log("ESTOS SON LOS DOSIMETROS DE CONTROL ANTIGUOS");
+            console.log(dosimetrosControl_antg); 
+            for(var i = 0; i < dosimetrosControl_antg.length; i++) {
+                var values = dosimetrosControl_antg[i].value;
+                if(values == 'NULL'){
+                    /* alert("FALTA SELECCIONAR ALGUN DOSÍMETRO"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN DOSÍMETRO DE CONTROL DE LAS ASIGNACIONES ANTERIORES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var dosimetros_antg = document.querySelectorAll('select[name="id_dosimetro_asigdosim[]"]');
+            console.log("ESTOS SON LOS DOSIMETROS ANTIGUOS");
+            console.log(dosimetros_antg); 
+            for(var i = 0; i < dosimetros_antg.length; i++) {
+                var values = dosimetros_antg[i].value;
+                if(values == 'NULL'){
+                    /* alert("FALTA SELECCIONAR ALGUN DOSÍMETRO"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN DOSÍMETRO DE LAS ASIGNACIONES ANTERIORES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var dosimetrosNull_antg = document.querySelectorAll('select[name="id_dosimetro_asigdosim_null[]"]');
+            console.log("ESTOS SON LOS DOSIMETROS CON HOLDER NULL ANTIGUOS");
+            console.log(dosimetrosNull_antg); 
+            for(var i = 0; i < dosimetrosNull_antg.length; i++) {
+                var values = dosimetrosNull_antg[i].value;
+                if(values == 'NULL'){
+                    /* alert("FALTA SELECCIONAR ALGUN DOSÍMETRO"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN DOSÍMETRO DE LAS ASIGNACIONES ANTERIORES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+
+            var holder_antg = document.querySelectorAll('select[name="id_holder_asigdosim[]"]');
+            console.log("ESTAS SON LOS HOLDERS ANTIGUOS");
+            console.log(holder_antg); 
+            for(var i = 0; i < holder_antg.length; i++) {
+                var values = holder_antg[i].value;
+                if(values == 'NULL'){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER DE LAS ASIGNACIONES ANTERIORES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var ocupacionesControl_antg = document.querySelectorAll('select[name="ocupacion_asigdosimControl[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE CONTROL ANTIGUOS");
+            console.log(ocupacionesControl_antg);  
+            for(var i = 0; i < ocupacionesControl_antg.length; i++) {
+                var values = ocupacionesControl_antg[i].value;
+                if(values == 'NULL'){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE DOSÍMETRO CONTROL DE LAS ASIGNACIONES ANTERIORES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var ocupaciones_antg = document.querySelectorAll('select[name="id_ocupacion_asigdosim[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE CONTROL ANTIGUOS");
+            console.log(ocupaciones_antg);  
+            for(var i = 0; i < ocupaciones_antg.length; i++) {
+                var values = ocupaciones_antg[i].value;
+                if(values == 'NULL'){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE LAS ASIGNACIONES ANTERIORES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var ocupacionesNull_antg = document.querySelectorAll('select[name="id_ocupacion_asigdosim_null[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE CONTROL ANTIGUOS");
+            console.log(ocupacionesNull_antg);  
+            for(var i = 0; i < ocupacionesNull_antg.length; i++) {
+                var values = ocupacionesNull_antg[i].value;
+                if(values == 'NULL'){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE LAS ASIGNACIONES ANTERIORES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            ///////////////////////////////////////////////////////////////////////////
+            //////VALIDACIONES PARA LOS NUEVOS DOSIMETROS QUE DESEE AÑADIR//////////////
+            var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
+            console.log("ESTAS SON LOS TRABAJADORES");
+            console.log(trabajadores);
+            for(var i = 0; i < trabajadores.length; i++) {
+                var values = trabajadores[i].value;
+                if(values == ''){
+                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN TRABAJADOR",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                }
+                
+            };
+
+            var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
+            console.log("ESTAS SON LAS UBICACIONES");
+            console.log(ubicacion);
+            for(var i = 0; i < ubicacion.length; i++) {
+                var values = ubicacion[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUNA UBICACIÓN"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA UBICACIÓN",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            
+            var dosimetros = document.querySelectorAll('select[name="id_dosimetro_asig[]"]');
+            console.log("ESTOS SON LOS DOSIMETROS");
+            console.log(dosimetros); 
+            for(var i = 0; i < dosimetros.length; i++) {
+                var values = dosimetros[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN DOSÍMETRO"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN DOSÍMETRO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+           
+            var holder = document.querySelectorAll('select[name="id_holder_asig[]"]');
+            console.log("ESTAS SON LOS HOLDERS");
+            console.log(holder); 
+            for(var i = 0; i < holder.length; i++) {
+                var values = holder[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+           
+
+            var ocupaciones = document.querySelectorAll('select[name="ocupacion_asig[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES");
+            console.log(ocupaciones);  
+            for(var i = 0; i < ocupaciones.length; i++) {
+                var values = ocupaciones[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            
+
+            /* if(trabajadores.length == 0 && ubicacion.length == 0 && dosimetros.length == 0 && holder.length == 0 && ocupaciones.length == 0){
+                alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA");
+                return Swal.fire({
+                                title:"OPRIMA EL BOTÓN DE NUEVO DOSÍMETRO",
+                                text: "INGRESE LA INFORMACIÓN SOLICITADA",
+                                icon: 'error'
+                            });
+            }; */
             Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
                 icon: 'warning',
@@ -1368,6 +1597,7 @@
                 }
             })
         });
+
         $('#limpiar_asig').click(function(e){
             e.preventDefault();
             Swal.fire({
