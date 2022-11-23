@@ -461,7 +461,8 @@
                     var fechafinal = contratodosi[0].fecha_finalizacion;
                     console.log(fechainicio);
                     myFechaInicial = new Date(fechainicio);
-                    console.log(myFechaInicial);
+                    myFechaInicial.setMinutes(myFechaInicial.getMinutes() + myFechaInicial.getTimezoneOffset());
+                    console.log("ESTA ES LA FECHA INICIAL" +myFechaInicial);
                     document.getElementById("fechainicio_contratodosi").value = fechainicio;
                     document.getElementById("fechafin_contratodosi").value = fechafinal;
                     
@@ -497,6 +498,7 @@
 
         $('#especialidades_empresadosi').on('change', function(){
             var especialidad_id = $(this).val();
+            $('#tabla_meses').html("");
             if($.trim(especialidad_id) != ''){
                 $.get('meseschangecontratoDosi', {especialidad_id: especialidad_id}, function(todoslos_meses){
                     console.log("ESTOS SON TODOS LOS MESES");
@@ -520,26 +522,32 @@
                     }
                 })
                 $.get('mesactualcontdosisededepto', {especialidad_id: especialidad_id}, function(mesactual_trabjasig){
+                    console.log("ESTE ES EL MES ACTUAL**")
                     console.log(mesactual_trabjasig);
                     const vacio = JSON.stringify(mesactual_trabjasig);
+                    console.log("ESTE ES VACIO" +vacio);
                     $('#mesacambiar').empty();
                     $('#mesacambiar').append("<option value=''>--</option>");
                     const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
                      
                     if(vacio == '{}'){
-                        
+                            console.log("ESTA EN VACIO**");
                         var r = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+1));
                         var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
                         $('#mesacambiar').append("<option value='1'> 1 -  </option>");
                     }else{
-                        
+                        console.log("NO ESTA EN VACIO**");
                         $.each(mesactual_trabjasig, function(index, value){
-                            var r = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+value));  
-                            var r2 = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+value+1));    
+                            console.log(value);
+                            var r = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+value-1));
+                            console.log("ESTE ES EL MES ACTUAL"+r);  
+                            var r2 = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+value));    
+                            console.log("ESTE ES EL MES SIGUEINTE AL ACTUAL"+r2);
                             var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
                             var fechaesp2 = meses[r2.getMonth()] + ' DE ' + r.getUTCFullYear();
 
                             var siguientemes = value+1;
+                            console.log("MES SIGUIENTE" + siguientemes);
                             $('#mesacambiar').append("<option value='"+ value + "'>" + value + " ("+ fechaesp + ")" + "</option>");
                             $('#mesacambiar').append("<option value='"+ siguientemes + "'>" + siguientemes + " ("+ fechaesp2 + ")" + "</option>"); 
                         })
@@ -1313,6 +1321,7 @@
             var dosimetros = document.querySelectorAll('select[name="id_dosimetro_asig[]"]');
             console.log("ESTOS SON LOS DOSIMETROS");
             console.log(dosimetros); 
+            
             for(var i = 0; i < dosimetros.length; i++) {
                 var values = dosimetros[i].value;
                 if(values == ''){
@@ -1322,8 +1331,19 @@
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
+                };
+                for(var x = 0; x < dosimetros.length; x++){
+                    var valuesX = dosimetros[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
                 }
             };
+
            
             var holder = document.querySelectorAll('select[name="id_holder_asig[]"]');
             console.log("ESTAS SON LOS HOLDERS");
@@ -1337,6 +1357,16 @@
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
+                };
+                for(var x = 0; x < holder.length; x++){
+                    var valuesX = holder[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
                 }
             };
            
@@ -1402,6 +1432,16 @@
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
+                };
+                for(var x = 0; x < dosimetrosControl_antg.length; x++){
+                    var valuesX = dosimetrosControl_antg[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
                 }
             };
             var dosimetros_antg = document.querySelectorAll('select[name="id_dosimetro_asigdosim[]"]');
@@ -1416,6 +1456,16 @@
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
+                };
+                for(var x = 0; x < dosimetros_antg.length; x++){
+                    var valuesX = dosimetros_antg[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
                 }
             };
             var dosimetrosNull_antg = document.querySelectorAll('select[name="id_dosimetro_asigdosim_null[]"]');
@@ -1430,6 +1480,21 @@
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
+                };
+                var dosimetrosControl_antg = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
+                for(var x = 0; x < dosimetrosNull_antg.length; x++){
+                    for(var y = 0; y < dosimetrosControl_antg.length; y++) {
+                        var valuesX = dosimetrosNull_antg[x].value;
+                        var valuesControl = dosimetrosControl_antg[y].value;
+                        if(values == valuesX && i != x || values == valuesControl){
+                            return Swal.fire({
+                                    title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                    icon: 'error'
+                                });
+                        }
+                        
+                    }
                 }
             };
 
@@ -1445,6 +1510,16 @@
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
+                };
+                for(var x = 0; x < holder_antg.length; x++){
+                    var valuesX = holder_antg[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
                 }
             };
             var ocupacionesControl_antg = document.querySelectorAll('select[name="ocupacion_asigdosimControl[]"]');
@@ -1535,6 +1610,16 @@
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
+                };
+                for(var x = 0; x < dosimetros.length; x++){
+                    var valuesX = dosimetros[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
                 }
             };
            
@@ -1550,6 +1635,16 @@
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
+                };
+                for(var x = 0; x < holder.length; x++){
+                    var valuesX = holder[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
                 }
             };
            
