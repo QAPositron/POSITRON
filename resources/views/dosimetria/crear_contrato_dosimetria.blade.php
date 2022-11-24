@@ -306,7 +306,7 @@ crossorigin="anonymous">
         }
     }
     function deleteDepa() {
-        console.log("hola")
+        console.log("hola");
         if(depaNumber ==1 ) {
 
         }else {
@@ -337,14 +337,178 @@ crossorigin="anonymous">
         
 
     })
-    $(document).ready(function(sedesNumber){
+    $(document).ready(function(){
 
-        $('#form_contrato_dosi').submit(function(e, sedesNumber){
+        $('#form_contrato_dosi').submit(function(e){
             e.preventDefault();
-            console.log(sedesNumber);
-            var sedes = document.querySelectorAll('select[id="id_sede"]');
-            console.log(sedes);
-            /* Swal.fire({
+            ///////////////////////VALIDACION PARA EL PERIODO OBLIGATORIO//////////
+            var periodo= document.getElementById("periodo_recambio_contrato_select").value;
+            console.log("ESTE ES EL PERIODO" + periodo);
+            if(periodo == ''){
+                return Swal.fire({
+                                title:"FALTA SELECCIONAR EL PERIODO DE RECAMBIO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            };
+            ///////////////////////VALIDACION PARA LAS FECHAS OBLIGATORIAS//////////
+            var fecha_inicio = document.getElementById("fecha_inicio_contrato_input").value;
+            console.log("ESTAS SON LAS " + fecha_inicio);
+            if(fecha_inicio == ''){
+                return Swal.fire({
+                                title:"FALTA SELECCIONAR LA FECHA DE INGRESO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            };
+            var fecha_finalizacion = document.getElementById("fecha_finalizacion_contrato_input").value;
+            console.log("ESTAS SON LAS OBSERVACIONES" + fecha_finalizacion);
+            if(fecha_finalizacion == ''){
+                return Swal.fire({
+                                title:"FALTA SELECCIONAR LA FECHA  DE FINALIZACIÓN",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            };
+            /////////////////////// VALIDACION PARA LA SEDE OBLIGATORIA///////////////////
+            var arraySedes = [];
+            for(var i = 0; i < 20; i++){
+                var sedes = document.querySelectorAll('select[id="id_sede'+i+'"]');
+                if(sedes.length != 0){
+                    arraySedes.push(sedes);
+                }
+            };
+            console.log("este es el array");
+            console.log(arraySedes);
+            console.log(arraySedes.length);
+
+            if(arraySedes.length == '0'){
+                return Swal.fire({
+                            title:"FALTA AGREGAR O AÑADIR UNA SEDE",
+                            text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                            icon: 'error'
+                        });
+            };
+            for(var i = 0; i < arraySedes.length; i++){
+                var sedes = document.querySelectorAll('select[name="id_sede'+(i+1)+'[]"]');
+                console.log(sedes);
+                for(var x = 0; x < sedes.length; x++) {
+                    var values = sedes[x].value;
+                    console.log("ESTOS SON LOS VALORES DE LA SEDES" +values);
+                    if(values == ''){
+                        return Swal.fire({
+                                    title:"FALTA SELECCIONAR ALGUNA SEDE",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                    icon: 'error'
+                                });
+                    }
+                }
+            }
+            /////////////////////////// VALIDACION PARA LAS ESPECIALIDADES OBLIGATORIAS Y PARA LA CANTIDAD DE DOSIMETROS OBLIGATORIOS///////////////////
+            for(var i = 0; i < arraySedes.length; i++){
+                var departamentoSede = document.querySelectorAll('select[name="departamentos_sede'+(i+1)+'[]"]');
+                console.log(departamentoSede);
+                console.log("ESTAS SON LOS DEPARTAMENTOS"+ i + "ESTE ES EL TAMAÑO" +departamentoSede.length);
+                if(departamentoSede.length >= 2){
+                    for(var x = 0; x < departamentoSede.length; x++) {
+                        var values = departamentoSede[x].value;
+                        console.log("PARA EL VALIR MAYOR A UNO"+values);
+                        if(values == ''){
+                            return Swal.fire({
+                                        title:"FALTA SELECCIONAR ALGUNA ESPECIALIDAD",
+                                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                        icon: 'error'
+                                    });
+                        }
+                    }
+                }else{
+                    var values = departamentoSede[0].value;
+                    console.log("PARA EL VALIR MENOR A UNO"+values);
+                    if(values == ''){
+                        return Swal.fire({
+                                    title:"FALTA SELECCIONAR ALGUNA ESPECIALIDAD",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                    icon: 'error'
+                                });
+                    }
+                };
+                var dosimetros_torax = document.querySelectorAll('input[name="dosimetro_torax_sede'+(i+1)+'[]"]');
+                console.log(dosimetros_torax);
+                console.log("ESTAS SON LOS DOSIMETROS TORAX DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_torax.length);
+                var dosimetros_cristalino = document.querySelectorAll('input[name="dosimetro_cristalino_sede'+(i+1)+'[]"]');
+                console.log(dosimetros_cristalino);
+                console.log("ESTAS SON LOS DOSIMETROS CRISTALINO DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_cristalino.length);
+                var dosimetros_dedo = document.querySelectorAll('input[name="dosimetro_dedo_sede'+(i+1)+'[]"]');
+                console.log(dosimetros_dedo);
+                console.log("ESTAS SON LOS DOSIMETROS DEDO DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_dedo.length);
+                var dosimetros_muneca = document.querySelectorAll('input[name="dosimetro_muneca_sede'+(i+1)+'[]"]');
+                console.log(dosimetros_muneca);
+                console.log("ESTAS SON LOS DOSIMETROS MUÑECA DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_muneca.length);
+                var dosimetros_control = document.querySelectorAll('input[name="dosimetro_control_sede'+(i+1)+'[]"]');
+                console.log(dosimetros_control);
+                console.log("ESTAS SON LOS DOSIMETROS CONTROL DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_control.length);
+                var dosimetros_area = document.querySelectorAll('input[name="dosimetro_area_sede'+(i+1)+'[]"]');
+                console.log(dosimetros_area);
+                console.log("ESTAS SON LOS DOSIMETROS AREA DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_area.length);
+                var dosimetros_caso = document.querySelectorAll('input[name="dosimetro_caso_sede'+(i+1)+'[]"]');
+                console.log(dosimetros_caso);
+                console.log("ESTAS SON LOS DOSIMETROS CASO DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_caso.length);
+
+                if(dosimetros_torax.length >= 2 && dosimetros_cristalino.length >= 2 && dosimetros_dedo.length >= 2 && dosimetros_muneca.length >=2 && dosimetros_control.length >=2 && dosimetros_area.length >=2 && dosimetros_caso.length >=2){
+                    for(var x = 0; x < dosimetros_torax.length; x++) {
+                        var valuesTorax = dosimetros_torax[x].value;
+                        var valuesCristalino = dosimetros_cristalino[x].value;
+                        var valuesDedo = dosimetros_dedo[x].value;
+                        var valuesMuneca = dosimetros_muneca[x].value;
+                        var valuesControl = dosimetros_control[x].value;
+                        var valuesArea = dosimetros_area[x].value;
+                        var valuesCaso = dosimetros_caso[x].value;
+
+                        console.log("DOSIMETROS TORAX PARA EL VALOR MAYOR A UNO"+valuesTorax);
+                        console.log("DOSIMETROS CRISTALINO PARA EL VALOR MAYOR A UNO"+valuesCristalino);
+                        console.log("DOSIMETROS DEDO PARA EL VALOR MAYOR A UNO"+valuesDedo);
+                        console.log("DOSIMETROS MUÑECA PARA EL VALOR MAYOR A UNO"+valuesMuneca);
+                        console.log("DOSIMETROS CONTROL PARA EL VALOR MAYOR A UNO"+valuesControl);
+                        console.log("DOSIMETROS AREA PARA EL VALOR MAYOR A UNO"+valuesArea);
+                        console.log("DOSIMETROS CASO PARA EL VALOR MAYOR A UNO"+valuesCaso);
+                        if(valuesTorax == '' && valuesCristalino == '' && valuesDedo == '' && valuesMuneca == '' && valuesControl == '' && valuesArea == '' && valuesCaso == ''){
+                            return Swal.fire({
+                                        title:"FALTA INGRESAR LA CANTIDAD DE DOSÍMETROS EN ALGUNA ESPECIALIDAD",
+                                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                        icon: 'error'
+                                    });
+                        }
+                        
+                    }
+                }else{
+                    var valuesTorax = dosimetros_torax[0].value;
+                    console.log("DOSIMETROS TORAX PARA EL VALIR MENOR A UNO"+valuesTorax);
+                    var valuesCristalino = dosimetros_cristalino[0].value;
+                    console.log("DOSIMETROS CRISTALINO PARA EL VALIR MENOR A UNO"+valuesCristalino);
+                    var valuesDedo = dosimetros_dedo[0].value;
+                    console.log("DOSIMETROS CRISTALINO PARA EL VALIR MENOR A UNO"+valuesDedo);
+                    var valuesMuneca = dosimetros_muneca[0].value;
+                    console.log("DOSIMETROS CRISTALINO PARA EL VALIR MENOR A UNO"+valuesMuneca);
+                    var valuesControl = dosimetros_control[0].value;
+                    console.log("DOSIMETROS CONTROL PARA EL VALIR MENOR A UNO"+valuesControl);
+                    var valuesArea = dosimetros_area[0].value;
+                    console.log("DOSIMETROS AREA PARA EL VALIR MENOR A UNO"+valuesArea);
+                    var valuesCaso = dosimetros_caso[0].value;
+                    console.log("DOSIMETROS CASO PARA EL VALIR MENOR A UNO"+valuesCaso);
+                    if(valuesTorax == '' && valuesCristalino == '' && valuesDedo == '' && valuesMuneca == '' && valuesControl == '' && valuesArea == '' && valuesCaso == ''){
+                        return Swal.fire({
+                                    title:"FALTA INGRESAR LA CANTIDAD DE DOSÍMETROS EN ALGUNA ESPECIALIDAD",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                    icon: 'error'
+                                });
+                    }
+                }
+            }
+            
+            
+            ////////////////////////////////////////////////////////////////////////////////
+            
+            Swal.fire({
                 text: "SEGURO QUE DESEA GUARDAR ESTE CONTRATO DE DOSIMETRÍA??",
                 icon: 'warning',
                 showCancelButton: true,
@@ -356,7 +520,7 @@ crossorigin="anonymous">
                 
                     this.submit()
                 }
-            }) */
+            })
         })
     })
 </script>
