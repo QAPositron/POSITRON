@@ -205,7 +205,7 @@
                                                     <div class="col"></div>
                                                     <div class="col-6">
                                                         <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
-                                                        <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea>
+                                                        <textarea class="form-control" name="nota_cambio_dosimetros1" id="nota_cambio_dosimetros1" rows="3" autofocus style="text-transform:uppercase"></textarea>
                                                     </div>
                                                     <div class="col"></div>
                                                 </div>
@@ -260,7 +260,7 @@
                                     <div class="col-md">
                                         <div class="form-floating">
                                             <input type="date" class="form-control" name="ultimoDia_asigdosim2" id="ultimoDia_asigdosim2" >
-                                            <label for="floatingInputGrid">ULTIMO DÍA:</label>
+                                            <label for="floatingInputGrid">ÚLTIMO DÍA:</label>
                                         </div>
                                     </div>
                                 </div>
@@ -310,7 +310,7 @@
                                     <div class="col-6">
 
                                         <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
-                                        <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea>
+                                        <textarea class="form-control" name="nota_cambio_dosimetros2" id="nota_cambio_dosimetros2" rows="3" autofocus style="text-transform:uppercase"></textarea>
 
                                     </div>
                                     <div class="col"></div>
@@ -555,7 +555,7 @@
 
                     $('#mesacambiar').on('change', function(){
                         var mes = $(this).val();
-
+                        
                         var dosi_control = 0;
                         var dosi_torax= 0;
                         var dosi_area = 0;
@@ -1385,7 +1385,17 @@
                             });
                 }
             };
-            
+             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
+            var observaciones = document.getElementById("nota_cambio_dosimetros1").value;
+            console.log("ESTAS SON LAS OBSERVACIONES");
+            console.log(observaciones);
+            if(observaciones == ''){
+                return Swal.fire({
+                                title:"FALTA INGRESAR LA DESCRIPCIÓN DE LA NOVEDAD EN LAS OBSERVACIONES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            };
 
             if(trabajadores.length == 0 && ubicacion.length == 0 && dosimetros.length == 0 && holder.length == 0 && ocupaciones.length == 0){
                 /* alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA"); */
@@ -1419,7 +1429,25 @@
 
         $('#form_cambio_cantdosim2').submit(function(e, mes){
             e.preventDefault();
-            //////VALIDACIONES PARA LAS ASIGNACIONES DEL MES ANTERIOR  LAS ANTIGUAS///////////////////
+            ////////VALIDACIONES PARA LAS FECHAS  DE INICIO Y FIN DEL PERIODO/////////////////
+            var primerdiaFecha = document.getElementById("primerDia_asigdosim2").value;
+            if(primerdiaFecha == ''){
+                return Swal.fire({
+                                title:"FALTA SELECCIONAR LA FECHA DEL PRIMER DÍA PARA EL PERIODO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            }
+            var ultimodiaFecha = document.getElementById("ultimoDia_asigdosim2").value;
+            if(ultimodiaFecha == ''){
+                return Swal.fire({
+                                title:"FALTA SELECCIONAR LA FECHA DEL ÚLTIMO DÍA PARA EL PERIODO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            }
+            ////////////////////////////////////////////////////////////
+            //////VALIDACIONES PARA LAS ASIGNACIONES DEL MES ANTERIOR LAS ANTIGUAS///////////////////
             var dosimetrosControl_antg = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
             console.log("ESTOS SON LOS DOSIMETROS DE CONTROL ANTIGUOS");
             console.log(dosimetrosControl_antg); 
@@ -1673,6 +1701,17 @@
                                 icon: 'error'
                             });
             }; */
+            ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
+            var observaciones = document.getElementById("nota_cambio_dosimetros2").value;
+            console.log("ESTAS SON LAS OBSERVACIONES" + observaciones);
+            if(observaciones == ''){
+                return Swal.fire({
+                                title:"FALTA INGRESAR LA DESCRIPCIÓN DE LA NOVEDAD EN LAS OBSERVACIONES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            };
+            ////////////////////////////////////////////////////////////////////////////////
             Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
                 icon: 'warning',

@@ -92,7 +92,9 @@ class DosimetriaController extends Controller
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('empresas.id_empresa', $id)
         ->get();
-        return view('dosimetria.crear_contrato_dosimetria', compact('empresa','sedes', 'departamentos'));
+        $codigocontratoant = Dosimetriacontrato::latest()->first();
+        
+        return view('dosimetria.crear_contrato_dosimetria', compact('empresa','sedes', 'departamentos', 'codigocontratoant'));
     }
     
     public function selectdepa(Request $request){
@@ -103,8 +105,9 @@ class DosimetriaController extends Controller
         echo "$departamentos";
     }
 
+
     public function saveContratodosi(Request $request){
-        /* return $request; */
+        return $request;
         
         $request->validate([
             'codigo_contrato'               => 'required|unique:dosimetriacontratos,codigo_contrato',

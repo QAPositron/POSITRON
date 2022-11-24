@@ -15,7 +15,7 @@
                             <div class="col-md">
                                 <div class="form-floating my-3" id="codigo_contrato">
                                     <input type="text" name="empresa_contrato" hidden id="empresa_contrato" value="{{$empresa->id_empresa}}">
-                                    <input type="number" name="codigo_contrato" id="codigo_contrato_input" class="form-control @error('codigo_contrato') is-invalid @enderror" autofocus >
+                                    <input type="number" name="codigo_contrato" id="codigo_contrato_input" value="" class="form-control @error('codigo_contrato') is-invalid @enderror" disabled>
                                     <label for="floatingInputGrid">CODIGO:</label>
                                     @error('codigo_contrato')
                                         <small class="invalid-feedback">*{{$message}}</small>
@@ -230,8 +230,9 @@ crossorigin="anonymous">
         console.log(document.getElementById(`${sedesNumber}`).querySelector(`#contenedorDeptoSede${sedesNumber}`))
         contenidoDepto= document.getElementById(`contenedorDeptoSede${sedesNumber}`)
         sedesNumber ++;
-    })
-
+    });
+    console.log("**");
+    console.log(sedesNumber);
     /////////////clonar departamento////////////
     function addDepa() {
 
@@ -326,13 +327,24 @@ crossorigin="anonymous">
                     console.log(depas);
                 });
             }
-        })
-    })
-    $(document).ready(function(){
+        });
+        
+        var num = parseInt('{{$codigocontratoant->codigo_contrato}}')+1;
+        var n = num.toString().padStart(5,'0');
+        console.log("ESTE ES EL CODIGO" +n);
+        
+        document.getElementById("codigo_contrato_input").value = n;
+        
 
-        $('#form_contrato_dosi').submit(function(e){
+    })
+    $(document).ready(function(sedesNumber){
+
+        $('#form_contrato_dosi').submit(function(e, sedesNumber){
             e.preventDefault();
-            Swal.fire({
+            console.log(sedesNumber);
+            var sedes = document.querySelectorAll('select[id="id_sede"]');
+            console.log(sedes);
+            /* Swal.fire({
                 text: "SEGURO QUE DESEA GUARDAR ESTE CONTRATO DE DOSIMETRÍA??",
                 icon: 'warning',
                 showCancelButton: true,
@@ -342,9 +354,9 @@ crossorigin="anonymous">
                 }).then((result) => {
                 if (result.isConfirmed) {
                 
-                    this.submit();
+                    this.submit()
                 }
-            })
+            }) */
         })
     })
 </script>
