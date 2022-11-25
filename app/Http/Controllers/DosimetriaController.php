@@ -105,9 +105,8 @@ class DosimetriaController extends Controller
         echo "$departamentos";
     }
 
-
     public function saveContratodosi(Request $request){
-        return $request;
+        /* return $request; */
         
         $request->validate([
             'codigo_contrato'               => 'required|unique:dosimetriacontratos,codigo_contrato',
@@ -182,6 +181,19 @@ class DosimetriaController extends Controller
             }
         }
         return redirect()->route('detallecontrato.create', $contratoDosi->id_contratodosimetria)->with('crear', 'ok');
+    }
+    
+    public function pdfContratoDosimetria($contdosi){
+
+        $contrato = Dosimetriacontrato::join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
+        ->join('colmunicipios', 'empresas.municipiocol_id', '=', 'colmunicipios.id_municipiocol')
+        ->join('coldepartamentos', 'colmunicipios.departamentocol_id', '=', 'coldepartamentos.id_departamentocol')
+        ->where('dosimetriacontratos.codigo_contrato', '=', $contdosi)->get();
+        /* return $contrato; */
+         $pdf =  PDF::loadView('dosimetria.contratoPDF_dosimetria', compact('contrato', 'contdosi'));
+        $pdf->setPaper('A4', 'portrait');
+        
+        return $pdf->stream(); 
     }
 
     public function editContratodosi($empresa, $id){

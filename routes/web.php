@@ -157,11 +157,11 @@ Route::get('contratodosisedecreate/{contratodosi}/create', [DosimetriaController
 
 Route::get('/contratosdosicreatelist/{contratodosi}/createlist/contratodosidepa',[DosimetriaController::class,'selectdepa']);
 
-
-
 Route::get('contratosdosicreatelist/{empresadosi}/createlist', [DosimetriaController::class, 'createlistContrato'])->name('contratosdosi.createlist');
 Route::get('contratosdosicreatelist/{empresadosi}/createlist/create', [DosimetriaController::class, 'createContratodosi'])->name('contratosdosi.create');
 Route::post('contratosdosi', [DosimetriaController::class, 'saveContratodosi'])->name('contratosdosi.save');
+Route::get('contratodosimetria/{contdosi}/pdf', [DosimetriaController::class, 'pdfContratoDosimetria'])->name('contratodosimetria.pdf');
+
 Route::get('contratosdosicreatelist/{empresadosi}/{contratodosi}/edit', [DosimetriaController::class, 'editContratodosi'])->name('contratosdosi.edit');
 Route::put('contratosdosicreatelist/{contratodosi}/update', [DosimetriaController::class, 'updateContratodosi'])->name('contratosdosi.update');
 Route::delete('contratosdosicreatelist/{empresadosi}/{contratodosi}/destroy', [DosimetriaController::class, 'destroyContratodosi'])->name('contratosdosi.destroy');

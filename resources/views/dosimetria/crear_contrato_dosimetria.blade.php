@@ -15,7 +15,8 @@
                             <div class="col-md">
                                 <div class="form-floating my-3" id="codigo_contrato">
                                     <input type="text" name="empresa_contrato" hidden id="empresa_contrato" value="{{$empresa->id_empresa}}">
-                                    <input type="number" name="codigo_contrato" id="codigo_contrato_input" value="" class="form-control @error('codigo_contrato') is-invalid @enderror" disabled>
+                                    
+                                    <input type="number" name="codigo_contrato" id="codigo_contrato_input" value="" class="form-control @error('codigo_contrato') is-invalid @enderror" readonly>
                                     <label for="floatingInputGrid">CODIGO:</label>
                                     @error('codigo_contrato')
                                         <small class="invalid-feedback">*{{$message}}</small>
@@ -504,8 +505,6 @@ crossorigin="anonymous">
                     }
                 }
             }
-            
-            
             ////////////////////////////////////////////////////////////////////////////////
             
             Swal.fire({
@@ -517,7 +516,11 @@ crossorigin="anonymous">
                 confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                
+                    var contrato = document.getElementById("codigo_contrato_input").value;
+                    var host = window.location.host;
+                    var path = "http://"+host+"/POSITRON/public/contratodosimetria/"+contrato+"/pdf";
+                    
+                    window.open(path, '_blank');
                     this.submit()
                 }
             })
