@@ -330,11 +330,12 @@ crossorigin="anonymous">
             }
         });
         
-        var num = parseInt('{{$codigocontratoant->codigo_contrato}}')+1;
+        var num = parseInt('{{empty($codigocontratoant->codigo_contrato) ? 0 : $codigocontratoant->codigo_contrato}}')+1;
         var n = num.toString().padStart(5,'0');
         console.log("ESTE ES EL CODIGO" +n);
         
         document.getElementById("codigo_contrato_input").value = n;
+        
         
 
     })
@@ -520,8 +521,8 @@ crossorigin="anonymous">
                     var host = window.location.host;
                     var path = "http://"+host+"/POSITRON/public/contratodosimetria/"+contrato+"/pdf";
                     
+                    this.submit();
                     window.open(path, '_blank');
-                    this.submit()
                 }
             })
         })

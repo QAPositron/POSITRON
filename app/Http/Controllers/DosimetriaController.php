@@ -184,11 +184,11 @@ class DosimetriaController extends Controller
     }
     
     public function pdfContratoDosimetria($contdosi){
-
-        $contrato = Dosimetriacontrato::join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
+        /* $contrato = Dosimetriacontrato::join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
         ->join('colmunicipios', 'empresas.municipiocol_id', '=', 'colmunicipios.id_municipiocol')
         ->join('coldepartamentos', 'colmunicipios.departamentocol_id', '=', 'coldepartamentos.id_departamentocol')
-        ->where('dosimetriacontratos.codigo_contrato', '=', $contdosi)->get();
+        ->where('dosimetriacontratos.codigo_contrato', '=', $contdosi)->get(); */
+        $contrato = Dosimetriacontrato::where('codigo_contrato', '=', $contdosi)->get();
         /* return $contrato; */
          $pdf =  PDF::loadView('dosimetria.contratoPDF_dosimetria', compact('contrato', 'contdosi'));
         $pdf->setPaper('A4', 'portrait');
