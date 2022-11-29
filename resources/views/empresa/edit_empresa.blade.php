@@ -162,6 +162,40 @@
                     </div>
                 </div>
                 <br>
+                <div class="row g-2">
+                    <div class="col md">
+                        <div class="form-floating">
+                            <input type="text" name="nombreRepr_empresa" id="nombreRepr_empresa" class="form-control @error('nombreRepr_empresa') is-invalid @enderror" value="{{old('nombreRepr_empresa', $empresa->nombre_representantelegal)}}" autofocus style="text-transform:uppercase;">
+                            <label for="floatingInputGrid">* NOMBRE(s) Y APELLIDO(s) REPR. LEGAL</label>
+                            @error('nombreRepr_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <select class="form-select @error('tipoIden_repreLegal') is-invalid @enderror" name="tipoIden_repreLegal" id="tipoIden_repreLegal" value="{{old('tipoIden_repreLegal')}}" autofocus style="text-transform:uppercase">
+                                <option value="{{$empresa->tipo_iden_representantelegal}}">--{{old('tipoIden_repreLegal', $empresa->tipo_iden_representantelegal)}}--</option>
+                                <option value="CÉDULA DE CIUDADANIA" @if (old('tipoIden_repreLegal') == "CÉDULA DE CIUDADANIA") {{ 'selected' }} @endif>CÉDULA DE CIUDADANIA</option>
+                                <option value="TARJETA DE IDENTIDAD" @if (old('tipoIden_repreLegal') == "TARJETA DE IDENTIDAD") {{ 'selected' }} @endif>TARJETA DE IDENTIDAD</option>
+                                <option value="REGISTRO CIVIL" @if (old('tipoIden_repreLegal') == "REGISTRO CIVIL") {{ 'selected' }} @endif>REGISTRO CIVIL</option>
+                                <option value="TARJETA DE EXTRANJERÍA" @if (old('tipoIden_repreLegal') == "TARJETA DE EXTRANJERÍA") {{ 'selected' }} @endif>TARJETA DE EXTRANJERÍA</option>
+                                <option value="DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO" @if (old('tipoIden_repreLegal') == "DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO") {{ 'selected' }} @endif>DOCUMENTO DE IDENTIFICACIÓN EXTRANJERO</option>
+                                <option value="CÉDULA DE EXTRANJERÍA" @if (old('tipoIden_repreLegal') == "CÉDULA DE EXTRANJERÍA") {{ 'selected' }} @endif>CÉDULA DE EXTRANJERÍA</option>
+                                <option value="PASAPORTE"  @if (old('tipoIden_repreLegal') == "PASAPORTE") {{ 'selected' }} @endif>PASAPORTE</option>
+                            </select>
+                            <label for="floatingInputGrid">* TIPO DE IDENTIFICACIÓN REPR. LEGAL:</label>
+                            @error('tipoIden_repreLegal') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="number" name="cedula_Repr_empresa" id="cedula_Repr_empresa" class="form-control @error('cedula_Repr_empresa') is-invalid @enderror" value="{{old('cedula_Repr_empresa', $empresa->cedula_representantelegal)}}" autofocus style="text-transform:uppercase;">
+                            <label for="floatingInputGrid">* N° DE IDENTIFICACIÓN REPR. LEGAL</label>
+                            @error('cedula_Repr_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                </div>
+                <br>
                  <!---------BOTON------------->
                 <div class="row">
                     <div class="col"></div>

@@ -22,10 +22,8 @@ class CreateEmpresasTable extends Migration
             $table->string('email_empresa')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('direccion_empresa', 40);
-            $table->string('primer_nombre_representantelegal', 15);
-            $table->string('segundo_nombre_representantelegal', 15);
-            $table->string('primer_apellido_representantelegal', 15);
-            $table->string('segundo_apellido_representantelegal', 15);
+            $table->string('nombre_representantelegal', 50);
+            $table->string('tipo_iden_representantelegal', 50);
             $table->integer('cedula_representantelegal');
             
             $table-> unsignedBigInteger('municipiocol_id');

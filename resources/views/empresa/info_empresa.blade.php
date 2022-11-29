@@ -43,7 +43,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             <th class="m-auto align-middle" style='width: 12.55%'>TIPO IDENTIFICACIÓN:</th>
                                             <td class="align-middle" style='width: 18.55%'>{{$empresa->tipo_identificacion_empresa}}</td>
                                             <th class="align-middle" style='width: 12.55%'>NÚMERO IDENTIFICACIÓN:</th>
-                                            <td class="align-middle" style='width: 20.55%'>{{$empresa->num_iden_empresa}} {{$empresa->DV}}</td>
+                                            <td class="align-middle" style='width: 14.55%'>{{$empresa->num_iden_empresa}} {{$empresa->DV}}</td>
                                         </tr>
                                         <tr>
                                             <th class="align-middle" style='width: 12.55%'>ACTIVIDAD ECONÓMICA:</th>
@@ -74,6 +74,18 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             <td class="align-middle">{{$empresa->municipios->nombre_municol}}</td>
                                             <th class="align-middle" style='width: 12.55%'>DEPARTAMENTO:</th>
                                             <td class="align-middle">{{$empresa->municipios->coldepartamento->nombre_deptocol}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="align-middle" style='width: 12.55%'>REPRESENTANTE LEGAL:</th>
+                                            <td class="align-middle">{{$empresa->nombre_representantelegal}}</td>
+                                            <th class="align-middle" style='width: 12.55%'>TIPO IDEN. REPR.LEGAL:</th>
+                                            <td class="align-middle">{{$empresa->tipo_iden_representantelegal}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="align-middle" style='width: 12.55%'>NÚMERO IDEN. REPR. LEGAL:</th>
+                                            <td class="align-middle">{{$empresa->cedula_representantelegal}}</td>
+                                            <th class="align-middle" style='width: 12.55%'></th>
+                                            <td class="align-middle"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="table-active text-center align-middle">

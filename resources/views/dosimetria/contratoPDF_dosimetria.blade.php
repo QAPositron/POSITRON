@@ -20,8 +20,8 @@
             debidamente inscrita en la Cámara de Comercio de esta ciudad, representada en este acto por su Representante Legal y Gerente General Asociado, 
             <b>DIEGO FERNANDO APONTE CASTAÑEDA</b>, mayor de edad, con domicilio en la ciudad de Bucaramanga, identificado con Cédula de Ciudadanía número 80.115.846 
             expedida de Bogotá, quien en el texto de este contrato se denominará, <b>QA POSITRON S.A.S.</b>, sociedad que actúa como distribuidor y prestador de 
-            servicio de dosimetría personal autorizado bajo licencia No. _____________ del Ministerio de Minas, por una parte, y {{$cont->empresa->primer_nombre_representantelegal}} {{$cont->empresa->segundo_nombre_representantelegal}} {{$cont->empresa->primer_apellido_representantelegal}} {{$cont->empresa->segundo_apellido_representantelegal}},
-            identificado con el numero de cedula No.{{$cont->empresa->cedula_representantelegal}}, que actúa como representante legal de {{$cont->empresa->nombre_empresa}}, 
+            servicio de dosimetría personal autorizado bajo licencia No. _____________ del Ministerio de Minas, por una parte, y {{$cont->empresa->nombre_representantelegal}},
+            identificado con el número de cédula No.{{$cont->empresa->cedula_representantelegal}}, que actúa como representante legal de {{$cont->empresa->nombre_empresa}}, 
             ubicada en la dirección {{$cont->empresa->direccion_empresa}} de la ciudad de {{$cont->empresa->municipios->nombre_municol}} 
             - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} y NIT: {{$cont->empresa->num_iden_empresa}} - {{$cont->empresa->DV}},
             quien en el texto de este se denominará <b>EL USUARIO</b>, se ha celebrado un <b>CONTRATO COMERCIAL</b>, contenido en las siguientes cláusula: <br>

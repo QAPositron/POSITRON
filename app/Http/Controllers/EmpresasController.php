@@ -49,10 +49,13 @@ class EmpresasController extends Controller
             'respoIva_empresa'    => ['required'],   
             'respoFiscal_empresa' => ['required'],
             'telefono_empresa'    => ['required', 'max:10', 'min:10'],
-            'correo_empresa'      => ['required', 'email', 'max:10',  Rule::unique('empresas', 'email_empresa')],
+            'correo_empresa'      => ['required', 'email',  Rule::unique('empresas', 'email_empresa')],
             'direccion_empresa'   => ['required'],
             'pais_empresa'        => ['required'],
-            'ciudad_empresa'      => ['required']
+            'ciudad_empresa'      => ['required'],
+            'nombreRepr_empresa'  => ['required'],
+            'tipoIden_repreLegal' => ['required'],
+            'cedula_Repr_empresa' => ['required']
             
         ]);
         
@@ -72,7 +75,9 @@ class EmpresasController extends Controller
         $empresa->direccion_empresa                 = strtoupper($request->direccion_empresa);
         $empresa->pais_empresa                      = strtoupper($request->pais_empresa);
         $empresa->municipiocol_id                   = $request->ciudad_empresa;
-        
+        $empresa->nombre_representantelegal         = strtoupper($request->nombreRepr_empresa);
+        $empresa->tipo_iden_representantelegal      = strtoupper($request->tipoIden_repreLegal);
+        $empresa->cedula_representantelegal         = $request->cedula_Repr_empresa;
         
         $empresa->save();
 
@@ -90,7 +95,7 @@ class EmpresasController extends Controller
     }
 
     public function update(Request $request, Empresa $empresa){
-        
+       
         $request->validate([
             'nombre_empresa'      => ['required', Rule::unique('empresas', 'nombre_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
             'tipo_empresa'        => ['required'],              
@@ -105,7 +110,10 @@ class EmpresasController extends Controller
             'direccion_empresa'   => ['required'],   
             'pais_empresa'        => ['required'],   
             'ciudad_empresa'      => ['required'],   
-            'departamento_empresa'=> ['required']
+            'departamento_empresa'=> ['required'],
+            'nombreRepr_empresa'  => ['required'],
+            'tipoIden_repreLegal' => ['required'],
+            'cedula_Repr_empresa' => ['required']
         ]);
         
         $empresa->nombre_empresa                    = strtoupper($request->nombre_empresa);
@@ -122,7 +130,9 @@ class EmpresasController extends Controller
         $empresa->direccion_empresa                 = strtoupper($request->direccion_empresa);
         $empresa->pais_empresa                      = strtoupper($request->pais_empresa);
         $empresa->municipiocol_id                   = $request->ciudad_empresa;
-        
+        $empresa->nombre_representantelegal         = strtoupper($request->nombreRepr_empresa);
+        $empresa->tipo_iden_representantelegal      = strtoupper($request->tipoIden_repreLegal);
+        $empresa->cedula_representantelegal         = $request->cedula_Repr_empresa;
         
         $empresa->save();
         return redirect()->route('empresas.search')->with('actualizar', 'ok');
