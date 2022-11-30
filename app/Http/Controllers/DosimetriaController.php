@@ -833,13 +833,9 @@ class DosimetriaController extends Controller
         /* return $personaSede; */
     }
     public function saveAsignacionDosiContratoM1(Request $request, $asigdosicont, $mesnumber){
-       /*  return $asigdosicont; */
-        $request->validate([
-            'primerDia_asigdosim'        => 'required',
-            'ultimoDia_asigdosim'        => 'required',
-            'fecha_envio_dosim_asignado' => 'required',
-        ]);
-         ////////////////// SAVE DE DOSIMETRO TIPO  CONTROL  /////////////////////////
+        /* return $request; */
+      
+        ////////////////// SAVE DE DOSIMETRO TIPO  CONTROL  /////////////////////////
 
         if(!empty($request->id_dosimetro_asigdosimControl)){
 
