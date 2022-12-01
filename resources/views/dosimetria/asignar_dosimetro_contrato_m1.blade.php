@@ -915,6 +915,56 @@
                             });
                     }
                 }
+            };
+            /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE CONTROL y TORAX /////////////////
+            var dosimContr = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
+            console.log("DOSIMETROS DE TIPO CONTROL");
+            console.log(dosimContr);
+            for(var i = 0; i < dosimContr.length; i++){
+                console.log("DOSIMETRO CONTROL POSICION" +i);
+                var valuesContr = dosimContr[i].value;
+                console.log(valuesContr);
+                var dosimTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
+                console.log("DOSIMETROS DE TIPO TORAX");
+                console.log(dosimTorax);
+                for(var x = 0; x < dosimTorax.length; x++){
+                    console.log("DOSIMETRO TORAX POSICION" +x);
+                    var valuesTorax = dosimTorax[x].value;
+                    console.log(valuesTorax);
+                    if(valuesContr == valuesTorax){
+
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS CUERPO ENTERO SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            }); 
+                    }
+                }
+            };
+            var dosimTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
+            console.log("DOSIMETROS DE TIPO TORAX");
+            console.log(dosimTorax);
+            for(var i = 0; i < dosimTorax.length; i++){
+                console.log("DOSIMETRO TORAX POSICION" +i);
+                var valuesTorax = dosimTorax[i].value;
+                console.log(valuesTorax);
+                var dosimContr = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
+                console.log("DOSIMETROS DE TIPO CONTROL");
+                console.log(dosimContr);
+                console.log("TAMAÑO DOSIMETRO CRISTALINO" +dosimContr.length);
+                for(var x = 0; x < dosimContr.length; x++){
+                    console.log("DOSIMETRO CRISTALINO POSICION" +x);
+                    var valuesContr = dosimContr[x].value;
+                    console.log(valuesContr);
+
+                    if(valuesTorax == valuesContr){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
             }
             /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE CRISTALINO y (ANILLO, MUÑECA) /////////////////
             
@@ -1055,57 +1105,8 @@
                             });
                     }
                 }
-            }
-            /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE CONTROL y TORAX /////////////////
-            var dosimContr = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
-            console.log("DOSIMETROS DE TIPO CONTROL");
-            console.log(dosimContr);
-            for(var i = 0; i < dosimContr.length; i++){
-                console.log("DOSIMETRO CONTROL POSICION" +i);
-                var valuesContr = dosimContr[i].value;
-                console.log(valuesContr);
-                var dosimTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
-                console.log("DOSIMETROS DE TIPO TORAX");
-                console.log(dosimTorax);
-                for(var x = 0; x < dosimTorax.length; x++){
-                    console.log("DOSIMETRO TORAX POSICION" +x);
-                    var valuesTorax = dosimTorax[x].value;
-                    console.log(valuesTorax);
-                    if(valuesContr == valuesTorax){
-
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS CUERPO ENTERO SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            }); 
-                    }
-                }
             };
-            var dosimTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
-            console.log("DOSIMETROS DE TIPO TORAX");
-            console.log(dosimTorax);
-            for(var i = 0; i < dosimTorax.length; i++){
-                console.log("DOSIMETRO TORAX POSICION" +i);
-                var valuesTorax = dosimTorax[i].value;
-                console.log(valuesTorax);
-                var dosimContr = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
-                console.log("DOSIMETROS DE TIPO CONTROL");
-                console.log(dosimContr);
-                console.log("TAMAÑO DOSIMETRO CRISTALINO" +dosimContr.length);
-                for(var x = 0; x < dosimContr.length; x++){
-                    console.log("DOSIMETRO CRISTALINO POSICION" +x);
-                    var valuesContr = dosimContr[x].value;
-                    console.log(valuesContr);
-
-                    if(valuesTorax == valuesContr){
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            }
+            
             /////////////////////VALIDACION PARA LOS HOLDERS /////////////////
             var holCristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"]');
             console.log("ESTAS SON LOS HOLDERS DE CRISTALINO");

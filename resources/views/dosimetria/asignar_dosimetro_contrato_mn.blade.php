@@ -114,7 +114,6 @@
                                     <th style='width: 16.40%'>DOSÍMETRO</th>
                                     <th style='width: 16.40%'>HOLDER</th>
                                     <th style='width: 20.60%'>OCUPACIÓN</th>
-                                    
                                 </thead>
                                 <tbody>
                                     <input hidden name="mesNumber1" id="mesNumber1" value="{{$mesnumber}}">
@@ -193,7 +192,7 @@
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                 </select>
                                             </td>
-                                            <td></td>
+                                            
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
@@ -1139,14 +1138,14 @@
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                 </select>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
                                                         <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                                                         <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
                                                     </svg>
                                                 </button>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo DEDO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
@@ -1344,7 +1343,7 @@ crossorigin="anonymous">
             document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
         }
     };
-    function changueArea(area){
+    /* function changueArea(area){
         
         Swal.fire({
             title: 'DESEA CAMBIAR DE ÁREA EN UN DOSÍMETRO TIPO "AMBIENTAL"?',
@@ -1471,7 +1470,7 @@ crossorigin="anonymous">
                 @endforeach
             }
         })
-    }
+    } */
 
 </script>
 
@@ -1500,6 +1499,537 @@ crossorigin="anonymous">
     $(document).ready(function(){
         $('#form-nueva-asignacion_mn').submit(function(e){
             e.preventDefault();
+
+            ///////////////////////VALIDACION PARA LAS FECHAS/////////////////
+            var fecha_inicio = document.getElementById("primerDia_asigdosim").value;
+            if(fecha_inicio == ''){
+                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR LA FECHA DEL PRIMER DÍA PARA EL PERIODO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+            };
+            var fecha_final = document.getElementById("ultimoDia_asigdosim").value;
+            if(fecha_final == ''){
+                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR LA FECHA DEL ULTIMO DÍA PARA EL PERIODO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+            };
+            /////////////////////VALIDACION PARA LOS DOSIMETROS/////////////////
+            var dosimControl = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL");
+            console.log(dosimControl);
+            for(var i = 0; i < dosimControl.length; i++){
+                var values = dosimControl[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO DE TIPO CONTROL",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimControl.length; x++){
+                    var valuesX = dosimControl[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS CONTROL SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            var dosimArea = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
+            console.log("ESTAS SON LOS DOSIMTROS AREA");
+            console.log(dosimArea);
+            for(var i = 0; i < dosimArea.length; i++){
+                var values = dosimArea[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO PARA UNO DE UBICACIÓN ÁREA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimArea.length; x++){
+                    var valuesX = dosimArea[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN ÁREA SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            var dosimCaso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
+            console.log("ESTAS SON LOS DOSIMETROS CASO");
+            console.log(dosimCaso);
+            for(var i = 0; i < dosimCaso.length; i++){
+                var values = dosimCaso[i].value;
+                if(values == ''){
+                    
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO PARA UNO DE UBICACIÓN CASO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                };
+                for(var x = 0; x < dosimCaso.length; x++){
+                    var valuesX = dosimCaso[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CASO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            var dosimTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
+            console.log("ESTAS SON LOS DOSIMETROS TORAX");
+            console.log(dosimTorax);
+            for(var i = 0; i < dosimTorax.length; i++){
+                var values = dosimTorax[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO PARA UNO DE UBICACIÓN TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimTorax.length; x++){
+                    var valuesX = dosimTorax[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            var dosimCristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
+            console.log("ESTAS SON LOS DOSIMETROS CRISTALINO");
+            console.log(dosimCristalino);
+            for(var i = 0; i < dosimCristalino.length; i++){
+                var values = dosimCristalino[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO PARA UNO DE UBICACIÓN CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimCristalino.length; x++){
+                    var valuesX = dosimCristalino[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            var dosimMuneca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"]');
+            console.log("ESTAS SON LOS DOSIMETROS MUÑECA");
+            console.log(dosimMuneca);
+            for(var i = 0; i < dosimMuneca.length; i++){
+                var values = dosimMuneca[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO PARA UNO DE UBICACIÓN MUÑECA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimMuneca.length; x++){
+                    var valuesX = dosimMuneca[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN MUÑECA SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+
+            var dosimAnillo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
+            console.log("ESTAS SON LOS DOSIMETROS ANILLO");
+            console.log(dosimAnillo);
+            for(var i = 0; i < dosimAnillo.length; i++){
+                var values = dosimAnillo[i].value;
+                console.log("VALOR DE LOS DOSIMETROS ANILLO" +values)
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO PARA UNO DE UBICACIÓN ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimAnillo.length; x++){
+                    var valuesX = dosimAnillo[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE CONTROL y TORAX /////////////////
+            var dosimContr = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
+            console.log("DOSIMETROS DE TIPO CONTROL");
+            console.log(dosimContr);
+            for(var i = 0; i < dosimContr.length; i++){
+                console.log("DOSIMETRO CONTROL POSICION" +i);
+                var valuesContr = dosimContr[i].value;
+                console.log(valuesContr);
+                var dosimTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
+                console.log("DOSIMETROS DE TIPO TORAX");
+                console.log(dosimTorax);
+                for(var x = 0; x < dosimTorax.length; x++){
+                    console.log("DOSIMETRO TORAX POSICION" +x);
+                    var valuesTorax = dosimTorax[x].value;
+                    console.log(valuesTorax);
+                    if(valuesContr == valuesTorax){
+
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS CUERPO ENTERO SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            }); 
+                    }
+                }
+            };
+            /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE CRISTALINO y (ANILLO, MUÑECA) /////////////////
+            
+            var dosimCrist = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
+            console.log("DOSIMETROS DE TIPO CRISTALINO");
+            console.log(dosimCrist);
+            for(var i = 0; i < dosimCrist.length; i++){
+                console.log("DOSIMETRO CRISTALINO POSICION" +i);
+                var valuesCrist = dosimCrist[i].value;
+                console.log(valuesCrist);
+                var dosimMun = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"]');
+                console.log("DOSIMETROS DE TIPO MUÑECA");
+                console.log(dosimMun);
+                for(var x = 0; x < dosimMun.length; x++){
+                    console.log("DOSIMETRO MUÑECA POSICION" +x);
+                    var valuesMun = dosimMun[x].value;
+                    console.log(valuesMun);
+                    if(valuesCrist == valuesMun){
+
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            }); 
+                    }
+                }
+            };
+            for(var i = 0; i < dosimCrist.length; i++){
+                console.log("DOSIMETRO CRISTALINO POSICION" +i);
+                var valuesCrist = dosimCrist[i].value;
+                console.log(valuesCrist);
+                var dosimAni = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
+                console.log("DOSIMETROS DE TIPO ANILLO");
+                console.log(dosimAni);
+                console.log("TAMAÑO DOSIMETRO ANILLO" +dosimAni.length)
+                for(var x = 0; x < dosimAni.length; x++){
+                    console.log("DOSIMETRO ANILLO POSICION" +x);
+                    var valuesAni = dosimAni[x].value;
+                    console.log(valuesAni);
+                    if(valuesCrist == valuesAni){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE MUÑECA y (ANILLO, CRISTALINO) /////////////////
+            var dosimMun = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"]');
+            console.log("DOSIMETROS DE TIPO MUÑECA");
+            console.log(dosimMun);
+            for(var i = 0; i < dosimMun.length; i++){
+                console.log("DOSIMETRO MUÑECA POSICION" +i);
+                var valuesMun = dosimMun[i].value;
+                console.log(valuesMun);
+                var dosimAni = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
+                console.log("DOSIMETROS DE TIPO ANILLO");
+                console.log(dosimAni);
+                for(var x = 0; x < dosimAni.length; x++){
+                    console.log("DOSIMETRO ANILLO POSICION" +x);
+                    var valuesAni = dosimAni[x].value;
+                    console.log(valuesAni);
+                    if(valuesMun == valuesAni){
+
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            }); 
+                    }
+                }
+            };
+            for(var i = 0; i < dosimMun.length; i++){
+                console.log("DOSIMETRO MUÑECA POSICION" +i);
+                var valuesMun = dosimMun[i].value;
+                console.log(valuesMun);
+                var dosimCris = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
+                console.log("DOSIMETROS DE TIPO CRISTALINO");
+                console.log(dosimCris);
+                console.log("TAMAÑO DOSIMETRO CRISTALINO" +dosimCris.length)
+                for(var x = 0; x < dosimCris.length; x++){
+                    console.log("DOSIMETRO CRISTALINO POSICION" +x);
+                    var valuesCris = dosimCris[x].value;
+                    console.log(valuesCris);
+                    if(valuesMun == valuesCris){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE ANILLO y (MUÑECA, CRISTALINO) /////////////////
+            var dosimAni = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
+            console.log("DOSIMETROS DE TIPO ANILLO");
+            console.log(dosimAni);
+            for(var i = 0; i < dosimAni.length; i++){
+                console.log("DOSIMETRO ANILLO POSICION" +i);
+                var valuesAni = dosimAni[i].value;
+                console.log(valuesAni);
+                var dosimMun = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"]');
+                console.log("DOSIMETROS DE TIPO MUÑECA");
+                console.log(dosimMun);
+                for(var x = 0; x < dosimMun.length; x++){
+                    console.log("DOSIMETRO MUÑECA POSICION" +x);
+                    var valuesMun = dosimMun[x].value;
+                    console.log(valuesMun);
+                    if(valuesAni == valuesMun){
+
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            }); 
+                    }
+                }
+            };
+            for(var i = 0; i < dosimAni.length; i++){
+                console.log("DOSIMETRO ANILLO POSICION" +i);
+                var valuesAni = dosimAni[i].value;
+                console.log(valuesAni);
+                var dosimCris = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
+                console.log("DOSIMETROS DE TIPO CRISTALINO");
+                console.log(dosimCris);
+                console.log("TAMAÑO DOSIMETRO CRISTALINO" +dosimCris.length);
+                for(var x = 0; x < dosimCris.length; x++){
+                    console.log("DOSIMETRO CRISTALINO POSICION" +x);
+                    var valuesCris = dosimCris[x].value;
+                    console.log(valuesCris);
+
+                    if(valuesAni == valuesCris){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            /////////////////////VALIDACION PARA LOS HOLDERS /////////////////
+            var holCristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"]');
+            console.log("ESTAS SON LOS HOLDERS DE CRISTALINO");
+            console.log(holCristalino);
+            for(var i = 0; i < holCristalino.length; i++) {
+                var values = holCristalino[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER PARA UN DOSIMETRO DE UBICACIÓN CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                };
+                for(var x = 0; x < holCristalino.length; x++){
+                    var valuesX = holCristalino[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS DE UBICACIÓN CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            }; 
+            var holAnillo = document.querySelectorAll('select[name="id_holder_asigdosimDedo[]"]');
+            console.log("ESTAS SON LOS HOLDERS DE ANILLO");
+            console.log(holAnillo);
+            for(var i = 0; i < holAnillo.length; i++) {
+                var values = holAnillo[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER PARA UN DOSÍMETRO DE UBICACIÓN ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                };
+                for(var x = 0; x < holAnillo.length; x++){
+                    var valuesX = holAnillo[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS DE UBICACIÓN ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            var holMuneca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"]');
+            console.log("ESTAS SON LOS HOLDERS DE ANILLO");
+            console.log(holMuneca);
+            for(var i = 0; i < holMuneca.length; i++) {
+                var values = holMuneca[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER PARA UN DOSÍMETRO DE UBICACIÓN MUÑECA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                };
+                for(var x = 0; x < holMuneca.length; x++){
+                    var valuesX = holMuneca[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS DE UBICACIÓN MUÑECA SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };  
+            /////////////////////VALIDACION PARA LAS OCUPACIONES /////////////////
+            var ocuControl = document.querySelectorAll('select[name="ocupacion_asigdosimControl[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE CONTROL");
+            console.log(ocuControl);  
+            for(var i = 0; i < ocuControl.length; i++) {
+                var values = ocuControl[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR LA OCUPACIÓN DEL DOSIMETRO CONTROL",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var ocuArea = document.querySelectorAll('select[name="ocupacion_asigdosimArea[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE AREA");
+            console.log(ocuArea);  
+            for(var i = 0; i < ocuArea.length; i++) {
+                var values = ocuArea[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN ÁREA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var ocuCaso = document.querySelectorAll('select[name="ocupacion_asigdosimCaso[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE CASO");
+            console.log(ocuCaso);  
+            for(var i = 0; i < ocuCaso.length; i++) {
+                var values = ocuCaso[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN CASO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var ocuTorax = document.querySelectorAll('select[name="ocupacion_asigdosimTorax[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE TORAX");
+            console.log(ocuTorax);  
+            for(var i = 0; i < ocuTorax.length; i++) {
+                var values = ocuTorax[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var ocuCristalino = document.querySelectorAll('select[name="ocupacion_asigdosimCristalino[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE CRISTALINO");
+            console.log(ocuCristalino);  
+            for(var i = 0; i < ocuCristalino.length; i++) {
+                var values = ocuCristalino[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var ocuMuneca = document.querySelectorAll('select[name="ocupacion_asigdosimMuneca[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE MUÑECA");
+            console.log(ocuMuneca);  
+            for(var i = 0; i < ocuMuneca.length; i++) {
+                var values = ocuMuneca[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN MUÑECA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            var ocuAnillo = document.querySelectorAll('select[name="ocupacion_asigdosimDedo[]"]');
+            console.log("ESTAS SON LAS OCUPACIONES DE ANILLO");
+            console.log(ocuAnillo);  
+            for(var i = 0; i < ocuAnillo.length; i++) {
+                var values = ocuAnillo[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+
             Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
                 icon: 'warning',

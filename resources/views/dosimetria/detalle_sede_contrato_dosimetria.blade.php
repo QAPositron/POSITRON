@@ -46,7 +46,6 @@
                                     {{$i+1}}
                                 </th>
                                 <th class="align-middle">
-                                   {{--  <a class="link-dark" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i+1 ])}}">MES {{$i+1}} </a><br> --}}
                                     @if($i==0)
                                         @php
                                             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
@@ -56,11 +55,11 @@
                                         <span id="mes{{$i}}"></span>
                                     @endif
                                 </th>
-                                
                                 <td class='text-center'>
                                     <div class="row align-items-center"> 
                                         @if($mesTotal[$i]>0)
                                             @if(  $i == '0' )
+                                                MESTOTAL MAYOR A CERO Y i IGUAL A CERO
                                                 <div class="col-md text-center">
                                                     <a onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn  btn-sm aling-middle">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -141,6 +140,7 @@
                                                 </div> 
                                                 
                                             @else
+                                                MESTOTAL MAYOR A CERO Y i IGUAL NO CERO
                                                 <div class="col-md text-center">
                                                     <a onclick="return false" style="background-color: #a0aec0"  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -224,6 +224,7 @@
                                             @endif
                                         @else
                                             @if(  $i == '0' )
+                                                MESTOTAL MENOR A CERO Y i IGUAL A CERO
                                                 <div class="col-md text-center">
                                                     <a  href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn colorQA btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -273,6 +274,7 @@
                                                 </div> 
                                                 
                                             @else
+                                                MESTOTAL MENOR A CERO Y i IGUAL NO CERO
                                                 <div class="col-md text-center">
                                                     <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn colorQA btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">

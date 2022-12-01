@@ -43,7 +43,7 @@
                 <tbody>
                     @foreach($dosimetriacontrato as $dosicont)
                         <tr>
-                            <td class="align-middle"><a class="btn btn-outline-primary rounded-pill" href="{{route('detallecontrato.create', $dosicont->id_contratodosimetria)}}">{{$dosicont->codigo_contrato}}</a></td>
+                            <td class="align-middle" id='{{$dosicont->id_contratodosimetria}}'></td>
                             <td class="align-middle">{{$dosicont->fecha_inicio}}</td>
                             <td class="align-middle">{{$dosicont->fecha_finalizacion}}</td>
                             <td class="align-middle text-center">{{$dosicont->periodo_recambio}}</td>
@@ -116,6 +116,15 @@ crossorigin="anonymous">
         document.getElementById("fecha_finalizacion_contrato_input").value = fecha_final;
     };
     $(document).ready(function(){
+        @foreach($dosimetriacontrato as $dosicont)
+            var TDcontrato = document.getElementById("{{$dosicont->id_contratodosimetria}}");
+            var num = parseInt('{{$dosicont->codigo_contrato}}');
+            var n = num.toString().padStart(5,'0');
+            console.log("ESTE ES EL CODIGO" +n);
+           
+            TDcontrato.innerHTML = "<a class='btn btn-outline-primary rounded-pill' href='{{route('detallecontrato.create', "+$dosicont->id_contratodosimetria+")}}'>"+n+"</a>";
+            
+        @endforeach
 
         $('.eliminar_contratodosi').submit(function(e){
             e.preventDefault();

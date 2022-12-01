@@ -506,8 +506,8 @@ class DosimetriaController extends Controller
             $mesAssignRev11, $mesAssignRev12
         ];
         
-        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
         /* return $mescontdosisededepto; */
+        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
     }
 
     public function asignaDosiContrato($id, $mesnumber)
@@ -1167,13 +1167,6 @@ class DosimetriaController extends Controller
     }
     public function saveAsignacionDosiContratoMn($id, $mesnumber, Request $request){
         /* return $request; */
-        
-        
-        $request->validate([
-            'primerDia_asigdosim'        => 'required',
-            'ultimoDia_asigdosim'        => 'required',
-            'fecha_envio_dosim_asignado' => 'required',
-        ]);
 
         //////////////////ACTUALZAR TABLA CONTRATODOSIMETRIASEDEDEPTOS /////////////////////////
         $dosi_control = empty($request->id_dosimetro_asigdosimControl)  ? 0 : count($request->id_dosimetro_asigdosimControl);
