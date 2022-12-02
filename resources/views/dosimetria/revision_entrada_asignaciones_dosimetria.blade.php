@@ -202,8 +202,20 @@
                                     @csrf
                                     <div class="modal-body">
                                         <div class="col-md">
-                                            <label class="text-center">INGRESE LAS OBSERVACIONES O NOTAS PERTINENTES:</label>
-                                            <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea> 
+                                            
+                                            <div class="form-floating">
+                                                <select class="form-select " name="nota_cambio_dosimetro" id="nota_cambio_dosimetros">
+                                                    <option value ="">---</option>
+                                                    <option value ="DOSIMETRO CONTAMINADO">DOSIMETRO CONTAMINADO</option>
+                                                    <option value ="HOLDER DAÑADO">HOLDER DAÑADO</option>
+                                                    <option value ="DOSIMETRO DAÑADO">DOSIMETRO DAÑADO</option>
+                                                    <option value ="DOSIMETROS FALTANTES">DOSIMETROS FALTANTES</option>
+                                                    <option value ="DOSIMETROS HUMEDOS">DOSIMETROS HUMEDOS</option>
+                                                    <option value ="DOSIMETRO SIN ETIQUETA">DOSIMETRO SIN ETIQUETA</option>
+                                                </select>
+                                                <label class="text-center">INGRESE LAS OBSERVACIONES O NOTAS PERTINENTES:</label>
+                                            </div>
+                                            {{-- <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea>  --}}
                                             <input type="number" hidden value="{{$mesnumber}}" name="mesnumber" id="mesnumber">
                                             <input type="number" hidden value="{{$contdosisededepto->id_contdosisededepto}}" name="id_contdosisededepto" id="id_contdosisededepto">
                                         </div>
@@ -264,7 +276,7 @@ crossorigin="anonymous">
 <script type="text/javascript">
     
     $(document).ready(function(){
-        
+       
         @foreach($trabjasignados as $trabj)
             if('{{$trabj->revision_entrada}}' == 'TRUE'){
                 let tr = document.getElementById('{{$trabj->id_trabajadordosimetro}}'); 

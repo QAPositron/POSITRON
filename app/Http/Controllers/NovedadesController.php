@@ -144,7 +144,7 @@ class NovedadesController extends Controller
    
     public function savecambiocantdosim(Request $request){
 
-       /*  return $request; */
+        /* return $request; */
 
         $dosi_control = $request->dosi_control;
         $dosi_torax= $request->dosi_torax;
@@ -235,7 +235,7 @@ class NovedadesController extends Controller
         $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino == null ? 0 : $dosi_cristalino;
         $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca == null ? 0 : $dosi_muñeca;
         $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo == null ? 0 : $dosi_dedo;    
-        $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);
+        $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros1);
 
         $newMesescontdosisedeptos->save();
 
@@ -472,7 +472,7 @@ class NovedadesController extends Controller
         $newMesescontdosisedeptos->dosi_cristalino      = $dosi_cristalino;
         $newMesescontdosisedeptos->dosi_muñeca          = $dosi_muñeca;
         $newMesescontdosisedeptos->dosi_dedo            = $dosi_dedo;  
-        $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);  
+        $newMesescontdosisedeptos->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros2);  
         $newMesescontdosisedeptos->save();
 
         $updatecontratoDosisedepto = Contratodosimetriasededepto::where('id_contdosisededepto', $request->contdosisededepto)

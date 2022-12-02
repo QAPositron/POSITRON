@@ -12,12 +12,13 @@
         </div>
         <div class="col-md-9">
             <h2 class="text-center">DOSIMETRÍA DE</h2>
-            <h3 class="text-center"><i>{{$dosisededeptocontra->contratodosimetriasede->sede->empresa->nombre_empresa}} </i> - SEDE:<i> {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i> - ESPECIALIDAD: <i>{{$dosisededeptocontra->departamentosede->departamento->nombre_departamento}}</i></h3>
+            <h3 class="text-center"><i>{{$dosisededeptocontra->contratodosimetriasede->sede->empresa->nombre_empresa}} </i> - SEDE:<i> {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i></h3>
+            <h3 class="text-center">ESPECIALIDAD: <i>{{$dosisededeptocontra->departamentosede->departamento->nombre_departamento}}</i></h3>
         </div>
         <div class="col-md"></div>
     </div>
     <br>
-    <h4 class="text-center align-middle">CONTRATO No. {{$dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</h4>
+    <h4 class="text-center align-middle" id="id_contrato"> </h4>
 
     <br>
     <h6 class="text-center"> <b>TOTAL DE DOSÍMETROS:</b> CONTROL: # {{$dosisededeptocontra->dosi_control}} -- TÓRAX: # {{$dosisededeptocontra->dosi_torax}}   --  ÁREA: # {{$dosisededeptocontra->dosi_area}}   --  CASO: # {{$dosisededeptocontra->dosi_caso}} -- CRISTALINO: # {{$dosisededeptocontra->dosi_cristalino}} --  MUÑECA: # {{$dosisededeptocontra->dosi_muñeca}} -- DEDO: # {{$dosisededeptocontra->dosi_dedo}}</h6>
@@ -41,7 +42,7 @@
 
                         @for($i=0; $i<12; $i++)
                             
-                            <tr>
+                            <tr @if($dosisededeptocontra->mes_actual == ($i+1)) style="background-color: rgb(26, 153, 128, 0.1);" @endif>
                                 <th class="text-center align-middle">
                                     {{$i+1}}
                                 </th>
@@ -59,7 +60,7 @@
                                     <div class="row align-items-center"> 
                                         @if($mesTotal[$i]>0)
                                             @if(  $i == '0' )
-                                                MESTOTAL MAYOR A CERO Y i IGUAL A CERO
+                                                
                                                 <div class="col-md text-center">
                                                     <a onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn  btn-sm aling-middle">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -140,7 +141,6 @@
                                                 </div> 
                                                 
                                             @else
-                                                MESTOTAL MAYOR A CERO Y i IGUAL NO CERO
                                                 <div class="col-md text-center">
                                                     <a onclick="return false" style="background-color: #a0aec0"  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -224,7 +224,6 @@
                                             @endif
                                         @else
                                             @if(  $i == '0' )
-                                                MESTOTAL MENOR A CERO Y i IGUAL A CERO
                                                 <div class="col-md text-center">
                                                     <a  href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn colorQA btn-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -274,13 +273,20 @@
                                                 </div> 
                                                 
                                             @else
-                                                MESTOTAL MENOR A CERO Y i IGUAL NO CERO
                                                 <div class="col-md text-center">
-                                                    <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn colorQA btn-sm">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
-                                                            <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                                                        </svg> <br> ASIGNAR
-                                                    </a>
+                                                    @if($dosisededeptocontra->mes_actual+1 == ($i+1))
+                                                        <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn colorQA btn-sm">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+                                                            </svg> <br> ASIGNAR
+                                                        </a>
+                                                    @else
+                                                        <a onclick="return false" style="background-color: #a0aec0"  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn btn-sm">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+                                                            </svg> <br> ASIGNAR
+                                                        </a>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md text-center">
                                                     <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1])}}" target="_blank">
@@ -356,6 +362,15 @@ crossorigin="anonymous">
 
 <script type="text/javascript">
     $(document).ready(function(){
+        var TDcontrato = document.getElementById("id_contrato");
+        var num = parseInt('{{$dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}');
+        var n = num.toString().padStart(5,'0');
+        console.log("ESTE ES EL CODIGO" +n);
+           
+        TDcontrato.innerHTML = "CONTRATO No. "+n;
+
+
+
         // Creamos array con los meses del año
         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
         let fecha = new Date("{{$dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}");

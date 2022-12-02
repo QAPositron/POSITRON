@@ -24,7 +24,7 @@
 
     </div>
 </div>
-<BR></BR>
+<br>
 <div class="row">
     <div class="col"></div>
     <div class="col-7">

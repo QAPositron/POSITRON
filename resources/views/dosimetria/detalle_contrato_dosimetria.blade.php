@@ -15,9 +15,8 @@
     <div class="col-md"></div>
 </div>
 <br>
-<h4 class="text-center">CONTRATO No. {{$dosimetriacontrato->codigo_contrato}}</h4>
+<h4 class="text-center" id="id_contrato"></h4>
 <br>
-{{-- <h6 class="text-center ">TOTAL DE DOSÍMETROS:       CUERPO E.:        AMBIENTAL: #       EZCLIP:# </h6> --}}
 
 <div class="row">
     <div class="col-md"></div>
@@ -76,7 +75,7 @@
                         echo "<thead class='table-active text-center'>";  
                             echo "<tr>";
                                 echo "<th class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
-                                echo "<th class='align-middle' style='width: 8.90%'>MES</th>";
+                                echo "<th class='align-middle' style='width: 8.90%'>MES ACTUAL</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. TÓRAX</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CRISTALINO</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ANILLO</th>";
@@ -154,6 +153,13 @@ crossorigin="anonymous">
     
     $(document).ready(function(){
 
+        var TDcontrato = document.getElementById("id_contrato");
+        var num = parseInt('{{$dosimetriacontrato->codigo_contrato}}');
+        var n = num.toString().padStart(5,'0');
+        console.log("ESTE ES EL CODIGO" +n);
+           
+        TDcontrato.innerHTML = "CONTRATO No. "+n;
+        
         $('.eliminar_contdosisedepto').submit(function(e){
             e.preventDefault();
             Swal.fire({

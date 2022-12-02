@@ -261,7 +261,7 @@ crossorigin="anonymous">
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'CORRECTO!!',
-                                    text: 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO DE CONTROL Y ADEMAS COINCIDE LA UBICACIÓN Y ESTADO',
+                                    text: 'SI HAY COINCIDENCIA ENTRE LA ETIQUETA Y EL DOSIMETRO DE CONTROL',
                                     showConfirmButton: false,
                                     timer: 6000
                                 })
@@ -282,7 +282,7 @@ crossorigin="anonymous">
                             Swal.fire({
                                 icon: 'error',
                                 title: 'ERROR!!',
-                                text: 'NO SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO DE CONTROL',
+                                text: 'NO HAY COINCIDENCIA ENTRE LA ETIQUETA Y EL DOSÍMETRO DE CONTROL',
                                 showConfirmButton: false,
                                 timer: 6000
                             })
@@ -325,7 +325,7 @@ crossorigin="anonymous">
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'CORRECTO!!',
-                                    text: 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO Y ADEMAS COINCIDE LA UBICACIÓN',
+                                    text: 'SI HAY COINCIDENCIA ENTRE LA ETIQUETA Y EL DOSÍMETRO',
                                     showConfirmButton: false,
                                     timer: 4000
                                 })
@@ -345,7 +345,7 @@ crossorigin="anonymous">
                             Swal.fire({
                                 icon: 'error',
                                 title: 'ERROR!!',
-                                text: 'NO SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO',
+                                text: 'NO HAY COINCIDENCIA ENTRE LA ETIQUETA Y EL DOSÍMETRO',
                                 showConfirmButton: false,
                                 timer: 3000
                             })

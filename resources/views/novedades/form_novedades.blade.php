@@ -408,11 +408,15 @@
             console.log(empresa_id);
             if($.trim(empresa_id) != ''){
                 $.get('contratoDosim', {empresa_id: empresa_id}, function(contratos){
+                    console.log("ESTOS SON LOS CONTRATOS");
                     console.log(contratos);
                     $('#contratos_empresadosi').empty();
                     $('#contratos_empresadosi').append("<option value=''>--SELECCIONE UN CONTRATO--</option>");
                     $.each(contratos, function(index, value){
-                        $('#contratos_empresadosi').append("<option value='"+ index + "'>" + value + "</option>");
+                        var num = parseInt(value);
+                        var n = num.toString().padStart(5,'0');
+                        console.log("ESTE ES EL CODIGO" +n);
+                        $('#contratos_empresadosi').append("<option value='"+ index + "'>" + n + "</option>");
                     })
                 });
             }
