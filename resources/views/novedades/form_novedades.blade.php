@@ -146,13 +146,7 @@
             </div>
             <br>
             <br>
-            {{-- @if($errors->any())
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            @endif --}}
+           
             <div class="row px-2">
                 <div class="col-md">
                     

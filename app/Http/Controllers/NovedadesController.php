@@ -534,4 +534,31 @@ class NovedadesController extends Controller
         
         return $pdf->stream();
     }
+
+
+
+
+    ///////////////////////////////////// NUEVO MODULO DE NOVEDADES CON HISTORIAL Y OTRA INTERFAZ//////////////////////////
+    public function search(){
+        $empresasDosi = ContratosDosimetriaEmpresa::all();
+        return view('novedades.search_novedades',compact('empresasDosi'));
+    }
+    public function contratosDosim(Request $request){
+        $contratosDosi = Dosimetriacontrato::where('empresa_id', '=', $request->empresa_id)->get();
+        return response()->json($contratosDosi);
+    }
+    public function sedesEspcontDosim(Request $request){
+        $sedesEspDosi = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
+        ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
+        ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
+        ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
+        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
+        ->where('contratodosimetria_id', '=', $request->contrato_id)
+        ->get();
+        return response()->json($sedesEspDosi);
+    }
+
+
+
 }

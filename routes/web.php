@@ -265,7 +265,7 @@ Route::get('/revisiondosimetriaentrada/asignacionesControl', [DosimetriaControll
 Route::post('revisiondosimetriaentrada/observacion', [DosimetriaController::class, 'observacionesRevsEntradaGeneral'])->name('observacionesrevsentradageneral.create');
 Route::get('certificadorevisionentradadosimetria/{empresa}/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfCertificadorevisionentrada'])->name('certificadorevisionentrada.pdf');
 
-////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA //////////////
+////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA (ANTIGUAS)//////////////
 Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');
 Route::get('/novedades/contratoDosim', [NovedadesController::class, 'contratoDosimetria']);
 Route::get('/novedades/sedescontDosi', [NovedadesController::class, 'sedescontDosimetria']);
@@ -278,7 +278,6 @@ Route::get('/novedades/dosiasginadoscontrolmesactual/', [NovedadesController::cl
 Route::get('/novedades/trabajadoresempresa/', [NovedadesController::class, 'trabajadoresempresa']);
 Route::get('/novedades/dosimetros/', [NovedadesController::class, 'dosimetrosdisponibles']);
 
-/* Route::get('/novedades/cantidadDosimesant/', [NovedadesController::class, 'cantidadDosimetrosmesactual']);*/
 Route::post('novedades/novedadesmesact', [NovedadesController::class, 'savecambiocantdosim'])->name('cambiocantdosim.save');
 Route::get('novedades/{deptodosi}/{mesnumber}/reportePDFcambiodosim', [NovedadesController::class, 'reportePDFcambiodosim'])->name('reportePDFcambiodosim.pdf');
 
@@ -286,6 +285,11 @@ Route::post('novedades/novedadesmesig', [NovedadesController::class, 'savemesigu
 Route::get('novedades/limpiar/', [NovedadesController::class, 'clearAsignacionAnteriorMn']);
 
 Route::get('novedades/meseschangecontratoDosi', [NovedadesController::class, 'meseschangecontratoDosi']);
+
+////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA (NUEVAS 05/12/22) //////////////
+Route::get('novedades/search', [NovedadesController::class, 'search'])->name('novedadesdosim.search');
+Route::get('/novedades/contratosDosim', [NovedadesController::class, 'contratosDosim']);
+Route::get('/novedades/sedesEspcontDosi', [NovedadesController::class, 'sedesEspcontDosim']);
 
 
 Route::get('/prueba1', [PruebaController::class,'index']);

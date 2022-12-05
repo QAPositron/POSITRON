@@ -39,7 +39,7 @@
                 de las referencias "cuerpo entero, cristalino y anillo", a escogencia del mismo, en la fecha de inicio de este contrato y en cada periodo de medición 
                 comprendido en el servicio contratado para recambio de equipos. La entrega o reposición se realizará en fecha anterior al inicio del periodo de uso correspondientes. </li>
             <li>Orientar a los <b>USUARIOS</b> de los dosímetros sobre el uso de los mismos. Para tal efecto <b>QA POSITRON S.A.S.</b> brindara las recomendaciones pertinentes a los 
-                <b>USUARIOS</b>, ya sea de manera escrita, mediante los formatos adjuntos a los dosímetros a su entrega, a través de charlas de capacitación para el para el manejo 
+                <b>USUARIOS</b>, ya sea de manera escrita, mediante los formatos adjuntos a los dosímetros a su entrega, a través de charlas de capacitación para el manejo 
                 del servicio y los dosímetros, o él envió de información por vía electrónica.</li>
             <li>Cuando el servicio sea contratado en la ciudad de Bucaramanga., recoger los dosímetros dentro de los cinco (5) días hábiles siguiente a la notificación de disponibilidad
                 para la recolección de los mismos, realizada por parte del usuario, a la terminación del periodo de uso (mensual o trimestral). La recolección se realizará en el lugar y 
@@ -64,7 +64,7 @@
                 obligación de pagarlos en el término que se estipule en dichos documentos.</li>
             <li>Notificar por escrito a <b>QA POSITRON S.A.S.</b>, al inicio del servicio, la persona encargada de entregar los dosímetros, y notificar el día en que estarán a disposición para 
                 recolección al final de cada periodo de uso, en caso de aplicar. Para tal efecto, se tiene a disposición el correo electrónico dosimetria.qapositron@gmail.com.</li>
-            <li>Informar a <b>QA POSITRON S.A.S.</b>, de manera escrita y/o en los formatos de novedades suministra dos para tal fin, la necesidad de cambios en los usuarios, adiciones, o 
+            <li>Informar a <b>QA POSITRON S.A.S.</b>, de manera escrita y/o en los formatos de novedades suministrados para tal fin, la necesidad de cambios en los usuarios, adiciones, o 
                 cancelaciones, a más tardar treinta (30) días calendario antes de la fecha programada para el inicio del periodo de uso para el cual se necesitan los cambios, de tal forma se 
                 puedan incorporar en la programación de producción. <b>Solicitudes extemporáneas tendrán efectos en los cambios y la facturación para el siguiente periodo de uso aplicable.</b></li>
             <li>Restituir a <b>QA POSITRON S.A.S.</b> a la finalización del contrato el último de los dosímetros en su poder.</li>

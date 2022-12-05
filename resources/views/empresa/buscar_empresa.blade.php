@@ -14,7 +14,7 @@
     
 <div class="row pt-3" id ="salida"> 
     <h2 class="text-center">TODAS LAS EMPRESAS</h2>
-    <BR></BR>
+    <br>
     <table class="table table-responsive hover table-bordered" id="empresas">
         <thead class="table-active text-center">
             <th scope='col'  style='width: 18.60%'>NOMBRE</th>

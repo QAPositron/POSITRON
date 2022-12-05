@@ -22,6 +22,7 @@
               <li><a class="dropdown-item" href="{{route('revisiondosimetria.create')}}">REVISIÓN DE SALIDA</a></li>
               <li><a class="dropdown-item" href="{{route('revisiondosimetriaentrada.create')}}">REVISIÓN DE ENTRADA</a></li>
               <li><a class="dropdown-item" href="{{route('novedadesdosim.create')}}">NOVEDADES</a></li>
+              <li><a class="dropdown-item" href="{{route('novedadesdosim.search')}}">NOVEDADES NUEVO</a></li>
             </ul>
           </li>
           <li class="nav-item">
