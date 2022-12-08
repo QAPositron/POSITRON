@@ -11,7 +11,7 @@
     <div class="col"></div>
 </div>
 
-<div class="row pt-3">
+{{-- <div class="row pt-3">
     <div class="col-md"></div>
     <div class="col-md">
         <h2 class="text-center">HISTORIAL DE NOVEDADES</h2>
@@ -20,14 +20,19 @@
 </div>
 <br>
 <br>
-<br>
+<br> --}}
 <div class="row">
     <div class="col md"></div>
     <div class="col-md-6">
         <div class="card text-dark bg-light">
+            <br>
+            <h2 class="text-center">HISTORIAL DE NOVEDADES</h2>
+            <br>
             <div class="row p-4">
+                <label > SELECCIONE LA EMPRESA Y EL CONTRATO CORRESPONDIENTE PARA VER SU HISTORIAL DE NOVEDADES: </label>
                 <div class="col-md"></div>
                 <div class="col-md-5">
+                    <br>
                     <div class="form-floating">
                         <select class="form-select" name="empresaDosimetria" id="empresaDosimetria" autofocus style="text-transform:uppercase">
                             <option value="">--SELECCIONE--</option>
@@ -63,8 +68,7 @@
                     <br>
                     <h4 class="text-center" id="tituloContrato"></h4>
                     <br>
-                    <div id="tituloSede"></div>
-                    <div id="tablaEsp"></div>
+                    <div id="titulosTablas"></div>
                 </div>
                 <div class="col-md"></div>
             </div>
@@ -112,15 +116,17 @@
                     console.log(sedesEsp);
                     infoContrato.style.display= "block";
                     $.each(sedesEsp, function(index, value){
-                        
+                        console.log("ESTE ES EL INDICE" +index);
                         tituloEmpresa.innerHTML = "DOSIMETRÍA DE <i>"+value.nombre_empresa+"</i>";
                         var num = parseInt(value.codigo_contrato);
                         var n = num.toString().padStart(5,'0');
                         tituloContrato.innerHTML = "CONTRATO No."+n;
+                        /* let tituloSede = 0; */
                         if(value.nombre_sede != check){
-                    
-                            tituloSede.innerHTML = "<h4 class='text-center'>"+value.nombre_sede+"</h4>";
+                            
+                            $('#titulosTablas').append("<h4 class='text-center' id='tituloSede"+index+"'>"+value.nombre_sede+"</h4>");
                             check = value.nombre_sede;
+                            
                             console.log(check);
                             let myTable= "<table class='table  table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
                             myTable+= "<th class='align-middle' style='width: 8.90%'>MES ACTUAL</th>";
@@ -131,6 +137,7 @@
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL</th>";
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ÁREA</th>";
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CASO</th>";
+                            myTable+="<th class='align-middle' style='width: 10.90%'>ACCIONES</th>";
                             myTable+="</tr>";
                             myTable+="<tbody><tr><td class='text-center align-middle'>"+value.nombre_departamento+"</td>";
                             myTable+="<td class='text-center align-middle'>"+value.mes_actual+"</td>";
@@ -143,7 +150,7 @@
                             myTable+="<td class='text-center align-middle'>"+value.dosi_caso+"</td>";
                             myTable+="</td>";
 
-                            tablaEsp.innerHTML = myTable;
+                            $('#titulosTablas').append(myTable);
 
                         } 
                     })
