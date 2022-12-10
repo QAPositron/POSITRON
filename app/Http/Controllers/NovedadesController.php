@@ -537,6 +537,7 @@ class NovedadesController extends Controller
 
 
 
+    //////////// NOVEDADES DE DOSIMETRIA (NUEVAS 05/12/22) //////////////
 
     ///////////////////////////////////// NUEVO MODULO DE NOVEDADES CON HISTORIAL Y OTRA INTERFAZ//////////////////////////
     public function search(){
@@ -558,7 +559,10 @@ class NovedadesController extends Controller
         ->get();
         return response()->json($sedesEspDosi);
     }
-
+    public function create(){
+        $empresasDosi = ContratosDosimetriaEmpresa::all();
+        return view('novedades.crear_novedad',compact('empresasDosi'));
+    }
 
 
 }

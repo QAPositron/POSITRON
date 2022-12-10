@@ -287,9 +287,11 @@ Route::get('novedades/limpiar/', [NovedadesController::class, 'clearAsignacionAn
 Route::get('novedades/meseschangecontratoDosi', [NovedadesController::class, 'meseschangecontratoDosi']);
 
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA (NUEVAS 05/12/22) //////////////
-Route::get('novedades/search', [NovedadesController::class, 'search'])->name('novedadesdosim.search');
+Route::get('novedades/search', [NovedadesController::class, 'search'])->name('novedadesdosimetria.search');
 Route::get('/novedades/contratosDosim', [NovedadesController::class, 'contratosDosim']);
 Route::get('/novedades/sedesEspcontDosi', [NovedadesController::class, 'sedesEspcontDosim']);
+
+Route::get('novedades/crear', [NovedadesController::class, 'create'])->name('novedadesdosimetria.create');
 
 
 Route::get('/prueba1', [PruebaController::class,'index']);

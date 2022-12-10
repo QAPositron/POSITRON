@@ -2,7 +2,7 @@
 @section('contenido')
 <div class="row">
     <div class="col">
-        <a href="{{-- {{route('empresas.create')}} --}}" class="btn colorQA ">
+        <a href="{{route('novedadesdosimetria.create')}}" class="btn colorQA ">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg mb-2" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
             </svg> CREAR NOVEDAD
@@ -11,16 +11,6 @@
     <div class="col"></div>
 </div>
 
-{{-- <div class="row pt-3">
-    <div class="col-md"></div>
-    <div class="col-md">
-        <h2 class="text-center">HISTORIAL DE NOVEDADES</h2>
-    </div>
-    <div class="col-md"></div>
-</div>
-<br>
-<br>
-<br> --}}
 <div class="row">
     <div class="col md"></div>
     <div class="col-md-6">
@@ -28,11 +18,10 @@
             <br>
             <h2 class="text-center">HISTORIAL DE NOVEDADES</h2>
             <br>
+            <label class="px-4"> SELECCIONE LA EMPRESA Y EL CONTRATO CORRESPONDIENTE PARA VER SU HISTORIAL DE NOVEDADES: </label>
             <div class="row p-4">
-                <label > SELECCIONE LA EMPRESA Y EL CONTRATO CORRESPONDIENTE PARA VER SU HISTORIAL DE NOVEDADES: </label>
                 <div class="col-md"></div>
                 <div class="col-md-5">
-                    <br>
                     <div class="form-floating">
                         <select class="form-select" name="empresaDosimetria" id="empresaDosimetria" autofocus style="text-transform:uppercase">
                             <option value="">--SELECCIONE--</option>
@@ -137,7 +126,6 @@
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL</th>";
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ÁREA</th>";
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CASO</th>";
-                            myTable+="<th class='align-middle' style='width: 10.90%'>ACCIONES</th>";
                             myTable+="</tr>";
                             myTable+="<tbody><tr><td class='text-center align-middle'>"+value.nombre_departamento+"</td>";
                             myTable+="<td class='text-center align-middle'>"+value.mes_actual+"</td>";
@@ -148,7 +136,12 @@
                             myTable+="<td class='text-center align-middle'>"+value.dosi_control+"</td>";
                             myTable+="<td class='text-center align-middle'>"+value.dosi_area+"</td>";
                             myTable+="<td class='text-center align-middle'>"+value.dosi_caso+"</td>";
+                            myTable+="</tr>";
+                            myTable+="<tr>";
+                            myTable+="<td class='text-center align-middle' colspan='9'>";
+
                             myTable+="</td>";
+                            myTable+="</tr>";
 
                             $('#titulosTablas').append(myTable);
 
