@@ -273,6 +273,7 @@ Route::get('/novedades/especialidadescontDosi', [NovedadesController::class, 'es
 Route::get('/novedades/contdosisededepto/', [NovedadesController::class, 'contratodosi']);
 Route::get('/novedades/mesescontdosisededepto/', [NovedadesController::class, 'mesescontDosimetria']);
 Route::get('/novedades/mesactualcontdosisededepto/', [NovedadesController::class, 'mesactualcontDosimetria']);
+
 Route::get('/novedades/dosiasginadosmesactual/', [NovedadesController::class, 'dosiasginadosmesactual']);
 Route::get('/novedades/dosiasginadoscontrolmesactual/', [NovedadesController::class, 'dosiasginadoscontrolmesactual']);
 Route::get('/novedades/trabajadoresempresa/', [NovedadesController::class, 'trabajadoresempresa']);
@@ -290,7 +291,7 @@ Route::get('novedades/meseschangecontratoDosi', [NovedadesController::class, 'me
 Route::get('novedades/search', [NovedadesController::class, 'search'])->name('novedadesdosimetria.search');
 Route::get('/novedades/contratosDosim', [NovedadesController::class, 'contratosDosim']);
 Route::get('/novedades/sedesEspcontDosi', [NovedadesController::class, 'sedesEspcontDosim']);
-
+//////////////(se usaron las rutas para encontrar los contratos las sedes y las especialidades y el mes actual de una empresa de dosimetria)/////////
 Route::get('novedades/crear', [NovedadesController::class, 'create'])->name('novedadesdosimetria.create');
 
 

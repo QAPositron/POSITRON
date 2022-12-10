@@ -127,7 +127,6 @@
             <br>
             <div class="row">
                 <div class="col-md">
-
                 </div>
                 <div class="col-md-1">
                     <label for="" class="text-center align-middle">MES A MODIFICAR</label>
