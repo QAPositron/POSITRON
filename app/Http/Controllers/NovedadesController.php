@@ -144,7 +144,7 @@ class NovedadesController extends Controller
    
     public function savecambiocantdosim(Request $request){
 
-        /* return $request; */
+        return $request;
 
         $dosi_control = $request->dosi_control;
         $dosi_torax= $request->dosi_torax;
@@ -254,7 +254,7 @@ class NovedadesController extends Controller
         /* return $request; */
     }
     public function savemesiguientecambiocantdosim(Request $request){
-        /* return $request; */
+        return $request;
 
         $dosi_control = 0;
         $dosi_torax= 0;
@@ -561,7 +561,15 @@ class NovedadesController extends Controller
     }
     public function create(){
         $empresasDosi = ContratosDosimetriaEmpresa::all();
-        return view('novedades.crear_novedad',compact('empresasDosi'));
+        $dosimetrosDisponibles = Dosimetro::where('estado_dosimetro', '=', 'STOCK')
+        ->where('tipo_dosimetro', '=', 'GENERAL')
+        ->get();
+        $dosimetrosDisponiblesEzclip = Dosimetro::where('estado_dosimetro', '=', 'STOCK')
+        ->where('tipo_dosimetro', '=', 'EZCLIP')
+        ->get();
+        $holdersDisponibles = Holder::where('estado_holder', '=', 'STOCK')
+        ->get();
+        return view('novedades.crear_novedad',compact('empresasDosi', 'dosimetrosDisponibles', 'dosimetrosDisponiblesEzclip', 'holdersDisponibles'));
     }
 
 
