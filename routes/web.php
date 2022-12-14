@@ -181,6 +181,9 @@ Route::post('asignadosicontratom1/{asigdosicont}/{mesnumber}/', [DosimetriaContr
 Route::get('asignadosicontratomn/{asigdosicont}/{mesnumber}/create', [DosimetriaController::class, 'asignaDosiContratoMn'])->name('asignadosicontratomn.create');
 Route::post('asignadosicontratomn/{asigdosicont}/{mesnumber}/', [DosimetriaController::class, 'saveAsignacionDosiContratoMn'])->name('asignadosicontratomn.save');
 Route::get('asignadosicontratomn/{asigdosicont}/{mesnumber}/clear', [DosimetriaController::class, 'clearAsignacionAnteriorMn'])->name('asignadosicontratomn.clear');
+
+Route::get('asignadosicontratomnNovedad/{asigdosicont}/{mesnumber}/create',[DosimetriaController::class, 'asignaDosiContratoMnNovedad'])->name('asignadosicontratomnNovedad.create');
+Route::post('asignadosicontratomnNovedad/{asigdosicont}/{mesnumber}/',[DosimetriaController::class, 'saveAsignacionDosiContratoMnNovedad'])->name('asignadosicontratomnNovedad.save');
 /////////////
 
 Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/create', [DosimetriaController::class, 'asignaDosiContrato'])->name('asignadosicontrato.create');

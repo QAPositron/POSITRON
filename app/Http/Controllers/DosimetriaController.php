@@ -506,7 +506,7 @@ class DosimetriaController extends Controller
             $mesAssignRev11, $mesAssignRev12
         ];
         
-        /* return $dosisededeptocontra; */
+        /* return $mesesAssig[1]; */
         return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
     }
 
@@ -1065,8 +1065,8 @@ class DosimetriaController extends Controller
     public function asignaDosiContratoMn($id, $mesnumber){
         $contdosisededepto = Contratodosimetriasededepto::find($id);
         $mescontdosisededepto = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)->latest()->first();
-        $trabajadoreSede = Trabajadorsede::where('sede_id', '=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
-        ->get();
+        /* $trabajadoreSede = Trabajadorsede::where('sede_id', '=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
+        ->get(); */
         $personaSede = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
         ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
         ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
@@ -1110,43 +1110,115 @@ class DosimetriaController extends Controller
         ->where('mes_asignacion', $mesnumber-1)
         ->where('ubicacion', 'TORAX')
         ->get();
-        
-       /* if($mescontdosisededepto->mes_asignacion == $mesnumber){
-            
-            $dosicristalinomesant = Mesescontdosisedeptos::join('trabajadordosimetros', 'mesescontdosisedeptos.contdosisededepto_id', '=', 'trabajadordosimetros.contdosisededepto_id')
-            ->where('trabajadordosimetros.contdosisededepto_id', $id)
-            ->where('trabajadordosimetros.mes_asignacion', $mesnumber-1)
-            ->where('trabajadordosimetros.ubicacion', 'CRISTALINO')
-            ->where('mesescontdosisedeptos.mes_asignacion', $mesnumber)
-            ->select('*')
-            ->get();
-            
-        }else{
-            $dosicristalinomesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', $mesnumber-1)
-            ->where('ubicacion', 'CRISTALINO')
-            ->get();
-        } */
         $dosicristalinomesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
             ->where('mes_asignacion', $mesnumber-1)
             ->where('ubicacion', 'CRISTALINO')
             ->get();
         $dosimuñecamesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', $mesnumber-1)
-        ->where('ubicacion', 'MUÑECA')
-        ->get();
+            ->where('mes_asignacion', $mesnumber-1)
+            ->where('ubicacion', 'MUÑECA')
+            ->get();
         $dosidedomesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', $mesnumber-1)
-        ->where('ubicacion', 'ANILLO')
-        ->get();
-        
-        
+            ->where('mes_asignacion', $mesnumber-1)
+            ->where('ubicacion', 'ANILLO')
+            ->get();
+        /* return $mescontdosisededepto; */
         return view('dosimetria.asignar_dosimetro_contrato_mn', compact('mesnumber', 'mescontdosisededepto', 'contdosisededepto', 'dosimLibresGeneral',
-         'areaSede', 'dosimLibresAmbiental', 'trabajadoreSede', 'personaSede', 'dosimLibresEzclip', 'holderLibresCristalino', 'holderLibresExtrem', 
-         'holderLibresAnillo', 'dosicontrolmesant', 'dosiareamesant', 'dosicasomesant', 'dositoraxmesant', 'dosicristalinomesant', 'dosimuñecamesant', 'dosidedomesant' ));
+         'areaSede', 'dosimLibresAmbiental', 'personaSede', 'dosimLibresEzclip', 'holderLibresCristalino', 'holderLibresExtrem', 
+         'holderLibresAnillo', 'dosicontrolmesant', 'dosiareamesant', 'dosicasomesant',  
+         'dositoraxmesant', 'dosicristalinomesant',  'dosimuñecamesant',  'dosidedomesant' ));
         /* return $contdosisededepto; */
     }
+    public function asignaDosiContratoMnNovedad($id, $mesnumber){
+        $contdosisededepto = Contratodosimetriasededepto::find($id);
+        $mescontdosisededepto = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)->latest()->first();
 
+        $personaSede = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
+        ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
+        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->where('personasedes.sede_id','=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
+        ->where(function($query) {
+            $query->orWhere('roles.nombre_rol', 'TOE')
+                  ->orWhere('roles.nombre_rol', 'OPR');
+        })->get();
+        $dosimLibresGeneral = Dosimetro::where('estado_dosimetro', 'STOCK')
+        ->where('tipo_dosimetro', 'GENERAL')
+        ->get();
+        $areaSede = Areadepartamentosede::where('departamentosede_id', $contdosisededepto->departamentosede_id)
+        ->get();
+        $dosimLibresAmbiental = Dosimetro::where('estado_dosimetro', 'STOCK')
+        ->where('tipo_dosimetro', 'AMBIENTAL')
+        ->get();
+        $dosimLibresEzclip = Dosimetro::where('estado_dosimetro', 'STOCK')
+        ->where('tipo_dosimetro', 'EZCLIP')
+        ->get();
+        $holderLibresCristalino = Holder::where('estado_holder', 'STOCK')
+        ->where('tipo_holder', 'CRISTALINO')
+        ->get();
+        $holderLibresExtrem = Holder::where('estado_holder', 'STOCK')
+        ->where('tipo_holder', 'EXTREM')
+        ->get();
+        $holderLibresAnillo = Holder::where('estado_holder', 'STOCK')
+        ->where('tipo_holder', 'ANILLO')
+        ->get();
+        
+        $dosicontrolmesant = Dosicontrolcontdosisede::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', $mesnumber-1)
+        ->get();
+        $dosicontrolmesact = Dosicontrolcontdosisede::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', $mesnumber)
+        ->get();
+        $dosiareamesant = Dosiareacontdosisede::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', $mesnumber-1)
+        ->get();
+        $dosiareamesact = Dosiareacontdosisede::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', $mesnumber)
+        ->get();
+        $dosicasomesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', $mesnumber-1)
+        ->where('ubicacion', 'CASO')
+        ->get();
+        $dosicasomesact = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', $mesnumber)
+        ->where('ubicacion', 'CASO')
+        ->get();
+        $dositoraxmesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', $mesnumber-1)
+        ->where('ubicacion', 'TORAX')
+        ->get();
+        $dositoraxmesact = Trabajadordosimetro::where('contdosisededepto_id', $id)
+        ->where('mes_asignacion', $mesnumber)
+        ->where('ubicacion', 'TORAX')
+        ->get();
+        $dosicristalinomesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $mesnumber-1)
+            ->where('ubicacion', 'CRISTALINO')
+            ->get();
+        $dosicristalinomesact = Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $mesnumber)
+            ->where('ubicacion', 'CRISTALINO')
+            ->get();
+        $dosimuñecamesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $mesnumber-1)
+            ->where('ubicacion', 'MUÑECA')
+            ->get();
+        $dosimuñecamesact = Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $mesnumber)
+            ->where('ubicacion', 'MUÑECA')
+            ->get();
+        $dosidedomesant = Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $mesnumber-1)
+            ->where('ubicacion', 'ANILLO')
+            ->get();
+        $dosidedomesact = Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $mesnumber)
+            ->where('ubicacion', 'ANILLO')
+            ->get();
+        return view('dosimetria.asignar_dosimetro_contrato_mn_conovedad', compact('mesnumber','contdosisededepto', 'mescontdosisededepto', 'dosimLibresGeneral',
+        'areaSede', 'dosimLibresAmbiental', 'personaSede', 'dosimLibresEzclip', 'holderLibresCristalino', 'holderLibresExtrem', 
+        'holderLibresAnillo', 'dosicontrolmesant', 'dosicontrolmesact', 'dosiareamesant', 'dosiareamesact', 'dosicasomesant', 'dosicasomesact', 
+        'dositoraxmesant', 'dositoraxmesact', 'dosicristalinomesant', 'dosicristalinomesact', 'dosimuñecamesant', 'dosimuñecamesact', 'dosidedomesant', 'dosidedomesact'));
+    }
     public function clearAsignacionAnteriorMn($id, $mesnumber){
        /*  $contdosisededepto = Contratodosimetriasededepto::find($id); */
         /* return $contdosisededepto; */
@@ -1450,7 +1522,9 @@ class DosimetriaController extends Controller
         }
         return redirect()->route('asignadosicontrato.info', ["asigdosicont" => $id, "mesnumber" => $mesnumber])->with('crear', 'ok');
     } 
-
+    public function saveAsignacionDosiContratoMnNovedad($id, $mesnumber, Request $request){
+        return $request;
+    }
     public function info($id, $mesnumber, Request $request){
         $contdosisededepto = Contratodosimetriasededepto::find($id);
         $mescontdosisededepto = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)->latest()->first();

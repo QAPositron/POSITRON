@@ -144,7 +144,7 @@ class NovedadesController extends Controller
    
     public function savecambiocantdosim(Request $request){
 
-        return $request;
+        /* return $request; */
 
         $dosi_control = $request->dosi_control;
         $dosi_torax= $request->dosi_torax;
@@ -254,7 +254,7 @@ class NovedadesController extends Controller
         /* return $request; */
     }
     public function savemesiguientecambiocantdosim(Request $request){
-        return $request;
+        /* return $request; */
 
         $dosi_control = 0;
         $dosi_torax= 0;
@@ -301,15 +301,15 @@ class NovedadesController extends Controller
             
                     $newasignacion->contratodosimetriasede_id    = $request->contratodosimetriasede;
                     $newasignacion->persona_id                   = $request->id_trabajador_asig[$i];
-                    $newasignacion->dosimetro_id                 = $request->id_dosimetro_asig[$i];
-                    $newasignacion->holder_id                    = $request->id_holder_asig[$i];
+                    $newasignacion->dosimetro_id                 = $request->id_dosimetro_asig[$i] == 'null' ? NULL : $request->id_dosimetro_asig[$i];
+                    $newasignacion->holder_id                    = $request->id_holder_asig[$i] == 'null' ? NULL : $request->id_holder_asig[$i];
                     $newasignacion->contdosisededepto_id         = $request->contdosisededepto;
                     $newasignacion->mes_asignacion               = $request->mes_asig_siguiente;
                     $newasignacion->dosimetro_uso                = 'TRUE';
                     $newasignacion->primer_dia_uso               = $request->primerDia_asigdosim2;
                     $newasignacion->ultimo_dia_uso               = $request->ultimoDia_asigdosim2;
                     $newasignacion->fecha_dosim_enviado          = $request->fecha_envio_dosim_asignado;
-                    $newasignacion->ocupacion                    = $request->ocupacion_asig[$i];
+                    $newasignacion->ocupacion                    = $request->ocupacion_asig[$i] == 'null' ? NULL : $request->ocupacion_asig[$i];
                     $newasignacion->ubicacion                    = $request->id_ubicacion_asig[$i];
                     $newasignacion->energia                      = 'F';
                     $newasignacion->save();
@@ -385,7 +385,7 @@ class NovedadesController extends Controller
     
                 $newasignacionAntiguaNull->contratodosimetriasede_id = $request->contratodosimetriasede;
                 $newasignacionAntiguaNull->persona_id                = $request->id_trabj_asigdosim_null[$i];
-                $newasignacionAntiguaNull->dosimetro_id              = $request->id_dosimetro_asigdosim_null[$i];
+                $newasignacionAntiguaNull->dosimetro_id              = $request->id_dosimetro_asigdosim_null[$i] == 'null' ? NULL : $request->id_dosimetro_asigdosim_null[$i];
                 $newasignacionAntiguaNull->holder_id                 = null;
                 $newasignacionAntiguaNull->contdosisededepto_id      = $request->contdosisededepto;
                 $newasignacionAntiguaNull->mes_asignacion            = $request->mes_asig_siguiente;
@@ -393,7 +393,7 @@ class NovedadesController extends Controller
                 $newasignacionAntiguaNull->primer_dia_uso            = $request->primerDia_asigdosim2;
                 $newasignacionAntiguaNull->ultimo_dia_uso            = $request->ultimoDia_asigdosim2;
                 $newasignacionAntiguaNull->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
-                $newasignacionAntiguaNull->ocupacion                 = $request->id_ocupacion_asigdosim_null[$i];
+                $newasignacionAntiguaNull->ocupacion                 = $request->id_ocupacion_asigdosim_null[$i] == 'null' ? NULL : $request->id_ocupacion_asigdosim_null[$i];
                 $newasignacionAntiguaNull->ubicacion                 = $request->ubicacion_asigdosim_null[$i];
                 $newasignacionAntiguaNull->energia                   = 'F';
                 $newasignacionAntiguaNull->save(); 
@@ -422,15 +422,15 @@ class NovedadesController extends Controller
     
                 $newasignacionAntigua->contratodosimetriasede_id = $request->contratodosimetriasede;
                 $newasignacionAntigua->persona_id                = $request->id_trabj_asigdosim[$i];
-                $newasignacionAntigua->dosimetro_id              = $request->id_dosimetro_asigdosim[$i];
-                $newasignacionAntigua->holder_id                 = $request->id_holder_asigdosim[$i];
+                $newasignacionAntigua->dosimetro_id              = $request->id_dosimetro_asigdosim[$i] == 'null' ? NULL : $request->id_dosimetro_asigdosim[$i];
+                $newasignacionAntigua->holder_id                 = $request->id_holder_asigdosim[$i] == 'null' ? NULL : $request->id_holder_asigdosim[$i];
                 $newasignacionAntigua->contdosisededepto_id      = $request->contdosisededepto;
                 $newasignacionAntigua->mes_asignacion            = $request->mes_asig_siguiente;
                 $newasignacionAntigua->dosimetro_uso             = 'TRUE';
                 $newasignacionAntigua->primer_dia_uso            = $request->primerDia_asigdosim2;
                 $newasignacionAntigua->ultimo_dia_uso            = $request->ultimoDia_asigdosim2;
                 $newasignacionAntigua->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
-                $newasignacionAntigua->ocupacion                 = $request->id_ocupacion_asigdosim[$i];
+                $newasignacionAntigua->ocupacion                 = $request->id_ocupacion_asigdosim[$i] == 'null' ? NULL : $request->id_ocupacion_asigdosim[$i];
                 $newasignacionAntigua->ubicacion                 = $request->ubicacion_asigdosim[$i];
                 $newasignacionAntigua->energia                   = 'F';
                 $newasignacionAntigua->save(); 
@@ -492,7 +492,7 @@ class NovedadesController extends Controller
         /* return $request; */
         
     }
-
+    
     public function clearAsignacionAnteriorMn(Request $request){
         $cleardosicontrolasigmesant = Dosicontrolcontdosisede::where('contdosisededepto_id', $request->contdosisededepto_id)
         ->where('contratodosimetriasede_id', $request->contratodosimetriasede_id)
