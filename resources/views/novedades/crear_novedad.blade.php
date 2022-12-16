@@ -603,6 +603,7 @@
                                 var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`">
                                         <td colspan='2' style='width: 75px' class='align-middle'>CONTROL</td>
                                         <td style='width: 190px' class='align-middle'>
+                                            
                                             <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
@@ -1279,8 +1280,119 @@
             })
         });
 
-    })
+        $('#form_cambio_cantdosim2').submit(function(e, mes){
+            e.preventDefault();
+            ////////VALIDACIONES PARA LAS FECHAS  DE INICIO Y FIN DEL PERIODO/////////////////
+            var primerdiaFecha = document.getElementById("primerDia_asigdosim2").value;
+            if(primerdiaFecha == ''){
+                return Swal.fire({
+                                title:"FALTA SELECCIONAR LA FECHA DEL PRIMER DÍA PARA EL PERIODO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            }
+            var ultimodiaFecha = document.getElementById("ultimoDia_asigdosim2").value;
+            if(ultimodiaFecha == ''){
+                return Swal.fire({
+                                title:"FALTA SELECCIONAR LA FECHA DEL ÚLTIMO DÍA PARA EL PERIODO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            }
+            ////////////////////////////////////////////////////////////
+            
+            ///////////////////////////////////////////////////////////////////////////
+            //////VALIDACIONES PARA LOS NUEVOS DOSIMETROS QUE DESEE AÑADIR//////////////
+           /*  var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
+            console.log("ESTAS SON LOS TRABAJADORES");
+            console.log(trabajadores);
+            for(var i = 0; i < trabajadores.length; i++) {
+                var values = trabajadores[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN TRABAJADOR",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                }
+                
+            }; */
 
+            var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
+            console.log("ESTAS SON LAS UBICACIONES");
+            console.log(ubicacion);
+            for(var i = 0; i < ubicacion.length; i++) {
+                var values = ubicacion[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUNA UBICACIÓN"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUNA UBICACIÓN",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            };
+            
+            
+            
+
+            if( ubicacion.length == 0 ){
+                /* alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA"); */
+                return Swal.fire({
+                                title:"OPRIMA EL BOTÓN DE NUEVO DOSÍMETRO",
+                                text: "INGRESE LA INFORMACIÓN SOLICITADA",
+                                icon: 'error'
+                            });
+            };
+            ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
+           /*  var observaciones = document.getElementById("nota_cambio_dosimetros2").value;
+            console.log("ESTAS SON LAS OBSERVACIONES" + observaciones);
+            if(observaciones == ''){
+                return Swal.fire({
+                                title:"FALTA INGRESAR LA DESCRIPCIÓN DE LA NOVEDAD EN LAS OBSERVACIONES",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            }; */
+            ////////////////////////////////////////////////////////////////////////////////
+            Swal.fire({
+                text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    /* var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
+                    var mes = document.getElementById("mesacambiar").value;
+                    var host = window.location.host;
+                    var path = "http://"+host+"/POSITRON/public/novedades/"+contdosisededepto_id+"/"+mes+"/reportePDFcambiodosim";
+                    
+                    window.open(path, '_blank'); */
+                    this.submit();
+                }
+            })
+        });
+
+        $('#limpiar_asig').click(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL MES ANTERIOR?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33    ',
+                confirmButtonText: 'SI, SEGURO!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    limpiar();
+                    
+                }
+            })
+        })
+    })
 </script>
 
 @endsection()

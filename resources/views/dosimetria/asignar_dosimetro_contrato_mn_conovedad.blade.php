@@ -48,20 +48,14 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input value="" type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" onchange="fechaultimodia();">
+                            <input type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->primer_dia_uso}}" @break @endforeach>
                             <label for="floatingInputGrid">PRIMER DÍA</label>
-                            @error('primerDia_asigdosim')
-                                <small class="invalid-feedback">*{{$message}}</small>
-                            @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input value="" type="date" class="form-control @error('ultimoDia_asigdosim') is-invalid @enderror" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
+                            <input type="date" class="form-control " name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->ultimo_dia_uso}}" @break @endforeach>
                             <label for="floatingInputGrid">ULTIMO DÍA:</label>
-                            @error('ultimoDia_asigdosim')
-                                <small class="invalid-feedback">*{{$message}}</small>
-                            @enderror
                         </div>
                     </div>
                 </div> 
@@ -69,20 +63,20 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
+                            <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->fecha_dosim_enviado}}" @break @endforeach>
                             <label for="floatingInputGrid">FECHA ENVIO</label>
                             
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
+                            <input type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->fecha_dosim_recibido}}" @break @endforeach>
                             <label for="floatingInputGrid">FECHA RECIBIDO</label>
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
+                            <input type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->fecha_dosim_devuelto}}" @break @endforeach>
                             <label for="floatingInputGrid">FECHA DEVUELTO</label>
                         </div>
                     </div>
@@ -286,7 +280,7 @@
                                     @foreach($dosicasomesact as $dosicasoact)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso" value="{{$dosicasoact->id_trabajadordosimetro}}" hidden>
+                                                <input type="number" name="id_asigdosimCaso[]" id="id_asigdosimCaso" value="{{$dosicasoact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso{{$dosicasoact->persona_id}}" disabled>
                                                     <option value="{{$dosicasoact->persona_id}}"> {{$dosicasoant->persona->primer_nombre_persona}} {{$dosicasoant->persona->segundo_nombre_persona}} {{$dosicasoant->persona->primer_apellido_persona}} {{$dosicasoant->persona->segundo_apellido_persona}}</option>
                                                     
@@ -368,7 +362,7 @@
                                     @foreach($dositoraxmesact as $dositoraxact)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax_mesant" value="{{$dositoraxact->id_trabajadordosimetro}}" hidden>
+                                                <input type="number" name="id_asigdosimTorax[]" id="id_asigdosimTorax" value="{{$dositoraxact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax{{$dositoraxact->persona_id}}" disabled>
                                                     <option value="{{$dositoraxact->persona_id}}">{{$dositoraxact->persona->primer_nombre_persona}} {{$dositoraxact->persona->segundo_nombre_persona}} {{$dositoraxact->persona->primer_apellido_persona}} {{$dositoraxact->persona->segundo_apellido_persona}}</option>
                                                     
@@ -451,7 +445,7 @@
                                     @foreach($dosicristalinomesact as $dosicristalinoact)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino_mesant" value="{{$dosicristalinoact->id_trabajadordosimetro}}" hidden>
+                                                <input type="number" name="id_asigdosimCristalino[]" id="id_asigdosimCristalino" value="{{$dosicristalinoact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino{{$dosicristalinoact->persona_id}}" disabled>
                                                     <option value="{{$dosicristalinoact->persona_id}}">{{$dosicristalinoact->persona->primer_nombre_persona}} {{$dosicristalinoact->persona->segundo_nombre_persona}} {{$dosicristalinoact->persona->primer_apellido_persona}} {{$dosicristalinoact->persona->segundo_apellido_persona}}</option>
                                                     
@@ -539,7 +533,7 @@
                                     @foreach($dosimuñecamesact as $dosimuñecact)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca_mesant" value="{{$dosimuñecact->id_trabajadordosimetro}}" hidden>
+                                                <input type="number" name="id_asigdosimMuneca[]" id="id_asigdosimMuneca" value="{{$dosimuñecact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca{{$dosimuñecact->persona_id}}" disabled>
                                                     <option value="{{$dosimuñecact->persona_id}}"> {{$dosimuñecact->persona->primer_nombre_persona}} {{$dosimuñecact->persona->segundo_nombre_persona}} {{$dosimuñecact->persona->primer_apellido_persona}} {{$dosimuñecact->persona->segundo_apellido_persona}}</option>
                                                     
@@ -564,7 +558,7 @@
                                             </td>
                                             <td>
                                                 <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca"  style="text-transform:uppercase">
-                                                    @if($dosimuñecact->dosimetro_uso != NULL)
+                                                    @if($dosimuñecact->ocupacion != NULL)
                                                         @if($dosimuñecact->ocupacion=='T')
                                                             <option selected hidden value="T">--TELETERAPIA--</option>
                                                             @elseif($dosimuñecact->ocupacion=='BQ')
@@ -628,7 +622,7 @@
                                     @foreach($dosidedomesact as $dosidedoact)
                                         <tr>
                                             <td>
-                                                <input type="number" name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo_mesant" value="{{$dosidedoact->id_trabajadordosimetro}}" hidden>
+                                                <input type="number" name="id_asigdosimDedo[]" id="id_asigdosimDedo" value="{{$dosidedoact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo{{$dosidedoact->persona_id}}" disabled>
                                                     <option value="{{$dosidedoact->persona_id}}">{{$dosidedoact->persona->primer_nombre_persona}} {{$dosidedoact->persona->segundo_nombre_persona}} {{$dosidedoact->persona->primer_apellido_persona}} {{$dosidedoact->persona->segundo_apellido_persona}}</option>
                                                     
@@ -825,5 +819,23 @@ crossorigin="anonymous">
             document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
         }
     };
+    $(document).ready(function(){
+        $('#form-nueva-asignacion_mn').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                
+                    this.submit();
+                }
+            })
+    })
+    })
 </script>
 @endsection

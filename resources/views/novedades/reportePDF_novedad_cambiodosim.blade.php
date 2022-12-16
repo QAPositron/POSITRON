@@ -38,7 +38,13 @@
                 @foreach($dosicontrolasig as $dosicontrol)
                     <tr>
                         <td>CONTROL </td>
-                        <td style="text-align: center;">{{$dosicontrol->dosimetro->codigo_dosimeter}}</td>
+                        <td style="text-align: center;">
+                            @if($dosicontrol->dosimetro_id ==  'NULL')
+                                NINGUNO 
+                            @else 
+                               {{$dosicontrol->dosimetro->codigo_dosimeter}}
+                            @endif
+                        </td>
                         <td style="text-align: center;">{{-- ///por ahora no aplica///  --}}
                                 N.A.
                         </td>
