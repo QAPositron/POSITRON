@@ -139,9 +139,23 @@
                             myTable+="</tr>";
                             myTable+="<tr>";
                             myTable+="<td class='text-center align-middle' colspan='9'>";
-
+                                myTable= "<table class='table  table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' style='width: 10.90%'>NOVEDADES</th>";
+                                    myTable+= "<th class='align-middle' style='width: 8.90%'>MES</th>";
+                                    myTable+="<th class='align-middle' style='width: 10.90%'>ID</th>";
+                                    myTable+="<th class='align-middle' style='width: 10.90%'>OBSERVACIÓN</th>";
+                                    myTable+="<th class='align-middle' style='width: 10.90%'>ACCIONES</th>";
+                                    myTable+="</tr>";
+                                    myTable+="<tbody><tr><td class='text-center align-middle'></td>";
+                                    myTable+="<td class='text-center align-middle'></td>";
+                                    myTable+="<td class='text-center align-middle'></td>";
+                                    myTable+="<td class='text-center align-middle'></td>";
+                                    myTable+="</tr>";
+                                    myTable+="</tbody>";
+                                    myTable= "</table>";
                             myTable+="</td>";
                             myTable+="</tr>";
+                            myTable+="</tbody>";
+                            myTable= "</table>";
 
                             $('#titulosTablas').append(myTable);
 
