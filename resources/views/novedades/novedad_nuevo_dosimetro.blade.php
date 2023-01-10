@@ -1,0 +1,100 @@
+@extends('layouts.plantillabase')
+@section('contenido')
+<div class="row">
+    <div class="col-md">
+        <div class="col-md">
+            <a type="button" class="btn btn-circle colorQA" href="{{route('novedadesdosimetria.search')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </a>
+        </div> 
+    </div>
+    <div class="col-7">
+        <h2 class="text-center">NOVEDAD DE DOSIMETRÍA: NUEVO DOSÍMETRO</h2>
+    </div>
+    <div class="col md"></div>
+</div>
+<br>
+<div class="row">
+    <div class="col md"></div>
+    <div class="col-md-10">
+        <div class="card text-dark bg-light">
+            <br>
+            <label class="px-4">SELECCIONE LA INFORMACIÓN DEL CONTRATO DE DOSIMETRÍA: </label>
+            <div class="row p-4">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <select class="form-select" name="empresaDosimetria" id="empresaDosimetria" value="" autofocus style="text-transform:uppercase;">
+                            <option value="">--SELECCIONE--</option>
+                            {{-- @foreach($empresasDosi as $empdosi)
+                                <option value="{{$empdosi->empresa_id}}">{{$empdosi->nombre_empresa}}</option>
+                            @endforeach --}}
+                        </select>
+                        <label for="floatingInputGrid">EMPRESA:</label>
+                        @error('empresaDosimetria')
+                            <small>*{{$message}}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                        <select class="form-select" name="contratos_empresadosi" id="contratos_empresadosi" value="" autofocus style="text-transform:uppercase">
+
+                        </select>
+                        <label for="floatingInputGrid">CONTRATOS:</label>
+                        @error('contratos_empresadosi')
+                            <small>*{{$message}}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                        <select class="form-select" name="sedes_empresadosi" id="sedes_empresadosi" value="" autofocus style="text-transform:uppercase">
+
+                        </select>
+                        <label for="floatingInputGrid">SEDES:</label>
+                        @error('sedes_empresadosi')
+                            <small>*{{$message}}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                        <select class="form-select" name="especialidades_empresadosi" id="especialidades_empresadosi" value="" autofocus style="text-transform:uppercase">
+
+                        </select>
+                        <label for="floatingInputGrid">ESPECIALIDADES:</label>
+                        @error('especialidades_empresadosi')
+                            <small>*{{$message}}</small>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-md"></div>
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <select class="form-select" name="mesacambiar" id="mesacambiar" value="" autofocus style="text-transform:uppercase">
+                            <option value="">--SELECCIONE--</option>
+                        </select>
+                        <label for="floatingInputGrid">MES A MODIFICAR:</label>
+                    </div>
+                </div>
+                
+                <div class="col-md"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md"></div>
+</div>
+<script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+</script>
+
+@endsection()

@@ -36,6 +36,9 @@ class NovedadesController extends Controller
 
         return view('novedades.form_novedades', compact('empresasDosi', 'dosimetrosDisponibles', 'holdersDisponibles', 'dosimetrosDisponiblesEzclip'));
     }
+    public function nuevoDosimetro(){ 
+        return view('novedades.novedad_nuevo_dosimetro');
+    }
     public function contratoDosimetria(Request $request){
         $contratosDosi = Dosimetriacontrato::where('empresa_id', '=', $request->empresa_id)->get();
         foreach($contratosDosi as $contratos){

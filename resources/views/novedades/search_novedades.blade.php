@@ -10,6 +10,22 @@
     </div>
     <div class="col"></div>
 </div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="dropdown">
+            <button class="btn colorQA dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              CREAR NOVEDAD
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="{{route('novedadesdosimetria.nuevoDosimetro')}}">NUEVO DOSíMETRO</a></li>
+              <li><a class="dropdown-item" href="#">RETIRO DE DOSíMETRO</a></li>
+              <li><a class="dropdown-item" href="#">CAMBIO DE TRABAJADOR</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
 
 <div class="row">
     <div class="col md"></div>
@@ -72,6 +88,7 @@
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     $(document).ready(function(){

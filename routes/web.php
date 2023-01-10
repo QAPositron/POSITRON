@@ -297,6 +297,7 @@ Route::get('/novedades/sedesEspcontDosi', [NovedadesController::class, 'sedesEsp
 //////////////(se usaron las rutas para encontrar los contratos las sedes y las especialidades y el mes actual y las asignaciones de una empresa de dosimetria)/////////
 Route::get('novedades/crear', [NovedadesController::class, 'create'])->name('novedadesdosimetria.create');
 
+Route::get('novedades/nuevoDosimetro', [NovedadesController::class, 'nuevoDosimetro'])->name('novedadesdosimetria.nuevoDosimetro');
 
 Route::get('/prueba1', [PruebaController::class,'index']);
 Route::post('/prueba1', [PruebaController::class, 'sedes']);
