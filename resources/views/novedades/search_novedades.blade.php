@@ -19,8 +19,8 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="{{route('novedadesdosimetria.nuevoDosimetro')}}">NUEVO DOSíMETRO</a></li>
-              <li><a class="dropdown-item" href="#">RETIRO DE DOSíMETRO</a></li>
-              <li><a class="dropdown-item" href="#">CAMBIO DE TRABAJADOR</a></li>
+              <li><a class="dropdown-item" href="{{route('novedadesdosimetria.retiroDosimetro')}}">RETIRO DE DOSíMETRO</a></li>
+              <li><a class="dropdown-item" href="{{route('novedadesdosimetria.cambioTrabajador')}}">CAMBIO DE TRABAJADOR</a></li>
             </ul>
         </div>
     </div>
@@ -74,6 +74,7 @@
                     <h4 class="text-center" id="tituloContrato"></h4>
                     <br>
                     <div id="titulosTablas"></div>
+                    <div id="Tablas"></div>
                 </div>
                 <div class="col-md"></div>
             </div>
@@ -127,13 +128,13 @@
                         var num = parseInt(value.codigo_contrato);
                         var n = num.toString().padStart(5,'0');
                         tituloContrato.innerHTML = "CONTRATO No."+n;
-                        /* let tituloSede = 0; */
                         if(value.nombre_sede != check){
                             
                             $('#titulosTablas').append("<h4 class='text-center' id='tituloSede"+index+"'>"+value.nombre_sede+"</h4>");
                             check = value.nombre_sede;
                             
-                            console.log(check);
+                            console.log("ESTE ES EL CHECK" +check);
+                            
                             let myTable= "<table class='table  table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
                             myTable+= "<th class='align-middle' style='width: 8.90%'>MES ACTUAL</th>";
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. TÓRAX</th>";
@@ -144,7 +145,8 @@
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ÁREA</th>";
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CASO</th>";
                             myTable+="</tr>";
-                            myTable+="<tbody><tr><td class='text-center align-middle'>"+value.nombre_departamento+"</td>";
+                            myTable+="</thead>";
+                            myTable+="<tr><td class='text-center align-middle'>"+value.nombre_departamento+"</td>";
                             myTable+="<td class='text-center align-middle'>"+value.mes_actual+"</td>";
                             myTable+="<td class='text-center align-middle'>"+value.dosi_torax+"</td>";
                             myTable+="<td class='text-center align-middle'>"+value.dosi_cristalino+"</td>";
@@ -155,37 +157,44 @@
                             myTable+="<td class='text-center align-middle'>"+value.dosi_caso+"</td>";
                             myTable+="</tr>";
                             myTable+="<tr>";
-                            myTable+="<td class='text-center align-middle' colspan='9'>";
-                                myTable= "<table class='table  table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' style='width: 10.90%'>NOVEDADES</th>";
-                                    myTable+= "<th class='align-middle' style='width: 8.90%'>MES</th>";
-                                    myTable+="<th class='align-middle' style='width: 10.90%'>ID</th>";
-                                    myTable+="<th class='align-middle' style='width: 10.90%'>OBSERVACIÓN</th>";
-                                    myTable+="<th class='align-middle' style='width: 10.90%'>ACCIONES</th>";
-                                    myTable+="</tr>";
-                                    myTable+="<tbody><tr><td class='text-center align-middle'></td>";
-                                    myTable+="<td class='text-center align-middle'></td>";
-                                    myTable+="<td class='text-center align-middle'></td>";
-                                    myTable+="<td class='text-center align-middle'></td>";
-                                    myTable+="</tr>";
-                                    myTable+="</tbody>";
-                                    myTable= "</table>";
+                            myTable+="<td class='text-center align-middle p-4' colspan='9'>";
+                                myTable+="<div id='detalleTabla'></div>";
                             myTable+="</td>";
                             myTable+="</tr>";
-                            myTable+="</tbody>";
-                            myTable= "</table>";
 
-                            $('#titulosTablas').append(myTable);
+                            $('#Tablas').append(myTable);
 
+                            
                         } 
+                        $.get('novedadesContDosim', {contrato_id: value.id_contratodosimetria}, function(novedadesCont){
+                            console.log("ESTAS SON LAS NOVEDADES");
+                            console.log(novedadesCont);
+                            var cheq;
+                            let Table= "<table class='table table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' colspan='3'>NOVEDADES</th></tr>";
+                            Table+="<tr><th class='align-middle' style='width: 12.90%'>MES</th>";
+                            Table+="<th class='align-middle'>OBSERVACIÓN</th>";
+                            Table+="<th class='align-middle' style='width: 12.90%'>ACCIONES</th>";
+                            Table+="</tr>";
+                            Table+="</thead>";
+                            $.each(novedadesCont, function(index, value2){
+                                if(value.id_contdosisededepto == value2.contdosisededepto_id && value2.nota_cambiodosim != cheq){
+                                    Table+="<tr><td class='text-center align-middle'>"+value2.mes_asignacion+"</td>";
+                                    Table+="<td class='text-center align-middle'>"+value2.nota_cambiodosim+"</td>";
+                                    Table+="<td class='text-center align-middle'>";
+                                        Table+="<a href='' class='btn btn-primary'>";
+                                            Table+="<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-info-lg pb-1' viewBox='0 0 16 16'>";
+                                                Table+="<path d='m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704l1.323-6.208Zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0Z'/>";
+                                            Table+="</svg";
+                                        Table+="</a></td>";
+                                    Table+="</tr>";
+                                    cheq = value2.nota_cambiodosim;
+                                }
+                            })
+    
+                            $('#detalleTabla').append(Table);
+                        })
                     })
-                    /* $('#sedes_empresadosi').empty();
-                    $('#sedes_empresadosi').append("<option value=''>--SELECCIONE UNA SEDE DEL CONTRATO--</option>");
-                    $.each(sedes, function(index, value){
-                        if(check != value){
-                            $('#sedes_empresadosi').append("<option value='"+ index + "'>" + value + "</option>");
-                            check = value; 
-                        }
-                    }) */
+                    
                 });
             }
         })

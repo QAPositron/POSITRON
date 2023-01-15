@@ -11,7 +11,7 @@
         </div> 
     </div>
     <div class="col-7">
-        <h2 class="text-center">NOVEDAD DE DOSIMETRÍA <br> NUEVO DOSÍMETRO</h2>
+        <h2 class="text-center">NOVEDAD DE DOSIMETRÍA <br> RETIRO DE DOSÍMETRO</h2>
     </div>
     <div class="col md"></div>
 </div>
@@ -41,6 +41,7 @@
 
                         </select>
                         <label for="floatingInputGrid">CONTRATOS:</label>
+                       
                     </div>
                 </div>
                 <div class="col-md">
@@ -49,6 +50,7 @@
 
                         </select>
                         <label for="floatingInputGrid">SEDES:</label>
+                        
                     </div>
                 </div>
                 <div class="col-md">
@@ -57,6 +59,7 @@
 
                         </select>
                         <label for="floatingInputGrid">ESPECIALIDADES:</label>
+                        
                     </div>
                 </div>
             </div>
@@ -70,7 +73,6 @@
                         <label for="floatingInputGrid">MES A MODIFICAR:</label>
                     </div>
                 </div>
-                
                 <div class="col-md"></div>
             </div>
         </div>
@@ -83,17 +85,7 @@
     <div class="col-md-12">
         <div class="card text-dark bg-light" id='Formulario1' style="display: none; position: relative;">
             <br>
-            <br>
-            <div class="row">
-                <div class="col-md-5">
-                    {{-- <label class="px-4 ">OPRIMA EL BOTÓN PARA AÑADIR UN NUEVO DOSÍMETRO: </label> --}}
-                </div>
-                <div class="col-2 d-grid gap-2">
-                    <button class="btn colorQA" id="agregar" name="agregar" onclick="agregarFila()">NUEVO DOSÍMETRO</button>
-                </div>
-                <div class="col-md"></div>
-            </div>
-            <br>
+            
             <div >
 
                 <div class="table table-responsive text-center px-4">
@@ -104,6 +96,8 @@
                             <th style='width: 100px'>DOSÍMETRO</th>
                             <th style='width: 100px'>HOLDER</th>
                             <th style='width: 100px'>OCUPACIÓN</th>
+                            <th style='width: 100px'>ACCIONES</th>
+
                         </thead>
                         <tbody id="body_asignaciones">
                            
@@ -182,16 +176,7 @@
         </div>
         <div class="card text-dark bg-light" id='Formulario2' style="display: none; position: relative;">
             <br>
-            <br>
-            <div class="row">
-                <div class="col-md-5">
-                </div>
-                <div class="col-2 d-grid gap-2">
-                    <button class="btn colorQA" id="agregar2" name="agregar2" onclick="agregarFila()">NUEVO DOSÍMETRO</button>
-                </div>
-                <div class="col-md"></div>
-            </div>
-            <br>
+            
             <div >
                 <div class="table table-responsive text-center px-4">
                     <form id="form_cambio_cantdosim2" name="form_cambio_cantdosim2" action="{{route('cambiocantdosimesig.save')}}" method="POST">
@@ -242,6 +227,8 @@
                                 <th style='width: 100px'>DOSÍMETRO</th>
                                 <th style='width: 100px'>HOLDER</th>
                                 <th style='width: 100px'>OCUPACIÓN</th>
+                                <th style='width: 100px'>ACCIONES</th>
+
                             </thead>
                             <tbody id="body_asignaciones2">
                                 
@@ -449,9 +436,9 @@
                     var consultaMesactual = mesactual_trabjasig.mes_asignacion;
                     console.log("LA CONSULTA"+consultaMesactual);
 
-                    if(mes == consultaMesactual){
+                    /* if(mes == consultaMesactual){
                         Formulario1.style.display= "block";
-                    }else if (mes > consultaMesactual){
+                    }else */ if (mes > consultaMesactual){
                         Formulario2.style.display= "block";
                     }else{
                         Formulario2.style.display= "none";
@@ -512,8 +499,20 @@
                                                 <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
                                             </select>
                                         </td>
+                                        <td style='width: 183px' class='align-middle'>
+                                            <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`);" ${disacont}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
                                     </tr>`;
                                 $("#body_asignaciones2").append(tr);
+                                if(asignacionescontrolmesactual[i].dosimetro_uso != 'FALSE'){
+                                    document.getElementById('eliminarControl').disabled = true;
+                                }else{
+                                    document.getElementById('eliminarControl').disabled = false;
+                                }
                             } 
                         }else{
                             //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
@@ -571,9 +570,10 @@
                                         var codigo_holder = asignacionesmesactual[i].codigo_holder;
                                         var id_ocupacion = asignacionesmesactual[i].ocupacion;
                                         var ocupacion = asignacionesmesactual[i].ocupacion;
-                                        document.getElementById('agregar2').disabled = true;
+                                        
+
                                     }else{
-                                        document.getElementById('agregar2').disabled = false;
+                                       
                                         var id_dosimetro = '';
                                         var codigo_dosimeter = '---';
                                         var id_holder = '';
@@ -633,6 +633,13 @@
                                                     <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
                                                 </select>
                                             </td>
+                                            <td style='width: 183px' class='align-middle'>
+                                                <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarEzclip(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');" ${dis}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </button>
+                                            </td>
                                             
                                         </tr>`;
                                         $("#body_asignaciones2").append(tr);
@@ -675,12 +682,21 @@
                                                     <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
                                                 </select>
                                             </td>
-                                            
+                                            <td style='width: 183px' class='align-middle'>
+                                                <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarTorax(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');" ${dis}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </button>
+                                            </td>
                                         </tr>`;
                                         $("#body_asignaciones2").append(tr);
                                         
                                     }
+                                   
+
                                 }
+
                             }else{
                                 $('#body_asignaciones2').html("");
                                 /* alert("ASIGNACIONES PARA EL MES ACTUAL"); */
@@ -736,237 +752,10 @@
                             }
                         });
                     });
-                    
-                });
-            })
+                })
+            });
         });
-    });
-    function agregarFila(){
-    
-        var mes = document.getElementById("mesacambiar").value;
-        
-        alert("EL MES SELECCIONADO es"+mes);
-        var especialidad_id= document.getElementById("especialidades_empresadosi").value;
-
-        $('#mesacambiar').on('change', function(){
-            $('#tr_newAsignacion').html("");
-            $('#botones').html("");
-        })
-        
-        var selectTrabajadores = document.createElement("select");
-        var selectDosimetros = document.createElement("select");
-        var selectDosimetrosEzclip = document.createElement("select");
-        var selectHolders = document.createElement("select");
-        var id_empresa = document.getElementById("empresaDosimetria").value;
-        var sede = document.getElementById("sedes_empresadosi");
-        var id_sede = sede.options[sede.selectedIndex].text;
-        
-        console.log("SEDE:" +id_sede);
-        $.get('trabajadoresempresa', {id_sede: id_sede}, function(trabajadores){
-            console.log(trabajadores);
-            const vacio = JSON.stringify(trabajadores);
-            console.log("ESTOS SON LOS TRABAJADORES" + vacio);
-            for(var i = 0; i < trabajadores.length; i++){
-                option = document.createElement("option");
-                option.value = trabajadores[i].id_persona;
-                option.text = trabajadores[i].primer_nombre_persona+` `+trabajadores[i].primer_apellido_persona+` `+trabajadores[i].segundo_apellido_persona;
-                selectTrabajadores.appendChild(option);
-            }
-            console.log(selectTrabajadores.innerHTML);
-
-            @foreach($dosimetrosDisponibles as $dosimetros)
-                option = document.createElement("option");
-                option.value = '{{$dosimetros->id_dosimetro}}';
-                option.text = '{{$dosimetros->codigo_dosimeter}}';
-                selectDosimetros.appendChild(option);
-            @endforeach
-            console.log(selectDosimetros.innerHTML);
-
-            
-            @foreach($dosimetrosDisponiblesEzclip as $dosimetrosezclip)
-                option = document.createElement("option");
-                option.value = '{{$dosimetrosezclip->id_dosimetro}}';
-                option.text = '{{$dosimetrosezclip->codigo_dosimeter}}';
-                selectDosimetrosEzclip.appendChild(option);
-            @endforeach
-
-            @foreach($holdersDisponibles as $holders)
-                option = document.createElement("option");
-                option.value = '{{$holders->id_holder}}';
-                option.text = '{{$holders->codigo_holder}}';
-                selectHolders.appendChild(option);
-            @endforeach
-            console.log(selectHolders.innerHTML);
-
-            $.get('mesactualcontdosisededepto', {especialidad_id: especialidad_id}, function(mesactual_trabjasig){
-                /* console.log("CONSULTA MES ACTUAL" + JSON.stringify(mesactual_trabjasig)); */
-                var consultaMesactual = mesactual_trabjasig.mes_asignacion;
-                if(mes > consultaMesactual){
-
-                    alert("si entro, el mes siguiente al actual");
-
-                    var mestrabj_asig = document.getElementById("mesacambiar").value;
-                    var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
-                    var id_contratodosimetriasede =  document.getElementById("sedes_empresadosi").value; 
-                    document.getElementById("mes_asig_siguiente").value = mestrabj_asig;
-                    document.getElementById("contdosisededepto").value = id_contdosisededepto;
-                    document.getElementById("contratodosimetriasede").value = id_contratodosimetriasede;
-                    alert("SE TUVIERON Q GUARDAR"+document.getElementById("mesacambiar").value);
-
-
-                    document.getElementById("tr_newAsignacion2")
-                    .insertRow(-1).innerHTML += 
-                        `<td style="width: 27.30%">
-                            <select class="form-select " name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                ${selectTrabajadores.innerHTML}
-                            </select>
-                        
-                        </td>
-                        <td style="width: 14.50%">
-                            <select class="form-select"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="TORAX">TORAX</option>
-                                <option value="CRISTALINO">CRISTALINO</option>
-                                <option value="ANILLO">ANILLO</option>
-                                <option value="MUÑECA">MUÑECA</option>
-                                <option value="CONTROL">CONTROL</option>
-                                <option value="AREA">ÁREA</option>
-                                <option value="CASO">CASO</option>
-                            </select>
-                        </td> 
-                        <td style="width: 15.0%">
-                            <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                ${selectDosimetrosEzclip.innerHTML}
-                                ${selectDosimetros.innerHTML}
-                            </select>
-                            @error('id_dosimetro_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                        </td>
-                        <td style="width: 14.20%">
-                            <select class="form-select "  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="NA">N.A</option>
-                                ${selectHolders.innerHTML}
-                            </select>
-                        </td>
-                        <td style="width: 14.20%">
-                            <select class="form-select @error('ocupacion_asig') is-invalid @enderror" name="ocupacion_asig[]" id="ocupacion_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="T"> TELETERAPIA</option>
-                                <option value="BQ">BRAQUITERAPIA</option>
-                                <option value="MN">MEDICINA NUCLEAR</option>
-                                <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                <option value="MF">MEDIDORES FIJOS</option>
-                                <option value="IV">INVESTIGACIÓN</option>
-                                <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                <option value="MM">MEDIDORES MÓVILES</option>
-                                <option value="E"> DOCENCIA</option>
-                                <option value="PR">PERFILAJE Y REGISTRO</option>
-                                <option value="TR">TRAZADORES</option>
-                                <option value="HD">HEMODINAMIA</option>
-                                <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                <option value="RX">RADIODIAGNÓSTICO</option>
-                                <option value="FL">FLUOROSCOPIA</option>
-                                <option value="AM">APLICACIONES MÉDICAS</option>
-                                <option value="AI">APLICACIONES INDUSTRIALES</option>
-                            </select>
-                            @error('ocupacion_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                        </td>   
-                        <td style="width: 24.80%">
-                            <button id="" class="btn btn-danger"  type="button" onclick="eliminarFilaform2(this)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                </svg>
-                            </button>
-                            
-                        </td>
-                    `;
-                }else{
-                    alert("si entrO, es el MES actual");
-
-                    var mestrabj_asig = document.getElementById("mesacambiar").value;
-                    var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
-                    var id_contratodosimetriasede =  document.getElementById("sedes_empresadosi").value; 
-                    document.getElementById("mestrabj_asig").value = mestrabj_asig;
-                    document.getElementById("id_contdosisededepto").value = id_contdosisededepto;
-                    document.getElementById("id_contratodosimetriasede").value = id_contratodosimetriasede;
-
-                    document.getElementById("tabla_adicional")
-                    .insertRow(-1).innerHTML += 
-                        `<td style="width: 32.30%">
-                            <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                ${selectTrabajadores.innerHTML}
-                            </select>
-                        </td>
-                        <td style="width: 14.50%">
-                            <select class="form-select"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="TORAX">TORAX</option>
-                                <option value="CRISTALINO">CRISTALINO</option>
-                                <option value="ANILLO">ANILLO</option>
-                                <option value="MUÑECA">MUÑECA</option>
-                                <option value="CONTROL">CONTROL</option>
-                                <option value="AREA">ÁREA</option>
-                                <option value="CASO">CASO</option>
-                            </select>
-                        </td> 
-                        <td style="width: 15.0%">
-                            <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                ${selectDosimetrosEzclip.innerHTML}
-                                ${selectDosimetros.innerHTML}
-                            </select>
-                        </td>
-                        <td style="width: 14.20%">
-                            <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="NA">N.A</option>
-                                ${selectHolders.innerHTML}
-                            </select>
-                        </td>
-                        <td style="width: 14.20%">
-                            <select class="form-select" name="ocupacion_asig[]" id="ocupacion_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="T"> TELETERAPIA</option>
-                                <option value="BQ">BRAQUITERAPIA</option>
-                                <option value="MN">MEDICINA NUCLEAR</option>
-                                <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                <option value="MF">MEDIDORES FIJOS</option>
-                                <option value="IV">INVESTIGACIÓN</option>
-                                <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                <option value="MM">MEDIDORES MÓVILES</option>
-                                <option value="E"> DOCENCIA</option>
-                                <option value="PR">PERFILAJE Y REGISTRO</option>
-                                <option value="TR">TRAZADORES</option>
-                                <option value="HD">HEMODINAMIA</option>
-                                <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                <option value="RX">RADIODIAGNÓSTICO</option>
-                                <option value="FL">FLUOROSCOPIA</option>
-                                <option value="AM">APLICACIONES MÉDICAS</option>
-                                <option value="AI">APLICACIONES INDUSTRIALES</option>
-                            </select>
-                        </td>   
-                        <td style="width: 15.80%">
-                            <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                </svg>
-                            </button>
-                        </td>
-                    `;
-                }
-                    
-                    
-            
-            })
-        });
-    }
-    function eliminarFila(row){
-        var d = row.parentNode.parentNode.rowIndex;
-        document.getElementById('tabla_adicional').deleteRow(d);
-    }
+    })
     function limpiar(){
         var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
         var mes = document.getElementById("mesacambiar").value;
@@ -983,11 +772,18 @@
                 element.options.item(0).text = "---";
                 element.options.item(0).value = null;
             });
-            var boton = document.getElementById('agregar2');
-            boton.disabled = false;
+            var cambiarBoton = document.querySelectorAll('.cambiarBoton');
+            cambiarBoton.forEach(function(element){
+                element.disabled = false;
+
+            });
 
         })
-        
+        /* document.getElementById('eliminarControl').disabled = false;
+        document.getElementById('eliminarEzclip').disabled = false;
+        document.getElementById('eliminarTorax').disabled = false; */
+
+
     }
     function fechaUltimoDia(){
         
@@ -1000,7 +796,64 @@
         var año = fecha.getFullYear();
         document.getElementById("ultimoDia_asigdosim2").value = año+'-'+mm+'-'+dia;
 
-
+    
+    }
+    function eliminarEzclip(ezclip, ubicacion){
+        
+        Swal.fire({
+            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO ' +ubicacion+ ' ??',
+           /*  text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO", */
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1A9980',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'SI, SEGURO!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                alert('SE SELECCIONO ESTA ASIGNACION'+ezclip);
+                const element = document.getElementById(ezclip);
+                element.remove();
+                
+            }
+        })
+    }
+    function eliminarTorax(torax, ubicacion){
+        
+        Swal.fire({
+            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO ' +ubicacion+ ' ??',
+            /* text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO", */
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1A9980',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'SI, SEGURO!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                alert('SE SELECCIONO ESTA ASIGNACION'+torax);
+                const element = document.getElementById(torax);
+                element.remove();
+                
+            }
+        })
+    }
+    function eliminarControl(control){
+        
+        Swal.fire({
+            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO CONTROL ??',
+            /* text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO", */
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1A9980',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'SI, SEGURO!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                alert('SE SELECCIONO ESTA ASIGNACION'+control);
+                const element = document.getElementById(control);
+                element.remove();
+                
+            }
+        })
     }
 </script>
 @if(session('guardar')== 'ok')
@@ -1215,14 +1068,13 @@
             
             
 
-            if( ubicacion.length == 0 ){
-                /* alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA"); */
+            /* if( ubicacion.length == 0 ){
                 return Swal.fire({
                                 title:"OPRIMA EL BOTÓN DE NUEVO DOSÍMETRO",
                                 text: "INGRESE LA INFORMACIÓN SOLICITADA",
                                 icon: 'error'
                             });
-            };
+            }; */
             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
            /*  var observaciones = document.getElementById("nota_cambio_dosimetros2").value;
             console.log("ESTAS SON LAS OBSERVACIONES" + observaciones);

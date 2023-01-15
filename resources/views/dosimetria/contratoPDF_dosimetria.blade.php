@@ -13,7 +13,15 @@
 <body>
     <center><img src="{{asset('imagenes/VerdeSF.png')}}" width="200" ></center>
     <p style="text-align:center;">CONTRATO DE ARRENDAMIENTO DE DOSIMETROS Y PRESTACIÓN DE SERVICIOS COMPLEMENTARIOS DE DOSIMETRÍA PERSONAL </p>
-    <h4 style="text-align: center;">QA-CTO-{{$contdosi}}</h4>
+    @php
+        $n = $contdosi;
+        echo $n;
+        $titulo = str_pad($n, 5, "0", STR_PAD_LEFT); 
+        echo "<h4 style='text-align: center;'>QA-CTO-DP-" ;
+            echo $titulo;
+        echo "</h4>";
+    @endphp
+    
     @foreach($contrato as $cont)
         <p style="text-align:justify; margin-bottom: 0px;">Entre los suscritos <b>QA POSITRON S.A.S.</b>, sociedad comercial, con domicilio en la ciudad de Bucaramanga,
             constituida mediante escritura pública a número 13 de fecha 14 de enero de 1.997, otorgada en la Notaría 52 del Círculo Notaria de Bucaramanga,
@@ -103,6 +111,20 @@
     
     @endforeach
 
-
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+       
+        $(document).ready(function(){
+            var h1contrato = document.getElementById("contrato");
+            var num = parseInt('{{$contdosi}}');
+            var n = num.toString().padStart(5,'0');
+            console.log("ESTE ES EL CODIGO" +n);
+            h1contrato.innerHTML = "QA-CTO-DP-"+n;
+        })
+    </script>
 
 </body>
