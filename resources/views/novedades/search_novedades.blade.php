@@ -73,7 +73,6 @@
                     <br>
                     <h4 class="text-center" id="tituloContrato"></h4>
                     <br>
-                    <div id="titulosTablas"></div>
                     <div id="Tablas"></div>
                 </div>
                 <div class="col-md"></div>
@@ -117,6 +116,7 @@
             infoContrato.style.display= "none";
             var contrato_id = $(this).val();
             var check;
+            var chech;
             if($.trim(contrato_id) != ''){
                 $.get('sedesEspcontDosi', {contrato_id: contrato_id}, function(sedesEsp){
                     console.log("ESTAS SON LAS SEDES Y ESP");
@@ -130,10 +130,12 @@
                         tituloContrato.innerHTML = "CONTRATO No."+n;
                         if(value.nombre_sede != check){
                             
-                            $('#titulosTablas').append("<h4 class='text-center' id='tituloSede"+index+"'>"+value.nombre_sede+"</h4>");
+                            $('#Tablas').append("<h4 class='text-center' id='tituloSede"+index+"'>"+value.nombre_sede+"</h4>");
                             check = value.nombre_sede;
                             
-                            console.log("ESTE ES EL CHECK" +check);
+                            console.log("ESTE ES EL CHECK DE SEDE" +check);
+                        }
+                        if(value.nombre_departamento != chech && value.nombre_sede == check){
                             
                             let myTable= "<table class='table  table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
                             myTable+= "<th class='align-middle' style='width: 8.90%'>MES ACTUAL</th>";
@@ -147,6 +149,7 @@
                             myTable+="</tr>";
                             myTable+="</thead>";
                             myTable+="<tr><td class='text-center align-middle'>"+value.nombre_departamento+"</td>";
+                                chech = value.nombre_departamento;
                             myTable+="<td class='text-center align-middle'>"+value.mes_actual+"</td>";
                             myTable+="<td class='text-center align-middle'>"+value.dosi_torax+"</td>";
                             myTable+="<td class='text-center align-middle'>"+value.dosi_cristalino+"</td>";
@@ -158,7 +161,7 @@
                             myTable+="</tr>";
                             myTable+="<tr>";
                             myTable+="<td class='text-center align-middle p-4' colspan='9'>";
-                                myTable+="<div id='detalleTabla'></div>";
+                                myTable+="<div id='detalleTabla"+value.id_contdosisededepto+"'></div>";
                             myTable+="</td>";
                             myTable+="</tr>";
 
@@ -170,28 +173,39 @@
                             console.log("ESTAS SON LAS NOVEDADES");
                             console.log(novedadesCont);
                             var cheq;
-                            let Table= "<table class='table table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' colspan='3'>NOVEDADES</th></tr>";
+                            let Table= "<table class='table table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' colspan='4'>NOVEDADES</th></tr>";
                             Table+="<tr><th class='align-middle' style='width: 12.90%'>MES</th>";
+                            Table+="<th class='align-middle' style='width: 12.90%'>FECHA</th>";
                             Table+="<th class='align-middle'>OBSERVACIÓN</th>";
                             Table+="<th class='align-middle' style='width: 12.90%'>ACCIONES</th>";
                             Table+="</tr>";
                             Table+="</thead>";
+                            var id = [];
                             $.each(novedadesCont, function(index, value2){
+                                var fecha = new Date(value2.created_at);
+                                var dia = fecha.getDate();
+                                var mes = fecha.getMonth()+1;
+                                var año = fecha.getFullYear();
+                                id.push(value2.id_novedadmesescontdosi);
+                                console.log(id);
+                                console.log("ESTA ES EL ID NOVEDAD "+value2.id_novedadmesescontdosi);
                                 if(value.id_contdosisededepto == value2.contdosisededepto_id && value2.nota_cambiodosim != cheq){
                                     Table+="<tr><td class='text-center align-middle'>"+value2.mes_asignacion+"</td>";
+                                    Table+="<td class='text-center align-middle'>"+dia+"-"+mes+"-"+año+"</td>";    
                                     Table+="<td class='text-center align-middle'>"+value2.nota_cambiodosim+"</td>";
                                     Table+="<td class='text-center align-middle'>";
-                                        Table+="<a href='' class='btn btn-primary'>";
+                                        Table+="<button class='btn btn-primary'  type='button' onclick='detalle("+value2.nota_cambiodosim+")';>";
                                             Table+="<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-info-lg pb-1' viewBox='0 0 16 16'>";
                                                 Table+="<path d='m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704l1.323-6.208Zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0Z'/>";
                                             Table+="</svg";
-                                        Table+="</a></td>";
+                                        Table+="</button></td>";
+                                        
                                     Table+="</tr>";
                                     cheq = value2.nota_cambiodosim;
+                                    $('#detalleTabla'+value.id_contdosisededepto).append(Table);
                                 }
                             })
     
-                            $('#detalleTabla').append(Table);
                         })
                     })
                     
@@ -201,5 +215,17 @@
 
     })
 </script>
+<script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function detalle(nota){
+        alert(+nota);
+    }
+</script>
+
 
 @endsection()

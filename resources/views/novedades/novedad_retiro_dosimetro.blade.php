@@ -508,11 +508,7 @@
                                         </td>
                                     </tr>`;
                                 $("#body_asignaciones2").append(tr);
-                                if(asignacionescontrolmesactual[i].dosimetro_uso != 'FALSE'){
-                                    document.getElementById('eliminarControl').disabled = true;
-                                }else{
-                                    document.getElementById('eliminarControl').disabled = false;
-                                }
+                                
                             } 
                         }else{
                             //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
@@ -775,13 +771,10 @@
             var cambiarBoton = document.querySelectorAll('.cambiarBoton');
             cambiarBoton.forEach(function(element){
                 element.disabled = false;
-
             });
 
         })
-        /* document.getElementById('eliminarControl').disabled = false;
-        document.getElementById('eliminarEzclip').disabled = false;
-        document.getElementById('eliminarTorax').disabled = false; */
+        
 
 
     }
@@ -1034,21 +1027,38 @@
             
             ///////////////////////////////////////////////////////////////////////////
             //////VALIDACIONES PARA LOS NUEVOS DOSIMETROS QUE DESEE AÑADIR//////////////
-           /*  var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
+            var trabajadoresNull = document.querySelectorAll('select[name="id_trabj_asigdosim_null[]"]');
+            var trabajadores = document.querySelectorAll('select[name="id_trabj_asigdosim[]"]');
+
             console.log("ESTAS SON LOS TRABAJADORES");
             console.log(trabajadores);
-            for(var i = 0; i < trabajadores.length; i++) {
-                var values = trabajadores[i].value;
-                if(values == ''){
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGÚN TRABAJADOR",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
+            console.log(trabajadoresNull);
+            if(trabajadoresNull.length == 0 && trabajadores.length == 0){
+                return Swal.fire({
+                                    title:"NO PUEDE RETIRAR TODOS LOS DOSIMETROS, AL MENOS DEBE TENER UN DOSIMETRO DE TIPO TORAX O EZCLIP",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                    icon: 'error'
+                                }).then(function() {
+                                    var host = window.location.host;
+                                    window.location = "http://"+host+"/POSITRON/public/novedades/retiroDosimetro";
+                                });
+            }
+            /* for(var i = 0; i < trabajadoresNull.length; i++){
+                var valuesNull = trabajadoresNull[i].value;
+                for(var x = 0; x < trabajadores.length; x++) {
+                    var values = trabajadores[x].value;
+                    if(values == '' && valuesNull == ''){
+                        return Swal.fire({
+                                    title:"NO PUEDE RETIRAR TODOS LOS DOSIMETROS, AL MENOS DEBE TENER UN DOSIMETRO DE TIPO TORAX O EZCLIP",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                    icon: 'error'
+                                });
+                        
+                    }
                     
-                }
-                
-            }; */
+                };
+            } */
+            
 
             var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
             console.log("ESTAS SON LAS UBICACIONES");
@@ -1068,13 +1078,7 @@
             
             
 
-            /* if( ubicacion.length == 0 ){
-                return Swal.fire({
-                                title:"OPRIMA EL BOTÓN DE NUEVO DOSÍMETRO",
-                                text: "INGRESE LA INFORMACIÓN SOLICITADA",
-                                icon: 'error'
-                            });
-            }; */
+            
             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
            /*  var observaciones = document.getElementById("nota_cambio_dosimetros2").value;
             console.log("ESTAS SON LAS OBSERVACIONES" + observaciones);

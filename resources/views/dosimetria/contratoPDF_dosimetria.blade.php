@@ -15,7 +15,6 @@
     <p style="text-align:center;">CONTRATO DE ARRENDAMIENTO DE DOSIMETROS Y PRESTACIÓN DE SERVICIOS COMPLEMENTARIOS DE DOSIMETRÍA PERSONAL </p>
     @php
         $n = $contdosi;
-        echo $n;
         $titulo = str_pad($n, 5, "0", STR_PAD_LEFT); 
         echo "<h4 style='text-align: center;'>QA-CTO-DP-" ;
             echo $titulo;
