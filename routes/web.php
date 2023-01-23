@@ -301,7 +301,7 @@ Route::get('novedades/crear', [NovedadesController::class, 'create'])->name('nov
 Route::get('novedades/nuevoDosimetro', [NovedadesController::class, 'nuevoDosimetro'])->name('novedadesdosimetria.nuevoDosimetro');
 Route::get('novedades/retiroDosimetro', [NovedadesController::class,  'retiroDosimetro'])->name('novedadesdosimetria.retiroDosimetro');
 Route::get('novedades/cambioTrabajador', [NovedadesController::class,  'cambioTrabajador'])->name('novedadesdosimetria.cambioTrabajador');
-Route::get('novedades/{nota}/detalleNovedad', [NovedadesController::class, 'detalleNovedad'])->name('novedadesdosimetria.detalleNovedad');
+Route::get('novedades/{nota}/{deptodosi}/detalleNovedad', [NovedadesController::class, 'detalleNovedad'])->name('novedadesdosimetria.detalleNovedad');
 
 
 Route::get('/prueba1', [PruebaController::class,'index']);

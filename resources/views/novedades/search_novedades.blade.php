@@ -172,39 +172,51 @@
                         $.get('novedadesContDosim', {contrato_id: value.id_contratodosimetria}, function(novedadesCont){
                             console.log("ESTAS SON LAS NOVEDADES");
                             console.log(novedadesCont);
-                            var cheq;
-                            let Table= "<table class='table table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' colspan='4'>NOVEDADES</th></tr>";
-                            Table+="<tr><th class='align-middle' style='width: 12.90%'>MES</th>";
-                            Table+="<th class='align-middle' style='width: 12.90%'>FECHA</th>";
-                            Table+="<th class='align-middle'>OBSERVACIÓN</th>";
-                            Table+="<th class='align-middle' style='width: 12.90%'>ACCIONES</th>";
-                            Table+="</tr>";
-                            Table+="</thead>";
+                            if(novedadesCont.length == 0){
+                                Table+="NO HAY NOVEDADES";
+                                $('#detalleTabla'+value.id_contdosisededepto).append(Table);
+
+                            }else{
+                                let Table= "<table class='table table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' colspan='4'>NOVEDADES</th></tr>";
+                                    Table+="<tr><th class='align-middle' style='width: 12.90%'>MES</th>";
+                                    Table+="<th class='align-middle' style='width: 12.90%'>FECHA</th>";
+                                    Table+="<th class='align-middle'>OBSERVACIÓN</th>";
+                                    Table+="<th class='align-middle' style='width: 12.90%'>ACCIONES</th>";
+                                    Table+="</tr>";
+                                    Table+="</thead>";
+                                    Table+="<tbody id='tablaNovedad"+value.departamentosede_id+"'>";
+                                    Table+="</tbody>";
+                                    $('#detalleTabla'+value.id_contdosisededepto).append(Table);
+                            }
                             var id = [];
+                            var cheq;
                             $.each(novedadesCont, function(index, value2){
                                 var fecha = new Date(value2.created_at);
                                 var dia = fecha.getDate();
                                 var mes = fecha.getMonth()+1;
                                 var año = fecha.getFullYear();
                                 id.push(value2.id_novedadmesescontdosi);
+                                /* console.log("ESTE ES EL ARRAY ID");
                                 console.log(id);
-                                console.log("ESTA ES EL ID NOVEDAD "+value2.id_novedadmesescontdosi);
-                                if(value.id_contdosisededepto == value2.contdosisededepto_id && value2.nota_cambiodosim != cheq){
-                                    Table+="<tr><td class='text-center align-middle'>"+value2.mes_asignacion+"</td>";
-                                    Table+="<td class='text-center align-middle'>"+dia+"-"+mes+"-"+año+"</td>";    
-                                    Table+="<td class='text-center align-middle'>"+value2.nota_cambiodosim+"</td>";
-                                    Table+="<td class='text-center align-middle'>";
-                                        Table+="<button class='btn btn-primary'  type='button' onclick='detalle("+value2.nota_cambiodosim+")';>";
-                                            Table+="<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-info-lg pb-1' viewBox='0 0 16 16'>";
-                                                Table+="<path d='m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704l1.323-6.208Zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0Z'/>";
-                                            Table+="</svg";
-                                        Table+="</button></td>";
-                                        
-                                    Table+="</tr>";
+                                console.log("ESTA ES EL ID NOVEDAD "+value2.id_novedadmesescontdosi); */
+                                
+                                if(value.id_contdosisededepto == value2.contdosisededepto_id && value.departamentosede_id == value2.departamentosede_id && value2.nota_cambiodosim != cheq){
+                                    var tr = `<tr><td class="text-center align-middle">`+value2.mes_asignacion+`</td>
+                                        <td class="text-center align-middle">`+dia+`-`+mes+`-`+año+`</td>
+                                        <td class="text-center align-middle">`+value2.nota_cambiodosim+`</td>
+                                        <td class="text-center align-middle">
+                                            <button class="btn btn-primary"  type="button" onclick="detalle('`+value2.nota_cambiodosim+`', `+value2.contdosisededepto_id+`);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-lg pb-1" viewBox="0 0 16 16">
+                                                    <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704l1.323-6.208Zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0Z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>`;
                                     cheq = value2.nota_cambiodosim;
-                                    $('#detalleTabla'+value.id_contdosisededepto).append(Table);
+                                    $('#tablaNovedad'+value2.departamentosede_id).append(tr);
                                 }
-                            })
+                                
+                            }) 
     
                         })
                     })
@@ -222,8 +234,11 @@
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
-    function detalle(nota){
-        alert(+nota);
+    function detalle(nota, deptodosi){
+        var host = window.location.host;
+        var path = "http://"+host+"/POSITRON/public/novedades/"+nota+"/"+deptodosi+"/detalleNovedad";
+        
+        window.open(path, '_self');
     }
 </script>
 
