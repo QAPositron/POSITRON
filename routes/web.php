@@ -46,7 +46,9 @@ use Illuminate\Http\Request;
 /* Route::get('/',[PruebaController::class,'index1']); */
     //return view('welcome');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'login'])->name('login');
+Route::get('home', [HomeController::class, 'index'])->name('home');
+
 
 /////////RUTAS PARA EL CRUD DE EMPRESAS///////
 Route::get('empresas/search', [EmpresasController::class, 'search'])->name('empresas.search');
