@@ -13,6 +13,10 @@ use Illuminate\Validation\Rule;
 
 class SedesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function create($id){
         $empresa = Empresa::find($id); 
         $departamentoscol = Coldepartamento::all();

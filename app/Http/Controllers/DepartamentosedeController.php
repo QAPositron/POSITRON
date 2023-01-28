@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class DepartamentosedeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function destroydepa(Empresa $empresa, $depa){
         $departamento = Departamentosede::find($depa);

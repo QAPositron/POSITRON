@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
 
@@ -178,6 +179,7 @@
                     
                 </form>
             </div>
+            <br>
         </div>
         <div class="col"></div>
     </div>

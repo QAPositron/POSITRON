@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
 <div class="row">
@@ -123,7 +124,7 @@
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo control asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
                                     @foreach($dosicontrolmesant as $dosicontrolant)
                                         <tr>
-                                            <td colspan='2' class='align-middle'>CONTROL</td>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL</td>
                                             <td class='align-middle'>
                                                 <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" @if($dosicontrolant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicontrolant->dosimetro_uso != 'FALSE') {{$dosicontrolant->dosimetro_id}} @endif"> @if($dosicontrolant->dosimetro_uso != 'FALSE') {{$dosicontrolant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
@@ -132,7 +133,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle'>N.A.</td>
+                                            <td class='align-middle text-center'>N.A.</td>
                                             <td>
                                                 <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" style="text-transform:uppercase" @if($dosicontrolant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicontrolant->dosimetro_uso != 'FALSE')
@@ -199,7 +200,7 @@
                                     @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_control - count($dosicontrolmesant)); $i++)
                                             <tr>
-                                                <td colspan='2' class='align-middle'>CONTROL</td>
+                                                <td colspan='2' class='align-middle text-center'>CONTROL</td>
                                                 <td class='align-middle'>
                                                     <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -208,7 +209,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td class='align-middle'>N.A.</td>
+                                                <td class='align-middle text-center'>N.A.</td>
                                                 <td>
                                                     <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
@@ -250,7 +251,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>ÁREA</td>
+                                            <td class="align-middle text-center">ÁREA</td>
                                             <td>
                                                 <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosiareant->dosimetro_uso != 'FALSE'){{$dosiareant->dosimetro_id}}@endif">@if($dosiareant->dosimetro_uso != 'FALSE'){{$dosiareant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
@@ -259,7 +260,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>N.A</td>
+                                            <td class="align-middle text-center">N.A</td>
                                             <td>
                                                 <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" style="text-transform:uppercase" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosiareant->dosimetro_uso != 'FALSE')
@@ -341,7 +342,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>ÁREA</td>
+                                                <td class="align-middle text-center">ÁREA</td>
                                                 <td>
                                                     <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -350,7 +351,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>N.A</td>
+                                                <td class="align-middle text-center">N.A</td>
                                                 <td>
                                                     <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
@@ -404,7 +405,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>CASO</td>
+                                            <td class="align-middle text-center">CASO</td>
                                             <td>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicasoant->dosimetro_uso != 'FALSE') {{$dosicasoant->dosimetro_id}} @endif">@if($dosicasoant->dosimetro_uso != 'FALSE') {{$dosicasoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
@@ -413,7 +414,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>N.A</td>
+                                            <td class="align-middle text-center">N.A</td>
                                             <td>
                                                 <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" style="text-transform:uppercase" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicasoant->dosimetro_uso != 'FALSE')
@@ -499,7 +500,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>CASO</td>
+                                                <td class="align-middle text-center">CASO</td>
                                                 <td>
                                                     <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -508,7 +509,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>N.A</td>
+                                                <td class="align-middle text-center">N.A</td>
                                                 <td>
                                                     <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
@@ -562,7 +563,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>TÓRAX</td>
+                                            <td class="align-middle text-center">TÓRAX</td>
                                             <td>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dositoraxant->dosimetro_uso != 'FALSE') {{$dositoraxant->dosimetro_id}}@endif">@if($dositoraxant->dosimetro_uso != 'FALSE') {{$dositoraxant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
@@ -571,7 +572,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>N.A</td>
+                                            <td class="align-middle text-center">N.A</td>
                                             <td>
                                                 <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" style="text-transform:uppercase" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dositoraxant->dosimetro_uso != 'FALSE')
@@ -656,7 +657,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>TÓRAX</td>
+                                                <td class="align-middle text-center">TÓRAX</td>
                                                 <td>
                                                     <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -665,7 +666,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>N.A</td>
+                                                <td class="align-middle text-center">N.A</td>
                                                 <td>
                                                     <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
@@ -719,7 +720,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>CRISTALINO</td>
+                                            <td class="align-middle text-center">CRISTALINO</td>
                                             <td>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->dosimetro_id}}@endif">@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
@@ -820,7 +821,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>CRISTALINO</td>
+                                                <td class="align-middle text-center">CRISTALINO</td>
                                                 <td>
                                                     <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -891,7 +892,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>MUÑECA</td>
+                                            <td class="align-middle text-center">MUÑECA</td>
                                             <td>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->dosimetro_id}}@endif">@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
@@ -990,7 +991,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>MUÑECA</td>
+                                                <td class="align-middle text-center">MUÑECA</td>
                                                 <td>
                                                     <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -1060,7 +1061,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>ANILLO</td>
+                                            <td class="align-middle text-center">ANILLO</td>
                                             <td>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo"  @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro_id}}@endif">@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
@@ -1161,7 +1162,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>ANILLO</td>
+                                                <td class="align-middle text-center">ANILLO</td>
                                                 <td>
                                                     <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>

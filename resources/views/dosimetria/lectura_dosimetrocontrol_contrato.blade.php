@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido') 
 <div class="row">

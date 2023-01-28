@@ -1,9 +1,11 @@
+
+@extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
 
     <div class="row">
         <div class="col">
-            <a href="{{route('personas.create')}}" class="btn colorQA btn-sm m-4">
+            <a href="{{route('personas.create')}}" class="btn colorQA btn-sm m-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                 </svg> CREAR PERSONA
@@ -12,7 +14,7 @@
         <div class="col"></div>
     </div>
     {{-- @livewire('search-personas-component') --}}
-    <div class="row pt-5" id ="salida">
+    <div class="row" id ="salida">
         <h2 class="text-center">TODAS LAS PERSONAS</h2>
         <br>
         <br>
@@ -165,7 +167,7 @@
                         "previous": "ANTERIOR"
                     }   
                 },
-                /* "dom": '<lf<t>ip>' */
+                
                    
             });
             

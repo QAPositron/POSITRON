@@ -1,5 +1,5 @@
 
-<!doctype html>
+{{-- <!doctype html>
 <html lang="en">
     
     <head>
@@ -69,9 +69,12 @@
     <body>
         <!-- ///////////////HEADER NAV/////////// -->
         @include('layouts.partials.header')
-       
+        --}}
+@extends('layouts.app')
+@extends('layouts.plantillabase')
+@section('contenido')    
         <!-- //////////////////// CONTENIDO ///////////////// -->
-        <div class="container mt-5 p-auto ">
+        {{-- <div class="container mt-5 p-auto "> --}}
             <div class="row">
 
                 <div class="col"></div>
@@ -177,7 +180,7 @@
                 </div>
                 <div class="col"></div>    
             </div>
-        </div>
+        {{-- </div> --}}
         <div class="modal fade" id="nuevo_deptoModal" tabindex="-1" aria-labelledby="nuevo_deptoModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -190,11 +193,11 @@
                 </div> 
             </div>
         </div>
-        {{-- <script
+        <script
             src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
             crossorigin="anonymous">
-        </script> --}}
+        </script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if(session('guardar')== 'ok')
             <script>
@@ -300,5 +303,6 @@
                 })
             })
         </script>
-    </body>
-</html>
+@endsection
+    {{-- </body>
+</html> --}}

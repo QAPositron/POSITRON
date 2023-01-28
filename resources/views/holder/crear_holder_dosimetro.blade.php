@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
 <div class="row">
@@ -55,11 +56,14 @@
                         </div>
                     </div>
                 </div>
-                <BR></BR>
+                <br>
                 <div class="row ">
                     <div class="col"></div>
                     <div class="col d-grid gap-2">
                         <button class="btn btn-primary " type="submit" id="boton-asignar" name="boton-asignar">GUARDAR</button>
+                    </div>
+                    <div class="col d-grid gap-2">
+                        <a href="{{route('dosimetros.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                     </div>
                     <div class="col"></div>
                 </div>

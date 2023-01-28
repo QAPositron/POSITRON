@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class DepartamentoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function save(Request $request){
         /* return $request; */

@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
 <div class="row">
@@ -58,7 +59,7 @@
                         <button class="btn colorQA " type="submit" id="boton-guardar" name="boton-guardar">ACTUALIZAR</button>
                     </div>
                     <div class="col d-grid gap-2">
-                        <a href="{{route('empresas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                        <a href="{{route('dosimetros.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
                     </div>
                     <div class="col"></div>
                 </div>

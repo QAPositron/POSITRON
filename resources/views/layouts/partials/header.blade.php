@@ -1,7 +1,7 @@
 <header>
-  <nav class="navbar  navbar-expand-lg navbar-dark colorQA">
-    <div class="container-fluid">
-      <a class="navbar-brand ms-5" href="#"><img src="{{asset('imagenes/logo_positron.png')}}" width="170px"></a>
+  <nav class="navbar  navbar-expand-md navbar-dark colorQA">
+    <div class="container">
+      {{-- <a class="navbar-brand ms-5" href="#"><img src="{{asset('imagenes/logo_positron.png')}}" width="170px"></a> --}}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -21,7 +21,7 @@
               <li><a class="dropdown-item" href="{{route('dosimetros.search')}}">INVENTARIO</a></li>
               <li><a class="dropdown-item" href="{{route('revisiondosimetria.create')}}">REVISIÓN DE SALIDA</a></li>
               <li><a class="dropdown-item" href="{{route('revisiondosimetriaentrada.create')}}">REVISIÓN DE ENTRADA</a></li>
-              <li><a class="dropdown-item" href="{{route('novedadesdosim.create')}}">NOVEDADES</a></li>
+              {{-- <li><a class="dropdown-item" href="{{route('novedadesdosim.create')}}">NOVEDADES</a></li> --}}
               <li><a class="dropdown-item" href="{{route('novedadesdosimetria.search')}}">NOVEDADES NUEVO</a></li>
             </ul>
           </li>
@@ -32,7 +32,7 @@
             <a class="nav-link {{request()->routeIs('contacto.*') ? 'active' : ''}}" href="{{route('contactos.search')}}">CONTACTOS</a>
           </li> --}}
         </ul>
-        <span class="navbar-text me-5">
+        <span class="navbar-text">
           MODULO DOSIMETRÍA
         </span>
       </div>

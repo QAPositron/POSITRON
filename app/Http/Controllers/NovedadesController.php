@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Validator;
 
 class NovedadesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //el metodo INDEX esta provicional se debe eliminar 
     public function index(){ 
         $empresasDosi = ContratosDosimetriaEmpresa::all();

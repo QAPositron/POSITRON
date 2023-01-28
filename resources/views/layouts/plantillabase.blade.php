@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -24,7 +24,6 @@
       .active{
         background-color: #EEEEEE;
         background-color: rgba(231, 231, 231, 0.3);
-        /* font-weight: bold; */
       }
       .colorQA{
         background-color: #1A9980;
@@ -33,9 +32,7 @@
       .bg-danger{
         color: white;
       }
-      /* tr:hover{
-        background-color: rgba(26, 153, 128, 0.1);
-      } */
+      
       input[type=number]::-webkit-inner-spin-button,
       input[type=number]::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -61,7 +58,6 @@
       }
       .form-check-input:focus{
         border-color: white;
-        /* background-attachment: #1A9980; */
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
       }
       .form-check-input:checked{
@@ -86,8 +82,7 @@
         color: red;
       }
       .trcorrect{
-        /* background-color: #1A9980;
-        color: orange; */
+        
         box-shadow: inset 0 1px 1px rgba(194, 20, 34, 0.075), 0 0 8px rgb(245, 6, 6);
                         
       }
@@ -129,7 +124,8 @@
     
     @livewireStyles
   </head>
-  <body>
+  <body> --}}
+    @section('content')
     <!-- ///////////////HEADER NAV/////////// -->
     @include('layouts.partials.header')
 
@@ -138,6 +134,9 @@
     <div class="container mt-5 p-auto ">
         @yield('contenido')
     </div>
+    @endsection()
+
+    {{-- 
     @livewireScripts
     
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -163,8 +162,8 @@
     <script type="text/javascript" src= "<?php $_SERVER['DOCUMENT_ROOT'] ?>/POSITRON/public/DataTables/datatables.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.js"></script>
 
-
-    
+ --}}
+ 
     
   </body>
 </html>

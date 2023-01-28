@@ -19,10 +19,8 @@ use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\PersonasedesController;
 use App\Http\Controllers\PersonasperfilesController;
 use App\Http\Controllers\PersonasrolesController;
-use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SedesController;
-use App\Http\Controllers\TrabajadoresController;
 use App\Http\Controllers\TrabajadorsController;
 use App\Http\Livewire\FormTrabajador;
 use App\Models\Areadepartamentosede;
@@ -31,6 +29,7 @@ use App\Models\Departamentosede;
 use App\Models\Holder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,8 +46,10 @@ use Illuminate\Http\Request;
     //return view('welcome');
 
 Route::get('/', [HomeController::class, 'login'])->name('login');
-Route::get('home', [HomeController::class, 'index'])->name('home');
+/*Route::get('home', [HomeController::class, 'index'])->name('home'); */
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /////////RUTAS PARA EL CRUD DE EMPRESAS///////
 Route::get('empresas/search', [EmpresasController::class, 'search'])->name('empresas.search');
@@ -87,26 +88,7 @@ Route::post('areadeptosave', [AreadepartamentosedeController::class, 'save'])->n
 Route::put('areadeptoupdate/{area}', [AreadepartamentosedeController::class, 'update'])->name('areadepto.update');
 Route::delete('areadeptodestroy/{area}', [AreadepartamentosedeController::class, 'destroy'])->name('areadepto.destroy');
 
-/////////RUTAS PARA EL CRUD DE TRABAJADORES///////
 
-/* Route::get('trabajadores/{empresa}/create', FormTrabajador::class)->name('trabajadores.create'); */
-Route::get('trabajadores/{trabajador}/create', [TrabajadorsController::class, 'create'])->name('trabajadores.create');
-/* Route::get('/trabaja',[TrabajadorsController::class, 'select']); */
-Route::post('trabajadores', [TrabajadorsController::class, 'save'])->name('trabajadores.save');
-Route::get('trabajadores/{trabajador}/edit', [TrabajadorsController::class, 'edit'])->name('trabajadores.edit');
-Route::put('trabajadores/{trabajador}', [TrabajadorsController::class, 'update'])->name('trabajadores.update');
-Route::delete('trabajadores/{trabajador}', [TrabajadorsController::class, 'destroy'])->name('trabajadores.destroy');
-
-/////////RUTAS PARA EL CRUD DE CONTACTOS///////
-Route::get('contactos/search', [ContactosController::class, 'search'])->name('contactos.search');
-/* Route::get('contactos/selectsedes', [ContactosController::class, 'selectsedes']); */
-Route::get('contactos/{contacto}/selectsedes', [ContactosController::class, 'selectsedes']);
-
-Route::get('contactos/create', [ContactosController::class, 'create'])->name('contactos.create');
-Route::post('contactos', [ContactosController::class, 'save'])->name('contactos.save');
-Route::get('contactos/{contacto}/edit', [ContactosController::class, 'edit'])->name('contactos.edit');
-Route::put('contactos/{contacto}', [ContactosController::class, 'update'])->name('contactos.update');
-Route::delete('contactos/{contacto}', [ContactosController::class, 'destroy'])->name('contactos.destroy');
 
 /////////RUTAS PARA EL CRUD DE PERFILES/////
 Route::post('perfiles', [PerfilesController::class, 'save'])->name('perfiles.save');
@@ -152,7 +134,6 @@ Route::delete('holders/{holder}', [HolderController::class, 'destroy'])->name('h
 Route::get('empresasdosicreate', [DosimetriaController::class, 'createEmpresa'])->name('empresasdosi.create');
 Route::post('empresasdosi', [DosimetriaController::class, 'saveEmpresa'])->name('empresasdosi.save');
 
-/* Route::get('contratosdosilistar/{empresadosi}/listar', [DosimetriaController::class, 'listarContratosdosi'])->name('contratosdosi.listar'); */
 Route::get('contratosdosicreate/{empresadosi}/create', [DosimetriaController::class, 'createContrato'])->name('contratosdosi.create');
 
 Route::get('contratodosisedecreate/{contratodosi}/create', [DosimetriaController::class, 'createSedeContrato'])->name('contratosdosisede.create');
@@ -306,17 +287,12 @@ Route::get('novedades/cambioTrabajador', [NovedadesController::class,  'cambioTr
 Route::get('novedades/{nota}/{deptodosi}/detalleNovedad', [NovedadesController::class, 'detalleNovedad'])->name('novedadesdosimetria.detalleNovedad');
 
 
-Route::get('/prueba1', [PruebaController::class,'index']);
-Route::post('/prueba1', [PruebaController::class, 'sedes']);
-Route::post('/prueba',[PruebaController::class,'prueba']);
-
-Route::get('pruebacreate',[PruebaController::class,'index1']);
-Route::get('/prueba2',[PruebaController::class,'prueba2']);
-Route::get('/prueba3',[PruebaController::class,'prueba3']);
-Route::get('/prueba4',[PruebaController::class,'prueba4']);
+ 
 
 /* Route::post('/prueba', function(Request $request){
     $name = $request->input('name');
     $surname = $request->input('surname');
     echo "tu nombre es $name y tu apellido es $surname";
 }); */
+
+

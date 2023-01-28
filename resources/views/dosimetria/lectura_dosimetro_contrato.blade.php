@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
 <div class="row">
@@ -9,7 +10,7 @@
         </a>
     </div>
     <div class="col-md-6">
-        <h3 class="text-center">LECTURA DE DOSÍMETRO </h3>
+        <h3 class="text-center">xxxxLECTURA DE DOSÍMETRO </h3>
         <h3 class="text-center">ESPECIALIDAD: {{$trabjasig->contratodosimetriasededepto->departamentosede->nombre_departamento}} <br> CONTRATO No. {{$trabjasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}} - MES {{$trabjasig->mes_asignacion}}</h3>
     </div>
     <div class="col-md"></div>

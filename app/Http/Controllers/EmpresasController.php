@@ -20,7 +20,10 @@ use Illuminate\Validation\Rule;
 
 class EmpresasController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function create(){
         $departamentoscol = Coldepartamento::all();
         $municipioscol = Colmunicipio::all();

@@ -38,6 +38,11 @@ use Illuminate\Support\Facades\DB;
 
 class DosimetriaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /* public function index(){
         $empresa = ContratosDosimetriaEmpresa::all();
         return view('dosimetria.empresas_dosimetria', compact('empresa'));
@@ -2381,7 +2386,7 @@ class DosimetriaController extends Controller
         ->get();
         $observacionesDelMes = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
-        ->select('nota_cambiodosim')
+        /* ->select('nota_cambiodosim') */
         ->get();
         /* return $contdosisededepto->departamentosede->departamento->nombre_departamento; */
         return view('dosimetria.revision_entrada_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber', 'observacionesDelMes'));
