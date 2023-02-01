@@ -15,23 +15,23 @@ class CreateEmpresasTable extends Migration
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->bigincrements('id_empresa')->unique();
-            $table->string('nombre_empresa', 40)->unique();
+            $table->string('nombre_empresa')->unique();
             $table->integer('num_iden_empresa')->unique();
             $table->integer('DV')->nullable();
             $table->string('telefono_empresa', 10);
             $table->string('email_empresa')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('direccion_empresa', 40);
-            $table->string('nombre_representantelegal', 50);
+            $table->text('direccion_empresa');
+            $table->text('nombre_representantelegal');
             $table->string('tipo_iden_representantelegal', 50);
             $table->integer('cedula_representantelegal');
             
             $table-> unsignedBigInteger('municipiocol_id');
             $table-> foreign('municipiocol_id')->references('id_municipiocol')->on('colmunicipios')->onDelete('cascade')->onUpdate('cascade');
             
-            $table->string('pais_empresa' , 40);
-            $table->string('tipo_empresa', 40);
-            $table->string('tipo_identificacion_empresa', 40);
+            $table->string('pais_empresa');
+            $table->string('tipo_empresa');
+            $table->string('tipo_identificacion_empresa');
             $table->integer('actividad_economica_empresa');
             $table->string('respo_iva_empresa');
             $table->string('respo_fiscal_empresa');

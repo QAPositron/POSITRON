@@ -20,8 +20,8 @@ class CreateAreadepartamentosedesTable extends Migration
             $table-> unsignedBigInteger('departamentosede_id');
             $table-> foreign('departamentosede_id')->references('id_departamentosede')->on('departamentosedes')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->string('nombre_area', 30);
-            $table->string('descripcion', 100)->nullable();
+            $table->text('nombre_area');
+            $table->text('descripcion')->nullable();
             
             
             $table->timestamps();

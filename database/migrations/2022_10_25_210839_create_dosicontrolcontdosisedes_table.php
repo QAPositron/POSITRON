@@ -27,14 +27,14 @@ class CreateDosicontrolcontdosisedesTable extends Migration
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
             
             $table->integer('mes_asignacion');
-            $table->string('dosimetro_uso', 10);
+            $table->string('dosimetro_uso', 50);
             $table->date('primer_dia_uso')->nullable();
             $table->date('ultimo_dia_uso')->nullable();
             $table->date('fecha_dosim_enviado')->nullable();
             $table->date('fecha_dosim_recibido')->nullable();
             $table->date('fecha_dosim_devuelto')->nullable();
-            $table->string('ocupacion', 30)->nullable();
-            $table->string('energia', 30)->nullable();
+            $table->string('ocupacion', 50)->nullable();
+            $table->string('energia', 50)->nullable();
             $table->date('zero_level_date')->nullable();
             $table->date('measurement_date')->nullable();
             $table->double('Hp007_calc_dose', 8, 5)->nullable();
@@ -59,17 +59,17 @@ class CreateDosicontrolcontdosisedesTable extends Migration
             $table->date('verification_date')->nullable();
             $table->date('verification_required_on_or_before')->nullable();
             $table->integer('remaining_days_available_for_use')->nullable();
-            $table->string('nota1', 10)->nullable();
-            $table->string('nota2', 10)->nullable();
-            $table->string('nota3', 10)->nullable();
-            $table->string('nota4', 10)->nullable();
-            $table->string('nota5', 10)->nullable();
-            $table->string('DNL', 10)->nullable();
-            $table->string('EU', 10)->nullable();
-            $table->string('DPL', 10)->nullable();
-            $table->string('DSU', 10)->nullable();
-            $table->string('revision_salida', 10)->nullable();
-            $table->string('revision_entrada', 10)->nullable();
+            $table->string('nota1', 50)->nullable();
+            $table->string('nota2', 50)->nullable();
+            $table->string('nota3', 50)->nullable();
+            $table->string('nota4', 50)->nullable();
+            $table->string('nota5', 50)->nullable();
+            $table->string('DNL', 50)->nullable();
+            $table->string('EU', 50)->nullable();
+            $table->string('DPL', 50)->nullable();
+            $table->string('DSU', 50)->nullable();
+            $table->string('revision_salida', 50)->nullable();
+            $table->string('revision_entrada', 50)->nullable();
             $table->timestamps();
         });
     }

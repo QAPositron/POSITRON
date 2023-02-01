@@ -15,18 +15,18 @@ class CreatePersonasTable extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->bigincrements('id_persona')->unique();
-            $table->string('primer_nombre_persona', 15);
-            $table->string('segundo_nombre_persona', 15);
-            $table->string('primer_apellido_persona', 15);
-            $table->string('segundo_apellido_persona', 15);
-            $table->string('genero_persona', 15);
-            $table->string('tipo_iden_persona', 50);
+            $table->text('primer_nombre_persona');
+            $table->text('segundo_nombre_persona');
+            $table->text('primer_apellido_persona');
+            $table->text('segundo_apellido_persona');
+            $table->text('genero_persona');
+            $table->text('tipo_iden_persona');
             $table->integer('cedula_persona')->unique();
-            $table->string('correo_persona', 30)->unique();
+            $table->string('correo_persona', 50)->unique();
             $table->string('telefono_persona', 15);
-            $table->string('lider_ava', 15)->nullable();
-            $table->string('lider_dosimetria', 15)->nullable();
-            $table->string('lider_controlescalidad', 15)->nullable();
+            $table->string('lider_ava', 50)->nullable();
+            $table->string('lider_dosimetria', 50)->nullable();
+            $table->string('lider_controlescalidad', 50)->nullable();
             $table->timestamps();
         });
     }

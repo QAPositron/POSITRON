@@ -20,8 +20,8 @@ class CreateColmunicipiosTable extends Migration
             $table-> unsignedBigInteger('departamentocol_id');
             $table-> foreign('departamentocol_id')->references('id_departamentocol')->on('coldepartamentos')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->string('nombre_municol',40);
-            $table->string('abrev_municol',40);
+            $table->text('nombre_municol');
+            $table->text('abrev_municol');
             $table->timestamps();
         });
     }
