@@ -804,8 +804,7 @@ class DosimetriaController extends Controller
     }
     public function asignaDosiContratoM1($id, $mesnumber){ 
         $contdosisededepto = Contratodosimetriasededepto::find($id);
-        $trabajadoreSede = Trabajadorsede::where('sede_id', '=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
-        ->get();
+        
         $personaSede = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
         ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
         ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
@@ -834,7 +833,7 @@ class DosimetriaController extends Controller
         $holderLibresAnillo = Holder::where('estado_holder', 'STOCK')
         ->where('tipo_holder', 'ANILLO')
         ->get();
-        return view('dosimetria.asignar_dosimetro_contrato_m1', compact('mesnumber','contdosisededepto', 'dosimLibresGeneral', 'areaSede', 'dosimLibresAmbiental', 'trabajadoreSede', 'personaSede', 'dosimLibresEzclip', 'holderLibresCristalino', 'holderLibresExtrem', 'holderLibresAnillo'));
+        return view('dosimetria.asignar_dosimetro_contrato_m1', compact('mesnumber','contdosisededepto', 'dosimLibresGeneral', 'areaSede', 'dosimLibresAmbiental', 'personaSede', 'dosimLibresEzclip', 'holderLibresCristalino', 'holderLibresExtrem', 'holderLibresAnillo'));
         /* return $personaSede; */
     }
     public function saveAsignacionDosiContratoM1(Request $request, $asigdosicont, $mesnumber){
