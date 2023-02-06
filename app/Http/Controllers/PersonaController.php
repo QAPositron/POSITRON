@@ -190,14 +190,7 @@ class PersonaController extends Controller
                 $personasRoles->save();
             }
         }
-        if(!empty($request->lider_dosimetria) && $request->lider_dosimetria == 'TRUE'){
-            $personasRoles = new Personasroles();
-    
-            $personasRoles->persona_id  = $persona->id_persona;
-            $personasRoles->rol_id      = 2;
-    
-            $personasRoles->save();
-        }
+        
 
         if(!empty($request->id_sedes)){
             for($i=0; $i<count($request->id_sedes); $i++){

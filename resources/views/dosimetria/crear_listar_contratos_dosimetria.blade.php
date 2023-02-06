@@ -28,17 +28,17 @@
 <br>
 <div class="row">
     <div class="col"></div>
-    <div class="col-7">
+    <div class="col-8">
         {{-- <h3 class="text-center">LISTADO DE CONTRATOS</h3> --}}
         <div class="table table-responsive p-4 ">
             <table class="table table-bordered contratosdosi">
                 <thead class ="table-active text-center">
                     <tr>
                         <th>No. CONTRATO</th>
-                        <th style='width: 15.60%'>FECHA INICIO</th>
-                        <th style='width: 15.60%'>FECHA FINALIZACIÓN</th>
-                        <th style='width: 20.60%'>P. RECAMBIO</th>
-                        <th style='width: 45.60%'>ACCIONES</th>
+                        <th style='width: 20.60%'>FECHA INICIO</th>
+                        <th style='width: 20.60%'>FECHA FINALIZACIÓN</th>
+                        <th style='width: 15.60%'>P. RECAMBIO</th>
+                        <th style='width: 30.60%'>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,8 +48,8 @@
                             <td class="align-middle">{{$dosicont->fecha_inicio}}</td>
                             <td class="align-middle">{{$dosicont->fecha_finalizacion}}</td>
                             <td class="align-middle text-center">{{$dosicont->periodo_recambio}}</td>
-                            <td class="text-center">
-                                <div class="row">
+                            <td class="align-middle text-center">
+                                <div class="row align-items-center">
                                     <div class="col">
                                         <a href="{{-- {{route('contratosdosi.edit', ['empresadosi' => $empresa->id_empresa, 'contratodosi' => $dosicont->id_contratodosimetria])}} --}}" class="btn colorQA">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
@@ -58,11 +58,11 @@
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <form class="eliminar_contratodosi" id="eliminar_contratodosi" name="eliminar_contratodosi" action="{{-- {{route('contratosdosi.destroy',  ['empresadosi' => $empresa->id_empresa, 'contratodosi' => $dosicont->id_contratodosimetria])}} --}}" method="POST">
+                                        <form class="eliminar_contratodosi mb-1" id="eliminar_contratodosi" name="eliminar_contratodosi" action="{{-- {{route('contratosdosi.destroy',  ['empresadosi' => $empresa->id_empresa, 'contratodosi' => $dosicont->id_contratodosimetria])}} --}}" method="POST">
                                             @csrf  
                                             @method('delete')
                                             <button class="btn btn-danger" type="submit">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash mb-1" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                     <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                                 </svg>

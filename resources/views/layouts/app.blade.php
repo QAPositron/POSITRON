@@ -123,6 +123,9 @@
       .dataTables_wrapper  .dataTables_length{
           float: left
       }
+      .td{
+        word-break:break-all;
+      }
     </style>
         
     @livewireStyles

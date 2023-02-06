@@ -30,5 +30,6 @@ class HomeController extends Controller
         $empresa = Empresa::all();
 
         return view('empresa.buscar_empresa',compact('empresa'));
+        /* return view('home'); */
     }
 }

@@ -7,7 +7,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
     
     <div class="row">
         <div class="col"></div>
-        <div class="col-11">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="infoEmpresas" role="tablist">
@@ -32,7 +32,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                     <!-- //////////////////// PESTAÑA DE EMPRESA //////////////// -->
                     <div class="tab-content mt-3">
                         <div class="tab-pane active" id="empresa" role="tabpanel">  
-                            <h4 class="card-title text-center pt-3">{{$empresa->nombre_empresa}}</h4>
+                            <h3 class="card-title text-center pt-3"> <i>{{$empresa->nombre_empresa}}</i></h3>
                             
                             <div class="table table-responsive p-4 ">
                                 <table class="table table-bordered">
@@ -90,7 +90,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="table-active text-center align-middle">
-                                                <div class="row">
+                                                <div class="row align-items-center">
                                                     <div class="col"></div>
                                                     <div class="col">
                                                         <a href="{{route('empresas.edit', $empresa->id_empresa)}}" class="btn colorQA btn-sm">
@@ -100,7 +100,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                                         </a>
                                                     </div>
                                                     <div class="col">
-                                                        <form id="form_eliminar_empresa" action="{{route('empresas.destroy', $empresa)}}" method="POST">
+                                                        <form id="form_eliminar_empresa" action="{{route('empresas.destroy', $empresa)}}" method="POST" class="mb-1">
                                                             @csrf  
                                                             @method('delete')
                                                             <button class="btn btn-danger btn-sm" onclick="Eliminar(evt);" type="submit">
@@ -134,7 +134,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col-9">
-                                    <h4 class="card-title text-center">SEDES SUBSCRITAS A LA EMPRESA: {{$empresa->nombre_empresa}}</h4>
+                                    <h3 class="card-title text-center">SEDES SUBSCRITAS A LA EMPRESA: <br> <i>{{$empresa->nombre_empresa}}</i> </h3>
                                         <br>
                                         @php
                                             $check = 'inicial';
@@ -208,22 +208,22 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                                     @endforeach
                                                 </td>
                                                 <td class="text-center align-middle">
-                                                    <div class="row">
+                                                    <div class="row align-items-center">
                                                         <div class="col">
                                                             <a href="{{route('sedes.edit', $sed->id_sede)}}" class="btn btn-sm colorQA">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
                                                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                                 </svg>
                                                             </a>
                                                         </div>
                                                         <div class="col">
-                                                            <form id="form_eliminar_sede" name="form_eliminar_sede" class="form_eliminar_sede" action="{{route('sedes.destroy', $sed)}}" method="POST">
+                                                            <form id="form_eliminar_sede" name="form_eliminar_sede" class="form_eliminar_sede mb-1" action="{{route('sedes.destroy', $sed)}}" method="POST">
                                                                 @csrf  
                                                                 @method('delete')
                                                                 <button class="btn btn-sm btn-danger" type="submit">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                                                     </svg>
                                                                 </button>
                                                             </form>
@@ -465,7 +465,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                 </div>
                                 <div class="col"></div>
                             </div>
-                            <h3 class="card-title text-center">TRABAJADORES DE DOSIMETRÍA SUBSCRITOS A LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
+                            <h3 class="card-title text-center">TRABAJADORES DE DOSIMETRÍA SUBSCRITOS A LA EMPRESA: <br> <i>{{$empresa->nombre_empresa}}</i></h3>
                             <br>
                             @php
                                 $check = 'inicial';
@@ -478,16 +478,16 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             echo "<h4 class='card-title text-center'>{$trabDosim->nombre_sede}</h4>";  
                                             $check = strval($trabDosim->nombre_sede);
                                             echo "<thead class='table-active text-center'>";    
-                                                echo "<th class='align-middle'>TRABAJADOR</th>";
-                                                echo "<th class='align-middle'>TIPO IDEN.</th>";
-                                                echo "<th class='align-middle'>No. IDEN.</th>";    
-                                                echo "<th class='align-middle'>GÉNERO</th>";
-                                                echo "<th class='align-middle'>EMAIL</th>";
-                                                echo "<th class='align-middle'>TELEFONO</th>";
-                                                echo "<th class='align-middle'>PERFIL LABORAL</th>";
-                                                echo "<th class='align-middle'>ROL</th>";
+                                                echo "<th class='align-middle text-center'>TRABAJADOR</th>";
+                                                echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
+                                                echo "<th class='align-middle text-center' >No. IDEN.</th>";    
+                                                echo "<th class='align-middle text-center' style='width: 10.60%'>GÉNERO</th>";
+                                                echo "<th class='align-middle text-center' style='width: 20.60%'>EMAIL</th>";
+                                                echo "<th class='align-middle text-center'>TELEFONO</th>";
+                                                echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
+                                                echo "<th class='align-middle text-center'>ROL</th>";
                                                
-                                                echo "<th  style='width: 35.60%'>ACCIONES</th>";
+                                                echo "<th class='align-middle' style='width: 12.60%'>ACCIONES</th>";
                                             echo "</thead>";
                                     }
                                 @endphp
@@ -501,7 +501,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             $cheq = $trabDosim->cedula_persona;
                                         @endphp    
                                         <td class="align-middle text-center">{{$trabDosim->genero_persona == 'FEMENINO' ? 'F' : 'M'}}</td>
-                                        <td class="align-middle">{{$trabDosim->correo_persona}}</td>
+                                        <td class="align-middle" style="word-break:break-all;">{{$trabDosim->correo_persona}}</td>
                                         <td class="align-middle">{{$trabDosim->telefono_persona}}</td>
                                         <td class="align-middle text-center">
                                             @foreach($personasperfiles as $personperf)
@@ -528,20 +528,20 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             @endforeach
                                         </td>
                                         <td class="text-center align-middle">
-                                            <div class="row">
+                                            <div class="row align-items-center">
                                                 <div class="col">
                                                     <a href="{{route('personas.edit', ['persona'=>$trabDosim->id_persona, 'trabestucont'=> 1, 'empresa'=>$empresa->id_empresa])}}" class="btn colorQA">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
                                                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                         </svg>
                                                     </a>
                                                 </div>
                                                 <div class="col">
-                                                    <form class="form_eliminar_persona" id="form_eliminar_persona" name="form_eliminar_persona" action=" {{route('personas.destroy', $trabDosim->id_persona)}}" method="POST">
+                                                    <form class="form_eliminar_persona mb-1" id="form_eliminar_persona" name="form_eliminar_persona" action=" {{route('personas.destroy', $trabDosim->id_persona)}}" method="POST">
                                                         @csrf  
                                                         @method('delete')
                                                         <button class="btn btn-danger"  type="submit">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                             <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                                             </svg>
@@ -568,7 +568,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                 </div>
                                 <div class="col"></div>
                             </div>
-                            <h3 class="card-title text-center">ESTUDIANTES DE AULA VIRTUAL SUBSCRITOS A LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
+                            <h3 class="card-title text-center">ESTUDIANTES DE AULA VIRTUAL SUBSCRITOS A LA EMPRESA: <br> <i>{{$empresa->nombre_empresa}}</i></h3>
                             <br>
                             @php
                                 $check = 'inicial';
@@ -580,16 +580,16 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             echo "<h4 class='card-title text-center'>{$estuAva->nombre_sede}</h4>";  
                                             $check = strval($estuAva->nombre_sede);
                                             echo "<thead class='table-active text-center'>";    
-                                                echo "<th class='align-middle' style='width: 20.60%'>TRABAJADOR</th>";
-                                                echo "<th class='align-middle' style='width: 11.60%'>TIPO IDEN.</th>";
-                                                echo "<th class='align-middle'>No. IDEN.</th>";    
-                                                echo "<th class='align-middle'>GÉNERO</th>";
-                                                echo "<th class='align-middle'>EMAIL</th>";
-                                                echo "<th class='align-middle'>TELEFONO</th>";
-                                                echo "<th class='align-middle' style='width: 14.60%'>PERFIL LABORAL</th>";
-                                                echo "<th class='align-middle' style='width: 12.60%'>ROL</th>";
+                                                echo "<th class='align-middle text-center'>TRABAJADOR</th>";
+                                                echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
+                                                echo "<th class='align-middle text-center'>No. IDEN.</th>";    
+                                                echo "<th class='align-middle text-center'>GÉNERO</th>";
+                                                echo "<th class='align-middle text-center'>EMAIL</th>";
+                                                echo "<th class='align-middle text-center'>TELEFONO</th>";
+                                                echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
+                                                echo "<th class='align-middle text-center'>ROL</th>";
                                             
-                                                echo "<th class='align-middle' style='width: 14.60%'>ACCIONES</th>";
+                                                echo "<th class='align-middle text-center' style='width: 14.60%'>ACCIONES</th>";
                                             echo "</thead>";
                                     }
                                 @endphp
@@ -598,7 +598,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                     <td class="align-middle">{{$estuAva->tipo_iden_persona}}</td>
                                     <td class="align-middle">{{$estuAva->cedula_persona}}</td>
                                     <td class="align-middle text-center">{{$estuAva->genero_persona == 'FEMENINO' ? 'F' : 'M'}}</td>
-                                    <td class="align-middle">{{$estuAva->correo_persona}}</td>
+                                    <td class="align-middle" style="word-break:break-all;">{{$estuAva->correo_persona}}</td>
                                     <td class="align-middle">{{$estuAva->telefono_persona}}</td>
                                     <td class="align-middle text-center">
                                         @foreach($personasperfiles as $personperf)
@@ -625,20 +625,20 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                         @endforeach
                                     </td>
                                     <td class="text-center align-middle">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col">
                                                 <a href="{{route('personas.edit', ['persona'=>$estuAva->id_persona, 'trabestucont'=> 2, 'empresa'=>$empresa->id_empresa])}}" class="btn colorQA">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
                                                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                     </svg>
                                                 </a>
                                             </div>
                                             <div class="col">
-                                                <form class="form_eliminar_persona" id="form_eliminar_persona" name="form_eliminar_persona" action="{{--  {{route('personas.destroy', $trabDosim->id_persona)}} --}}" method="POST">
+                                                <form class="form_eliminar_persona mb-1" id="form_eliminar_persona" name="form_eliminar_persona" action="{{--  {{route('personas.destroy', $trabDosim->id_persona)}} --}}" method="POST" class="mb-1">
                                                     @csrf  
                                                     @method('delete')
                                                     <button class="btn btn-danger"  type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                                         </svg>
@@ -663,8 +663,8 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                 </div>
                                 <div class="col"></div>
                             </div>
-                            <BR></BR>
-                            <h3 class="card-title text-center">CONTACTOS SUBSCRITOS A LA EMPRESA: {{$empresa->nombre_empresa}}</h3>
+                            <h3 class="card-title text-center">CONTACTOS SUBSCRITOS A LA EMPRESA: <br> <i>{{$empresa->nombre_empresa}}</i> </h3>
+                            <br>
                             @php
                                 $check2 = 'inicial';
                             @endphp 
@@ -675,25 +675,25 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             echo "<h4 class='card-title text-center pt-3'>{$cont->nombre_sede}</h4>";
                                             $check2 = strval($cont->nombre_sede);
                                             echo "<thead class='table-active text-center'>";    
-                                                echo "<th class='align-middle' style='width: 20.60%'>CONTACTO</th>";
-                                                echo "<th class='align-middle' style='width: 10.60%'>TIPO IDEN.</th>";
-                                                echo "<th class='align-middle'>N. IDEN</th>";    
-                                                echo "<th class='align-middle'>GÉNERO</th>";
-                                                echo "<th class='align-middle' style='width: 15.60%'>EMAIL</th>";
-                                                echo "<th class='align-middle' style='width: 9.60%'>TELEFONO</th>";
-                                                echo "<th class='align-middle' style='width: 14.60%'>PERFIL LABORAL</th>";
-                                                echo "<th class='align-middle' style='width: 12.60%'>ROL</th>";
-                                                echo "<th class='align-middle' style='width: 14.10%'>ACCIONES</th>";
+                                                echo "<th class='align-middle text-center'>CONTACTO</th>";
+                                                echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
+                                                echo "<th class='align-middle text-center'>No. IDEN</th>";    
+                                                echo "<th class='align-middle text-center'>GÉNERO</th>";
+                                                echo "<th class='align-middle text-center'>EMAIL</th>";
+                                                echo "<th class='align-middle text-center'>TELEFONO</th>";
+                                                echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
+                                                echo "<th class='align-middle text-center'>ROL</th>";
+                                                echo "<th class='align-middle text-center'>ACCIONES</th>";
                                             echo "</thead>";
                                     }
                                 @endphp
                                 <tr>
                                     <td class="align-middle">{{$cont->primer_nombre_persona}} {{$cont->segundo_nombre_persona}} {{$cont->primer_apellido_persona}} {{$cont->segundo_apellido_persona}}</td>
                                     <td class="align-middle">{{$cont->tipo_iden_persona}}</td>
-                                    <td class="align-middle">{{$cont->cedula_persona}}</td>
+                                    <td class="align-middle text-center">{{$cont->cedula_persona}}</td>
                                     <td class="align-middle text-center">{{$cont->genero_persona == 'FEMENINO' ? 'F' : 'M'}}</td>
-                                    <td class="align-middle">{{$cont->correo_persona}}</td>
-                                    <td class="align-middle">{{$cont->telefono_persona}}</td>
+                                    <td class="align-middle" style="word-break:break-all;">{{$cont->correo_persona}}</td>
+                                    <td class="align-middle text-center">{{$cont->telefono_persona}}</td>
                                     <td class="align-middle text-center">
                                         @foreach($personasperfiles as $personperf)
                                             @if($cont->id_persona == $personperf->persona_id)
@@ -719,22 +719,22 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                         @endforeach
                                     </td>
                                     <td class="text-center align-middle">
-                                        <div class="row">
+                                        <div class="row align-items-center">
                                             <div class="col">
                                                 <a href="{{route('personas.edit', ['persona'=>$cont->id_persona, 'trabestucont'=> 3, 'empresa'=>$empresa->id_empresa])}}" class="btn colorQA">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
                                                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                     </svg>
                                                 </a>
                                             </div>
                                             <div class="col">
-                                                <form id="form_eliminar_contacto" name="form_eliminar_contacto" action="{{-- {{route('contactos.destroy', $cont)}} --}}" method="POST">
+                                                <form id="form_eliminar_contacto" name="form_eliminar_contacto" action="{{-- {{route('contactos.destroy', $cont)}} --}}" method="POST" class="mb-1">
                                                     @csrf  
                                                     @method('delete')
                                                     <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                                         </svg>
                                                     </button>
                                                 </form>

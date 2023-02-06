@@ -543,7 +543,7 @@
         var fecha = document.getElementById("primerDia_asigdosim").value;
         var fecha_inicio = new Date(fecha);
         fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
-        alert(fecha_inicio);
+        /* alert(fecha_inicio); */
         if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
             var fecha_final_año = fecha_inicio.getFullYear();
             var mm = fecha_inicio.getMonth() + 2;

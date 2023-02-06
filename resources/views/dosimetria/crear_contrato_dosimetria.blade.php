@@ -194,7 +194,7 @@ crossorigin="anonymous">
 <script type="text/javascript">
     function fechafinalcontrato(){
         var fecha_inicio = new Date(document.getElementById('fecha_inicio_contrato_input').value);
-        alert(fecha_inicio);
+        /* alert(fecha_inicio); */
         var fecha_final_año = fecha_inicio.getFullYear()+1;
         var mm = fecha_inicio.getMonth()+1;
         var fecha_final_mes = (mm < 10 ? '0' : '')+mm;

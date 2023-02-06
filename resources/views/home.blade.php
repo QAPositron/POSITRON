@@ -1,11 +1,12 @@
 @extends('layouts.app')
+@extends('layouts.plantillabase')
+@section('contenido')
 
-@section('content')
-<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <br>
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header text-center"> <b>{{ __('BIENVENIDO AL MODULO DE DOSIMETRIA') }}</b> </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,10 +15,10 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <i>{{ __('HA INGRESADO EXITOSAMENTE!') }}</i> 
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 @endsection

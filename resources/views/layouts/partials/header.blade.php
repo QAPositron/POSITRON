@@ -11,7 +11,7 @@
             <a class="nav-link {{request()->routeIs('home') ? 'active' : ''}}" href="{{route('home')}}">INICIO</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{request()->routeIs('empresas.*') ? 'active' : ''}}"  href="{{route('empresas.search')}}">ADMINISTRACIÓN</a>
+            <a class="nav-link {{request()->routeIs('empresas.*') || request()->routeIs('login') ? 'active' : ''}}"  href="{{route('empresas.search')}}">ADMINISTRACIÓN</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{request()->routeIs('holders.*') || request()->routeIs('dosimetros.*') || request()->routeIs('empresasdosi.*') || request()->routeIs('contratosdosi.*') || request()->routeIs('contratosdosisede.*') || request()->routeIs('contratosdosisededepto.*') || request()->routeIs('detallesedecont.*') || request()->routeIs('detallecontrato.*') || request()->routeIs('asignadosicontratom1.*') || request()->routeIs('asignadosicontratomn.*') || request()->routeIs('asignadosicontrato.*') || request()->routeIs('asigdosicont.*') || request()->routeIs('lecturadosi.*') || request()->routeIs('lecturadosicontrl.*') || request()->routeIs('lecturadosicontrol.*') || request()->routeIs('lecturadosiarea.*') ? 'active' : ''}}" 
