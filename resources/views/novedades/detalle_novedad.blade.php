@@ -48,7 +48,7 @@
                             <td class='align-middle text-center'>{{$nov->created_at}}</td>
                             <td class='align-middle text-center'>{{$nov->trabajadordosimetro->persona->primer_nombre_persona}} {{$nov->trabajadordosimetro->persona->segundo_nombre_persona}} {{$nov->trabajadordosimetro->persona->primer_apellido_persona}} {{$nov->trabajadordosimetro->persona->segundo_apellido_persona}}</td>
                             <td class='align-middle text-center'>{{$nov->trabajadordosimetro->persona->cedula_persona}}</td>
-                            <td class='align-middle text-center'>@if($nov->trabajadordosimetro->dosimetro_id == null) @else {{$nov->trabajadordosimetro->dosimetro->codigo_dosimetro}} @endif </td>
+                            <td class='align-middle text-center'>@if($nov->trabajadordosimetro->dosimetro_id == null) @else {{$nov->trabajadordosimetro->dosimetro->codigo_dosimeter}} @endif </td>
                             <td class='align-middle text-center'>@if($nov->trabajadordosimetro->holder_id == null) @else {{$nov->trabajadordosimetro->holder->codigo_holder}} @endif</td>
                             <td class='align-middle text-center'>@if($nov->trabajadordosimetro->ocupacion == null) @else {{$nov->trabajadordosimetro->ocupacion}} @endif</td>
                             <td class='align-middle text-center'>@if($nov->trabajadordosimetro->ubicacion == null) @else {{$nov->trabajadordosimetro->ubicacion}} @endif</td>

@@ -143,11 +143,23 @@
                                         <br>
                                         <div class="row">
                                             <div class="col"></div>
-                                            <div class="col-6">
+                                            <div class="col-9">
                                                 <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
-                                                <textarea class="form-control" name="nota_cambio_dosimetros1" id="nota_cambio_dosimetros1" rows="3" autofocus style="text-transform:uppercase"></textarea>
+                                                <div class="card">
+                                                    <div class="card-body" id="textCard">
+                                                      
+                                                    </div>
+                                                </div>
+
+                                                {{-- <textarea class="form-control" name="nota_cambio_dosimetros1" id="nota_cambio_dosimetros1" rows="3" autofocus style="text-transform:uppercase"></textarea> --}}
                                             </div>
-                                            <div class="col"></div>
+                                            <div class="col-md text-start">
+                                                <button class="btn btn-circle colorQA" onclick="Generarnotas()" type="button" id="notas" name="notas" role="button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </div>
                                         <br>
                                         <div class="row">
@@ -524,11 +536,11 @@
                                 
                                 var tr = `<tr>
                                         <td colspan='2' class='align-middle'>CONTROL</td>
-                                        <td style='width: 208px'class='align-middle'>`
+                                        <td class="text-center" style='width: 208px'class='align-middle'>`
                                             +asignacionescontrolmesactual[i].codigo_dosimeter+
                                         `</td>
-                                        <td style='width: 208px' class='align-middle'>NA</td>
-                                        <td style='width: 208px' class='align-middle'>`+asignacionescontrolmesactual[i].ocupacion+`</td>
+                                        <td class="text-center" style='width: 208px' class='align-middle'>NA</td>
+                                        <td class="text-center" style='width: 208px' class='align-middle'>`+asignacionescontrolmesactual[i].ocupacion+`</td>
                                             
                                     </tr>`;
                                 $("#tr_control").append(tr);
@@ -646,15 +658,15 @@
                                                     ${selectTrabajadores.innerHTML}
                                                 </select>
                                             </td>
-                                            <td class='align-middle'><input type="text" name="ubicacion_asigdosim_null[]" id="ubicacion_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
-                                            <td class='align-middle'>
+                                            <td class='align-middle text-center'><input type="text" name="ubicacion_asigdosim_null[]" id="ubicacion_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select cambiar"  name="id_dosimetro_asigdosim_null[]" id="id_dosimetro_asigdosim_null" ${dis}>
                                                     <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                     ${selectDosimetros.innerHTML}
                                                 </select>
                                             </td>
-                                            <td class='align-middle'> NA </td>
-                                            <td class='align-middle'>
+                                            <td class='align-middle text-center'> NA </td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select cambiar"  name="id_ocupacion_asigdosim_null[]" id="id_ocupacion_asigdosim_null" ${dis}>
                                                     <option value="`+id_ocupacion+`">`+ocupacion+`</option>
                                                     <option value="T">T = TELETERAPIA</option>
@@ -697,20 +709,20 @@
 
                                         var tr = `<tr>
                                             <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].codigo_holder+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].ocupacion+`</td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].ubicacion+`</td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_holder+`</td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].ocupacion+`</td>
                                             
                                         </tr>`;
                                         $("#body_asignaciones").append(tr);
                                     }else{
                                         var tr = `<tr>
                                             <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
-                                            <td class='align-middle'> NA </td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].ocupacion+`</td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].ubicacion+`</td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
+                                            <td class='align-middle text-center'> NA </td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].ocupacion+`</td>
                                             
                                         </tr>`;
                                         $("#body_asignaciones").append(tr);
@@ -746,7 +758,7 @@
     
         var mes = document.getElementById("mesacambiar").value;
         
-        alert("EL MES SELECCIONADO es"+mes);
+        /* alert("EL MES SELECCIONADO es"+mes); */
         var especialidad_id= document.getElementById("especialidades_empresadosi").value;
 
         $('#mesacambiar').on('change', function(){
@@ -804,7 +816,7 @@
                 var consultaMesactual = mesactual_trabjasig.mes_asignacion;
                 if(mes > consultaMesactual){
 
-                    alert("si entro, el mes siguiente al actual");
+                    /* alert("si entro, el mes siguiente al actual"); */
 
                     var mestrabj_asig = document.getElementById("mesacambiar").value;
                     var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
@@ -874,17 +886,16 @@
                             </select>
                             @error('ocupacion_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </td>   
-                        <td style="width: 24.80%">
+                        <td class="text-center" style="width: 24.80%">
                             <button id="" class="btn btn-danger"  type="button" onclick="eliminarFilaform2(this)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                 </svg>
                             </button>
-                            
                         </td>
                     `;
                 }else{
-                    alert("si entrO, es el MES actual");
+                    /* alert("si entrO, es el MES actual"); */
 
                     var mestrabj_asig = document.getElementById("mesacambiar").value;
                     var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
@@ -949,9 +960,9 @@
                                 <option value="AI">APLICACIONES INDUSTRIALES</option>
                             </select>
                         </td>   
-                        <td style="width: 15.80%">
+                        <td class="text-center" style="width: 15.80%">
                             <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                 </svg>
                             </button>
@@ -963,10 +974,48 @@
             
             })
         });
+
+        $(".inputs").remove();
     }
     function eliminarFila(row){
         var d = row.parentNode.parentNode.rowIndex;
         document.getElementById('tabla_adicional').deleteRow(d);
+        
+        $(".inputs").remove();
+    }
+    function Generarnotas(){
+        var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
+        /* console.log(trabajadores); */
+        var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
+        /* console.log("ESTAS SON LAS UBICACIONES");
+        console.log(ubicacion); */
+        var sede = document.getElementById("sedes_empresadosi");
+        var id_sede = sede.options[sede.selectedIndex].text;
+        $.get('trabajadoresempresa', {id_sede: id_sede}, function(trabjDisponibles){
+            console.log(trabjDisponibles);
+            for(var i = 0; i < trabajadores.length; i++) {
+                var values = trabajadores[i].value;
+                /* console.log(values); */
+                for(var x = 0; x < ubicacion.length; x++) {
+                    var valuesX = ubicacion[x].value;
+                    /* console.log(values); */
+                    if(i==x){
+                        console.log("NUEVO DOSIMETRO PARA"+values+"CON UBICACION:"+valuesX);
+                        trabjDisponibles.forEach(function(trabj){
+                            console.log("ENTRO AL FOREACH CON VALUE"+values);
+                            console.log("ITERACION DEL FOREACH"+trabj.id_persona);
+                            if(values == trabj.id_persona){
+                                console.log("NUEVO DOSIMETRO PARA"+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+"CON UBICACION:"+valuesX);
+                                let input = `<input type="text" name="inputnotas[]" id="inputnotas`+i+`" class="form-control inputs" value="NUEVO DOSIMETRO PARA `+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+` CON UBICACION: `+valuesX+`" readonly>`;
+                                $('#textCard').append(input);
+                            }
+                        })
+                    }
+                };
+                
+                
+            };
+        })
     }
     function limpiar(){
         var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;

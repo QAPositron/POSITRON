@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase')
-@section('contenido')
+@section('contenido') 
 <div class="row">
     <div class="col-md">
         <a type="button" class="btn btn-circle colorQA" href="{{route('asignadosicontrato.info', ['asigdosicont' => $trabjasig->contdosisededepto_id, 'mesnumber' => $trabjasig->mes_asignacion ])}}">

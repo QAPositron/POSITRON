@@ -9,12 +9,30 @@
             </svg>
         </a>
     </div>
-    <div class="col-md-6">
-        <h3 class="text-center">LECTURA DE DOSÍMETRO </h3>
-        <h3 class="text-center">ESPECIALIDAD: {{$trabjasig->contratodosimetriasededepto->departamentosede->nombre_departamento}} <br> CONTRATO No. {{$trabjasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}} - MES {{$trabjasig->mes_asignacion}}</h3>
+    <div class="col-md-9">
+        <h2 class="text-center">DOSIMETRÍA DE </h2>
+        <h3 class="text-center"><i>{{$trabjasig->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$trabjasig->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
+        <h4 class="text-center">ESPECIALIDAD: {{$trabjasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}</h4>    
+        
     </div>
     <div class="col-md"></div>
 </div>
+<br>
+    <h4 class="text-center" id="id_contrato"></h4>
+<br>
+<br>
+<h3 class="text-center">
+    LECTURA DE DOSÍMETRO DEL MES {{$trabjasig->mes_asignacion}}(
+    @if($trabjasig->mes_asignacion == 1)
+        @php
+            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+            echo $meses[date("m", strtotime($trabjasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($trabjasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ;
+        @endphp
+    @else
+        <span id="mes{{$trabjasig->mes_asignacion}}"></span>
+    @endif
+    )
+</h3>
 <br>
     <div class="row">
         <div class="col-md"></div>
@@ -72,8 +90,8 @@
                                     
                                 </div>
                                 <div class="col-md-2 m-4">
-                                    <label for="floatingInputGrid"> <b>DEPARTAMENTO:</b> </label>
-                                    <input type="text"  class="form-control text-center" name="deptoLectDosim" id="deptoLectDosim" value="{{$trabjasig->contratodosimetriasededepto->departamentosede->nombre_departamento}}" readonly>
+                                    <label for="floatingInputGrid"> <b>ESPECIALIDAD:</b> </label>
+                                    <input type="text"  class="form-control text-center" name="deptoLectDosim" id="deptoLectDosim" value="{{$trabjasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>CEDULA:</b> </label>
                                     <input type="text"  class="form-control" name="cedulatrabLectDosim" id="cedulatrabLectDosim" value="{{$trabjasig->persona->cedula_persona}}" readonly>
@@ -385,6 +403,29 @@ integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
 </script>
 <script type="text/javascript">
+    $(document).ready(function(){
+        var TDcontrato = document.getElementById("id_contrato");
+        var num = parseInt('{{$trabjasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}');
+        var n = num.toString().padStart(5,'0');
+        console.log("ESTE ES EL CODIGO" +n);
+        TDcontrato.innerHTML = "CONTRATO No."+n;
+
+        
+        // Creamos array con los meses del año
+        const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+        let fecha = new Date("{{$trabjasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
+        console.log(fecha);
+        for($i=0; $i<=13; $i++){
+            var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
+            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+            console.log(fechaesp); 
+            if('{{$trabjasig->mes_asignacion}}' == ($i+1) ){  
+            
+                document.getElementById('mes{{$trabjasig->mes_asignacion}}').innerHTML = fechaesp;
+
+            } 
+        }
+    })
     $(document).ready(function(){
         $('#infoLectura a').on('click', function (e) {
             e.preventDefault()

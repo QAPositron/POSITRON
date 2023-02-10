@@ -21,9 +21,6 @@
 <h4 class="text-center" id="id_contrato"></h4>
 <br>
 
-
-
-
 <br>
 <h3 class="text-center">
     TRABAJADORES ASIGNADOS AL MES {{ Request()->mesnumber  }} (
@@ -38,9 +35,6 @@
     )
 </h3>
 <br>
-
-
-
 
 @if(count($trabjasignados)>0 || count($dosicontrolasig)>0)
     <form id="edit_fecha_contasig" name="edit_fecha_contasig" action="{{route('asignadosicontrato.updatefechas', ['id'=>$contdosisededepto->id_contdosisededepto, 'mesnumber'=> Request()->mesnumber])}}" method="POST">
@@ -734,7 +728,7 @@ crossorigin="anonymous">
         var trabajadores = <?php echo json_encode($trabjasignados);  ?>;
         console.log(trabajadores); */
         if('{{$dosicontrolasig}}' != '[]'){
-            alert('hay dosimetro de control');
+            /* alert('hay dosimetro de control'); */
             @foreach($trabjasignados as $trab)
                 if('{{$trab->Hp10_calc_dose}}' != 'NULL'){
                     @foreach($dosicontrolasig as $cont)
