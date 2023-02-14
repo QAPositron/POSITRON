@@ -118,7 +118,7 @@
                                     @foreach($dosicontrolmesact as $dosicontrolact)
                                         <tr>
                                             <input type="number" name="id_dosicontrolAsig[]" id="id_dosicontrolAsig" value="{{$dosicontrolact->id_dosicontrolcontdosisedes}}" hidden >
-                                            <td colspan='2' class='align-middle'>CONTROL</td>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL</td>
                                             <td class='align-middle'>
                                                 <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" >
                                                     <option value="@if($dosicontrolact->dosimetro_id != NULL){{$dosicontrolact->dosimetro_id}}@endif">@if($dosicontrolact->dosimetro_id == NULL) -- @else --{{$dosicontrolact->dosimetro->codigo_dosimeter}}-- @endif</option>
@@ -127,7 +127,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle'>N.A.</td>
+                                            <td class='align-middle text-center'>N.A.</td>
                                             <td>
                                                 <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" style="text-transform:uppercase" >
                                                     {{-- <option value="{{$dosicontrolact->dosimetro_id}}"> {{$dosicontrolact->dosimetro->codigo_dosimeter}}</option> --}}
@@ -194,7 +194,7 @@
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo AREA asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
                                     @foreach($dosiareamesact as $dosiareact)
                                         <tr>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <input type="number" name="id_dosiareaAsig[]" id="id_dosiareaAsig" value="{{$dosiareact->id_dosiareacontdosisedes}}" hidden >
                                                 <select class="form-select id_area_asigdosimArea"  name="id_area_asigdosimArea[]" id="id_area_asigdosimArea{{$dosiareact->areadepartamentosede_id}}" disabled>
                                                     <option value="{{$dosiareact->areadepartamentosede_id}}">--{{$dosiareact->areadepartamentosede->nombre_area}}--</option>
@@ -205,7 +205,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>ÁREA</td>
+                                            <td class='align-middle text-center'>ÁREA</td>
                                             <td>
                                                 <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea">
                                                     <option value="@if($dosiareact->dosimetro_id != NULL){{$dosiareact->dosimetro_id}}@endif">@if($dosiareact->dosimetro_id == NULL)-- @else--{{$dosiareact->dosimetro->codigo_dosimeter}}--@endif</option>
@@ -214,8 +214,8 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>N.A</td>
-                                            <td>
+                                            <td class='align-middle text-center'>N.A</td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" style="text-transform:uppercase" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosiareact->ocupacion != NULL)    
                                                         @if($dosiareact->ocupacion=='T')
@@ -280,15 +280,15 @@
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo CASO asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
                                     @foreach($dosicasomesact as $dosicasoact)
                                         <tr>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <input type="number" name="id_asigdosimCaso[]" id="id_asigdosimCaso" value="{{$dosicasoact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso{{$dosicasoact->persona_id}}" disabled>
                                                     <option value="{{$dosicasoact->persona_id}}"> {{$dosicasoant->persona->primer_nombre_persona}} {{$dosicasoant->persona->segundo_nombre_persona}} {{$dosicasoant->persona->primer_apellido_persona}} {{$dosicasoant->persona->segundo_apellido_persona}}</option>
                                                     
                                                 </select>
                                             </td>
-                                            <td>CASO</td>
-                                            <td>
+                                            <td class='align-middle text-center'>CASO</td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso">
                                                     <option value="@if($dosicasoact->dosimetro_id != NULL){{$dosicasoact->dosimetro_id}} @endif">@if($dosicasoact->dosimetro_id == NULL) -- @else--{{$dosicasoact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -296,8 +296,8 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>N.A</td>
-                                            <td>
+                                            <td class='align-middle text-center'>N.A</td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" style="text-transform:uppercase" >
                                                     @if($dosicasoact->ocupacion != NULL)    
                                                         @if($dosicasoact->ocupacion=='T')
@@ -362,15 +362,15 @@
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo TORAX asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
                                     @foreach($dositoraxmesact as $dositoraxact)
                                         <tr>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <input type="number" name="id_asigdosimTorax[]" id="id_asigdosimTorax" value="{{$dositoraxact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax{{$dositoraxact->persona_id}}" disabled>
                                                     <option value="{{$dositoraxact->persona_id}}">{{$dositoraxact->persona->primer_nombre_persona}} {{$dositoraxact->persona->segundo_nombre_persona}} {{$dositoraxact->persona->primer_apellido_persona}} {{$dositoraxact->persona->segundo_apellido_persona}}</option>
                                                     
                                                 </select>
                                             </td>
-                                            <td>TÓRAX</td>
-                                            <td>
+                                            <td class='align-middle text-center'>TÓRAX</td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" >
                                                     <option value="@if($dositoraxact->dosimetro_id != NULL){{$dositoraxact->dosimetro_id}} @endif">@if($dositoraxact->dosimetro_id == NULL)--@else --{{$dositoraxact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -378,8 +378,8 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>N.A</td>
-                                            <td>
+                                            <td class='align-middle text-center'>N.A</td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" style="text-transform:uppercase">
                                                     @if($dositoraxact->ocupacion != NULL)    
                                                         @if($dositoraxact->ocupacion=='T')
@@ -445,15 +445,15 @@
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo CRISTALINO asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
                                     @foreach($dosicristalinomesact as $dosicristalinoact)
                                         <tr>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <input type="number" name="id_asigdosimCristalino[]" id="id_asigdosimCristalino" value="{{$dosicristalinoact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino{{$dosicristalinoact->persona_id}}" disabled>
                                                     <option value="{{$dosicristalinoact->persona_id}}">{{$dosicristalinoact->persona->primer_nombre_persona}} {{$dosicristalinoact->persona->segundo_nombre_persona}} {{$dosicristalinoact->persona->primer_apellido_persona}} {{$dosicristalinoact->persona->segundo_apellido_persona}}</option>
                                                     
                                                 </select>
                                             </td>
-                                            <td>CRISTALINO</td>
-                                            <td>
+                                            <td class='align-middle text-center'>CRISTALINO</td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino">
                                                     <option value="@if($dosicristalinoact->dosimetro_id != NULL){{$dosicristalinoact->dosimetro_id}}@endif">@if($dosicristalinoact->dosimetro_id == NULL)--@else--{{$dosicristalinoact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -461,7 +461,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" >
                                                     <option value="@if($dosicristalinoact->holder_id != NULL){{$dosicristalinoact->holder_id}}@endif">@if($dosicristalinoact->holder_id == NULL)--@else--{{$dosicristalinoact->holder->codigo_holder}}--@endif</option>
                                                     @foreach($holderLibresCristalino as $holibcris)
@@ -469,7 +469,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino">
                                                     @if($dosicristalinoact->ocupacion != NULL)
                                                         @if($dosicristalinoact->ocupacion=='T')
@@ -533,15 +533,15 @@
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo MUÑECA asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
                                     @foreach($dosimuñecamesact as $dosimuñecact)
                                         <tr>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <input type="number" name="id_asigdosimMuneca[]" id="id_asigdosimMuneca" value="{{$dosimuñecact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca{{$dosimuñecact->persona_id}}" disabled>
                                                     <option value="{{$dosimuñecact->persona_id}}"> {{$dosimuñecact->persona->primer_nombre_persona}} {{$dosimuñecact->persona->segundo_nombre_persona}} {{$dosimuñecact->persona->primer_apellido_persona}} {{$dosimuñecact->persona->segundo_apellido_persona}}</option>
                                                     
                                                 </select>
                                             </td>
-                                            <td>MUÑECA</td>
-                                            <td>
+                                            <td class='align-middle text-center'>MUÑECA</td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca">
                                                     <option value="@if($dosimuñecact->dosimetro_id != NULL){{$dosimuñecact->dosimetro_id}}@endif">@if($dosimuñecact->dosimetro_id == NULL)--@else--{{$dosimuñecact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -549,7 +549,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select"  name="id_holder_asigdosimMuneca[]" id="id_holder_asigdosimMuneca">
                                                     <option value="@if($dosimuñecact->holder_id != NULL){{$dosimuñecact->holder_id}}@endif">@if($dosimuñecact->holder_id == NULL)--@else--{{$dosimuñecact->holder->codigo_holder}}--@endif</option>
                                                     @foreach($holderLibresExtrem as $holibexm)
@@ -557,7 +557,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca"  style="text-transform:uppercase">
                                                     @if($dosimuñecact->ocupacion != NULL)
                                                         @if($dosimuñecact->ocupacion=='T')
@@ -622,15 +622,15 @@
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo DEDO asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
                                     @foreach($dosidedomesact as $dosidedoact)
                                         <tr>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <input type="number" name="id_asigdosimDedo[]" id="id_asigdosimDedo" value="{{$dosidedoact->id_trabajadordosimetro}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo{{$dosidedoact->persona_id}}" disabled>
                                                     <option value="{{$dosidedoact->persona_id}}">{{$dosidedoact->persona->primer_nombre_persona}} {{$dosidedoact->persona->segundo_nombre_persona}} {{$dosidedoact->persona->primer_apellido_persona}} {{$dosidedoact->persona->segundo_apellido_persona}}</option>
                                                     
                                                 </select>
                                             </td>
-                                            <td>ANILLO</td>
-                                            <td>
+                                            <td class='align-middle text-center'>ANILLO</td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo"  >
                                                     <option value="@if($dosidedoact->dosimetro_id != NULL){{$dosidedoact->dosimetro_id}}@endif">@if($dosidedoact->dosimetro_id == NULL)-- @else--{{$dosidedoact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -638,7 +638,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo">
                                                     <option value="@if($dosidedoact->holder_id != NULL){{$dosidedoact->holder_id}}@endif">@if($dosidedoact->holder_id == NULL )--@else--{{$dosidedoact->holder->codigo_holder}}--@endif</option>
                                                     @foreach($holderLibresAnillo as $holibanillo)
@@ -646,7 +646,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo">
                                                     @if($dosidedoact->ocupacion != NULL)
                                                         @if($dosidedoact->ocupacion=='T')

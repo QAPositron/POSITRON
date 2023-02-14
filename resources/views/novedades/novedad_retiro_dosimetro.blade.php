@@ -241,7 +241,7 @@
                             </tbody>
                         </table>
                             
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col"></div>
                             <div class="col-6">
 
@@ -250,6 +250,24 @@
 
                             </div>
                             <div class="col"></div>
+                        </div> --}}
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-9">
+                                <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
+                                <div class="card">
+                                    <div class="card-body" id="textCard2">
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md text-start">
+                                <button class="btn btn-circle colorQA" onclick="Generarnotas2()" type="button" id="notas" name="notas" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <br>
                         <div class="row">
@@ -468,18 +486,18 @@
                                 }
                                 
                                 var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`control">
-                                        <td colspan='2' style='width: 75px' class='align-middle'>CONTROL</td>
+                                        <td colspan='2' style='width: 75px' class='align-middle text-center'>CONTROL</td>
                                         <td style='width: 190px' class='align-middle'>
                                             
-                                            <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
+                                            <select class="form-select cambiar text-center"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
                                             </select>
                                         </td>
-                                        <td style='width: 163px' class='align-middle'>NA</td>
+                                        <td style='width: 163px' class='align-middle text-center'>NA</td>
                                         <td style='width: 185px' class='align-middle'>
                                            
-                                            <select class="form-select cambiar" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" ${disacont} >
+                                            <select class="form-select cambiar text-center" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" ${disacont} >
                                                 <option value="`+id_ocupacion+`">`+ocupacion+`</option>
                                                 <option value="T">T = TELETERAPIA</option>
                                                 <option value="BQ">BQ = BRAQUITERAPIA</option>
@@ -500,7 +518,7 @@
                                                 <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
                                             </select>
                                         </td>
-                                        <td style='width: 183px' class='align-middle'>
+                                        <td style='width: 183px' class='align-middle text-center'>
                                             <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`);" ${disacont}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -518,12 +536,12 @@
                             for(var i=0; i<asignacionescontrolmesactual.length; i++){
                                 
                                 var tr = `<tr>
-                                        <td colspan='2' class='align-middle'>CONTROL</td>
-                                        <td style='width: 208px'class='align-middle'>`
+                                        <td colspan='2' class='align-middle text-center'>CONTROL</td>
+                                        <td style='width: 208px'class='align-middle text-center'>`
                                             +asignacionescontrolmesactual[i].codigo_dosimeter+
                                         `</td>
-                                        <td style='width: 208px' class='align-middle'>NA</td>
-                                        <td style='width: 208px' class='align-middle'>`+asignacionescontrolmesactual[i].ocupacion+`</td>
+                                        <td style='width: 208px' class='align-middle text-center'>NA</td>
+                                        <td style='width: 208px' class='align-middle text-center'>`+asignacionescontrolmesactual[i].ocupacion+`</td>
                                             
                                     </tr>`;
                                 $("#tr_control").append(tr);
@@ -588,28 +606,28 @@
                                     if(asignacionesmesactual[i].codigo_holder != null){
 
                                         var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
-                                            <td class='align-middle'>
+                                            <td class='align-middle text-center'>
                                                 <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim_mesdesp`+asignacionesmesactual[i].id_persona+`" class="form-control id_trabj_asigdosim" value="`+asignacionesmesactual[i].id_persona+`" hidden>
                                                 <select class="form-select"  name="id_trabj_asigdosim[]" id="id_trabj_asigdosim`+asignacionesmesactual[i].id_persona+`" disabled>
                                                     <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
                                                     ${selectTrabajadores.innerHTML}
                                                 </select>
                                             </td>
-                                            <td class='align-middle'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
-                                            <td class='align-middle'>
-                                                <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
+                                            <td class='align-middle text-center'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control text-center" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select cambiar text-center"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
                                                     <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                     ${selectDosimetrosEzclip.innerHTML}
                                                 </select>
                                             </td>
-                                            <td class='align-middle'>
-                                                <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select cambiar text-center"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
                                                     <option value="`+id_holder+`">`+codigo_holder+`</option>
                                                     ${selectHolders.innerHTML}
                                                 </select>
                                             </td>
-                                            <td class='align-middle'>
-                                                <select class="form-select cambiar"  name="id_ocupacion_asigdosim[]" id="id_ocupacion_asigdosim" ${dis} >
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select cambiar text-center"  name="id_ocupacion_asigdosim[]" id="id_ocupacion_asigdosim" ${dis} >
                                                     <option value="`+id_ocupacion+`">`+ocupacion+`</option>
                                                     <option value="T">T = TELETERAPIA</option>
                                                     <option value="BQ">BQ = BRAQUITERAPIA</option>
@@ -630,7 +648,7 @@
                                                     <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
                                                 </select>
                                             </td>
-                                            <td style='width: 183px' class='align-middle'>
+                                            <td style='width: 183px' class='align-middle text-center'>
                                                 <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarEzclip(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');" ${dis}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -642,23 +660,23 @@
                                         $("#body_asignaciones2").append(tr);
                                     }else{
                                         var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
-                                            <td class='align-middle'>
+                                            <td class='align-middle text-center'>
                                                 <input type="text" name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null_mesdesp`+asignacionesmesactual[i].id_persona+`" class="form-control" value="`+asignacionesmesactual[i].id_persona+`" hidden>
-                                                <select class="form-select"  name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null`+asignacionesmesactual[i].id_persona+`" disabled>
+                                                <select class="form-select text-center"  name="id_trabj_asigdosim_null[]" id="id_trabj_asigdosim_null`+asignacionesmesactual[i].id_persona+`" disabled>
                                                     <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
                                                     ${selectTrabajadores.innerHTML}
                                                 </select>
                                             </td>
-                                            <td class='align-middle'><input type="text" name="ubicacion_asigdosim_null[]" id="ubicacion_asigdosim_null" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
-                                            <td class='align-middle'>
-                                                <select class="form-select cambiar"  name="id_dosimetro_asigdosim_null[]" id="id_dosimetro_asigdosim_null" ${dis}>
+                                            <td class='align-middle text-center'><input type="text" name="ubicacion_asigdosim_null[]" id="ubicacion_asigdosim_null" class="form-control text-center" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select cambiar text-center"  name="id_dosimetro_asigdosim_null[]" id="id_dosimetro_asigdosim_null" ${dis}>
                                                     <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                     ${selectDosimetros.innerHTML}
                                                 </select>
                                             </td>
-                                            <td class='align-middle'> NA </td>
-                                            <td class='align-middle'>
-                                                <select class="form-select cambiar"  name="id_ocupacion_asigdosim_null[]" id="id_ocupacion_asigdosim_null" ${dis}>
+                                            <td class='align-middle text-center'> NA </td>
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select cambiar text-center"  name="id_ocupacion_asigdosim_null[]" id="id_ocupacion_asigdosim_null" ${dis}>
                                                     <option value="`+id_ocupacion+`">`+ocupacion+`</option>
                                                     <option value="T">T = TELETERAPIA</option>
                                                     <option value="BQ">BQ = BRAQUITERAPIA</option>
@@ -679,7 +697,7 @@
                                                     <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
                                                 </select>
                                             </td>
-                                            <td style='width: 183px' class='align-middle'>
+                                            <td style='width: 183px' class='align-middle text-center'>
                                                 <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarTorax(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');" ${dis}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>

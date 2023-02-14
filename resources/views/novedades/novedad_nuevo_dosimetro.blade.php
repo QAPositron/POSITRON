@@ -146,15 +146,13 @@
                                             <div class="col-9">
                                                 <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
                                                 <div class="card">
-                                                    <div class="card-body" id="textCard">
+                                                    <div class="card-body" id="textCard1">
                                                       
                                                     </div>
                                                 </div>
-
-                                                {{-- <textarea class="form-control" name="nota_cambio_dosimetros1" id="nota_cambio_dosimetros1" rows="3" autofocus style="text-transform:uppercase"></textarea> --}}
                                             </div>
                                             <div class="col-md text-start">
-                                                <button class="btn btn-circle colorQA" onclick="Generarnotas()" type="button" id="notas" name="notas" role="button">
+                                                <button class="btn btn-circle colorQA" onclick="Generarnotas1()" type="button" id="notas" name="notas" role="button">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
                                                         <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
                                                     </svg>
@@ -266,15 +264,24 @@
                             </tbody>
                         </table>
                             
+                        
                         <div class="row">
                             <div class="col"></div>
-                            <div class="col-6">
-
+                            <div class="col-9">
                                 <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
-                                <textarea class="form-control" name="nota_cambio_dosimetros2" id="nota_cambio_dosimetros2" rows="3" autofocus style="text-transform:uppercase"></textarea>
-
+                                <div class="card">
+                                    <div class="card-body" id="textCard2">
+                                      
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col"></div>
+                            <div class="col-md text-start">
+                                <button class="btn btn-circle colorQA" onclick="Generarnotas2()" type="button" id="notas" name="notas" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         <br>
                         <div class="row">
@@ -501,8 +508,8 @@
                                                 ${selectDosimetros.innerHTML}
                                             </select>
                                         </td>
-                                        <td style='width: 163px' class='align-middle'>NA</td>
-                                        <td style='width: 185px' class='align-middle'>
+                                        <td style='width: 163px' class='align-middle text-center'>NA</td>
+                                        <td style='width: 185px' class='align-middle text-center'>
                                            
                                             <select class="form-select cambiar" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" ${disacont} >
                                                 <option value="`+id_ocupacion+`">`+ocupacion+`</option>
@@ -539,8 +546,8 @@
                                         <td class="text-center" style='width: 208px'class='align-middle'>`
                                             +asignacionescontrolmesactual[i].codigo_dosimeter+
                                         `</td>
-                                        <td class="text-center" style='width: 208px' class='align-middle'>NA</td>
-                                        <td class="text-center" style='width: 208px' class='align-middle'>`+asignacionescontrolmesactual[i].ocupacion+`</td>
+                                        <td class="text-center align-middle" style='width: 208px' >NA</td>
+                                        <td class="text-center align-middle" style='width: 208px' >`+asignacionescontrolmesactual[i].ocupacion+`</td>
                                             
                                     </tr>`;
                                 $("#tr_control").append(tr);
@@ -888,7 +895,7 @@
                         </td>   
                         <td class="text-center" style="width: 24.80%">
                             <button id="" class="btn btn-danger"  type="button" onclick="eliminarFilaform2(this)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                 </svg>
                             </button>
@@ -983,7 +990,13 @@
         
         $(".inputs").remove();
     }
-    function Generarnotas(){
+    function eliminarFilaform2(row){
+        var e = row.parentNode.parentNode.rowIndex;
+        document.getElementById('tabla_adicional2').deleteRow(e);
+        
+        $(".inputs").remove();
+    }
+    function Generarnotas1(){
         var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
         /* console.log(trabajadores); */
         var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
@@ -1007,13 +1020,43 @@
                             if(values == trabj.id_persona){
                                 console.log("NUEVO DOSIMETRO PARA"+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+"CON UBICACION:"+valuesX);
                                 let input = `<input type="text" name="inputnotas[]" id="inputnotas`+i+`" class="form-control inputs" value="NUEVO DOSIMETRO PARA `+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+` CON UBICACION: `+valuesX+`" readonly>`;
-                                $('#textCard').append(input);
+                                $('#textCard1').append(input);
                             }
                         })
                     }
                 };
-                
-                
+            };
+        })
+    }
+    function Generarnotas2(){
+        var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
+        /* console.log(trabajadores); */
+        var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
+        /* console.log("ESTAS SON LAS UBICACIONES");
+        console.log(ubicacion); */
+        var sede = document.getElementById("sedes_empresadosi");
+        var id_sede = sede.options[sede.selectedIndex].text;
+        $.get('trabajadoresempresa', {id_sede: id_sede}, function(trabjDisponibles){
+            console.log(trabjDisponibles);
+            for(var i = 0; i < trabajadores.length; i++) {
+                var values = trabajadores[i].value;
+                /* console.log(values); */
+                for(var x = 0; x < ubicacion.length; x++) {
+                    var valuesX = ubicacion[x].value;
+                    /* console.log(values); */
+                    if(i==x){
+                        console.log("NUEVO DOSIMETRO PARA"+values+"CON UBICACION:"+valuesX);
+                        trabjDisponibles.forEach(function(trabj){
+                            console.log("ENTRO AL FOREACH CON VALUE"+values);
+                            console.log("ITERACION DEL FOREACH"+trabj.id_persona);
+                            if(values == trabj.id_persona){
+                                console.log("NUEVO DOSIMETRO PARA"+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+"CON UBICACION:"+valuesX);
+                                let input = `<input type="text" name="inputnotas[]" id="inputnotas`+i+`" class="form-control inputs" value="NUEVO DOSIMETRO PARA `+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+` CON UBICACION: `+valuesX+`" readonly>`;
+                                $('#textCard2').append(input);
+                            }
+                        })
+                    }
+                };
             };
         })
     }
@@ -1105,14 +1148,7 @@
             
             for(var i = 0; i < dosimetros.length; i++) {
                 var values = dosimetros[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN DOSÍMETRO"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGÚN DOSÍMETRO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                };
+                
                 for(var x = 0; x < dosimetros.length; x++){
                     var valuesX = dosimetros[x].value;
                     if(values == valuesX && i != x){
@@ -1131,14 +1167,7 @@
             console.log(holder); 
             for(var i = 0; i < holder.length; i++) {
                 var values = holder[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGÚN HOLDER",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                };
+                
                 for(var x = 0; x < holder.length; x++){
                     var valuesX = holder[x].value;
                     if(values == valuesX && i != x){
@@ -1152,33 +1181,22 @@
             };
            
 
-            var ocupaciones = document.querySelectorAll('select[name="ocupacion_asig[]"]');
+            /* var ocupaciones = document.querySelectorAll('select[name="ocupacion_asig[]"]');
             console.log("ESTAS SON LAS OCUPACIONES");
             console.log(ocupaciones);  
             for(var i = 0; i < ocupaciones.length; i++) {
                 var values = ocupaciones[i].value;
                 if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    alert("FALTA SELECCIONAR ALGUN HOLDER");
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
                 }
-            };
-             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
-            /* var observaciones = document.getElementById("nota_cambio_dosimetros1").value;
-            console.log("ESTAS SON LAS OBSERVACIONES");
-            console.log(observaciones);
-            if(observaciones == ''){
-                return Swal.fire({
-                                title:"FALTA INGRESAR LA DESCRIPCIÓN DE LA NOVEDAD EN LAS OBSERVACIONES",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
             }; */
-
-            if(trabajadores.length == 0 && ubicacion.length == 0 && dosimetros.length == 0 && holder.length == 0 && ocupaciones.length == 0){
+            /*if(trabajadores.length == 0 && ubicacion.length == 0 && dosimetros.length == 0 && holder.length == 0 && ocupaciones.length == 0){ */
+            if(trabajadores.length == 0 && ubicacion.length == 0){
                 /* alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA"); */
                 return Swal.fire({
                                 title:"OPRIMA EL BOTÓN DE NUEVO DOSÍMETRO",
@@ -1186,6 +1204,18 @@
                                 icon: 'error'
                             });
             };
+             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
+            var observaciones = document.querySelectorAll('input[name="inputnotas[]"]');
+            console.log("ESTAS SON LAS OBSERVACIONES");
+            console.log(observaciones);
+            if(observaciones.length == 0){
+                return Swal.fire({
+                                title:"FALTA OPRIMIR EL BOTÓN PARA GENERAR LAS OBSERVACIONES DE LAS NOVEDADES ",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            };
+            
 
             Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL MES ACTUAL??",
@@ -1231,7 +1261,7 @@
             
             ///////////////////////////////////////////////////////////////////////////
             //////VALIDACIONES PARA LOS NUEVOS DOSIMETROS QUE DESEE AÑADIR//////////////
-           /*  var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
+            var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
             console.log("ESTAS SON LOS TRABAJADORES");
             console.log(trabajadores);
             for(var i = 0; i < trabajadores.length; i++) {
@@ -1245,7 +1275,7 @@
                     
                 }
                 
-            }; */
+            };
 
             var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
             console.log("ESTAS SON LAS UBICACIONES");
@@ -1262,10 +1292,7 @@
                 }
             };
             
-            
-            
-
-            if( ubicacion.length == 0 ){
+            if(trabajadores.length == 0 && ubicacion.length == 0 ){
                 /* alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA"); */
                 return Swal.fire({
                                 title:"OPRIMA EL BOTÓN DE NUEVO DOSÍMETRO",
@@ -1274,15 +1301,15 @@
                             });
             };
             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
-           /*  var observaciones = document.getElementById("nota_cambio_dosimetros2").value;
+            var observaciones = document.querySelectorAll('input[name="inputnotas[]"]');
             console.log("ESTAS SON LAS OBSERVACIONES" + observaciones);
-            if(observaciones == ''){
+            if(observaciones.length == 0){
                 return Swal.fire({
-                                title:"FALTA INGRESAR LA DESCRIPCIÓN DE LA NOVEDAD EN LAS OBSERVACIONES",
+                                title:"FALTA OPRIMIR EL BOTÓN PARA GENERAR LAS OBSERVACIONES DE LAS NOVEDADES ",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
-            }; */
+            };
             ////////////////////////////////////////////////////////////////////////////////
             Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
