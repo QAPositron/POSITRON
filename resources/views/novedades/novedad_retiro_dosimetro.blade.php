@@ -240,17 +240,6 @@
                                 </table>
                             </tbody>
                         </table>
-                            
-                        {{-- <div class="row">
-                            <div class="col"></div>
-                            <div class="col-6">
-
-                                <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
-                                <textarea class="form-control" name="nota_cambio_dosimetros2" id="nota_cambio_dosimetros2" rows="3" autofocus style="text-transform:uppercase"></textarea>
-
-                            </div>
-                            <div class="col"></div>
-                        </div> --}}
                         <div class="row">
                             <div class="col"></div>
                             <div class="col-9">
@@ -649,7 +638,7 @@
                                                 </select>
                                             </td>
                                             <td style='width: 183px' class='align-middle text-center'>
-                                                <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarEzclip(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');" ${dis}>
+                                                <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarEzclip(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`');" ${dis}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                     </svg>
@@ -698,7 +687,7 @@
                                                 </select>
                                             </td>
                                             <td style='width: 183px' class='align-middle text-center'>
-                                                <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarTorax(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`');" ${dis}>
+                                                <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarTorax(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`');" ${dis}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                     </svg>
@@ -810,7 +799,11 @@
 
     
     }
-    function eliminarEzclip(ezclip, ubicacion){
+    var dosiRetirado = [];
+    var dosiControlRetirado = '';
+    
+    function eliminarEzclip(ezclip, ubicacion, nombre){
+        console.log('SE SELECCIONO ESTA ASIGNACION'+ezclip +nombre);
         
         Swal.fire({
             title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO ' +ubicacion+ ' ??',
@@ -822,14 +815,16 @@
             confirmButtonText: 'SI, SEGURO!'
         }).then((result) => {
             if (result.isConfirmed) {
-                alert('SE SELECCIONO ESTA ASIGNACION'+ezclip);
+                alert('SE SELECCIONO ESTA ASIGNACION'+ezclip +nombre);
                 const element = document.getElementById(ezclip);
+                dosiRetirado.push({nombre,ubicacion});
+                console.log(dosiRetirado);
                 element.remove();
                 
             }
         })
     }
-    function eliminarTorax(torax, ubicacion){
+    function eliminarTorax(torax, ubicacion, nombre){
         
         Swal.fire({
             title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO ' +ubicacion+ ' ??',
@@ -841,13 +836,17 @@
             confirmButtonText: 'SI, SEGURO!'
         }).then((result) => {
             if (result.isConfirmed) {
-                alert('SE SELECCIONO ESTA ASIGNACION'+torax);
+                alert('SE SELECCIONO ESTA ASIGNACION'+ torax + nombre);
                 const element = document.getElementById(torax);
+                dosiRetirado.push({nombre,ubicacion});
+                console.log(dosiRetirado);
+
                 element.remove();
                 
             }
         })
     }
+    
     function eliminarControl(control){
         
         Swal.fire({
@@ -860,12 +859,30 @@
             confirmButtonText: 'SI, SEGURO!'
         }).then((result) => {
             if (result.isConfirmed) {
-                alert('SE SELECCIONO ESTA ASIGNACION'+control);
-                const element = document.getElementById(control);
+                alert('SE SELECCIONO ESTA ASIGNACION CONTROL'+control);
+                const element = document.getElementById(control+'control');
+                dosiControlRetirado = 'CONTROL';
+                console.log(dosiControlRetirado);
                 element.remove();
-                
             }
         })
+    }
+    function Generarnotas2(){
+        console.log('---------------------*****');
+        console.log(dosiRetirado);
+        console.log(dosiControlRetirado);
+        console.log('---------------------*****');
+        for(var x = 0; x < dosiRetirado.length; x++){
+            console.log("RETIRO DEL DOSIMETRO CON UBICACION: "+dosiRetirado[x].ubicacion+" PARA EL TRABAJADOR: "+dosiRetirado[x].nombre);
+            let input = `<input type="text" name="inputnotas[]" id="inputnotas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CON UBICACIÓN `+dosiRetirado[x].ubicacion+` PARA EL TRABAJADOR: `+dosiRetirado[x].nombre+`" readonly>`;
+            $('#textCard2').append(input);
+        }
+        if(dosiControlRetirado == 'CONTROL'){
+
+            let input = `<input type="text" name="inputnotas[]" id="inputnotas" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CONTROL" readonly>`;
+            $('#textCard2').append(input);
+        }
+        
     }
 </script>
 @if(session('guardar')== 'ok')
@@ -880,148 +897,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#form_cambio_cantdosim').submit(function(e, mes){
-            e.preventDefault();
-            var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
-            console.log("ESTAS SON LOS TRABAJADORES");
-            console.log(trabajadores);
-            for(var i = 0; i < trabajadores.length; i++) {
-                var values = trabajadores[i].value;
-                if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGÚN TRABAJADOR",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                    
-                }
-                
-            };
-
-            var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
-            console.log("ESTAS SON LAS UBICACIONES");
-            console.log(ubicacion);
-            for(var i = 0; i < ubicacion.length; i++) {
-                var values = ubicacion[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUNA UBICACIÓN"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA UBICACIÓN",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            
-            var dosimetros = document.querySelectorAll('select[name="id_dosimetro_asig[]"]');
-            console.log("ESTOS SON LOS DOSIMETROS");
-            console.log(dosimetros); 
-            
-            for(var i = 0; i < dosimetros.length; i++) {
-                var values = dosimetros[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN DOSÍMETRO"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGÚN DOSÍMETRO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                };
-                for(var x = 0; x < dosimetros.length; x++){
-                    var valuesX = dosimetros[x].value;
-                    if(values == valuesX && i != x){
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            };
-
-           
-            var holder = document.querySelectorAll('select[name="id_holder_asig[]"]');
-            console.log("ESTAS SON LOS HOLDERS");
-            console.log(holder); 
-            for(var i = 0; i < holder.length; i++) {
-                var values = holder[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGÚN HOLDER",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                };
-                for(var x = 0; x < holder.length; x++){
-                    var valuesX = holder[x].value;
-                    if(values == valuesX && i != x){
-                        return Swal.fire({
-                                title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            };
-           
-
-            var ocupaciones = document.querySelectorAll('select[name="ocupacion_asig[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES");
-            console.log(ocupaciones);  
-            for(var i = 0; i < ocupaciones.length; i++) {
-                var values = ocupaciones[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
-            /* var observaciones = document.getElementById("nota_cambio_dosimetros1").value;
-            console.log("ESTAS SON LAS OBSERVACIONES");
-            console.log(observaciones);
-            if(observaciones == ''){
-                return Swal.fire({
-                                title:"FALTA INGRESAR LA DESCRIPCIÓN DE LA NOVEDAD EN LAS OBSERVACIONES",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-            }; */
-
-            if(trabajadores.length == 0 && ubicacion.length == 0 && dosimetros.length == 0 && holder.length == 0 && ocupaciones.length == 0){
-                /* alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA"); */
-                return Swal.fire({
-                                title:"OPRIMA EL BOTÓN DE NUEVO DOSÍMETRO",
-                                text: "INGRESE LA INFORMACIÓN SOLICITADA",
-                                icon: 'error'
-                            });
-            };
-
-            Swal.fire({
-                text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL MES ACTUAL??",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'SI, SEGURO!'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
-                    var mes = document.getElementById("mesacambiar").value;
-                    var host = window.location.host;
-                    var path = "http://"+host+"/POSITRON/public/novedades/"+contdosisededepto_id+"/"+mes+"/reportePDFcambiodosim";
-                    
-                    window.open(path, '_blank');
-                    this.submit();
-
-                }
-            })
-        });
+        
 
         $('#form_cambio_cantdosim2').submit(function(e, mes){
             e.preventDefault();
@@ -1046,7 +922,7 @@
             
             ///////////////////////////////////////////////////////////////////////////
             //////VALIDACIONES PARA LOS NUEVOS DOSIMETROS QUE DESEE AÑADIR//////////////
-            var trabajadoresNull = document.querySelectorAll('select[name="id_trabj_asigdosim_null[]"]');
+            /* var trabajadoresNull = document.querySelectorAll('select[name="id_trabj_asigdosim_null[]"]');
             var trabajadores = document.querySelectorAll('select[name="id_trabj_asigdosim[]"]');
 
             console.log("ESTAS SON LOS TRABAJADORES");
@@ -1061,7 +937,7 @@
                                     var host = window.location.host;
                                     window.location = "http://"+host+"/POSITRON/public/novedades/retiroDosimetro";
                                 });
-            }
+            } */
             /* for(var i = 0; i < trabajadoresNull.length; i++){
                 var valuesNull = trabajadoresNull[i].value;
                 for(var x = 0; x < trabajadores.length; x++) {
@@ -1079,35 +955,32 @@
             } */
             
 
-            var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
+           /*  var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
             console.log("ESTAS SON LAS UBICACIONES");
             console.log(ubicacion);
             for(var i = 0; i < ubicacion.length; i++) {
                 var values = ubicacion[i].value;
                 if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUNA UBICACIÓN"); */
+                   
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGUNA UBICACIÓN",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
                 }
-            };
+            }; */
             
-            
-            
-
             
             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
-           /*  var observaciones = document.getElementById("nota_cambio_dosimetros2").value;
+            var observaciones = document.querySelectorAll('input[name="inputnotas[]"]');
             console.log("ESTAS SON LAS OBSERVACIONES" + observaciones);
-            if(observaciones == ''){
+            if(observaciones.length == 0){
                 return Swal.fire({
-                                title:"FALTA INGRESAR LA DESCRIPCIÓN DE LA NOVEDAD EN LAS OBSERVACIONES",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-            }; */
+                    title:"FALTA OPRIMIR EL BOTÓN PARA GENERAR LAS OBSERVACIONES DE LAS NOVEDADES ",
+                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                        icon: 'error'
+                });
+            };
             ////////////////////////////////////////////////////////////////////////////////
             Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN??",

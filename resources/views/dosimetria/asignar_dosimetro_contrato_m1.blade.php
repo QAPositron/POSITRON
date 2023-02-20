@@ -136,7 +136,7 @@
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo control DEL primer mes/////// --}}
                                     @for($i=1; $i<=$contdosisededepto->dosi_control; $i++)
                                         <tr>
-                                            <td colspan='2' class='align-middle'>CONTROL</td>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL</td>
                                             <td class='align-middle'>
                                                 <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" autofocus aria-label="Floating label select example">
                                                     <option value="">----</option>
@@ -145,7 +145,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle'>N.A.</td>
+                                            <td class='align-middle text-center'>N.A.</td>
                                             <td>
                                                 <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" autofocus style="text-transform:uppercase">
                                                     <option value="">----</option>
@@ -183,7 +183,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>ÁREA</td>
+                                                <td class='align-middle text-center'>ÁREA</td>
                                                 <td>
                                                     <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -192,7 +192,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>N.A</td>
+                                                <td class='align-middle text-center'>N.A</td>
                                                 <td>
                                                     <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
@@ -233,7 +233,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>CASO</td>
+                                                <td class='align-middle text-center'>CASO</td>
                                                 <td>
                                                     <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
@@ -242,7 +242,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>N.A</td>
+                                                <td class='align-middle text-center'>N.A</td>
                                                 <td>
                                                     <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
@@ -282,7 +282,7 @@
                                                             @endforeach
                                                         </select>
                                                     </td>
-                                                    <td>TÓRAX</td>
+                                                    <td class='align-middle text-center'>TÓRAX</td>
                                                     <td>
                                                         <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" autofocus aria-label="Floating label select example">
                                                             <option value="">----</option>
@@ -291,7 +291,7 @@
                                                             @endforeach
                                                         </select>
                                                     </td>
-                                                    <td>N.A</td>
+                                                    <td class='align-middle text-center'>N.A</td>
                                                     <td>
                                                         <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
                                                             <option value="">----</option>
@@ -331,7 +331,7 @@
                                                             @endforeach
                                                         </select>
                                                     </td>
-                                                    <td>CRISTALINO</td>
+                                                    <td class='align-middle text-center'>CRISTALINO</td>
                                                     <td>
                                                         <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" autofocus aria-label="Floating label select example">
                                                             <option value="">----</option>
@@ -387,7 +387,7 @@
                                                             @endforeach
                                                         </select>
                                                     </td>
-                                                    <td>MUÑECA</td>
+                                                    <td class='align-middle text-center'>MUÑECA</td>
                                                     <td>
                                                         <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" autofocus aria-label="Floating label select example">
                                                             <option value="">----</option>
@@ -442,7 +442,7 @@
                                                             @endforeach
                                                         </select>
                                                     </td>
-                                                    <td>ANILLO</td>
+                                                    <td class='align-middle text-center'>ANILLO</td>
                                                     <td>
                                                         <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                             <option value="">----</option>
