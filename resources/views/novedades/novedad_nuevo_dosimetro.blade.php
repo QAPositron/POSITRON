@@ -143,7 +143,7 @@
                                         <br>
                                         <div class="row">
                                             <div class="col"></div>
-                                            <div class="col-9">
+                                            <div class="col-10">
                                                 <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
                                                 <div class="card">
                                                     <div class="card-body" id="textCard1">
@@ -267,7 +267,7 @@
                         
                         <div class="row">
                             <div class="col"></div>
-                            <div class="col-9">
+                            <div class="col-10">
                                 <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
                                 <div class="card">
                                     <div class="card-body" id="textCard2">

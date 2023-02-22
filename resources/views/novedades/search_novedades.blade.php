@@ -197,9 +197,7 @@
                                 var mes = fecha.getMonth()+1;
                                 var año = fecha.getFullYear();
                                 id.push(value2.id_novedadmesescontdosi);
-                                /* console.log("ESTE ES EL ARRAY ID");
-                                console.log(id);
-                                console.log("ESTA ES EL ID NOVEDAD "+value2.id_novedadmesescontdosi); */
+                                
                                 
                                 if(value.id_contdosisededepto == value2.contdosisededepto_id && value.departamentosede_id == value2.departamentosede_id && value2.nota_cambiodosim != cheq){
                                     var tr = `<tr><td class="text-center align-middle">`+value2.mes_asignacion+`</td>
