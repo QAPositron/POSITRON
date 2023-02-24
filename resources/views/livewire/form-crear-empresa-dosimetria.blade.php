@@ -1,6 +1,6 @@
 <div>
     <form action="{{route('empresasdosi.save')}}" method="POST" wire:submit.prevent="saveEmpresa" id="form_crear_empresadosi" name="form_crear_empresadosi" class="form_crear_empresadosi">
-        @csrf
+        @csrf 
         <div class="modal-body">
             <div class="col-md">
                 <label class="text-center">AL SELECCIONAR UNA EMPRESA Y GUARDAR SE PODRAN CREAR CONTRATOS EN ELLA</label>

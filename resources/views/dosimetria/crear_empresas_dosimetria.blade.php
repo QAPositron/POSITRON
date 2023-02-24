@@ -25,7 +25,7 @@
     <h2 class="text-center">EMPRESAS CON DOSIMETRÍA</h2>
     <div class="row">               
         <div class="col"></div>
-        <div class="col-11">
+        <div class="col-12">
             <div class="table table-responsive p-4 ">
                 <table class="table table-bordered empresasdosi">
                     <thead class ="table-active text-center">
@@ -37,7 +37,9 @@
                             <th style='width: 10.60%'>DOSIM. CRISTALINO</th>
                             <th style='width: 10.60%'>DOSIM. ANILLO</th>
                             <th style='width: 10.60%'>DOSIM. MUÑECA</th>
-                            <th style='width: 9.60%'>DOSIM. CONTROL</th>
+                            <th style='width: 9.60%'>DOSIM. CONTROL TORAX</th>
+                            <th style='width: 9.60%'>DOSIM. CONTROL CRISTALINO</th>
+                            <th style='width: 9.60%'>DOSIM. CONTROL ANILLO</th>
                             <th style='width: 9.60%'>DOSIM. ÁREA</th>
                             <th style='width: 9.60%'>DOSIM. CASO</th>
                         </tr>
@@ -52,7 +54,9 @@
                                 <td class="align-middle">{{$empdosi->numtotal_dosi_cristalino}}</td>
                                 <td class="align-middle">{{$empdosi->numtotal_dosi_dedo}}</td>
                                 <td class="align-middle">{{$empdosi->numtotal_dosi_muñeca}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_control}}</td>
+                                <td class="align-middle">{{$empdosi->numtotal_dosi_control_torax}}</td>
+                                <td class="align-middle">{{$empdosi->numtotal_dosi_control_cristalino}}</td>
+                                <td class="align-middle">{{$empdosi->numtotal_dosi_control_dedo}}</td>
                                 <td class="align-middle">{{$empdosi->numtotal_dosi_ambiental}}</td>
                                 <td class="align-middle">{{$empdosi->numtotal_dosi_caso}}</td>
                             </tr>

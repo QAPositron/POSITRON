@@ -21,7 +21,9 @@ class CreateMesescontdosisedeptosTable extends Migration
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
 
             $table->integer('mes_asignacion');
-            $table->integer('dosi_control')->nullable();
+            $table->integer('dosi_control_torax')->nullable();
+            $table->integer('dosi_control_cristalino')->nullable();
+            $table->integer('dosi_control_dedo')->nullable();
             $table->integer('dosi_torax')->nullable();
             $table->integer('dosi_area')->nullable();
             $table->integer('dosi_caso')->nullable();

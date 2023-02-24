@@ -11,7 +11,7 @@
         </a>
     </div>
     <div class="col-md">
-        <h2 class="text-center ">DOSIMETRÍA DE <br> <i>{{$dosimetriacontrato->empresa->nombre_empresa}}</i> </h2>
+        <h2 class="text-center ">DOSIMETRÍA DE<br> <i>{{$dosimetriacontrato->empresa->nombre_empresa}}</i> </h2>
     </div>
     <div class="col-md"></div>
 </div>
@@ -66,7 +66,7 @@
         @php
             $check = 'inicial';
         @endphp 
-        
+         
         @foreach($dosimecontrasedeptos as $dosicontsedep)
             @php
                 if($dosicontsedep->nombre_sede != $check ){
@@ -81,7 +81,9 @@
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CRISTALINO</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ANILLO</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. MUÑECA</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL</th>";    
+                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL TÓRAX</th>";    
+                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL CRISTALINO</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL ANILLO</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ÁREA</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CASO</th>";
                                 /* echo "<th class='align-middle'>ACCIONES</th>"; */
@@ -96,7 +98,9 @@
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_cristalino}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_dedo}}</td> 
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_muñeca}}</td>
-                <td class="text-center align-middle">{{$dosicontsedep->dosi_control}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_control_torax}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_control_cristalino}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_control_dedo}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_area}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_caso}}</td>
                 {{-- <td class="text-center align-middle">

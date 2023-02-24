@@ -26,7 +26,9 @@ class CreateContratodosimetriasededeptosTable extends Migration
             $table-> foreign('departamentosede_id')->references('id_departamentosede')->on('departamentosedes')->onDelete('cascade')->onUpdate('cascade');
             
             $table->integer('mes_actual')->nullable();
-            $table->integer('dosi_control')->nullable();
+            $table->integer('dosi_control_torax')->nullable();
+            $table->integer('dosi_control_cristalino')->nullable();
+            $table->integer('dosi_control_dedo')->nullable();
             $table->integer('dosi_torax')->nullable();
             $table->integer('dosi_area')->nullable();
             $table->integer('dosi_caso')->nullable();

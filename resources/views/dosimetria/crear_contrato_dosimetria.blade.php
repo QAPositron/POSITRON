@@ -4,9 +4,9 @@
 
     <div class="row">
         <div class="col"></div>
-        <div class="col-11">
+        <div class="col-12">
             <div class="card text-dark bg-light">
-                <h2 class="text-center mt-3" id="nueva_empresaModalLabel">CREAR CONTRATO DE DOSIMETRÍA <br> PARA LA EMPRESA <br> {{$empresa->nombre_empresa}}</h2>
+                <h2 class="text-center mt-3" id="nueva_empresaModalLabel">CREAR CONTRATO DE DOSIMETRÍA<br> PARA LA EMPRESA <br> {{$empresa->nombre_empresa}}</h2>
             
                 <form class="m-4" action="{{route('contratosdosi.save')}}"  method="POST" id="form_contrato_dosi">
                     @csrf
@@ -64,7 +64,7 @@
                     </div>
                     <div class="col-md">
                         <hr>
-                        <label class="text-center ms-4">ASIGNE A ESTE CONTRATO UNA O MÁS SEDES:</label>
+                        <label class="text-center ms-4">ASIGNE A ESTE CONTRATO A UNA O MÁS SEDES :</label>
         
                         <div class="row mt-2">
                             <div class="col-md text-center">
@@ -106,7 +106,7 @@
                                 </div>
                                 <div hidden id="clonarDepto">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-floating mt-4">
                                                 <select class="form-select"  id="departamento_sede">
                                                     <option value="">--SELECCIONE--</option>
@@ -115,10 +115,8 @@
                                                     @endforeach
                                                 </select>
                                                 <label for="floatingSelectGrid">ESPECIALIDAD:</label>
-                                                
                                             </div>
                                         </div>
-                                        
                                         <div class="col-md">
                                             <label for="" class="text-center">No. DOSÍM. TÓRAX</label>
                                             <input type="number" id="num_dosi_torax_contrato_sede"  class="form-control text-center" autofocus >
@@ -136,10 +134,6 @@
                                             <input type="number"  id="num_dosi_muneca_contrato_sede"  class="form-control text-center" autofocus>
                                         </div>
                                         <div class="col-md">
-                                            <label for="" class="text-center">No. DOSÍM. CONTROL</label>
-                                            <input type="number" id="num_dosi_control_contrato_sede"  class="form-control text-center" autofocus >
-                                        </div>
-                                        <div class="col-md">
                                             <label for="" class="text-center">No. DOSÍM. ÁREA</label>
                                             <input type="number" id="num_dosi_area_contrato_sede"  class="form-control text-center" autofocus >
                                         </div>
@@ -148,9 +142,27 @@
                                             <input type="number" id="num_dosi_caso_contrato_sede"  class="form-control text-center" autofocus >
                                         </div>
                                         
-                                        
-                                        
                                         <input type="number"  id="primer_mes_asignacion" name="primer_mes_asignacion" class="form-control text-center" value="1" hidden>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md"></div>
+                                        <div class="col-md"></div>
+                                        <div class="col-md"></div>
+                                        <div class="col-md"></div>
+                                        <div class="col-md-2">
+                                            <label for="" class="text-center">No. DOSÍM. CONTROL TÓRAX</label>
+                                            <input type="number" id="num_dosi_control_torax_contrato_sede"  class="form-control text-center" autofocus >
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="" class="text-center">No. DOSÍM. CONTROL CRISTALINO</label>
+                                            <input type="number" id="num_dosi_control_cristalino_contrato_sede"  class="form-control text-center" autofocus >
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="" class="text-center">No. DOSÍM. CONTROL ANILLO</label>
+                                            <input type="number" id="num_dosi_control_dedo_contrato_sede"  class="form-control text-center" autofocus >
+                                        </div>
+                                        <div class="col-md"></div>
                                     </div>
                                     <br>
                                 </div>
@@ -249,8 +261,14 @@ crossorigin="anonymous">
         document.getElementById(`depa${depaNumber}`).querySelector(`#departamento_sede`)
             .setAttribute("name", `departamentos_sede${sedesNumber-1}[]`);
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_contrato_sede`)
-        .setAttribute("name", `dosimetro_control_sede${sedesNumber-1}[]`);
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_torax_contrato_sede`)
+            .setAttribute("name", `dosimetro_control_torax_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_cristalino_contrato_sede`)
+            .setAttribute("name", `dosimetro_control_cristalino_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_dedo_contrato_sede`)
+            .setAttribute("name", `dosimetro_control_dedo_sede${sedesNumber-1}[]`);
 
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_torax_contrato_sede`)
             .setAttribute("name", `dosimetro_torax_sede${sedesNumber-1}[]`);
@@ -287,7 +305,7 @@ crossorigin="anonymous">
                     $.get('contratodosidepa', {sede_id: sede_id}, function (depas) {
                         console.log('departamentos', depas)
                         $('#departamento_sede').empty();
-                        $('#departamento_sede').append("<option value=''> --SELECCIONE UNA ESPECIALIDAD-- </option>");
+                        $('#departamento_sede').append("<option value=''> --SELECCIONE-- </option>");
                         $.each(JSON.parse(depas), function (index, value) {
                             $('#departamento_sede').append("<option value='" + value.id_departamentosede + "'>" + value.nombre_departamento + "</option>")
                         })
@@ -448,9 +466,9 @@ crossorigin="anonymous">
                 var dosimetros_muneca = document.querySelectorAll('input[name="dosimetro_muneca_sede'+(i+1)+'[]"]');
                 console.log(dosimetros_muneca);
                 console.log("ESTAS SON LOS DOSIMETROS MUÑECA DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_muneca.length);
-                var dosimetros_control = document.querySelectorAll('input[name="dosimetro_control_sede'+(i+1)+'[]"]');
-                console.log(dosimetros_control);
-                console.log("ESTAS SON LOS DOSIMETROS CONTROL DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_control.length);
+                var dosimetros_control_torax = document.querySelectorAll('input[name="dosimetro_control_torax_sede'+(i+1)+'[]"]');
+                console.log(dosimetros_control_torax);
+                console.log("ESTAS SON LOS DOSIMETROS CONTROL TORAX DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_control_torax.length);
                 var dosimetros_area = document.querySelectorAll('input[name="dosimetro_area_sede'+(i+1)+'[]"]');
                 console.log(dosimetros_area);
                 console.log("ESTAS SON LOS DOSIMETROS AREA DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_area.length);
@@ -458,13 +476,13 @@ crossorigin="anonymous">
                 console.log(dosimetros_caso);
                 console.log("ESTAS SON LOS DOSIMETROS CASO DE LA SEDE"+ (i+1) + "ESTE ES EL TAMAÑO" +dosimetros_caso.length);
 
-                if(dosimetros_torax.length >= 2 && dosimetros_cristalino.length >= 2 && dosimetros_dedo.length >= 2 && dosimetros_muneca.length >=2 && dosimetros_control.length >=2 && dosimetros_area.length >=2 && dosimetros_caso.length >=2){
+                if(dosimetros_torax.length >= 2 && dosimetros_cristalino.length >= 2 && dosimetros_dedo.length >= 2 && dosimetros_muneca.length >=2 && dosimetros_control_torax.length >=2 && dosimetros_area.length >=2 && dosimetros_caso.length >=2){
                     for(var x = 0; x < dosimetros_torax.length; x++) {
                         var valuesTorax = dosimetros_torax[x].value;
                         var valuesCristalino = dosimetros_cristalino[x].value;
                         var valuesDedo = dosimetros_dedo[x].value;
                         var valuesMuneca = dosimetros_muneca[x].value;
-                        var valuesControl = dosimetros_control[x].value;
+                        var valuesControlTorax = dosimetros_control_torax[x].value;
                         var valuesArea = dosimetros_area[x].value;
                         var valuesCaso = dosimetros_caso[x].value;
 
@@ -472,10 +490,10 @@ crossorigin="anonymous">
                         console.log("DOSIMETROS CRISTALINO PARA EL VALOR MAYOR A UNO"+valuesCristalino);
                         console.log("DOSIMETROS DEDO PARA EL VALOR MAYOR A UNO"+valuesDedo);
                         console.log("DOSIMETROS MUÑECA PARA EL VALOR MAYOR A UNO"+valuesMuneca);
-                        console.log("DOSIMETROS CONTROL PARA EL VALOR MAYOR A UNO"+valuesControl);
+                        console.log("DOSIMETROS CONTROL PARA EL VALOR MAYOR A UNO"+valuesControlTorax);
                         console.log("DOSIMETROS AREA PARA EL VALOR MAYOR A UNO"+valuesArea);
                         console.log("DOSIMETROS CASO PARA EL VALOR MAYOR A UNO"+valuesCaso);
-                        if(valuesTorax == '' && valuesCristalino == '' && valuesDedo == '' && valuesMuneca == '' && valuesControl == '' && valuesArea == '' && valuesCaso == ''){
+                        if(valuesTorax == '' && valuesCristalino == '' && valuesDedo == '' && valuesMuneca == '' && valuesControlTorax == '' && valuesArea == '' && valuesCaso == ''){
                             return Swal.fire({
                                         title:"FALTA INGRESAR LA CANTIDAD DE DOSÍMETROS EN ALGUNA ESPECIALIDAD",
                                         text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -490,16 +508,16 @@ crossorigin="anonymous">
                     var valuesCristalino = dosimetros_cristalino[0].value;
                     console.log("DOSIMETROS CRISTALINO PARA EL VALIR MENOR A UNO"+valuesCristalino);
                     var valuesDedo = dosimetros_dedo[0].value;
-                    console.log("DOSIMETROS CRISTALINO PARA EL VALIR MENOR A UNO"+valuesDedo);
+                    console.log("DOSIMETROS DEDO PARA EL VALIR MENOR A UNO"+valuesDedo);
                     var valuesMuneca = dosimetros_muneca[0].value;
-                    console.log("DOSIMETROS CRISTALINO PARA EL VALIR MENOR A UNO"+valuesMuneca);
-                    var valuesControl = dosimetros_control[0].value;
-                    console.log("DOSIMETROS CONTROL PARA EL VALIR MENOR A UNO"+valuesControl);
+                    console.log("DOSIMETROS MUNECA PARA EL VALIR MENOR A UNO"+valuesMuneca);
+                    var valuesControlTorax = dosimetros_control_torax[0].value;
+                    console.log("DOSIMETROS CONTROL PARA EL VALIR MENOR A UNO"+valuesControlTorax);
                     var valuesArea = dosimetros_area[0].value;
                     console.log("DOSIMETROS AREA PARA EL VALIR MENOR A UNO"+valuesArea);
                     var valuesCaso = dosimetros_caso[0].value;
                     console.log("DOSIMETROS CASO PARA EL VALIR MENOR A UNO"+valuesCaso);
-                    if(valuesTorax == '' && valuesCristalino == '' && valuesDedo == '' && valuesMuneca == '' && valuesControl == '' && valuesArea == '' && valuesCaso == ''){
+                    if(valuesTorax == '' && valuesCristalino == '' && valuesDedo == '' && valuesMuneca == '' && valuesControlTorax == '' && valuesArea == '' && valuesCaso == ''){
                         return Swal.fire({
                                     title:"FALTA INGRESAR LA CANTIDAD DE DOSÍMETROS EN ALGUNA ESPECIALIDAD",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",

@@ -23,21 +23,23 @@
                 
                 <div class="row g-2 mx-3">
                     <div class="col-md"></div>
-                    <div class="col-md-6">    
+                    <div class="col-md-7">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
                                     <tr class="text-center">
-                                        <th colspan='7'>DOSíMETROS CONTRATADOS</th>
+                                        <th colspan='9'>DOSíMETROS CONTRATADOS</th>
                                     </tr>
                                     <tr class="text-center">
-                                        <th>TÓRAX</th>
-                                        <th>CRISTALINO</th>
-                                        <th>ANILLO</th>
-                                        <th>MUÑECA</th>
-                                        <th>CONTROL</th>
-                                        <th>ÁREA</th>
-                                        <th>CASO</th>
+                                        <th class="align-middle">TÓRAX</th>
+                                        <th class="align-middle">CRISTALINO</th>
+                                        <th class="align-middle">ANILLO</th>
+                                        <th class="align-middle">MUÑECA</th>
+                                        <th class="align-middle">ÁREA</th>
+                                        <th class="align-middle">CASO</th>
+                                        <th class="align-middle">CONTROL TÓRAX</th>
+                                        <th class="align-middle">CONTROL CRISTALINO</th>
+                                        <th class="align-middle">CONTROL ANILLO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,7 +48,9 @@
                                         <td class="text-center">{{$contdosisededepto->dosi_cristalino}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_dedo}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_muñeca}}</td>
-                                        <td class="text-center">{{$contdosisededepto->dosi_control}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_control_torax}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_control_cristalino}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_control_dedo}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_area}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_caso}}</td>
                                     </tr>
@@ -133,12 +137,12 @@
                                     <input type="number" name="id_departamento_asigdosim" id="id_departamento_asigdosim" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                     <input type="number" name="id_contrato_asigdosim_sede" id="id_contrato_asigdosim_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
                                         
-                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo control DEL primer mes/////// --}}
-                                    @for($i=1; $i<=$contdosisededepto->dosi_control; $i++)
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo control_torax DEL primer mes/////// --}}
+                                    @for($i=1; $i<=$contdosisededepto->dosi_control_torax; $i++)
                                         <tr>
-                                            <td colspan='2' class='align-middle text-center'>CONTROL</td>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
                                             <td class='align-middle'>
-                                                <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" autofocus aria-label="Floating label select example">
+                                                <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" autofocus aria-label="Floating label select example">
                                                     <option value="">----</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
@@ -147,7 +151,7 @@
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
                                             <td>
-                                                <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" autofocus style="text-transform:uppercase">
+                                                <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" autofocus style="text-transform:uppercase">
                                                     <option value="">----</option>
                                                     <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
@@ -170,7 +174,43 @@
                                             </td>
                                         </tr>
                                     @endfor
-
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo control_cristalino DEL primer mes/////// --}}
+                                    @for($i=1; $i<=$contdosisededepto->dosi_control_cristalino; $i++)
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL CRISTALINO</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_asigdosimControlCristalino"  name="id_dosimetro_asigdosimControlCristalino[]" id="id_dosimetro_asigdosimControlCristalino" autofocus aria-label="Floating label select example">
+                                                    <option value="">----</option>
+                                                    @foreach($dosimLibresGeneral as $dosigenlib)
+                                                        <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle text-center'>N.A.</td>
+                                            <td>
+                                                <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" autofocus style="text-transform:uppercase">
+                                                    <option value="">----</option>
+                                                    <option value="T"> TELETERAPIA</option>
+                                                    <option value="BQ">BRAQUITERAPIA</option>
+                                                    <option value="MN">MEDICINA NUCLEAR</option>
+                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                    <option value="MF">MEDIDORES FIJOS</option>
+                                                    <option value="IV">INVESTIGACIÓN</option>
+                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                    <option value="MM">MEDIDORES MÓVILES</option>
+                                                    <option value="E"> DOCENCIA</option>
+                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                    <option value="TR">TRAZADORES</option>
+                                                    <option value="HD">HEMODINAMIA</option>
+                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                    <option value="RX">RADIODIAGNÓSTICO</option>
+                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="AM">APLICACIONES MÉDICAS</option>
+                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    @endfor
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo ambiental que falten por asignar en el primer mes/////// --}}
                                     @for($i=1; $i<=$contdosisededepto->dosi_area; $i++)
                                         @if($mesnumber = 1)

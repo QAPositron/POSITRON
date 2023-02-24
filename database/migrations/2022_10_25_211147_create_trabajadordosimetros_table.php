@@ -20,9 +20,6 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table-> unsignedBigInteger('contratodosimetriasede_id');
             $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
 
-           /*  $table-> unsignedBigInteger('trabajador_id')->nullable();
-            $table-> foreign('trabajador_id')->references('id_trabajador')->on('trabajadors')->onDelete('cascade')->onUpdate('cascade'); */
-
             $table-> unsignedBigInteger('persona_id');
             $table-> foreign('persona_id')->references('id_persona')->on('personas')->onDelete('cascade')->onUpdate('cascade');
 
