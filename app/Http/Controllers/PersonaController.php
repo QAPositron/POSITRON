@@ -91,12 +91,28 @@ class PersonaController extends Controller
         $persona->save();
         if(!empty($request->perfil_personas)){
             for($i=0; $i<count($request->perfil_personas); $i++){
-                $personasPerfiles = new Personasperfiles();
-                
-                $personasPerfiles->persona_id = $persona->id_persona;
-                $personasPerfiles->perfil_id  = $request->perfil_personas[$i];
-                
-                $personasPerfiles->save();
+                if($request->perfil_personas[$i] == 1){
+                    $personasPerfiles = new Personasperfiles();
+                    
+                    $personasPerfiles->persona_id = $persona->id_persona;
+                    $personasPerfiles->perfil_id  = $request->perfil_personas[$i];
+                    
+                    $personasPerfiles->save();
+
+                    $personasRoles = new Personasroles();
+        
+                    $personasRoles->persona_id  = $persona->id_persona;
+                    $personasRoles->rol_id      = 2;
+            
+                    $personasRoles->save();
+                }else{
+                    $personasPerfiles = new Personasperfiles();
+                    
+                    $personasPerfiles->persona_id = $persona->id_persona;
+                    $personasPerfiles->perfil_id  = $request->perfil_personas[$i];
+                    
+                    $personasPerfiles->save();
+                }
             }
         }
         if(!empty($request->rol_personas)){

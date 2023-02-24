@@ -22,9 +22,9 @@ class CreateEmpresasTable extends Migration
             $table->string('email_empresa')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->text('direccion_empresa');
-            $table->text('nombre_representantelegal');
-            $table->string('tipo_iden_representantelegal', 50);
-            $table->integer('cedula_representantelegal');
+            $table->text('nombre_representantelegal')->nullable();
+            $table->string('tipo_iden_representantelegal', 50)->nullable();
+            $table->integer('cedula_representantelegal')->nullable();
             
             $table-> unsignedBigInteger('municipiocol_id');
             $table-> foreign('municipiocol_id')->references('id_municipiocol')->on('colmunicipios')->onDelete('cascade')->onUpdate('cascade');

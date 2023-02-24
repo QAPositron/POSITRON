@@ -1,83 +1,18 @@
 
-{{-- <!doctype html>
-<html lang="en">
-    
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="csrf-token" content="{{csrf_token() }}">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">    
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-        
-        @livewireScripts
-
-        <title>CREATE</title>
-        <style>
-            .active{
-                background-color: #EEEEEE;
-                background-color: rgba(231, 231, 231, 0.3);
-                /* font-weight: bold; */
-            }
-            .colorQA{
-                background-color: #1A9980;
-                color: white;
-            }
-            .bg-danger{
-                color: white;
-            }
-            tr:hover{
-                background-color: rgba(26, 153, 128, 0.1);
-            }
-            input[type=number]::-webkit-inner-spin-button,
-            input[type=number]::-webkit-outer-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-            input[type=number] { -moz-appearance:textfield; }
-
-            .form-control:focus {
-                border-color: white;
-                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
-            }
-            .form-select:focus{
-                border-color: white;
-                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
-            }
-            .form-check-input:focus{
-                border-color: white;
-                /* background-attachment: #1A9980; */
-                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
-            }
-            .form-check-input:checked{
-                background: #1A9980;
-                border-color: white;
-            }
-        
-        </style>
-        
-    </head>
-    <body>
-        <!-- ///////////////HEADER NAV/////////// -->
-        @include('layouts.partials.header')
-        --}}
 @extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')    
         <!-- //////////////////// CONTENIDO ///////////////// -->
         {{-- <div class="container mt-5 p-auto "> --}}
             <div class="row">
-
-                <div class="col"></div>
+                <div class="col">
+                    <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nuevo_deptoModal" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" class="bi bi-plus-lg mb-1" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg> CREAR ESPECIALIDAD
+                    </button>
+                </div>
                 <div class="col-8">
                     <div class="card text-dark bg-light">
                         <h2 class="text-center mt-3">CREAR SEDE</h2>
@@ -85,31 +20,7 @@
                         <form class="m-4" id="form_create_sede" name="form_create_sede" action="{{route('sedes.save')}}" method="POST">
                         
                             @csrf
-                            <label for="">AÑADA LOS DEPARTAMENTOS DE ESPECIALIDADES QUE CONTEGA ESTA SEDE</label>
-                            <br>
-                            <br>
-                            <div class="row g-2">
-                                <div class="col-10">
-                                    <label for="">ESPECIALIDADES:</label>
-                                    <div class="form-floating">
-                                        <select class="form-select @error('multiple_select_depsede') is-invalid @enderror" id="multiple_select_depsede" name="multiple_select_depsede[]" autofocus aria-label="Floating label select example" multiple="true">
-                                            @foreach($especialidades as $dep)
-                                                <option value="{{$dep->id_departamento}}" {{ in_array($dep->id_departamento, (array) old('multiple_select_depsede', [])) ? "selected" : "" }}>{{$dep->nombre_departamento}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('multiple_select_depsede') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                                    </div>    
-                                </div>
-                                <div class="col-md mt-4">
-                                    <div class="col-md d-flex align-items-center ">
-                                        <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nuevo_deptoModal" >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <h6>OBSERVE LAS ESPECIALIDADES Y CREE LA QUE DESEE </h6>
                             <br>
                             <div class="row g-2">
                                 <div class="col-md">
@@ -163,7 +74,24 @@
                                 @error('direccion_sede') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </div>
                             <br>
-                            
+                            <label for="">AÑADA LOS DEPARTAMENTOS DE ESPECIALIDADES QUE CONTEGA ESTA SEDE</label>
+                            <br>
+                            <br>
+                            <div class="row g-2">
+                                <div class="col-10">
+                                    <label for="">ESPECIALIDADES:</label>
+                                    <div class="form-floating">
+                                        <select class="form-select @error('especialidades') is-invalid @enderror" id="especialidades" name="especialidades[]" autofocus aria-label="Floating label select example" multiple="true">
+                                            @foreach($especialidades as $dep)
+                                                <option value="{{$dep->id_departamento}}" {{ in_array($dep->id_departamento, (array) old('especialidades', [])) ? "selected" : "" }}>{{$dep->nombre_departamento}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('especialidades') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                                    </div>    
+                                </div>
+                                
+                            </div>
+                            <br>
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col d-grid gap-2">
@@ -211,7 +139,7 @@
         <script type="text/javascript">
             $(document).ready(() => {
 
-                $('#multiple_select_depsede').select2({
+                $('#especialidades').select2({
                     placeholder:"SELECCIONE LAS ESPECIALIDADES",
                     tags: true,
                     tokenSeparators: ['/',',',',',','," "]

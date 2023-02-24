@@ -29,6 +29,7 @@ class CreateNovedadmesescontdosisededeptosTable extends Migration
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
             
             $table->integer('mes_asignacion');
+            $table->integer('tipo_novedad');
             $table->text('nota_cambiodosim')->nullable();
             
             $table->timestamps();

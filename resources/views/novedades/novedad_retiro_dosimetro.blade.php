@@ -182,6 +182,7 @@
                 <div class="table table-responsive text-center px-4">
                     <form id="form_cambio_cantdosim2" name="form_cambio_cantdosim2" action="{{route('cambiocantdosimesig.save')}}" method="POST">
                         @csrf
+                        <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="2">
                         <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
                         <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
                         <input type="number" hidden name="contratodosimetriasede" id="contratodosimetriasede" value="">

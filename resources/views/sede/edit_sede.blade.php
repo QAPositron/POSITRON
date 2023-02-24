@@ -2,7 +2,13 @@
 @extends('layouts.plantillabase')
 @section('contenido')
     <div class="row">
-        <div class="col"></div>
+        <div class="col">
+            <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nuevo_deptoModal" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                </svg> CREAR ESPECIALIDAD
+            </button>
+        </div>
         <div class="col-6">
             <div class="card text-dark bg-light" >
                 <h2 class="text-center mt-3">EDITAR SEDE</h2>
@@ -31,30 +37,6 @@
                             </div>
                         </div>
                         <div class="col"></div>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col-10">
-                            <label for=""> AÑADIR ESPECIALIDADES:
-
-                            </label>
-                            <div class="form-floating">
-                                <select class="form-select @error('multiple_select_depsede') is-invalid @enderror" id="multiple_select_depsede" name="multiple_select_depsede[]" autofocus aria-label="Floating label select example" multiple="true">
-                                    @foreach($especialidades as $dep)
-                                        <option value="{{$dep->id_departamento}}" {{ in_array($dep->id_departamento, (array) old('multiple_select_depsede', [])) ? "selected" : "" }}>{{$dep->nombre_departamento}}</option>
-                                    @endforeach
-                                </select>
-                                @error('multiple_select_depsede') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                            </div>    
-                        </div>
-                        <div class="col-md mt-4">
-                            <div class="col-md d-flex align-items-center ">
-                                <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nuevo_deptoModal" >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                     <br>
                     <div class="row g-2">
@@ -112,7 +94,22 @@
                         </div>
                     </div>
                     <br>
-                    
+                    <div class="row g-2">
+                        <div class="col-10">
+                            <label for=""> AÑADIR ESPECIALIDADES:
+
+                            </label>
+                            <div class="form-floating">
+                                <select class="form-select @error('especialidades') is-invalid @enderror" id="especialidades" name="especialidades[]" autofocus aria-label="Floating label select example" multiple="true">
+                                    @foreach($especialidades as $dep)
+                                        <option value="{{$dep->id_departamento}}" {{ in_array($dep->id_departamento, (array) old('especialidades', [])) ? "selected" : "" }}>{{$dep->nombre_departamento}}</option>
+                                    @endforeach
+                                </select>
+                                @error('especialidades') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>    
+                        </div>
+                    </div>
+                    <br>
                     <div class="row">
                         <div class="col"></div>
                         <div class="col d-grid gap-2">
@@ -162,7 +159,7 @@ crossorigin="anonymous">
 <script type="text/javascript">
     $(document).ready(() => {
 
-        $('#multiple_select_depsede').select2({
+        $('#especialidades').select2({
             placeholder:"SELECCIONE LAS ESPECIALIDADES",
             tags: true,
             tokenSeparators: ['/',',',',',','," "]

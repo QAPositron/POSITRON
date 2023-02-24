@@ -20,6 +20,7 @@ class RolSeeder extends Seeder
             ['nombre_rol' => 'CONTACTO'],
             ['nombre_rol' => 'TOE'],
             ['nombre_rol' => 'OPR'],
+            ['nombre_rol' => 'PUBLICO'],
         ];
         Roles::insert($roles);
     }

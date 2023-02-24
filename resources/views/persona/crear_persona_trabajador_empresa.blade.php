@@ -41,7 +41,7 @@
                         <div class="form-floating">
                             <select class="form-select @error('rol_personas') is-invalid @enderror" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
                                 @foreach($roles as $rol)
-                                    @if($id == 1 && ($rol->id_rol == 3 || $rol->id_rol == 4))
+                                    @if($id == 1 && ($rol->id_rol == 3 || $rol->id_rol == 4 || $rol->id_rol == 5))
                                         <option value ="{{$rol->id_rol}}" {{ in_array($rol->id_rol, (array) old('rol_personas', [])) ? "selected" : "" }}>{{$rol->nombre_rol}}</option>
                                     
                                     @elseif($id == 2 && $rol->id_rol == 1)

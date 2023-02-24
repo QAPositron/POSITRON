@@ -26,7 +26,7 @@ class FormDepartamento extends Component
         $depto->nombre_departamento = strtoupper($this->nombre_especialidad);
 
         $depto->save();
-        return back()->with('guardar', 'ok');
+        
     }
 
     public function render()

@@ -43,8 +43,8 @@ class SedesController extends Controller
             'nombre_sede'               => ['required', Rule::unique('sedes', 'nombre_sede')->where(fn ($query) => $query->where('empresas_id', $request->id_empresa))], 
             'municipio_sede'            => ['required'],              
             'departamento_sede'         => ['required'],  
-            'direccion_sede'            => ['required'] 
-           
+            'direccion_sede'            => ['required'],
+            'especialidades'            => ['required'] 
         ]);
         
         $sede = new Sede();
@@ -56,12 +56,12 @@ class SedesController extends Controller
         
         $sede->save();
 
-        for($i=0; $i<count($request->multiple_select_depsede); $i++){
+        for($i=0; $i<count($request->especialidades); $i++){
 
             $deptosede = new Departamentosede();
 
             $deptosede->sede_id                 = $sede->id_sede;
-            $deptosede->departamento_id         = $request->multiple_select_depsede[$i];
+            $deptosede->departamento_id         = $request->especialidades[$i];
             
             $deptosede->save();
         }
@@ -80,11 +80,12 @@ class SedesController extends Controller
     public function update(Request $request, Sede $sede){
         
         $request->validate([
-            
+            'id_empresa'            => ['required'],
             'nombre_sede'           => ['required',  Rule::unique('sedes', 'nombre_sede')->ignore($sede->id_sede, 'id_sede')->where(fn ($query) => $query->where('empresas_id', $request->id_empresa))], 
+            'departamento_sede'     => ['required'],
             'municipio_sede'        => ['required'],               
             'direccion_sede'        => ['required'], 
-           
+            'especialidades'        => ['required']
         ]);
 
         $sede->empresas_id         =$request->id_empresa;
@@ -95,15 +96,15 @@ class SedesController extends Controller
         /* return $request; */
 
         $sede->save();
-        if(empty($request->multiple_select_depsede)){
+        if(empty($request->especialidades)){
 
         }else{
-            for($i=0; $i<count($request->multiple_select_depsede); $i++){
+            for($i=0; $i<count($request->especialidades); $i++){
     
                 $deptosede = new Departamentosede();
     
                 $deptosede->sede_id             = $sede->id_sede;
-                $deptosede->departamento_id     = $request->multiple_select_depsede[$i];
+                $deptosede->departamento_id     = $request->especialidades[$i];
                 
                 $deptosede->save();
             }

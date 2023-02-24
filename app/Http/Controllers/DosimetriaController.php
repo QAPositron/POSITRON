@@ -811,7 +811,8 @@ class DosimetriaController extends Controller
         ->where('personasedes.sede_id','=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
         ->where(function($query) {
             $query->orWhere('roles.nombre_rol', 'TOE')
-                  ->orWhere('roles.nombre_rol', 'OPR');
+                  ->orWhere('roles.nombre_rol', 'OPR')
+                  ->orWhere('roles.nombre_rol', 'PUBLICO');
         })->get();
         $dosimLibresGeneral = Dosimetro::where('estado_dosimetro', 'STOCK')
         ->where('tipo_dosimetro', 'GENERAL')
@@ -1077,7 +1078,8 @@ class DosimetriaController extends Controller
         ->where('personasedes.sede_id','=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
         ->where(function($query) {
             $query->orWhere('roles.nombre_rol', 'TOE')
-                  ->orWhere('roles.nombre_rol', 'OPR');
+                  ->orWhere('roles.nombre_rol', 'OPR')
+                  ->orWhere('roles.nombre_rol', 'PUBLICO');
         })->get();
         $dosimLibresGeneral = Dosimetro::where('estado_dosimetro', 'STOCK')
         ->where('tipo_dosimetro', 'GENERAL')
@@ -1145,7 +1147,8 @@ class DosimetriaController extends Controller
         ->where('personasedes.sede_id','=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
         ->where(function($query) {
             $query->orWhere('roles.nombre_rol', 'TOE')
-                  ->orWhere('roles.nombre_rol', 'OPR');
+                  ->orWhere('roles.nombre_rol', 'OPR')
+                  ->orWhere('roles.nombre_rol', 'PUBLICO');
         })->get();
         $dosimLibresGeneral = Dosimetro::where('estado_dosimetro', 'STOCK')
         ->where('tipo_dosimetro', 'GENERAL')

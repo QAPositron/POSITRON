@@ -191,6 +191,7 @@
                 <div class="table table-responsive text-center px-4">
                     <form id="form_cambio_cantdosim2" name="form_cambio_cantdosim2" action="{{route('cambiocantdosimesig.save')}}" method="POST">
                         @csrf
+                        <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="3">
                         <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
                         <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
                         <input type="number" hidden name="contratodosimetriasede" id="contratodosimetriasede" value="">
@@ -486,7 +487,7 @@
                                 }
                                 
                                 var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`control">
-                                        <td colspan='2' style='width: 75px' class='align-middle'>CONTROL</td>
+                                        <td colspan='2' style='width: 75px' class='align-middle text-center'>CONTROL</td>
                                         <td style='width: 190px' class='align-middle'>
                                             
                                             <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
@@ -494,7 +495,7 @@
                                                 ${selectDosimetros.innerHTML}
                                             </select>
                                         </td>
-                                        <td style='width: 163px' class='align-middle'>NA</td>
+                                        <td style='width: 163px' class='align-middle text-center'>NA</td>
                                         <td style='width: 185px' class='align-middle'>
                                            
                                             <select class="form-select cambiar" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" ${disacont} >
@@ -863,7 +864,7 @@
                         trabjDisponibles.forEach(function(trabj){
                             if( values == trabj.id_persona ){
                                 console.log("CAMBIO DEL TRABAJADOR "+trajNullCambiado[x].nombre+" POR " +trabj.primer_nombre_persona+" "+trabj.primer_apellido_persona+" "+trabj.segundo_apellido_persona+" PARA EL DOSÍMETRO CON UBICACIÓN: "+trajNullCambiado[x].ubicacion);
-                                let input = `<input type="text" name="inputnotas[]" id="inputnotas`+x+`" class="form-control inputs" value="CAMBIO DEL TRABAJADOR: `+trajNullCambiado[x].nombre+` POR `+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+` PARA EL DOSÍMETRO CON UBICACIÓN: `+trajNullCambiado[x].ubicacion+`" readonly>`;
+                                let input = `<input type="text" name="inputnotas[]" id="inputnotas`+x+`" class="form-control inputs" value="CAMBIO DEL TRABAJADOR: `+trajNullCambiado[x].nombre+` POR `+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+` PARA EL DOSÍMETRO CON UBICACIÓN: `+trajNullCambiado[x].ubicacion+`" readonly style="word-wrap: break-word; word-break: break-all;">`;
                                 $('#textCard2').append(input);
                             }
                         })

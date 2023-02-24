@@ -44,9 +44,9 @@ class EmpresasController extends Controller
         
         $request->validate([
             'nombre_empresa'      => ['required', Rule::unique('empresas', 'nombre_empresa')],
-            'tipo_empresa'        => ['required'],              
+            'tipo_empresa'        => ['required'],               
             'tipoIden_empresa'    => ['required'], 
-            'numero_ident'        => ['required', 'max:10',  Rule::unique('empresas', 'num_iden_empresa')],
+            
             'nitdv_empresa'       => ['max:1'], 
             'actividad_empresa'   => ['required', 'min:4', 'max:4'],
             'respoIva_empresa'    => ['required'],   
@@ -55,12 +55,21 @@ class EmpresasController extends Controller
             'correo_empresa'      => ['required', 'email',  Rule::unique('empresas', 'email_empresa')],
             'direccion_empresa'   => ['required'],
             'pais_empresa'        => ['required'],
-            'ciudad_empresa'      => ['required'],
-            'nombreRepr_empresa'  => ['required'],
+            'ciudad_empresa'      => ['required']
+            /* 'nombreRepr_empresa'  => ['required'],
             'tipoIden_repreLegal' => ['required'],
-            'cedula_Repr_empresa' => ['required']
+            'cedula_Repr_empresa' => ['required'] */
             
         ]);
+        if($request->tipoIden_empresa == 'NIT'){
+            $request->validate([
+                'numero_ident'    => ['required', 'min:9','max:9',  Rule::unique('empresas', 'num_iden_empresa')],
+            ]);
+        }elseif($request->tipoIden_empresa == 'CÉDULA DE CIUDADANIA'){
+            $request->validate([
+                'numero_ident'    => ['required', 'min:7',  Rule::unique('empresas', 'num_iden_empresa')],
+            ]);
+        }
         
         $empresa = new Empresa();
 
@@ -180,7 +189,8 @@ class EmpresasController extends Controller
         ->where('sedes.empresas_id', '=', $empresa->id_empresa)
         ->where(function($query) {
             $query->orWhere('roles.nombre_rol', 'TOE')
-                  ->orWhere('roles.nombre_rol', 'OPR');
+                  ->orWhere('roles.nombre_rol', 'OPR')
+                  ->orWhere('roles.nombre_rol', 'PUBLICO');
         })->orderBy('sedes.id_sede')->get();
         $personasperfiles = Personasperfiles::all();
         $personasroles = Personasroles::all();
