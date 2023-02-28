@@ -213,7 +213,7 @@
                                                 <div class="col-md mx-4">
                                                    
                                                     
-                                                        <label for="">DOSÍMETRO DE CONTROL:</label>
+                                                        <label for="">DOSÍMETRO DE CONTROL {{ $dosicontrolasig->ubicacion}}:</label>
                                                         <div class="row">
                                                             <div class="col-md">
                                                                 <div class="form-floating">

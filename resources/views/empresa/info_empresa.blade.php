@@ -491,7 +491,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             echo "</thead>";
                                     }
                                 @endphp
-                                @if($trabDosim->cedula_persona != $cheq)
+                                {{-- @if($trabDosim->cedula_persona != $cheq) --}}
                                     <tr>
 
                                         <td class="align-middle">{{$trabDosim->primer_nombre_persona}} {{$trabDosim->segundo_nombre_persona}} {{$trabDosim->primer_apellido_persona}} {{$trabDosim->segundo_apellido_persona}}</td>
@@ -551,7 +551,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             </div>
                                         </td>
                                     </tr>
-                                @endif
+                                {{-- @endif --}}
                             @endforeach
                             </table>
                            

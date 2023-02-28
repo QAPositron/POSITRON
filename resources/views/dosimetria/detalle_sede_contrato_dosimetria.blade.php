@@ -22,8 +22,8 @@
     <h4 class="text-center align-middle" id="id_contrato"> </h4>
 
     <br>
-    <h6 class="text-center"> <b>TOTAL DE DOSÍMETROS:</b> TÓRAX: # {{$dosisededeptocontra->dosi_torax}}   --  ÁREA: # {{$dosisededeptocontra->dosi_area}}   --  CASO: # {{$dosisededeptocontra->dosi_caso}} -- CRISTALINO: # {{$dosisededeptocontra->dosi_cristalino}} --  MUÑECA: # {{$dosisededeptocontra->dosi_muñeca}} -- DEDO: # {{$dosisededeptocontra->dosi_dedo}} --</h6>
-    <h6 class="text-center">CONTROL TÓRAX: # {{$dosisededeptocontra->dosi_control_torax}} -- CONTROL CRISTALINO: #{{$dosisededeptocontra->dosi_control_cristalino}} -- CONTROL ANILLO: # {{$dosisededeptocontra->dosi_control_dedo}}</h6>
+    <h6 class="text-center"> <b>TOTAL DE DOSÍMETROS:</b> TÓRAX: # {{$dosisededeptocontra->dosi_torax}}  --  CRISTALINO: # {{$dosisededeptocontra->dosi_cristalino}}  --  DEDO: # {{$dosisededeptocontra->dosi_dedo}}  --  MUÑECA: # {{$dosisededeptocontra->dosi_muñeca}}  --  ÁREA: # {{$dosisededeptocontra->dosi_area}}  --  CASO: # {{$dosisededeptocontra->dosi_caso}}</h6>
+    <h6 class="text-center">CONTROL TÓRAX: # {{$dosisededeptocontra->dosi_control_torax}}  --  CONTROL CRISTALINO: #{{$dosisededeptocontra->dosi_control_cristalino}} -- CONTROL ANILLO: # {{$dosisededeptocontra->dosi_control_dedo}}</h6>
 
     <div class="row">
         <div class="col"></div>

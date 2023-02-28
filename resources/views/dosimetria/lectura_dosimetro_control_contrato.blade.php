@@ -11,7 +11,7 @@
         </a>
     </div>
     <div class="col-md-9">
-        <h2 class="text-center">DOSIMETRÍA DE </h2>
+        <h2 class="text-center">DOSIMETRÍA DE </h2> 
         <h3 class="text-center"><i>{{$dosicontasig->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$dosicontasig->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
         <h4 class="text-center">ESPECIALIDAD: {{$dosicontasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}</h4>    
     </div>
@@ -22,7 +22,7 @@
 <br>
 <br>
 <h3 class="text-center">
-    LECTURA DE DOSÍMETRO TIPO CONTROL <br> DEL MES {{$dosicontasig->mes_asignacion}} (
+    LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}} <br> DEL MES {{$dosicontasig->mes_asignacion}} (
     @if($dosicontasig->mes_asignacion == 1)
         @php
             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
@@ -373,7 +373,7 @@ crossorigin="anonymous">
                 document.getElementById('mes{{$dosicontasig->mes_asignacion}}').innerHTML = fechaesp;
 
             } 
-        }
+        }   
     })
     $(document).ready(function(){
         $('#infoLectura a').on('click', function (e) {

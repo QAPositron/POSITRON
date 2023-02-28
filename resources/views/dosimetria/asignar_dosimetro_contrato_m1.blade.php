@@ -150,7 +150,7 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
-                                            <td>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" autofocus style="text-transform:uppercase">
                                                     <option value="">----</option>
                                                     <option value="T"> TELETERAPIA</option>
