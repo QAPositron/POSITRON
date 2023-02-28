@@ -10,6 +10,10 @@ class Holder extends Model
     use HasFactory;
     protected $primaryKey = 'id_holder';
 
+    //relacion uno a uno con dosimetro control
+    public function dosicontrolcontdosisede(){
+        return $this->hasOne(Dosicontrolcontdosisede::class, 'holder_id', 'id_holder');
+    }
     //relacion uno a muchos con trabajador dosiemtro
     public function trabajadordosimetro(){
         return $this->hasOne(Trabajadordosimetro::class, 'holder_id', 'id_holder');

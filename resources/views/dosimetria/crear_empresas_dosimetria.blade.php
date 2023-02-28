@@ -28,37 +28,37 @@
         <div class="col-12">
             <div class="table table-responsive p-4 ">
                 <table class="table table-bordered empresasdosi">
-                    <thead class ="table-active text-center">
+                    <thead class ="table-active">
                         <tr>
-                            <th >EMPRESA</th>
-                            <th style='width: 15.60%'>TIPO. IDEN</th>
-                            <th style='width: 14.80%'>No. IDEN</th>
-                            <th style='width: 10.60%'>DOSIM. TORAX</th>
-                            <th style='width: 10.60%'>DOSIM. CRISTALINO</th>
-                            <th style='width: 10.60%'>DOSIM. ANILLO</th>
-                            <th style='width: 10.60%'>DOSIM. MUÑECA</th>
-                            <th style='width: 9.60%'>DOSIM. CONTROL TORAX</th>
-                            <th style='width: 9.60%'>DOSIM. CONTROL CRISTALINO</th>
-                            <th style='width: 9.60%'>DOSIM. CONTROL ANILLO</th>
-                            <th style='width: 9.60%'>DOSIM. ÁREA</th>
-                            <th style='width: 9.60%'>DOSIM. CASO</th>
+                            <th class="align-middle text-center">EMPRESA</th>
+                            <th class="align-middle text-center" style='width: 15.60%'>TIPO. IDEN</th>
+                            <th class="align-middle text-center" style='width: 14.80%'>No. IDEN</th>
+                            <th class="align-middle text-center" style='width: 10.60%'>DOSIM. TORAX</th>
+                            <th class="align-middle text-center" style='width: 10.60%'>DOSIM. CRISTALINO</th>
+                            <th class="align-middle text-center" style='width: 10.60%'>DOSIM. ANILLO</th>
+                            <th class="align-middle text-center" style='width: 10.60%'>DOSIM. MUÑECA</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. CONTROL TORAX</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. CONTROL CRISTALINO</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. CONTROL ANILLO</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. ÁREA</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. CASO</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($empresaDosi as $empdosi)
                             <tr>
-                                <td class="align-middle"><a class="btn btn-outline-primary rounded-pill" href="{{route('contratosdosi.createlist', $empdosi->empresa_id)}}">{{$empdosi->nombre_empresa}}</a></td>
-                                <td class="align-middle">{{$empdosi->empresa->tipo_identificacion_empresa}}</td>
-                                <td class="align-middle">{{$empdosi->num_iden_empresa}} {{$empdosi->empresa->DV}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_torax}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_cristalino}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_dedo}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_muñeca}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_control_torax}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_control_cristalino}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_control_dedo}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_ambiental}}</td>
-                                <td class="align-middle">{{$empdosi->numtotal_dosi_caso}}</td>
+                                <td class="align-middle text-center"><a class="btn btn-outline-primary rounded-pill" href="{{route('contratosdosi.createlist', $empdosi->empresa_id)}}">{{$empdosi->nombre_empresa}}</a></td>
+                                <td class="align-middle text-center">{{$empdosi->empresa->tipo_identificacion_empresa}}</td>
+                                <td class="align-middle text-center">{{$empdosi->num_iden_empresa}} {{$empdosi->empresa->DV}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_torax}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_cristalino}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_dedo}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_muñeca}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_torax}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_cristalino}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_dedo}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_ambiental}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_caso}}</td>
                             </tr>
                         @endforeach
                     </tbody>

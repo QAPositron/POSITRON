@@ -13,21 +13,23 @@
                 <br>
                 <div class="row g-2 mx-3">
                     <div class="col-md"></div>
-                    <div class="col-md-6">    
+                    <div class="col-md-7">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
                                     <tr class="text-center">
-                                        <th colspan='7'>DOSíMETROS CONTRATADOS</th>
+                                        <th colspan='9'>DOSíMETROS CONTRATADOS</th>
                                     </tr>
                                     <tr class="text-center">
-                                        <th>TÓRAX</th>
-                                        <th>CRISTALINO</th>
-                                        <th>ANILLO</th>
-                                        <th>MUÑECA</th>
-                                        <th>CONTROL</th>
-                                        <th>ÁREA</th>
-                                        <th>CASO</th>
+                                        <th class="align-middle">TÓRAX</th>
+                                        <th class="align-middle">CRISTALINO</th>
+                                        <th class="align-middle">ANILLO</th>
+                                        <th class="align-middle">MUÑECA</th>
+                                        <th class="align-middle">ÁREA</th>
+                                        <th class="align-middle">CASO</th>
+                                        <th class="align-middle">CONTROL TÓRAX</th>
+                                        <th class="align-middle">CONTROL CRISTALINO</th>
+                                        <th class="align-middle">CONTROL ANILLO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,9 +38,11 @@
                                         <td class="text-center">{{$mescontdosisededepto->dosi_cristalino}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_control}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_area}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_caso}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_cristalino}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_dedo}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -121,13 +125,13 @@
                                     <input type="number" name="id_departamento_asigdosim" id="id_departamento_asigdosim" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                     <input type="number" name="id_contrato_asigdosim_sede" id="id_contrato_asigdosim_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
                                     
-                                    {{--///Filas creadas segun la cantidad de dosimetros tipo control asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
-                                    @foreach($dosicontrolmesant as $dosicontrolant)
+                                    {{--///Filas creadas segun la cantidad de dosimetros tipo CONTROL TORAX asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
+                                    @foreach($dosicontrolToraxmesant as $dosicontrolToraxant)
                                         <tr>
-                                            <td colspan='2' class='align-middle text-center'>CONTROL</td>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
                                             <td class='align-middle'>
-                                                <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" @if($dosicontrolant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    <option value="@if($dosicontrolant->dosimetro_uso != 'FALSE') {{$dosicontrolant->dosimetro_id}} @endif"> @if($dosicontrolant->dosimetro_uso != 'FALSE') {{$dosicontrolant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" @if($dosicontrolToraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if($dosicontrolToraxant->dosimetro_uso != 'FALSE') {{$dosicontrolToraxant->dosimetro_id}} @endif"> @if($dosicontrolToraxant->dosimetro_uso != 'FALSE') {{$dosicontrolToraxant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
                                                     @endforeach
@@ -135,41 +139,41 @@
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
                                             <td>
-                                                <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" style="text-transform:uppercase" @if($dosicontrolant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosicontrolant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicontrolant->ocupacion=='T')
+                                                <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" style="text-transform:uppercase" @if($dosicontrolToraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    @if($dosicontrolToraxant->dosimetro_uso != 'FALSE')
+                                                        @if($dosicontrolToraxant->ocupacion=='T')
                                                             <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dosicontrolant->ocupacion=='BQ')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='BQ')
                                                             <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dosicontrolant->ocupacion=='MN')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='MN')
                                                             <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dosicontrolant->ocupacion=='GM')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='GM')
                                                             <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dosicontrolant->ocupacion=='MF')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='MF')
                                                             <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dosicontrolant->ocupacion=='IV')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='IV')
                                                             <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dosicontrolant->ocupacion=='DN')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='DN')
                                                             <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dosicontrolant->ocupacion=='MM')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='MM')
                                                             <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dosicontrolant->ocupacion=='E')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='E')
                                                             <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dosicontrolant->ocupacion=='PR')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='PR')
                                                             <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dosicontrolant->ocupacion=='TR')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='TR')
                                                             <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dosicontrolant->ocupacion=='HD')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='HD')
                                                             <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dosicontrolant->ocupacion=='OD')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='OD')
                                                             <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dosicontrolant->ocupacion=='RX')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='RX')
                                                             <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dosicontrolant->ocupacion=='FL')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='FL')
                                                             <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dosicontrolant->ocupacion=='AM')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dosicontrolant->ocupacion=='AI')
+                                                            @elseif($dosicontrolToraxant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
                                                         @endif
                                                     @endif
@@ -196,13 +200,13 @@
                                             
                                         </tr>
                                     @endforeach
-                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL TORAX asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
                                     @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
-                                        @for($i=1; $i<=($mescontdosisededepto->dosi_control - count($dosicontrolmesant)); $i++)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_control_torax - count($dosicontrolToraxmesant)); $i++)
                                             <tr>
-                                                <td colspan='2' class='align-middle text-center'>CONTROL</td>
+                                                <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
                                                 <td class='align-middle'>
-                                                    <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" autofocus aria-label="Floating label select example">
+                                                    <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresGeneral as $dosigenlib)
                                                             <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
@@ -211,7 +215,7 @@
                                                 </td>
                                                 <td class='align-middle text-center'>N.A.</td>
                                                 <td>
-                                                    <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" autofocus style="text-transform:uppercase">
+                                                    <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
@@ -236,7 +240,271 @@
                                             </tr>
                                         @endfor
                                     @endif
-                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CONTROL/////// --}}
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CONTROL TORAX/////// --}}
+
+                                    {{--///Filas creadas segun la cantidad de dosimetros tipo CONTROL CRISTALINO asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
+                                    @foreach($dosicontrolCristalinomesant as $dosicontrolCristalinoant)
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL CRISTALINO</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_asigdosimControlCristalino"  name="id_dosimetro_asigdosimControlCristalino[]" id="id_dosimetro_asigdosimControlCristalino" @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') {{$dosicontrolCristalinoant->dosimetro_id}} @endif"> @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') {{$dosicontrolCristalinoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                        <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select id_holder_asigdosimControlCristalino[]"  name="id_holder_asigdosimControlCristalino[]" id="id_holder_asigdosimControlCristalino" @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE'){{$dosicontrolCristalinoant->holder_id}}@endif">@if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE'){{$dosicontrolCristalinoant->holder->codigo_holder}}@else ---- @endif</option>
+                                                    @foreach($holderLibresCristalino as $holibcris)
+                                                        <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" style="text-transform:uppercase" @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE')
+                                                        @if($dosicontrolCristalinoant->ocupacion=='T')
+                                                            <option selected hidden value="T">TELETERAPIA</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='BQ')
+                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='MN')
+                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='GM')
+                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='MF')
+                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='IV')
+                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='DN')
+                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='MM')
+                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='E')
+                                                            <option selected hidden value="E">DOCENCIA</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='PR')
+                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='TR')
+                                                            <option selected hidden value="TR">TRAZADORES</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='HD')
+                                                            <option selected hidden value="HD">HEMODINAMIA</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='OD')
+                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='RX')
+                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='FL')
+                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='AM')
+                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
+                                                            @elseif($dosicontrolCristalinoant->ocupacion=='AI')
+                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @endif
+                                                    @endif
+                                                    <option value="">----</option>
+                                                    <option value="T"> TELETERAPIA</option>
+                                                    <option value="BQ">BRAQUITERAPIA</option>
+                                                    <option value="MN">MEDICINA NUCLEAR</option>
+                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                    <option value="MF">MEDIDORES FIJOS</option>
+                                                    <option value="IV">INVESTIGACIÓN</option>
+                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                    <option value="MM">MEDIDORES MÓVILES</option>
+                                                    <option value="E"> DOCENCIA</option>
+                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                    <option value="TR">TRAZADORES</option>
+                                                    <option value="HD">HEMODINAMIA</option>
+                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                    <option value="RX">RADIODIAGNÓSTICO</option>
+                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="AM">APLICACIONES MÉDICAS</option>
+                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                </select>
+                                            </td>
+                                            
+                                        </tr>
+                                    @endforeach
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL CRISTALINO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_control_cristalino - count($dosicontrolCristalinomesant)); $i++)
+                                            <tr>
+                                                <td colspan='2' class='align-middle text-center'>CONTROL CRISTALINO</td>
+                                                <td class='align-middle'>
+                                                    <select class="form-select id_dosimetro_asigdosimControlCristalino"  name="id_dosimetro_asigdosimControlCristalino[]" id="id_dosimetro_asigdosimControlCristalino" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                            <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle text-center'>
+                                                    <select class="form-select id_holder_asigdosimControlCristalino"  name="id_holder_asigdosimControlCristalino[]" id="id_holder_asigdosimControlCristalino" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($holderLibresCristalino as $holibcris)
+                                                            <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        @endfor
+                                    @endif
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CONTROL CRISTALINO/////// --}}
+                                    
+                                    {{--///Filas creadas segun la cantidad de dosimetros tipo CONTROL DEDO asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
+                                    @foreach($dosicontrolDedomesant as $dosicontrolDedoant)
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL ANILLO</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_asigdosimControlDedo"  name="id_dosimetro_asigdosimControlDedo[]" id="id_dosimetro_asigdosimControlDedo" @if($dosicontrolDedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if($dosicontrolDedoant->dosimetro_uso != 'FALSE') {{$dosicontrolDedoant->dosimetro_id}} @endif"> @if($dosicontrolDedoant->dosimetro_uso != 'FALSE') {{$dosicontrolDedoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                        <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select id_holder_asigdosimControlDedo"  name="id_holder_asigdosimControlDedo[]" id="id_holder_asigdosimControlDedo" @if($dosicontrolDedoant->dosimetro_uso != 'FALSE') { disabled } @endif >
+                                                    <option value="@if($dosicontrolDedoant->dosimetro_uso != 'FALSE'){{$dosicontrolDedoant->holder_id}}@endif">@if($dosicontrolDedoant->dosimetro_uso != 'FALSE'){{$dosicontrolDedoant->holder->codigo_holder}}@else ---- @endif</option>
+                                                    @foreach($holderLibresAnillo as $holibanillo)
+                                                        <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" style="text-transform:uppercase" @if($dosicontrolDedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    @if($dosicontrolDedoant->dosimetro_uso != 'FALSE')
+                                                        @if($dosicontrolDedoant->ocupacion=='T')
+                                                            <option selected hidden value="T">TELETERAPIA</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='BQ')
+                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='MN')
+                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='GM')
+                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='MF')
+                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='IV')
+                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='DN')
+                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='MM')
+                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='E')
+                                                            <option selected hidden value="E">DOCENCIA</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='PR')
+                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='TR')
+                                                            <option selected hidden value="TR">TRAZADORES</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='HD')
+                                                            <option selected hidden value="HD">HEMODINAMIA</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='OD')
+                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='RX')
+                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='FL')
+                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='AM')
+                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
+                                                            @elseif($dosicontrolDedoant->ocupacion=='AI')
+                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @endif
+                                                    @endif
+                                                    <option value="">----</option>
+                                                    <option value="T"> TELETERAPIA</option>
+                                                    <option value="BQ">BRAQUITERAPIA</option>
+                                                    <option value="MN">MEDICINA NUCLEAR</option>
+                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                    <option value="MF">MEDIDORES FIJOS</option>
+                                                    <option value="IV">INVESTIGACIÓN</option>
+                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                    <option value="MM">MEDIDORES MÓVILES</option>
+                                                    <option value="E"> DOCENCIA</option>
+                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                    <option value="TR">TRAZADORES</option>
+                                                    <option value="HD">HEMODINAMIA</option>
+                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                    <option value="RX">RADIODIAGNÓSTICO</option>
+                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="AM">APLICACIONES MÉDICAS</option>
+                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                </select>
+                                            </td>
+                                            
+                                        </tr>
+                                    @endforeach
+                                    {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL ANILLO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
+                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                        @for($i=1; $i<=($mescontdosisededepto->dosi_control_dedo - count($dosicontrolDedomesant)); $i++)
+                                            <tr>
+                                                <td colspan='2' class='align-middle text-center'>CONTROL ANILLO</td>
+                                                <td class='align-middle'>
+                                                    <select class="form-select id_dosimetro_asigdosimControlDedo"  name="id_dosimetro_asigdosimControlDedo[]" id="id_dosimetro_asigdosimControlDedo" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                            <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle text-center'>
+                                                    <select class="form-select id_holder_asigdosimControlDedo"  name="id_holder_asigdosimControlDedo[]" id="id_holder_asigdosimControlDedo" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($holderLibresAnillo as $holibanillo)
+                                                            <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        @endfor
+                                    @endif
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CONTROL DEDO/////// --}}
+
+
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo AREA asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dosiareamesant as $dosiareant)
                                         <tr>
@@ -1521,30 +1789,80 @@ crossorigin="anonymous">
                     
             };
             /////////////////////VALIDACION PARA LOS DOSIMETROS/////////////////
-            var dosimControl = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
-            console.log("ESTAS SON LOS  DOSIM CONTROL");
-            console.log(dosimControl);
-            for(var i = 0; i < dosimControl.length; i++){
-                var values = dosimControl[i].value;
+            var dosimControlTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlTorax[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL TORAX");
+            console.log(dosimControlTorax);
+            for(var i = 0; i < dosimControlTorax.length; i++){
+                var values = dosimControlTorax[i].value;
                 if(values == ''){
                     return Swal.fire({
-                                title:"FALTA SELECCIONAR EL DOSÍMETRO DE TIPO CONTROL",
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO DE TIPO CONTROL TÓRAX",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
                     
                 };
-                for(var x = 0; x < dosimControl.length; x++){
-                    var valuesX = dosimControl[x].value;
+                for(var x = 0; x < dosimControlTorax.length; x++){
+                    var valuesX = dosimControlTorax[x].value;
                     if(values == valuesX && i != x){
                         return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS CONTROL SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                title:"ALGUNOS DOSÍMETROS CONTROL TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
                     }
                 }
             };
+            var dosimControlCristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlCristalino[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL CRISTALINO");
+            console.log(dosimControlCristalino);
+            for(var i = 0; i < dosimControlCristalino.length; i++){
+                var values = dosimControlCristalino[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO DE TIPO CONTROL CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimControlTorax.length; x++){
+                    var valuesX = dosimControlTorax[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS CONTROL CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+
+            var dosimControlDedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlDedo[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL DEDO");
+            console.log(dosimControlDedo);
+            for(var i = 0; i < dosimControlDedo.length; i++){
+                var values = dosimControlDedo[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO DE TIPO CONTROL ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimControlDedo.length; x++){
+                    var valuesX = dosimControlDedo[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+
             var dosimArea = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
             console.log("ESTAS SON LOS DOSIMTROS AREA");
             console.log(dosimArea);

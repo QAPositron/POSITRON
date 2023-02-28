@@ -156,7 +156,7 @@ Route::delete('detallecontrato/{detcont}/{contratodosisede}/{contratodosisededep
 
 Route::get('detallesedecont/{detsedcont}/create',[DosimetriaController::class, 'createdetsedeContrato'])->name('detallesedecont.create');
 /////////RUTAS PARA EL CRUD DE ASIGNACION DOSIMETROS///////
-
+ 
 /////KATE//// 
 Route::get('asignadosicontratom1/{asigdosicont}/{mesnumber}/create', [DosimetriaController::class, 'asignaDosiContratoM1'])->name('asignadosicontratom1.create');
 Route::post('asignadosicontratom1/{asigdosicont}/{mesnumber}/', [DosimetriaController::class, 'saveAsignacionDosiContratoM1'])->name('asignadosicontratom1.save');

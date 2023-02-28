@@ -48,11 +48,11 @@
                                         <td class="text-center">{{$contdosisededepto->dosi_cristalino}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_dedo}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_muñeca}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_area}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_caso}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_control_torax}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_control_cristalino}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_control_dedo}}</td>
-                                        <td class="text-center">{{$contdosisededepto->dosi_area}}</td>
-                                        <td class="text-center">{{$contdosisededepto->dosi_caso}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -141,7 +141,7 @@
                                     @for($i=1; $i<=$contdosisededepto->dosi_control_torax; $i++)
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
-                                            <td class='align-middle'>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" autofocus aria-label="Floating label select example">
                                                     <option value="">----</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -178,17 +178,68 @@
                                     @for($i=1; $i<=$contdosisededepto->dosi_control_cristalino; $i++)
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL CRISTALINO</td>
-                                            <td class='align-middle'>
+                                            <td class='align-middle text-center'>
                                                 <select class="form-select id_dosimetro_asigdosimControlCristalino"  name="id_dosimetro_asigdosimControlCristalino[]" id="id_dosimetro_asigdosimControlCristalino" autofocus aria-label="Floating label select example">
                                                     <option value="">----</option>
-                                                    @foreach($dosimLibresGeneral as $dosigenlib)
-                                                        <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                    @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                        <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle text-center'>N.A.</td>
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select"  name="id_holder_asigdosimControlCristalino[]" id="id_holder_asigdosimControlCristalino" autofocus aria-label="Floating label select example">
+                                                    <option value="">----</option>
+                                                    @foreach($holderLibresCristalino as $holibcris)
+                                                        <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
                                             <td>
                                                 <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" autofocus style="text-transform:uppercase">
+                                                    <option value="">----</option>
+                                                    <option value="T"> TELETERAPIA</option>
+                                                    <option value="BQ">BRAQUITERAPIA</option>
+                                                    <option value="MN">MEDICINA NUCLEAR</option>
+                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                    <option value="MF">MEDIDORES FIJOS</option>
+                                                    <option value="IV">INVESTIGACIÓN</option>
+                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                    <option value="MM">MEDIDORES MÓVILES</option>
+                                                    <option value="E"> DOCENCIA</option>
+                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                    <option value="TR">TRAZADORES</option>
+                                                    <option value="HD">HEMODINAMIA</option>
+                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                    <option value="RX">RADIODIAGNÓSTICO</option>
+                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="AM">APLICACIONES MÉDICAS</option>
+                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    @endfor
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo control_dedo DEL primer mes/////// --}}
+                                    @for($i=1; $i<=$contdosisededepto->dosi_control_dedo; $i++)
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL ANILLO</td>
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select id_dosimetro_asigdosimControlDedo"  name="id_dosimetro_asigdosimControlDedo[]" id="id_dosimetro_asigdosimControlDedo" autofocus aria-label="Floating label select example">
+                                                    <option value="">----</option>
+                                                    @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                        <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle text-center'>
+                                                <select class="form-select"  name="id_holder_asigdosimControlDedo[]" id="id_holder_asigdosimControlDedo" autofocus aria-label="Floating label select example">
+                                                    <option value="">----</option>
+                                                    @foreach($holderLibresAnillo as $holibanillo)
+                                                        <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle'>
+                                                <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" autofocus style="text-transform:uppercase">
                                                     <option value="">----</option>
                                                     <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
@@ -573,8 +624,14 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#id_dosimetro_asigdosimControl').select2();
-        $('#ocupacion_asigdosimControl').select2();
+        $('#id_dosimetro_asigdosimControlTorax').select2();
+        $('#ocupacion_asigdosimControlTorax').select2();
+        $('#id_dosimetro_asigdosimControlCristalino').select2();
+        $('#id_holder_asigdosimControlCristalino').select2();
+        $('#ocupacion_asigdosimControlCristalino').select2();
+        $('#id_dosimetro_asigdosimControlDedo').select2();
+        $('#id_holder_asigdosimControlDedo').select2();
+        $('#ocupacion_asigdosimControlDedo').select2();
         $('#id_area_asigdosimArea').select2();
         $('#id_dosimetro_asigdosimArea').select2();
         $('#ocupacion_asigdosimArea').select2();
@@ -771,31 +828,83 @@
                 }
             }
             /////////////////////VALIDACION PARA LOS DOSIMETROS  /////////////////
-            var dosimControl = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
-            console.log("ESTAS SON LOS  DOSIM CONTROL");
-            console.log(dosimControl);
-            for(var i = 0; i < dosimControl.length; i++){
-                var values = dosimControl[i].value;
+            var dosimControlTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlTorax[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL TORAX");
+            console.log(dosimControlTorax);
+            for(var i = 0; i < dosimControlTorax.length; i++){
+                var values = dosimControlTorax[i].value;
                 if(values == ''){
                     /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
-                                title:"FALTA SELECCIONAR EL DOSÍMETRO PARA UNO DE CONTROL",
+                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL TÓRAX",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                 icon: 'error'
                             });
                     
                 };
-                for(var x = 0; x < dosimControl.length; x++){
-                    var valuesX = dosimControl[x].value;
+                for(var x = 0; x < dosimControlTorax.length; x++){
+                    var valuesX = dosimControlTorax[x].value;
                     if(values == valuesX && i != x){
                         return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS CONTROL SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                title:"ALGUNOS DOSÍMETROS CONTROL TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
                     }
                 }
             }
+            var dosimControlCristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlCristalino[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL CRISTALINO");
+            console.log(dosimControlCristalino);
+            for(var i = 0; i < dosimControlCristalino.length; i++){
+                var values = dosimControlCristalino[i].value;
+                if(values == ''){
+                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimControlCristalino.length; x++){
+                    var valuesX = dosimControlCristalino[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS CONTROL CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            }
+            var dosimControlDedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlDedo[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL DEDO");
+            console.log(dosimControlDedo);
+            for(var i = 0; i < dosimControlDedo.length; i++){
+                var values = dosimControlDedo[i].value;
+                if(values == ''){
+                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimControlDedo.length; x++){
+                    var valuesX = dosimControlDedo[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            }
+
+
             var dosimArea = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
             console.log("ESTAS SON LOS DOSIMTROS AREA");
             console.log(dosimArea);

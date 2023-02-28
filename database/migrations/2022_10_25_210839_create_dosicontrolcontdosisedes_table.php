@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateDosicontrolcontdosisedesTable extends Migration
-{ 
+{  
     /**
      * Run the migrations.
      *
@@ -19,7 +19,10 @@ class CreateDosicontrolcontdosisedesTable extends Migration
 
             $table-> unsignedBigInteger('dosimetro_id')->nullable();
             $table-> foreign('dosimetro_id')->references('id_dosimetro')->on('dosimetros')->onDelete('cascade')->onUpdate('cascade');
-
+            
+            $table-> unsignedBigInteger('holder_id')->nullable();
+            $table-> foreign('holder_id')->references('id_holder')->on('holders')->onDelete('cascade')->onUpdate('cascade');
+            
             $table-> unsignedBigInteger('contratodosimetriasede_id');
             $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
 

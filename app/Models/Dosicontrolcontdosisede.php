@@ -22,6 +22,10 @@ class Dosicontrolcontdosisede extends Model
     public function dosimetro(){
         return $this->belongsTo(Dosimetro::class, 'dosimetro_id', 'id_dosimetro');
     }
+    //Relacion uno a uno (inversa) con holder
+    public function holder(){
+        return $this->belongsTo(Holder::class, 'holder_id', 'id_holder');
+    }
      //Relacion uno a muchos (inversa) con contratodosimetriasededepto
     public function contratodosimetriasededepto(){
         return $this->belongsTo(Contratodosimetriasededepto::class, 'contdosisededepto_id','id_contdosisededepto');
