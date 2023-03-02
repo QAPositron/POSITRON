@@ -88,45 +88,51 @@
                                 @foreach($trabjasignados as $trabasig)
                                     <tr id='{{$trabasig->id_trabajadordosimetro}}' class="text-center" >
                                         <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                        <td class='align-middle py-3'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                        <td class='align-middle py-3'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle py-3'>
+                                        <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                        <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle py-3 text-center'>
                                             @if($trabasig->holder_id == '')
                                                 N.A.
                                             @else
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle  py-3'>{{$trabasig->ocupacion}}</td>
-                                        <td class='align-middle py-3'>{{$trabasig->ubicacion}}</td>
+                                        <td class='align-middle  py-3 text-center'>{{$trabasig->ocupacion}}</td>
+                                        <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
                                     </tr>
                                 @endforeach
                             @else
                                 @foreach($dosicontrolasig as $dosicontasig)
                                     <tr id="C{{$dosicontasig->id_dosicontrolcontdosisedes}}">
-                                        <td class='align-middle py-3'>CONTROL</td>
-                                        <td class='align-middle py-3'>N.A.</td>
-                                        <td class='align-middle py-3'>{{$dosicontasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle py-3'>N.A.</td>
-                                        <td class='align-middle py-3'>{{$dosicontasig->ocupacion}}</td>
-                                        <td class='align-middle py-3'>CONTROL</td>
+                                        <td class='align-middle py-3'>CONTROL {{$dosicontasig->ubicacion}}</td>
+                                        <td class='align-middle py-3 text-center'>N.A.</td>
+                                        <td class='align-middle py-3 text-center'>{{$dosicontasig->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle py-3 text-center'>
+                                            @if($dosicontasig->holder_id == '')
+                                                N.A.
+                                            @else
+                                                {{$dosicontasig->holder->codigo_holder}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle py-3 text-center'>{{$dosicontasig->ocupacion}}</td>
+                                        <td class='align-middle py-3 text-center'>{{$dosicontasig->ubicacion}}</td>
                                         
                                     </tr>
                                 @endforeach
                                 @foreach($trabjasignados as $trabasig)
                                     <tr id='{{$trabasig->id_trabajadordosimetro}}'>
                                         <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                        <td class='align-middle py-3'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                        <td class='align-middle py-3'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle py-3'>
+                                        <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                        <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle py-3 text-center'>
                                             @if($trabasig->holder_id == '')
                                                 N.A.
                                             @else
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle py-3'>{{$trabasig->ocupacion}}</td>
-                                        <td class='align-middle py-3'>{{$trabasig->ubicacion}}</td>
+                                        <td class='align-middle py-3 text-center'>{{$trabasig->ocupacion}}</td>
+                                        <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -286,7 +292,7 @@ crossorigin="anonymous">
         @endforeach
         @foreach($dosicontrolasig as $dosicont)
             if('{{$dosicont->revision_entrada}}' == 'TRUE'){
-                let tr = document.getElementById('{{$dosicont->id_dosicontrolcontdosisedes}}'); 
+                let tr = document.getElementById('C{{$dosicont->id_dosicontrolcontdosisedes}}'); 
                 tr.style.boxShadow = "0px 0px 7px 1px rgb(26, 153, 128)";  
             }
         @endforeach
@@ -306,7 +312,7 @@ crossorigin="anonymous">
         })
         
         function consultarDosiControl(){
-            
+            console.log("****CONSULTA DOSIMETRO CONTROL****");
             var codigoDosi = document.getElementById('codigo_dosimetro').value; 
             console.log(codigoDosi);
             if(codigoDosi != ''){
@@ -316,14 +322,15 @@ crossorigin="anonymous">
                         var check = 0;
                         var codigoEtiq = document.getElementById("codigo_etiqueta").value;
                         console.log(check);
+                        console.log("codigo etiqueta "+codigoEtiq);
                         @foreach($dosicontrolasig as $dosicont)
-                            if(codigoEtiq == codigoDosi && codigoDosi == '{{$dosicont->dosimetro->codigo_dosimeter}}' && dosimetro[0].estado_dosimetro == 'EN USO'){
+                            if(codigoEtiq == codigoDosi && codigoDosi == '{{$dosicont->dosimetro->codigo_dosimeter}}' /* && dosimetro[0].estado_dosimetro == 'EN USO' */){
                                 console.log("SI SE HIZO MATCH CONTROL");
                                 check = 1;
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'CORRECTO!!',
-                                    text: 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO DE CONTROL Y ADEMAS COINCIDE LA UBICACIÓN Y ESTADO',
+                                    text: 'SI HAY COINCIDENCIA ENTRE LA ETIQUETA Y EL DOSíMETRO DE CONTROL',
                                     showConfirmButton: false,
                                     timer: 6000
                                 })
@@ -333,7 +340,7 @@ crossorigin="anonymous">
                                 document.querySelector('#dosi_control').disabled= false;
                                 $.get('dosimetroControlEntrada', {id_dosicontrolcontdosisedes: '{{$dosicont->id_dosicontrolcontdosisedes}}'}, function(dosicontrol){
                                     console.log("SE HIZO EL CHECK CONTROL"+dosicontrol);
-                                    let tr = document.getElementById('{{$dosicont->id_dosicontrolcontdosisedes}}'); 
+                                    let tr = document.getElementById('C{{$dosicont->id_dosicontrolcontdosisedes}}'); 
                                     tr.style.boxShadow = "0px 0px 7px 1px rgb(26, 153, 128)";  
                                 })
                             }
@@ -370,6 +377,9 @@ crossorigin="anonymous">
         }
 
         function consultarTrabDosi(){
+            console.log("/////CONSULTA DOSIMETRO TRABAJADOR/////");
+            
+
             var codigoDosi = document.getElementById('codigo_dosimetro').value; 
             console.log("DOSIMETRO" + codigoDosi);
             if(codigoDosi != ''){
@@ -439,6 +449,8 @@ crossorigin="anonymous">
         }
 
         $('#codigo_dosimetro').on('change', function(){
+            console.log("ENTRO AL CODIGO DOSIMETRO CHANGE");
+
             var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
             const js = document.querySelector('#dosi_control').checked;
             console.log("ESTADO INICIAL"+js);
@@ -450,7 +462,7 @@ crossorigin="anonymous">
                 consultarTrabDosi();
             }
         });
-        $('#codigo_etiqueta').on('change', function(){
+        /* $('#codigo_etiqueta').on('change', function(){
             var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
             const js = document.querySelector('#dosi_control').checked;
             console.log("ESTADO INICIAL"+js);
@@ -463,7 +475,7 @@ crossorigin="anonymous">
             }else{
                 consultarTrabDosi();
             }
-        });
+        }); */
         
         
         

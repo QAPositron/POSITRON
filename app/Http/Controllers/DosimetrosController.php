@@ -45,8 +45,11 @@ class DosimetrosController extends Controller
     public function search(){
 
         /* $trabajadores = Trabajador::all(); */
-        $dosimetro= Dosimetro::paginate(5);
-        $holder = Holder::paginate(5);
+        /* $dosimetro= Dosimetro::paginate(5);
+        $holder = Holder::paginate(5); */
+        $dosimetro= Dosimetro::all();
+        $holder = Holder::all();
+
         return view('dosimetro.buscar_dosimetro', compact('dosimetro', 'holder'));
     }
 

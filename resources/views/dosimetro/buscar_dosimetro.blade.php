@@ -5,7 +5,7 @@
     
     <div class="row">
         <div class="col"></div>
-        <div class="col-9">
+        <div class="col-10">
             <div class="card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="infoDosimetros" role="tablist">
@@ -33,7 +33,7 @@
                             </div>
                             <h4 class="card-title text-center ">TODOS LOS DOSÍMETROS</h4>
                             <div class="m-5">
-                                <table class="table table-responsive table-hover table-bordered p-4">
+                                <table class="table table-responsive table-hover table-bordered p-4 dosimetros">
                                     <thead class="table-active text-center">
                                         <th class="align-middle" scope='col'  style='width: 18.60%'>CODIGO</th>
                                         <th class="align-middle" scope='col'>TIPO</th>
@@ -78,10 +78,10 @@
                                         </tr>
                                     @endforeach
                                 </table>
-                                <BR></BR>
+                                {{-- <BR></BR>
                                 <div class="d-flex justify-content-center">
                                     {{$dosimetro->links()}}
-                                </div>
+                                </div> --}}
                             </div>
                             
                         </div>
@@ -100,7 +100,7 @@
                             </div>
                             <h4 class="card-title text-center">TODOS LOS HOLDERS</h4>
                             <div class="m-5">
-                                <table class="table table-responsive table-hover table-bordered p-4">
+                                <table class="table table-responsive table-hover table-bordered p-4 holders">
                                     <thead class="table-active text-center">
                                         <th class="align-middle" scope='col'>CODIGO</th>
                                         <th class="align-middle" scope='col'>TIPO</th>
@@ -139,10 +139,10 @@
                                         </tr>
                                     @endforeach
                                 </table>
-                                <BR></BR>
+                                {{-- <BR></BR>
                                 <div class="d-flex justify-content-center">
                                     {{$holder->links()}}
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -239,7 +239,53 @@
                     this.submit();
                 }
             })
-        })
+        });
+
+        
+        $('.dosimetros').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "NO HAY REGISTROS",
+                "info": "MOSTRANDO REGISTROS DEL  _START_ AL _END_ DE UN TOTAL DE  _TOTAL_ REGISTROS",
+                "infoEmpty": "MOSTRANDO 0 DE 0 REGISTROS",
+                "infoFiltered": "(FILTRADO DE UN TOTAL DE _MAX_ REGISTROS)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "MOSTRAR _MENU_ REGISTROS",
+                "loadingRecords": "CARGANDO...",
+                "processing": "PROCESANDO...",
+                "search": "BUSCAR:",
+                "zeroRecords": "NO SE ENCONTRARON RESULTADOS",
+                "paginate": {
+                    "first": "PRIMERO",
+                    "last": "ÚLTIMO",
+                    "next": "SIGUIENTE",
+                    "previous": "ANTERIOR"
+                }   
+            },
+        });
+        $('.holders').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "NO HAY REGISTROS",
+                "info": "MOSTRANDO REGISTROS DEL  _START_ AL _END_ DE UN TOTAL DE  _TOTAL_ REGISTROS",
+                "infoEmpty": "MOSTRANDO 0 DE 0 REGISTROS",
+                "infoFiltered": "(FILTRADO DE UN TOTAL DE _MAX_ REGISTROS)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "MOSTRAR _MENU_ REGISTROS",
+                "loadingRecords": "CARGANDO...",
+                "processing": "PROCESANDO...",
+                "search": "BUSCAR:",
+                "zeroRecords": "NO SE ENCONTRARON RESULTADOS",
+                "paginate": {
+                    "first": "PRIMERO",
+                    "last": "ÚLTIMO",
+                    "next": "SIGUIENTE",
+                    "previous": "ANTERIOR"
+                }   
+            },
+        });
     })
 </script>
 

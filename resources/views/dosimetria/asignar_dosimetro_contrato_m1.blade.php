@@ -717,7 +717,6 @@
             ///////////////////////VALIDACION PARA LAS FECHAS/////////////////
             var fecha_inicio = document.getElementById("primerDia_asigdosim").value;
             if(fecha_inicio == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR LA FECHA DEL PRIMER DÍA PARA EL PERIODO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -727,7 +726,6 @@
             };
             var fecha_final = document.getElementById("ultimoDia_asigdosim").value;
             if(fecha_final == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR LA FECHA DEL ULTIMO DÍA PARA EL PERIODO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -742,7 +740,6 @@
             for(var i = 0; i < trabjTorax.length; i++){
                 var values = trabjTorax[i].value;
                 if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGÚN TRABAJADOR PARA UN DOSÍMETRO DE UBICACIÓN TORAX",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -757,7 +754,6 @@
             for(var i = 0; i < trabjCristalino.length; i++){
                 var values = trabjCristalino[i].value;
                 if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGÚN TRABAJADOR PARA UN DOSÍMETRO DE UBICACIÓN CRISTALINO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -772,7 +768,6 @@
             for(var i = 0; i < trabjAnillo.length; i++){
                 var values = trabjAnillo[i].value;
                 if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGÚN TRABAJADOR PARA UN DOSÍMETRO DE UBICACIÓN ANILLO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -787,7 +782,6 @@
             for(var i = 0; i < trabjMuneca.length; i++){
                 var values = trabjMuneca[i].value;
                 if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGÚN TRABAJADOR PARA UN DOSÍMETRO DE UBICACIÓN MUÑECA",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -803,7 +797,6 @@
             for(var i = 0; i < nombreArea.length; i++){
                 var values = nombreArea[i].value;
                 if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGÚNA ÁREA PARA UN DOSÍMETRO DE UBICACIÓN ÁREA",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -818,7 +811,6 @@
             for(var i = 0; i < trabjCaso.length; i++){
                 var values = trabjCaso[i].value;
                 if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGÚN TRABAJADOR PARA UN DOSÍMETRO DE UBICACIÓN CASO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -834,7 +826,6 @@
             for(var i = 0; i < dosimControlTorax.length; i++){
                 var values = dosimControlTorax[i].value;
                 if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL TÓRAX",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -859,7 +850,6 @@
             for(var i = 0; i < dosimControlCristalino.length; i++){
                 var values = dosimControlCristalino[i].value;
                 if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL CRISTALINO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -884,7 +874,6 @@
             for(var i = 0; i < dosimControlDedo.length; i++){
                 var values = dosimControlDedo[i].value;
                 if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
                                 title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL ANILLO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
@@ -897,6 +886,17 @@
                     if(values == valuesX && i != x){
                         return Swal.fire({
                                 title:"ALGUNOS DOSÍMETROS CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+
+                for(var y = 0; y < dosimControlCristalino.length; y++){
+                    var valuesCrist = dosimControlCristalino[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL CRISTALINO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
@@ -978,6 +978,16 @@
                             });
                     }
                 }
+                for(var y = 0; y < dosimControlTorax.length; y++){
+                    var valuesTorax = dosimControlTorax[y].value;
+                    if(values == valuesTorax){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSIMETROS DE UBICACIÓN TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
             }
             var dosimCristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
             console.log("ESTAS SON LOS DOSIMETROS CRISTALINO");
@@ -998,6 +1008,26 @@
                     if(values == valuesX && i != x){
                         return Swal.fire({
                                 title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimControlCristalino.length; y++){
+                    var valuesCrist = dosimControlCristalino[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimControlDedo.length; y++){
+                    var valuesDedo = dosimControlDedo[y].value;
+                    if(values == valuesDedo){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN CRISTALINO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
@@ -1050,6 +1080,26 @@
                     if(values == valuesX && i != x){
                         return Swal.fire({
                                 title:"ALGUNOS DOSÍMETROS DE UBICACIÓN ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimControlDedo.length; y++){
+                    var valuesDedo = dosimControlDedo[y].value;
+                    if(values == valuesDedo){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimControlCristalino.length; y++){
+                    var valuesCrist = dosimControlCristalino[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN ANILLO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
