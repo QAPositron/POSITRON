@@ -25,12 +25,12 @@
                 <th class="align-middle text-center" >TIPO IDEN.</th>
                 <th class="align-middle text-center" >No. IDEN.</th>
                 <th class="align-middle text-center" >GÉNERO</th>
-                <th class="align-middle text-center" style='width: 20.60%'>EMAIL</th>
+                <th class="align-middle text-center" style='width: 12.60%'>EMAIL</th>
                 <th class="align-middle text-center" >TELEFONO</th>
                 <th class="align-middle text-center" >EMPRESA - SEDE RELACIONADAS</th>
                 <th class="align-middle text-center" >PERFIL LABORAL</th>
                 <th class="align-middle text-center" >ROLES</th>
-                <th class="align-middle text-center"  style='width: 15.60%'>ACCIONES</th>
+                <th class="align-middle text-center"  style='width: 10.20%'>ACCIONES</th>
             </thead>
             @foreach($persona as $person)
                 <tr>

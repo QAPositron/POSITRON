@@ -85,18 +85,25 @@
             <table class="table table-bordered">
                 <thead>
                     <tr class="table-active text-center">
-                        <th class='align-middle' style='width: 8.0%'>TRABAJADOR</th>
-                        <th class='align-middle' style='width: 4.90%'>N. IDEN.</th>
-                        <th class='align-middle' style='width: 7.90%'>DOSÍM.</th>
-                        <th class='align-middle' style='width: 4.90%'>HOLDER</th>
-                        <th class='align-middle' style='width: 2.90%'>OCUP.</th>
-                        <th class='align-middle' style='width: 4.90%'>UBI.</th>
-                        <th class='align-middle' style='width: 4.90%'>Hp(10)</th>
-                        <th class='align-middle' style='width: 4.90%'>Hp(3)</th>
-                        <th class='align-middle' style='width: 4.90%'>Hp(0.07)</th>
-                        {{-- <th class='align-middle' style='width: 4.90%'>EZCLIP</th> --}}
-                        <th class='align-middle' style='width: 4.90%'>NOTAS</th>
-                        <th class='align-middle' style='width: 14.0%' >ACCIONES</th>
+                        <th rowspan="2" class='align-middle' style='width: 8.0%'>TRABAJADOR</th>
+                        <th rowspan="2" class='align-middle' style='width: 4.90%'>N. IDEN.</th>
+                        <th rowspan="2" class='align-middle' style='width: 7.90%'>DOSÍM.</th>
+                        <th rowspan="2" class='align-middle' style='width: 4.90%'>HOLDER</th>
+                        <th rowspan="2" class='align-middle' style='width: 2.90%'>OCUP.</th>
+                        <th rowspan="2" class='align-middle' style='width: 4.90%'>UBI.</th>
+                        <th colspan="2" class='align-middle' style='width: 4.90%'>Hp(10)</th>
+                        <th colspan="2" class='align-middle' style='width: 4.90%'>Hp(3)</th>
+                        <th colspan="2" class='align-middle' style='width: 4.90%'>Hp(0.07)</th>
+                        <th rowspan="2" class='align-middle' style='width: 4.90%'>NOTAS</th>
+                        <th rowspan="2" class='align-middle' style='width: 10.0%' >ACCIONES</th>
+                    </tr>
+                    <tr class="table-active text-center">
+                        <th class='align-middle' style='width: 3.90%'>MED.</th>
+                        <th class='align-middle' style='width: 3.90%'>LEC.</th>
+                        <th class='align-middle' style='width: 3.90%'>MED.</th>
+                        <th class='align-middle' style='width: 3.90%'>LEC.</th>
+                        <th class='align-middle' style='width: 3.90%'>MED.</th>
+                        <th class='align-middle' style='width: 3.90%'>LEC.</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -162,18 +169,18 @@
                         @foreach($trabjasignados as $trabasig)
                             <tr id='{{$trabasig->id_trabajadordosimetro}}'>
                                 <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                <td class='align-middle'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                <td class='align-middle'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                <td class='align-middle text-center'>
                                     @if($trabasig->holder_id == '')
                                         N.A.
                                     @else
                                         {{$trabasig->holder->codigo_holder}}
                                     @endif
                                 </td>
-                                <td class='align-middle'>{{$trabasig->ocupacion}}</td>
-                                <td class='align-middle'>{{$trabasig->ubicacion}}</td>
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'>{{$trabasig->ocupacion}}</td>
+                                <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
+                                <td class='align-middle text-center'>
                                     @if($trabasig->nota2 == 'TRUE')
                                         {{'NP'}}
                                     @elseif($trabasig->DNL == 'TRUE')
@@ -188,7 +195,8 @@
                                         {{$trabasig->Hp10_calc_dose}}
                                     @endif
                                 </td>
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'></td>
+                                <td class='align-middle text-center'>
                                     @if($trabasig->nota2 == 'TRUE')
                                         {{'NP'}}
                                     @elseif($trabasig->DNL == 'TRUE')
@@ -203,7 +211,8 @@
                                         {{$trabasig->Hp3_calc_dose}}
                                     @endif
                                 </td>
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'></td>
+                                <td class='align-middle text-center'>
                                     @if($trabasig->nota2 == 'TRUE')
                                         {{'NP'}}
                                     @elseif($trabasig->DNL == 'TRUE')
@@ -218,8 +227,8 @@
                                         {{$trabasig->Hp007_calc_dose}}
                                     @endif
                                 </td>
-                                {{-- <td class='align-middle'></td> --}}
-                                <td class='align-middle'>
+                                <td class='align-middle'></td>
+                                <td class='align-middle text-center'>
                                     @for($i=1; $i<=6; $i++)
                                         @if($trabasig->{"nota$i"} == 'TRUE')
                                             {{$i}})
@@ -263,12 +272,12 @@
                         @foreach($dosicontrolToraxasig as $dosicontToraxasig)
                             <tr id="{{$dosicontToraxasig->id_dosicontrolcontdosisedes}}">
                                 <td class='align-middle'><b>CONTROL TÓRAX</b> </td>
-                                <td class='align-middle'><b>N.A.</b> </td>
-                                <td class='align-middle'><b>{{$dosicontToraxasig->dosimetro->codigo_dosimeter}}</b> </td>
-                                <td class='align-middle'><b>N.A.</b></td>
-                                <td class='align-middle'><b>{{$dosicontToraxasig->ocupacion}}</b></td>
-                                <td class='align-middle'><b>CONTROL TÓRAX</b></td>
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'><b>N.A.</b> </td>
+                                <td class='align-middle text-center'><b>{{$dosicontToraxasig->dosimetro->codigo_dosimeter}}</b> </td>
+                                <td class='align-middle text-center'><b>N.A.</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontToraxasig->ocupacion}}</b></td>
+                                <td class='align-middle text-center'><b>CONTROL TÓRAX</b></td>
+                                <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontToraxasig->nota2 == 'TRUE')
                                         <b>{{'NP'}}</b>
                                     @elseif($dosicontToraxasig->DNL == 'TRUE')
@@ -283,7 +292,7 @@
                                         <b>{{$dosicontToraxasig->Hp10_calc_dose}}</b>
                                     @endif
                                 </td>
-                                <td class='align-middle'>
+                                <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontToraxasig->nota2 == 'TRUE')
                                         <b>{{'NP'}}</b>
                                     @elseif($dosicontToraxasig->DNL == 'TRUE')
@@ -298,7 +307,7 @@
                                         <b>{{$dosicontToraxasig->Hp3_calc_dose}}</b>
                                     @endif
                                 </td>
-                                <td class='align-middle'>
+                                <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontToraxasig->nota2 == 'TRUE')
                                         <b>{{'NP'}}</b>
                                     @elseif($dosicontToraxasig->DNL == 'TRUE')
@@ -314,7 +323,7 @@
                                     @endif
                                 </td>
                                 {{-- <td class='align-middle'></td> --}}
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'>
                                     @for($i=1; $i<=6; $i++)
                                         @if($dosicontToraxasig->{"nota$i"} == 'TRUE')
                                             <b>{{$i}})</b>
@@ -414,19 +423,18 @@
                                 @if($trabasig->ubicacion == 'TORAX')
                                     <tr id='{{$trabasig->id_trabajadordosimetro}}'>
                                         <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                        <td class='align-middle'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                        <td class='align-middle'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                        <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->holder_id == '')
                                                 N.A.
                                             @else
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle'>{{$trabasig->ocupacion}}</td>
-                                        <td class='align-middle'>{{$trabasig->ubicacion}}</td>
-                                        
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>{{$trabasig->ocupacion}}</td>
+                                        <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -441,7 +449,10 @@
                                                 {{$trabasig->Hp10_calc_dose}}
                                             @endif
                                         </td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp10_calc_dose - $dosicontToraxasig->Hp10_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -456,7 +467,9 @@
                                                 {{$trabasig->Hp3_calc_dose}}
                                             @endif
                                         </td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -471,8 +484,10 @@
                                                 {{$trabasig->Hp007_calc_dose}}
                                             @endif
                                         </td>
-                                        {{-- <td class='align-middle'></td> --}}
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp007_calc_dose - $dosicontToraxasig->Hp007_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @for($i=1; $i<=6; $i++)
                                                 @if($trabasig->{"nota$i"} == 'TRUE')
                                                     {{$i}})
@@ -518,12 +533,12 @@
                         @foreach($dosicontrolCristalinoasig as $dosicontCristalinoasig)
                             <tr id="{{$dosicontCristalinoasig->id_dosicontrolcontdosisedes}}">
                                 <td class='align-middle'> <b>CONTROL CRISTALINO</b> </td>
-                                <td class='align-middle'><b>N.A.</b></td>
-                                <td class='align-middle'><b>{{$dosicontCristalinoasig->dosimetro->codigo_dosimeter}}</b></td>
-                                <td class='align-middle'><b>{{$dosicontCristalinoasig->holder->codigo_holder}}</b></td>
-                                <td class='align-middle'><b>{{$dosicontCristalinoasig->ocupacion}}</b></td>
-                                <td class='align-middle'><b>CONTROL CRISTALINO</b></td>
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'><b>N.A.</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->dosimetro->codigo_dosimeter}}</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->holder->codigo_holder}}</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->ocupacion}}</b></td>
+                                <td class='align-middle text-center'><b>CONTROL CRISTALINO</b></td>
+                                <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontCristalinoasig->nota2 == 'TRUE')
                                         <b>{{'NP'}}</b>
                                     @elseif($dosicontCristalinoasig->DNL == 'TRUE')
@@ -538,7 +553,7 @@
                                         <b>{{$dosicontCristalinoasig->Hp10_calc_dose}}</b>
                                     @endif
                                 </td>
-                                <td class='align-middle'>
+                                <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontCristalinoasig->nota2 == 'TRUE')
                                         <b>{{'NP'}}</b>
                                     @elseif($dosicontCristalinoasig->DNL == 'TRUE')
@@ -553,7 +568,7 @@
                                         <b>{{$dosicontCristalinoasig->Hp3_calc_dose}}</b>
                                     @endif
                                 </td>
-                                <td class='align-middle'>
+                                <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontCristalinoasig->nota2 == 'TRUE')
                                         <b>{{'NP'}}</b>
                                     @elseif($dosicontCristalinoasig->DNL == 'TRUE')
@@ -569,7 +584,7 @@
                                     @endif
                                 </td>
                                 {{-- <td class='align-middle'></td> --}}
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'>
                                     @for($i=1; $i<=6; $i++)
                                         @if($dosicontCristalinoasig->{"nota$i"} == 'TRUE')
                                             <b>{{$i}})</b>
@@ -612,19 +627,18 @@
                                 @if($trabasig->ubicacion == 'CRISTALINO')
                                     <tr id='{{$trabasig->id_trabajadordosimetro}}'>
                                         <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                        <td class='align-middle'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                        <td class='align-middle'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                        <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->holder_id == '')
                                                 N.A.
                                             @else
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle'>{{$trabasig->ocupacion}}</td>
-                                        <td class='align-middle'>{{$trabasig->ubicacion}}</td>
-                                        
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>{{$trabasig->ocupacion}}</td>
+                                        <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -639,7 +653,8 @@
                                                 {{$trabasig->Hp10_calc_dose}}
                                             @endif
                                         </td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -654,7 +669,10 @@
                                                 {{$trabasig->Hp3_calc_dose}}
                                             @endif
                                         </td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp3_calc_dose-$dosicontCristalinoasig->Hp3_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -669,8 +687,8 @@
                                                 {{$trabasig->Hp007_calc_dose}}
                                             @endif
                                         </td>
-                                        {{-- <td class='align-middle'></td> --}}
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
                                             @for($i=1; $i<=6; $i++)
                                                 @if($trabasig->{"nota$i"} == 'TRUE')
                                                     {{$i}})
@@ -716,12 +734,12 @@
                         @foreach($dosicontrolDedoasig as $dosicontDedoasig)
                             <tr id="{{$dosicontDedoasig->id_dosicontrolcontdosisedes}}">
                                 <td class='align-middle'><b>CONTROL ANILLO</b></td>
-                                <td class='align-middle'><b>N.A.</b></td>
-                                <td class='align-middle'><b>{{$dosicontDedoasig->dosimetro->codigo_dosimeter}}</b></td>
-                                <td class='align-middle'><b>{{$dosicontDedoasig->holder->codigo_holder}}</b></td>
-                                <td class='align-middle'><b>{{$dosicontDedoasig->ocupacion}}</b></td>
-                                <td class='align-middle'><b>CONTROL ANILLO</b></td>
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'><b>N.A.</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontDedoasig->dosimetro->codigo_dosimeter}}</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontDedoasig->holder->codigo_holder}}</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontDedoasig->ocupacion}}</b></td>
+                                <td class='align-middle text-center'><b>CONTROL ANILLO</b></td>
+                                <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontDedoasig->nota2 == 'TRUE')
                                         <b>{{'NP'}}</b>
                                     @elseif($dosicontDedoasig->DNL == 'TRUE')
@@ -736,7 +754,7 @@
                                         <b>{{$dosicontDedoasig->Hp10_calc_dose}}</b>
                                     @endif
                                 </td>
-                                <td class='align-middle'>
+                                <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontDedoasig->nota2 == 'TRUE')
                                         <b>{{'NP'}}</b>
                                     @elseif($dosicontDedoasig->DNL == 'TRUE')
@@ -751,7 +769,7 @@
                                         <b>{{$dosicontDedoasig->Hp3_calc_dose}}</b>
                                     @endif
                                 </td>
-                                <td class='align-middle'>
+                                <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontDedoasig->nota2 == 'TRUE')
                                         <b>{{'NP'}}</b>
                                     @elseif($dosicontDedoasig->DNL == 'TRUE')
@@ -767,7 +785,7 @@
                                     @endif
                                 </td>
                                 {{-- <td class='align-middle'></td> --}}
-                                <td class='align-middle'>
+                                <td class='align-middle text-center'>
                                     @for($i=1; $i<=6; $i++)
                                         @if($dosicontDedoasig->{"nota$i"} == 'TRUE')
                                             <b>{{$i}})</b>
@@ -810,19 +828,19 @@
                                 @if($trabasig->ubicacion == 'ANILLO')
                                     <tr id='{{$trabasig->id_trabajadordosimetro}}'>
                                         <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                        <td class='align-middle'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                        <td class='align-middle'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                        <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->holder_id == '')
                                                 N.A.
                                             @else
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle'>{{$trabasig->ocupacion}}</td>
-                                        <td class='align-middle'>{{$trabasig->ubicacion}}</td>
+                                        <td class='align-middle text-center'>{{$trabasig->ocupacion}}</td>
+                                        <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
                                         
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -837,7 +855,8 @@
                                                 {{$trabasig->Hp10_calc_dose}}
                                             @endif
                                         </td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -852,7 +871,8 @@
                                                 {{$trabasig->Hp3_calc_dose}}
                                             @endif
                                         </td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -867,8 +887,10 @@
                                                 {{$trabasig->Hp007_calc_dose}}
                                             @endif
                                         </td>
-                                        {{-- <td class='align-middle'></td> --}}
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp007_calc_dose - $dosicontDedoasig->Hp007_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @for($i=1; $i<=6; $i++)
                                                 @if($trabasig->{"nota$i"} == 'TRUE')
                                                     {{$i}})

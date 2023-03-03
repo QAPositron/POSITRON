@@ -515,7 +515,7 @@ class DosimetriaController extends Controller
             $mesAssignRev11, $mesAssignRev12
         ];
         
-        return $mesesAssig[0];
+        /* return $mes1AssignRev; */
         return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
     }
 

@@ -9,14 +9,32 @@
             </svg>
         </a>
     </div>
-    <div class="col-md-6">
-        <h3 class="text-center">EDITAR LA LECTURA DEL DOSÍMETRO </h3>
-        <h3 class="text-center">ESPECIALIDAD: {{$trabjasig->contratodosimetriasededepto->departamentosede->nombre_departamento}} <br> CONTRATO No. {{$trabjasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}} - MES {{$trabjasig->mes_asignacion}}</h3>
+    
+    <div class="col-md-9">
+        <h2 class="text-center">DOSIMETRÍA DE </h2>
+        <h3 class="text-center"><i>{{$trabjasig->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$trabjasig->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
+        <h4 class="text-center">ESPECIALIDAD: {{$trabjasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}</h4>
     </div>
     <div class="col-md"></div>
 </div>
 <br>
-
+<br>
+    <h4 class="text-center" id="id_contrato"></h4>
+<br>
+<br>
+<h3 class="text-center">
+    EDITAR LECTURA DE DOSÍMETRO DEL MES {{$trabjasig->mes_asignacion}} (
+    @if($trabjasig->mes_asignacion == 1)
+        @php
+            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+            echo $meses[date("m", strtotime($trabjasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($trabjasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ;
+        @endphp
+    @else
+        <span id="mes{{$trabjasig->mes_asignacion}}"></span>
+    @endif
+    )
+</h3>
+<br>
     <div class="row">
         <div class="col"></div>
         <div class="col-11">
@@ -74,7 +92,7 @@
                                 </div>
                                 <div class="col-md m-4">
                                     <label for="floatingInputGrid"> <b>DEPARTAMENTO:</b> </label>
-                                    <input type="text"  class="form-control text-center" name="deptoLectDosim" id="deptoLectDosim" value="{{$trabjasig->contratodosimetriasededepto->departamentosede->nombre_departamento}}" readonly>
+                                    <input type="text"  class="form-control text-center" name="deptoLectDosim" id="deptoLectDosim" value="{{$trabjasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>CEDULA:</b> </label>
                                     <input type="text"  class="form-control" name="cedulatrabLectDosim" id="cedulatrabLectDosim" value="{{$trabjasig->persona->cedula_persona}}" readonly>
@@ -146,30 +164,42 @@
                                             <input type="NUMBER" id="id_contratodosimetriasededepto" name="id_contratodosimetriasededepto" value="{{$trabjasig->contdosisededepto_id}}" hidden>
                                             <div class="row g-2">
                                                 <div class="col-md-4 mx-4">
-                                                    <div class="form-floating">
-                                                        <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$trabjasig->Hp007_calc_dose}}">
-                                                        <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$trabjasig->Hp10_calc_dose}}">
-                                                        <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        <input type="NUMBER" step="any" class="form-control" name="ezclip_calc_dose" id="ezclip_calc_dose" value="{{$trabjasig->Ezclip_calc_dose}}">
-                                                        <label for="floatingInputGrid">EzClip CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$trabjasig->Hp3_calc_dose}}">
-                                                        <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        <input type="date" class="form-control" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
-                                                        <label for="floatingInputGrid">MEASUREMENT DATE:</label>
-                                                    </div>
+                                                    @if($trabjasig->ubicacion == 'TORAX' || $trabjasig->ubicacion == 'CASO')
+                                                        <div class="form-floating">
+                                                            <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$trabjasig->Hp10_calc_dose}}">
+                                                            <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
+                                                            <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$trabjasig->Hp007_calc_dose}}">
+                                                            <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
+                                                            <label for="floatingInputGrid">MEASUREMENT DATE:</label>
+                                                        </div>
+                                                    @elseif($trabjasig->ubicacion == 'CRISTALINO')
+                                                        <div class="form-floating">
+                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$trabjasig->Hp3_calc_dose}}">
+                                                            <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
+                                                            <label for="floatingInputGrid">MEASUREMENT DATE:</label>
+                                                        </div>
+                                                    @elseif($trabjasig->ubicacion == 'ANILLO')
+                                                        <div class="form-floating">
+                                                            <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$trabjasig->Hp007_calc_dose}}">
+                                                            <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
+                                                            <input type="date" class="form-control" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
+                                                            <label for="floatingInputGrid">MEASUREMENT DATE:</label>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md mx-4">
                                                    
@@ -439,6 +469,27 @@ crossorigin="anonymous">
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
+        var TDcontrato = document.getElementById("id_contrato");
+        var num = parseInt('{{$trabjasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}');
+        var n = num.toString().padStart(5,'0');
+        console.log("ESTE ES EL CODIGO" +n);
+        TDcontrato.innerHTML = "CONTRATO No."+n;
+
+        
+        // Creamos array con los meses del año
+        const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+        let fecha = new Date("{{$trabjasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
+        console.log(fecha);
+        for($i=1; $i<=13; $i++){
+            var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
+            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+            console.log(fechaesp); 
+            if('{{$trabjasig->mes_asignacion}}' == ($i+1) ){  
+            
+                document.getElementById('mes{{$trabjasig->mes_asignacion}}').innerHTML = fechaesp;
+
+            } 
+        }
         $('#infoLectura a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')

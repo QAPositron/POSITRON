@@ -68,7 +68,7 @@
 <br>
 <div class="row">
     
-    <div class="col-md-7">
+    <div class="col-md-8">
         <div class="row">
             <div class="col-md">
                 <div class="table table-responsive p-4">
@@ -143,7 +143,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
         <br>
         <div class="card border-secondary text-bg-light mb-3">
             <div class="card-header text-center">

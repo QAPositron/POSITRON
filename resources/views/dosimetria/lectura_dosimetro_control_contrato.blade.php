@@ -149,42 +149,70 @@
                                             <input type="NUMBER" id="id_contratodosimetriasededepto" name="id_contratodosimetriasededepto" value="{{$dosicontasig->contdosisededepto_id}}" hidden>
                                             <div class="row g-2">
                                                 <div class="col-md-4 mx-4">
-                                                    
-                                                    <div class="form-floating">
-                                                        @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose_readonly" value="{{$dosicontasig->Hp10_calc_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$dosicontasig->Hp10_calc_dose}}">
-                                                        @endif
-                                                        <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose_readonly" value="{{$dosicontasig->Hp3_calc_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosicontasig->Hp3_calc_dose}}">
-                                                        @endif
-                                                        <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE' || $dosicontasig->measurement_date != '')
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose_readonly" value="{{$dosicontasig->Hp007_calc_dose}}" readonly>
-                                                        @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosicontasig->Hp007_calc_dose}}">
-                                                        @endif
-                                                        <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
-                                                            <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosicontasig->measurement_date}}" readonly>
-                                                        @else
-                                                            <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}">
-                                                        @endif
-                                                        <label for="floatingInputGrid">MEASUREMENT DATE:</label>
-                                                    </div>
+                                                    @if($dosicontasig->ubicacion == 'TORAX')
+                                                        <div class="form-floating">
+                                                            @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose_readonly" value="{{$dosicontasig->Hp10_calc_dose}}" readonly>
+                                                            @else
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$dosicontasig->Hp10_calc_dose}}">
+                                                            @endif
+                                                            <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
+                                                            @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE' || $dosicontasig->measurement_date != '')
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose_readonly" value="{{$dosicontasig->Hp007_calc_dose}}" readonly>
+                                                            @else
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosicontasig->Hp007_calc_dose}}">
+                                                            @endif
+                                                            <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
+                                                            @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
+                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosicontasig->measurement_date}}" readonly>
+                                                            @else
+                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}">
+                                                            @endif
+                                                            <label for="floatingInputGrid">MEASUREMENT DATE:</label>
+                                                        </div>
+                                                    @elseif($dosicontasig->ubicacion == 'CRISTALINO')
+                                                        <div class="form-floating">
+                                                            @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose_readonly" value="{{$dosicontasig->Hp3_calc_dose}}" readonly>
+                                                            @else
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosicontasig->Hp3_calc_dose}}">
+                                                            @endif
+                                                            <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
+                                                            @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
+                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosicontasig->measurement_date}}" readonly>
+                                                            @else
+                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}">
+                                                            @endif
+                                                            <label for="floatingInputGrid">MEASUREMENT DATE:</label>
+                                                        </div>
+                                                    @elseif($dosicontasig->ubicacion == 'ANILLO')
+                                                        <div class="form-floating">
+                                                            @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE' || $dosicontasig->measurement_date != '')
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose_readonly" value="{{$dosicontasig->Hp007_calc_dose}}" readonly>
+                                                            @else
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosicontasig->Hp007_calc_dose}}">
+                                                            @endif
+                                                            <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
+                                                            @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
+                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosicontasig->measurement_date}}" readonly>
+                                                            @else
+                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}">
+                                                            @endif
+                                                            <label for="floatingInputGrid">MEASUREMENT DATE:</label>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md mx-4">
                                                     @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')

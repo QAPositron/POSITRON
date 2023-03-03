@@ -481,13 +481,13 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                                 echo "<th class='align-middle text-center'>TRABAJADOR</th>";
                                                 echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
                                                 echo "<th class='align-middle text-center' >No. IDEN.</th>";    
-                                                echo "<th class='align-middle text-center' style='width: 10.60%'>GÉNERO</th>";
-                                                echo "<th class='align-middle text-center' style='width: 20.60%'>EMAIL</th>";
+                                                echo "<th class='align-middle text-center' style='width: 30px'>GÉNERO</th>";
+                                                echo "<th class='align-middle text-center' style='width: 150px'>EMAIL</th>";
                                                 echo "<th class='align-middle text-center'>TELEFONO</th>";
                                                 echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
                                                 echo "<th class='align-middle text-center'>ROL</th>";
                                                
-                                                echo "<th class='align-middle' style='width: 12.60%'>ACCIONES</th>";
+                                                echo "<th class='align-middle'>ACCIONES</th>";
                                             echo "</thead>";
                                     }
                                 @endphp
