@@ -162,32 +162,33 @@
                                             @method('put')
                                             <input type="NUMBER" id="mes_asignacion" name="mes_asignacion" value="{{$trabjasig->mes_asignacion}}" hidden>
                                             <input type="NUMBER" id="id_contratodosimetriasededepto" name="id_contratodosimetriasededepto" value="{{$trabjasig->contdosisededepto_id}}" hidden>
+
                                             <div class="row g-2">
                                                 <div class="col-md-3 mx-4">
                                                     @if($trabjasig->ubicacion == 'TORAX' || $trabjasig->ubicacion == 'CASO')
                                                         <div class="form-floating">
                                                             @if($trabjasig->nota2 == 'TRUE'|| $trabjasig->DNL == 'TRUE'|| $trabjasig->EU == 'TRUE' || $trabjasig->DSU =='TRUE' || $trabjasig->DPL =='TRUE'|| $trabjasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose_readonly" value="{{$trabjasig->Hp10_calc_dose}}" readonly>
+                                                                <input type="NUMBER" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose_readonly" value="{{$trabjasig->Hp10_calc_dose}}" readonly>
                                                             @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$trabjasig->Hp10_calc_dose}}">
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$trabjasig->Hp10_calc_dose}}">
                                                             @endif
                                                             <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
                                                         </div>
                                                         <br>
                                                         <div class="form-floating">
                                                             @if($trabjasig->nota2 == 'TRUE'|| $trabjasig->DNL == 'TRUE'|| $trabjasig->EU == 'TRUE' || $trabjasig->DSU =='TRUE' || $trabjasig->DPL =='TRUE'|| $trabjasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose_readonly" value="{{$trabjasig->Hp007_calc_dose}}" readonly>
+                                                                <input type="NUMBER" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose_readonly" value="{{$trabjasig->Hp007_calc_dose}}" readonly>
                                                             @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$trabjasig->Hp007_calc_dose}}">
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$trabjasig->Hp007_calc_dose}}">
                                                             @endif
                                                             <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
                                                         </div>
                                                         <br>
                                                         <div class="form-floating">
                                                             @if($trabjasig->nota2 == 'TRUE'|| $trabjasig->DNL == 'TRUE'|| $trabjasig->EU == 'TRUE' || $trabjasig->DSU =='TRUE' || $trabjasig->DPL =='TRUE'|| $trabjasig->measurement_date != '')
-                                                            <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$trabjasig->measurement_date}}" readonly>
+                                                                <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$trabjasig->measurement_date}}" readonly>
                                                             @else
-                                                            <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
+                                                                <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
                                                             @endif
                                                             <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                             @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
@@ -195,18 +196,18 @@
                                                     @elseif($trabjasig->ubicacion == 'CRISTALINO')
                                                         <div class="form-floating">
                                                             @if($trabjasig->nota2 == 'TRUE'|| $trabjasig->DNL == 'TRUE'|| $trabjasig->EU == 'TRUE' || $trabjasig->DSU =='TRUE' || $trabjasig->DPL =='TRUE'|| $trabjasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose_readonly" value="{{$trabjasig->Hp3_calc_dose}}" readonly>
+                                                                <input type="NUMBER" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose_readonly" value="{{$trabjasig->Hp3_calc_dose}}" readonly>
                                                             @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$trabjasig->Hp3_calc_dose}}">
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$trabjasig->Hp3_calc_dose}}">
                                                             @endif
                                                             <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
                                                         </div>
                                                         <br>
                                                         <div class="form-floating">
                                                             @if($trabjasig->nota2 == 'TRUE'|| $trabjasig->DNL == 'TRUE'|| $trabjasig->EU == 'TRUE' || $trabjasig->DSU =='TRUE' || $trabjasig->DPL =='TRUE'|| $trabjasig->measurement_date != '')
-                                                            <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$trabjasig->measurement_date}}" readonly>
+                                                                <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$trabjasig->measurement_date}}" readonly>
                                                             @else
-                                                            <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
+                                                                <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
                                                             @endif
                                                             <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                             @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
@@ -214,18 +215,18 @@
                                                     @elseif($trabjasig->ubicacion == 'ANILLO')
                                                         <div class="form-floating">
                                                             @if($trabjasig->nota2 == 'TRUE'|| $trabjasig->DNL == 'TRUE'|| $trabjasig->EU == 'TRUE' || $trabjasig->DSU =='TRUE' || $trabjasig->DPL =='TRUE'|| $trabjasig->measurement_date != '')
-                                                            <input type="NUMBER" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose_readonly" value="{{$trabjasig->Hp007_calc_dose}}" readonly>
+                                                                <input type="NUMBER" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose_readonly" value="{{$trabjasig->Hp007_calc_dose}}" readonly>
                                                             @else
-                                                            <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$trabjasig->Hp007_calc_dose}}">
+                                                                <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$trabjasig->Hp007_calc_dose}}">
                                                             @endif
                                                             <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
                                                         </div>
                                                         <br>
                                                         <div class="form-floating">
                                                             @if($trabjasig->nota2 == 'TRUE'|| $trabjasig->DNL == 'TRUE'|| $trabjasig->EU == 'TRUE' || $trabjasig->DSU =='TRUE' || $trabjasig->DPL =='TRUE'|| $trabjasig->measurement_date != '')
-                                                            <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$trabjasig->measurement_date}}" readonly>
+                                                                <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$trabjasig->measurement_date}}" readonly>
                                                             @else
-                                                            <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
+                                                                <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
                                                             @endif
                                                             <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                             @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
@@ -631,26 +632,26 @@ crossorigin="anonymous">
                 
             })
         }
-        if('{{$trabjasig->ubicacion}}' == 'MUÑECA' || '{{$trabjasig->ubicacion}}' == 'DEDO'){
+        if('{{$trabjasig->ubicacion}}' == 'MUÑECA' || '{{$trabjasig->ubicacion}}' == 'ANILLO' || '{{$trabjasig->ubicacion}}' == 'TORAX'){
             $('#hp007_calc_dose').on('change', function(){
                 var hp007 = document.getElementById("hp007_calc_dose").value;
                 var restahp007control = hp007 - '{{$dosicontrolasig->Hp007_calc_dose}}';
                 if (restahp007control >= 41.6 ){
-                    alert("es MUÑECA O DEDO y se paso de la dosis naranja"+restahp007control);
+                    alert("es MUÑECA O ANILLO y se paso de la dosis naranja"+restahp007control);
                     let Divhp007 = document.getElementById("hp007_calc_dose");
                     Divhp007.classList.remove("dosisroja");
                     Divhp007.classList.add("dosisnaranja");
                     $('#nota1checked').prop("checked", false);
                     $('#nota3checked').prop("checked", true);
                 } else if(restahp007control >= 12){
-                    alert("es MUÑECA O DEDO y se paso de la dosis roja"+restahp007control);
+                    alert("es MUÑECA O ANILLO y se paso de la dosis roja"+restahp007control);
                     let Divhp007 = document.getElementById("hp007_calc_dose");
                     Divhp007.classList.remove("dosisnaranja");
                     Divhp007.classList.add("dosisroja");
                     $('#nota1checked').prop("checked", false);
                     $('#nota3checked').prop("checked", true);
                 } else{
-                    alert("es MUÑECA O DEDO "+restahp007control);
+                    alert("es MUÑECA O ANILLO "+restahp007control);
                     let Divhp007 = document.getElementById("hp007_calc_dose");
                     Divhp007.classList.remove("dosisroja");
                     Divhp007.classList.remove("dosisnaranja");
@@ -691,13 +692,6 @@ crossorigin="anonymous">
             })
         } 
     })
-    /* $(document).ready(function(){
-        if('{{$trabjasig->ubicacion}}' == 'TORAX' || '{{$trabjasig->ubicacion}}' == 'CASO'){
-            $('#hp10_calc_dose').on('change', function(){
-                var hp10 = document.getElementById("hp10_calc_dose").value;
-                var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
-            })
-        }
-    }) */ 
+     
 </script>
 @endsection

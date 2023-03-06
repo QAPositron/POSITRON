@@ -48,9 +48,11 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table->double('Hp007_calc_dose', 8, 5)->nullable();
             $table->double('Hp007_background_dose', 8, 5)->nullable();
             $table->double('Hp007_raw_dose', 8, 5)->nullable();
+            $table->double('Hp007_dif_dosicont', 8, 5)->nullable();
             $table->double('Hp10_calc_dose', 8, 5)->nullable();
             $table->double('Hp10_background_dose', 8, 5)->nullable();
             $table->double('Hp10_raw_dose', 8, 5)->nullable();
+            $table->double('Hp10_dif_dosicont', 8, 5)->nullable();
             $table->double('Cu_calc_dose', 8, 5)->nullable();
             $table->double('Cu_background_dose', 8, 5)->nullable();
             $table->double('Cu_raw_dose', 8, 5)->nullable();
@@ -63,6 +65,7 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table->double('Hp3_calc_dose', 8, 5)->nullable();
             $table->double('Hp3_background_dose', 8, 5)->nullable();
             $table->double('Hp3_raw_dose', 8, 5)->nullable();
+            $table->double('Hp3_dif_dosicont', 8, 5)->nullable();
             $table->double('H_10_calc_dose', 8, 5)->nullable();
             $table->date('verification_date')->nullable();
             $table->date('verification_required_on_or_before')->nullable();

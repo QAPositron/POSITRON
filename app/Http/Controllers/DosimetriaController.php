@@ -2133,6 +2133,7 @@ class DosimetriaController extends Controller
 
 
     public function savelecturadosi(Request $request, $id){
+        /* return $request; */
 
         $trabjasig = Trabajadordosimetro::find($id);
         if($request->nota2 != '' || $request->dnl != ''|| $request->eu != '' || $request->dsu !='' || $request->dpl !=''){
@@ -2149,15 +2150,18 @@ class DosimetriaController extends Controller
         $trabjasig->Hp007_calc_dose         = $request->hp007_calc_dose;
         $trabjasig->Hp007_background_dose   = $request->hp007_background_dose;
         $trabjasig->Hp007_raw_dose          = $request->hp007_raw_dose;
+        $trabjasig->Hp007_dif_dosicont      = $request->hp007_calc_dose - $request->hp007_calc_dose_control;
         $trabjasig->Hp10_calc_dose          = $request->hp10_calc_dose;
         $trabjasig->Hp10_background_dose    = $request->hp10_background_dose;
         $trabjasig->Hp10_raw_dose           = $request->hp10_raw_dose;
+        $trabjasig->Hp10_dif_dosicont       = $request->hp10_calc_dose - $request->hp10_calc_dose_control;
         $trabjasig->EzClip_calc_dose        = $request->ezclip_calc_dose;
         $trabjasig->EzClip_background_dose  = $request->ezclip_background_dose;
         $trabjasig->EzClip_raw_dose         = $request->ezclip_raw_dose;
         $trabjasig->Hp3_calc_dose           = $request->hp3_calc_dose;
         $trabjasig->Hp3_background_dose     = $request->hp3_background_dose;
         $trabjasig->Hp3_raw_dose            = $request->hp3_raw_dose;
+        $trabjasig->Hp3_dif_dosicont        = $request->hp3_calc_dose - $request->hp3_calc_dose_control;
         $trabjasig->H_10_calc_dose          = $request->h10_cal_dose;
         $trabjasig->verification_date       = $request->verification_Date;
         $trabjasig->verification_required_on_or_before  = $request->verification_required_before;
@@ -2362,18 +2366,33 @@ class DosimetriaController extends Controller
         ->select('nota_cambiodosim')        
         ->get();
         
-        $trabajadoresaisgxmeses = array();
+        $SumatoriaDocemesestrabajadoresaisg = array();
         for($i=0; $i<count($trabajdosiasig); $i++){
 
-            $trabajadoresaisgxmeses[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)->get();
+            $SumatoriaDocemesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
+            ->where('contdosisededepto_id', '=', $id)
+            ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
+            ->where('mes_asignacion', '<=', $mesnumber)
+            ->latest()
+            ->take(12)
+            ->get();
+        }
+        $SumatoriaFechaIngresomesestrabajadoresaisg = array();
+        for($i=0; $i<count($trabajdosiasig); $i++){
+
+            $SumatoriaFechaIngresomesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
+            ->where('contdosisededepto_id', '=', $id)
+            ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
+            ->where('mes_asignacion', '<=', $mesnumber)
+            ->get();
         }
         
-        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'fechainiciodositrabaj', 'trabajadoresaisgxmeses', 'mesescantdosi', 'mesnumber'));
+        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaFechaIngresomesestrabajadoresaisg', 'mesescantdosi', 'mesnumber'));
         $pdf->setPaper('8.5x14', 'landscape');
         
         
         
-        for($i=0; $i<count($contratoDosi); $i++ ){
+        /* for($i=0; $i<count($contratoDosi); $i++ ){
             
             $empresa = $contratoDosi[$i]->nombre_empresa;
             $sede = $contratoDosi[$i]->nombre_sede;
@@ -2390,9 +2409,9 @@ class DosimetriaController extends Controller
                     return $pdf->stream("RPD_".$date."_".substr($empresa, 0, 4)."-".substr($sede, 0, 4)."-".$contratoDosi[$i]->nombre_departamento.".pdf");
                 }
             } */
-            /* return $newDate; */
-        }
-        /* return $personaEncargada; */
+            /* return $newDate;
+        } */
+        /* return $SumatoriaFechaIngresomesestrabajadoresaisg; */
         return $pdf->stream();
        
         

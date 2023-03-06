@@ -270,7 +270,7 @@
                         @endforeach
                     @else
                         @foreach($dosicontrolToraxasig as $dosicontToraxasig)
-                            <tr id="{{$dosicontToraxasig->id_dosicontrolcontdosisedes}}">
+                            <tr id="C{{$dosicontToraxasig->id_dosicontrolcontdosisedes}}">
                                 <td class='align-middle'><b>CONTROL TÓRAX</b> </td>
                                 <td class='align-middle text-center'><b>N.A.</b> </td>
                                 <td class='align-middle text-center'><b>{{$dosicontToraxasig->dosimetro->codigo_dosimeter}}</b> </td>
@@ -531,7 +531,7 @@
                             @endforeach
                         @endforeach
                         @foreach($dosicontrolCristalinoasig as $dosicontCristalinoasig)
-                            <tr id="{{$dosicontCristalinoasig->id_dosicontrolcontdosisedes}}">
+                            <tr id="C{{$dosicontCristalinoasig->id_dosicontrolcontdosisedes}}">
                                 <td class='align-middle'> <b>CONTROL CRISTALINO</b> </td>
                                 <td class='align-middle text-center'><b>N.A.</b></td>
                                 <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->dosimetro->codigo_dosimeter}}</b></td>
@@ -732,7 +732,7 @@
                             @endforeach
                         @endforeach
                         @foreach($dosicontrolDedoasig as $dosicontDedoasig)
-                            <tr id="{{$dosicontDedoasig->id_dosicontrolcontdosisedes}}">
+                            <tr id="C{{$dosicontDedoasig->id_dosicontrolcontdosisedes}}">
                                 <td class='align-middle'><b>CONTROL ANILLO</b></td>
                                 <td class='align-middle text-center'><b>N.A.</b></td>
                                 <td class='align-middle text-center'><b>{{$dosicontDedoasig->dosimetro->codigo_dosimeter}}</b></td>
@@ -1143,7 +1143,7 @@ crossorigin="anonymous">
         }
        
         
-        if('{{$dosicontrolToraxasig}}' != '[]'){
+        if('{{$dosicontrolToraxasig}}' != '[]' ||  '{{$dosicontrolCristalinoasig}}'!= '[]' || '{{$dosicontrolDedoasig}}' != '[]'){
             alert('hay dosimetro de control torax');
             @foreach($trabjasignados as $trab)
                 if('{{$trab->Hp10_calc_dose}}' != 'NULL'){
@@ -1158,8 +1158,8 @@ crossorigin="anonymous">
                     @endforeach
                 }
                 if('{{$trab->Hp3_calc_dose}}' != 'NULL'){
-                    @foreach($dosicontrolToraxasig as $contTorax)
-                        var resta = '{{$trab->Hp3_calc_dose}}' - '{{$contTorax->Hp3_calc_dose}}';
+                    @foreach($dosicontrolCristalinoasig as $contCrist)
+                        var resta = '{{$trab->Hp3_calc_dose}}' - '{{$contCrist->Hp3_calc_dose}}';
                         if('{{$trab->ubicacion}}' == 'CRISTALINO' && resta >= 12.5){
                             alert('ALERTA ROJA CRISTALINO'+resta);
                             let trhp3 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
@@ -1171,16 +1171,16 @@ crossorigin="anonymous">
                 if('{{$trab->Hp007_calc_dose}}'!= 'NULL'){
                     @foreach($dosicontrolToraxasig as $contTorax)
                         var resta = '{{$trab->Hp007_calc_dose}}' - '{{$contTorax->Hp007_calc_dose}}';
-                        if('{{$trab->ubicacion}}' == 'MUÑECA' && resta >= 41.6){
-                            alert('ALERTA ROJA MUÑECA');
+                        if('{{$trab->ubicacion}}' == 'TORAX' && resta >= 41.6){
+                            alert('ALERTA ROJA torax');
                             let trhp007 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                             trhp007.classList.add("trdosisroja");
                         }
                     @endforeach
-                    @foreach($dosicontrolToraxasig as $contTorax)
-                    var resta = '{{$trab->Hp007_calc_dose}}' - '{{$contTorax->Hp007_calc_dose}}';
-                        if('{{$trab->ubicacion}}'== 'DEDO' && resta >= 41.6){
-                            alert('ALERTA ROJA DEDO');
+                    @foreach($dosicontrolDedoasig as $contAnillo)
+                    var resta = '{{$trab->Hp007_calc_dose}}' - '{{$contAnillo->Hp007_calc_dose}}';
+                        if('{{$trab->ubicacion}}'== 'ANILLO' && resta >= 41.6){
+                            alert('ALERTA ROJA ANILLO');
                             let trhp007 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                             trhp007.classList.add("trdosisroja");
                         }
@@ -1216,7 +1216,7 @@ crossorigin="anonymous">
                         let trhp007 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                         trhp007.classList.add("trdosisroja");
                     }
-                    if('{{$trab->ubicacion}}'== 'DEDO' && '{{$trab->Hp007_calc_dose}}' >= 41.6){
+                    if('{{$trab->ubicacion}}'== 'ANILLO' && '{{$trab->Hp007_calc_dose}}' >= 41.6){
                         alert('ALERTA ROJA DEDO');
                         let trhp007 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                         trhp007.classList.add("trdosisroja");
