@@ -209,9 +209,8 @@
                                     @csrf
                                     <div class="modal-body">
                                         <div class="col-md">
-                                            
                                             <div class="form-floating">
-                                                <select class="form-select " name="nota_cambio_dosimetro" id="nota_cambio_dosimetros">
+                                                <select class="form-select" name="nota_cambio_dosimetro" id="nota_cambio_dosimetros">
                                                     <option value ="">---</option>
                                                     <option value ="DOSIMETRO CONTAMINADO">DOSIMETRO CONTAMINADO</option>
                                                     <option value ="HOLDER DAÑADO">HOLDER DAÑADO</option>
@@ -225,6 +224,18 @@
                                             {{-- <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea>  --}}
                                             <input type="number" hidden value="{{$mesnumber}}" name="mesnumber" id="mesnumber">
                                             <input type="number" hidden value="{{$contdosisededepto->id_contdosisededepto}}" name="id_contdosisededepto" id="id_contdosisededepto">
+                                        </div>
+                                        <br>
+                                        <div class="col md">
+                                            <div class="form-floating">
+                                                <select class="form-select" name="trabajador_correspondiente" id="trabajador_correspondiente">
+                                                    <option value ="">---</option>
+                                                    @foreach($trabjasignados as $trabasig)
+                                                        <option value ="{{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}">{{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <label class="text-center">CORRESPONDE AL TRABAJADOR:</label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

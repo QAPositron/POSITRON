@@ -2329,7 +2329,7 @@ class DosimetriaController extends Controller
         ->select('empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato', 'departamentos.nombre_departamento', 'empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio')
         ->get();
 
-        $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        /* $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('personasedes', 'contratodosimetriasedes.sede_id', '=', 'personasedes.sede_id')
         ->join('personas', 'personasedes.persona_id', '=', 'personas.id_persona')
         ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
@@ -2337,6 +2337,14 @@ class DosimetriaController extends Controller
         ->where('personas.lider_dosimetria', '=', 'TRUE')
         ->where('roles.nombre_rol', '=', 'CONTACTO')
         ->select('personas.primer_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'roles.nombre_rol')
+        ->get(); */
+        $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        ->join('personasedes', 'contratodosimetriasedes.sede_id', '=', 'personasedes.sede_id')
+        ->join('personas', 'personasedes.persona_id', '=', 'personas.id_persona')
+        ->join('personasperfiles', 'personas.id_persona', '=', 'personasperfiles.persona_id')
+        ->join('perfiles', 'personasperfiles.perfil_id', '=', 'perfiles.id_perfil')
+        ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $id)
+        ->where('lider_dosimetria', '=', 'TRUE')
         ->get();
 
         $trabajdosiasig= Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
@@ -2411,7 +2419,7 @@ class DosimetriaController extends Controller
             } */
             /* return $newDate;
         } */
-        /* return $SumatoriaFechaIngresomesestrabajadoresaisg; */
+        /* return $personaEncargada; */
         return $pdf->stream();
        
         
@@ -2643,9 +2651,10 @@ class DosimetriaController extends Controller
     public function observacionesRevsEntradaGeneral(Request $request){
         
         $obsercacionentradanewmes = new Mesescontdosisedeptos;
+        $texto = strtoupper($request->nota_cambio_dosimetro).' CORRESPONDIENTE AL TRABAJADOR '.strtoupper($request->trabajador_correspondiente);
         $obsercacionentradanewmes->contdosisededepto_id = $request->id_contdosisededepto;
         $obsercacionentradanewmes->mes_asignacion       = $request->mesnumber;
-        $obsercacionentradanewmes->nota_cambiodosim     = strtoupper($request->nota_cambio_dosimetros);
+        $obsercacionentradanewmes->nota_cambiodosim     = $texto;
         $obsercacionentradanewmes->save();
 
         return back()->with('crear', 'ok');

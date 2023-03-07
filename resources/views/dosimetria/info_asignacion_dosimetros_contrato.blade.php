@@ -1144,13 +1144,13 @@ crossorigin="anonymous">
        
         
         if('{{$dosicontrolToraxasig}}' != '[]' ||  '{{$dosicontrolCristalinoasig}}'!= '[]' || '{{$dosicontrolDedoasig}}' != '[]'){
-            alert('hay dosimetro de control torax');
+            /* alert('hay dosimetro de control torax'); */
             @foreach($trabjasignados as $trab)
                 if('{{$trab->Hp10_calc_dose}}' != 'NULL'){
                     @foreach($dosicontrolToraxasig as $contTorax)
                         var resta = '{{$trab->Hp10_calc_dose}}' - '{{$contTorax->Hp10_calc_dose}}';
                         if('{{$trab->ubicacion}}' == 'TORAX' && resta >= 1.67){
-                            alert('ALERTA ROJA TORAX'+resta);
+                            /* alert('ALERTA ROJA TORAX'+resta); */
                             let trhp10 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                             console.log("HP3"+trhp10);
                             trhp10.classList.add("trdosisroja");
@@ -1161,7 +1161,7 @@ crossorigin="anonymous">
                     @foreach($dosicontrolCristalinoasig as $contCrist)
                         var resta = '{{$trab->Hp3_calc_dose}}' - '{{$contCrist->Hp3_calc_dose}}';
                         if('{{$trab->ubicacion}}' == 'CRISTALINO' && resta >= 12.5){
-                            alert('ALERTA ROJA CRISTALINO'+resta);
+                            /* alert('ALERTA ROJA CRISTALINO'+resta); */
                             let trhp3 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                             console.log("HP3"+trhp3);
                             trhp3.classList.add("trdosisroja");
@@ -1172,7 +1172,7 @@ crossorigin="anonymous">
                     @foreach($dosicontrolToraxasig as $contTorax)
                         var resta = '{{$trab->Hp007_calc_dose}}' - '{{$contTorax->Hp007_calc_dose}}';
                         if('{{$trab->ubicacion}}' == 'TORAX' && resta >= 41.6){
-                            alert('ALERTA ROJA torax');
+                            /* alert('ALERTA ROJA torax'); */
                             let trhp007 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                             trhp007.classList.add("trdosisroja");
                         }
@@ -1180,7 +1180,7 @@ crossorigin="anonymous">
                     @foreach($dosicontrolDedoasig as $contAnillo)
                     var resta = '{{$trab->Hp007_calc_dose}}' - '{{$contAnillo->Hp007_calc_dose}}';
                         if('{{$trab->ubicacion}}'== 'ANILLO' && resta >= 41.6){
-                            alert('ALERTA ROJA ANILLO');
+                            /* alert('ALERTA ROJA ANILLO'); */
                             let trhp007 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                             trhp007.classList.add("trdosisroja");
                         }
@@ -1188,13 +1188,13 @@ crossorigin="anonymous">
                 }
             @endforeach
         }else{
-            alert('no hay dosimetro de control');
+            /* alert('no hay dosimetro de control'); */
             @foreach($trabjasignados as $trab)
             
                 if('{{$trab->Hp10_calc_dose}}' != 'NULL'){
                     
                     if('{{$trab->ubicacion}}' == 'TORAX' && '{{$trab->Hp10_calc_dose}}' >= 1.67){
-                        alert('ALERTA ROJA TORAX');
+                        /* alert('ALERTA ROJA TORAX'); */
                         let trhp10 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                         console.log("HP3"+trhp10);
                         trhp10.classList.add("trdosisroja");
@@ -1203,7 +1203,7 @@ crossorigin="anonymous">
                 if('{{$trab->Hp3_calc_dose}}' != 'NULL'){
                     
                     if('{{$trab->ubicacion}}' == 'CRISTALINO' && '{{$trab->Hp3_calc_dose}}' >= 12.5){
-                        alert('ALERTA ROJA CRISTALINO');
+                        /* alert('ALERTA ROJA CRISTALINO'); */
                         let trhp3 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                         console.log("HP3"+trhp3);
                         trhp3.classList.add("trdosisroja");
@@ -1212,12 +1212,12 @@ crossorigin="anonymous">
                 if('{{$trab->Hp007_calc_dose}}'!= 'NULL'){
                     
                     if('{{$trab->ubicacion}}' == 'MUÑECA' && '{{$trab->Hp007_calc_dose}}' >= 41.6){
-                        alert('ALERTA ROJA MUÑECA');
+                        /* alert('ALERTA ROJA MUÑECA'); */
                         let trhp007 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                         trhp007.classList.add("trdosisroja");
                     }
                     if('{{$trab->ubicacion}}'== 'ANILLO' && '{{$trab->Hp007_calc_dose}}' >= 41.6){
-                        alert('ALERTA ROJA DEDO');
+                        /* alert('ALERTA ROJA DEDO'); */
                         let trhp007 = document.getElementById('{{$trab->id_trabajadordosimetro}}');
                         trhp007.classList.add("trdosisroja");
                     }

@@ -662,7 +662,7 @@
                             <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">{{$dositrabj->energia}}</td>
 
                             <!--  /////////DOSIS DEL PERIODO///// -->
-                            <td id ="hp10_trabjasig" style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; @if(($dositrabj->Hp10_calc_dose - $dosicontrol->Hp10_calc_dose >= 12.0)) color: #ff0000;  @endif " align="center">
+                            <td id ="hp10_trabjasig" style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; @if($dositrabj->nota3 == 'TRUE') color: #ff0000;  @endif " align="center">
                                 @if($dositrabj->DNL =='TRUE')
                                     {{'DNL'}}
                                 @elseif($dositrabj->EU == 'TRUE')
@@ -681,7 +681,7 @@
                                     {{$dositrabj->Hp10_calc_dose - $dosicontrol->Hp10_calc_dose}} 
                                 @endif
                             </td>
-                            <td id="hp007_trabjasig" style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; @if(($dositrabj->Hp007_calc_dose - $dosicontrol->Hp007_calc_dose >= 12.0)) color: #ff0000;  @endif" align="center">
+                            <td id="hp007_trabjasig" style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; @if($dositrabj->nota3 == 'TRUE') color: #ff0000;  @endif" align="center">
                                 @if($dositrabj->DNL =='TRUE')
                                     {{'DNL'}}
                                 @elseif($dositrabj->EU == 'TRUE')
@@ -700,7 +700,7 @@
                                     {{$dositrabj->Hp007_calc_dose - $dosicontrol->Hp007_calc_dose}} 
                                 @endif
                             </td>
-                            <td id="hp3_trabjasig" style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;  @if(($dositrabj->Hp3_calc_dose - $dosicontrol->Hp3_calc_dose >= 12.0)) color: #ff0000;  @endif" align="center">
+                            <td id="hp3_trabjasig" style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;  @if($dositrabj->nota3 == 'TRUE') color: #ff0000;  @endif" align="center">
                                 @if($dositrabj->DNL =='TRUE')
                                     {{'DNL'}}
                                 @elseif($dositrabj->EU == 'TRUE')

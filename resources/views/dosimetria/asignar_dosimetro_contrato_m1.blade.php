@@ -141,8 +141,8 @@
                                     @for($i=1; $i<=$contdosisededepto->dosi_control_torax; $i++)
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" autofocus aria-label="Floating label select example">
+                                            <td>
+                                                <select class="form-control id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" autofocus aria-label="Floating label select example">
                                                     <option value="">----</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
@@ -150,7 +150,7 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
-                                            <td class='align-middle text-center'>
+                                            <td>
                                                 <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" autofocus style="text-transform:uppercase">
                                                     <option value="">----</option>
                                                     <option value="T"> TELETERAPIA</option>
@@ -178,7 +178,7 @@
                                     @for($i=1; $i<=$contdosisededepto->dosi_control_cristalino; $i++)
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL CRISTALINO</td>
-                                            <td class='align-middle text-center'>
+                                            <td>
                                                 <select class="form-select id_dosimetro_asigdosimControlCristalino"  name="id_dosimetro_asigdosimControlCristalino[]" id="id_dosimetro_asigdosimControlCristalino" autofocus aria-label="Floating label select example">
                                                     <option value="">----</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -186,7 +186,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle text-center'>
+                                            <td>
                                                 <select class="form-select"  name="id_holder_asigdosimControlCristalino[]" id="id_holder_asigdosimControlCristalino" autofocus aria-label="Floating label select example">
                                                     <option value="">----</option>
                                                     @foreach($holderLibresCristalino as $holibcris)
@@ -222,7 +222,7 @@
                                     @for($i=1; $i<=$contdosisededepto->dosi_control_dedo; $i++)
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL ANILLO</td>
-                                            <td class='align-middle text-center'>
+                                            <td>
                                                 <select class="form-select id_dosimetro_asigdosimControlDedo"  name="id_dosimetro_asigdosimControlDedo[]" id="id_dosimetro_asigdosimControlDedo" autofocus aria-label="Floating label select example">
                                                     <option value="">----</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -230,7 +230,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle text-center'>
+                                            <td>
                                                 <select class="form-select"  name="id_holder_asigdosimControlDedo[]" id="id_holder_asigdosimControlDedo" autofocus aria-label="Floating label select example">
                                                     <option value="">----</option>
                                                     @foreach($holderLibresAnillo as $holibanillo)
@@ -238,7 +238,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle'>
+                                            <td>
                                                 <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" autofocus style="text-transform:uppercase">
                                                     <option value="">----</option>
                                                     <option value="T"> TELETERAPIA</option>
@@ -317,8 +317,6 @@
                                                 <td>
                                                     <select class="form-select"  name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
-                                                        
-                                                       
                                                         @foreach($personaSede as $persed)
                                                             <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
@@ -360,221 +358,221 @@
                                         @endif
                                     @endfor
 
-                                        {{-- ///Filas creadas segun la cantidad de dosimetros tipo cuerpo entero que falten por asignar en el primer mes/////// --}}
-                                        @for($i=1; $i<=$contdosisededepto->dosi_torax; $i++)
-                                            @if($mesnumber = 1) 
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-select"  name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            
-                                                            @foreach($personaSede as $persed)
-                                                                <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}} - ({{$persed->nombre_rol}})</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td class='align-middle text-center'>TÓRAX</td>
-                                                    <td>
-                                                        <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            @foreach($dosimLibresGeneral as $dosigenlib)
-                                                                <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td class='align-middle text-center'>N.A</td>
-                                                    <td>
-                                                        <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
-                                                            <option value="">----</option>
-                                                            <option value="T"> TELETERAPIA</option>
-                                                            <option value="BQ">BRAQUITERAPIA</option>
-                                                            <option value="MN">MEDICINA NUCLEAR</option>
-                                                            <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                            <option value="MF">MEDIDORES FIJOS</option>
-                                                            <option value="IV">INVESTIGACIÓN</option>
-                                                            <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            <option value="MM">MEDIDORES MÓVILES</option>
-                                                            <option value="E"> DOCENCIA</option>
-                                                            <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                            <option value="TR">TRAZADORES</option>
-                                                            <option value="HD">HEMODINAMIA</option>
-                                                            <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            <option value="RX">RADIODIAGNÓSTICO</option>
-                                                            <option value="FL">FLUOROSCOPIA</option>
-                                                            <option value="AM">APLICACIONES MÉDICAS</option>
-                                                            <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endfor
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo cuerpo entero que falten por asignar en el primer mes/////// --}}
+                                    @for($i=1; $i<=$contdosisededepto->dosi_torax; $i++)
+                                        @if($mesnumber = 1) 
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select"  name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        
+                                                        @foreach($personaSede as $persed)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}} - ({{$persed->nombre_rol}})</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle text-center'>TÓRAX</td>
+                                                <td>
+                                                    <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresGeneral as $dosigenlib)
+                                                            <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle text-center'>N.A</td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endfor
                                         
-                                        {{-- ///Filas creadas segun la cantidad de dosimetros tipo CRISTALINO que falten por asignar en el primer mes/////// --}}
-                                        @for($i=1; $i<=$contdosisededepto->dosi_cristalino; $i++)
-                                            @if($mesnumber = 1)
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-select"  name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            
-                                                            @foreach($personaSede as $persed)
-                                                                <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}} - ({{$persed->nombre_rol}})</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td class='align-middle text-center'>CRISTALINO</td>
-                                                    <td>
-                                                        <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            @foreach($dosimLibresEzclip as $dosiezcliplib)
-                                                                <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            @foreach($holderLibresCristalino as $holibcris)
-                                                                <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" autofocus style="text-transform:uppercase">
-                                                            <option value="">----</option>
-                                                            <option value="T"> TELETERAPIA</option>
-                                                            <option value="BQ">BRAQUITERAPIA</option>
-                                                            <option value="MN">MEDICINA NUCLEAR</option>
-                                                            <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                            <option value="MF">MEDIDORES FIJOS</option>
-                                                            <option value="IV">INVESTIGACIÓN</option>
-                                                            <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            <option value="MM">MEDIDORES MÓVILES</option>
-                                                            <option value="E"> DOCENCIA</option>
-                                                            <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                            <option value="TR">TRAZADORES</option>
-                                                            <option value="HD">HEMODINAMIA</option>
-                                                            <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            <option value="RX">RADIODIAGNÓSTICO</option>
-                                                            <option value="FL">FLUOROSCOPIA</option>
-                                                            <option value="AM">APLICACIONES MÉDICAS</option>
-                                                            <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endfor  
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo CRISTALINO que falten por asignar en el primer mes/////// --}}
+                                    @for($i=1; $i<=$contdosisededepto->dosi_cristalino; $i++)
+                                        @if($mesnumber = 1)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select"  name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        
+                                                        @foreach($personaSede as $persed)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}} - ({{$persed->nombre_rol}})</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle text-center'>CRISTALINO</td>
+                                                <td>
+                                                    <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                            <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($holderLibresCristalino as $holibcris)
+                                                            <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endfor  
 
-                                        {{-- ///Filas creadas segun la cantidad de dosimetros tipo EXTREMIDAD  que falten por asignar en el primer mes/////// --}}
-                                        @for($i=1; $i<=$contdosisededepto->dosi_muñeca; $i++)
-                                            @if($mesnumber = 1)
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            
-                                                            @foreach($personaSede as $persed)
-                                                                <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}- ({{$persed->nombre_rol}})</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td class='align-middle text-center'>MUÑECA</td>
-                                                    <td>
-                                                        <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            @foreach($dosimLibresEzclip as $dosiezcliplib)
-                                                                <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-select"  name="id_holder_asigdosimMuneca[]" id="id_holder_asigdosimMuneca" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            @foreach($holderLibresExtrem as $holibexm)
-                                                                <option value="{{$holibexm->id_holder}}">{{$holibexm->codigo_holder}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca" autofocus style="text-transform:uppercase">
-                                                            <option value="">----</option>
-                                                            <option value="T"> TELETERAPIA</option>
-                                                            <option value="BQ">BRAQUITERAPIA</option>
-                                                            <option value="MN">MEDICINA NUCLEAR</option>
-                                                            <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                            <option value="MF">MEDIDORES FIJOS</option>
-                                                            <option value="IV">INVESTIGACIÓN</option>
-                                                            <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            <option value="MM">MEDIDORES MÓVILES</option>
-                                                            <option value="E"> DOCENCIA</option>
-                                                            <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                            <option value="TR">TRAZADORES</option>
-                                                            <option value="HD">HEMODINAMIA</option>
-                                                            <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            <option value="RX">RADIODIAGNÓSTICO</option>
-                                                            <option value="FL">FLUOROSCOPIA</option>
-                                                            <option value="AM">APLICACIONES MÉDICAS</option>
-                                                            <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endfor 
-                                        {{-- ///Filas creadas segun la cantidad de dosimetros tipo ANILLO  que falten por asignar en el primer mes/////// --}}
-                                        @for($i=1; $i<=$contdosisededepto->dosi_dedo; $i++)
-                                            @if($mesnumber = 1)
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-select"  name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            
-                                                            @foreach($personaSede as $persed)
-                                                                <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}} - ({{$persed->nombre_rol}})</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td class='align-middle text-center'>ANILLO</td>
-                                                    <td>
-                                                        <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            @foreach($dosimLibresEzclip as $dosiezcliplib)
-                                                                <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo" autofocus aria-label="Floating label select example">
-                                                            <option value="">----</option>
-                                                            @foreach($holderLibresAnillo as $holibanillo)
-                                                                <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" autofocus style="text-transform:uppercase">
-                                                            <option value="">----</option>
-                                                            <option value="T"> TELETERAPIA</option>
-                                                            <option value="BQ">BRAQUITERAPIA</option>
-                                                            <option value="MN">MEDICINA NUCLEAR</option>
-                                                            <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                            <option value="MF">MEDIDORES FIJOS</option>
-                                                            <option value="IV">INVESTIGACIÓN</option>
-                                                            <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            <option value="MM">MEDIDORES MÓVILES</option>
-                                                            <option value="E"> DOCENCIA</option>
-                                                            <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                            <option value="TR">TRAZADORES</option>
-                                                            <option value="HD">HEMODINAMIA</option>
-                                                            <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            <option value="RX">RADIODIAGNÓSTICO</option>
-                                                            <option value="FL">FLUOROSCOPIA</option>
-                                                            <option value="AM">APLICACIONES MÉDICAS</option>
-                                                            <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                        @endfor 
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo EXTREMIDAD  que falten por asignar en el primer mes/////// --}}
+                                    @for($i=1; $i<=$contdosisededepto->dosi_muñeca; $i++)
+                                        @if($mesnumber = 1)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        
+                                                        @foreach($personaSede as $persed)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}- ({{$persed->nombre_rol}})</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle text-center'>MUÑECA</td>
+                                                <td>
+                                                    <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                            <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select"  name="id_holder_asigdosimMuneca[]" id="id_holder_asigdosimMuneca" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($holderLibresExtrem as $holibexm)
+                                                            <option value="{{$holibexm->id_holder}}">{{$holibexm->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endfor 
+                                    {{-- ///Filas creadas segun la cantidad de dosimetros tipo ANILLO  que falten por asignar en el primer mes/////// --}}
+                                    @for($i=1; $i<=$contdosisededepto->dosi_dedo; $i++)
+                                        @if($mesnumber = 1)
+                                            <tr>
+                                                <td>
+                                                    <select class="form-select"  name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        
+                                                        @foreach($personaSede as $persed)
+                                                            <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}} - ({{$persed->nombre_rol}})</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle text-center'>ANILLO</td>
+                                                <td>
+                                                    <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                            <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo" autofocus aria-label="Floating label select example">
+                                                        <option value="">----</option>
+                                                        @foreach($holderLibresAnillo as $holibanillo)
+                                                            <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="T"> TELETERAPIA</option>
+                                                        <option value="BQ">BRAQUITERAPIA</option>
+                                                        <option value="MN">MEDICINA NUCLEAR</option>
+                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
+                                                        <option value="MF">MEDIDORES FIJOS</option>
+                                                        <option value="IV">INVESTIGACIÓN</option>
+                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
+                                                        <option value="MM">MEDIDORES MÓVILES</option>
+                                                        <option value="E"> DOCENCIA</option>
+                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
+                                                        <option value="TR">TRAZADORES</option>
+                                                        <option value="HD">HEMODINAMIA</option>
+                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
+                                                        <option value="RX">RADIODIAGNÓSTICO</option>
+                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endfor 
                                     
                                 </tbody>
                             </table>
@@ -624,6 +622,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        //select2 para dosimetros de tipo control////
         $('#id_dosimetro_asigdosimControlTorax').select2();
         $('#ocupacion_asigdosimControlTorax').select2();
         $('#id_dosimetro_asigdosimControlCristalino').select2();
@@ -632,9 +631,119 @@
         $('#id_dosimetro_asigdosimControlDedo').select2();
         $('#id_holder_asigdosimControlDedo').select2();
         $('#ocupacion_asigdosimControlDedo').select2();
-        $('#id_area_asigdosimArea').select2();
-        $('#id_dosimetro_asigdosimArea').select2();
-        $('#ocupacion_asigdosimArea').select2();
+        
+        /////SELECT2 PARA LOS SELECTS DE TRABAJADORES//////// 
+        var trabj_torax = document.querySelectorAll('select[name="id_trabajador_asigdosimTorax[]"]');
+        for(var i = 0; i < trabj_torax.length; i++){
+            trabj_torax[i].setAttribute("id", "id_trabajador_asigdosimTorax"+[i]);
+            $('#id_trabajador_asigdosimTorax'+[i]).select2();
+        }
+        var nombres_area = document.querySelectorAll('select[name="id_area_asigdosimArea[]"]');
+        for(var i = 0; i < nombres_area.length; i++){
+            nombres_area[i].setAttribute("id", "id_area_asigdosimArea"+[i]);
+            $('#id_area_asigdosimArea'+[i]).select2();
+        }
+        var trabj_caso = document.querySelectorAll('select[name="id_trabajador_asigdosimCaso[]"]');
+        for(var i = 0; i < trabj_caso.length; i++){
+            trabj_caso[i].setAttribute("id", "id_trabajador_asigdosimCaso"+[i]);
+            $('#id_trabajador_asigdosimCaso'+[i]).select2();
+        }
+        var trabj_cristalino = document.querySelectorAll('select[name="id_trabajador_asigdosimCristalino[]"]');
+        for(var i = 0; i < trabj_cristalino.length; i++){
+            trabj_cristalino[i].setAttribute("id", "id_trabajador_asigdosimCristalino"+[i]);
+            $('#id_trabajador_asigdosimCristalino'+[i]).select2();
+        }
+        var trabj_muñenca = document.querySelectorAll('select[name="id_trabajador_asigdosimMuneca[]"]');
+        for(var i = 0; i < trabj_muñenca.length; i++){
+            trabj_muñenca[i].setAttribute("id", "id_trabajador_asigdosimMuneca"+[i]);
+            $('#id_trabajador_asigdosimMuneca'+[i]).select2();
+        }
+        var trabj_dedo = document.querySelectorAll('select[name="id_trabajador_asigdosimDedo[]"]');
+        for(var i = 0; i < trabj_dedo.length; i++){
+            trabj_dedo[i].setAttribute("id", "id_trabajador_asigdosimDedo"+[i]);
+            $('#id_trabajador_asigdosimDedo'+[i]).select2();
+        }
+        ///////SELECT2 PARA LOS SELECTS DE DOSIMETROS //////
+        
+        var dosim_area = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
+        for(var i = 0; i < dosim_area.length; i++){
+            dosim_area[i].setAttribute("id", "id_dosimetro_asigdosimArea"+[i]);
+            $('#id_dosimetro_asigdosimArea'+[i]).select2();
+        }
+        var dosim_caso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
+        for(var i = 0; i < dosim_caso.length; i++){
+            dosim_caso[i].setAttribute("id", "id_dosimetro_asigdosimCaso"+[i]);
+            $('#id_dosimetro_asigdosimCaso'+[i]).select2();
+        }
+        var dosim_torax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
+        for(var i = 0; i < dosim_torax.length; i++){
+            dosim_torax[i].setAttribute("id", "id_dosimetro_asigdosimTorax"+[i]);
+            $('#id_dosimetro_asigdosimTorax'+[i]).select2();
+        }
+        var dosim_cristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
+        for(var i = 0; i < dosim_cristalino.length; i++){
+            dosim_cristalino[i].setAttribute("id", "id_dosimetro_asigdosimCristalino"+[i]);
+            $('#id_dosimetro_asigdosimCristalino'+[i]).select2();
+        }
+        var dosim_muñeca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"');
+        for(var i = 0; i < dosim_muñeca.length; i++){
+            dosim_muñeca[i].setAttribute("id", "id_dosimetro_asigdosimMuneca"+[i]);
+            $('#id_dosimetro_asigdosimMuneca'+[i]).select2();
+        }
+        var dosim_dedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"');
+        for(var i = 0; i < dosim_dedo.length; i++){
+            dosim_dedo[i].setAttribute("id", "id_dosimetro_asigdosimDedo"+[i]);
+            $('#id_dosimetro_asigdosimDedo'+[i]).select2();
+        }
+        //////SELECT2 PARA LOS SELECTS DE LOS HOLDERS /////
+        var holder_cristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"');
+        for(var i = 0; i < holder_cristalino.length; i++){
+            holder_cristalino[i].setAttribute("id", "id_holder_asigdosimCristalino"+[i]);
+            $('#id_holder_asigdosimCristalino'+[i]).select2();
+        }
+        var holder_muñeca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"');
+        for(var i = 0; i < holder_muñeca.length; i++){
+            holder_muñeca[i].setAttribute("id", "id_holder_asigdosimMuneca"+[i]);
+            $('#id_holder_asigdosimMuneca'+[i]).select2();
+        }
+        var holder_dedo = document.querySelectorAll('select[name="id_holder_asigdosimDedo[]"');
+        for(var i = 0; i < holder_dedo.length; i++){
+            holder_dedo[i].setAttribute("id", "id_holder_asigdosimDedo"+[i]);
+            $('#id_holder_asigdosimDedo'+[i]).select2();
+        }
+        ///SELECT2 PAR LOS SELECT DE LAS OCUPACIONES/////
+        var ocu_area = document.querySelectorAll('select[name="ocupacion_asigdosimArea[]"');
+        for(var i = 0; i < ocu_area.length; i++){
+            ocu_area[i].setAttribute("id", "ocupacion_asigdosimArea"+[i]);
+            $('#ocupacion_asigdosimArea'+[i]).select2();
+        }
+        var ocu_caso = document.querySelectorAll('select[name="ocupacion_asigdosimCaso[]"');
+        for(var i = 0; i < ocu_caso.length; i++){
+            ocu_caso[i].setAttribute("id", "ocupacion_asigdosimCaso"+[i]);
+            $('#ocupacion_asigdosimCaso'+[i]).select2();
+        }
+        var ocu_torax = document.querySelectorAll('select[name="ocupacion_asigdosimTorax[]"');
+        for(var i = 0; i < ocu_torax.length; i++){
+            ocu_torax[i].setAttribute("id", "ocupacion_asigdosimTorax"+[i]);
+            $('#ocupacion_asigdosimTorax'+[i]).select2();
+        }
+        var ocu_cristalino = document.querySelectorAll('select[name="ocupacion_asigdosimCristalino[]"');
+        for(var i = 0; i < ocu_cristalino.length; i++){
+            ocu_cristalino[i].setAttribute("id", "ocupacion_asigdosimCristalino"+[i]);
+            $('#ocupacion_asigdosimCristalino'+[i]).select2();
+        }
+        var ocu_muñeca = document.querySelectorAll('select[name="ocupacion_asigdosimMuneca[]"');
+        for(var i = 0; i < ocu_muñeca.length; i++){
+            ocu_muñeca[i].setAttribute("id", "ocupacion_asigdosimMuneca"+[i]);
+            $('#ocupacion_asigdosimMuneca'+[i]).select2();
+        }
+        var ocu_dedo = document.querySelectorAll('select[name="ocupacion_asigdosimDedo[]"');
+        for(var i = 0; i < ocu_dedo.length; i++){
+            ocu_dedo[i].setAttribute("id", "ocupacion_asigdosimDedo"+[i]);
+            $('#ocupacion_asigdosimDedo'+[i]).select2();
+        }
+//////////////////////////////
+
         document.getElementById("primerDia_asigdosim").value = '{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}';
 
         var fecha = document.getElementById("primerDia_asigdosim").value;
