@@ -85,7 +85,7 @@
         <div class="col-7 px-1">
            
             
-            <h4 class="text-center">INFORMACIÓN DE TODAS LAS ASIGNACIONES</h4>
+            <h4 class="text-center">TODAS LAS ASIGNACIONES</h4>
             <div class="table table-responsive p-2">
                 <table class="table table-bordered asignaciones" id="tablaAsignaciones" style="font-size: 12px;">
                     <thead>
@@ -132,15 +132,16 @@
             </div>
             <br>
             <br>
-            <h4 class="text-center">INFORMACIÓN DE TODAS LAS ASIGNACIONES DE DOSÍMETRO CONTROL</h4>
+            <h4 class="text-center">ASIGNACIONES DE DOSÍMETRO CONTROL</h4>
             <div class="table table-responsive p-4 m-1">
                 <table class="table table-bordered asignacionesControl" style="font-size: 13px;">
                     <thead>
                         <tr class="table-active text-center">
-                            <th class='align-middle py-4' style="width: 10%;">CONTROL</th>
+                            <th class='align-middle py-4' style="width: 25%;">CONTROL</th>
                             <th class='align-middle py-4' >DOSÍMETRO</th>
-                            <th class='align-middle py-4' >CONTRATO</th>
+                            <th class='align-middle py-4' >HOLDER</th>
                             <th class='align-middle py-4' >MES</th>
+                            <th class='align-middle py-4' >CONTRATO</th>
                             <th class='align-middle py-4' >SEDE</th>
                             <th class='align-middle py-4' >ESPECIALIDAD</th>
                         </tr>
@@ -148,17 +149,24 @@
                     <tbody>
                         @if(count($dosicontrol) == 0)
                             <tr>
-                                <td colspan ="6" class='align-middle text-center'>NO HAY REGISTROS</td>
+                                <td colspan ="7" class='align-middle text-center'>NO HAY REGISTROS</td>
                             </tr>
                         @else
                             @foreach($dosicontrol as $dosicont)
                                 <tr id="{{$dosicont->id_dosicontrolcontdosisedes}}">
-                                    <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>CONTROL</td>
+                                    <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>CONTROL {{$dosicont->ubicacion}}</td>
                                     <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->codigo_dosimeter}}</td>
-                                    <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->codigo_contrato}}</td>
+                                    <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>
+                                        @if($dosicont->holder_id == '')
+                                            N.A.
+                                        @else
+                                            {{$dosicont->codigo_holder}}
+                                        @endif
+                                    </td>
                                     <td id="mes{{$dosicont->codigo_dosimeter}}" class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>
                                     
                                     </td>
+                                    <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->codigo_contrato}}</td>
                                     <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->nombre_sede}}</td>
                                     <td class='align-middle text-center' @if($dosicont->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$dosicont->nombre_departamento}}</td>
                                 </tr>
@@ -190,7 +198,7 @@
                         <tr class="table-active text-center ">
                             <th class='align-middle py-4' >TRABAJADOR</th>
                             <th class='align-middle py-4' >DOSÍMETRO</th>
-                            <th class='align-middle py-4' >UBICACIÓN</th>
+                            <th class='align-middle py-4' >UBI.</th>
                             <th class='align-middle py-4' >MES</th>
                             <th class='align-middle py-4' >CONTRATO</th>
                             <th class='align-middle py-4' >SEDE</th>
@@ -207,7 +215,7 @@
                                 <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->mes_asignacion}}</td>
                                 <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}</td>
                                 <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->contratodosimetriasede->sede->nombre_sede}}</td>
-                                <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{$temptrab->contratodosimetriasededepto->departamentosede->nombre_departamento}}</td>
+                                <td class='align-middle text-center' @if($temptrab->dosimetro_uso == 'FALSE') style="color:red;" @endif>{{substr($temptrab->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento,0,4)}}.</td>
                                 <td class='align-middle text-center'>
                                     <button class="btn btn-sm btn-danger" @if(!empty($temptrab->persona->primer_nombre_persona)) onclick="eliminar({{$temptrab->trabajcontdosimetro_id }}, 0)" @else onclick="eliminar({{$temptrab->trabajcontdosimetro_id }}, 1)" @endif>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
@@ -284,6 +292,7 @@ crossorigin="anonymous">
         });
 
         $('#dosi_control').on('change', function(){
+            console.log("ENTRO AL DOSI CONTROL CHANGE");
             var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
             const js = document.querySelector('#dosi_control').checked;
             console.log("ESTADO INICIAL"+js);
@@ -295,8 +304,79 @@ crossorigin="anonymous">
                 consultarTrabDosi();
             }
         })
+        
+        function consultarDosiControl(codigoEtiq){
+            console.log("****CONSULTA DOSIMETRO CONTROL****");
+            var codigoDosi = document.getElementById('codigo_dosimetro').value; 
+            console.log(codigoDosi);
+            if(codigoDosi != ''){
+                $.get('dosimetro',{codigo_dosi : codigoDosi}, function(dosimetro){
+                    console.log(dosimetro);
+                    if(dosimetro.length != 0){
+                        var check = 0;
+                        console.log(check);
+                        console.log("ESTE ES EL CODIGO DOSIMETRO" + codigoDosi);
+                        console.log("ESTE ES EL CODIGO ETIQUETA" + codigoEtiq);
+                        var empresa = @this.empresa;
+                        console.log("EMPRESA = "+empresa);
+                        $.get('asignacionesControl',{empresa : empresa}, function(asignacionescontrol){
+                            console.log(asignacionescontrol);
+                            asignacionescontrol.forEach(function (element){
+                                if(codigoEtiq == codigoDosi && codigoDosi == element.codigo_dosimeter && check == 0){
+                                    check = 1;
+                                    Livewire.emit('MATCHCONTROL', element.id_dosicontrolcontdosisedes);
+                                    console.log("SI SE HIZO MATCH CONTROL");
+                                    Livewire.on('alert', function(message){
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'CORRECTO!!',
+                                            text: message,
+                                            showConfirmButton: false,
+                                            timer: 4000
+                                        });
+                                    });
+                                }
+                            });
+                            console.log("ESTE ES EL CHECK" +check);
+    
+                            if(check == 0){
+                                console.log("NO SE HIZO MATCH CONTROL");
+                                Livewire.emit('NOMATCH');
+                                Livewire.on('alert', function(message){
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'ERROR!!',
+                                        text: message,
+                                        showConfirmButton: false,
+                                        timer: 4000
+                                    });
+                                })
+                                
+                                
+                            }
+                        })
+                       
+                    }else{
+                        
+                        Livewire.emit('NOEXISTE');
+                        console.log("NO EXISTE");
+                        Livewire.on('alert', function(message){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!!',
+                                text: message,
+                                showConfirmButton: false,
+                                timer: 4000
+                            });
+                        })
+                        
+                    }
+                    
+                });
+            }
+        };
         function consultarTrabDosi(codigoEtiq){
-            console.log("ENTRO A TRABAJADORES");
+            console.log("/////CONSULTA DOSIMETRO TRABAJADOR/////");
             var codigoDosi = document.getElementById('codigo_dosimetro').value; 
             
             if(codigoDosi != ''){
@@ -364,76 +444,7 @@ crossorigin="anonymous">
                 
             }
         };
-        function consultarDosiControl(codigoEtiq){
-            console.log("ENTRO A CONTROLES");
-            var codigoDosi = document.getElementById('codigo_dosimetro').value; 
-            console.log(codigoDosi);
-            if(codigoDosi != ''){
-                $.get('dosimetro',{codigo_dosi : codigoDosi}, function(dosimetro){
-                    console.log(dosimetro);
-                    if(dosimetro.length != 0){
-                        var check = 0;
-                        console.log(check);
-                        console.log("ESTE ES EL CODIGO DOSIMETRO" + codigoDosi);
-                        console.log("ESTE ES EL CODIGO ETIQUETA" + codigoEtiq);
-                        var empresa = @this.empresa;
-                        $.get('asignacionesControl',{empresa : empresa}, function(asignacionescontrol){
-                            console.log(asignacionescontrol);
-                            asignacionescontrol.forEach(function (element){
-                                if(codigoEtiq == codigoDosi && codigoDosi == element.codigo_dosimeter && check == 0){
-                                    check = 1;
-                                    Livewire.emit('MATCHCONTROL', element.id_dosicontrolcontdosisedes);
-                                    console.log("SI SE HIZO MATCH CONTROL");
-                                    Livewire.on('alert', function(message){
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'CORRECTO!!',
-                                            text: message,
-                                            showConfirmButton: false,
-                                            timer: 4000
-                                        });
-                                    });
-                                }
-                            });
-                            console.log("ESTE ES EL CHECK" +check);
-    
-                            if(check == 0){
-                                console.log("NO SE HIZO MATCH CONTROL");
-                                Livewire.emit('NOMATCH');
-                                Livewire.on('alert', function(message){
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'ERROR!!',
-                                        text: message,
-                                        showConfirmButton: false,
-                                        timer: 4000
-                                    });
-                                })
-                                
-                                
-                            }
-                        })
-                       
-                    }else{
-                        
-                        Livewire.emit('NOEXISTE');
-                        console.log("NO EXISTE");
-                        Livewire.on('alert', function(message){
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error!!',
-                                text: message,
-                                showConfirmButton: false,
-                                timer: 4000
-                            });
-                        })
-                        
-                    }
-                    
-                });
-            }
-        };
-        $('#codigo_etiqueta').on('change', function(){
+        /* $('#codigo_etiqueta').on('change', function(){
             var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
             const js = document.querySelector('#dosi_control').checked;
             console.log("ESTADO INICIAL"+js);
@@ -451,8 +462,9 @@ crossorigin="anonymous">
             
             console.log("SALIO DEL CHANGE DE LA FUNCION CODIGO ETIQUETA");
            
-        });
+        }); */
         $('#codigo_dosimetro').on('change', function(){
+            console.log("ENTRO AL CODIGO DOSIMETRO CHANGE");
             var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
             const js = document.querySelector('#dosi_control').checked;
             console.log("ESTADO INICIAL"+js);
@@ -463,7 +475,7 @@ crossorigin="anonymous">
             }else{
                 consultarTrabDosi(codigoEtiq);
             }
-            /* consultarTrabDosi(codigoEtiq); */
+            
             console.log("SALIO DEL CHANGE DE LA FUNCION CODIGO DOSIMETRO NORMAL");
             
         });

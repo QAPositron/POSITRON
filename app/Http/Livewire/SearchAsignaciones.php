@@ -67,22 +67,22 @@ class SearchAsignaciones extends Component
         $dosicontrol = Dosicontrolcontdosisede::find($id);
         $newTempdosimcontrolrev = new Temptrabajdosimrev();
 
-        $newTempdosimcontrolrev->trabajcontdosimetro_id    = $dosicontrol->id_dosicontrolcontdosisedes;
-        $newTempdosimcontrolrev->contratodosimetriasede_id = $dosicontrol->contratodosimetriasede_id;
-        $newTempdosimcontrolrev->persona_id                = NULL;
-        $newTempdosimcontrolrev->dosimetro_id              = $dosicontrol->dosimetro_id;
-        $newTempdosimcontrolrev->holder_id                 = NULL;
-        $newTempdosimcontrolrev->contdosisededepto_id      = $dosicontrol->contdosisededepto_id;
-        $newTempdosimcontrolrev->mes_asignacion            = $dosicontrol->mes_asignacion;
-        $newTempdosimcontrolrev->dosimetro_uso             = $dosicontrol->dosimetro_uso;
-        $newTempdosimcontrolrev->primer_dia_uso            = $dosicontrol->primer_dia_uso;
-        $newTempdosimcontrolrev->ultimo_dia_uso            = $dosicontrol->ultimo_dia_uso;
-        $newTempdosimcontrolrev->fecha_dosim_enviado       = $dosicontrol->fecha_dosim_enviado;
-        $newTempdosimcontrolrev->fecha_dosim_recibido      = $dosicontrol->fecha_dosim_recibido;
-        $newTempdosimcontrolrev->fecha_dosim_devuelto      = $dosicontrol->fecha_dosim_devuelto;
-        $newTempdosimcontrolrev->ocupacion                 = $dosicontrol->ocupacion;
-        $newTempdosimcontrolrev->ubicacion                 = NULL;
-        $newTempdosimcontrolrev->energia                   = $dosicontrol->energia;
+        $newTempdosimcontrolrev->dosicontrolcontdosisedes_id    = $dosicontrol->id_dosicontrolcontdosisedes;
+        $newTempdosimcontrolrev->contratodosimetriasede_id      = $dosicontrol->contratodosimetriasede_id;
+       
+        $newTempdosimcontrolrev->dosimetro_id                   = $dosicontrol->dosimetro_id;
+        $newTempdosimcontrolrev->holder_id                      = $dosicontrol->holder_id;
+        $newTempdosimcontrolrev->contdosisededepto_id           = $dosicontrol->contdosisededepto_id;
+        $newTempdosimcontrolrev->mes_asignacion                 = $dosicontrol->mes_asignacion;
+        $newTempdosimcontrolrev->dosimetro_uso                  = $dosicontrol->dosimetro_uso;
+        $newTempdosimcontrolrev->primer_dia_uso                 = $dosicontrol->primer_dia_uso;
+        $newTempdosimcontrolrev->ultimo_dia_uso                 = $dosicontrol->ultimo_dia_uso;
+        $newTempdosimcontrolrev->fecha_dosim_enviado            = $dosicontrol->fecha_dosim_enviado;
+        $newTempdosimcontrolrev->fecha_dosim_recibido           = $dosicontrol->fecha_dosim_recibido;
+        $newTempdosimcontrolrev->fecha_dosim_devuelto           = $dosicontrol->fecha_dosim_devuelto;
+        $newTempdosimcontrolrev->ocupacion                      = $dosicontrol->ocupacion;
+        $newTempdosimcontrolrev->ubicacion                      = $dosicontrol->ubicacion;
+        $newTempdosimcontrolrev->energia                        = $dosicontrol->energia;
         $newTempdosimcontrolrev->save();
 
         $this->emit('alert', 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO DE CONTROL');
@@ -141,6 +141,7 @@ class SearchAsignaciones extends Component
         ->select('trabajadordosimetros.id_trabajadordosimetro', 'trabajadordosimetros.dosimetro_uso', 'trabajadordosimetros.ubicacion', 'trabajadordosimetros.mes_asignacion','personas.primer_nombre_persona', 'personas.segundo_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'dosimetros.codigo_dosimeter', 'trabajadordosimetros.holder_id', 'holders.codigo_holder', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentos.nombre_departamento', 'dosimetriacontratos.fecha_inicio')
         ->get();
         $dosicontrol = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+        ->leftJoin('holders', 'dosicontrolcontdosisedes.holder_id', '=', 'holders.id_holder')
         ->join('contratodosimetriasedes', 'dosicontrolcontdosisedes.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
         ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
@@ -151,7 +152,7 @@ class SearchAsignaciones extends Component
         ->whereNull('dosicontrolcontdosisedes.revision_salida')
         ->where('empresas.nombre_empresa', '=', $this->empresa)
         ->where('codigo_dosimeter', 'like', '%' . $this->search .'%')
-        ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.dosimetro_uso','dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentos.nombre_departamento', 'dosimetriacontratos.fecha_inicio')
+        ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.dosimetro_uso','dosicontrolcontdosisedes.mes_asignacion', 'dosicontrolcontdosisedes.ubicacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'dosicontrolcontdosisedes.holder_id', 'holders.codigo_holder', 'sedes.nombre_sede', 'departamentos.nombre_departamento', 'dosimetriacontratos.fecha_inicio')
         ->get();
         $temptrabajdosimrev = Temptrabajdosimrev::all();
         $empresa = $this->empresa;

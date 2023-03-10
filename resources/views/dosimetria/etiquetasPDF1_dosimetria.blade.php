@@ -195,7 +195,7 @@
     }
     .primerdia_torax, .ultimodia_torax{
         position: relative; 
-        bottom: 79px;
+        bottom: 69px;
         left: 54px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
@@ -209,7 +209,7 @@
         left: 54px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
-        /* background: blue; */
+        
         width: 38px;
         text-align:left;
     } */
