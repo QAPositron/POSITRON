@@ -2561,24 +2561,10 @@ class DosimetriaController extends Controller
     } */
     
     public function pdfCertificadorevisionsalida($empresa, $deptodosi, $mesnumber){
-        /* return $mesnumber; */
-        if($empresa != 0){
-            $empresa = Empresa::where('nombre_empresa', '=', $empresa)->get();
-        }
-        $temptrabjdosimrev = Temptrabajdosimrev::all();
-        $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
-        ->where('mes_asignacion', '=', $mesnumber)
-        ->where('revision_salida', '=', 'TRUE')
-        ->get();
-        $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $deptodosi)
-        ->where('mes_asignacion', '=', $mesnumber)
-        ->where('revision_salida', '=', 'TRUE')
-        ->get();
-        $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
-        $pdf =  PDF::loadView('dosimetria.certificadoPDF_revision_dosimetria', compact('temptrabjdosimrev', 'empresa', 'dosicontrolasig', 'trabjasignados', 'deptodosi', 'contdosisededepto'));
+        
+        $pdf =  PDF::loadView('dosimetria.certificadoPDF_revision_dosimetria');
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream();
-        /* return $empresa; */
     }
     public function revisionDosimetriaEntrada($id, $mesnumber){
         $contdosisededepto = Contratodosimetriasededepto::find($id);
