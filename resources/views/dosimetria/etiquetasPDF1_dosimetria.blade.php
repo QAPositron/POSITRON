@@ -195,7 +195,7 @@
     }
     .primerdia_torax, .ultimodia_torax{
         position: relative; 
-        bottom: 69px;
+        bottom: 79px;
         left: 54px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
@@ -203,16 +203,7 @@
         width: 38px;
         text-align:left; 
     }
-    /* .ultimodia_torax{
-        position: relative; 
-        bottom: 69px;
-        left: 54px;
-        font-size: 7px;
-        font-family: Arial, Helvetica, sans-serif;
-        
-        width: 38px;
-        text-align:left;
-    } */
+    
     .codigobar_torax{
         transform: rotate(-270deg);
         position: relative; 

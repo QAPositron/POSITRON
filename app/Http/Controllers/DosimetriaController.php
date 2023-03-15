@@ -2521,7 +2521,7 @@ class DosimetriaController extends Controller
         ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
         ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
         ->whereNull('trabajadordosimetros.revision_salida')
-        ->where('empresas.nombre_empresa', '=', $request->empresa)
+        ->where('empresas.id_empresa', '=', $request->empresa)
         ->select('trabajadordosimetros.id_trabajadordosimetro','trabajadordosimetros.ubicacion', 'trabajadordosimetros.ubicacion', 'trabajadordosimetros.mes_asignacion','personas.primer_nombre_persona', 'personas.segundo_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'dosimetros.codigo_dosimeter', 'holders.codigo_holder', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'empresas.nombre_empresa', 'departamentos.nombre_departamento')
         ->get();
         return response()->json($asignacionesall);
@@ -2548,7 +2548,7 @@ class DosimetriaController extends Controller
         ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
         ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
         ->whereNull('dosicontrolcontdosisedes.revision_salida')
-        ->where('empresas.nombre_empresa', '=', $request->empresa)
+        ->where('empresas.id_empresa', '=', $request->empresa)
         ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'departamentos.nombre_departamento')
         ->get();
         
@@ -2568,7 +2568,9 @@ class DosimetriaController extends Controller
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream();
     } */
-    public function pdfReporteRevisionSalida($deptodosi, $mesnumber){
+    public function pdfReporteRevisionSalida($empresa, $deptodosi, $mesnumber){
+        /* return $deptodosi; */
+
         $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
         $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
         ->where('mes_asignacion', '=', $mesnumber)
@@ -2576,7 +2578,17 @@ class DosimetriaController extends Controller
         $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $deptodosi)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
-        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionsalida_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados'));
+
+        //PARA LA REVISION GENERAL///
+        $temptrabajdosimrev = Temptrabajdosimrev::join('contratodosimetriasededeptos', 'temptrabajdosimrevs.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
+        ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
+        ->join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
+        ->join('departamentos', 'departamentosedes.departamento_id', '=', 'departamentos.id_departamento')
+        ->get();
+        $empresainfo= ContratosDosimetriaEmpresa::where('empresa_id', '=', $empresa)
+        ->get();
+        /* return $empresainfo; */
+        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionsalida_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados', 'temptrabajdosimrev', 'empresainfo'));
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream();
     }
