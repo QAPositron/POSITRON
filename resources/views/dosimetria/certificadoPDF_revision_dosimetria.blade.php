@@ -20,7 +20,7 @@
         text-align:center;
         color:#1A9980;
 
-    }
+    } 
 </style>
 <body>
     <img src="{{asset('imagenes/VerdeSF.png')}}" width="200" style="position:relative; right:20px; bottom:10px; ">
@@ -60,43 +60,5 @@
     <p style="position:relative; text-align:justify;">Se revisaron 3 dosímetros de control, tres dosímetros de tórax, un dosímetro de anillo y un dosímetro de cristalino, para un total de 8 dosímetros.</p>
     <p style="position:relative; text-align:justify;">En caso de encontrar inconsistencias en la información, por favor hacerla llegar vía correo electrónico indicando el número de revisión dosímetros del presente documento al correo: <label style="color:#1A9980;">dosimetría.qapositron@gmail.com.</label> </p>
     <p style="position:relative; text-align:justify;">Cordialmente,</p>
-    <div style="position:relative; text-align:center;">
-        <label style="position: relative; top: 50px; ">_________________________________________</label> <br>
-        <label style="position: relative; top: 50px; color:#1A9980;">Diego Fernando Aponte Castañeda</label> <br>
-        <label style="position: relative; top: 50px;">Representante legal</label> <br>
-        <label style="position: relative; top: 50px;">Responsable de la lectura de los dosímetros</label>
-    </div>
-    <div style="position:relative; top:50px; text-align:center;">
-        <label style="position: relative; top: 50px;">_________________________________________</label> <br>
-        <label style="position: relative; top: 50px; color:#1A9980;">Judy J. Gaviria Torres</label> <br>
-        <label style="position: relative; top: 50px;">Ingeniera</label> <br>
-        <label style="position: relative; top: 50px;">Operador logístico</label>
-    </div>
-    <p style="position: relative; top:250px;"><b>_____________________________________</b></p>
-    <p style="position: relative; top:240px;"><small><sup>1</sup> Campo para que el encargado de la dosimetría revise la llagada de los dosímetros una vez es abierto el paquete</small></p>
-    <footer>
-        <p>______________________________________________________________________________________________</p>
-        <p >Servicios en dosimetría, protección radiológica y controles de calidad equipos de Rayos X</p>
-        <p style="top:30px;">dosimetria.qapositron@gmail.com – 301 449 5401 – 310 607 9375 – 304 338 6581</p>
-        <p>www.qapositron.com</p>
-    </footer>
-
-
-
-
-
-
-
-    <!-- ////////////////////SCRIPT PARA CONTAR LAS PAGINAS/////////////// -->
-    <script type="text/php">
-        if (isset($pdf)) {
-            $text = "página {PAGE_NUM} de {PAGE_COUNT}";
-            $size = 8;
-            $font = $fontMetrics->getFont("Verdana");
-            $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
-            $x = $pdf->get_width()-120;
-            $y = $pdf->get_height() - 50;
-            $pdf->page_text($x, $y, $text, $font, $size);
-        }
-    </script>
+    
 </body>

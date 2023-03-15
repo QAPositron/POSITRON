@@ -2562,9 +2562,21 @@ class DosimetriaController extends Controller
         return response()->json($dosicontrol);
     } */
     
-    public function pdfCertificadorevisionsalida($empresa, $deptodosi, $mesnumber){
+    /* public function pdfCertificadorevisionsalida($empresa, $deptodosi, $mesnumber){
         
         $pdf =  PDF::loadView('dosimetria.certificadoPDF_revision_dosimetria');
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream();
+    } */
+    public function pdfReporteRevisionSalida($deptodosi, $mesnumber){
+        $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
+        $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
+        $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
+        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionsalida_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados'));
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream();
     }

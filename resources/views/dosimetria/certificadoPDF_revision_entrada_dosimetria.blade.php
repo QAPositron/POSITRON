@@ -11,8 +11,8 @@
     }
 </style>
 <body>
-    <img src="{{asset('imagenes/VerdeSF.png')}}" width="200" style="position:relative; right:20px; bottom:10px; ">
-    <img src="{{asset('imagenes/SERVICIOS_QA.png')}}" width="330" style="position:relative; left:100px;">
+    <img src="{{asset('imagenes/1VerdeSF.png')}}" width="200" style="position:relative; right:20px; bottom:10px; ">
+    <img src="{{asset('imagenes/1SERVICIOS_QA.png')}}" style="position:relative; left:100px;">
 
     <p style="position:relative;">Señores</p>
     <p style="position:relative; bottom:8px;"><b>EMPRESA</b></p>
