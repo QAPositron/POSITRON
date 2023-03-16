@@ -2574,9 +2574,11 @@ class DosimetriaController extends Controller
         $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
         $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
         ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_salida', '=', 'TRUE')
         ->get();
         $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $deptodosi)
         ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_salida', '=', 'TRUE')
         ->get();
 
         //PARA LA REVISION GENERAL///
@@ -2587,7 +2589,8 @@ class DosimetriaController extends Controller
         ->get();
         $empresainfo= ContratosDosimetriaEmpresa::where('empresa_id', '=', $empresa)
         ->get();
-        /* return $empresainfo; */
+
+       /*  return $temptrabajdosimrev; */
         $pdf =  PDF::loadView('dosimetria.reportePDF_revisionsalida_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados', 'temptrabajdosimrev', 'empresainfo'));
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream();
