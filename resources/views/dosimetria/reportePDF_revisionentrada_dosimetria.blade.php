@@ -100,7 +100,7 @@
                 <p style="position:relative;">Municipio: @php echo ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->empresa->municipios->nombre_municol)); @endphp - @php echo ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->empresa->municipios->coldepartamento->nombre_deptocol)); @endphp </p>
             @endif
             <br>
-            <p style="position:relative;"> <b>Ref.: notificación revisión salida dosímetros – RSD-OSL-QA- 
+            <p style="position:relative;"> <b>Ref.: notificación revisión entrada dosímetros – RSD-OSL-QA- 
                 @php 
                     date_default_timezone_set('America/Bogota');
                     echo date("Y").date("m").date("d").date("H").date("i").date("s"); 
@@ -109,9 +109,9 @@
             <br>
             <p style="position:relative;">Cordial saludo,</p>
             <br>
-            <p style="position:relative; text-align:justify;">La empresa cuenta con un programa de aseguramiento de la calidad del laboratorio de dosimetría personal (LDP). Por lo tanto, deseamos informarles que hemos llevado a cabo la revisión de los dosímetros antes del envío a sus instalaciones, en este proceso garantizamos que la cantidad dosímetros sea la correcta y que el número del dosímetro con la información de la etiqueta se encuentren asociados para el periodo asignado.</p>
+            <p style="position:relative; text-align:justify;">La empresa cuenta con un programa de aseguramiento de la calidad del laboratorio de dosimetría personal (LDP). Por lo tanto, deseamos informarles que hemos llevado a cabo la revisión de los dosímetros enviados por ustedes a nuestro laboratorio. En este proceso, se garantiza que se cumplirán los siguientes criterios: <b>i)</b> la cantidad de dosímetros es la correcta; <b>ii)</b> la integridad de los holders y dosímetros está asegurada; <b>iii)</b> no haya contaminación de materiales radiactivos; <b>iv)</b> se ha verificado que el código del dosímetro y la información de la etiqueta están asociados para el período asignado.</p>
             <br>
-            <p style="position:relative; text-align:justify;">A continuación se listan los dosímetros revisados:</p>
+            <p style="position:relative; text-align:justify;">A continuación se listan los dosímetros revisados y sus observaciones:</p>
             <br>        
             <table style="position:relative; margin: 0 auto; border-collapse:collapse; font-size:9px; width: 100%" cellpadding="4">
                 <thead>
@@ -124,7 +124,7 @@
                         <th>Mes</th>
                         <th style="width: 10%;">Sede</th>
                         <th style="width: 12%;">Periodo</th>
-                        <th style="width: 20%;">Observaciones Revisión salida<sup>1</sup></th>
+                        <th style="width: 20%;">Observaciones Revisión llegada<sup>1</sup></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -236,6 +236,10 @@
                 </tbody>
             </table>
             <br>
+            <p style="position:relative; text-align:justify;"><b>Convenciones de las observaciones: </b>1) Buen Estado Físico, 2) Dosímetro contaminado<sup>2</sup>, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 5) dosímetro sin etiqueta, 6) holder dañado, 7) dosímetro de otro periodo, 8) Dosímetro otra sede, 9) Otra adicional.</p>
+            <br>
+            <p style="position:relative; text-align:justify;"><b>Observaciones Adicionales:</b></p>
+            <br>
             @if(empty($contdosisededepto))
                 <p style="position:relative; text-align:justify;">Se revisaron
                     @php
@@ -298,16 +302,11 @@
                 <p style="position:relative; bottom: 49px; text-align: center; font-size: 11px; ">Operador logístico</p>
             </div>
             <br>
-            <p style="position:relative; top:15px;">Quien revisa la llegada de los dosímetros a la instalación:</p>
             
-            <div style="position:relative; width: 200px; height: 50px; top:45px; page-break-inside: avoid; ">
-                <p style="position: relative; text-align: center;">_____________________________</p> <br>
-                <p style="position: relative; bottom: 17px; text-align: center; font-size: 11px; color:#1A9980;">**Nombre del responsable**</p> <br>
-                <p style="position: relative; bottom: 35px; text-align: center; font-size: 11px; ">Responsable de recibir la dosimetría</p> <br>
-            </div>
             <div class="indices">
-                <p style=""><b>_____________________________________</b></p>
-                <p style="position: relative;"><small><sup>1</sup> Campo para que el encargado de la dosimetría del LDP revise la llagada de los dosímetros una vez es abierto el paquete. Usar las siguientes convenciones: 1) Buen Estado Físico, 2) inconsistencia información etiqueta-dosímetro, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 5) dosímetro sin etiqueta, 6) holder dañado, 7) dosímetro de otro periodo, 8) Dosímetro otra sede, 9) Otra adicional.</small></p>
+                <p><b>_____________________________________</b></p>
+                <p style="position: relative;"><small><sup>1</sup> Campo para que el encargado de la dosimetría del LDP revise la llagada de los dosímetros una vez es abierto el paquete.</small></p>
+                <p style="position: relative;"><small><sup>2</sup> En caso de encontrarse contaminados deben iniciar investigación.</small></p>
             </div>
             <br>
         </div>

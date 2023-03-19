@@ -249,7 +249,8 @@ Route::get('/revisiondosimetriaentrada/asignaciones', [DosimetriaController::cla
 Route::get('/revisiondosimetriaentrada/asignacionesControl', [DosimetriaController::class, 'asignacionesControlEntrada']);
 
 Route::post('revisiondosimetriaentrada/observacion', [DosimetriaController::class, 'observacionesRevsEntradaGeneral'])->name('observacionesrevsentradageneral.create');
-Route::get('certificadorevisionentradadosimetria/{empresa}/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfCertificadorevisionentrada'])->name('certificadorevisionentrada.pdf');
+/* Route::get('certificadorevisionentradadosimetria/{empresa}/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfCertificadorevisionentrada'])->name('certificadorevisionentrada.pdf'); */
+Route::get('/reporteRevisionEntrada/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfReporteRevisionEntrada'])->name('Reporterevisionentrada.pdf');
 
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA (ANTIGUAS)//////////////
 Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');

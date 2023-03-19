@@ -2595,6 +2595,22 @@ class DosimetriaController extends Controller
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream();
     }
+    public function pdfReporteRevisionEntrada($deptodosi, $mesnumber){
+        $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
+        $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_entrada', '=', 'TRUE')
+        ->get();
+        $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_entrada', '=', 'TRUE')
+        ->get();
+        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionentrada_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados',));
+        $pdf->setPaper('A4', 'portrait');
+        date_default_timezone_set('America/Bogota');
+        return $pdf->stream("RSD_OSL_QA_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
+        
+    }
     public function revisionDosimetriaEntrada($id, $mesnumber){
         $contdosisededepto = Contratodosimetriasededepto::find($id);
         $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $id)
