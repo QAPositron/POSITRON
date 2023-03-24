@@ -23,7 +23,7 @@ class FormDepartamento extends Component
         $this->validate();
 
         $depto = new Departamento();
-        $depto->nombre_departamento = strtoupper($this->nombre_especialidad);
+        $depto->nombre_departamento = mb_strtoupper($this->nombre_especialidad);
 
         $depto->save();
         

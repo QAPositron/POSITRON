@@ -27,8 +27,8 @@ class HolderController extends Controller
         $holder = new Holder();
 
         $holder->codigo_holder  = $request->codigo_holder;
-        $holder->tipo_holder    = strtoupper($request->tipo_holder);
-        $holder->estado_holder  = strtoupper($request->estado_holder);
+        $holder->tipo_holder    = mb_strtoupper($request->tipo_holder);
+        $holder->estado_holder  = mb_strtoupper($request->estado_holder);
         
         $holder->save();
 
@@ -56,8 +56,8 @@ class HolderController extends Controller
             
         ]);
         $holder->codigo_holder      = $request->codigo_holder;
-        $holder->tipo_holder        = strtoupper($request->tipo_holder);
-        $holder->estado_holder      = strtoupper($request->estado_holder);
+        $holder->tipo_holder        = mb_strtoupper($request->tipo_holder);
+        $holder->estado_holder      = mb_strtoupper($request->estado_holder);
 
         $holder->save();
         return redirect()->route('dosimetros.search')->with('actualizar', 'ok');

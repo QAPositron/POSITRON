@@ -46,5 +46,8 @@ class Contratodosimetriasededepto extends Model
     public function novedadmesescontdosi(){
         return $this->hasMany(Novedadmesescontdosisededepto::class, 'id_novedadmesescontdosi');
     }
-
+    //relacion uno a muchos con la tabla obsreventrada
+    public function obsreventrada(){
+        return $this->hasMany(Obsreventrada::class, 'id_obsreventrada');
+    }
 }

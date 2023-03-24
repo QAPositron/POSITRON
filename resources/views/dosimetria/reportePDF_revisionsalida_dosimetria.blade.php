@@ -36,8 +36,10 @@
         top: 100px;
         left: 0cm;
         right: 0cm;
-        margin-bottom:4.5cm;
-       /*  background: yellow; */
+        margin-bottom:3cm;
+        padding-bottom: 50px;
+        display:block;
+        /* background: yellow; */
     }
    
     td, th{
@@ -73,7 +75,7 @@
     <main>
         <div class="container">
 
-           {{--  @for($i= 1; $i<= 16; $i++)
+            {{-- @for($i= 1; $i<= 19; $i++)
                 
                     {{$i}} <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, quam quidem doloremque odio recusandae delectus itaque est exercitationem ut officia nemo nihil qui rerum quis sed nulla reiciendis facere repellendus?</p>
                 
@@ -270,20 +272,44 @@
                         if($torax != 0){if($torax <= 9){ echo "0".$torax." dosímetros de tórax, "; }else{ echo $torax." dosímetros de tórax, ";}}
                         if($anillo != 0){if($anillo <= 9){ echo "0".$anillo." dosímetro de anillo y ";}else{ echo $anillo." dosímetro de anillo y ";}}
                         if($cristalino != 0){if($cristalino <= 9){ echo "0".$cristalino." dosímetro de cristalino, para un total de ".$sum_control+$torax+$anillo+$cristalino." dosimetros."; } else{ echo $cristalino." dosímetro de cristalino, para un total de ".$sum_control+$torax+$anillo+$cristalino." dosimetros."; }}
-    
+                        $suma = $control+$torax+$anillo+$cristalino;
+                        if($suma != 0){if($suma <= 9){echo ", para un total de 0".$suma." dosimetros.";}else{echo ", para un total de ".$suma." dosimetros.";}}
                     @endphp
                 </p>
             @else
                 <p style="position:relative; text-align:justify;">Se revisaron
                     @php
-                        $control = $contdosisededepto->dosi_control_torax + $contdosisededepto->dosi_control_cristalino + $contdosisededepto->dosi_control_dedo;
+                        $control_torax = 0;
+                        $control_cristalino = 0;
+                        $control_anillo = 0;
+                        $torax = 0;
+                        $cristalino = 0;
+                        $anillo = 0;
+                        foreach($dosicontrolasig as $dosicont){
+                            if($dosicont->ubicacion == 'TORAX' && $dosicont->revision_salida == 'TRUE'){
+                                $control_torax += 1;
+                            }elseif($dosicont->ubicacion == 'CRISTALINO' && $dosicont->revision_salida == 'TRUE'){
+                                $control_cristalino += 1;
+                            }elseif($dosicont->ubicacion == 'ANILLO' && $dosicont->revision_salida == 'TRUE'){
+                                $control_anillo += 1;
+                            }
+                        }
+                        foreach($trabjasignados as $trabjasig){
+                            if($trabjasig->ubicacion == 'TORAX' && $trabjasig->revision_salida == 'TRUE'){
+                                $torax += 1;
+                            }elseif($trabjasig->ubicacion == 'CRISTALINO' && $trabjasig->revision_salida == 'TRUE'){
+                                $cristalino += 1;
+                            }elseif($trabjasig->ubicacion == 'ANILLO' && $trabjasig->revision_salida == 'TRUE'){
+                                $anillo += 1;
+                            }
+                        }
+                        $control = $control_torax + $control_cristalino + $control_anillo;
                         if($control != 0){if($control <= 9){ echo "0".$control." dosímetros de control, "; }else{ echo $control." dosímetros de control, "; }}
-                        $torax = $contdosisededepto->dosi_torax;
                         if($torax != 0){if($torax <= 9){ echo "0".$torax." dosímetros de tórax, "; }else{ echo $torax." dosímetros de tórax, ";}}
-                        $anillo = $contdosisededepto->dosi_dedo;
                         if($anillo != 0){if($anillo <= 9){ echo "0".$anillo." dosímetro de anillo y ";}else{ echo $anillo." dosímetro de anillo y ";}}
-                        $cristalino = $contdosisededepto->dosi_cristalino;
-                        if($cristalino != 0){if($cristalino <= 9){ echo "0".$cristalino." dosímetro de cristalino, para un total de ".$control+$torax+$anillo+$cristalino." dosimetros."; } else{ echo $cristalino." dosímetro de cristalino, para un total de ".$control+$torax+$anillo+$cristalino." dosimetros."; }}
+                        if($cristalino != 0){if($cristalino <= 9){ echo "0".$cristalino." dosímetro de cristalino"; } else{ echo $cristalino." dosímetro de cristalino";}}
+                        $suma = $control+$torax+$anillo+$cristalino;
+                        if($suma != 0){if($suma <= 9){echo ", para un total de 0".$suma." dosimetros.";}else{echo ", para un total de ".$suma." dosimetros.";}}
                     @endphp
                 </p>
             @endif
@@ -298,9 +324,10 @@
                 <p style="position:relative; bottom: 49px; text-align: center; font-size: 11px; ">Operador logístico</p>
             </div>
             <br>
+            <br>
             <p style="position:relative; top:15px;">Quien revisa la llegada de los dosímetros a la instalación:</p>
-            
             <div style="position:relative; width: 200px; height: 50px; top:45px; page-break-inside: avoid; ">
+                
                 <p style="position: relative; text-align: center;">_____________________________</p> <br>
                 <p style="position: relative; bottom: 17px; text-align: center; font-size: 11px; color:#1A9980;">**Nombre del responsable**</p> <br>
                 <p style="position: relative; bottom: 35px; text-align: center; font-size: 11px; ">Responsable de recibir la dosimetría</p> <br>

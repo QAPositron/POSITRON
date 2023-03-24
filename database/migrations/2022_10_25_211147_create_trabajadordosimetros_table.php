@@ -82,6 +82,7 @@ class CreateTrabajadordosimetrosTable extends Migration
             $table->string('DSU', 50)->nullable();
             $table->string('revision_salida', 50)->nullable();
             $table->string('revision_entrada', 50)->nullable();
+            
             $table->timestamps();
         });
     }

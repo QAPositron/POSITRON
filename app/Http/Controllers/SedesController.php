@@ -50,9 +50,9 @@ class SedesController extends Controller
         $sede = new Sede();
 
         $sede->empresas_id         =$request->id_empresa;
-        $sede->nombre_sede         =strtoupper($request->nombre_sede);
-        $sede->municipiocol_id     =strtoupper($request->municipio_sede);       
-        $sede->direccion_sede	   =strtoupper($request->direccion_sede);
+        $sede->nombre_sede         = mb_strtoupper($request->nombre_sede);
+        $sede->municipiocol_id     = mb_strtoupper($request->municipio_sede);       
+        $sede->direccion_sede	   = mb_strtoupper($request->direccion_sede);
         
         $sede->save();
 

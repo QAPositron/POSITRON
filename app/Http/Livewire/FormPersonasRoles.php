@@ -24,7 +24,7 @@ class FormPersonasRoles extends Component
 
         $roles = new Roles();
 
-        $roles->nombre_rol = strtoupper($this->nombre_rol);
+        $roles->nombre_rol =  mb_strtoupper($this->nombre_rol);
 
         $roles->save();
         return back()->with('guardar', 'ok');

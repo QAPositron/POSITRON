@@ -225,8 +225,8 @@ Route::get('revisiondosimetria/{deptodosi}/{mesnumber}/revision', [DosimetriaCon
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetro',[DosimetriaController::class, 'revisionDosimetro']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/trabajadordosimetro',[DosimetriaController::class, 'revisionCheck']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetroControl',[DosimetriaController::class, 'revisionCheckControl']);
-
-
+Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/asignacionesTrab', [DosimetriaController::class, 'asignacionesTrab']);
+Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/asignacionesCont', [DosimetriaController::class, 'asignacionesCont']);
 Route::get('revisiondosimetria/create', [DosimetriaController::class, 'revisionDosimetriaGeneral'])->name('revisiondosimetria.create');
 Route::get('/revisiondosimetria/asignaciones', [DosimetriaController::class, 'asignaciones']);
 Route::get('/revisiondosimetria/dosimetro', [DosimetriaController::class, 'revisionDosimetro']);
@@ -236,13 +236,16 @@ Route::get('/revisiondosimetria/asignacionesControl', [DosimetriaController::cla
 Route::get('/revisiondosimetria/controldosimetro',[DosimetriaController::class, 'revisionCheckControlGeneral']);
 Route::get('/revisiondosimetria/eliminarevisado', [DosimetriaController::class, 'eliminarevision']);
 /* Route::get('certificadorevisiondosimetria/{empresa}/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfCertificadorevisionsalida'])->name('certificadorevision.pdf'); */
+
 Route::get('/reporteRevisionSalida/{empresa}/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfReporteRevisionSalida'])->name('Reporterevisionsalida.pdf');
 ////////////RUTAS PARA LA REVISION ENTRADA DE DOSIMETROS ASIGNADOS/////////
 Route::get('revisiondosimetriaentrada/{deptodosi}/{mesnumber}/revisionEntrada', [DosimetriaController::class, 'revisionDosimetriaEntrada'])->name('revisiondosimetriaEntrada.check');
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/dosimetro', [DosimetriaController::class, 'revisionDosimetro']);
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/dosimetroControlEntrada',[DosimetriaController::class, 'revisionCheckControlEntrada']);
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/trabajadordosimetroEntrada',[DosimetriaController::class, 'revisionCheckEntrada']);
-
+Route::post('/revisiondosimetriaentrada', [DosimetriaController::class, 'saveObservacionesReventrada'])->name('observacionesReventrada.save');
+Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/asignacionesTrab', [DosimetriaController::class, 'asignacionesTrab']);
+Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/asignacionesCont', [DosimetriaController::class, 'asignacionesCont']);
 Route::get('revisiondosimetriaentrada/create', [DosimetriaController::class, 'revisionDosimetriaEntradaGeneral'])->name('revisiondosimetriaentrada.create');
 Route::get('/revisiondosimetriaentrada/dosimetro', [DosimetriaController::class, 'revisionDosimetro']);
 Route::get('/revisiondosimetriaentrada/asignaciones', [DosimetriaController::class, 'asignacionesEntrada']);
@@ -250,7 +253,7 @@ Route::get('/revisiondosimetriaentrada/asignacionesControl', [DosimetriaControll
 
 Route::post('revisiondosimetriaentrada/observacion', [DosimetriaController::class, 'observacionesRevsEntradaGeneral'])->name('observacionesrevsentradageneral.create');
 /* Route::get('certificadorevisionentradadosimetria/{empresa}/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfCertificadorevisionentrada'])->name('certificadorevisionentrada.pdf'); */
-Route::get('/reporteRevisionEntrada/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfReporteRevisionEntrada'])->name('Reporterevisionentrada.pdf');
+Route::get('/reporteRevisionEntrada/{empresa}/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfReporteRevisionEntrada'])->name('Reporterevisionentrada.pdf');
 
 ////////////RUTAS PARA LAS NOVEDADES DE DOSIMETRIA (ANTIGUAS)//////////////
 Route::get('novedades/create', [NovedadesController::class, 'index'])->name('novedadesdosim.create');

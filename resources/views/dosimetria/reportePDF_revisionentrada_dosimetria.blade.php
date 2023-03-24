@@ -36,7 +36,9 @@
         top: 100px;
         left: 0cm;
         right: 0cm;
-        margin-bottom:4.5cm;
+        margin-bottom: 3cm/* 4.5cm */;
+        padding-bottom: 50px;
+        display:block;
        /*  background: yellow; */
     }
    
@@ -124,49 +126,49 @@
                         <th>Mes</th>
                         <th style="width: 10%;">Sede</th>
                         <th style="width: 12%;">Periodo</th>
-                        <th style="width: 20%;">Observaciones Revisión llegada<sup>1</sup></th>
+                        <th style="width: 20%;">Observaciones Revisión llegada al LDP<sup>1</sup></th>
                     </tr>
                 </thead>
                 <tbody>
                     @if(empty($contdosisededepto))
-                        @foreach($temptrabajdosimrev as $temtrabasig)
-                            @if($temtrabasig->dosicontrolcontdosisedes_id != NULL)
+                        @foreach($temptrabajdosimentradarev as $temtrabasigent)
+                            @if($temtrabasigent->dosicontrolcontdosisedes_id != NULL)
                                 <tr style="background-color: #EEEDEC">
-                                    <td>Control @if($temtrabasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($temtrabasig->ubicacion))}} @endif</td>
-                                    <td style="text-align:center;">{{$temtrabasig->dosimetro->codigo_dosimeter}}</td>
+                                    <td>Control @if($temtrabasigent->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($temtrabasigent->ubicacion))}} @endif</td>
+                                    <td style="text-align:center;">{{$temtrabasigent->dosimetro->codigo_dosimeter}}</td>
                                     <td style="text-align:center;">
-                                        @if($temtrabasig->holder_id == NULL)
+                                        @if($temtrabasigent->holder_id == NULL)
                                             N.A.
                                         @else
-                                            {{$temtrabasig->holder->codigo_holder}}
+                                            {{$temtrabasigent->holder->codigo_holder}}
                                         @endif
                                     </td>
-                                    <td style="text-align:center;">@if($temtrabasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($temtrabasig->ubicacion))}} @endif</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower(substr($temtrabasig->nombre_departamento,0,4)))}}.</td>
-                                    <td style="text-align:center;">{{$temtrabasig->mes_asignacion}}/12</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower($temtrabasig->nombre_sede))}}</td>
-                                    <td style="text-align:center;">{{$temtrabasig->primer_dia_uso}} - {{$temtrabasig->ultimo_dia_uso}}</td>
+                                    <td style="text-align:center;">@if($temtrabasigent->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($temtrabasigent->ubicacion))}} @endif</td>
+                                    <td style="text-align:center;">{{ucwords(strtolower(substr($temtrabasigent->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">{{$temtrabasigent->mes_asignacion}}/12</td>
+                                    <td style="text-align:center;">{{ucwords(strtolower($temtrabasigent->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{$temtrabasigent->primer_dia_uso}} - {{$temtrabasigent->ultimo_dia_uso}}</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
                             @endif
                         @endforeach
-                        @foreach($temptrabajdosimrev as $temtrabasig)
-                            @if($temtrabasig->trabajcontdosimetro_id != NULL)
+                        @foreach($temptrabajdosimentradarev as $temtrabasigent)
+                            @if($temtrabasigent->trabajcontdosimetro_id != NULL)
                                 <tr>
-                                    <td>{{ucwords(strtolower($temtrabasig->persona->primer_nombre_persona))}} {{ucwords(strtolower($temtrabasig->persona->segundo_nombre_persona))}} {{ucwords(strtolower($temtrabasig->persona->primer_apellido_persona))}} {{ucwords(strtolower($temtrabasig->persona->segundo_apellido_persona))}}</td>
-                                    <td style="text-align:center;">{{$temtrabasig->dosimetro->codigo_dosimeter}}</td>
+                                    <td>{{ucwords(strtolower($temtrabasigent->persona->primer_nombre_persona))}} {{ucwords(strtolower($temtrabasigent->persona->segundo_nombre_persona))}} {{ucwords(strtolower($temtrabasigent->persona->primer_apellido_persona))}} {{ucwords(strtolower($temtrabasigent->persona->segundo_apellido_persona))}}</td>
+                                    <td style="text-align:center;">{{$temtrabasigent->dosimetro->codigo_dosimeter}}</td>
                                     <td style="text-align:center;">
-                                        @if($temtrabasig->holder_id == NULL)
+                                        @if($temtrabasigent->holder_id == NULL)
                                             N.A.
                                         @else
-                                            {{$temtrabasig->holder->codigo_holder}}
+                                            {{$temtrabasigent->holder->codigo_holder}}
                                         @endif
                                     </td>
-                                    <td style="text-align:center;">@if($temtrabasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($temtrabasig->ubicacion))}}@endif</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower(substr($temtrabasig->nombre_departamento,0,4)))}}.</td>
-                                    <td style="text-align:center;">{{$temtrabasig->mes_asignacion}}/12</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower($temtrabasig->nombre_sede))}}</td>
-                                    <td style="text-align:center;">{{$temtrabasig->primer_dia_uso}} - {{$temtrabasig->ultimo_dia_uso}}</td>
+                                    <td style="text-align:center;">@if($temtrabasigent->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($temtrabasigent->ubicacion))}}@endif</td>
+                                    <td style="text-align:center;">{{ucwords(strtolower(substr($temtrabasigent->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">{{$temtrabasigent->mes_asignacion}}/12</td>
+                                    <td style="text-align:center;">{{ucwords(strtolower($temtrabasigent->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{$temtrabasigent->primer_dia_uso}} - {{$temtrabasigent->ultimo_dia_uso}}</td>
                                     <td></td>
                                 </tr>
                             @endif
@@ -189,7 +191,7 @@
                                     <td style="text-align:center;">{{$mesnumber}}/12</td>
                                     <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->primer_dia_uso}} - {{$trabjasig->ultimo_dia_uso}}</td>
-                                    <td></td>
+                                    <td style="text-align:center;">{{$trabjasig->observacion_revent}})</td>
                                 </tr>
                             @endforeach
                         @else
@@ -209,7 +211,7 @@
                                     <td style="text-align:center;">{{$mesnumber}}/12</td>
                                     <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
                                     <td style="text-align:center;">{{$dosicont->primer_dia_uso}} - {{$dosicont->ultimo_dia_uso}}</td>
-                                    <td style="text-align:center;"></td>
+                                    <td style="text-align:center;">{{$dosicont->observacion_revent}})</td>
                                 </tr>
                             @endforeach
                             @foreach($trabjasignados as $trabjasig)
@@ -228,7 +230,7 @@
                                     <td style="text-align:center;">{{$mesnumber}}/12</td>
                                     <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->primer_dia_uso}} - {{$trabjasig->ultimo_dia_uso}}</td>
-                                    <td></td>
+                                    <td style="text-align:center;">{{$trabjasig->observacion_revent}})</td>
                                 </tr>
                             @endforeach
                         @endif
@@ -249,22 +251,22 @@
                         $torax = 0;
                         $cristalino = 0;
                         $anillo = 0;
-                        foreach ($temptrabajdosimrev as $temtrabasig) {
-                            if($temtrabasig->trabajcontdosimetro_id != NULL){
-                                if($temtrabasig->ubicacion == 'TORAX'){
+                        foreach ($temptrabajdosimentradarev as $temtrabasigent) {
+                            if($temtrabasigent->trabajcontdosimetro_id != NULL){
+                                if($temtrabasigent->ubicacion == 'TORAX'){
                                     $torax += 1;
-                                }elseif($temtrabasig->ubicacion == 'CRISTALINO'){
+                                }elseif($temtrabasigent->ubicacion == 'CRISTALINO'){
                                     $cristalino += 1;
-                                }elseif($temtrabasig->ubicacion == 'ANILLO'){
+                                }elseif($temtrabasigent->ubicacion == 'ANILLO'){
                                     $anillo += 1;
                                 }
                             }
-                            if($temtrabasig->dosicontrolcontdosisedes_id != NULL){
-                                if($temtrabasig->ubicacion == 'TORAX'){
+                            if($temtrabasigent->dosicontrolcontdosisedes_id != NULL){
+                                if($temtrabasigent->ubicacion == 'TORAX'){
                                     $control_torax += 1;
-                                }elseif($temtrabasig->ubicacion == 'CRISTALINO'){
+                                }elseif($temtrabasigent->ubicacion == 'CRISTALINO'){
                                     $control_cristalino += 1;
-                                }elseif($temtrabasig->ubicacion == 'ANILLO'){
+                                }elseif($temtrabasigent->ubicacion == 'ANILLO'){
                                     $control_anillo += 1;
                                 }
                             }

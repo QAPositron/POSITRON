@@ -29,11 +29,11 @@ class DosimetrosController extends Controller
         
         $dosimetro = new Dosimetro();
 
-        $dosimetro->tipo_dosimetro          = strtoupper($request->tipo_dosimetro);
-        $dosimetro->tecnologia_dosimetro    = strtoupper($request->tecnologia_dosimetro);
+        $dosimetro->tipo_dosimetro          =  mb_strtoupper($request->tipo_dosimetro);
+        $dosimetro->tecnologia_dosimetro    =  mb_strtoupper($request->tecnologia_dosimetro);
         $dosimetro->codigo_dosimeter        = $request->codigo_dosimetro;
         $dosimetro->fecha_ingreso_servicio  = $request->fecha_ingre_serv_dosimetro;
-        $dosimetro->estado_dosimetro        = strtoupper($request->estado_dosimetro);
+        $dosimetro->estado_dosimetro        =  mb_strtoupper($request->estado_dosimetro);
         $dosimetro->uso_dosimetro           = '';
        
         $dosimetro->save();
@@ -67,11 +67,11 @@ class DosimetrosController extends Controller
              
             
         ]);
-        $dosimetro->tipo_dosimetro          = strtoupper($request->tipo_dosimetro);
-        $dosimetro->tecnologia_dosimetro    = strtoupper($request->tecnologia_dosimetro);
+        $dosimetro->tipo_dosimetro          =  mb_strtoupper($request->tipo_dosimetro);
+        $dosimetro->tecnologia_dosimetro    =  mb_strtoupper($request->tecnologia_dosimetro);
         $dosimetro->codigo_dosimeter        = $request->codigo_dosimetro;
         $dosimetro->fecha_ingreso_servicio  = $request->fecha_ingre_serv_dosimetro;
-        $dosimetro->estado_dosimetro        = strtoupper($request->estado_dosimetro);
+        $dosimetro->estado_dosimetro        =  mb_strtoupper($request->estado_dosimetro);
 
         $dosimetro->save();
         return redirect()->route('dosimetros.search')->with('actualizar', 'ok');

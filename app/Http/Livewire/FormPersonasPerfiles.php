@@ -23,7 +23,7 @@ class FormPersonasPerfiles extends Component
         $this->validate();
 
         $perfil = new Perfiles();
-        $perfil->nombre_perfil_laboral = strtoupper($this->nombre_perfil_laboral);
+        $perfil->nombre_perfil_laboral =  mb_strtoupper($this->nombre_perfil_laboral);
 
         $perfil->save();
         return back()->with('guardar', 'ok');

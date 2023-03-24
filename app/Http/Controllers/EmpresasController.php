@@ -73,22 +73,22 @@ class EmpresasController extends Controller
         
         $empresa = new Empresa();
 
-        $empresa->nombre_empresa                    = strtoupper($request->nombre_empresa);
-        $empresa->tipo_identificacion_empresa       = strtoupper($request->tipoIden_empresa);
+        $empresa->nombre_empresa                    = mb_strtoupper($request->nombre_empresa);
+        $empresa->tipo_identificacion_empresa       = mb_strtoupper($request->tipoIden_empresa);
         $empresa->num_iden_empresa                  = $request->numero_ident;
         $empresa->DV                                = $request->nitdv_empresa;
-        $empresa->tipo_empresa                      = strtoupper($request->tipo_empresa);
+        $empresa->tipo_empresa                      = mb_strtoupper($request->tipo_empresa);
         $empresa->actividad_economica_empresa       = $request->actividad_empresa;
-        $empresa->respo_iva_empresa                 = strtoupper($request->respoIva_empresa);
-        $empresa->respo_fiscal_empresa              = strtoupper($request->respoFiscal_empresa);
+        $empresa->respo_iva_empresa                 = mb_strtoupper($request->respoIva_empresa);
+        $empresa->respo_fiscal_empresa              = mb_strtoupper($request->respoFiscal_empresa);
         $empresa->telefono_empresa                  = $request->telefono_empresa;
-        $empresa->email_empresa                     = strtoupper($request->correo_empresa);
+        $empresa->email_empresa                     = mb_strtoupper($request->correo_empresa);
         $empresa->email_verified_at                 = now();
-        $empresa->direccion_empresa                 = strtoupper($request->direccion_empresa);
-        $empresa->pais_empresa                      = strtoupper($request->pais_empresa);
+        $empresa->direccion_empresa                 = mb_strtoupper($request->direccion_empresa);
+        $empresa->pais_empresa                      = mb_strtoupper($request->pais_empresa);
         $empresa->municipiocol_id                   = $request->ciudad_empresa;
-        $empresa->nombre_representantelegal         = strtoupper($request->nombreRepr_empresa);
-        $empresa->tipo_iden_representantelegal      = strtoupper($request->tipoIden_repreLegal);
+        $empresa->nombre_representantelegal         = mb_strtoupper($request->nombreRepr_empresa);
+        $empresa->tipo_iden_representantelegal      = mb_strtoupper($request->tipoIden_repreLegal);
         $empresa->cedula_representantelegal         = $request->cedula_Repr_empresa;
         
         $empresa->save();
@@ -128,22 +128,22 @@ class EmpresasController extends Controller
             'cedula_Repr_empresa' => ['required']
         ]);
         
-        $empresa->nombre_empresa                    = strtoupper($request->nombre_empresa);
-        $empresa->tipo_identificacion_empresa       = strtoupper($request->tipoIden_empresa);
+        $empresa->nombre_empresa                    = mb_strtoupper($request->nombre_empresa);
+        $empresa->tipo_identificacion_empresa       = mb_strtoupper($request->tipoIden_empresa);
         $empresa->num_iden_empresa                  = $request->numero_ident;
         $empresa->DV                                = $request->nitdv_empresa;
-        $empresa->tipo_empresa                      = strtoupper($request->tipo_empresa);
+        $empresa->tipo_empresa                      = mb_strtoupper($request->tipo_empresa);
         $empresa->actividad_economica_empresa       = $request->actividad_empresa;
-        $empresa->respo_iva_empresa                 = strtoupper($request->respoIva_empresa);
-        $empresa->respo_fiscal_empresa              = strtoupper($request->respoFiscal_empresa);
+        $empresa->respo_iva_empresa                 = mb_strtoupper($request->respoIva_empresa);
+        $empresa->respo_fiscal_empresa              = mb_strtoupper($request->respoFiscal_empresa);
         $empresa->telefono_empresa                  = $request->telefono_empresa;
-        $empresa->email_empresa                     = strtoupper($request->correo_empresa);
+        $empresa->email_empresa                     = mb_strtoupper($request->correo_empresa);
         $empresa->email_verified_at                 = now();
-        $empresa->direccion_empresa                 = strtoupper($request->direccion_empresa);
-        $empresa->pais_empresa                      = strtoupper($request->pais_empresa);
+        $empresa->direccion_empresa                 = mb_strtoupper($request->direccion_empresa);
+        $empresa->pais_empresa                      = mb_strtoupper($request->pais_empresa);
         $empresa->municipiocol_id                   = $request->ciudad_empresa;
-        $empresa->nombre_representantelegal         = strtoupper($request->nombreRepr_empresa);
-        $empresa->tipo_iden_representantelegal      = strtoupper($request->tipoIden_repreLegal);
+        $empresa->nombre_representantelegal         = mb_strtoupper($request->nombreRepr_empresa);
+        $empresa->tipo_iden_representantelegal      = mb_strtoupper($request->tipoIden_repreLegal);
         $empresa->cedula_representantelegal         = $request->cedula_Repr_empresa;
         
         $empresa->save();

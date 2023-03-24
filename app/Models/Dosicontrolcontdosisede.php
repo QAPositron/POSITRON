@@ -34,4 +34,8 @@ class Dosicontrolcontdosisede extends Model
     public function novedadmesescontdosi(){
         return $this->hasOne(Novedadmesescontdosisededepto::class, 'dosicontrol_id', 'id_dosicontrolcontdosisedes');
     }
+     //relacion uno a uno con obsreventradas
+     public function obsreventradas(){
+        return $this->hasOne(Obsreventrada::class, 'dosicontrol_id', 'id_dosicontrolcontdosisedes');
+    }
 }

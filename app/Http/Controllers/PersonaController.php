@@ -60,7 +60,7 @@ class PersonaController extends Controller
     public function save(Request $request){
         /* return $request; */
         $request->validate([
-            
+            'rol_personas'               => ['required'],
             'primer_nombre_persona'      => ['required'],              
             'primer_apellido_persona'    => ['required'],
             'segundo_apellido_persona'   => ['required'],
@@ -75,14 +75,14 @@ class PersonaController extends Controller
         
         $persona = new Persona();
 
-        $persona->primer_nombre_persona     = strtoupper($request->primer_nombre_persona);
-        $persona->segundo_nombre_persona    = strtoupper($request->segundo_nombre_persona);
-        $persona->primer_apellido_persona   = strtoupper($request->primer_apellido_persona);
-        $persona->segundo_apellido_persona  = strtoupper($request->segundo_apellido_persona);
-        $persona->tipo_iden_persona         = strtoupper($request->tipoIden_persona);
-        $persona->genero_persona            = strtoupper($request->genero_persona);
+        $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);
+        $persona->segundo_nombre_persona    =  mb_strtoupper($request->segundo_nombre_persona);
+        $persona->primer_apellido_persona   =  mb_strtoupper($request->primer_apellido_persona);
+        $persona->segundo_apellido_persona  =  mb_strtoupper($request->segundo_apellido_persona);
+        $persona->tipo_iden_persona         =  mb_strtoupper($request->tipoIden_persona);
+        $persona->genero_persona            =  mb_strtoupper($request->genero_persona);
         $persona->cedula_persona            = $request->cedula_persona;
-        $persona->correo_persona            = strtoupper($request->correo_persona);
+        $persona->correo_persona            =  mb_strtoupper($request->correo_persona);
         $persona->telefono_persona          = $request->telefono_persona;
         $persona->lider_ava                 = $request->lider_ava;
         $persona->lider_dosimetria          = $request->lider_dosimetria;
@@ -145,7 +145,14 @@ class PersonaController extends Controller
                 $personaSedesAdd->save();
             }
         }
-        
+        if(!empty($request->lider_dosimetria) && $request->lider_dosimetria == 'TRUE'){
+            $personasRoles = new Personasroles();
+    
+            $personasRoles->persona_id  = $persona->id_persona;
+            $personasRoles->rol_id      = 2;
+    
+            $personasRoles->save();
+        }
         return redirect()->route('personas.search')->with('guardar', 'ok');
     }
     public function createTrabEstuContEmp(Empresa $empresa, $id){
@@ -158,7 +165,7 @@ class PersonaController extends Controller
     public function savePersonasEmpresa(Request $request){
         /* return $request; */
         $request->validate([
-            
+            'rol_personas'               => ['required'],
             'primer_nombre_persona'      => ['required'],
             'primer_apellido_persona'    => ['required'],
             'segundo_apellido_persona'   => ['required'],
@@ -172,14 +179,14 @@ class PersonaController extends Controller
 
         $persona = new Persona();
 
-        $persona->primer_nombre_persona     = strtoupper($request->primer_nombre_persona);
-        $persona->segundo_nombre_persona    = strtoupper($request->segundo_nombre_persona);
-        $persona->primer_apellido_persona   = strtoupper($request->primer_apellido_persona);
-        $persona->segundo_apellido_persona  = strtoupper($request->segundo_apellido_persona);
-        $persona->tipo_iden_persona         = strtoupper($request->tipoIden_persona);
-        $persona->genero_persona            = strtoupper($request->genero_persona);
+        $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);
+        $persona->segundo_nombre_persona    =  mb_strtoupper($request->segundo_nombre_persona);
+        $persona->primer_apellido_persona   =  mb_strtoupper($request->primer_apellido_persona);
+        $persona->segundo_apellido_persona  =  mb_strtoupper($request->segundo_apellido_persona);
+        $persona->tipo_iden_persona         =  mb_strtoupper($request->tipoIden_persona);
+        $persona->genero_persona            =  mb_strtoupper($request->genero_persona);
         $persona->cedula_persona            = $request->cedula_persona;
-        $persona->correo_persona            = strtoupper($request->correo_persona);
+        $persona->correo_persona            =  mb_strtoupper($request->correo_persona);
         $persona->telefono_persona          = $request->telefono_persona;
         $persona->lider_ava                 = $request->lider_ava;
         $persona->lider_dosimetria          = $request->lider_dosimetria;
@@ -218,7 +225,14 @@ class PersonaController extends Controller
                 $personaSedes->save();
             }
         }
-        
+        if(!empty($request->lider_dosimetria) && $request->lider_dosimetria == 'TRUE'){
+            $personasRoles = new Personasroles();
+    
+            $personasRoles->persona_id  = $persona->id_persona;
+            $personasRoles->rol_id      = 2;
+    
+            $personasRoles->save();
+        }
         return redirect()->route('empresas.info', $request->id_empresa)->with('guardar', 'ok');
     }
     public function edit(Persona $persona, $id, $empresa){
@@ -242,7 +256,7 @@ class PersonaController extends Controller
     public function update(Request $request, Persona $persona){
         /*return $request;*/
         $request->validate([
-            
+            'rol_personas'               => ['required'],
             'primer_nombre_persona'      => ['required'],             
             'primer_apellido_persona'    => ['required'],
             'segundo_apellido_persona'   => ['required'],
@@ -253,14 +267,14 @@ class PersonaController extends Controller
             'telefono_persona'           => ['required', 'min:10', 'max:10'],
             
         ]);
-        $persona->primer_nombre_persona     = strtoupper($request->primer_nombre_persona);
-        $persona->segundo_nombre_persona    = strtoupper($request->segundo_nombre_persona);
-        $persona->primer_apellido_persona   = strtoupper($request->primer_apellido_persona);
-        $persona->segundo_apellido_persona  = strtoupper($request->segundo_apellido_persona);
-        $persona->genero_persona            = strtoupper($request->genero_persona);
-        $persona->tipo_iden_persona         = strtoupper($request->tipoIden_persona);
+        $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);
+        $persona->segundo_nombre_persona    =  mb_strtoupper($request->segundo_nombre_persona);
+        $persona->primer_apellido_persona   =  mb_strtoupper($request->primer_apellido_persona);
+        $persona->segundo_apellido_persona  =  mb_strtoupper($request->segundo_apellido_persona);
+        $persona->genero_persona            =  mb_strtoupper($request->genero_persona);
+        $persona->tipo_iden_persona         =  mb_strtoupper($request->tipoIden_persona);
         $persona->cedula_persona            = $request->cedula_persona;
-        $persona->correo_persona            = strtoupper($request->correo_persona);
+        $persona->correo_persona            =  mb_strtoupper($request->correo_persona);
         $persona->telefono_persona          = $request->telefono_persona;
         $persona->lider_ava                 = $request->lider_ava;
         $persona->lider_dosimetria          = $request->lider_dosimetria;
@@ -297,6 +311,7 @@ class PersonaController extends Controller
     
             $personasRoles->save();
         }
+        
         if(!empty($request->id_sedes)){
 
             for($i=0; $i<count($request->id_sedes); $i++){

@@ -1553,92 +1553,92 @@ crossorigin="anonymous">
             } 
         }
 
-        $('#id_dosimetro_asigdosimControlTorax').select2();
-        $('#ocupacion_asigdosimControlTorax').select2();
-        $('#id_dosimetro_asigdosimControlCristalino').select2();
-        $('#id_holder_asigdosimControlCristalino').select2();
-        $('#ocupacion_asigdosimControlCristalino').select2();
-        $('#id_dosimetro_asigdosimControlDedo').select2();
-        $('#id_holder_asigdosimControlDedo').select2();
-        $('#ocupacion_asigdosimControlDedo').select2();
+        $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",});
+        $('#ocupacion_asigdosimControlTorax').select2({width: "100%",});
+        $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%",});
+        $('#id_holder_asigdosimControlCristalino').select2({width: "100%",});
+        $('#ocupacion_asigdosimControlCristalino').select2({width: "100%",});
+        $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%",});
+        $('#id_holder_asigdosimControlDedo').select2({width: "100%",});
+        $('#ocupacion_asigdosimControlDedo').select2({width: "100%",});
          ///////SELECT2 PARA LOS SELECTS DE DOSIMETROS //////
         
          var dosim_area = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
         for(var i = 0; i < dosim_area.length; i++){
             dosim_area[i].setAttribute("id", "id_dosimetro_asigdosimArea"+[i]);
-            $('#id_dosimetro_asigdosimArea'+[i]).select2();
+            $('#id_dosimetro_asigdosimArea'+[i]).select2({width: "100%",});
         }
         var dosim_caso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
         for(var i = 0; i < dosim_caso.length; i++){
             dosim_caso[i].setAttribute("id", "id_dosimetro_asigdosimCaso"+[i]);
-            $('#id_dosimetro_asigdosimCaso'+[i]).select2();
+            $('#id_dosimetro_asigdosimCaso'+[i]).select2({width: "100%",});
         }
         var dosim_torax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
         for(var i = 0; i < dosim_torax.length; i++){
             dosim_torax[i].setAttribute("id", "id_dosimetro_asigdosimTorax"+[i]);
-            $('#id_dosimetro_asigdosimTorax'+[i]).select2();
+            $('#id_dosimetro_asigdosimTorax'+[i]).select2({width: "100%",});
         }
         var dosim_cristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
         for(var i = 0; i < dosim_cristalino.length; i++){
             dosim_cristalino[i].setAttribute("id", "id_dosimetro_asigdosimCristalino"+[i]);
-            $('#id_dosimetro_asigdosimCristalino'+[i]).select2();
+            $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%",});
         }
         var dosim_muñeca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"');
         for(var i = 0; i < dosim_muñeca.length; i++){
             dosim_muñeca[i].setAttribute("id", "id_dosimetro_asigdosimMuneca"+[i]);
-            $('#id_dosimetro_asigdosimMuneca'+[i]).select2();
+            $('#id_dosimetro_asigdosimMuneca'+[i]).select2({width: "100%",});
         }
         var dosim_dedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"');
         for(var i = 0; i < dosim_dedo.length; i++){
             dosim_dedo[i].setAttribute("id", "id_dosimetro_asigdosimDedo"+[i]);
-            $('#id_dosimetro_asigdosimDedo'+[i]).select2();
+            $('#id_dosimetro_asigdosimDedo'+[i]).select2({width: "100%",});
         }
            //////SELECT2 PARA LOS SELECTS DE LOS HOLDERS /////
         var holder_cristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"');
         for(var i = 0; i < holder_cristalino.length; i++){
             holder_cristalino[i].setAttribute("id", "id_holder_asigdosimCristalino"+[i]);
-            $('#id_holder_asigdosimCristalino'+[i]).select2();
+            $('#id_holder_asigdosimCristalino'+[i]).select2({width: "100%",});
         }
         var holder_muñeca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"');
         for(var i = 0; i < holder_muñeca.length; i++){
             holder_muñeca[i].setAttribute("id", "id_holder_asigdosimMuneca"+[i]);
-            $('#id_holder_asigdosimMuneca'+[i]).select2();
+            $('#id_holder_asigdosimMuneca'+[i]).select2({width: "100%",});
         }
         var holder_dedo = document.querySelectorAll('select[name="id_holder_asigdosimDedo[]"');
         for(var i = 0; i < holder_dedo.length; i++){
             holder_dedo[i].setAttribute("id", "id_holder_asigdosimDedo"+[i]);
-            $('#id_holder_asigdosimDedo'+[i]).select2();
+            $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%",});
         } 
         ///SELECT2 PAR LOS SELECT DE LAS OCUPACIONES/////
         var ocu_area = document.querySelectorAll('select[name="ocupacion_asigdosimArea[]"');
         for(var i = 0; i < ocu_area.length; i++){
             ocu_area[i].setAttribute("id", "ocupacion_asigdosimArea"+[i]);
-            $('#ocupacion_asigdosimArea'+[i]).select2();
+            $('#ocupacion_asigdosimArea'+[i]).select2({width: "100%",});
         }
         var ocu_caso = document.querySelectorAll('select[name="ocupacion_asigdosimCaso[]"');
         for(var i = 0; i < ocu_caso.length; i++){
             ocu_caso[i].setAttribute("id", "ocupacion_asigdosimCaso"+[i]);
-            $('#ocupacion_asigdosimCaso'+[i]).select2();
+            $('#ocupacion_asigdosimCaso'+[i]).select2({width: "100%",});
         }
         var ocu_torax = document.querySelectorAll('select[name="ocupacion_asigdosimTorax[]"');
         for(var i = 0; i < ocu_torax.length; i++){
             ocu_torax[i].setAttribute("id", "ocupacion_asigdosimTorax"+[i]);
-            $('#ocupacion_asigdosimTorax'+[i]).select2();
+            $('#ocupacion_asigdosimTorax'+[i]).select2({width: "100%",});
         }
         var ocu_cristalino = document.querySelectorAll('select[name="ocupacion_asigdosimCristalino[]"');
         for(var i = 0; i < ocu_cristalino.length; i++){
             ocu_cristalino[i].setAttribute("id", "ocupacion_asigdosimCristalino"+[i]);
-            $('#ocupacion_asigdosimCristalino'+[i]).select2();
+            $('#ocupacion_asigdosimCristalino'+[i]).select2({width: "100%",});
         }
         var ocu_muñeca = document.querySelectorAll('select[name="ocupacion_asigdosimMuneca[]"');
         for(var i = 0; i < ocu_muñeca.length; i++){
             ocu_muñeca[i].setAttribute("id", "ocupacion_asigdosimMuneca"+[i]);
-            $('#ocupacion_asigdosimMuneca'+[i]).select2();
+            $('#ocupacion_asigdosimMuneca'+[i]).select2({width: "100%",});
         }
         var ocu_dedo = document.querySelectorAll('select[name="ocupacion_asigdosimDedo[]"');
         for(var i = 0; i < ocu_dedo.length; i++){
             ocu_dedo[i].setAttribute("id", "ocupacion_asigdosimDedo"+[i]);
-            $('#ocupacion_asigdosimDedo'+[i]).select2();
+            $('#ocupacion_asigdosimDedo'+[i]).select2({width: "100%",});
         }
 //////////////////////////////
 

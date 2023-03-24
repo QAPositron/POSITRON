@@ -62,7 +62,7 @@
     </div>
     <div class="col-md text-center">
         
-        <a type="button" class="btn btn-circle colorQA"  href="{{route('Reporterevisionentrada.pdf', [/* 'empresa'=> 0, */ 'deptodosi' =>$contdosisededepto->id_contdosisededepto , 'mesnumber' => $mesnumber])}}" target="_blank">
+        <a type="button" class="btn btn-circle colorQA"  {{-- href="{{route('Reporterevisionentrada.pdf', [ 'empresa'=> 0, 'deptodosi' =>$contdosisededepto->id_contdosisededepto , 'mesnumber' => $mesnumber])}}" --}} onclick="alertCertificado('{{0}}', '{{$contdosisededepto->id_contdosisededepto}}', '{{$mesnumber}}', {{$dosicontrolasig}}, {{$trabjasignados}});" target="_blank">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-pdf pt-1" viewBox="0 0 16 16">
                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                 <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
@@ -76,82 +76,433 @@
 <br>
 <div class="row">
     
-    <div class="col-md-8">
-        <div class="row">
-            <div class="col-md">
-                <div class="table table-responsive p-4">
-                    <table class="table table-sm table-bordered">
-                        <thead>
-                            <tr class="table-active text-center ">
-                                <th class='align-middle py-4' style='width: 40%'>TRABAJADOR</th>
-                                <th class='align-middle py-4' >No. IDEN.</th>
-                                <th class='align-middle py-4' >DOSÍMETRO</th>
-                                <th class='align-middle py-4' >HOLDER</th>
-                                <th class='align-middle py-4' >OCUPACIÓN</th>
-                                <th class='align-middle py-4' >UBICACIÓN</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if($dosicontrolasig->isEmpty())
-                                @foreach($trabjasignados as $trabasig)
-                                    <tr id='{{$trabasig->id_trabajadordosimetro}}' class="text-center" >
-                                        <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                        <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                        <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle py-3 text-center'>
-                                            @if($trabasig->holder_id == '')
-                                                N.A.
-                                            @else
-                                                {{$trabasig->holder->codigo_holder}}
-                                            @endif
-                                        </td>
-                                        <td class='align-middle  py-3 text-center'>{{$trabasig->ocupacion}}</td>
-                                        <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
+    <div class="col-md-9">
+        <form action="{{route('observacionesReventrada.save')}}" method="POST"  id="form-observacionesreventrada" name="form-observacionesreventrada" >
+            <div class="row">
+                <div class="col-md">
+                        @csrf
+                        
+                        <div class="table table-responsive p-2">
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr class="table-active text-center ">
+                                        <th class='align-middle py-4' style='width: 30%'>TRABAJADOR</th>
+                                        <th class='align-middle py-4' >No. IDEN.</th>
+                                        <th class='align-middle py-4' >DOSÍMETRO</th>
+                                        <th class='align-middle py-4' >HOLDER</th>
+                                        <th class='align-middle py-4' >OCUPACIÓN</th>
+                                        <th class='align-middle py-4' >UBICACIÓN</th>
+                                        <th class='align-middle py-4' style='width: 30%'>OBSERVACIÓN</th>
                                     </tr>
-                                @endforeach
-                            @else
-                                @foreach($dosicontrolasig as $dosicontasig)
-                                    <tr id="C{{$dosicontasig->id_dosicontrolcontdosisedes}}">
-                                        <td class='align-middle py-3'>CONTROL {{$dosicontasig->ubicacion}}</td>
-                                        <td class='align-middle py-3 text-center'>N.A.</td>
-                                        <td class='align-middle py-3 text-center'>{{$dosicontasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle py-3 text-center'>
-                                            @if($dosicontasig->holder_id == '')
-                                                N.A.
-                                            @else
-                                                {{$dosicontasig->holder->codigo_holder}}
-                                            @endif
-                                        </td>
-                                        <td class='align-middle py-3 text-center'>{{$dosicontasig->ocupacion}}</td>
-                                        <td class='align-middle py-3 text-center'>{{$dosicontasig->ubicacion}}</td>
-                                        
-                                    </tr>
-                                @endforeach
-                                @foreach($trabjasignados as $trabasig)
-                                    <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                        <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                        <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                        <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle py-3 text-center'>
-                                            @if($trabasig->holder_id == '')
-                                                N.A.
-                                            @else
-                                                {{$trabasig->holder->codigo_holder}}
-                                            @endif
-                                        </td>
-                                        <td class='align-middle py-3 text-center'>{{$trabasig->ocupacion}}</td>
-                                        <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                                </thead>
+                                <tbody>
+                                    <input type="number" name="mes_asignacion" value="{{$mesnumber}}" hidden>
+                                    <input type="number" name="contdosisededepto" value="{{$contdosisededepto->id_contdosisededepto}}" hidden>
+                                    <input type="number" name="contratodosimetriasede" value="{{$contdosisededepto->contratodosimetriasede_id}}" hidden>
+                                    @if($dosicontrolasig->isEmpty())
+                                        @foreach($trabjasignados as $trabasig)
+                                            <tr id='{{$trabasig->id_trabajadordosimetro}}' class="text-center" >
+                                                <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                                <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                                <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                                <td class='align-middle py-3 text-center'>
+                                                    @if($trabasig->holder_id == '')
+                                                        N.A.
+                                                    @else
+                                                        {{$trabasig->holder->codigo_holder}}
+                                                    @endif
+                                                </td>
+                                                <td class='align-middle py-3 text-center'>{{$trabasig->ocupacion}}</td>
+                                                <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
+                                                <td class='align-middle py-3 text-center'>
+                                                    <input type="text" name="id_trabajadordosimetro[]" value="{{$trabasig->id_trabajadordosimetro}}" hidden>
+                                                    <select class="form-select"  name="observacion_asig[]" id="observacion_asig" autofocus multiple="true">
+                                                        @if($trabasig->observacion_revent == '1')
+                                                            <option value="{{$trabasig->observacion_revent}}">--1) BUEN ESTADO FÍSICO--</option>
+                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                            <option value="8">8) HOLDER DAÑADO</option>
+                                                            <option value="9">9) OTRA ADICIONAL</option>
+                                                        @elseif($trabasig->observacion_revent == '2')
+                                                            <option value="{{$trabasig->observacion_revent}}">--2) DOSÍMETRO CONTAMINADO--</option>
+                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                            <option value="8">8) HOLDER DAÑADO</option>
+                                                            <option value="9">9) OTRA ADICIONAL</option>
+                                                        @elseif($trabasig->observacion_revent == '3')
+                                                            <option value="{{$trabasig->observacion_revent}}">--3) DOSÍMETRO FALTANTE--</option>
+                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                            <option value="8">8) HOLDER DAÑADO</option>
+                                                            <option value="9">9) OTRA ADICIONAL</option>
+                                                        @elseif($trabasig->observacion_revent == '4')
+                                                            <option value="{{$trabasig->observacion_revent}}">--4) DOSÍMETRO DAÑADO--</option>
+                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                            <option value="8">8) HOLDER DAÑADO</option>
+                                                            <option value="9">9) OTRA ADICIONAL</option>
+                                                        @elseif($trabasig->observacion_revent == '5')
+                                                            <option value="{{$trabasig->observacion_revent}}">--5) DOSÍMETRO HUMEDO--</option>
+                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                            <option value="8">8) HOLDER DAÑADO</option>
+                                                            <option value="9">9) OTRA ADICIONAL</option>
+                                                        @elseif($trabasig->observacion_revent == '6')
+                                                            <option value="{{$trabasig->observacion_revent}}">--6) DOSÍMETRO DE OTRO PERIODO--</option>
+                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                            <option value="8">8) HOLDER DAÑADO</option>
+                                                            <option value="9">9) OTRA ADICIONAL</option>
+                                                        @elseif($trabasig->observacion_revent == '7')
+                                                            <option value="{{$trabasig->observacion_revent}}">--7) DOSÍMETRO DE OTRA SEDE--</option>
+                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                            <option value="8">8) HOLDER DAÑADO</option>
+                                                            <option value="9">9) OTRA ADICIONAL</option>
+                                                        @elseif($trabasig->observacion_revent == '8')
+                                                            <option value="{{$trabasig->observacion_revent}}">--8) HOLDER DAÑADO--</option>
+                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                            <option value="9">9) OTRA ADICIONAL</option>
+                                                        @elseif($trabasig->observacion_revent == '9')
+                                                            <option value="{{$trabasig->observacion_revent}}">--9) OTRA ADICIONAL--</option>
+                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                            <option value="8">8) HOLDER DAÑADO</option>
+                                                        @else
+                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                            <option value="8">8) HOLDER DAÑADO</option>
+                                                            <option value="9">9) OTRA ADICIONAL</option>
+                                                        @endif
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        @foreach($dosicontrolasig as $dosicontasig)
+                                            <tr id="C{{$dosicontasig->id_dosicontrolcontdosisedes}}">
+                                                <td class='align-middle py-3'>CONTROL {{$dosicontasig->ubicacion}}</td>
+                                                <td class='align-middle py-3 text-center'>N.A.</td>
+                                                <td class='align-middle py-3 text-center'>{{$dosicontasig->dosimetro->codigo_dosimeter}}</td>
+                                                <td class='align-middle py-3 text-center'>
+                                                    @if($dosicontasig->holder_id == '')
+                                                        N.A.
+                                                    @else
+                                                        {{$dosicontasig->holder->codigo_holder}}
+                                                    @endif
+                                                </td>
+                                                <td class='align-middle py-3 text-center'>{{$dosicontasig->ocupacion}}</td>
+                                                <td class='align-middle py-3 text-center'>{{$dosicontasig->ubicacion}}</td>
+                                                <td class='align-middle py-3 text-center'>
+                                                    <input type="text" name="id_dosicontrolcontdosisedes[]" value="{{$dosicontasig->id_dosicontrolcontdosisedes}}" hidden>
+                                                    <select class="form-select"  name="observacion_asig_dosicont{{$dosicontasig->id_dosicontrolcontdosisedes}}[]" id="observacion_asig_dosicont" autofocus multiple="true">
+                                                        <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                        <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                        <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                        <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                        <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                        <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                        <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                        <option value="8">8) HOLDER DAÑADO</option>
+                                                        <option value="9">9) OTRA ADICIONAL</option>
+                                                        @foreach($observacionesAsig as $obs)
+                                                            @if($obs->numero_obs == '1' && $obs->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <option value="{{$obs->numero_obs}}" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '2' && $obs->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <option value="{{$obs->numero_obs}}" selected>--2) DOSÍMETRO CONTAMINADO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '3' && $obs->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <option value="{{$obs->numero_obs}}" selected>--3) DOSÍMETRO FALTANTE--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '4' && $obs->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <option value="{{$obs->numero_obs}}" selected>--4) DOSÍMETRO DAÑADO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '5' && $obs->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <option value="{{$obs->numero_obs}}" selected>--5) DOSÍMETRO HUMEDO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '6' && $obs->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <option value="{{$obs->numero_obs}}" selected>--6) DOSÍMETRO DE OTRO PERIODO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '7' && $obs->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <option value="{{$obs->numero_obs}}" selected>--7) DOSÍMETRO DE OTRA SEDE--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '8' && $obs->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <option value="{{$obs->numero_obs}}" selected>--8) HOLDER DAÑADO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '9' && $obs->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <option value="{{$obs->numero_obs}}" selected>--9) OTRA ADICIONAL--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                            @else
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select> 
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        @foreach($trabjasignados as $trabasig)
+                                            <tr id='{{$trabasig->id_trabajadordosimetro}}'>
+                                                <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                                <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                                <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                                <td class='align-middle py-3 text-center'>
+                                                    @if($trabasig->holder_id == '')
+                                                        N.A.
+                                                    @else
+                                                        {{$trabasig->holder->codigo_holder}}
+                                                    @endif
+                                                </td>
+                                                <td class='align-middle py-3 text-center'>{{$trabasig->ocupacion}}</td>
+                                                <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
+                                                <td class='align-middle py-3 text-center'>
+                                                    <input type="text" name="id_trabajadordosimetro[]" value="{{$trabasig->id_trabajadordosimetro}}" hidden>
+                                                    <select class="form-select"  name="observacion_asig{{$trabasig->id_trabajadordosimetro}}[]" id="observacion_asig" autofocus multiple="true">
+                                                        <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                        <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                        <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                        <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                        <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                        <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                        <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                        <option value="8">8) HOLDER DAÑADO</option>
+                                                        <option value="9">9) OTRA ADICIONAL</option>
+                                                        @foreach($observacionesAsig as $obs)
+                                                            @if($obs->numero_obs == '1' && $obs->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <option value="{{$obs->numero_obs}}" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '2' && $obs->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <option value="{{$obs->numero_obs}}" selected>--2) DOSÍMETRO CONTAMINADO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '3' && $obs->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <option value="{{$obs->numero_obs}}" selected>--3) DOSÍMETRO FALTANTE--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '4' && $obs->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <option value="{{$obs->numero_obs}}" selected>--4) DOSÍMETRO DAÑADO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '5' && $obs->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <option value="{{$obs->numero_obs}}" selected>--5) DOSÍMETRO HUMEDO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '6' && $obs->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <option value="{{$obs->numero_obs}}" selected>--6) DOSÍMETRO DE OTRO PERIODO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '7' && $obs->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <option value="{{$obs->numero_obs}}" selected>--7) DOSÍMETRO DE OTRA SEDE--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '8' && $obs->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <option value="{{$obs->numero_obs}}" selected>--8) HOLDER DAÑADO--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @elseif($obs->numero_obs == '9' && $obs->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <option value="{{$obs->numero_obs}}" selected>--9) OTRA ADICIONAL--</option>
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                            @else
+                                                                <option value="1">1) BUEN ESTADO FÍSICO</option>
+                                                                <option value="2">2) DOSÍMETRO CONTAMINADO</option>
+                                                                <option value="3">3) DOSÍMETRO FALTANTE</option>
+                                                                <option value="4">4) DOSÍMETRO DAÑADO</option>
+                                                                <option value="5">5) DOSÍMETRO HUMEDO</option>
+                                                                <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
+                                                                <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
+                                                                <option value="8">8) HOLDER DAÑADO</option>
+                                                                <option value="9">9) OTRA ADICIONAL</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                        <!---------BOTON------------->
+                        <div class="col-md text-center">
+                            <button class="btn colorQA " type="submit" id="boton-guardar">GUARDAR</button>
+                        </div>
+                        <br>
+                    </div>
                 </div>
-                <br>
             </div>
-        </div>
-    </div>
-    <div class="col-md-4">
+        </form>
+    <div class="col-md-3">
         <br>
         <div class="card border-secondary text-bg-light mb-3">
             <div class="card-header text-center">
@@ -294,10 +645,37 @@ crossorigin="anonymous">
                 
                 document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
             }
-        }
-            
-    })
+        };
 
+        @foreach($dosicontrolasig as $dosicontasig)
+            var asigdosicont = document.querySelectorAll('select[name="observacion_asig_dosicont{{$dosicontasig->id_dosicontrolcontdosisedes}}[]"]');
+            console.log(asigdosicont);
+            for(var i = 0; i < asigdosicont.length; i++){
+                asigdosicont[i].setAttribute("id", "observacion_asig_dosicont"+'{{$dosicontasig->id_dosicontrolcontdosisedes}}');
+                $('#observacion_asig_dosicont'+'{{$dosicontasig->id_dosicontrolcontdosisedes}}').select2({
+                    placeholder:"--SELECCIONE--",
+                    tags: true,
+                    tokenSeparators: ['/',',',',',','," "],
+                    width: "100%",
+                });
+            };  
+        @endforeach
+        @foreach($trabjasignados as $trabasig)
+            var asigdosi = document.querySelectorAll('select[name="observacion_asig{{$trabasig->id_trabajadordosimetro}}[]"]');
+            console.log(asigdosi);
+            for(var i = 0; i < asigdosi.length; i++){
+                asigdosi[i].setAttribute("id", "observacion_asig"+'{{$trabasig->id_trabajadordosimetro}}');
+                $('#observacion_asig'+'{{$trabasig->id_trabajadordosimetro}}').select2({
+                    placeholder:"--SELECCIONE--",
+                    tags: true,
+                    tokenSeparators: ['/',',',',',','," "],
+                    width: "100%",
+                });
+            };
+        @endforeach
+        
+    })
+    
 </script>
 <script type="text/javascript">
     
@@ -351,7 +729,7 @@ crossorigin="anonymous">
                                     title: 'CORRECTO!!',
                                     text: 'SI HAY COINCIDENCIA ENTRE LA ETIQUETA Y EL DOSíMETRO DE CONTROL',
                                     showConfirmButton: false,
-                                    timer: 6000
+                                    timer: 1500
                                 })
     
                                 document.getElementById("codigo_dosimetro").value = "";
@@ -372,7 +750,7 @@ crossorigin="anonymous">
                                 title: 'ERROR!!',
                                 text: 'NO SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO DE CONTROL',
                                 showConfirmButton: false,
-                                timer: 6000
+                                timer: 1500
                             })
                             document.getElementById("codigo_dosimetro").value = "";
                             document.getElementById("codigo_etiqueta").value = "";
@@ -384,7 +762,7 @@ crossorigin="anonymous">
                             title: 'Error!!',
                             text: 'NO EXISTE NINGUN DOSÍMETRO CON ESE CODIGO',
                             showConfirmButton: false,
-                            timer: 6000
+                            timer: 1500
                         })
                         document.getElementById("codigo_dosimetro").value = "";
                         document.getElementById("codigo_etiqueta").value = "";
@@ -418,7 +796,7 @@ crossorigin="anonymous">
                                     title: 'CORRECTO!!',
                                     text: 'SI SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO Y ADEMAS COINCIDE LA UBICACIÓN',
                                     showConfirmButton: false,
-                                    timer: 4000
+                                    timer: 1500
                                 })
                                 document.getElementById("codigo_dosimetro").value = "";
                                 document.getElementById("codigo_etiqueta").value = "";
@@ -438,7 +816,7 @@ crossorigin="anonymous">
                                 title: 'ERROR!!',
                                 text: 'NO SE ENCUENTRA RELACIONADO ESTE DOSÍMETRO',
                                 showConfirmButton: false,
-                                timer: 3000
+                                timer: 1500
                             })
                             document.getElementById("codigo_dosimetro").value = "";
                             document.getElementById("codigo_etiqueta").value = "";
@@ -450,7 +828,7 @@ crossorigin="anonymous">
                             title: 'Error!!',
                             text: 'NO EXISTE NINGUN DOSÍMETRO CON ESE CODIGO',
                             showConfirmButton: false,
-                            timer: 3000
+                            timer: 1500
                         })
                         document.getElementById("codigo_dosimetro").value = "";
                         document.getElementById("codigo_etiqueta").value = "";
@@ -499,5 +877,82 @@ crossorigin="anonymous">
         
         
     })
+    function alertCertificado(empresa, id, mes){
+        console.log("SE SELECCIONO EL BOTON" +empresa+id+mes);
+        var dosi = 0;
+        var trab = 0;
+        var obsdosi = 0;
+        var obstrab = 0;
+        $.get('asignacionesTrab',{id : id, mes: mes}, function(asignacionesTrab){
+            console.log("ASIGNACIONES");
+            console.log(asignacionesTrab);
+            asignacionesTrab.forEach(trabj => {
+                if(trabj.revision_entrada == null){
+                    console.log("hay trabj");
+                    trab ++;
+                }
+            });
+            console.log(trab);
+            console.log("OBSERVACIONES TRAB" +obstrab);
+            if(trab != 0){
+                Swal.fire({
+                    title: "ALGUNOS DOSÍMETROS NO HAN SIDO REVISADOS !!!",
+                    text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#1A9980',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var host = window.location.host;
+                        var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/pdf";
+                        window.open(path, '_blank');
+                    }
+                })
+            
+            }else{
+                $.get('asignacionesCont', {id : id, mes: mes}, function(asignacionesCont){
+                    console.log("ASIGNACIONES CONTROL");
+                    console.log(asignacionesCont);
+                    asignacionesCont.forEach(dosicont => {
+                        if(dosicont.revision_entrada == null){
+                            console.log("hay dosi");
+                            dosi ++;
+                        
+                        }
+                    });
+                    console.log(dosi);
+                    console.log(trab);
+                    console.log("OBSERVACIONES DOSI" +obsdosi);
+                    if(dosi != 0){
+                        Swal.fire({
+                            title: "ALGUNOS DOSÍMETROS DE CONTROL NO HAN SIDO REVISADOS !!!",
+                            text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#1A9980',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'SI, SEGURO!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                var host = window.location.host;
+                                var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/pdf";
+                                window.open(path, '_blank');
+                            }
+                        })
+                    
+                    
+                    }else{
+                        var host = window.location.host;
+                        var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/pdf";
+                        window.open(path, '_blank');
+                    }
+                })
+            }
+            
+        });
+        
+    }
 </script>
 @endsection

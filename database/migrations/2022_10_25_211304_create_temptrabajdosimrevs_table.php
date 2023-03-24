@@ -50,6 +50,8 @@ class CreateTemptrabajdosimrevsTable extends Migration
             $table->string('ubicacion', 50)->nullable();
             $table->string('energia', 50)->nullable();
             
+            $table->string('revision_salida', 50)->nullable();
+            
             $table->timestamps();
         });
     }

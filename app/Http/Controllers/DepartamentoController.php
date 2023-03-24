@@ -17,7 +17,7 @@ class DepartamentoController extends Controller
         
         $depto = new Departamento();
  
-        $depto->nombre_departamento = strtoupper($request->nombre_especialidad);
+        $depto->nombre_departamento =  mb_strtoupper($request->nombre_especialidad);
  
         $depto->save();
         return back()->with('guardar', 'ok');

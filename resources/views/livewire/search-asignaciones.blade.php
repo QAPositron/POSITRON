@@ -35,6 +35,7 @@
                         <h5 class="pt-4 text-center">CÓDIGO DE LA ETIQUETA </h5>
                         <br>
                         <input class="form-control" wire:model="search" type="number" name="codigo_etiqueta" id="codigo_etiqueta" >
+                        {{$search}}
                     </div>
                     <div class="col-md m-3">
                         <h5 class="pt-4 text-center">CÓDIGO DEL DOSÍMETRO </h5>
@@ -231,6 +232,7 @@
             <br>
             
         </div>
+        {{$dosicontrol}}
         
     </div>
 </div>
@@ -332,7 +334,7 @@ crossorigin="anonymous">
                                             title: 'CORRECTO!!',
                                             text: message,
                                             showConfirmButton: false,
-                                            timer: 4000
+                                            timer: 1500
                                         });
                                     });
                                 }
@@ -348,7 +350,7 @@ crossorigin="anonymous">
                                         title: 'ERROR!!',
                                         text: message,
                                         showConfirmButton: false,
-                                        timer: 4000
+                                        timer: 1500
                                     });
                                 })
                                 
@@ -366,7 +368,7 @@ crossorigin="anonymous">
                                 title: 'Error!!',
                                 text: message,
                                 showConfirmButton: false,
-                                timer: 4000
+                                timer: 1500
                             });
                         })
                         
@@ -401,7 +403,7 @@ crossorigin="anonymous">
                                             title: 'CORRECTO!!',
                                             text: message,
                                             showConfirmButton: false,
-                                            timer: 4000
+                                            timer: 1500
                                         });
                                     });
                                 }
@@ -417,7 +419,7 @@ crossorigin="anonymous">
                                         title: 'ERROR!!',
                                         text: message,
                                         showConfirmButton: false,
-                                        timer: 4000
+                                        timer: 1500
                                     });
                                 })
                                 
@@ -435,7 +437,7 @@ crossorigin="anonymous">
                                 title: 'Error!!',
                                 text: message,
                                 showConfirmButton: false,
-                                timer: 4000
+                                timer: 1500
                             });
                         })
                         
@@ -462,7 +464,7 @@ crossorigin="anonymous">
             
             console.log("SALIO DEL CHANGE DE LA FUNCION CODIGO ETIQUETA");
            
-        }); */
+        }); */ 
         $('#codigo_dosimetro').on('change', function(){
             console.log("ENTRO AL CODIGO DOSIMETRO CHANGE");
             var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
@@ -501,7 +503,7 @@ crossorigin="anonymous">
                             title: 'CORRECTO!!',
                             text: message,
                             showConfirmButton: false,
-                            timer: 4000
+                            timer: 1500
                         });
                     })
                 }

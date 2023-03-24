@@ -2,15 +2,11 @@
     *{
         margin: 0px;
     }
-    
     .contenedor{
         width: 300px;
         /* height: 500px; */
         /* border: 2px solid blue; */
-        
-        
         margin: 0 auto;
-        
         /*background-color: red; */
         justify-content: center;
     }
@@ -269,6 +265,7 @@
     <div class="contenedor">
         @foreach($dosicontrolasig as $dosicont)
             @if($dosicont->ubicacion == 'TORAX')
+                {{-- //////// DOSIMETRO CONTROL TORAX ////////// --}}
                 <div class="imgtorax">
                     @if($dosicont->mes_asignacion == 1 || $dosicont->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
@@ -283,7 +280,7 @@
                     @elseif($dosicont->mes_asignacion == 6 || $dosicont->mes_asignacion == 12)
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM6.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @endif
-                    {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
+                    {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL TORAX ////////// --}}
                     @foreach($contratodosi as $contdosi)
                         <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @endif <b>NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b></div>
                         <div class="empresa_cont_torax" >{{$contdosi->nombre_empresa}}</div>
@@ -303,6 +300,7 @@
                     </div>
                 </div>
             @elseif($dosicont->ubicacion == 'CRISTALINO')
+                {{-- //////// DOSIMETRO CONTROL CRISTALINO ////////// --}}
                 <div class="imgcristalino">
                     @if($dosicont->mes_asignacion == 1 || $dosicont->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
@@ -317,7 +315,7 @@
                     @elseif($dosicont->mes_asignacion == 6 || $dosicont->mes_asignacion == 12)
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM6.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @endif
-                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                    {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL CRISTALINO ////////// --}}
                     @foreach($contratodosi as $contdosi)
                         <div class="empresa_cont_cristalino" >{{$contdosi->nombre_empresa}}</div>
                         <div class="num_iden_cont_cristalino">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
@@ -336,6 +334,7 @@
                     </div>
                 </div>
             @elseif($dosicont->ubicacion == 'ANILLO')
+                {{-- //////// DOSIMETRO CONTROL ANILLO ////////// --}}
                 <div class="imganillo">
                     @if($dosicont->mes_asignacion == 1 || $dosicont->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM1.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
@@ -350,7 +349,7 @@
                     @elseif($dosicont->mes_asignacion == 6 || $dosicont->mes_asignacion == 12)
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM6.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @endif
-                    {{-- //////// TEXTO PARA EL DOSIMETRO ANILLO ////////// --}}
+                    {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
                     @foreach($contratodosi as $contdosi)
                         <div class="empresa_cont_anillo" >{{$contdosi->nombre_empresa}}</div>
                         <div class="num_iden_cont_anillo">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
@@ -372,6 +371,7 @@
         @endforeach
         @foreach($trabajdosiasig as $trab)
             @if($trab->ubicacion == 'TORAX')
+                {{-- //////// DOSIMETRO TORAX ////////// --}}
                 <div class="imgtorax">
                     @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_TORAX/TORAXM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
@@ -407,6 +407,7 @@
                     </div>
                 </div>
             @elseif($trab->ubicacion == 'CRISTALINO')
+                {{-- //////// DOSIMETRO CRISTALINO ////////// --}}
                 <div class="imgcristalino">
                     @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/2CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
@@ -441,6 +442,7 @@
                     </div> 
                 </div>
             @elseif($trab->ubicacion == 'ANILLO')
+                {{-- //////// DOSIMETRO ANILLO ////////// --}}
                 <div class="imganillo">
                     @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_ANILLO/2ANILLOM1.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">

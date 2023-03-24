@@ -22,8 +22,8 @@ class AreadepartamentosedeController extends Controller
         $areadepto = new Areadepartamentosede();
 
         $areadepto->departamentosede_id = $request->id_departamentosede;
-        $areadepto->nombre_area         = strtoupper($request->nombre_area);
-        $areadepto->descripcion         = strtoupper($request->descripcion_area);
+        $areadepto->nombre_area         =  mb_strtoupper($request->nombre_area);
+        $areadepto->descripcion         =  mb_strtoupper($request->descripcion_area);
 
         $areadepto->save();
         return back()->with('guardada', 'ok');;
@@ -31,8 +31,8 @@ class AreadepartamentosedeController extends Controller
     public function update(Request $request){
         $area = Areadepartamentosede::where('id_areadepartamentosede', '=', $request->id_areadepartamentosede)->first();
         
-        $area->nombre_area  =  strtoupper($request->nombre_area_edit);
-        $area->descripcion  =  strtoupper($request->descripcion_area_edit);
+        $area->nombre_area  =   mb_strtoupper($request->nombre_area_edit);
+        $area->descripcion  =   mb_strtoupper($request->descripcion_area_edit);
         
         $area->save();
         return back()->with('actualizada', 'ok');

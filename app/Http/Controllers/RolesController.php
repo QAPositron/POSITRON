@@ -18,7 +18,7 @@ class RolesController extends Controller
 
         $roles = new Roles();
 
-        $roles->nombre_rol = strtoupper($request->nombre_rol);
+        $roles->nombre_rol =  mb_strtoupper($request->nombre_rol);
 
         $roles->save();
         return back()->with('guardar', 'ok'); 

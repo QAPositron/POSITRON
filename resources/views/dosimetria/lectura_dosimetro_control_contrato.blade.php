@@ -139,11 +139,9 @@
                                 <div class="col"></div>
                                 <div class="col-10">
                                     <div class="card text-dark bg-light">
-                                        <form class="m-4" id="form_save_lectura_dosim" name="form_save_lectura_dosim" action="{{route('lecturadosicontrol.save', $dosicontasig)}}" method="POST">
+                                        <form class="m-4" id="form_save_lectura_dosim" name="form_save_lectura_dosim" action="{{route('lecturadosicontrol.save')}}" method="POST">
                                             
                                             @csrf
-
-                                            @method('put')
 
                                             <input type="NUMBER" id="mes_asignacion" name="mes_asignacion" value="{{$dosicontasig->mes_asignacion}}" hidden>
                                             <input type="NUMBER" id="id_contratodosimetriasededepto" name="id_contratodosimetriasededepto" value="{{$dosicontasig->contdosisededepto_id}}" hidden>

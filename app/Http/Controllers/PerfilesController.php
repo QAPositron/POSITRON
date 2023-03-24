@@ -17,7 +17,7 @@ class PerfilesController extends Controller
         
         /* return $request; */
         $perfil = new Perfiles();
-        $perfil->nombre_perfil = strtoupper($request->nombre_perfil_laboral);
+        $perfil->nombre_perfil =  mb_strtoupper($request->nombre_perfil_laboral);
 
         $perfil->save();
         return back()->with('guardar', 'ok');

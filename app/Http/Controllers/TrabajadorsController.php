@@ -67,7 +67,7 @@ class TrabajadorsController extends Controller
         /* return $trabajador; */
         return view('trabajador.edit_trabajador', compact('trabajador'));
     }
-    public function update(Request $request, Trabajador $trabajador){
+    /* public function update(Request $request, Trabajador $trabajador){
         
         $request->validate([
             
@@ -97,7 +97,7 @@ class TrabajadorsController extends Controller
         
         
         return redirect()->route('empresas.info', $request->id_empresas)->with('actualizar', 'ok');
-    }
+    } */
     public function destroy(Trabajador $trabajador){
        /* return $trabajador; */
        

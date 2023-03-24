@@ -311,7 +311,7 @@ class NovedadesController extends Controller
             $newNovedadmesescontdosisededepto->contdosisededepto_id     = $request->id_contdosisededepto;
             $newNovedadmesescontdosisededepto->mes_asignacion           = $request->mestrabj_asig;
             $newNovedadmesescontdosisededepto->tipo_novedad             = $request->tipo_novedad;
-            $newNovedadmesescontdosisededepto->nota_cambiodosim         = strtoupper($dosicontrol['nota']);
+            $newNovedadmesescontdosisededepto->nota_cambiodosim         = mb_strtoupper($dosicontrol['nota']);
             
             $newNovedadmesescontdosisededepto->save();
         }
@@ -324,7 +324,7 @@ class NovedadesController extends Controller
             $newNovedadmesescontdosisededepto->contdosisededepto_id     = $request->id_contdosisededepto;
             $newNovedadmesescontdosisededepto->mes_asignacion           = $request->mestrabj_asig;
             $newNovedadmesescontdosisededepto->tipo_novedad             = $request->tipo_novedad;
-            $newNovedadmesescontdosisededepto->nota_cambiodosim     = strtoupper($dosi['nota']);
+            $newNovedadmesescontdosisededepto->nota_cambiodosim     = mb_strtoupper($dosi['nota']);
         
             
             $newNovedadmesescontdosisededepto->save();
@@ -592,7 +592,7 @@ class NovedadesController extends Controller
                 $newNovedadmesescontdosisededepto->contdosisededepto_id     = $request->contdosisededepto;
                 $newNovedadmesescontdosisededepto->mes_asignacion           = $request->mes_asig_siguiente;
                 $newNovedadmesescontdosisededepto->tipo_novedad             = $request->tipo_novedad;
-                $newNovedadmesescontdosisededepto->nota_cambiodosim         = strtoupper($dosicontrol['nota']);
+                $newNovedadmesescontdosisededepto->nota_cambiodosim         = mb_strtoupper($dosicontrol['nota']);
                 
                 $newNovedadmesescontdosisededepto->save();
             }
@@ -605,7 +605,7 @@ class NovedadesController extends Controller
                 $newNovedadmesescontdosisededepto->contdosisededepto_id     = $request->contdosisededepto;
                 $newNovedadmesescontdosisededepto->mes_asignacion           = $request->mes_asig_siguiente;
                 $newNovedadmesescontdosisededepto->tipo_novedad             = $request->tipo_novedad;
-                $newNovedadmesescontdosisededepto->nota_cambiodosim     = strtoupper($dosi['nota']);
+                $newNovedadmesescontdosisededepto->nota_cambiodosim         = mb_strtoupper($dosi['nota']);
             
                 
                 $newNovedadmesescontdosisededepto->save();
@@ -619,7 +619,7 @@ class NovedadesController extends Controller
                 $newNovedadmesescontdosisededepto->contdosisededepto_id     = $request->contdosisededepto;
                 $newNovedadmesescontdosisededepto->mes_asignacion           = $request->mes_asig_siguiente;
                 $newNovedadmesescontdosisededepto->tipo_novedad             = $request->tipo_novedad;
-                $newNovedadmesescontdosisededepto->nota_cambiodosim         = strtoupper($request->inputnotas[$x]);
+                $newNovedadmesescontdosisededepto->nota_cambiodosim         = mb_strtoupper($request->inputnotas[$x]);
                 $newNovedadmesescontdosisededepto->save();
             }
         }
