@@ -29,8 +29,6 @@
                                     <select class="form-select @error('periodo_recambio_contrato') is-invalid @enderror" name="periodo_recambio_contrato" id="periodo_recambio_contrato_select"  autofocus>
                                         <option value="">--SELECCIONE--</option>
                                         <option value="MENS">MENSUAL</option>
-                                        <option value="SEMS">SEMESTRAL</option>
-                                        <option value="BIMS">BIMESTRAL</option>
                                         <option value="TRIMS">TRIMESTRAL</option>
                                     </select>
                                     <label for="floatingInputGrid">PERIODO DE RECAMBIO:</label>

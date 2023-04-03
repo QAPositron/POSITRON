@@ -19,6 +19,7 @@ use App\Models\Empresa;
 use App\Models\Holder;
 use App\Models\Mesescontdosisedeptos;
 use App\Models\Mesescontratodosimetriasedepto;
+use App\Models\Observacion;
 use App\Models\Obsreventrada;
 use App\Models\Persona;
 use App\Models\Personasedes;
@@ -408,6 +409,7 @@ class DosimetriaController extends Controller
 
     public function createdetsedeContrato($id){
         $dosisededeptocontra = Contratodosimetriasededepto::find($id);
+        
         $mescontdosisededepto = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)->latest()->first();
         /* $mesesdosisedeptocontra = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)->get(); */
         /* $dosisededepacontra = Contratodosimetriasededepto::join('departamentosedes', 'departamentosede_id', '=', 'id_departamentosede')
@@ -517,7 +519,12 @@ class DosimetriaController extends Controller
         ];
         
         /* return $mes1AssignRev; */
-        return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
+        $periodo = $dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->periodo_recambio;
+        if($periodo == 'TRIMS'){
+            return view('dosimetria.detalle_sede_contrato_trimestral_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
+        }else if($periodo == 'MENS'){
+            return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
+        }
     }
 
     public function asignaDosiContrato($id, $mesnumber)
@@ -867,6 +874,7 @@ class DosimetriaController extends Controller
                 $asigdosim_control->energia                     = $request->energia_asigdosim;
     
                 $asigdosim_control->save();
+
                 $estadoDosimControlTorax = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimControlTorax[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -897,6 +905,7 @@ class DosimetriaController extends Controller
                 $asigdosim_control->energia                     = $request->energia_asigdosim;
     
                 $asigdosim_control->save();
+
                 $estadoDosimControlCristalino = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimControlCristalino[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -931,6 +940,7 @@ class DosimetriaController extends Controller
                 $asigdosim_control->energia                     = $request->energia_asigdosim;
     
                 $asigdosim_control->save();
+
                 $estadoDosimControl = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimControlDedo[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -1024,6 +1034,7 @@ class DosimetriaController extends Controller
                 $asigdosimCaso->energia                   = $request->energia_asigdosim;
     
                 $asigdosimCaso->save();
+
                 $estadoDosimCaso = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimCaso[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -1055,6 +1066,7 @@ class DosimetriaController extends Controller
                 $asigdosimCristalino->energia                   = $request->energia_asigdosim;
     
                 $asigdosimCristalino->save();
+
                 $estadoDosimCristalino = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimCristalino[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -1090,6 +1102,7 @@ class DosimetriaController extends Controller
                 $asigdosimMuneca->energia                   = $request->energia_asigdosim;
     
                 $asigdosimMuneca->save();
+
                 $estadoDosimMuneca = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimMuneca[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -1125,6 +1138,7 @@ class DosimetriaController extends Controller
                 $asigdosimDedo->energia                   = $request->energia_asigdosim;
     
                 $asigdosimDedo->save();
+
                 $estadoDosimDedo = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimDedo[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -1467,6 +1481,7 @@ class DosimetriaController extends Controller
                 $asigdosimTorax->energia                   = $request->energia_asigdosim;
     
                 $asigdosimTorax->save();
+
                 $estadoDosimTorax = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimTorax[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -1536,6 +1551,7 @@ class DosimetriaController extends Controller
                 $asigdosimCaso->energia                   = $request->energia_asigdosim;
     
                 $asigdosimCaso->save();
+
                 $estadoDosimCaso = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimCaso[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -1572,6 +1588,7 @@ class DosimetriaController extends Controller
                 $asigdosimCristalino->energia                   = $request->energia_asigdosim;
     
                 $asigdosimCristalino->save();
+
                 $estadoDosimCristalino = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimCristalino[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -1612,6 +1629,7 @@ class DosimetriaController extends Controller
                 $asigdosimMuneca->energia                   = $request->energia_asigdosim;
     
                 $asigdosimMuneca->save();
+
                 $estadoDosimMuneca = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimMuneca[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -1652,6 +1670,7 @@ class DosimetriaController extends Controller
                 $asigdosimDedo->energia                   = $request->energia_asigdosim;
     
                 $asigdosimDedo->save();
+
                 $estadoDosimDedo = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimDedo[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
@@ -2478,36 +2497,8 @@ class DosimetriaController extends Controller
         return response()->json($dosicontrol);
     }
     public function revisionDosimetriaGeneral(){
-        
-       /*  $trabajdosiasig = Trabajadordosimetro::join('personas', 'trabajadordosimetros.persona_id', '=', 'personas.id_persona')
-        ->join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
-        ->leftJoin('holders', 'trabajadordosimetros.holder_id', '=', 'holders.id_holder')
-        ->join('contratodosimetriasedes', 'trabajadordosimetros.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
-        ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
-        ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
-        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
-        ->join('contratodosimetriasededeptos', 'trabajadordosimetros.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
-        ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
-        ->where('trabajadordosimetros.dosimetro_uso', '=', 'TRUE')
-        ->whereNull('trabajadordosimetros.revision')
-        ->select('trabajadordosimetros.id_trabajadordosimetro','trabajadordosimetros.ubicacion', 'trabajadordosimetros.ubicacion', 'trabajadordosimetros.mes_asignacion','personas.primer_nombre_persona', 'personas.segundo_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'dosimetros.codigo_dosimeter', 'holders.codigo_holder', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'empresas.nombre_empresa', 'departamentosedes.nombre_departamento')
-        ->get();
-        $dosicontrolasig = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
-        ->join('contratodosimetriasedes', 'dosicontrolcontdosisedes.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
-        ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
-        ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
-        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
-        ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
-        ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
-        ->where('dosicontrolcontdosisedes.dosimetro_uso', '=', 'TRUE')
-        ->whereNull('dosicontrolcontdosisedes.revision')
-        ->select('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', 'dosicontrolcontdosisedes.mes_asignacion', 'dosimetros.codigo_dosimeter', 'dosimetriacontratos.codigo_contrato', 'sedes.nombre_sede', 'empresas.nombre_empresa', 'departamentosedes.nombre_departamento')
-        ->get(); */
-        
        
         return view('dosimetria.revision_asignaciones_dosimetria_general1');
-        /* return view('dosimetria.revision_asignaciones_dosimetria_general', compact('trabajdosiasig', 'dosimetros', 'dosicontrolasig') ); */
-        /* return $trabajdosiasig; */
     }
     public function asignaciones(Request $request){
         
@@ -2555,6 +2546,12 @@ class DosimetriaController extends Controller
         
         return response()->json($asignacionesControlall);
     }
+    public function observacionesreventrada(Request $request){
+        $observacionesAsig = Obsreventrada::where('contdosisededepto_id', '=', $request->id)
+        ->where('mes_asignacion', '=', $request->mes)
+        ->get();
+        return response()->json($observacionesAsig);
+    }
     public function asignacionesTrab(Request $request){
         $asignaciones = Trabajadordosimetro::where('contdosisededepto_id', '=', $request->id)
         ->where('mes_asignacion', '=', $request->mes)
@@ -2567,20 +2564,8 @@ class DosimetriaController extends Controller
         ->get();
         return response()->json($asignacionesControl);
     }
-    /* public function revisionCheckControlGeneral(Request $request){
-        $dosicontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes)
-        ->update([
-            'revision' => 'TRUE'
-        ]);
-        return response()->json($dosicontrol);
-    } */ 
-    
-    /* public function pdfCertificadorevisionsalida($empresa, $deptodosi, $mesnumber){
-        
-        $pdf =  PDF::loadView('dosimetria.certificadoPDF_revision_dosimetria');
-        $pdf->setPaper('A4', 'portrait');
-        return $pdf->stream();
-    } */
+
+   
     public function pdfReporteRevisionSalida($empresa, $deptodosi, $mesnumber){
         /* return $deptodosi; */
 
@@ -2619,7 +2604,9 @@ class DosimetriaController extends Controller
         ->where('mes_asignacion', '=', $mesnumber)
         ->where('revision_entrada', '=', 'TRUE')
         ->get();
-
+        $observacionesAsig = Obsreventrada::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
         //PARA LA REVISION GENERAL DE ENTRADA///
         $temptrabajdosimentradarev = Temptrabajdosimentradarev::join('contratodosimetriasededeptos', 'temptrabajdosimentradarevs.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
@@ -2629,7 +2616,7 @@ class DosimetriaController extends Controller
         $empresainfo= ContratosDosimetriaEmpresa::where('empresa_id', '=', $empresa)
         ->get();
         
-        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionentrada_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados','temptrabajdosimentradarev', 'empresainfo'));
+        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionentrada_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados','observacionesAsig','temptrabajdosimentradarev', 'empresainfo'));
         $pdf->setPaper('A4', 'portrait');
         date_default_timezone_set('America/Bogota');
         return $pdf->stream("RED_OSL_QA_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
@@ -2643,6 +2630,8 @@ class DosimetriaController extends Controller
         $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
+        $observaciones = Observacion::all();
+
         $observacionesAsig = Obsreventrada::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
@@ -2652,7 +2641,7 @@ class DosimetriaController extends Controller
         ->get();
         
         /* return $contdosisededepto->departamentosede->departamento->nombre_departamento; */
-        return view('dosimetria.revision_entrada_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber', 'observacionesAsig', 'observacionesDelMes'));
+        return view('dosimetria.revision_entrada_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber', 'observaciones', 'observacionesAsig', 'observacionesDelMes'));
     }
     public function revisionCheckControlEntrada(Request $request){
         $dosicontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes)
@@ -2711,46 +2700,56 @@ class DosimetriaController extends Controller
         /* return $request; */
         if(!empty($request->id_dosicontrolcontdosisedes)){
             for($i=0; $i<count($request->id_dosicontrolcontdosisedes); $i++){
-                $longitudIdcontrol = count($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i]));
-                for($x=0; $x < $longitudIdcontrol; $x++){
-                    $obsdosicont= new Obsreventrada();
-                    $obsdosicont->dosicontrol_id = $request->id_dosicontrolcontdosisedes[$i];
-                    $obsdosicont->contratodosimetriasede_id = $request->contratodosimetriasede;
-                    $obsdosicont->contdosisededepto_id = $request->contdosisededepto;
-                    $obsdosicont->mes_asignacion = $request->mes_asignacion;
-                    $obsdosicont->numero_obs = empty($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i])[$x]) ? null : $request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i])[$x];
-                    $obsdosicont->save();
+                if(!empty($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i]))){
+                    $longitudIdcontrol = count($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i]));
+                    for($x=0; $x < $longitudIdcontrol; $x++){
+                        $obsdosicont= new Obsreventrada();
+                        $obsdosicont->dosicontrol_id            = $request->id_dosicontrolcontdosisedes[$i];
+                        $obsdosicont->contratodosimetriasede_id = $request->contratodosimetriasede;
+                        $obsdosicont->contdosisededepto_id      = $request->contdosisededepto;
+                        $obsdosicont->observacion_id            = empty($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i])[$x]) ? null : $request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i])[$x];
+                        $obsdosicont->nota_obs9                 = $obsdosicont->observacion_id == 9 ? mb_strtoupper($request->input('obsAddCont'.$request->id_dosicontrolcontdosisedes[$i])) : null;
+                        $obsdosicont->mes_asignacion            = $request->mes_asignacion;
+                        $obsdosicont->save();
+                    }
                 }
             };
         }
         if(!empty($request->id_trabajadordosimetro)){
             for($i=0; $i<count($request->id_trabajadordosimetro); $i++){
-                $longitudIdtrabjdosi = count($request->input('observacion_asig'.$request->id_trabajadordosimetro[$i]));
-                for($x=0; $x < $longitudIdtrabjdosi; $x++){
-                    $obsdosi= new Obsreventrada();
-                    $obsdosi->trabajcontdosimetro_id = $request->id_trabajadordosimetro[$i];
-                    $obsdosi->contratodosimetriasede_id = $request->contratodosimetriasede;
-                    $obsdosi->contdosisededepto_id = $request->contdosisededepto;
-                    $obsdosi->mes_asignacion = $request->mes_asignacion;
-                    $obsdosi->numero_obs = empty($request->input('observacion_asig'.$request->id_trabajadordosimetro[$i])[$x]) ? null : $request->input('observacion_asig'.$request->id_trabajadordosimetro[$i])[$x];
-                    $obsdosi->save();
+                if(!empty($request->input('observacion_asig'.$request->id_trabajadordosimetro[$i]))){
+                    $longitudIdtrabjdosi = count($request->input('observacion_asig'.$request->id_trabajadordosimetro[$i]));
+                    for($x=0; $x < $longitudIdtrabjdosi; $x++){
+                        $obsdosi= new Obsreventrada();
+                        $obsdosi->trabajcontdosimetro_id    = $request->id_trabajadordosimetro[$i];
+                        $obsdosi->contratodosimetriasede_id = $request->contratodosimetriasede;
+                        $obsdosi->contdosisededepto_id      = $request->contdosisededepto;
+                        $obsdosi->observacion_id            = empty($request->input('observacion_asig'.$request->id_trabajadordosimetro[$i])[$x]) ? null : $request->input('observacion_asig'.$request->id_trabajadordosimetro[$i])[$x];
+                        $obsdosi->nota_obs9                 = $obsdosi->observacion_id == 9 ? mb_strtoupper($request->input('obsAddTrab'.$request->id_trabajadordosimetro[$i])) : null;
+                        $obsdosi->mes_asignacion            = $request->mes_asignacion;
+                        $obsdosi->save();
+                    }
                 }
             }
         }
         
         return redirect()->back()->with('crear', 'ok');
     }
-    public function observacionesRevsEntradaGeneral(Request $request){
+    public function nuevaObservacionreventrada(Request $request){
+        /* return $request; */
+        $observacionNew = new Observacion;
+        $observacionNew->obs = mb_strtoupper($request->obs_new);
         
-        $obsercacionentradanewmes = new Mesescontdosisedeptos;
-        $texto = mb_strtoupper($request->nota_cambio_dosimetro).' CORRESPONDIENTE AL TRABAJADOR '. mb_strtoupper($request->trabajador_correspondiente);
-        $obsercacionentradanewmes->contdosisededepto_id = $request->id_contdosisededepto;
-        $obsercacionentradanewmes->mes_asignacion       = $request->mesnumber;
-        $obsercacionentradanewmes->nota_cambiodosim     = $texto;
-        $obsercacionentradanewmes->save();
+        $observacionNew->save();
 
         return back()->with('crear', 'ok');
     }
+    public function observacionesremove(Request $request){
+        $removeObs = Obsreventrada::find($request->id);
+        $removeObs->delete();
+        return  response()->json(["mensaje"=>"borrado"]);
+    }
+    
     public function pdfCertificadorevisionentrada($empresa, $deptodosi, $mesnumber){
         /* return $mesnumber; */
         if($empresa != 0){

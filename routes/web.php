@@ -246,12 +246,14 @@ Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/trabajadordosimet
 Route::post('/revisiondosimetriaentrada', [DosimetriaController::class, 'saveObservacionesReventrada'])->name('observacionesReventrada.save');
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/asignacionesTrab', [DosimetriaController::class, 'asignacionesTrab']);
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/asignacionesCont', [DosimetriaController::class, 'asignacionesCont']);
+Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/observacionesreventrada', [DosimetriaController::class, 'observacionesreventrada']);
+Route::post('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/observacionesremove', [DosimetriaController::class, 'observacionesremove'])->name('observaciones.remove');
 Route::get('revisiondosimetriaentrada/create', [DosimetriaController::class, 'revisionDosimetriaEntradaGeneral'])->name('revisiondosimetriaentrada.create');
 Route::get('/revisiondosimetriaentrada/dosimetro', [DosimetriaController::class, 'revisionDosimetro']);
 Route::get('/revisiondosimetriaentrada/asignaciones', [DosimetriaController::class, 'asignacionesEntrada']);
 Route::get('/revisiondosimetriaentrada/asignacionesControl', [DosimetriaController::class, 'asignacionesControlEntrada']);
 
-Route::post('revisiondosimetriaentrada/observacion', [DosimetriaController::class, 'observacionesRevsEntradaGeneral'])->name('observacionesrevsentradageneral.create');
+Route::post('revisiondosimetriaentrada/observacionCreate', [DosimetriaController::class, 'nuevaObservacionreventrada'])->name('nuevaobservacionreventrada.create');
 /* Route::get('certificadorevisionentradadosimetria/{empresa}/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfCertificadorevisionentrada'])->name('certificadorevisionentrada.pdf'); */
 Route::get('/reporteRevisionEntrada/{empresa}/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdfReporteRevisionEntrada'])->name('Reporterevisionentrada.pdf');
 

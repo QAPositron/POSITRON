@@ -211,7 +211,13 @@
                                     <td style="text-align:center;">{{$mesnumber}}/12</td>
                                     <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
                                     <td style="text-align:center;">{{$dosicont->primer_dia_uso}} - {{$dosicont->ultimo_dia_uso}}</td>
-                                    <td style="text-align:center;">{{$dosicont->observacion_revent}})</td>
+                                    <td style="text-align:center;">
+                                        @foreach($observacionesAsig as $obs)
+                                            @if($dosicont->id_dosicontrolcontdosisedes == $obs->dosicontrol_id)
+                                                {{$obs->observacion_id}})
+                                            @endif
+                                        @endforeach
+                                    </td>
                                 </tr>
                             @endforeach
                             @foreach($trabjasignados as $trabjasig)
@@ -230,7 +236,13 @@
                                     <td style="text-align:center;">{{$mesnumber}}/12</td>
                                     <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->primer_dia_uso}} - {{$trabjasig->ultimo_dia_uso}}</td>
-                                    <td style="text-align:center;">{{$trabjasig->observacion_revent}})</td>
+                                    <td style="text-align:center;">
+                                        @foreach($observacionesAsig as $obs)
+                                            @if($trabjasig->id_trabajadordosimetro == $obs->trabajcontdosimetro_id)
+                                                {{$obs->observacion_id}})
+                                            @endif
+                                        @endforeach
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif
@@ -241,6 +253,18 @@
             <p style="position:relative; text-align:justify;"><b>Convenciones de las observaciones: </b>1) Buen Estado Físico, 2) Dosímetro contaminado<sup>2</sup>, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 5) dosímetro sin etiqueta, 6) holder dañado, 7) dosímetro de otro periodo, 8) Dosímetro otra sede, 9) Otra adicional.</p>
             <br>
             <p style="position:relative; text-align:justify;"><b>Observaciones Adicionales:</b></p>
+            @foreach($observacionesAsig as $obsAsig)
+                @if($obsAsig->observacion_id == 9)
+                    <p>- Correspondiente al dosímetro 
+                    @if($obsAsig->dosicontrol_id != NULL)
+                        control {{strtolower($obsAsig->dosicontrolcontdosisedes->ubicacion)}}:
+                    @elseif($obsAsig->trabajcontdosimetro_id != NULL)
+                        {{strtolower($obsAsig->trabajadordosimetro->ubicacion)}} del trabajador {{ucwords(strtolower($obsAsig->trabajadordosimetro->persona->primer_nombre_persona))}} {{ucwords(strtolower($obsAsig->trabajadordosimetro->persona->primer_apellido_persona))}} {{ucwords(strtolower($obsAsig->trabajadordosimetro->persona->segundo_apellido_persona))}}:
+                    @endif 
+                    {{strtolower($obsAsig->nota_obs9)}}.</p>
+                @endif
+            @endforeach
+            
             <br>
             @if(empty($contdosisededepto))
                 <p style="position:relative; text-align:justify;">Se revisaron

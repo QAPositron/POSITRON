@@ -28,8 +28,11 @@ class CreateObsreventradasTable extends Migration
             $table-> unsignedBigInteger('contdosisededepto_id');
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
 
+            $table-> unsignedBigInteger('observacion_id');
+            $table-> foreign('observacion_id')->references('id_observacion')->on('observacions')->onDelete('cascade')->onUpdate('cascade');
+
             $table->integer('mes_asignacion');
-            $table->integer('numero_obs')->nullable();
+            $table->text('nota_obs9')->nullable();
             $table->timestamps();
         });
     }

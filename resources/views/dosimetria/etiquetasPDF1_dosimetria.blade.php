@@ -414,7 +414,7 @@
                     @elseif($trab->mes_asignacion == 2 || $trab->mes_asignacion == 8)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($trab->mes_asignacion == 3 || $trab->mes_asignacion == 9)
-                        <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINO3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($trab->mes_asignacion == 4 || $trab->mes_asignacion == 10)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM4.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($trab->mes_asignacion == 5 || $trab->mes_asignacion == 11)

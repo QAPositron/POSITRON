@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
-
-
     <div class="row">
         <div class="col-md">
             <a type="button" class="btn btn-circle colorQA" href="{{route('detallecontrato.create', $dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)}}">
@@ -25,6 +23,7 @@
     <h6 class="text-center"> <b>TOTAL DE DOSÍMETROS:</b> TÓRAX: # {{$dosisededeptocontra->dosi_torax}}  --  CRISTALINO: # {{$dosisededeptocontra->dosi_cristalino}}  --  DEDO: # {{$dosisededeptocontra->dosi_dedo}}  --  MUÑECA: # {{$dosisededeptocontra->dosi_muñeca}}  --  ÁREA: # {{$dosisededeptocontra->dosi_area}}  --  CASO: # {{$dosisededeptocontra->dosi_caso}}</h6>
     <h6 class="text-center">CONTROL TÓRAX: # {{$dosisededeptocontra->dosi_control_torax}}  --  CONTROL CRISTALINO: #{{$dosisededeptocontra->dosi_control_cristalino}} -- CONTROL ANILLO: # {{$dosisededeptocontra->dosi_control_dedo}}</h6>
 
+
     <div class="row">
         <div class="col"></div>
         <div class="col-12">
@@ -34,14 +33,12 @@
                         
                         <tr>
                             <th class="text-center align-middle" style='width: 8.90%'>NÚMERO</th>
-                            <th class="text-center align-middle" style='width: 20.50%' >MESES</th>
+                            <th class="text-center align-middle" style='width:30.50%' >MESES</th>
                             <th class="text-center align-middle">ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        @for($i=0; $i<12; $i++)
-                            
+                        @for($i=0; $i<4; $i++)
                             <tr @if($dosisededeptocontra->mes_actual == ($i+1)) style="background-color: rgb(26, 153, 128, 0.1);" @endif>
                                 <th class="text-center align-middle">
                                     {{$i+1}}
@@ -50,17 +47,20 @@
                                     @if($i==0)
                                         @php
                                             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                                            echo $meses[date("m", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ;
+                                            $inicio = date($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
+                                            $fin_parcial = date("j-m-Y",strtotime($inicio."+ 3 month"));
+                                            $fin_total = date("j-m-Y",strtotime($fin_parcial."- 1 days")); 
+                                            echo date("j", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio))." ".$meses[date("m", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio)). " - ".date("d", strtotime($fin_total))." ".$meses[date("m", strtotime($fin_total))]." DE ".date("Y", strtotime($fin_total));
                                         @endphp
                                     @else
-                                        <span id="mes{{$i}}"></span>
+                                        <span id="mes{{$i+1}}"></span>
                                     @endif
                                 </th>
                                 <td class='text-center'>
                                     <div class="row align-items-center"> 
                                         @if($mesTotal[$i]>0)
                                             @if(  $i == '0' )
-                                            mesTotal > 0 & i= 0
+                                            mes > 0 & i= 0
                                                 <div class="col-md text-center">
                                                     <a onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn  btn-sm aling-middle">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -150,7 +150,7 @@
                                                 </div> 
                                                 
                                             @else
-                                            mesTotal > 0 & i != 0
+                                            mes > 0 & i != 0
                                                 <div class="col-md text-center">
                                                 
                                                     @foreach($mesesAssig[$i] as $asigmes)
@@ -266,7 +266,7 @@
                                             @endif
                                         @else
                                             @if(  $i == '0' )
-                                                mesTotal < 0 & i= 0
+                                                mes < 0 & i= 0
                                                 <div class="col-md text-center">
                                                 
                                                     <a  href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn btn-sm colorQA">
@@ -317,7 +317,7 @@
                                                 </div> 
                                                 
                                             @else
-                                                mesTotal < 0 & i != 0
+                                                mes < 0 & i != 0
                                                 <div class="col-md text-center">
                                                 
                                                     @if($dosisededeptocontra->mes_actual+1 == ($i+1) && count($mes1AssignRev) != 0)
@@ -382,15 +382,13 @@
                                 </td>
                             </tr>
                         @endfor
-
-
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="col"></div>
     </div>
-<script
+    <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
@@ -422,113 +420,31 @@ crossorigin="anonymous">
         let fecha = new Date("{{$dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}");
         fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset());
         console.log(fecha)
-        for($i=1; $i<=11; $i++){
+        var xx = 1; 
+        for(var i=3; i<=11; i= i+3){
 
-            var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
-            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-            document.getElementById('mes'+$i).innerHTML = fechaesp;
-            
-            console.log(fechaesp); 
-        }
-        /* $('#botoninfo').click(function(e){
-            e.preventDefault();
-            console.log("SE SELECCIONO EL BOTON");
-            Swal.fire({
-                text: "ALGUNOS DOSIMETROS NO TIENEN REGISTRO DE LECTURA !!!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#1A9980',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'SI, SEGURO!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.open("repodosimetria/{deptodosi}/{mesnumber}/pdf", " _blank");
-                    }
-                })
-        })   */ 
-         
-    });
-    function cambiaColor(){
-        var boton = document.getElementById("botonEtiq");
-        boton.style.background = "#a0aec0"; 
-        $('#botoRsalida').addClass('colorQA');
-        var botonRsalida = document.getElementById("botoRsalida");
-        botonRsalida.style.background = "#1A9980";
+            console.log(i);
+            var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+i));
+            console.log("r1" +r);
+             var r2 = new Date(new Date(r).setMonth(r.getMonth()+3));
+             var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+            console.log("r2 " +r2final);
+            var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+            console.log(fechaesp1);
 
-
-    }
-    /* function alertInforme(i, depto){
-        
-        console.log("mes"+ i);
-        console.log("DEPTO" +depto);
-        var host = window.location.host;
-        var path = "http://"+host+"/POSITRON/public/repodosimetria/"+depto+"/"+i+"/pdf";
-        console.log(host+"/POSITRON/public/repodosimetria/1/3/pdf");
-        
-        var mesesAsing = {!! json_encode($mesesAssig) !!};
-        const mesesA = mesesAsing[i-1];
-        mesesA.forEach(mesw => {
-            console.log(mesw)
-            if(mesw.ubicacion == 'TORAX'){
-                console.log('TORAX');
-                if(mesw.Hp007_calc_dose == null || mesw.Hp10_calc_dose == null || mesw.Hp3_calc_dose == null){
-                    console.log('TORAX*');
-                    Swal.fire({
-                        title: "Oops!!",
-                        text: "ALGUNOS DOSIMETROS NO TIENEN REGISTRO DE LECTURA, DESEA VER EL INFORME ??",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#1A9980',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'SI, SEGURO!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.open(path, '_blank');
-                        }
-                    })
-                }else{
-                    window.open(path, '_blank');
-                }
-            }else if(mesw.ubicacion == 'CRISTALINO'){
-                if(mesw.Hp3_calc_dose == null){
-                    Swal.fire({
-                        title: "Oops!!",
-                        text: "ALGUNOS DOSIMETROS NO TIENEN REGISTRO DE LECTURA, DESEA VER EL INFORME ??",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#1A9980',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'SI, SEGURO!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.open(path, '_blank');
-                        }
-                    })
-                }else{
-                    window.open(path, '_blank');
-                }
-            }else if(mesw.ubicacion == 'ANILLO'){
-                if(mesw.Hp007_calc_dose == null){
-                    Swal.fire({
-                        title: "Oops!!",
-                        text: "ALGUNOS DOSIMETROS NO TIENEN REGISTRO DE LECTURA, DESEA VER EL INFORME ??",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#1A9980',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'SI, SEGURO!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.open(path, '_blank');
-                        }
-                    })
-                }else{
-                    window.open(path, '_blank');
+            var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+            console.log(fechaesp2);
+            xx++;
+            console.log("XX"+xx);
+            for(var x=2; x<=4; x++){
+                console.log("ESTA ES LA X="+x);
+                if(xx == x){
+                    document.getElementById('mes'+xx).innerHTML = fechaesp1+' - '+fechaesp2;
                 }
             }
-            
-        });
-    } */
+        }
+        
+    })
 
 </script>
 @endsection

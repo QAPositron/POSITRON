@@ -13,7 +13,6 @@ class Obsreventrada extends Model
     public function trabajadordosimetro(){
         return $this->belongsTo(Trabajadordosimetro::class, 'trabajcontdosimetro_id', 'id_trabajadordosimetro');
     }
-
     //Relacion uno a uno (inversa) con holder
     public function dosicontrolcontdosisedes(){
         return $this->belongsTo(Dosicontrolcontdosisede::class, 'dosicontrol_id', 'id_dosicontrolcontdosisedes');
@@ -25,5 +24,9 @@ class Obsreventrada extends Model
     //Relacion uno a uno (inversa) con contdosisededepto
     public function contdosisededepto(){
         return $this->belongsTo(contdosisededepto::class, 'contdosisededepto_id', 'id_contdosisededepto');
+    }
+    public function observaciones(){
+        /* return $this->hasMany('App\Models\Sede'); */
+        return $this->belongsTo(Observacion::class, 'observacion_id', 'id_observacion');
     }
 }
