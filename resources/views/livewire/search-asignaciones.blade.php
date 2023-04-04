@@ -95,7 +95,7 @@
                             <th class='align-middle py-4' >DOSÍM.</th>
                             <th class='align-middle py-4' >HOLDER</th>
                             <th class='align-middle py-4' >UBICACIÓN</th>
-                            <th class='align-middle py-4' >MES</th>
+                            <th class='align-middle py-4' >PERÍODO</th>
                             <th class='align-middle py-4' >CONTRATO</th>
                             <th class='align-middle py-4' >SEDE</th>
                             <th class='align-middle py-4' >ESP.</th>
@@ -141,7 +141,7 @@
                             <th class='align-middle py-4' style="width: 25%;">CONTROL</th>
                             <th class='align-middle py-4' >DOSÍMETRO</th>
                             <th class='align-middle py-4' >HOLDER</th>
-                            <th class='align-middle py-4' >MES</th>
+                            <th class='align-middle py-4' >PERÍODO</th>
                             <th class='align-middle py-4' >CONTRATO</th>
                             <th class='align-middle py-4' >SEDE</th>
                             <th class='align-middle py-4' >ESPECIALIDAD</th>
@@ -200,7 +200,7 @@
                             <th class='align-middle py-4' >TRABAJADOR</th>
                             <th class='align-middle py-4' >DOSÍMETRO</th>
                             <th class='align-middle py-4' >UBI.</th>
-                            <th class='align-middle py-4' >MES</th>
+                            <th class='align-middle py-4' >PERÍODO</th>
                             <th class='align-middle py-4' >CONTRATO</th>
                             <th class='align-middle py-4' >SEDE</th>
                             <th class='align-middle py-4' >ESP.</th>

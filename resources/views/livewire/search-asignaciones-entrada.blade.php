@@ -94,7 +94,7 @@
                             <th class='align-middle py-4' >DOSÍM.</th>
                             <th class='align-middle py-4' >HOLDER</th>
                             <th class='align-middle py-4' >UBICACIÓN</th>
-                            <th class='align-middle py-4' >MES</th>
+                            <th class='align-middle py-4' >PERÍODO</th>
                             <th class='align-middle py-4' >CONTRATO</th>
                             <th class='align-middle py-4' >SEDE</th>
                             <th class='align-middle py-4' >ESP.</th>
@@ -140,7 +140,7 @@
                             <th class='align-middle py-4' style="width: 10%;">CONTROL</th>
                             <th class='align-middle py-4' >DOSÍMETRO</th>
                             <th class='align-middle py-4' >CONTRATO</th>
-                            <th class='align-middle py-4' >MES</th>
+                            <th class='align-middle py-4' >PERÍODO</th>
                             <th class='align-middle py-4' >SEDE</th>
                             <th class='align-middle py-4' >ESPECIALIDAD</th>
                         </tr>
@@ -191,7 +191,7 @@
                             <th class='align-middle py-4' >TRABAJADOR</th>
                             <th class='align-middle py-4' >DOSÍMETRO</th>
                             <th class='align-middle py-4' >UBICACIÓN</th>
-                            <th class='align-middle py-4' >MES</th>
+                            <th class='align-middle py-4' >PERÍODO</th>
                             <th class='align-middle py-4' >CONTRATO</th>
                             <th class='align-middle py-4' >SEDE</th>
                             <th class='align-middle py-4' >ESP.</th>
@@ -229,7 +229,7 @@
         <div class="col-md"></div>
         <div class="col-md-8 ">
             <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">  @if(count($temptrabajdosimentradarev) == '0' )<b>OBSERVACIONES DE LAS ASIGNACIONES REVISADAS </b> @else <b>OBSERVACIONES DE LAS ASIGNACIONES REVISADAS CORRESPONDIENTE AL </b> CONTRATO: {{$temptrabajdosimentradarev[0]->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}, SEDE: {{$temptrabajdosimentradarev[0]->contratodosimetriasede->sede->nombre_sede}}, ESP: {{$temptrabajdosimentradarev[0]->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}, MES: {{$temptrabajdosimentradarev[0]->mes_asignacion}}   @endif</h4>
+                <h4 class="alert-heading">  @if(count($temptrabajdosimentradarev) == '0' )<b>OBSERVACIONES DE LAS ASIGNACIONES REVISADAS </b> @else <b>OBSERVACIONES DE LAS ASIGNACIONES REVISADAS CORRESPONDIENTE AL </b> CONTRATO: {{$temptrabajdosimentradarev[0]->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}, SEDE: {{$temptrabajdosimentradarev[0]->contratodosimetriasede->sede->nombre_sede}}, ESP: {{$temptrabajdosimentradarev[0]->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}, PERÍODO: {{$temptrabajdosimentradarev[0]->mes_asignacion}}   @endif</h4>
                 
                 @if(!empty($observacionesDelMes))
                     

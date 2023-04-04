@@ -101,7 +101,7 @@
                         <table class="table table-bordered">
                             <thead class ="text-center">
                                 <tr>
-                                    <th>MESES</th>
+                                    <th>PERÍODOS</th>
                                     <th>DOSIM. TÓRAX</th>
                                     <th>DOSIM. CRISTALINO</th>
                                     <th>DOSIM. ANILLO</th>
@@ -122,7 +122,7 @@
                 <div class="col-md"></div>
             </div>
             
-            <label class="px-4">SELECCIONE SI DESEA ADICIONAR UN DOSÍMETRO AL MES ACTUAL O AL SIGUIENTE Y GUARDAR SUS ASIGNACIONES:</label>
+            <label class="px-4">SELECCIONE SI DESEA ADICIONAR UN DOSÍMETRO AL PERÍODO ACTUAL O AL SIGUIENTE Y GUARDAR SUS ASIGNACIONES:</label>
             <br>
             <br>
             <div class="row">
@@ -1404,7 +1404,7 @@
             };
 
             Swal.fire({
-                text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL MES ACTUAL??",
+                text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL PERÍODO ACTUAL??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -1732,7 +1732,7 @@
         $('#limpiar_asig').click(function(e){
             e.preventDefault();
             Swal.fire({
-                text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL MES ANTERIOR?',
+                text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL PERÍODO ANTERIOR?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

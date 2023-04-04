@@ -139,7 +139,7 @@
                         if(value.nombre_departamento != chech && value.nombre_sede == check){
                             
                             let myTable= "<table class='table  table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
-                            myTable+= "<th class='align-middle' style='width: 8.90%'>MES ACTUAL</th>";
+                            myTable+= "<th class='align-middle' style='width: 8.90%'>PERÍODO ACTUAL</th>";
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. TÓRAX</th>";
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CRISTALINO</th>";
                             myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ANILLO</th>";
@@ -179,7 +179,7 @@
 
                             }else{
                                 let Table= "<table class='table table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' colspan='4'>NOVEDADES</th></tr>";
-                                    Table+="<tr><th class='align-middle' style='width: 12.90%'>MES</th>";
+                                    Table+="<tr><th class='align-middle' style='width: 12.90%'>PERÍODO</th>";
                                     Table+="<th class='align-middle' style='width: 12.90%'>FECHA</th>";
                                     Table+="<th class='align-middle'>OBSERVACIÓN</th>";
                                     Table+="<th class='align-middle' style='width: 12.90%'>ACCIONES</th>";

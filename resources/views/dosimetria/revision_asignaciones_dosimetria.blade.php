@@ -14,12 +14,12 @@
         <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i></h3>
         <h3 class="text-center">
             @if($mesnumber == 1)
-                MES 1 (@php
+                PERÍODO 1 (@php
                     $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
                     echo $meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ;
                 @endphp),  ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}}  
             @else
-                MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ),  ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}}
+                PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ),  ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}}
             @endif
         </h3>
     </div>

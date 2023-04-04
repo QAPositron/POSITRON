@@ -71,7 +71,7 @@
                         <select class="form-select" name="mesacambiar" id="mesacambiar" value="" autofocus style="text-transform:uppercase">
                             <option value="">--SELECCIONE--</option>
                         </select>
-                        <label for="floatingInputGrid">MES A MODIFICAR:</label>
+                        <label for="floatingInputGrid">PERÍODO A MODIFICAR:</label>
                     </div>
                 </div>
                 <div class="col-md"></div>
@@ -1004,7 +1004,7 @@
         $('#limpiar_asig').click(function(e){
             e.preventDefault();
             Swal.fire({
-                text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL MES ANTERIOR?',
+                text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL PERÍODO ANTERIOR?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

@@ -22,7 +22,7 @@
                 <th rowspan="2">DOSÍMETRO</th>
                 <th rowspan="2">HOLDER</th>
                 <th rowspan="2">UBICACIÓN</th>
-                <th rowspan="2">MES</th>
+                <th rowspan="2">PERÍODO</th>
                 <th rowspan="2">CONTRATO</th>
                 <th rowspan="2">SEDE</th>
                 <th rowspan="2">ESPECIALIDAD</th>

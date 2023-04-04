@@ -30,7 +30,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr class="table-active text-center">
-                        <th class='align-middle' style='width: 2.0%'>MES ASIGNACIÓN</th>
+                        <th class='align-middle' style='width: 2.0%'>PERÍODO ASIGNACIÓN</th>
                         <th class='align-middle' style='width: 5.0%'>FECHA</th>
                         <th class='align-middle' style='width: 10.0%'>TRABAJADOR</th>
                         <th class='align-middle' style='width: 2.90%'>N. IDEN.</th>

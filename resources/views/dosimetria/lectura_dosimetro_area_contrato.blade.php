@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-6">
         <h3 class="text-center">LECTURA DE DOSÍMETRO TIPO ÁREA </h3>
-        <h4 class="text-center">ESPECIALIDAD: {{$dosiareasig->contratodosimetriasededepto->departamentosede->nombre_departamento}} <br> CONTRATO No. {{$dosiareasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}} - MES {{$dosiareasig->mes_asignacion}}</h4>
+        <h4 class="text-center">ESPECIALIDAD: {{$dosiareasig->contratodosimetriasededepto->departamentosede->nombre_departamento}} <br> CONTRATO No. {{$dosiareasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}} - PERÍODO {{$dosiareasig->mes_asignacion}}</h4>
     </div>
     <div class="col-md"></div>
 </div>

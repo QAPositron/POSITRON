@@ -6,7 +6,7 @@
     <div class="col-md-15">
         <div class="card text-dark bg-light">
             <h2 class="modal-title w-100 text-center">ASIGNACIÓN DE DOSÍMETROS DESPUÉS DE NOVEDAD</h2>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ), ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} </h3>
+            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ), ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} </h3>
             <form action="{{route('asignadosicontratomnNovedad.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion_mn" name="form-nueva-asignacion_mn" class="form-nueva-asignacion_mn m-4">
                 @csrf
                 <br>

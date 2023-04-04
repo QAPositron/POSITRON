@@ -22,7 +22,7 @@
 <br>
 <br>
 <h3 class="text-center">
-    EDITAR LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}}<br> DEL MES {{$dosicontasig->mes_asignacion}} (
+    EDITAR LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}}<br>DEL PERÍODO {{$dosicontasig->mes_asignacion}} (
     @if($dosicontasig->mes_asignacion == 1)
         @php
             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];

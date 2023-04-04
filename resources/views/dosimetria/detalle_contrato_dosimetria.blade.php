@@ -76,7 +76,7 @@
                         echo "<thead class='table-active text-center'>";  
                             echo "<tr>";
                                 echo "<th class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
-                                echo "<th class='align-middle' style='width: 8.90%'>MES ACTUAL</th>";
+                                echo "<th class='align-middle' style='width: 8.90%'>PERÍODO ACTUAL</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. TÓRAX</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CRISTALINO</th>";
                                 echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ANILLO</th>";

@@ -24,7 +24,7 @@
 <h4 class="text-center" id="id_contrato"></h4>
 <br>
 <h3 class="text-center">
-    LECTURA DE DOSÍMETRO <br> DEL MES {{$trabjasig->mes_asignacion}} (
+    LECTURA DE DOSÍMETRO <br> PARA EL PERÍODO {{$trabjasig->mes_asignacion}} (
     @if($trabjasig->mes_asignacion == 1)
         @php
             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];

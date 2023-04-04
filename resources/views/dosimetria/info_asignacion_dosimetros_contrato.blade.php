@@ -23,7 +23,7 @@
 
 <br>
 <h3 class="text-center">
-    TRABAJADORES ASIGNADOS AL MES {{ Request()->mesnumber  }} (
+    TRABAJADORES ASIGNADOS AL PERÍODO {{ Request()->mesnumber  }} (
         @if(Request()->mesnumber == 1)
             @php
                 $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
@@ -992,7 +992,7 @@
                                     @csrf
                                     <div class="modal-body">
                                         <div class="col-md">
-                                            <label class="text-center">INGRESE LAS OBSERVACIONES O NOTAS PERTINENTES AL MES:</label>
+                                            <label class="text-center">INGRESE LAS OBSERVACIONES O NOTAS PERTINENTES AL PERÍODO:</label>
                                             <textarea class="form-control" name="nota_cambio_dosimetros" id="nota_cambio_dosimetros" rows="3" autofocus style="text-transform:uppercase"></textarea> 
                                             <input type="number" hidden value="{{$mesnumber}}" name="mesnumber" id="mesnumber">
                                             <input type="number" hidden value="{{$contdosisededepto->id_contdosisededepto}}" name="id_contdosisededepto" id="id_contdosisededepto">

@@ -6,7 +6,7 @@
     <div class="col-md-15">
         <div class="card text-dark bg-light">
             <h2 class="modal-title w-100 text-center">ASIGNACIÓN DOSÍMETROS</h2>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>MES {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ), ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} </h3>
+            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ), ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} </h3>
             <form action="{{route('asignadosicontratomn.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion_mn" name="form-nueva-asignacion_mn" class="form-nueva-asignacion_mn m-4">
                 @csrf
 
@@ -674,7 +674,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">CASO</td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicasoant->dosimetro_uso != 'FALSE') {{$dosicasoant->dosimetro_id}} @endif">@if($dosicasoant->dosimetro_uso != 'FALSE') {{$dosicasoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -683,7 +683,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">N.A</td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" style="text-transform:uppercase" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicasoant->dosimetro_uso != 'FALSE')
                                                         @if($dosicasoant->ocupacion=='T')
@@ -769,7 +769,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">CASO</td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresGeneral as $dosigenlib)
@@ -778,7 +778,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">N.A</td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="T"> TELETERAPIA</option>
@@ -832,7 +832,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">TÓRAX</td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dositoraxant->dosimetro_uso != 'FALSE') {{$dositoraxant->dosimetro_id}}@endif">@if($dositoraxant->dosimetro_uso != 'FALSE') {{$dositoraxant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -841,7 +841,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">N.A</td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" style="text-transform:uppercase" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dositoraxant->dosimetro_uso != 'FALSE')
                                                         @if($dositoraxant->ocupacion=='T')
@@ -926,7 +926,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">TÓRAX</td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresGeneral as $dosigenlib)
@@ -935,7 +935,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">N.A</td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="T"> TELETERAPIA</option>
@@ -989,7 +989,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">CRISTALINO</td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->dosimetro_id}}@endif">@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -997,7 +997,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->holder_id}}@endif">@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->holder->codigo_holder}}@else ---- @endif</option>
                                                     @foreach($holderLibresCristalino as $holibcris)
@@ -1005,7 +1005,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicristalinoant->dosimetro_uso != 'FALSE')
                                                         @if($dosicristalinoant->ocupacion=='T')
@@ -1090,7 +1090,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">CRISTALINO</td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -1098,7 +1098,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($holderLibresCristalino as $holibcris)
@@ -1106,7 +1106,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="T"> TELETERAPIA</option>
@@ -1161,7 +1161,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">MUÑECA</td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->dosimetro_id}}@endif">@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -1169,7 +1169,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select"  name="id_holder_asigdosimMuneca[]" id="id_holder_asigdosimMuneca" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->holder_id}}@endif">@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->holder->codigo_holder}}@else ---- @endif</option>
                                                     @foreach($holderLibresExtrem as $holibexm)
@@ -1177,7 +1177,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca"  style="text-transform:uppercase" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosimuñecant->dosimetro_uso != 'FALSE')
                                                         @if($dosimuñecant->ocupacion=='T')
@@ -1260,7 +1260,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">MUÑECA</td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -1268,7 +1268,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select"  name="id_holder_asigdosimMuneca[]" id="id_holder_asigdosimMuneca" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($holderLibresExtrem as $holibexm)
@@ -1276,7 +1276,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="T"> TELETERAPIA</option>
@@ -1330,7 +1330,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">ANILLO</td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo"  @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro_id}}@endif">@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -1338,7 +1338,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo" @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif >
                                                     <option value="@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->holder_id}}@endif">@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->holder->codigo_holder}}@else ---- @endif</option>
                                                     @foreach($holderLibresAnillo as $holibanillo)
@@ -1346,7 +1346,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosidedoant->dosimetro_uso != 'FALSE')
                                                         @if($dosidedoant->ocupacion=='T')
@@ -1431,7 +1431,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">ANILLO</td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -1439,7 +1439,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($holderLibresAnillo as $holibanillo)
@@ -1447,7 +1447,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="T"> TELETERAPIA</option>
@@ -1543,16 +1543,40 @@ crossorigin="anonymous">
         let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
         
         console.log(fecha);
-        for($i=0; $i<=13; $i++){
-            var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
-            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-            console.log(r + fechaesp + "ESTA ES LA I"+($i+1)); 
-            if("{{$mesnumber}}" == ($i+1)){
-                
-                document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
-            } 
-        }
+        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
+            for($i=0; $i<=13; $i++){
+                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
+                var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                console.log(r + fechaesp + "ESTA ES LA I"+($i+1)); 
+                if("{{$mesnumber}}" == ($i+1)){
+                    
+                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
+                } 
+            }
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
+            var xx = 1;
+            for(var i=3; i<=11; i= i+3){
 
+                console.log(i);
+                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+i));
+                console.log("r1" +r);
+                var r2 = new Date(new Date(r).setMonth(r.getMonth()+3));
+                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                console.log("r2 " +r2final);
+                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                console.log(fechaesp1);
+
+                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                console.log(fechaesp2);
+                
+                console.log("{{$mesnumber}}");
+                xx ++;
+                
+                if("{{$mesnumber}}" == xx){
+                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                }
+            }
+        }
         $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",});
         $('#ocupacion_asigdosimControlTorax').select2({width: "100%",});
         $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%",});
@@ -1670,6 +1694,37 @@ crossorigin="anonymous">
             var fecha_final_año = fecha_inicio.getFullYear();
             console.log(fecha_final_año);
             var mm = fecha_inicio.getMonth() + 2;
+            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            if(fecha_final_mes == 13){
+                fecha_final_mes = '01' ;
+            }
+            console.log("MES "+fecha_final_mes);
+            var dd = fecha_inicio.getDate();
+            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            console.log("DIA" + fecha_final_dia);
+            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
+            console.log("ESTA ES LA FECHA FINAL" + fecha_final);
+
+            if(fecha_final_mes == 01){
+                var fechaFinaly = fecha_final.getFullYear() + 1;
+                console.log("AÑO"+fechaFinaly);
+            }else{
+                var fechaFinaly = fecha_final.getFullYear();
+            }
+            console.log(fechaFinaly);
+            var fechaFinalm = fecha_final.getMonth()+1;
+            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
+            console.log(fechaFinalmm);
+            var fechaFinald = fecha_final.getDate();
+            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
+            console.log(fechaFinaldd);
+            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
+            console.log(fechaFinalymd);
+            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
+            var fecha_final_año = fecha_inicio.getFullYear();
+            console.log(fecha_final_año);
+            var mm = fecha_inicio.getMonth() + 4;
             var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
             if(fecha_final_mes == 13){
                 fecha_final_mes = '01' ;
@@ -1836,7 +1891,7 @@ crossorigin="anonymous">
         $('#limpiar_asig').click(function(e){
             e.preventDefault();
             Swal.fire({
-                text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL MES ANTERIOR?',
+                text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL PERÍODO ANTERIOR?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
