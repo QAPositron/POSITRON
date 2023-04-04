@@ -22,16 +22,52 @@
     <h4 class="text-center align-middle" id="id_contrato"> </h4>
 
     <br>
-    <h6 class="text-center"> <b>TOTAL DE DOSÍMETROS:</b> TÓRAX: # {{$dosisededeptocontra->dosi_torax}}  --  CRISTALINO: # {{$dosisededeptocontra->dosi_cristalino}}  --  DEDO: # {{$dosisededeptocontra->dosi_dedo}}  --  MUÑECA: # {{$dosisededeptocontra->dosi_muñeca}}  --  ÁREA: # {{$dosisededeptocontra->dosi_area}}  --  CASO: # {{$dosisededeptocontra->dosi_caso}}</h6>
-    <h6 class="text-center">CONTROL TÓRAX: # {{$dosisededeptocontra->dosi_control_torax}}  --  CONTROL CRISTALINO: #{{$dosisededeptocontra->dosi_control_cristalino}} -- CONTROL ANILLO: # {{$dosisededeptocontra->dosi_control_dedo}}</h6>
-
+    
+    <div class="row g-2 mx-3">
+        <div class="col-md"></div>
+        <div class="col-md-7">    
+            <div class="table table-responsive">
+                <table class="table table-sm table-bordered">
+                    <thead class="table-active">
+                        <tr class="text-center">
+                            <th colspan='9'>DOSíMETROS CONTRATADOS</th>
+                        </tr>
+                        <tr class="text-center">
+                            <th class="align-middle">TÓRAX</th>
+                            <th class="align-middle">CRISTALINO</th>
+                            <th class="align-middle">ANILLO</th>
+                            <th class="align-middle">MUÑECA</th>
+                            <th class="align-middle">ÁREA</th>
+                            <th class="align-middle">CASO</th>
+                            <th class="align-middle">CONTROL TÓRAX</th>
+                            <th class="align-middle">CONTROL CRISTALINO</th>
+                            <th class="align-middle">CONTROL ANILLO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_torax}}</td>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_cristalino}}</td>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_dedo}}</td>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_muñeca}}</td>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_area}}</td>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_caso}}</td>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_control_torax}}</td>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_control_cristalino}}</td>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_control_dedo}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md"></div>
+    </div>
     <div class="row">
         <div class="col"></div>
         <div class="col-12">
             <div class="table table-responsive p-4">
                 <table class="table table-bordered ">
                     <thead class="table-active">
-                        
                         <tr>
                             <th class="text-center align-middle" style='width: 8.90%'>NÚMERO</th>
                             <th class="text-center align-middle" style='width: 20.50%' >PERÍODOS</th>

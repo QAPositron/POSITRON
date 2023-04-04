@@ -9,15 +9,27 @@
             <h2 class="text-center">ASIGNACIÓN DOSÍMETROS</h2>
             <h3 class="text-center" id="nueva_empresaModalLabel"> <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
                 PERÍODO {{$mesnumber}}
-                ( <span>
-                    @php  
-                        $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                        $fecha1 = date("j",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))." ".$meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio));
-                        $fecha2_parcial =  date("j-m-Y",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio."+ 3 month"));
-                        $fecha2_total = date("j-m-Y",strtotime($fecha2_parcial."- 1 days")); 
-                        echo $fecha1." - ".date("j", strtotime($fecha2_total))." ".$meses[date("m", strtotime($fecha2_total))]." DE ".date("Y", strtotime($fecha2_total))
-                    @endphp
-                </span> ), ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} 
+                @if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS')
+                    ( <span>
+                        @php  
+                            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                            $fecha1 = $meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio));
+                             
+                            echo $fecha1;
+                        @endphp
+                    </span> )
+                @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS')
+                    ( <span>
+                        @php  
+                            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                            $fecha1 = date("j",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))." ".$meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio));
+                            $fecha2_parcial =  date("j-m-Y",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio."+ 3 month"));
+                            $fecha2_total = date("j-m-Y",strtotime($fecha2_parcial."- 1 days")); 
+                            echo $fecha1." - ".date("j", strtotime($fecha2_total))." ".$meses[date("m", strtotime($fecha2_total))]." DE ".date("Y", strtotime($fecha2_total))
+                        @endphp
+                    </span> )
+                @endif
+                , ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} 
             </h3>
             <form action="{{route('asignadosicontratom1.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion" name="form-nueva-asignacion" class="form-nueva-asignacion m-4">
                 @csrf
@@ -747,72 +759,6 @@
         }
 //////////////////////////////
 
-        /* document.getElementById("primerDia_asigdosim").value = '{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}';
-
-        var fecha = document.getElementById("primerDia_asigdosim").value;
-        var fecha_inicio = new Date(fecha);
-        fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
-        
-        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
-            var fecha_final_año = fecha_inicio.getFullYear();
-            var mm = fecha_inicio.getMonth() + 2;
-            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-            if(fecha_final_mes == 13){
-                fecha_final_mes = '01' ;
-            } 
-            var dd = fecha_inicio.getDate();
-            
-            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            
-            console.log(fecha_final);
-            if(fecha_final_mes == 01){
-                var fechaFinaly = fecha_final.getFullYear() + 1;
-                console.log("AÑO"+fechaFinaly);
-            }else{
-                var fechaFinaly = fecha_final.getFullYear();
-            }
-            console.log(fechaFinaly);
-            var fechaFinalm = fecha_final.getMonth()+1;
-            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
-            console.log(fechaFinalmm);
-            var fechaFinald = fecha_final.getDate();
-            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
-            console.log(fechaFinaldd);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
-            console.log(fechaFinalymd);
-            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
-        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
-            var fecha_final_año = fecha_inicio.getFullYear();
-            var mm = fecha_inicio.getMonth() + 4;
-            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-            if(fecha_final_mes == 13){
-                fecha_final_mes = '01' ;
-            } 
-            var dd = fecha_inicio.getDate();
-            
-          
-            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            
-            console.log(fecha_final);
-            if(fecha_final_mes == 01){
-                var fechaFinaly = fecha_final.getFullYear() + 1;
-                console.log("AÑO"+fechaFinaly);
-            }else{
-                var fechaFinaly = fecha_final.getFullYear();
-            }
-            console.log(fechaFinaly);
-            var fechaFinalm = fecha_final.getMonth()+1;
-            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
-            console.log(fechaFinalmm);
-            var fechaFinald = fecha_final.getDate();
-            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
-            console.log(fechaFinaldd);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
-            console.log(fechaFinalymd);
-            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
-        } */
     });
     function fechaultimodia(){
         var fecha = document.getElementById("primerDia_asigdosim").value;
