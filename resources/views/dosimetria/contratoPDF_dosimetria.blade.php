@@ -1,18 +1,86 @@
 <style>
+    @page {
+        margin: 0cm 0cm;
+    }
     body{
-        /* background: orange; */
-        font-family: sans-serif;
+       /*  background: orange; */
+        font-family: "Calibri, sans-serif";
         font-size: 12px;
-        margin: 30pt 30pt 30pt 30pt;
+        margin-top: 1cm;
+        margin-left: 2cm;
+        margin-right: 2cm;
+        margin-bottom: 1cm;
+    }
+    header{
+        position: fixed;
+        top: 1cm;
+        left: 2cm;
+        right: 2cm;
+        height: 90px;
+        /* background: blue; */
+    }
+    footer{
+        position: fixed;
+        bottom: 1cm; 
+        left: 2cm; 
+        right: 2cm;
+        height: 2cm;
+        margin-top: 100px;
+        text-align:center;
+        color:#1A9980;
+        background: yellowgreen;
+       
+    }
+    main{
+        position: relative;
+        top: 80px;
+        left: 0cm;
+        right: 0cm;
+        margin-bottom:3cm;
+        padding-bottom: 50px;
+        display:block;
+        background: yellow;
     }
     
-    td, th{
+    /* td, th{
         border:0.1px solid black;
+    } */
+    #watermark {
+        position: fixed;
+        
+        /** 
+            Set a position in the page for your image
+            This should center it vertically
+        **/
+        top:      115px;
+        left:     2cm;
+
+        /** Change image dimensions**/
+        width:    18cm;
+        height:   18cm;
+
+        /** Your watermark should be behind every content**/
+        z-index:  -1000;
+        opacity:0.2;
     }
 </style>
 <body>
-    <center><img src="{{asset('imagenes/VerdeSF.png')}}" width="200" ></center>
-    <p style="text-align:center;">CONTRATO DE ARRENDAMIENTO DE DOSIMETROS Y PRESTACIÓN DE SERVICIOS COMPLEMENTARIOS DE DOSIMETRÍA PERSONAL </p>
+    <div id="watermark">
+        <img src="{{asset('imagenes/fondo.png')}}" height="100%" width="100%">
+    </div>
+    <header>
+        <img src="{{asset('imagenes/1VerdeSF.png')}}" width="180" style="position:relative; right:20px; bottom: 10px; opacity:0.5;">
+        <img src="{{asset('imagenes/1SERVICIOS_QA.png')}}" width="300" style="position:relative; left:170px; top:15px; opacity:0.5;">
+        
+    </header>
+    <footer>
+        <p>______________________________________________________________________________________</p>
+        <p >Servicios en dosimetría, protección radiológica y controles de calidad equipos de Rayos X</p>
+        <p style="top:30px;">dosimetria.qapositron@gmail.com – 301 449 5401 – 310 607 9375 – 304 338 6581</p>
+        <p>www.qapositron.com</p>
+    </footer>
+    <main></main>
+    {{-- <p style="text-align:center;">CONTRATO DE ARRENDAMIENTO DE DOSIMETROS Y PRESTACIÓN DE SERVICIOS COMPLEMENTARIOS DE DOSIMETRÍA PERSONAL </p>
     @php
         $n = $contdosi;
         $titulo = str_pad($n, 5, "0", STR_PAD_LEFT); 
@@ -108,7 +176,7 @@
 
         </p>
     
-    @endforeach
+    @endforeach --}}
 
     <script
     src="https://code.jquery.com/jquery-3.6.0.js"

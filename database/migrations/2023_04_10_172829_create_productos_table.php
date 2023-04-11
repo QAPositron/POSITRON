@@ -17,7 +17,7 @@ class CreateProductosTable extends Migration
             $table->bigincrements('id_producto')->unique();
             $table->string('referencia');
             $table->text('concepto');
-            $table->decimal('valor_unitario');
+            $table->decimal('valor_unitario', 10, 2);
             $table->string('categoria');
 
             $table->timestamps();

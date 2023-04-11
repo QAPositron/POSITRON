@@ -297,6 +297,9 @@ Route::get('novedades/{nota}/{deptodosi}/detalleNovedad', [NovedadesController::
 Route::get('productos/search', [ProductoController::class, 'search'])->name('productos.search');
 Route::get('productos/create', [ProductoController::class, 'create'])->name('productos.create');
 Route::post('productos', [ProductoController::class, 'save'])->name('productos.save');
+Route::get('productos/{producto}/edit', [ProductoController::class, 'edit'])->name('productos.edit');
+Route::put('productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
+Route::delete('productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
 
 

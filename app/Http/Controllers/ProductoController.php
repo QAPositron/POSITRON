@@ -31,14 +31,39 @@ class ProductoController extends Controller
         ]);
         $producto = new Producto();
 
-        $producto->ref_producto         = mb_strtoupper($request->ref_producto);
-        $producto->concepto_producto    = mb_strtoupper($request->concepto_producto);
-        $producto->v_unitario_producto  = mb_strtoupper($request->v_unitario_producto);
-        $producto->categoria_producto   = mb_strtoupper($request->categoria_producto);
+        $producto->referencia       = mb_strtoupper($request->ref_producto);
+        $producto->concepto         = mb_strtoupper($request->concepto_producto);
+        $producto->valor_unitario   = str_replace('.', '', $request->v_unitario_producto);
+        $producto->categoria        = mb_strtoupper($request->categoria_producto);
         
         $producto->save();
 
         
-        return redirect()->route('productos.search');
+        return redirect()->route('productos.search')->with('guardar', 'ok');
+    }
+    public function edit(Producto $producto){
+        return view('productos.editar_producto', compact('producto'));
+    }
+    public function update(Request $request, Producto $producto){
+        $request->validate([
+            'ref_producto'           => 'required',
+            'concepto_producto'      => 'required',
+            'v_unitario_producto'    => 'required',
+            'categoria_producto'     => 'required'
+            
+        ]);
+        $producto->referencia       = mb_strtoupper($request->ref_producto);
+        $producto->concepto         = mb_strtoupper($request->concepto_producto);
+        $producto->valor_unitario   = str_replace('.', '', $request->v_unitario_producto);
+        $producto->categoria        = mb_strtoupper($request->categoria_producto);
+        
+        $producto->save();
+        return redirect()->route('productos.search')->with('actualizar', 'ok');
+    }
+    
+    public function destroy(Producto $producto){   
+        /* return $producto; */
+    $producto->delete();
+        return redirect()->route('productos.search')->with('eliminar', 'ok');
     }
 }
