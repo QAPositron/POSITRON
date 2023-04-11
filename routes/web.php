@@ -19,6 +19,7 @@ use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\PersonasedesController;
 use App\Http\Controllers\PersonasperfilesController;
 use App\Http\Controllers\PersonasrolesController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SedesController;
 use App\Http\Controllers\TrabajadorsController;
@@ -292,13 +293,11 @@ Route::get('novedades/retiroDosimetro', [NovedadesController::class,  'retiroDos
 Route::get('novedades/cambioTrabajador', [NovedadesController::class,  'cambioTrabajador'])->name('novedadesdosimetria.cambioTrabajador');
 Route::get('novedades/{nota}/{deptodosi}/detalleNovedad', [NovedadesController::class, 'detalleNovedad'])->name('novedadesdosimetria.detalleNovedad');
 
+////////////RUTAS PARA LOS PRODUCTOS DE LAS COTIZACIONES //////////////
+Route::get('productos/search', [ProductoController::class, 'search'])->name('productos.search');
+Route::get('productos/create', [ProductoController::class, 'create'])->name('productos.create');
+Route::post('productos', [ProductoController::class, 'save'])->name('productos.save');
 
- 
 
-/* Route::post('/prueba', function(Request $request){
-    $name = $request->input('name');
-    $surname = $request->input('surname');
-    echo "tu nombre es $name y tu apellido es $surname";
-}); */
 
 
