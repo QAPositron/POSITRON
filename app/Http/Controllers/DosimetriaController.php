@@ -850,7 +850,7 @@ class DosimetriaController extends Controller
         /* return $personaSede; */
     }
     public function saveAsignacionDosiContratoM1(Request $request, $asigdosicont, $mesnumber){
-    
+        return $request;
       
         ////////////////// SAVE DE DOSIMETRO TIPO  CONTROL TORAX  /////////////////////////
 
@@ -2458,9 +2458,12 @@ class DosimetriaController extends Controller
         $trabajdosiasig= Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
+        $areadosiasig = Dosiareacontdosisede::where('contdosisededepto_id', '=', $id)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
         /* return $dosicontrolasig; */
         /* $pdf = PDF::loadView('dosimetria.etiquetasPDF_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig')); */
-        $pdf =  PDF::loadView('dosimetria.etiquetasPDF1_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig'));
+        $pdf =  PDF::loadView('dosimetria.etiquetasPDF1_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig', 'areadosiasig'));
         /* $pdf->setPaper('A4', 'portrait'); */
         $pdf->setPaper( array(0, 0,306.141,2834.645), 'portrait'); 
         return $pdf->stream();

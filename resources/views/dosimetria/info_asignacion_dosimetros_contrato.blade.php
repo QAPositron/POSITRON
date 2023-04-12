@@ -362,7 +362,7 @@
                                     </div>  
                                 </td>
                             </tr>
-                            {{--@foreach($dosiareasignados as $dosiareasig)
+                            @foreach($dosiareasignados as $dosiareasig)
                                 <tr>
                                     <td class='align-middle'>{{$dosiareasig->areadepartamentosede->nombre_area}}</td>
                                     <td class='align-middle'>N.A.</td>
@@ -418,7 +418,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                             @foreach($trabjasignados as $trabasig)
                                 @if($trabasig->ubicacion == 'TORAX')
                                     <tr id='{{$trabasig->id_trabajadordosimetro}}'>
