@@ -25,7 +25,7 @@
         left: 2cm; 
         right: 2cm;
         height: 2cm;
-        margin-top: 100px;
+        /* margin-top: 100px; */
         text-align:center;
         color:#1A9980;
         background: yellowgreen;
@@ -41,7 +41,11 @@
         display:block;
         background: yellow;
     }
-    
+    p {
+        margin: 0px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
     /* td, th{
         border:0.1px solid black;
     } */
@@ -56,9 +60,7 @@
         left:     2cm;
 
         /** Change image dimensions**/
-        width:    18cm;
-        height:   18cm;
-
+        
         /** Your watermark should be behind every content**/
         z-index:  -1000;
         opacity:0.2;
@@ -66,7 +68,7 @@
 </style>
 <body>
     <div id="watermark">
-        <img src="{{asset('imagenes/fondo.png')}}" height="100%" width="100%">
+        <img src="{{asset('imagenes/fondo.png')}}">
     </div>
     <header>
         <img src="{{asset('imagenes/1VerdeSF.png')}}" width="180" style="position:relative; right:20px; bottom: 10px; opacity:0.5;">
@@ -75,12 +77,13 @@
     </header>
     <footer>
         <p>______________________________________________________________________________________</p>
-        <p >Servicios en dosimetría, protección radiológica y controles de calidad equipos de Rayos X</p>
-        <p style="top:30px;">dosimetria.qapositron@gmail.com – 301 449 5401 – 310 607 9375 – 304 338 6581</p>
+        <p >Servicio de dosimetría personal mediante tecnología de BeOSL. Lic. QAP-001 2023 de Min. Minas y Energía.</p>
+        <p>Servicios en protección radiológica y controles de calidad - Res. 09472 de 2020 de Sec. Salud Santander</p>
+        <p >E-mail: qapositron@gmail.com</p>
         <p>www.qapositron.com</p>
     </footer>
-    <main></main>
-    {{-- <p style="text-align:center;">CONTRATO DE ARRENDAMIENTO DE DOSIMETROS Y PRESTACIÓN DE SERVICIOS COMPLEMENTARIOS DE DOSIMETRÍA PERSONAL </p>
+    <main>
+        {{-- <p style="text-align:center;">CONTRATO DE ARRENDAMIENTO DE DOSIMETROS Y PRESTACIÓN DE SERVICIOS COMPLEMENTARIOS DE DOSIMETRÍA PERSONAL </p>
     @php
         $n = $contdosi;
         $titulo = str_pad($n, 5, "0", STR_PAD_LEFT); 
@@ -177,7 +180,7 @@
         </p>
     
     @endforeach --}}
-
+    </main>
     <script
     src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -192,6 +195,7 @@
             console.log("ESTE ES EL CODIGO" +n);
             h1contrato.innerHTML = "QA-CTO-DP-"+n;
         })
-    </script>
+    </script>   
+
 
 </body>
