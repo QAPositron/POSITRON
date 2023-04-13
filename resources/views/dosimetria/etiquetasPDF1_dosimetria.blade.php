@@ -1,13 +1,18 @@
 <style>
-    *{
-        margin: 0px;
+    
+    @page{
+        
+        margin-top: 10px;
+        margin-bottom: 100px;
+        margin-left: 10px;
+        margin-right: 10px;
     }
     .contenedor{
         width: 300px;
         /* height: 500px; */
         /* border: 2px solid blue; */
         margin: 0 auto;
-        /*background-color: red; */
+       /*  background-color: red; */
         justify-content: center;
     }
     .imgtorax{
@@ -165,7 +170,7 @@
         right: 0px;
         font-size: 8px;
         font-family: Arial, Helvetica, sans-serif;
-        /* background: red; */
+        /* background:yellow; */
         width: 170px;
         text-align:right; 
     }
@@ -382,7 +387,7 @@
         @foreach($trabajdosiasig as $trab)
             @if($trab->ubicacion == 'TORAX')
                 {{-- //////// DOSIMETRO TORAX ////////// --}}
-                <div class="imgtorax">
+                <div class="imgtorax" style="page-break-inside: avoid;">
                     @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_TORAX/TORAXM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($trab->mes_asignacion == 2 || $trab->mes_asignacion == 8)
@@ -490,7 +495,7 @@
         @endforeach
         @foreach($areadosiasig as $area)
             {{-- //////// DOSIMETRO TORAX ////////// --}}
-            <div class="imgtorax">
+            <div class="imgtorax" style="page-break-inside: avoid;">
                 @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                 @elseif($trab->mes_asignacion == 2 || $trab->mes_asignacion == 8)
