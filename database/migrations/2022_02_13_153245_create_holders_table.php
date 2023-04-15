@@ -15,7 +15,7 @@ class CreateHoldersTable extends Migration
     {
         Schema::create('holders', function (Blueprint $table) {
             $table->bigincrements('id_holder')->unique();
-            $table->integer('codigo_holder')->unique();
+            $table->string('codigo_holder')->unique();
             $table->string('tipo_holder', 50);
             $table->string('estado_holder');
 

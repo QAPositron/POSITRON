@@ -15,7 +15,7 @@ class CreateDosimetrosTable extends Migration
     {
         Schema::create('dosimetros', function (Blueprint $table) {
             $table->bigincrements('id_dosimetro')->unique();
-            $table->integer('codigo_dosimeter')->unique();
+            $table->string('codigo_dosimeter')->unique();
             $table->string('estado_dosimetro', 50);
             $table->string('tecnologia_dosimetro', 50);
             $table->string('tipo_dosimetro', 50);

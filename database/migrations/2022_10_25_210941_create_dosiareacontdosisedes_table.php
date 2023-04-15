@@ -28,7 +28,6 @@ class CreateDosiareacontdosisedesTable extends Migration
 
             $table-> unsignedBigInteger('contdosisededepto_id');
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
-            
             $table->integer('mes_asignacion');
             $table->string('dosimetro_uso', 10);
             $table->date('primer_dia_uso')->nullable();
@@ -40,13 +39,14 @@ class CreateDosiareacontdosisedesTable extends Migration
             $table->string('energia', 50)->nullable();
             $table->date('zero_level_date')->nullable();
             $table->date('measurement_date')->nullable();
-            /* $table->double('Hp007_calc_dose', 8, 5)->nullable();
+            ///// EL DIA 12 DE ABIRL DEL 2023 SE CREO EL PRIMER CLIENTE CON DOSIMETROS AMBIENTAL O AREA PERO SE UTILIZARON DOSIMETROS CUERPO ENTERO, POR ELLO SE DEBIO MODIFICAR LA MIGRACION Y PONER LOS PARAMETROS DE CE///////
+            $table->double('Hp007_calc_dose', 8, 5)->nullable();
             $table->double('Hp007_background_dose', 8, 5)->nullable();
             $table->double('Hp007_raw_dose', 8, 5)->nullable();
             $table->double('Hp10_calc_dose', 8, 5)->nullable();
             $table->double('Hp10_background_dose', 8, 5)->nullable();
             $table->double('Hp10_raw_dose', 8, 5)->nullable();
-            $table->double('Cu_calc_dose', 8, 5)->nullable();
+            /*$table->double('Cu_calc_dose', 8, 5)->nullable();
             $table->double('Cu_background_dose', 8, 5)->nullable();
             $table->double('Cu_raw_dose', 8, 5)->nullable();
             $table->double('Pb/Sn_calc_dose', 8, 5)->nullable();

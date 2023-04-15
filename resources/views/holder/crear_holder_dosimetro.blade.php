@@ -13,7 +13,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating ">
-                            <input type="number" class="form-control"  name="codigo_holder" id="codigo_holder" value="{{old('codigo_holder')}}" autofocus style="text-transform:uppercase;">
+                            <input type="text" class="form-control"  name="codigo_holder" id="codigo_holder" value="{{old('codigo_holder')}}" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid"> CODIGO:</label>
                             @error('codigo_holder')
                                 <small>*{{$message}}</small>
@@ -60,7 +60,7 @@
                 <div class="row ">
                     <div class="col"></div>
                     <div class="col d-grid gap-2">
-                        <button class="btn btn-primary " type="submit" id="boton-asignar" name="boton-asignar">GUARDAR</button>
+                        <button class="btn colorQA" type="submit" id="boton-asignar" name="boton-asignar">GUARDAR</button>
                     </div>
                     <div class="col d-grid gap-2">
                         <a href="{{route('dosimetros.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>

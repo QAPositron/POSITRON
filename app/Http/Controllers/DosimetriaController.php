@@ -518,7 +518,7 @@ class DosimetriaController extends Controller
             $mesAssignRev11, $mesAssignRev12
         ];
         
-        /* return $mes1AssignRev; */
+       /*  return $mesTotal; */
         $periodo = $dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->periodo_recambio;
         if($periodo == 'TRIMS'){
             return view('dosimetria.detalle_sede_contrato_trimestral_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
@@ -1007,7 +1007,7 @@ class DosimetriaController extends Controller
                 $estadoDosimArea = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimArea[$i])
                 ->update([
                     'estado_dosimetro' => 'EN USO',
-                    'uso_dosimetro'    => 'AREA'
+                    'uso_dosimetro'    => 'AMBIENTAL'
                 ]);
             } 
         }

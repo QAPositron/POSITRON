@@ -24,11 +24,18 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating ">
-                            <select class="form-select" name="tipo_holder" id="tipo_holder" value="{{old('tipo_holder', $holder->tipo_holder)}}" autofocus style="text-transform:uppercase">
-                                <option value="{{$holder->tipo_holder}}">{{old('tipo_holder', $holder->tipo_holder)}}</option>
-                                <option value="ANILLO">ANILLO</option>
-                                <option value="EXTREM.">EXTREMIDAD</option>
-                                <option value="CRISTALINO">CRISTALINO</option>
+                            <select class="form-select" name="tipo_holder" id="tipo_holder" autofocus style="text-transform:uppercase">
+                                <option value="{{old('tipo_holder', $holder->tipo_holder)}}">--{{old('tipo_holder', $holder->tipo_holder)}}--</option>
+                                @if($holder->tipo_holder == 'ANILLO')
+                                    <option value="EXTREM" @if (old('tipo_holder') == "EXTREM") {{ 'selected' }} @endif>EXTREMIDAD</option>
+                                    <option value="CRISTALINO" @if (old('tipo_holder') == "CRISTALINO") {{ 'selected' }} @endif>CRISTALINO</option>
+                                @elseif($holder->tipo_holder == 'EXTREM')
+                                    <option value="ANILLO"  @if (old('tipo_holder') == "ANILLO") {{ 'selected' }} @endif>ANILLO</option>
+                                    <option value="CRISTALINO" @if (old('tipo_holder') == "CRISTALINO") {{ 'selected' }} @endif>CRISTALINO</option>
+                                @elseif($holder->tipo_holder == 'CRISTALINO')
+                                    <option value="EXTREM" @if (old('tipo_holder') == "EXTREM") {{ 'selected' }} @endif>EXTREMIDAD</option>
+                                    <option value="ANILLO"  @if (old('tipo_holder') == "ANILLO") {{ 'selected' }} @endif>ANILLO</option>
+                                @endif
                             </select>
                             <label for="floatingInputGrid"> TIPO HOLDER:</label>
                         </div>
@@ -39,11 +46,24 @@
                     <div class="col-md">
                         <div class="form-floating ">
                             <select class="form-select" name="estado_holder" id="estado_holder" value="{{old('estado_holder')}}" autofocus style="text-transform:uppercase">
-                                <option value="{{$holder->estado_holder}}">{{old('estado_holder', $holder->estado_holder)}}</option>
-                                <option value="STOCK">STOCK</option>
-                                <option value="PERDIDO">PERDIDO</option>
-                                <option value="DAÑADO">DAÑADO</option>
-                                <option value="EN USO">EN USO</option>
+                                <option value="{{old('estado_holder', $holder->estado_holder)}}">--{{old('estado_holder', $holder->estado_holder)}}--</option>
+                                @if($holder->estado_holder =='STOCK')
+                                    <option value="PERDIDO" @if (old('estado_holder') == "PERDIDO") {{ 'selected' }} @endif>PERDIDO</option>
+                                    <option value="DAÑADO" @if (old('estado_holder') == "DAÑADO") {{ 'selected' }} @endif>DAÑADO</option>
+                                    <option value="EN USO" @if (old('estado_holder') == "EN USO") {{ 'selected' }} @endif>EN USO</option>
+                                @elseif($holder->estado_holder =='PERDIDO')
+                                    <option value="STOCK" @if (old('estado_holder') == "STOCK") {{ 'selected' }} @endif>STOCK</option>
+                                    <option value="DAÑADO" @if (old('estado_holder') == "DAÑADO") {{ 'selected' }} @endif>DAÑADO</option>
+                                    <option value="EN USO" @if (old('estado_holder') == "EN USO") {{ 'selected' }} @endif>EN USO</option>
+                                @elseif($holder->estado_holder =='DAÑADO')
+                                    <option value="STOCK" @if (old('estado_holder') == "STOCK") {{ 'selected' }} @endif>STOCK</option>
+                                    <option value="PERDIDO" @if (old('estado_holder') == "PERDIDO") {{ 'selected' }} @endif>PERDIDO</option>
+                                    <option value="EN USO" @if (old('estado_holder') == "EN USO") {{ 'selected' }} @endif>EN USO</option>
+                                @elseif($holder->estado_holder =='EN USO')
+                                    <option value="STOCK" @if (old('estado_holder') == "STOCK") {{ 'selected' }} @endif>STOCK</option>
+                                    <option value="PERDIDO" @if (old('estado_holder') == "PERDIDO") {{ 'selected' }} @endif>PERDIDO</option>
+                                    <option value="DAÑADO" @if (old('estado_holder') == "DAÑADO") {{ 'selected' }} @endif>DAÑADO</option>
+                                @endif
                             </select>
                             <label for="floatingInputGrid"> ESTADO:</label>
                             @error('estado_holder')

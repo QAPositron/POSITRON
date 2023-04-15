@@ -16,11 +16,20 @@
                 <div class="row g-2">
                     
                     <div class="col-md">
-                        <div class="form-floating" >
-                            <select class="form-select" name="tipo_dosimetro" id="tipo_dosimetro" value="{{old('tipo_dosimetro', $dosimetro->tipo_dosimetro)}}" autofocus style="text-transform:uppercase">
-                                <option value="{{$dosimetro->tipo_dosimetro}}">{{old('tipo_dosimetro', $dosimetro->tipo_dosimetro)}}</option>
-                                <option value="GENERAL">GENERAL</option>
-                                <option value="EZCLIP">EZCLIP</option>
+                        <div class="form-floating">
+                            <select class="form-select" name="tipo_dosimetro" id="tipo_dosimetro" autofocus style="text-transform:uppercase">
+                                <option value="{{old('tipo_dosimetro', $dosimetro->tipo_dosimetro)}}">--{{old('tipo_dosimetro', $dosimetro->tipo_dosimetro)}}--</option>
+                                @if($dosimetro->tipo_dosimetro == 'GENERAL')
+                                    <option value="EZCLIP" @if (old('tipo_dosimetro') == "EZCLIP") {{ 'selected' }} @endif>EZCLIP</option>
+                                    <option value="AMBIENTAL" @if (old('tipo_dosimetro') == "AMBIENTAL") {{ 'selected' }} @endif>AMBIENTAL</option>
+                                @elseif($dosimetro->tipo_dosimetro == 'AMBIENTAL')
+                                    <option value="GENERAL" @if (old('tipo_dosimetro') == "GENERAL") {{ 'selected' }} @endif>GENERAL</option>
+                                    <option value="EZCLIP" @if (old('tipo_dosimetro') == "EZCLIP") {{ 'selected' }} @endif>EZCLIP</option>
+                                @elseif($dosimetro->tipo_dosimetro == 'EZCLIP')
+                                    <option value="GENERAL" @if (old('tipo_dosimetro') == "GENERAL") {{ 'selected' }} @endif>GENERAL</option>
+                                    <option value="AMBIENTAL" @if (old('tipo_dosimetro') == "AMBIENTAL") {{ 'selected' }} @endif>AMBIENTAL</option>
+                                @endif
+                                
                             </select>
                             <label for="floatingInputGrid">TIPO DE DOSÍMETRO:</label>
                             @error('tipo_dosimetro')
@@ -34,10 +43,18 @@
                     <div class="col-md">
                         <div class="form-floating">
                             <select class="form-select" name="tecnologia_dosimetro" id="tecnologia_dosimetro" autofocus  style="text-transform:uppercase">
-                                <option value="{{$dosimetro->tecnologia_dosimetro}}">{{old('tecnologia_dosimetro', $dosimetro->tecnologia_dosimetro)}}</option>
-                                <option value="OSL">OSL</option>
-                                <option value="TLD">TLD</option>
-                                <option value="ELECTRÓNICO">ELECTRÓNICO</option>    
+                                <option value="{{old('tecnologia_dosimetro', $dosimetro->tecnologia_dosimetro)}}">--{{old('tecnologia_dosimetro', $dosimetro->tecnologia_dosimetro)}}--</option>
+                                @if($dosimetro->tecnologia_dosimetro == 'OSL')
+                                    <option value="TLD" @if (old('tecnologia_dosimetro') == "TLD") {{ 'selected' }} @endif>TLD</option>
+                                    <option value="ELECTRÓNICO" @if (old('tecnologia_dosimetro') == "ELECTRÓNICO") {{ 'selected' }} @endif>ELECTRÓNICO</option>  
+                                @elseif($dosimetro->tecnologia_dosimetro == 'TLD')
+                                    <option value="OSL" @if (old('tecnologia_dosimetro') == "OSL") {{ 'selected' }} @endif>OSL</option>
+                                    <option value="ELECTRÓNICO" @if (old('tecnologia_dosimetro') == "ELECTRÓNICO") {{ 'selected' }} @endif>ELECTRÓNICO</option>
+                                @elseif($dosimetro->tecnologia_dosimetro == 'ELECTRÓNICO') 
+                                    <option value="TLD" @if (old('tecnologia_dosimetro') == "TLD") {{ 'selected' }} @endif>TLD</option>
+                                    <option value="OSL" @if (old('tecnologia_dosimetro') == "OSL") {{ 'selected' }} @endif>OSL</option>
+                                @endif
+                                
                             </select>
                             <label for="floatingInputGrid">TECNOLOGÍA DOSÍMETRO:</label>
                             @error('tecnologia_dosimetro')
@@ -75,11 +92,24 @@
                     <div class="col-md">
                         <div class="form-floating">
                             <select class="form-select" name="estado_dosimetro" id="estado_dosimetro" value="{{old('estado_dosimetro')}}" autofocus  style="text-transform:uppercase">
-                                <option value="{{$dosimetro->estado_dosimetro}}">{{old('estado_dosimetro', $dosimetro->estado_dosimetro)}}</option>
-                                <option value="STOCK">STOCK</option>
-                                <option value="PERDIDO">PERDIDO</option>
-                                <option value="DAÑADO">DAÑADO</option>
-                                <option value="EN USO">EN USO</option>
+                                <option value="{{old('estado_dosimetro',$dosimetro->estado_dosimetro)}}">--{{old('estado_dosimetro', $dosimetro->estado_dosimetro)}}--</option>
+                                @if($dosimetro->estado_dosimetro =='STOCK')
+                                    <option value="PERDIDO" @if (old('estado_dosimetro') == "PERDIDO") {{ 'selected' }} @endif>PERDIDO</option>
+                                    <option value="DAÑADO" @if (old('estado_dosimetro') == "DAÑADO") {{ 'selected' }} @endif>DAÑADO</option>
+                                    <option value="EN USO" @if (old('estado_dosimetro') == "EN USO") {{ 'selected' }} @endif>EN USO</option>
+                                @elseif($dosimetro->estado_dosimetro =='PERDIDO')
+                                    <option value="STOCK" @if (old('estado_dosimetro') == "STOCK") {{ 'selected' }} @endif>STOCK</option>
+                                    <option value="DAÑADO" @if (old('estado_dosimetro') == "DAÑADO") {{ 'selected' }} @endif>DAÑADO</option>
+                                    <option value="EN USO" @if (old('estado_dosimetro') == "EN USO") {{ 'selected' }} @endif>EN USO</option>
+                                @elseif($dosimetro->estado_dosimetro =='DAÑADO')
+                                    <option value="STOCK" @if (old('estado_dosimetro') == "STOCK") {{ 'selected' }} @endif>STOCK</option>
+                                    <option value="PERDIDO" @if (old('estado_dosimetro') == "PERDIDO") {{ 'selected' }} @endif>PERDIDO</option>
+                                    <option value="EN USO" @if (old('estado_dosimetro') == "EN USO") {{ 'selected' }} @endif>EN USO</option>
+                                @elseif($dosimetro->estado_dosimetro =='EN USO')
+                                    <option value="STOCK" @if (old('estado_dosimetro') == "STOCK") {{ 'selected' }} @endif>STOCK</option>
+                                    <option value="PERDIDO" @if (old('estado_dosimetro') == "PERDIDO") {{ 'selected' }} @endif>PERDIDO</option>
+                                    <option value="DAÑADO" @if (old('estado_dosimetro') == "DAÑADO") {{ 'selected' }} @endif>DAÑADO</option>
+                                @endif
                             </select>
                             <label for="floatingInputGrid">ESTADO DOSÍMETRO:</label>
                             @error('estado_dosimetro')

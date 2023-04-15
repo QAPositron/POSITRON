@@ -97,7 +97,7 @@
                                     <div class="row align-items-center"> 
                                         @if($mesTotal[$i]>0)
                                             @if(  $i == '0' )
-                                            {{-- mes > 0 & i= 0 --}}
+                                            mes > 0 & i= 0
                                                 <div class="col-md text-center">
                                                     <a onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn  btn-sm aling-middle">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -187,7 +187,7 @@
                                                 </div> 
                                                 
                                             @else
-                                            {{-- mes > 0 & i != 0 --}}
+                                            mes > 0 & i != 0
                                                 <div class="col-md text-center">
                                                 
                                                     @foreach($mesesAssig[$i] as $asigmes)
@@ -303,7 +303,7 @@
                                             @endif
                                         @else
                                             @if(  $i == '0' )
-                                                {{-- mes < 0 & i= 0 --}}
+                                                mes < 0 & i= 0
                                                 <div class="col-md text-center">
                                                 
                                                     <a  href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i+1 ])}}" class="btn btn-sm colorQA">
@@ -354,7 +354,7 @@
                                                 </div> 
                                                 
                                             @else
-                                                {{-- mes < 0 & i != 0 --}}
+                                                mes < 0 & i != 0
                                                 <div class="col-md text-center">
                                                 
                                                     @if($dosisededeptocontra->mes_actual+1 == ($i+1) && count($mes1AssignRev) != 0)

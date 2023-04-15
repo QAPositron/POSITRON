@@ -18,7 +18,7 @@
                             <select class="form-select" name="tipo_dosimetro" id="tipo_dosimetro" value="{{old('tipo_dosimetro')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
                                 <option value="GENERAL">GENERAL</option>
-                                <option value="AMBIENTAL">ÁREA</option>
+                                <option value="AMBIENTAL">AMBIENTAL</option>
                                 <option value="EZCLIP">EZCLIP</option>
                             </select>
                             <label for="floatingInputGrid">TIPO:</label>
