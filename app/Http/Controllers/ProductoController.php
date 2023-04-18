@@ -63,7 +63,7 @@ class ProductoController extends Controller
     
     public function destroy(Producto $producto){   
         /* return $producto; */
-    $producto->delete();
+        $producto->delete();
         return redirect()->route('productos.search')->with('eliminar', 'ok');
     }
 }

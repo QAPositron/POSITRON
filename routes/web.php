@@ -3,6 +3,7 @@
 use App\Http\Controllers\AreadepartamentosedeController;
 use App\Http\Controllers\AsignarDosimetroController;
 use App\Http\Controllers\ContactosController;
+use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\DepartamentosedeController;
 use App\Http\Controllers\DepartamentosedesController;
@@ -226,6 +227,7 @@ Route::get('revisiondosimetria/{deptodosi}/{mesnumber}/revision', [DosimetriaCon
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetro',[DosimetriaController::class, 'revisionDosimetro']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/trabajadordosimetro',[DosimetriaController::class, 'revisionCheck']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetroControl',[DosimetriaController::class, 'revisionCheckControl']);
+Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetroAmbiental',[DosimetriaController::class, 'revisionCheckAmbiental']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/asignacionesTrab', [DosimetriaController::class, 'asignacionesTrab']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/asignacionesCont', [DosimetriaController::class, 'asignacionesCont']);
 Route::get('revisiondosimetria/create', [DosimetriaController::class, 'revisionDosimetriaGeneral'])->name('revisiondosimetria.create');
@@ -301,6 +303,13 @@ Route::get('productos/{producto}/edit', [ProductoController::class, 'edit'])->na
 Route::put('productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
 Route::delete('productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 
+////////////RUTAS PARA  LAS COTIZACIONES //////////////
+Route::get('cotizaciones/search', [CotizacionController::class, 'search'])->name('cotizaciones.search');
+Route::get('cotizaciones/create', [CotizacionController::class, 'create'])->name('cotizaciones.create');
+Route::post('cotizaciones', [CotizacionController::class, 'save'])->name('cotizaciones.save');
+Route::get('cotizaciones/{cotizacion}/edit', [CotizacionController::class, 'edit'])->name('cotizaciones.edit');
+Route::put('cotizaciones/{cotizacion}', [CotizacionController::class, 'update'])->name('cotizaciones.update');
+Route::delete('cotizaciones/{cotizacion}', [CotizacionController::class, 'destroy'])->name('cotizaciones.destroy');
 
 
 

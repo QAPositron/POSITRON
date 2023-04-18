@@ -10,7 +10,7 @@
             </svg>
         </a>
     </div> 
-    <div class="col-md-5">
+    <div class="col-md-11">
         <h2 class="text-center "> CONTRATOS DE DOSIMETRÍA PARA <br> <i>{{$empresa->nombre_empresa}}</i> </h2> 
     </div>
     <div class="col-md"></div>

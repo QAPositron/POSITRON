@@ -11,9 +11,10 @@
                 </svg>
             </a>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-11">
             <h2 class="text-center">DOSIMETRÍA DE</h2>
-            <h3 class="text-center"><i>{{$dosisededeptocontra->contratodosimetriasede->sede->empresa->nombre_empresa}} </i> - SEDE:<i> {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i></h3>
+            <h3 class="text-center"><i>{{$dosisededeptocontra->contratodosimetriasede->sede->empresa->nombre_empresa}} </i></h3>
+            <h3 class="text-center">SEDE:<i> {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i></h3> 
             <h3 class="text-center">ESPECIALIDAD: <i>{{$dosisededeptocontra->departamentosede->departamento->nombre_departamento}}</i></h3>
         </div>
         <div class="col-md"></div>

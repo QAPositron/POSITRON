@@ -2476,8 +2476,10 @@ class DosimetriaController extends Controller
         $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
-
-        return view('dosimetria.revision_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber'));
+        $areadosiasig =Dosiareacontdosisede::where('contdosisededepto_id', '=', $id)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->get();
+        return view('dosimetria.revision_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber', 'areadosiasig'));
     }
     
     public function revisionDosimetro(Request $request){
@@ -2498,6 +2500,13 @@ class DosimetriaController extends Controller
             'revision_salida' => 'TRUE'
         ]);
         return response()->json($dosicontrol);
+    }
+    public function revisionCheckAmbiental(Request $request){
+        $dosiambiental = Dosiareacontdosisede::where('id_dosiareacontdosisedes', '=', $request->id_dosiareacontdosisedes )
+        ->update([
+            'revision_salida' => 'TRUE'
+        ]);
+        return response()->json($dosiambiental);
     }
     public function revisionDosimetriaGeneral(){
        
@@ -2581,6 +2590,10 @@ class DosimetriaController extends Controller
         ->where('mes_asignacion', '=', $mesnumber)
         ->where('revision_salida', '=', 'TRUE')
         ->get();
+        $areasignados = Dosiareacontdosisede::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_salida', '=', 'TRUE')
+        ->get();
 
         //PARA LA REVISION GENERAL///
         $temptrabajdosimrev = Temptrabajdosimrev::join('contratodosimetriasededeptos', 'temptrabajdosimrevs.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
@@ -2592,7 +2605,7 @@ class DosimetriaController extends Controller
         ->get();
 
        /*  return $temptrabajdosimrev; */
-        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionsalida_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados', 'temptrabajdosimrev', 'empresainfo'));
+        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionsalida_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados', 'temptrabajdosimrev', 'empresainfo', 'areasignados'));
         $pdf->setPaper('A4', 'portrait');
         date_default_timezone_set('America/Bogota');
         return $pdf->stream("RSD_OSL_QA_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");

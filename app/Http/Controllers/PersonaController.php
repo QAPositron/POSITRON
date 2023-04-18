@@ -63,12 +63,12 @@ class PersonaController extends Controller
             'rol_personas'               => ['required'],
             'primer_nombre_persona'      => ['required'],              
             'primer_apellido_persona'    => ['required'],
-            'segundo_apellido_persona'   => ['required'],
+            /* 'segundo_apellido_persona'   => ['required'], */
             'tipoIden_persona'           => ['required'],
             'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],    
             'genero_persona'             => ['required'],
-            'correo_persona'             => ['required', 'email', Rule::unique('personas', 'correo_persona')],
-            'telefono_persona'           => ['required', 'min:10', 'max:10'],
+            'correo_persona'             => ['email', Rule::unique('personas', 'correo_persona')],
+            'telefono_persona'           => ['min:10', 'max:10'],
             
             /* 'lider_dosiemtria'           => [Rule::unique('personas', 'lider_dosimetria')->where(fn ($query) => $query->where('personasedes', 'sede_id'))], */
         ]);
@@ -168,12 +168,12 @@ class PersonaController extends Controller
             'rol_personas'               => ['required'],
             'primer_nombre_persona'      => ['required'],
             'primer_apellido_persona'    => ['required'],
-            'segundo_apellido_persona'   => ['required'],
+            /* 'segundo_apellido_persona'   => ['required'], */
             'tipoIden_persona'           => ['required'],
             'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],
             'genero_persona'             => ['required'],
-            'correo_persona'             => ['required', 'email', Rule::unique('personas', 'correo_persona')],
-            'telefono_persona'           => ['required', 'min:10', 'max:10'],
+            'correo_persona'             => ['email', Rule::unique('personas', 'correo_persona')],
+            'telefono_persona'           => ['min:10', 'max:10'],
             
         ]);
 
@@ -259,12 +259,12 @@ class PersonaController extends Controller
             'rol_personas'               => ['required'],
             'primer_nombre_persona'      => ['required'],             
             'primer_apellido_persona'    => ['required'],
-            'segundo_apellido_persona'   => ['required'],
+            /* 'segundo_apellido_persona'   => ['required'], */
             'tipoIden_persona'           => ['required'],
             'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')->ignore($persona->id_persona, 'id_persona')],    
             'genero_persona'             => ['required'],
-            'correo_persona'             => ['required', 'email', Rule::unique('personas', 'correo_persona')->ignore($persona->id_persona, 'id_persona')],
-            'telefono_persona'           => ['required', 'min:10', 'max:10'],
+            'correo_persona'             => ['email', Rule::unique('personas', 'correo_persona')->ignore($persona->id_persona, 'id_persona')],
+            'telefono_persona'           => ['min:10', 'max:10'],
             
         ]);
         $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);

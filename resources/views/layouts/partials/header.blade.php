@@ -31,7 +31,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{request()->routeIs('cotizaciones.*') || request()->routeIs('productos.*') ? 'active' : ''}}" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">COTIZACIONES</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{{route('empresasdosi.create')}}">DOSIMETRÍA</a></li>
+              <li><a class="dropdown-item" href="{{route('cotizaciones.search')}}">DOSIMETRÍA</a></li>
               <li><a class="dropdown-item" href="{{route('productos.search')}}">PRODUCTOS</a></li>
             </ul>
           </li>
