@@ -74,7 +74,7 @@
                         @endforeach
                         
                     </td>
-                    <td  class="align-middle text-center">
+                    <td class="align-middle text-center">
                         <div class="row align-items-center">
                             <div class="col">
                                 <a href="{{route('personas.edit', ['persona'=>$person->id_persona, 'trabestucont'=>0, 'empresa'=>0])}}" class="btn colorQA">

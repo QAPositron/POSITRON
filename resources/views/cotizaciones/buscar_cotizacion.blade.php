@@ -15,8 +15,17 @@
 <div class="row">
     <div class="col-md"></div>
     <div class="col-md-8">
-        <h2 class="text-center">TODOS LAS COTIZACIONES</h2>
+        <h2 class="text-center">TODAS LAS COTIZACIONES</h2>
         <br>
+        <table class="table table-responsive hover table-bordered" id="cotizaciones">
+            <thead class="table-active align-middle">
+                <th class="text-center">CODIGO</th>
+                <th class="text-center">EMPRESA</th>
+                <th class="text-center">SEDE</th>
+                <th class="text-center">FECHA EMISIÓN</th>
+                <th class="text-center">FECHA VENCIMIENTO</th>
+            </thead>
+        </table>
     </div>
     <div class="col-md"></div>
 </div>

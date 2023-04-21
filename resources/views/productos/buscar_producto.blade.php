@@ -17,7 +17,7 @@
     <div class="col-md-8">
         <h2 class="text-center">TODOS LOS PRODUCTOS</h2>
         <br>
-        <table class="table table-responsive hover table-bordered" id="empresas">
+        <table class="table table-responsive hover table-bordered" id="productos">
             <thead class="table-active align-middle">
                 <th class="text-center">REFERENCIA</th>
                 <th class="text-center" style='width: 30%'>CONCEPTO</th>

@@ -306,6 +306,7 @@ Route::delete('productos/{producto}', [ProductoController::class, 'destroy'])->n
 ////////////RUTAS PARA  LAS COTIZACIONES //////////////
 Route::get('cotizaciones/search', [CotizacionController::class, 'search'])->name('cotizaciones.search');
 Route::get('cotizaciones/create', [CotizacionController::class, 'create'])->name('cotizaciones.create');
+Route::get('/cotizaciones/selectsedes', [CotizacionController::class, 'selectsedes']);
 Route::post('cotizaciones', [CotizacionController::class, 'save'])->name('cotizaciones.save');
 Route::get('cotizaciones/{cotizacion}/edit', [CotizacionController::class, 'edit'])->name('cotizaciones.edit');
 Route::put('cotizaciones/{cotizacion}', [CotizacionController::class, 'update'])->name('cotizaciones.update');
