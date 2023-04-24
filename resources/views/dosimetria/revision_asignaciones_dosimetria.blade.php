@@ -107,7 +107,7 @@
                         <tbody>
                             @if($dosicontrolasig->isEmpty())
                                 @foreach($areadosiasig as $areasig)
-                                    <tr id='{{$areasig->id_dosiareacontdosisedes}}'>
+                                    <tr id='A{{$areasig->id_dosiareacontdosisedes}}'>
                                         <td class='align-middle py-3'>{{$areasig->areadepartamentosede->nombre_area}}</td>
                                         <td class='align-middle py-3 text-center'>N.A. </td>
                                         <td class='align-middle py-3 text-center'>{{$areasig->dosimetro->codigo_dosimeter}}</td>
@@ -473,7 +473,7 @@ crossorigin="anonymous">
                         console.log("ETIQUETA" +codigoEtiq)
                         console.log(check);
                         @foreach($areadosiasig as $area)
-                            if(codigoEtiq == codigoDosi && codigoDosi == '{{$area->dosimetro->codigo_dosimeter}}' && dosimetro[0].uso_dosimetro == 'AREA'){
+                            if(codigoEtiq == codigoDosi && codigoDosi == '{{$area->dosimetro->codigo_dosimeter}}' && dosimetro[0].uso_dosimetro == 'AMBIENTAL'){
                                 console.log("SI SE HIZO MATCH");
                                 check = 1;
                                 Swal.fire({

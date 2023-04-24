@@ -22,6 +22,9 @@ class CreateObsreventradasTable extends Migration
             $table-> unsignedBigInteger('dosicontrol_id')->nullable();
             $table-> foreign('dosicontrol_id')->references('id_dosicontrolcontdosisedes')->on('dosicontrolcontdosisedes')->onDelete('cascade')->onUpdate('cascade');
 
+            $table-> unsignedBigInteger('dosiareacontdosimetro_id')->nullable();
+            $table-> foreign('dosiareacontdosimetro_id')->references('id_dosiareacontdosisedes')->on('dosiareacontdosisedes')->onDelete('cascade')->onUpdate('cascade');
+
             $table-> unsignedBigInteger('contratodosimetriasede_id');
             $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
 

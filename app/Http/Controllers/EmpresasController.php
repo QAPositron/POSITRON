@@ -27,7 +27,8 @@ class EmpresasController extends Controller
     public function create(){
         $departamentoscol = Coldepartamento::all();
         $municipioscol = Colmunicipio::all();
-        return view('empresa.crear_empresa', compact('departamentoscol', 'municipioscol'));
+        $especialidades = Departamento::all();
+        return view('empresa.crear_empresa', compact('departamentoscol', 'municipioscol', 'especialidades'));
         /* return $departamentoscol; */
     }
 
@@ -93,6 +94,26 @@ class EmpresasController extends Controller
         
         $empresa->save();
 
+        if(!empty($request->especialidades)){
+            $sede = new Sede();
+
+            $sede->empresas_id         = $empresa->id_empresa;
+            $sede->nombre_sede         = 'PRINCIPAL';
+            $sede->municipiocol_id     = $request->ciudad_empresa;       
+            $sede->direccion_sede	   = mb_strtoupper($request->direccion_empresa);
+            
+            $sede->save();
+
+            for($i=0; $i<count($request->especialidades); $i++){
+
+                $deptosede = new Departamentosede();
+
+                $deptosede->sede_id                 = $sede->id_sede;
+                $deptosede->departamento_id         = $request->especialidades[$i];
+                
+                $deptosede->save();
+            }
+        }
         return redirect()->route('empresas.search')->with('guardar', 'ok');
     }
 

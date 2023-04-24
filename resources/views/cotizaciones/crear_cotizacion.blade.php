@@ -48,13 +48,13 @@
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-md">
+                    {{-- <div class="col-md">
                         <div class="form-floating">
                             <input class="form-control @error('persona') is-invalid @enderror" type="text" value="{{old('persona')}}">
                             <label for="floatingInputGrid">DIRIGIDO A </label>
                             @error('persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md">
                         <div class="form-floating">
                             <input value="" type="date" class="form-control @error('fecha_emision') is-invalid @enderror" name="fecha_emision" id="fecha_emision" onchange="fechaultimodia();" >
@@ -158,7 +158,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td colspan="8" class="text-end"><b>VALOR TOTAL AÑO SIN DESCUENTO</b></td>
+                                <td colspan="8" class="text-end"><b>VALOR TOTAL SIN DESCUENTO</b></td>
                                 <td>
                                     <div class="form-group">
                                         <input type="number" name="totalAñoSD_periodo" id="totalAñoSD_periodo" value="" class="form-control ">

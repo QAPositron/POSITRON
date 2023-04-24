@@ -57,6 +57,18 @@
                 </div>
                 <div class="col-md"></div>
             </div>
+            <div class="row">
+                <div class="col-md"></div>
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="dosi_ambiental" name="dosi_ambiental">
+                        <label class="form-check-label" for="defaultCheck1">    
+                            DOSIMETRO AMBIENTAL
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md"></div>
+            </div>
             <br>
         </div>
     </div>
@@ -86,7 +98,7 @@
                             <table class="table table-sm table-bordered">
                                 <thead>
                                     <tr class="table-active text-center ">
-                                        <th class='align-middle py-4' style='width: 20%'>TRABAJADOR</th>
+                                        <th class='align-middle py-4' style='width: 20%'>TRABAJADOR / ÁREA</th>
                                         <th class='align-middle py-4' >No. IDEN.</th>
                                         <th class='align-middle py-4' >DOSÍMETRO</th>
                                         <th class='align-middle py-4' >HOLDER</th>
@@ -100,8 +112,57 @@
                                     <input type="number" name="contdosisededepto" value="{{$contdosisededepto->id_contdosisededepto}}" hidden>
                                     <input type="number" name="contratodosimetriasede" value="{{$contdosisededepto->contratodosimetriasede_id}}" hidden>
                                     @if($dosicontrolasig->isEmpty())
+                                        @foreach($areasignados as $area)
+                                            <tr>
+                                                <td class='align-middle py-3'>{{$area->areadepartamentosede->nombre_area}}</td>
+                                                <td class='align-middle text-center'>N.A.</td>
+                                                <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
+                                                <td class='align-middle text-center'>N.A.</td>
+                                                <td class='align-middle text-center'>{{$area->ocupacion}}</td>
+                                                <td class='align-middle text-center'>AMBIENTAL</td>
+                                                <td class='align-middle text-center'>
+                                                    @if(count($observacionesAsig) > 0)
+                                                        <div class="row">
+                                                            @foreach($observacionesAsig as $obsAsig)
+                                                                @if($obsAsig->dosiareacontdosimetro_id == $area->id_dosiareacontdosisedes)
+                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
+                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
+                                                                        <br>
+                                                                    </div>
+                                                                    <div class="col-2 m-1">
+                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                                            </svg>
+                                                                        </button>
+                                                                    </div>
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="text" name="id_dosiareacontdosisedes[]" value="{{$area->id_dosiareacontdosisedes}}" hidden>
+                                                            <select class="form-select" name="observacion_asig_dosiarea{{$area->id_dosiareacontdosisedes}}[]" id="observacion_asig_dosiarea" autofocus multiple="true">
+                                                                @if(count($observacionesAsig) == 0)
+                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                    @foreach($observaciones as $obs)
+                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                    @endforeach
+                                                                @else
+                                                                    @foreach($observaciones as $obs)
+                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select> 
+                                                            <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddCont{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         @foreach($trabjasignados as $trabasig)
-                                            <tr id='{{$trabasig->id_trabajadordosimetro}}' class="text-center" >
+                                            <tr id='{{$trabasig->id_trabajadordosimetro}}'>
                                                 <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
                                                 <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
                                                 <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
@@ -115,115 +176,98 @@
                                                 <td class='align-middle py-3 text-center'>{{$trabasig->ocupacion}}</td>
                                                 <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
                                                 <td class='align-middle py-3 text-center'>
-                                                    <input type="text" name="id_trabajadordosimetro[]" value="{{$trabasig->id_trabajadordosimetro}}" hidden>
-                                                    <select class="form-select"  name="observacion_asig[]" id="observacion_asig" autofocus multiple="true">
-
-                                                        @if($trabasig->observacion_revent == '1')
-                                                            <option value="{{$trabasig->observacion_revent}}">--1) BUEN ESTADO FÍSICO--</option>
-                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
-                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
-                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
-                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
-                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
-                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
-                                                            <option value="8">8) HOLDER DAÑADO</option>
-                                                            <option value="9">9) OTRA ADICIONAL</option>
-                                                        @elseif($trabasig->observacion_revent == '2')
-                                                            <option value="{{$trabasig->observacion_revent}}">--2) DOSÍMETRO CONTAMINADO--</option>
-                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
-                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
-                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
-                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
-                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
-                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
-                                                            <option value="8">8) HOLDER DAÑADO</option>
-                                                            <option value="9">9) OTRA ADICIONAL</option>
-                                                        @elseif($trabasig->observacion_revent == '3')
-                                                            <option value="{{$trabasig->observacion_revent}}">--3) DOSÍMETRO FALTANTE--</option>
-                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
-                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
-                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
-                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
-                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
-                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
-                                                            <option value="8">8) HOLDER DAÑADO</option>
-                                                            <option value="9">9) OTRA ADICIONAL</option>
-                                                        @elseif($trabasig->observacion_revent == '4')
-                                                            <option value="{{$trabasig->observacion_revent}}">--4) DOSÍMETRO DAÑADO--</option>
-                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
-                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
-                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
-                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
-                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
-                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
-                                                            <option value="8">8) HOLDER DAÑADO</option>
-                                                            <option value="9">9) OTRA ADICIONAL</option>
-                                                        @elseif($trabasig->observacion_revent == '5')
-                                                            <option value="{{$trabasig->observacion_revent}}">--5) DOSÍMETRO HUMEDO--</option>
-                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
-                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
-                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
-                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
-                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
-                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
-                                                            <option value="8">8) HOLDER DAÑADO</option>
-                                                            <option value="9">9) OTRA ADICIONAL</option>
-                                                        @elseif($trabasig->observacion_revent == '6')
-                                                            <option value="{{$trabasig->observacion_revent}}">--6) DOSÍMETRO DE OTRO PERIODO--</option>
-                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
-                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
-                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
-                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
-                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
-                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
-                                                            <option value="8">8) HOLDER DAÑADO</option>
-                                                            <option value="9">9) OTRA ADICIONAL</option>
-                                                        @elseif($trabasig->observacion_revent == '7')
-                                                            <option value="{{$trabasig->observacion_revent}}">--7) DOSÍMETRO DE OTRA SEDE--</option>
-                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
-                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
-                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
-                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
-                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
-                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
-                                                            <option value="8">8) HOLDER DAÑADO</option>
-                                                            <option value="9">9) OTRA ADICIONAL</option>
-                                                        @elseif($trabasig->observacion_revent == '8')
-                                                            <option value="{{$trabasig->observacion_revent}}">--8) HOLDER DAÑADO--</option>
-                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
-                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
-                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
-                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
-                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
-                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
-                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
-                                                            <option value="9">9) OTRA ADICIONAL</option>
-                                                        @elseif($trabasig->observacion_revent == '9')
-                                                            <option value="{{$trabasig->observacion_revent}}">--9) OTRA ADICIONAL--</option>
-                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
-                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
-                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
-                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
-                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
-                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
-                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
-                                                            <option value="8">8) HOLDER DAÑADO</option>
-                                                        @else
-                                                            <option value="1">1) BUEN ESTADO FÍSICO</option>
-                                                            <option value="2">2) DOSÍMETRO CONTAMINADO</option>
-                                                            <option value="3">3) DOSÍMETRO FALTANTE</option>
-                                                            <option value="4">4) DOSÍMETRO DAÑADO</option>
-                                                            <option value="5">5) DOSÍMETRO HUMEDO</option>
-                                                            <option value="6">6) DOSÍMETRO DE OTRO PERIODO</option>
-                                                            <option value="7">7) DOSÍMETRO DE OTRA SEDE</option>
-                                                            <option value="8">8) HOLDER DAÑADO</option>
-                                                            <option value="9">9) OTRA ADICIONAL</option>
-                                                        @endif
-                                                    </select>
+                                                    @if(count($observacionesAsig) > 0)
+                                                        <div class="row">
+                                                            @foreach($observacionesAsig as $obsAsig)
+                                                                @if($obsAsig->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
+                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
+                                                                        <br>
+                                                                    </div>
+                                                                    <div class="col-2 m-1">
+                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                                            </svg>
+                                                                        </button>
+                                                                    </div>
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="text" name="id_trabajadordosimetro[]" value="{{$trabasig->id_trabajadordosimetro}}" hidden>
+                                                            <select class="form-select"  name="observacion_asig{{$trabasig->id_trabajadordosimetro}}[]" id="observacion_asig" autofocus multiple="true">
+                                                                @if(count($observacionesAsig) == 0)
+                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                    @foreach($observaciones as $obs)
+                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                    @endforeach
+                                                                @else
+                                                                    @foreach($observaciones as $obs)
+                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+                                                            <textarea class="form-control mt-1" name="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" id="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" cols="35" rows="3" hidden></textarea>
+                                                        </div>
+                                                    </div>
+                                                   
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        
                                     @else
+                                        @foreach($areasignados as $area)
+                                            <tr>
+                                                <td class='align-middle py-3'>{{$area->areadepartamentosede->nombre_area}}</td>
+                                                <td class='align-middle text-center'>N.A.</td>
+                                                <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
+                                                <td class='align-middle text-center'>N.A.</td>
+                                                <td class='align-middle text-center'>{{$area->ocupacion}}</td>
+                                                <td class='align-middle text-center'>AMBIENTAL</td>
+                                                <td class='align-middle text-center'>
+                                                    @if(count($observacionesAsig) > 0)
+                                                        <div class="row">
+                                                            @foreach($observacionesAsig as $obsAsig)
+                                                                @if($obsAsig->dosiareacontdosimetro_id == $area->id_dosiareacontdosisedes)
+                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
+                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
+                                                                        <br>
+                                                                    </div>
+                                                                    <div class="col-2 m-1">
+                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                                            </svg>
+                                                                        </button>
+                                                                    </div>
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="text" name="id_dosiareacontdosisedes[]" value="{{$area->id_dosiareacontdosisedes}}" hidden>
+                                                            <select class="form-select" name="observacion_asig_dosiarea{{$area->id_dosiareacontdosisedes}}[]" id="observacion_asig_dosiarea" autofocus multiple="true">
+                                                                @if(count($observacionesAsig) == 0)
+                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                    @foreach($observaciones as $obs)
+                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                    @endforeach
+                                                                @else
+                                                                    @foreach($observaciones as $obs)
+                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select> 
+                                                            <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddCont{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         @foreach($dosicontrolasig as $dosicontasig)
                                             <tr id="C{{$dosicontasig->id_dosicontrolcontdosisedes}}">
                                                 <td class='align-middle py-3'>CONTROL {{$dosicontasig->ubicacion}}</td>
@@ -276,9 +320,7 @@
                                                             <textarea class="form-control mt-1" name="obsAddCont{{$dosicontasig->id_dosicontrolcontdosisedes}}" id="obsAddCont{{$dosicontasig->id_dosicontrolcontdosisedes}}" cols="35" rows="3" hidden></textarea>
                                                         </div>
                                                     </div>
-                                                    
                                                 </td>
-                                                
                                             </tr>
                                         @endforeach
                                         @foreach($trabjasignados as $trabasig)
@@ -503,6 +545,19 @@ crossorigin="anonymous">
                 });
             };
         @endforeach
+        @foreach($areasignados as $area)
+            var asigdosi = document.querySelectorAll('select[name="observacion_asig_dosiarea{{$area->id_dosiareacontdosisedes}}[]"]');
+            console.log(asigdosi);
+            for(var i = 0; i < asigdosi.length; i++){
+                asigdosi[i].setAttribute("id", "observacion_asig_dosiarea"+'{{$area->id_dosiareacontdosisedes}}');
+                $('#observacion_asig_dosiarea'+'{{$area->id_dosiareacontdosisedes}}').select2({
+                    placeholder:"--SELECCIONE--",
+                    tags: true,
+                    tokenSeparators: ['/',',',',',','," "],
+                    width: "100%",
+                });
+            };
+        @endforeach
         
     })
     
@@ -510,7 +565,12 @@ crossorigin="anonymous">
 <script type="text/javascript">
     
     $(document).ready(function(){
-       
+        @foreach($areasignados as $area)
+            if('{{$area->revision_entrada}}' == 'TRUE'){
+                let tr = document.getElementById('A{{$area->id_dosiareacontdosisedes}}'); 
+                tr.style.boxShadow = "0px 0px 7px 1px rgb(26, 153, 128)";  
+            }
+        @endforeach
         @foreach($trabjasignados as $trabj)
             if('{{$trabj->revision_entrada}}' == 'TRUE'){
                 let tr = document.getElementById('{{$trabj->id_trabajadordosimetro}}'); 

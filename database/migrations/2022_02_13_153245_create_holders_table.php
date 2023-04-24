@@ -13,6 +13,7 @@ class CreateHoldersTable extends Migration
      */
     public function up()
     {
+        ///////SE IMPLEMENTO EL CODIGO DEL DEL HOLDER COMO STRING PORQUE LOS HOLDERS CRISTALINO CONTIENEN LETRAS////////
         Schema::create('holders', function (Blueprint $table) {
             $table->bigincrements('id_holder')->unique();
             $table->string('codigo_holder')->unique();

@@ -13,6 +13,7 @@ class CreateDosimetrosTable extends Migration
      */
     public function up()
     {
+        ///////SE IMPLEMENTO EL CODIGO DEL DOSIMETRO COMO STRING PARA USAR EL CERO A LA IZQUIERDA CON LOS LECTORES////////
         Schema::create('dosimetros', function (Blueprint $table) {
             $table->bigincrements('id_dosimetro')->unique();
             $table->string('codigo_dosimeter')->unique();
