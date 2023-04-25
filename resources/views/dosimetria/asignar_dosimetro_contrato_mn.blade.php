@@ -141,60 +141,18 @@
                                             <td>
                                                 <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" style="text-transform:uppercase" @if($dosicontrolToraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicontrolToraxant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicontrolToraxant->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='MN')
-                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='GM')
-                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='MF')
-                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='IV')
-                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='DN')
-                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='MM')
-                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='PR')
-                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='TR')
-                                                            <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='HD')
-                                                            <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='OD')
-                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='RX')
-                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='FL')
-                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='AM')
+                                                        @if($dosicontrolToraxant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dosicontrolToraxant->ocupacion=='AI')
+                                                        @elseif($dosicontrolToraxant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @elseif($dosicontrolToraxant->ocupacion=='O')
+                                                            <option selected hidden value="O">OTRO</option>
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="AM">APLICCIONES MÉDICAS</option>
+                                                    <option value="AI">APLICCIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
                                                 </select>
                                             </td>
                                             
@@ -217,7 +175,7 @@
                                                 <td>
                                                     <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
+                                                        {{-- <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -231,9 +189,10 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="FL">FLUOROSCOPIA</option> --}}
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
                                                     </select>
                                                 </td>
                                                 <td></td>
@@ -265,44 +224,16 @@
                                             <td>
                                                 <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" style="text-transform:uppercase" @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicontrolCristalinoant->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='MN')
-                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='GM')
-                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='MF')
-                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='IV')
-                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='DN')
-                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='MM')
-                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='PR')
-                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='TR')
-                                                            <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='HD')
-                                                            <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='OD')
-                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='RX')
-                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='FL')
-                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='AM')
+                                                        @if($dosicontrolCristalinoant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dosicontrolCristalinoant->ocupacion=='AI')
+                                                        @elseif($dosicontrolCristalinoant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @elseif($dosicontrolCristalinoant->ocupacion=='O')
+                                                            <option selected hidden value="O">OTRO</option>
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
+                                                    {{-- <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -316,9 +247,10 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="FL">FLUOROSCOPIA</option> --}}
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
                                                 </select>
                                             </td>
                                             
@@ -348,7 +280,7 @@
                                                 <td>
                                                     <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
+                                                        {{-- <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -362,9 +294,10 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="FL">FLUOROSCOPIA</option> --}}
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
                                                     </select>
                                                 </td>
                                                 <td></td>
@@ -396,44 +329,16 @@
                                             <td>
                                                 <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" style="text-transform:uppercase" @if($dosicontrolDedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicontrolDedoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicontrolDedoant->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='MN')
-                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='GM')
-                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='MF')
-                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='IV')
-                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='DN')
-                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='MM')
-                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='PR')
-                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='TR')
-                                                            <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='HD')
-                                                            <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='OD')
-                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='RX')
-                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='FL')
-                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='AM')
+                                                        @if($dosicontrolDedoant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dosicontrolDedoant->ocupacion=='AI')
+                                                        @elseif($dosicontrolDedoant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @elseif($dosicontrolDedoant->ocupacion=='0')
+                                                            <option selected hidden value="0">OTRO</option>
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
+                                                    {{-- <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -447,9 +352,10 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="FL">FLUOROSCOPIA</option> --}}
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
                                                 </select>
                                             </td>
                                             
@@ -479,7 +385,7 @@
                                                 <td>
                                                     <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
+                                                        {{-- <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -493,9 +399,11 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="FL">FLUOROSCOPIA</option> --}}
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
+
                                                     </select>
                                                 </td>
                                                 <td></td>
@@ -532,44 +440,16 @@
                                             <td>
                                                 <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" style="text-transform:uppercase" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosiareant->dosimetro_uso != 'FALSE')
-                                                        @if($dosiareant->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dosiareant->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dosiareant->ocupacion=='MN')
-                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dosiareant->ocupacion=='GM')
-                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dosiareant->ocupacion=='MF')
-                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dosiareant->ocupacion=='IV')
-                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dosiareant->ocupacion=='DN')
-                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dosiareant->ocupacion=='MM')
-                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dosiareant->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dosiareant->ocupacion=='PR')
-                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dosiareant->ocupacion=='TR')
-                                                            <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dosiareant->ocupacion=='HD')
-                                                            <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dosiareant->ocupacion=='OD')
-                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dosiareant->ocupacion=='RX')
-                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dosiareant->ocupacion=='FL')
-                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dosiareant->ocupacion=='AM')
+                                                        @if($dosiareant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dosiareant->ocupacion=='AI')
+                                                        @elseif($dosiareant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @elseif($dosiareant->ocupacion=='O')
+                                                            <option selected hidden value="O">OTRO</option>
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
+                                                    {{-- <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -583,9 +463,10 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="FL">FLUOROSCOPIA</option> --}}
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
                                                 </select>
                                             </td>
                                             {{-- <td>
@@ -623,7 +504,7 @@
                                                 <td>
                                                     <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
+                                                        {{-- <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -637,9 +518,11 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="FL">FLUOROSCOPIA</option> --}}
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
+
                                                     </select>
                                                 </td>
                                                 {{-- <td>
@@ -686,44 +569,16 @@
                                             <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" style="text-transform:uppercase" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicasoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicasoant->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dosicasoant->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dosicasoant->ocupacion=='MN')
-                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dosicasoant->ocupacion=='GM')
-                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dosicasoant->ocupacion=='MF')
-                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dosicasoant->ocupacion=='IV')
-                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dosicasoant->ocupacion=='DN')
-                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dosicasoant->ocupacion=='MM')
-                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dosicasoant->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dosicasoant->ocupacion=='PR')
-                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dosicasoant->ocupacion=='TR')
-                                                            <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dosicasoant->ocupacion=='HD')
-                                                            <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dosicasoant->ocupacion=='OD')
-                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dosicasoant->ocupacion=='RX')
-                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dosicasoant->ocupacion=='FL')
-                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dosicasoant->ocupacion=='AM')
+                                                        @if($dosicasoant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dosicasoant->ocupacion=='AI')
+                                                        @elseif($dosicasoant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @elseif($dosicasoant->ocupacion=='O')
+                                                            <option selected hidden value="O">OTRO</option>
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
+                                                    {{-- <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -737,9 +592,11 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="FL">FLUOROSCOPIA</option> --}}
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
+
                                                 </select>
                                             </td>
                                             {{-- <td>
@@ -781,7 +638,7 @@
                                                 <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
+                                                        {{-- <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -795,9 +652,11 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="FL">FLUOROSCOPIA</option> --}}
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
+
                                                     </select>
                                                 </td>
                                                 {{-- <td>
@@ -844,44 +703,16 @@
                                             <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" style="text-transform:uppercase" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dositoraxant->dosimetro_uso != 'FALSE')
-                                                        @if($dositoraxant->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dositoraxant->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dositoraxant->ocupacion=='MN')
-                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dositoraxant->ocupacion=='GM')
-                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dositoraxant->ocupacion=='MF')
-                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dositoraxant->ocupacion=='IV')
-                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dositoraxant->ocupacion=='DN')
-                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dositoraxant->ocupacion=='MM')
-                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dositoraxant->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dositoraxant->ocupacion=='PR')
-                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dositoraxant->ocupacion=='TR')
-                                                            <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dositoraxant->ocupacion=='HD')
-                                                            <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dositoraxant->ocupacion=='OD')
-                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dositoraxant->ocupacion=='RX')
-                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dositoraxant->ocupacion=='FL')
-                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dositoraxant->ocupacion=='AM')
+                                                        @if($dositoraxant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dositoraxant->ocupacion=='AI')
+                                                        @elseif($dositoraxant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @elseif($dositoraxant->ocupacion=='O')
+                                                            <option selected hidden value="O">OTRO</option>
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
+                                                    {{-- <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -895,9 +726,11 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="FL">FLUOROSCOPIA</option> --}}
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
+
                                                 </select>
                                             </td>
                                             {{-- <td>
@@ -938,7 +771,7 @@
                                                 <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
+                                                        {{-- <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -952,9 +785,11 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="FL">FLUOROSCOPIA</option> --}}
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
+
                                                     </select>
                                                 </td>
                                                 {{-- <td>
@@ -1008,44 +843,16 @@
                                             <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicristalinoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicristalinoant->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='MN')
-                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='GM')
-                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='MF')
-                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='IV')
-                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='DN')
-                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='MM')
-                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='PR')
-                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='TR')
-                                                            <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='HD')
-                                                            <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='OD')
-                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='RX')
-                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='FL')
-                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='AM')
+                                                        @if($dosicristalinoant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dosicristalinoant->ocupacion=='AI')
+                                                        @elseif($dosicristalinoant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @elseif($dosicristalinoant->ocupacion=='O')
+                                                            <option selected hidden value="O">OTRO</option>
                                                         @endif
                                                     @endif    
                                                     <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
+                                                    {{-- <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1059,9 +866,11 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="FL">FLUOROSCOPIA</option> --}}
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
+
                                                 </select>
                                             </td>
                                             {{-- <td>
@@ -1109,7 +918,7 @@
                                                 <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
+                                                        {{-- <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1123,9 +932,11 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="FL">FLUOROSCOPIA</option> --}}
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
+
                                                     </select>
                                                 </td>
                                                 {{-- <td>
@@ -1180,44 +991,16 @@
                                             <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca"  style="text-transform:uppercase" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosimuñecant->dosimetro_uso != 'FALSE')
-                                                        @if($dosimuñecant->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dosimuñecant->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dosimuñecant->ocupacion=='MN')
-                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dosimuñecant->ocupacion=='GM')
-                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dosimuñecant->ocupacion=='MF')
-                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dosimuñecant->ocupacion=='IV')
-                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dosimuñecant->ocupacion=='DN')
-                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dosimuñecant->ocupacion=='MM')
-                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dosimuñecant->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dosimuñecant->ocupacion=='PR')
-                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dosimuñecant->ocupacion=='TR')
-                                                            <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dosimuñecant->ocupacion=='HD')
-                                                            <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dosimuñecant->ocupacion=='OD')
-                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dosimuñecant->ocupacion=='RX')
-                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dosimuñecant->ocupacion=='FL')
-                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dosimuñecant->ocupacion=='AM')
+                                                        @if($dosimuñecant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dosimuñecant->ocupacion=='AI')
+                                                        @elseif($dosimuñecant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @elseif($dosimuñecant->ocupacion=='O')
+                                                            <option selected hidden value="O">OTRO</option>
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
+                                                    {{-- <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1231,9 +1014,11 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="FL">FLUOROSCOPIA</option> --}}
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
+
                                                 </select>
                                             </td>
                                             {{-- <td>
@@ -1279,7 +1064,7 @@
                                                 <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
+                                                        {{-- <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1293,9 +1078,11 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="FL">FLUOROSCOPIA</option> --}}
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
+                                                        
                                                     </select>
                                                 </td>
                                                 {{-- <td>
@@ -1349,44 +1136,16 @@
                                             <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosidedoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosidedoant->ocupacion=='T')
-                                                            <option selected hidden value="T">TELETERAPIA</option>
-                                                            @elseif($dosidedoant->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">BRAQUITERAPIA</option>
-                                                            @elseif($dosidedoant->ocupacion=='MN')
-                                                            <option selected hidden value="MN">MEDICINA NUCLEAR</option>
-                                                            @elseif($dosidedoant->ocupacion=='GM')
-                                                            <option selected hidden value="GM">GAMAGRAFIA INDUSTRIAL</option>
-                                                            @elseif($dosidedoant->ocupacion=='MF')
-                                                            <option selected hidden value="MF">MEDIDORES FIJOS</option>
-                                                            @elseif($dosidedoant->ocupacion=='IV')
-                                                            <option selected hidden value="IV">INVESTIGACIÓN</option>
-                                                            @elseif($dosidedoant->ocupacion=='DN')
-                                                            <option selected hidden value="DN">DENSÍMETRO NUCLEAR</option>
-                                                            @elseif($dosidedoant->ocupacion=='MM')
-                                                            <option selected hidden value="MM">MEDIDORES MÓVILES</option>
-                                                            @elseif($dosidedoant->ocupacion=='E')
-                                                            <option selected hidden value="E">DOCENCIA</option>
-                                                            @elseif($dosidedoant->ocupacion=='PR')
-                                                            <option selected hidden value="PR">PERFILAJE Y REGISTRO</option>
-                                                            @elseif($dosidedoant->ocupacion=='TR')
-                                                            <option selected hidden value="TR">TRAZADORES</option>
-                                                            @elseif($dosidedoant->ocupacion=='HD')
-                                                            <option selected hidden value="HD">HEMODINAMIA</option>
-                                                            @elseif($dosidedoant->ocupacion=='OD')
-                                                            <option selected hidden value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                            @elseif($dosidedoant->ocupacion=='RX')
-                                                            <option selected hidden value="RX">RADIODIAGNÓSTICO</option>
-                                                            @elseif($dosidedoant->ocupacion=='FL')
-                                                            <option selected hidden value="FL">FLUOROSCOPÍA</option>
-                                                            @elseif($dosidedoant->ocupacion=='AM')
+                                                        @if($dosidedoant->ocupacion=='AM')
                                                             <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                            @elseif($dosidedoant->ocupacion=='AI')
+                                                        @elseif($dosidedoant->ocupacion=='AI')
                                                             <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        @elseif($dosidedoant->ocupacion=='O')
+                                                            <option selected hidden value="O">OTRO</option>
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
+                                                    {{-- <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1400,9 +1159,11 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
+                                                    <option value="FL">FLUOROSCOPIA</option> --}}
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
+
                                                 </select>
                                             </td>
                                             {{-- <td>
@@ -1450,7 +1211,7 @@
                                                 <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
+                                                        {{-- <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1464,9 +1225,11 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
+                                                        <option value="FL">FLUOROSCOPIA</option> --}}
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
+
                                                     </select>
                                                 </td>
                                                 {{-- <td>

@@ -58,9 +58,28 @@
         bottom: 210px; 
         /* background: yellow; */
     }
-    
+    #watermark {
+        position: fixed;
+        
+        /** 
+            Set a position in the page for your image
+            This should center it vertically
+        **/
+        top:      115px;
+        left:     2cm;
+
+        /** Change image dimensions**/
+       
+        
+        /** Your watermark should be behind every content**/
+        z-index:  -1000;
+        opacity:0.03;
+    }
 </style>
 <body>
+    <div id="watermark">
+        <img src="{{asset('imagenes/FONDO1min.png')}}" width="643" height="890">
+    </div>
     <header>
         <img src="{{asset('imagenes/1VerdeSF.png')}}" width="180" style="position:relative; right:20px; bottom: 10px;">
         <img src="{{asset('imagenes/1SERVICIOS_QA.png')}}" width="330" style="position:relative; left:130px; top:15px;">
@@ -126,7 +145,7 @@
                         <th>Mes</th>
                         <th style="width: 10%;">Sede</th>
                         <th style="width: 12%;">Periodo</th>
-                        <th style="width: 20%;">Observaciones Revisión llegada al LDP<sup>1</sup></th>
+                        <th style="width: 15%;">Observaciones Revisión llegada al LDP<sup>1</sup></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -175,6 +194,31 @@
                         @endforeach
                     @else
                         @if($dosicontrolasig->isEmpty())
+                            @foreach($areasignados as $area)
+                                <tr>
+                                    <td>{{ucwords(strtolower($area->areadepartamentosede->nombre_area))}}</td>
+                                    <td style="text-align:center;">{{$area->dosimetro->codigo_dosimeter}}</td>
+                                    <td style="text-align:center;">N.A.
+                                        {{-- @if($trabjasig->holder_id == NULL)
+                                            N.A.
+                                        @else
+                                            {{$trabjasig->holder->codigo_holder}}
+                                        @endif --}}
+                                    </td>
+                                    <td style="text-align:center;">Ambiental</td>
+                                    <td style="text-align:center;">{{ucwords(strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @else {{$mesnumber}}/4 @endif </td>
+                                    <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{$area->primer_dia_uso}} - {{$area->ultimo_dia_uso}}</td>
+                                    <td style="text-align:center;">
+                                        @foreach($observacionesAsig as $obs)
+                                            @if($area->id_dosiareacontdosisedes == $obs->dosiareacontdosimetro_id)
+                                                {{$obs->observacion_id}})
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                </tr>
+                            @endforeach
                             @foreach($trabjasignados as $trabjasig)
                                 <tr>
                                     <td>{{ucwords(strtolower($trabjasig->persona->primer_nombre_persona))}} {{ucwords(strtolower($trabjasig->persona->segundo_nombre_persona))}} {{ucwords(strtolower($trabjasig->persona->primer_apellido_persona))}} {{ucwords(strtolower($trabjasig->persona->segundo_apellido_persona))}}</td>
@@ -191,7 +235,13 @@
                                     <td style="text-align:center;">{{$mesnumber}}/12</td>
                                     <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->primer_dia_uso}} - {{$trabjasig->ultimo_dia_uso}}</td>
-                                    <td style="text-align:center;">{{$trabjasig->observacion_revent}})</td>
+                                    <td style="text-align:center;">
+                                        @foreach($observacionesAsig as $obs)
+                                            @if($trabjasig->id_trabajadordosimetro == $obs->trabajcontdosimetro_id)
+                                                {{$obs->observacion_id}})
+                                            @endif
+                                        @endforeach
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
@@ -214,6 +264,31 @@
                                     <td style="text-align:center;">
                                         @foreach($observacionesAsig as $obs)
                                             @if($dosicont->id_dosicontrolcontdosisedes == $obs->dosicontrol_id)
+                                                {{$obs->observacion_id}})
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                </tr>
+                            @endforeach
+                            @foreach($areasignados as $area)
+                                <tr>
+                                    <td>{{ucwords(strtolower($area->areadepartamentosede->nombre_area))}}</td>
+                                    <td style="text-align:center;">{{$area->dosimetro->codigo_dosimeter}}</td>
+                                    <td style="text-align:center;">N.A.
+                                        {{-- @if($trabjasig->holder_id == NULL)
+                                            N.A.
+                                        @else
+                                            {{$trabjasig->holder->codigo_holder}}
+                                        @endif --}}
+                                    </td>
+                                    <td style="text-align:center;">Ambiental</td>
+                                    <td style="text-align:center;">{{ucwords(strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @else {{$mesnumber}}/4 @endif </td>
+                                    <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{$area->primer_dia_uso}} - {{$area->ultimo_dia_uso}}</td>
+                                    <td style="text-align:center;">
+                                        @foreach($observacionesAsig as $obs)
+                                            @if($area->id_dosiareacontdosisedes == $obs->dosiareacontdosimetro_id)
                                                 {{$obs->observacion_id}})
                                             @endif
                                         @endforeach
@@ -267,7 +342,7 @@
             
             <br>
             @if(empty($contdosisededepto))
-                <p style="position:relative; text-align:justify;">Se revisaron
+                <p style="position:relative; text-align:justify;">Se revisaron:
                     @php
                         $control_torax = 0;
                         $control_cristalino = 0;
@@ -275,6 +350,7 @@
                         $torax = 0;
                         $cristalino = 0;
                         $anillo = 0;
+                        $ambiental = 0;
                         foreach ($temptrabajdosimentradarev as $temtrabasigent) {
                             if($temtrabasigent->trabajcontdosimetro_id != NULL){
                                 if($temtrabasigent->ubicacion == 'TORAX'){
@@ -304,16 +380,46 @@
                     @endphp
                 </p>
             @else
-                <p style="position:relative; text-align:justify;">Se revisaron
+                <p style="position:relative; text-align:justify;">Se revisaron:
                     @php
-                        $control = $contdosisededepto->dosi_control_torax + $contdosisededepto->dosi_control_cristalino + $contdosisededepto->dosi_control_dedo;
+                        $control_torax = 0;
+                        $control_cristalino = 0;
+                        $control_anillo = 0;
+                        $torax = 0;
+                        $cristalino = 0;
+                        $anillo = 0;
+                        $ambiental= 0;
+                        foreach($dosicontrolasig as $dosicont){
+                            if($dosicont->ubicacion == 'TORAX' && $dosicont->revision_entrada == 'TRUE'){
+                                $control_torax += 1;
+                            }elseif($dosicont->ubicacion == 'CRISTALINO' && $dosicont->revision_entrada == 'TRUE'){
+                                $control_cristalino += 1;
+                            }elseif($dosicont->ubicacion == 'ANILLO' && $dosicont->revision_entrada == 'TRUE'){
+                                $control_anillo += 1;
+                            }
+                        }
+                        foreach ($areasignados as $area) {
+                            if($area->revision_entrada == 'TRUE'){
+                                $ambiental += 1;
+                            }
+                        }
+                        foreach($trabjasignados as $trabjasig){
+                            if($trabjasig->ubicacion == 'TORAX' && $trabjasig->revision_entrada == 'TRUE'){
+                                $torax += 1;
+                            }elseif($trabjasig->ubicacion == 'CRISTALINO' && $trabjasig->revision_entrada == 'TRUE'){
+                                $cristalino += 1;
+                            }elseif($trabjasig->ubicacion == 'ANILLO' && $trabjasig->revision_entrada == 'TRUE'){
+                                $anillo += 1;
+                            }
+                        }
+                        $control = $control_torax + $control_cristalino + $control_anillo;
                         if($control != 0){if($control <= 9){ echo "0".$control." dosímetros de control, "; }else{ echo $control." dosímetros de control, "; }}
-                        $torax = $contdosisededepto->dosi_torax;
                         if($torax != 0){if($torax <= 9){ echo "0".$torax." dosímetros de tórax, "; }else{ echo $torax." dosímetros de tórax, ";}}
-                        $anillo = $contdosisededepto->dosi_dedo;
                         if($anillo != 0){if($anillo <= 9){ echo "0".$anillo." dosímetro de anillo y ";}else{ echo $anillo." dosímetro de anillo y ";}}
-                        $cristalino = $contdosisededepto->dosi_cristalino;
-                        if($cristalino != 0){if($cristalino <= 9){ echo "0".$cristalino." dosímetro de cristalino, para un total de ".$control+$torax+$anillo+$cristalino." dosimetros."; } else{ echo $cristalino." dosímetro de cristalino, para un total de ".$control+$torax+$anillo+$cristalino." dosimetros."; }}
+                        if($cristalino != 0){if($cristalino <= 9){ echo "0".$cristalino." dosímetro de cristalino"; } else{ echo $cristalino." dosímetro de cristalino"; }}
+                        if($ambiental != 0){if($ambiental <= 9){ echo "0".$ambiental." dosímetro ambiental,"; } else{ echo " ".$ambiental." dosímetro ambiental,";}}
+                        $suma = $control+$torax+$anillo+$cristalino+$ambiental;
+                        if($suma != 0){if($suma <= 9){echo " para un total de 0".$suma." dosimetros.";}else{echo " para un total de ".$suma." dosimetros.";}}
                     @endphp
                 </p>
             @endif

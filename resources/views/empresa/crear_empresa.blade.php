@@ -168,10 +168,10 @@
                     </div>
                     <br>
                     <div class="row g-2">
-                        <div class="col md">
+                        <div class="col-md-4">
                             <div class="form-floating">
                                 <input type="text" name="nombreRepr_empresa" id="nombreRepr_empresa" class="form-control @error('nombreRepr_empresa') is-invalid @enderror" value="{{old('nombreRepr_empresa')}}" autofocus style="text-transform:uppercase;">
-                                <label for="floatingInputGrid">NOMBRE(s) Y APELLIDO(s) REPR. LEGAL</label>
+                                <label for="floatingInputGrid">NOMBRE(s) Y APELLIDO(s) REPR.</label>
                                 @error('nombreRepr_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                                     <option value="CÉDULA DE EXTRANJERÍA" @if (old('tipoIden_repreLegal') == "CÉDULA DE EXTRANJERÍA") {{ 'selected' }} @endif>CÉDULA DE EXTRANJERÍA</option>
                                     <option value="PASAPORTE"  @if (old('tipoIden_repreLegal') == "PASAPORTE") {{ 'selected' }} @endif>PASAPORTE</option>
                                 </select>
-                                <label for="floatingInputGrid">TIPO DE IDENTIFICACIÓN REPR. LEGAL:</label>
+                                <label for="floatingInputGrid">TIPO DE IDEN. REPR.</label>
                                 @error('tipoIden_repreLegal') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                                 
                             </div>
@@ -195,8 +195,15 @@
                         <div class="col-md">
                             <div class="form-floating">
                                 <input type="number" name="cedula_Repr_empresa" id="cedula_Repr_empresa" class="form-control @error('cedula_Repr_empresa') is-invalid @enderror" value="{{old('cedula_Repr_empresa')}}" autofocus style="text-transform:uppercase;">
-                                <label for="floatingInputGrid">N° DE IDENTIFICACIÓN REPR. LEGAL</label>
+                                <label for="floatingInputGrid">N° DE IDEN. REPR.</label>
                                 @error('cedula_Repr_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-floating">
+                                <input type="number" name="telefono_Repr_empresa" id="telefono_Repr_empresa" class="form-control @error('telefono_Repr_empresa') is-invalid @enderror" value="{{old('telefono_Repr_empresa')}}" autofocus style="text-transform:uppercase;">
+                                <label for="floatingInputGrid">TELÉFONO REPR.</label>
+                                @error('telefono_Repr_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>

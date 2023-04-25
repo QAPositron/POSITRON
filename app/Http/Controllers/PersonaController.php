@@ -58,7 +58,7 @@ class PersonaController extends Controller
     }
     
     public function save(Request $request){
-        /* return $request; */
+       /*  return $request; */
         $request->validate([
             'rol_personas'               => ['required'],
             'primer_nombre_persona'      => ['required'],              
@@ -117,12 +117,29 @@ class PersonaController extends Controller
         }
         if(!empty($request->rol_personas)){
             for($i=0; $i<count($request->rol_personas); $i++){
-                $personasRoles = new Personasroles();
-    
-                $personasRoles->persona_id  = $persona->id_persona;
-                $personasRoles->rol_id      = $request->rol_personas[$i];
+                if($request->lider_dosimetria == 'TRUE' && $request->rol_personas[$i] == 2){
+                    $personasRoles = new Personasroles();
         
-                $personasRoles->save();
+                    $personasRoles->persona_id  = $persona->id_persona;
+                    $personasRoles->rol_id      = 2;
+            
+                    $personasRoles->save();
+                }elseif($request->lider_dosimetria == 'TRUE'){
+                    $personasRoles = new Personasroles();
+        
+                    $personasRoles->persona_id  = $persona->id_persona;
+                    $personasRoles->rol_id      = 2;
+            
+                    $personasRoles->save();
+                }else{
+                    $personasRoles = new Personasroles();
+        
+                    $personasRoles->persona_id  = $persona->id_persona;
+                    $personasRoles->rol_id      = $request->rol_personas[$i];
+            
+                    $personasRoles->save();
+                }
+                
             }
         }
         if(!empty($request->id_sedes)){
@@ -145,14 +162,7 @@ class PersonaController extends Controller
                 $personaSedesAdd->save();
             }
         }
-        if(!empty($request->lider_dosimetria) && $request->lider_dosimetria == 'TRUE'){
-            $personasRoles = new Personasroles();
-    
-            $personasRoles->persona_id  = $persona->id_persona;
-            $personasRoles->rol_id      = 2;
-    
-            $personasRoles->save();
-        }
+        
         return redirect()->route('personas.search')->with('guardar', 'ok');
     }
     public function createTrabEstuContEmp(Empresa $empresa, $id){
@@ -203,17 +213,34 @@ class PersonaController extends Controller
                 $personasPerfiles->save();
             }
         }
+        
         if(!empty($request->rol_personas)){
             for($i=0; $i<count($request->rol_personas); $i++){
-                $personasRoles = new Personasroles();
-    
-                $personasRoles->persona_id  = $persona->id_persona;
-                $personasRoles->rol_id      = $request->rol_personas[$i];
+                if($request->lider_dosimetria == 'TRUE' && $request->rol_personas[$i] == 2){
+                    $personasRoles = new Personasroles();
         
-                $personasRoles->save();
+                    $personasRoles->persona_id  = $persona->id_persona;
+                    $personasRoles->rol_id      = 2;
+            
+                    $personasRoles->save();
+                }elseif($request->lider_dosimetria == 'TRUE'){
+                    $personasRoles = new Personasroles();
+        
+                    $personasRoles->persona_id  = $persona->id_persona;
+                    $personasRoles->rol_id      = 2;
+            
+                    $personasRoles->save();
+                }else{
+                    $personasRoles = new Personasroles();
+        
+                    $personasRoles->persona_id  = $persona->id_persona;
+                    $personasRoles->rol_id      = $request->rol_personas[$i];
+            
+                    $personasRoles->save();
+                }
+                
             }
         }
-        
 
         if(!empty($request->id_sedes)){
             for($i=0; $i<count($request->id_sedes); $i++){
@@ -225,14 +252,7 @@ class PersonaController extends Controller
                 $personaSedes->save();
             }
         }
-        if(!empty($request->lider_dosimetria) && $request->lider_dosimetria == 'TRUE'){
-            $personasRoles = new Personasroles();
-    
-            $personasRoles->persona_id  = $persona->id_persona;
-            $personasRoles->rol_id      = 2;
-    
-            $personasRoles->save();
-        }
+       
         return redirect()->route('empresas.info', $request->id_empresa)->with('guardar', 'ok');
     }
     public function edit(Persona $persona, $id, $empresa){

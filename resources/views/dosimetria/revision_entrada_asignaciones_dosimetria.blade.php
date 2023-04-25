@@ -113,7 +113,7 @@
                                     <input type="number" name="contratodosimetriasede" value="{{$contdosisededepto->contratodosimetriasede_id}}" hidden>
                                     @if($dosicontrolasig->isEmpty())
                                         @foreach($areasignados as $area)
-                                            <tr>
+                                            <tr id='A{{$area->id_dosiareacontdosisedes}}'>
                                                 <td class='align-middle py-3'>{{$area->areadepartamentosede->nombre_area}}</td>
                                                 <td class='align-middle text-center'>N.A.</td>
                                                 <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
@@ -217,57 +217,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                                        
                                     @else
-                                        @foreach($areasignados as $area)
-                                            <tr>
-                                                <td class='align-middle py-3'>{{$area->areadepartamentosede->nombre_area}}</td>
-                                                <td class='align-middle text-center'>N.A.</td>
-                                                <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
-                                                <td class='align-middle text-center'>N.A.</td>
-                                                <td class='align-middle text-center'>{{$area->ocupacion}}</td>
-                                                <td class='align-middle text-center'>AMBIENTAL</td>
-                                                <td class='align-middle text-center'>
-                                                    @if(count($observacionesAsig) > 0)
-                                                        <div class="row">
-                                                            @foreach($observacionesAsig as $obsAsig)
-                                                                @if($obsAsig->dosiareacontdosimetro_id == $area->id_dosiareacontdosisedes)
-                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
-                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
-                                                                        <br>
-                                                                    </div>
-                                                                    <div class="col-2 m-1">
-                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                                                            </svg>
-                                                                        </button>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                    @endif
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" name="id_dosiareacontdosisedes[]" value="{{$area->id_dosiareacontdosisedes}}" hidden>
-                                                            <select class="form-select" name="observacion_asig_dosiarea{{$area->id_dosiareacontdosisedes}}[]" id="observacion_asig_dosiarea" autofocus multiple="true">
-                                                                @if(count($observacionesAsig) == 0)
-                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @else
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select> 
-                                                            <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddCont{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
                                         @foreach($dosicontrolasig as $dosicontasig)
                                             <tr id="C{{$dosicontasig->id_dosicontrolcontdosisedes}}">
                                                 <td class='align-middle py-3'>CONTROL {{$dosicontasig->ubicacion}}</td>
@@ -318,6 +268,55 @@
                                                                 @endif
                                                             </select> 
                                                             <textarea class="form-control mt-1" name="obsAddCont{{$dosicontasig->id_dosicontrolcontdosisedes}}" id="obsAddCont{{$dosicontasig->id_dosicontrolcontdosisedes}}" cols="35" rows="3" hidden></textarea>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        @foreach($areasignados as $area)
+                                            <tr id='A{{$area->id_dosiareacontdosisedes}}'>
+                                                <td class='align-middle py-3'>{{$area->areadepartamentosede->nombre_area}}</td>
+                                                <td class='align-middle text-center'>N.A.</td>
+                                                <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
+                                                <td class='align-middle text-center'>N.A.</td>
+                                                <td class='align-middle text-center'>{{$area->ocupacion}}</td>
+                                                <td class='align-middle text-center'>AMBIENTAL</td>
+                                                <td class='align-middle text-center'>
+                                                    @if(count($observacionesAsig) > 0)
+                                                        <div class="row">
+                                                            @foreach($observacionesAsig as $obsAsig)
+                                                                @if($obsAsig->dosiareacontdosimetro_id == $area->id_dosiareacontdosisedes)
+                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
+                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
+                                                                        <br>
+                                                                    </div>
+                                                                    <div class="col-2 m-1">
+                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                                            </svg>
+                                                                        </button>
+                                                                    </div>
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input type="text" name="id_dosiareacontdosisedes[]" value="{{$area->id_dosiareacontdosisedes}}" hidden>
+                                                            <select class="form-select" name="observacion_asig_dosiarea{{$area->id_dosiareacontdosisedes}}[]" id="observacion_asig_dosiarea" autofocus multiple="true">
+                                                                @if(count($observacionesAsig) == 0)
+                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                    @foreach($observaciones as $obs)
+                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                    @endforeach
+                                                                @else
+                                                                    @foreach($observaciones as $obs)
+                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select> 
+                                                            <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddCont{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -591,12 +590,28 @@ crossorigin="anonymous">
             console.log("codigo etiqueta con checkbox estado inicial"+codigoEtiq+js);
             
             if(js){
-
+                document.getElementById("dosi_ambiental").disabled = true;
                 consultarDosiControl();
             }else{
+                document.getElementById("dosi_ambiental").disabled = false;
                 consultarTrabDosi();
             }
-        })
+        });
+        $('#dosi_ambiental').on('change', function(){
+            console.log("ENTRO AL DOSI  AMBIENTAL CHANGE");
+            var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
+            const js = document.querySelector('#dosi_ambiental').checked;
+            console.log("ESTADO INICIAL"+js);
+            console.log("codigo etiqueta con checkbox estado inicial"+codigoEtiq+js);
+            
+            if(js){
+                document.getElementById("dosi_control").disabled = true;
+                consultarAreaDosi();
+            }else{
+                document.getElementById("dosi_control").disabled = false;
+                consultarTrabDosi();
+            }
+        });
         
         function consultarDosiControl(){
             console.log("****CONSULTA DOSIMETRO CONTROL****");
@@ -735,16 +750,92 @@ crossorigin="anonymous">
             }
         }
 
+        function consultarAreaDosi(){
+            console.log("/////CONSULTA DOSIMETRO AMBIENTAL/////");
+
+            var codigoDosi = document.getElementById('codigo_dosimetro').value; 
+            console.log("DOSIMETRO" + codigoDosi);
+            if(codigoDosi != ''){
+                $.get('dosimetro',{codigo_dosi : codigoDosi}, function(dosimetro){
+                    console.log(dosimetro);
+                    if(dosimetro.length != 0){
+                        var check = 0;
+                        var codigoEtiq = document.getElementById("codigo_etiqueta").value;
+                        console.log("ETIQUETA" +codigoEtiq)
+                        console.log(check);
+                        @foreach($areasignados as $area)
+                            if(codigoEtiq == codigoDosi && codigoDosi == '{{$area->dosimetro->codigo_dosimeter}}' && dosimetro[0].uso_dosimetro == 'AMBIENTAL'){
+                                console.log("SI SE HIZO MATCH");
+                                check = 1;
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'CORRECTO!!',
+                                    text: 'SI HAY COINCIDENCIA ENTRE LA ETIQUETA Y EL DOSÍMETRO',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                document.getElementById("codigo_dosimetro").value = "";
+                                document.getElementById("codigo_etiqueta").value = "";
+                                /* document.querySelector('#dosi_control').disabled= false; */
+                                $.get('ambientaldosimetroEntrada', {id_dosiareacontdosisedes: '{{$area->id_dosiareacontdosisedes}}'}, function(ambientaldosi){
+                                    console.log("SE HIZO EL CHECK"+ambientaldosi);
+                                    let tr = document.getElementById('A{{$area->id_dosiareacontdosisedes}}'); 
+                                    tr.style.boxShadow = "0px 0px 7px 1px rgb(26, 153, 128)";  
+                                })
+                            }
+                        @endforeach  
+                        console.log(check);
+                        if(check == 0){
+                            console.log("NO SE HIZO MATCH");
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'ERROR!!',
+                                text: 'NO HAY COINCIDENCIA ENTRE LA ETIQUETA Y EL DOSÍMETRO',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            document.getElementById("codigo_dosimetro").value = "";
+                            document.getElementById("codigo_etiqueta").value = "";
+                            /* document.querySelector('#dosi_control').disabled= false; */
+                        }
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!!',
+                            text: 'NO EXISTE NINGUN DOSÍMETRO CON ESE CODIGO',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        document.getElementById("codigo_dosimetro").value = "";
+                        document.getElementById("codigo_etiqueta").value = "";
+                        /* document.querySelector('#dosi_control').disabled= false; */
+                        console.log("NO EXISTE");
+                    }
+                    document.getElementById("codigo_dosi").innerHTML = dosimetro[0].codigo_dosimeter;
+                    document.getElementById("tipo_dosi").innerHTML =  dosimetro[0].tipo_dosimetro;
+                    document.getElementById("tecnologia_dosi").innerHTML = dosimetro[0].tecnologia_dosimetro;
+                    document.getElementById("estado_dosi").innerHTML = dosimetro[0].estado_dosimetro;
+                    document.getElementById("uso_dosi").innerHTML = dosimetro[0].uso_dosimetro;
+                    
+                })
+            }
+        }
+
         $('#codigo_dosimetro').on('change', function(){
             console.log("ENTRO AL CODIGO DOSIMETRO CHANGE");
 
             var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
-            const js = document.querySelector('#dosi_control').checked;
-            console.log("ESTADO INICIAL"+js);
-            console.log("codigo etiqueta con checkbox estado inicial"+codigoEtiq+js);
-            document.querySelector('#dosi_control').disabled= true;
-            if(js){
+            const jscontrol = document.querySelector('#dosi_control').checked;
+            const jsambiental = document.querySelector('#dosi_ambiental').checked;
+            console.log("ESTADO INICIAL CONTROL"+jscontrol);
+            console.log("ESTADO INICIAL AMBIENTAL"+jsambiental);
+            console.log("codigo etiqueta con checkbox estado inicial control"+codigoEtiq+jscontrol);
+            console.log("codigo etiqueta con checkbox estado inicial ambiental"+codigoEtiq+jsambiental);
+            /* document.querySelector('#dosi_control').disabled= true; */
+            if(jscontrol){
                 consultarDosiControl();
+            }else if(jsambiental){
+                consultarAreaDosi();
             }else{
                 consultarTrabDosi();
             }

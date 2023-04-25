@@ -52,15 +52,35 @@
     }
     .indices{
         position: fixed;
+        display:block;
         left: 2cm; 
         right: 2cm;
         text-align:justify;
         bottom: 210px; 
         /* background: yellow; */
     }
-    
+    #watermark {
+        position: fixed;
+        
+        /** 
+            Set a position in the page for your image
+            This should center it vertically
+        **/
+        top:      115px;
+        left:     2cm;
+
+        /** Change image dimensions**/
+       
+        
+        /** Your watermark should be behind every content**/
+        z-index:  -1000;
+        opacity:0.03;
+    }
 </style>
 <body>
+    <div id="watermark">
+        <img src="{{asset('imagenes/FONDO1min.png')}}" width="643" height="890">
+    </div>
     <header>
         <img src="{{asset('imagenes/1VerdeSF.png')}}" width="180" style="position:relative; right:20px; bottom: 10px;">
         <img src="{{asset('imagenes/1SERVICIOS_QA.png')}}" width="330" style="position:relative; left:130px; top:15px;">
@@ -361,28 +381,31 @@
             @endif
             <p style="position:relative; text-align:justify;">En caso de encontrar inconsistencias en la información, por favor hacerla llegar vía correo electrónico indicando el número de revisión dosímetros (RSD) del presente documento al correo: <label style="color:#1A9980;">dosimetría.qapositron@gmail.com.</label> </p>
             <br>
-            <p style="position:relative; text-align:justify;">Cordialmente,</p>
+            <div style="position:relative; display:block;  page-break-inside: avoid; ">
+                <p style="position:relative; text-align:justify;">Cordialmente,</p>
+
+                <div style="position:relative; width: 200px; height: 70px; top:30px; page-break-inside: avoid;">
+                    <p style="position:relative; text-align:center;">_____________________________</p> <br>
+                    <p style="position:relative; bottom: 15px; text-align: center; font-size: 11px; color:#1A9980;">JUDY J.GAVIRIA TORRES</p> <br>
+                    <p style="position:relative; bottom: 33px; text-align: center; font-size: 11px;">Ingeniera</p> <br>
+                    <p style="position:relative; bottom: 49px; text-align: center; font-size: 11px; ">Operador logístico</p>
+                </div>
+                <br>
+                <br>
+                <p style="position:relative; display:block; top:15px;">Quien revisa la llegada de los dosímetros a la instalación:</p>
+                <div style="position:relative; width: 200px; height: 50px; top:45px; page-break-inside: avoid; ">
+                    
+                    <p style="position: relative; text-align: center;">_____________________________</p> <br>
+                    <p style="position: relative; bottom: 17px; text-align: center; font-size: 11px; color:#1A9980;">**Nombre del responsable**</p> <br>
+                    <p style="position: relative; bottom: 35px; text-align: center; font-size: 11px; ">Responsable de recibir la dosimetría</p> <br>
+                </div>
+            </div>
             
-            <div style="position:relative; width: 200px; height: 70px; top:30px; page-break-inside: avoid;">
-                <p style="position:relative; text-align:center;">_____________________________</p> <br>
-                <p style="position:relative; bottom: 15px; text-align: center; font-size: 11px; color:#1A9980;">JUDY J.GAVIRIA TORRES</p> <br>
-                <p style="position:relative; bottom: 33px; text-align: center; font-size: 11px;">Ingeniera</p> <br>
-                <p style="position:relative; bottom: 49px; text-align: center; font-size: 11px; ">Operador logístico</p>
-            </div>
             <br>
-            <br>
-            <p style="position:relative; top:15px;">Quien revisa la llegada de los dosímetros a la instalación:</p>
-            <div style="position:relative; width: 200px; height: 50px; top:45px; page-break-inside: avoid; ">
-                
-                <p style="position: relative; text-align: center;">_____________________________</p> <br>
-                <p style="position: relative; bottom: 17px; text-align: center; font-size: 11px; color:#1A9980;">**Nombre del responsable**</p> <br>
-                <p style="position: relative; bottom: 35px; text-align: center; font-size: 11px; ">Responsable de recibir la dosimetría</p> <br>
-            </div>
-            <div class="indices">
-                <p style=""><b>_____________________________________</b></p>
-                <p style="position: relative;"><small><sup>1</sup> Campo para que el encargado de la dosimetría del LDP revise la llagada de los dosímetros una vez es abierto el paquete. Usar las siguientes convenciones: 1) Buen Estado Físico, 2) inconsistencia información etiqueta-dosímetro, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 5) dosímetro sin etiqueta, 6) holder dañado, 7) dosímetro de otro periodo, 8) Dosímetro otra sede, 9) Otra adicional.</small></p>
-            </div>
-            <br>
+        </div>
+        <div class="indices">
+            <p style=""><b>_____________________________________</b></p>
+            <p style="position: relative;"><small><sup>1</sup> Campo para que el encargado de la dosimetría del LDP revise la llagada de los dosímetros una vez es abierto el paquete. Usar las siguientes convenciones: 1) Buen Estado Físico, 2) inconsistencia información etiqueta-dosímetro, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 5) dosímetro sin etiqueta, 6) holder dañado, 7) dosímetro de otro periodo, 8) Dosímetro otra sede, 9) Otra adicional.</small></p>
         </div>
         
     </main>
@@ -404,6 +427,7 @@
             $x = $pdf->get_width()-110;
             $y = $pdf->get_height() - 35;
             $pdf->page_text($x, $y, $text, $font, $size);
+
         }
     </script>
 </body>

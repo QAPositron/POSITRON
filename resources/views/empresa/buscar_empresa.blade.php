@@ -28,7 +28,7 @@
         </thead>
         @foreach($empresa as $emp)
             <tr>
-                <td class="align-middle"><a class="btn btn-outline-primary rounded-pill" href="{{route('empresas.info', $emp->id_empresa)}}">{{$emp->nombre_empresa}}</a></td>
+                <td class="align-middle text-center"><a class="btn btn-outline-primary rounded-pill" href="{{route('empresas.info', $emp->id_empresa)}}">{{$emp->nombre_empresa}}</a></td>
                 <td class="align-middle text-center">{{$emp->tipo_identificacion_empresa}}</td>
                 <td class="align-middle text-center">{{$emp->num_iden_empresa}}  {{$emp->DV}}</td>
                 <td class="align-middle text-center">{{$emp->municipios->nombre_municol}}</td>

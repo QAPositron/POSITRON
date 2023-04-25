@@ -246,6 +246,7 @@ Route::get('revisiondosimetriaentrada/{deptodosi}/{mesnumber}/revisionEntrada', 
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/dosimetro', [DosimetriaController::class, 'revisionDosimetro']);
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/dosimetroControlEntrada',[DosimetriaController::class, 'revisionCheckControlEntrada']);
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/trabajadordosimetroEntrada',[DosimetriaController::class, 'revisionCheckEntrada']);
+Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/ambientaldosimetroEntrada',[DosimetriaController::class, 'revisionEntradaCheckAmbiental']);
 Route::post('/revisiondosimetriaentrada', [DosimetriaController::class, 'saveObservacionesReventrada'])->name('observacionesReventrada.save');
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/asignacionesTrab', [DosimetriaController::class, 'asignacionesTrab']);
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/asignacionesCont', [DosimetriaController::class, 'asignacionesCont']);

@@ -67,10 +67,13 @@ class CreateDosiareacontdosisedesTable extends Migration
             $table->string('nota3', 50)->nullable();
             $table->string('nota4', 50)->nullable();
             $table->string('nota5', 50)->nullable();
+            $table->string('nota6', 50)->nullable();
             $table->string('DNL', 50)->nullable();
             $table->string('EU', 50)->nullable();
             $table->string('DPL', 50)->nullable();
             $table->string('DSU', 50)->nullable();
+            $table->string('revision_salida', 50)->nullable();
+            $table->string('revision_entrada', 50)->nullable();
             $table->timestamps();
         });
     }

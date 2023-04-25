@@ -72,7 +72,9 @@
         
         /** Your watermark should be behind every content**/
         z-index:  -1000;
-        opacity:0.03;
+        /* opacity:0.03; */
+        opacity:0.5;
+        /* filter: brightness(180%); */
     }
     #lista1, #lista2{
         /* background-color:red; */
@@ -91,9 +93,9 @@
 
 </style>
 <body>
-    {{-- <div id="watermark">
-        <img src="{{asset('imagenes/FONDO1min.png')}}" width="643" height="890">
-    </div> --}}
+    <div id="watermark">
+        <img src="{{asset('imagenes/fondoVerde3_min.png ')}}" width="643" height="890">
+    </div>
     <header>
         <img src="{{asset('imagenes/1VerdeSF.png')}}" width="160" style="position:relative; right:20px; bottom: 10px; opacity:0.5;">
         <img src="{{asset('imagenes/1SERVICIOS_QA.png')}}" width="300" style="position:relative; left:170px; top:15px; opacity:0.5;">
@@ -118,20 +120,19 @@
         @endphp
         
         @foreach($contrato as $cont)
-            <p style="text-align:justify; margin-bottom: 0px; position:relative">Entre los suscritos <b>QA POSITRON S.A.S.</b>, sociedad comercial, con domicilio en la ciudad de Bucaramanga,
-                constituida mediante matrícula 05-462860-16 con fecha 26 de Junio de 2020 debidamente inscrita en la Cámara de Comercio de esta ciudad,
-                representada en este acto por su Representante Legal, <b>DIEGO FERNANDO APONTE CASTAÑEDA</b>, mayor de edad, con domicilio en la ciudad de Bucaramanga, identificado con Cédula de Ciudadanía número 80.115.846 
-                expedida de Bogotá, quien en el texto de este contrato se denominará, <b>QA POSITRON S.A.S.</b>, sociedad que actúa como prestador de servicio de dosimetría personal autorizado bajo licencia No. QAP-001 del Ministerio de Minas, por una parte, y {{$cont->empresa->nombre_representantelegal}},
+            <p style="text-align:justify; margin-bottom: 0px; position:relative">Entre los suscritos <b>QA POSITRON S.A.S.</b>, sociedad comercial, constituida legalmente con domicilio en la ciudad de Bucaramanga,
+                debidamente inscrita en la Cámara de Comercio de esta ciudad, representada en este acto por su Representante Legal y Gerente General Asociado, <b>DIEGO FERNANDO APONTE CASTAÑEDA</b>, mayor de edad, con domicilio en la ciudad de Bucaramanga, identificado con Cédula de Ciudadanía número 80.115.846 
+                expedida de Bogotá, quien en el texto de este contrato se denominará, <b>QA POSITRON S.A.S.</b>, sociedad que actúa como distribuidor y prestador de servicio de dosimetría personal autorizado bajo licencia No. QAP-001 del Ministerio de Minas, por una parte, y {{$cont->empresa->nombre_representantelegal}},
                 identificado con el número de cédula No.{{$cont->empresa->cedula_representantelegal}}, que actúa como representante legal de {{$cont->empresa->nombre_empresa}}, 
                 ubicada en la dirección {{$cont->empresa->direccion_empresa}} de la ciudad de {{$cont->empresa->municipios->nombre_municol}} 
-                - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} y NIT: {{$cont->empresa->num_iden_empresa}} - {{$cont->empresa->DV}},
+                - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} e identificada con NIT: {{$cont->empresa->num_iden_empresa}} - {{$cont->empresa->DV}},
                 quien en el texto de este se denominará <b>EL USUARIO</b>, se ha celebrado un <b>CONTRATO COMERCIAL</b>, contenido en las siguientes cláusulas: <br>
                 <b>PRIMERA. - OBJETO:</b>  Por medio del presente contrato <b>QA POSITRON S.A.S.</b>, se compromete a entregar a manera de comodato o préstamo comercial al 
                 <b>USUARIO</b>, para que este utilice en forma gratuita y restituya al final de cada período de uso, uno o varios dosímetros personales con sus respectivos 
                 portadosímetros, y prestar el servicio global de dosimetría, el cual incluye entre otros, el servicio técnico, servicio al cliente, logística de distribución 
-                y recolección (de ser aplicable), servicios complementarios de lectura y reporte periódico de los resultados. Como contraprestación de estos servicios, el USUARIO 
-                se obliga a pagar el valor convenido, todo de conformidad con las condiciones sobre los productos, duración del contrato, costo y plazos de entrega de resultados, 
-                se  establecen en el “Formato de Solicitud de Servicios de Dosimetría”, adjunto a este contrato formando parte integral del mismo, concordante con la correspondiente 
+                y recolección (de ser aplicable), servicios complementarios de lectura y reporte periódico de los resultados. Como contraprestación de estos servicios, <b>el USUARIO</b>  
+                se obliga a pagar el valor convenido, todo de conformidad con las condiciones sobre la duración del contrato, costo y plazos de entrega de resultados, 
+                se  establecen en el <b>“FORMATO DE SOLICITUD PARA SERVICIO DE DOSIMETRIA PERSONAL”</b> y <b> “COTIZACIONES”</b>, adjunto a este contrato formando parte integral del mismo, concordante con la correspondiente 
                 cotización del servicio y demás documentos y comunicaciones relativos a esta orden contractual, que hacen también parte integral de este contrato. <br>
                 <b>SEGUNDA. – <u>OBLIGACIONES DE QA POSITRON S.A.S.</u>:</b>
             </p>
@@ -175,8 +176,8 @@
                 <br>
                 Dirección para Notificaciones: <br>
                 <br>
-                <b>QA POSITRON S.A.S.:</b> CL 36 No.27 – 71 OFI 919 Bucaramanga Cel. 3106079373- 3014495401 - 3043386581 <br>
-                <b>USUARIO: </b>{{$cont->empresa->nombre_empresa}}  <b>CIUDAD:</b>{{$cont->empresa->direccion_empresa}}, {{$cont->empresa->municipios->nombre_municol}}
+                <b>QA POSITRON S.A.S.:</b> CL 36 No.27 – 71 OFI 919 Bucaramanga <b>Cel.</b> 3106079373- 3014495401 - 3043386581 <br>
+                <b>USUARIO: </b>{{$cont->empresa->nombre_empresa}}  <b>CIUDAD:</b>{{$cont->empresa->direccion_empresa}}, {{$cont->empresa->municipios->nombre_municol}} - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} <b>Cel.</b> {{$cont->empresa->telefono_empresa}}
 
             </p>
             <div style="position:relative; width:50%; height: 170px; top:80px; page-break-inside: avoid; ">
@@ -190,7 +191,7 @@
             <div style="position:relative; width: 50%; height: 170px; left: 320px; top:-90px; page-break-inside: avoid;">
                 <p style="position: relative; top:70px; text-align: center;"><b>{{$cont->empresa->nombre_representantelegal}}</b></p> <br>
                 <p style="position: relative; top:53px;text-align: center; font-size: 11px;">REP. LEGAL {{$cont->empresa->nombre_empresa}}</p> <br>
-                <p style="position: relative; top:35px; text-align: center; font-size: 11px; ">CEL. (+57) {{-- {{$cont->empresa->}} --}}</p> <br>
+                <p style="position: relative; top:35px; text-align: center; font-size: 11px; ">CEL. (+57) {{$cont->empresa->telefono_representantelegal}}</p> <br>
                 <p style="position:relative; top:15px; text-align: center; font-size: 11px; ">e-mail: <u style="color: blue;">{{mb_strtolower($cont->empresa->email_empresa)}}</u> </p>
             </div>
         @endforeach

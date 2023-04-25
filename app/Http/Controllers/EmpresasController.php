@@ -91,6 +91,8 @@ class EmpresasController extends Controller
         $empresa->nombre_representantelegal         = mb_strtoupper($request->nombreRepr_empresa);
         $empresa->tipo_iden_representantelegal      = mb_strtoupper($request->tipoIden_repreLegal);
         $empresa->cedula_representantelegal         = $request->cedula_Repr_empresa;
+        $empresa->telefono_representantelegal       = $request->telefono_Repr_empresa;
+
         
         $empresa->save();
 

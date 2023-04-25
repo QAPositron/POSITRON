@@ -2,24 +2,30 @@
     
     @page{
         
-        margin-top: 10px;
-        margin-bottom: 100px;
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+        
+    }
+    body{
+        padding:0px; 
+       /*  background-color: aqua; */
     }
     .contenedor{
         width: 300px;
-        /* height: 500px; */
+        height: 740px;
         /* border: 2px solid blue; */
+       
         margin: 0 auto;
-       /*  background-color: red; */
+       
         justify-content: center;
     }
     .imgtorax{
         /* background-color:yellow; */
         width: 191px;
         height: 86px;
-        margin: 10 auto;
+        margin: 0 auto;
         justify-content: center;
     }
 
@@ -30,16 +36,7 @@
         max-height: 86px;
         margin: 0 auto;
     }
-    /* .nom_area{
-        position: relative; 
-        bottom: 81px;
-        left: 20px;
-        font-size: 8px;
-        font-family: Arial, Helvetica, sans-serif;
-        background: red;
-        width: 70px;
-        text-align:left;
-    } */
+    
     .num_iden_cont_torax{
         position: relative; 
         bottom: 81px;
@@ -227,7 +224,7 @@
         /* background-color:red; */
         width: 236px;
         height: 43px;
-        margin: 10 auto;
+        margin: 0 auto;
         justify-content: center;
     }
     .img_cristalino, .img_anillo{
@@ -281,7 +278,7 @@
         @foreach($dosicontrolasig as $dosicont)
             @if($dosicont->ubicacion == 'TORAX')
                 {{-- //////// DOSIMETRO CONTROL TORAX ////////// --}}
-                <div class="imgtorax">
+                <div class="imgtorax" style="page-break-inside: avoid;">
                     @if($dosicont->mes_asignacion == 1 || $dosicont->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($dosicont->mes_asignacion == 2 || $dosicont->mes_asignacion == 8)
@@ -316,7 +313,7 @@
                 </div>
             @elseif($dosicont->ubicacion == 'CRISTALINO')
                 {{-- //////// DOSIMETRO CONTROL CRISTALINO ////////// --}}
-                <div class="imgcristalino">
+                <div class="imgcristalino" style="page-break-inside: avoid;">
                     @if($dosicont->mes_asignacion == 1 || $dosicont->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($dosicont->mes_asignacion == 2 || $dosicont->mes_asignacion == 8)
@@ -350,7 +347,7 @@
                 </div>
             @elseif($dosicont->ubicacion == 'ANILLO')
                 {{-- //////// DOSIMETRO CONTROL ANILLO ////////// --}}
-                <div class="imganillo">
+                <div class="imganillo" style="page-break-inside: avoid;">
                     @if($dosicont->mes_asignacion == 1 || $dosicont->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM1.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($dosicont->mes_asignacion == 2 || $dosicont->mes_asignacion == 8)
@@ -366,7 +363,7 @@
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
                     @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_anillo" >{{$contdosi->nombre_empresa}}</div>
+                        <div class="empresa_cont_anillo" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
                         <div class="num_iden_cont_anillo">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
                     @endforeach
                     <div class="codigo_cont_anillo" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
@@ -423,7 +420,7 @@
                 </div>
             @elseif($trab->ubicacion == 'CRISTALINO')
                 {{-- //////// DOSIMETRO CRISTALINO ////////// --}}
-                <div class="imgcristalino">
+                <div class="imgcristalino" style="page-break-inside: avoid;">
                     @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/2CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($trab->mes_asignacion == 2 || $trab->mes_asignacion == 8)
@@ -458,7 +455,7 @@
                 </div>
             @elseif($trab->ubicacion == 'ANILLO')
                 {{-- //////// DOSIMETRO ANILLO ////////// --}}
-                <div class="imganillo">
+                <div class="imganillo" style="page-break-inside: avoid;">
                     @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
                         <img src="{{asset('imagenes/IMG_ANILLO/2ANILLOM1.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($trab->mes_asignacion == 2 || $trab->mes_asignacion == 8)
@@ -474,7 +471,7 @@
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO ANILLO ////////// --}}
                     @foreach($contratodosi as $contdosi)
-                        <div class="empresa_anillo" >{{$contdosi->nombre_empresa}}</div>
+                        <div class="empresa_anillo" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
                     @endforeach
                     <div class="nombre_anillo" > <b>{{$trab->persona->primer_apellido_persona}} {{substr($trab->persona->segundo_apellido_persona, 0,1)}}, {{$trab->persona->primer_nombre_persona}} {{substr($trab->persona->segundo_nombre_persona, 0,1)}}</b> </div>
                     <div class="cedula_anillo">CC. {{$trab->persona->cedula_persona}}</div>

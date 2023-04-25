@@ -1793,7 +1793,7 @@ class DosimetriaController extends Controller
                         $estadoDosimArea = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosimArea[$i])
                         ->update([
                             'estado_dosimetro' => 'EN USO',
-                            'uso_dosimetro'    => 'AREA'
+                            'uso_dosimetro'    => 'AMBIENTAL'
                         ]);
                         $estadoDosimAreamesant = Dosiareacontdosisede::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
                         ->where('contdosisededepto_id', $id)
@@ -2233,7 +2233,7 @@ class DosimetriaController extends Controller
     public function lecturadosicontrol($id){
         $dosicontasig = Dosicontrolcontdosisede::find($id);
        
-        return view('dosimetria.lectura_dosimetro_control_contrato', compact('dosicontasig'));
+       return view('dosimetria.lectura_dosimetro_control_contrato', compact('dosicontasig'));
 
     }
 
@@ -2304,20 +2304,25 @@ class DosimetriaController extends Controller
         return view('dosimetria.lectura_dosimetro_area_contrato', compact('dosiareasig'));
     }
     public function savelecturadosiarea(Request $request, $id){
+        /* return $request; */
         $dosiareacontasig = Dosiareacontdosisede::find($id);
 
-        if($request->nota2 != 'TRUE' || $request->dnl != 'TRUE'|| $request->eu != 'TRUE' || $request->dsu !='TRUE' || $request->dpl !='TRUE'){
+        if($request->nota2 != '' || $request->dnl != ''|| $request->eu != '' || $request->dsu !='' || $request->dpl !=''){
+        }else{
             $request->validate([
                 'measurement_date'              => 'required',
-                'zeroLevel_date'                => 'required',
-                'verification_Date'             => 'required',
-                'verification_required_before'  => 'required',
             ]); 
+
         }
 
         $dosiareacontasig->zero_level_date                     = $request->zeroLevel_date;
         $dosiareacontasig->measurement_date                    = $request->measurement_date;
-        
+        $dosiareacontasig->Hp007_calc_dose                     = $request->hp007_calc_dose;
+        $dosiareacontasig->Hp007_background_dose               = $request->hp007_background_dose;
+        $dosiareacontasig->Hp007_raw_dose                      = $request->hp007_raw_dose;
+        $dosiareacontasig->Hp10_calc_dose                      = $request->hp10_calc_dose;
+        $dosiareacontasig->Hp10_background_dose                = $request->hp10_background_dose;
+        $dosiareacontasig->Hp10_raw_dose                       = $request->hp10_raw_dose;
         $dosiareacontasig->H_10_calc_dose                      = $request->h10_cal_dose;
         $dosiareacontasig->verification_date                   = $request->verification_Date;
         $dosiareacontasig->verification_required_on_or_before  = $request->verification_required_before;
@@ -2327,6 +2332,7 @@ class DosimetriaController extends Controller
         $dosiareacontasig->nota3                               = $request->nota3;
         $dosiareacontasig->nota4                               = $request->nota4;
         $dosiareacontasig->nota5                               = $request->nota5;
+        $dosiareacontasig->nota6                               = $request->nota6;
         $dosiareacontasig->DNL                                 = $request->dnl;
         $dosiareacontasig->EU                                  = $request->eu;
         $dosiareacontasig->DPL                                 = $request->dpl;
@@ -2412,6 +2418,16 @@ class DosimetriaController extends Controller
             ->take(12)
             ->get();
         }
+        $SumatoriaDocemesesAreasasig = array();
+        for($i=0; $i<count($dosiareasig); $i++){
+
+            $SumatoriaDocemesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
+            ->where('contdosisededepto_id', '=', $id)
+            ->where('mes_asignacion', '<=', $mesnumber)
+            ->latest()
+            ->take(12)
+            ->get();
+        }
         $SumatoriaFechaIngresomesestrabajadoresaisg = array();
         for($i=0; $i<count($trabajdosiasig); $i++){
 
@@ -2421,8 +2437,16 @@ class DosimetriaController extends Controller
             ->where('mes_asignacion', '<=', $mesnumber)
             ->get();
         }
-        
-        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaFechaIngresomesestrabajadoresaisg', 'mesescantdosi', 'mesnumber'));
+        $SumatoriaFechaIngresomesesAreasasig = array();
+        for($i=0; $i<count($dosiareasig); $i++){
+
+            $SumatoriaFechaIngresomesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
+            ->where('contdosisededepto_id', '=', $id)
+            ->where('mes_asignacion', '<=', $mesnumber)
+            ->get();
+        }
+       /*  return $SumatoriaFechaIngresomesesAreasasig; */
+        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaDocemesesAreasasig','SumatoriaFechaIngresomesestrabajadoresaisg', 'SumatoriaFechaIngresomesesAreasasig', 'mesescantdosi', 'mesnumber'));
         $pdf->setPaper('8.5x14', 'landscape');
         
         
@@ -2472,7 +2496,7 @@ class DosimetriaController extends Controller
         /* $pdf = PDF::loadView('dosimetria.etiquetasPDF_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig')); */
         $pdf =  PDF::loadView('dosimetria.etiquetasPDF1_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig', 'areadosiasig'));
         /* $pdf->setPaper('A4', 'portrait'); */
-        $pdf->setPaper( array(0, 0, 396.85, 510.236), 'portrait'); 
+        $pdf->setPaper( array(0, 0, 396.85, 566.929), 'portrait'); 
         return $pdf->stream();
     }
     public function revisionDosimetria($id, $mesnumber){
@@ -2627,6 +2651,10 @@ class DosimetriaController extends Controller
         ->where('mes_asignacion', '=', $mesnumber)
         ->where('revision_entrada', '=', 'TRUE')
         ->get();
+        $areasignados = Dosiareacontdosisede::where('contdosisededepto_id', '=', $deptodosi)
+        ->where('mes_asignacion', '=', $mesnumber)
+        ->where('revision_entrada', '=', 'TRUE')
+        ->get();
         $observacionesAsig = Obsreventrada::where('contdosisededepto_id', '=', $deptodosi)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
@@ -2639,7 +2667,7 @@ class DosimetriaController extends Controller
         $empresainfo= ContratosDosimetriaEmpresa::where('empresa_id', '=', $empresa)
         ->get();
         
-        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionentrada_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados','observacionesAsig','temptrabajdosimentradarev', 'empresainfo'));
+        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionentrada_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados', 'areasignados', 'observacionesAsig','temptrabajdosimentradarev', 'empresainfo'));
         $pdf->setPaper('A4', 'portrait');
         date_default_timezone_set('America/Bogota');
         return $pdf->stream("RED_OSL_QA_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
@@ -2683,6 +2711,14 @@ class DosimetriaController extends Controller
         ]);
         
         return response()->json($trabajadordosimetro);
+    }
+    public function revisionEntradaCheckAmbiental(Request $request){
+        $areadosimetro = Dosiareacontdosisede::where('id_dosiareacontdosisedes', '=', $request->id_dosiareacontdosisedes)
+        ->update([
+            'revision_entrada' => 'TRUE'
+        ]);
+        
+        return response()->json($areadosimetro);
     }
     public function revisionDosimetriaEntradaGeneral(){
         
