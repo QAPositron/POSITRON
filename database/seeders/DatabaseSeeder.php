@@ -21,9 +21,20 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ColdepartamentoSeeder::class);
         $this->call(ColmunicipioSeeder::class);
+        $this->call(DosimetroSeeder::class);
+        $this->call(HolderSeeder::class);
+        $this->call(EmpresaSeeder::class);
+        $this->call(SedeSeeder::class);
         $this->call(DepartamentoSeeder::class);
+        $this->call(DepartamentosedeSeeder::class);
+        $this->call(AreadepartamentosedeSeeder::class);
         $this->call(RolSeeder::class);
         $this->call(PerfilSeeder::class);
-        $this->call(ObservacionSeeder::class);
+        $this->call(PersonaSeeder::class);
+        $this->call(PersonasedesSeeder::class);
+        $this->call(PersonasrolesSeeder::class);
+
+
+
     }
 }

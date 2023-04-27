@@ -201,7 +201,7 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="text" class="form-control @error('segundo_apellido_persona') is-invalid @enderror"  name="segundo_apellido_persona" id="segundo_apellido_persona" value="{{old('segundo_apellido_persona', $persona->segundo_apellido_persona)}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">* SEGUNDO APELLIDO:</label>
+                            <label for="floatingInputGrid">SEGUNDO APELLIDO:</label>
                             @error('segundo_apellido_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -249,7 +249,7 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="email" class="form-control @error('correo_persona') is-invalid @enderror" name="correo_persona" id="correo_persona" value="{{old('correo_persona', $persona->correo_persona)}}" autofocus style="text-transform:uppercase;">
-                            <label for="">* CORREO:</label>
+                            <label for="">CORREO:</label>
                             @error('correo_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -259,7 +259,7 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="numeric" class="form-control @error('telefono_persona') is-invalid @enderror"  name="telefono_persona" id="telefono_persona" value="{{old('telefono_persona', $persona->telefono_persona)}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">* TELÉFONO:</label>
+                            <label for="floatingInputGrid">TELÉFONO:</label>
                             @error('telefono_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>

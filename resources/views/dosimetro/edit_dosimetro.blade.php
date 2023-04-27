@@ -5,7 +5,7 @@
     <div class="col"></div>
     <div class="col-4">
         <div class="card text-dark bg-light">
-            <h2 class="text-center mt-3">EDITAR DOSIMETRO</h2>
+            <h2 class="text-center mt-3">EDITAR DOSÍMETRO</h2>
             
             <form class="m-4" id="form_edit_dosimetro" name="form_edit_dosimetro" action="{{route('dosimetros.update', $dosimetro)}}" method="POST">
                 
@@ -14,10 +14,10 @@
                 @method('put')
 
                 <div class="row g-2">
-                    
+                    <label class="text-secondary">' * ' campo obligatorio</label>
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" name="tipo_dosimetro" id="tipo_dosimetro" autofocus style="text-transform:uppercase">
+                            <select class="form-select @error('tipo_dosimetro') is-invalid @enderror" name="tipo_dosimetro" id="tipo_dosimetro" autofocus style="text-transform:uppercase">
                                 <option value="{{old('tipo_dosimetro', $dosimetro->tipo_dosimetro)}}">--{{old('tipo_dosimetro', $dosimetro->tipo_dosimetro)}}--</option>
                                 @if($dosimetro->tipo_dosimetro == 'GENERAL')
                                     <option value="EZCLIP" @if (old('tipo_dosimetro') == "EZCLIP") {{ 'selected' }} @endif>EZCLIP</option>
@@ -31,10 +31,9 @@
                                 @endif
                                 
                             </select>
-                            <label for="floatingInputGrid">TIPO DE DOSÍMETRO:</label>
-                            @error('tipo_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <label for="floatingInputGrid">* TIPO</label>
+                            @error('tipo_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+
                         </div>
                     </div>
                 </div>
@@ -42,7 +41,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" name="tecnologia_dosimetro" id="tecnologia_dosimetro" autofocus  style="text-transform:uppercase">
+                            <select class="form-select @error('tecnologia_dosimetro') is-invalid @enderror" name="tecnologia_dosimetro" id="tecnologia_dosimetro" autofocus  style="text-transform:uppercase">
                                 <option value="{{old('tecnologia_dosimetro', $dosimetro->tecnologia_dosimetro)}}">--{{old('tecnologia_dosimetro', $dosimetro->tecnologia_dosimetro)}}--</option>
                                 @if($dosimetro->tecnologia_dosimetro == 'OSL')
                                     <option value="TLD" @if (old('tecnologia_dosimetro') == "TLD") {{ 'selected' }} @endif>TLD</option>
@@ -56,10 +55,8 @@
                                 @endif
                                 
                             </select>
-                            <label for="floatingInputGrid">TECNOLOGÍA DOSÍMETRO:</label>
-                            @error('tecnologia_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <label for="floatingInputGrid">* TECNOLOGÍA DOSÍMETRO:</label>
+                            @error('tecnologia_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -67,11 +64,9 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating" >
-                            <input type="numeric" name="codigo_dosimetro" id="codigo_dosimetro" class="form-control" value="{{old('codigo_dosimetro', $dosimetro->codigo_dosimeter)}}" autofocus >
-                            <label for="floatingInputGrid">CODIGO DOSÍMETRO:</label>
-                            @error('codigo_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <input type="numeric" name="codigo_dosimetro" id="codigo_dosimetro" class="form-control @error('codigo_dosimetro') is-invalid @enderror" value="{{old('codigo_dosimetro', $dosimetro->codigo_dosimeter)}}" autofocus >
+                            <label for="floatingInputGrid">* CODIGO DOSÍMETRO:</label>
+                            @error('codigo_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -79,11 +74,9 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" name="fecha_ingre_serv_dosimetro" id="fecha_ingre_serv_dosimetro" class="form-control" value="{{old('fecha_ingre_serv_dosimetro', $dosimetro->fecha_ingreso_servicio)}}" autofocus style="text-transform:uppercase;"> 
-                            <label for="floatingInputGrid">FECHA INGRESO AL SERVICIO:</label>
-                            @error('fecha_ingre_serv_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <input type="date" name="fecha_ingre_serv_dosimetro" id="fecha_ingre_serv_dosimetro" class="form-control @error('fecha_ingre_serv_dosimetro') is-invalid @enderror" value="{{old('fecha_ingre_serv_dosimetro', $dosimetro->fecha_ingreso_servicio)}}" autofocus style="text-transform:uppercase;"> 
+                            <label for="floatingInputGrid">* FECHA INGRESO AL SERVICIO:</label>
+                            @error('fecha_ingre_serv_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -91,7 +84,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" name="estado_dosimetro" id="estado_dosimetro" value="{{old('estado_dosimetro')}}" autofocus  style="text-transform:uppercase">
+                            <select class="form-select @error('estado_dosimetro') is-invalid @enderror" name="estado_dosimetro" id="estado_dosimetro" value="{{old('estado_dosimetro')}}" autofocus  style="text-transform:uppercase">
                                 <option value="{{old('estado_dosimetro',$dosimetro->estado_dosimetro)}}">--{{old('estado_dosimetro', $dosimetro->estado_dosimetro)}}--</option>
                                 @if($dosimetro->estado_dosimetro =='STOCK')
                                     <option value="PERDIDO" @if (old('estado_dosimetro') == "PERDIDO") {{ 'selected' }} @endif>PERDIDO</option>
@@ -111,10 +104,8 @@
                                     <option value="DAÑADO" @if (old('estado_dosimetro') == "DAÑADO") {{ 'selected' }} @endif>DAÑADO</option>
                                 @endif
                             </select>
-                            <label for="floatingInputGrid">ESTADO DOSÍMETRO:</label>
-                            @error('estado_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <label for="floatingInputGrid">* ESTADO DOSÍMETRO:</label>
+                            @error('estado_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>

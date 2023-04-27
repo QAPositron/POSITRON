@@ -84,8 +84,8 @@ class SedesController extends Controller
             'nombre_sede'           => ['required',  Rule::unique('sedes', 'nombre_sede')->ignore($sede->id_sede, 'id_sede')->where(fn ($query) => $query->where('empresas_id', $request->id_empresa))], 
             'departamento_sede'     => ['required'],
             'municipio_sede'        => ['required'],               
-            'direccion_sede'        => ['required'], 
-            'especialidades'        => ['required']
+            'direccion_sede'        => ['required']
+            
         ]);
 
         $sede->empresas_id         =$request->id_empresa;

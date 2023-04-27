@@ -23,6 +23,7 @@
                             <h6>OBSERVE LAS ESPECIALIDADES Y CREE LA QUE DESEE </h6>
                             <br>
                             <div class="row g-2">
+                                <label class="text-secondary">' * ' campo obligatorio</label>
                                 <div class="col-md">
                                     <div class="form-floating text-wrap">
                                         <input type="text" class="form-control"   name="empresas_id" id="empresas_id" value="{{old('empresas_id', $empresa->nombre_empresa)}}" autofocus style="text-transform:uppercase;" disabled>
@@ -34,7 +35,7 @@
                                 <div class="col-md">
                                     <div class="form-floating text-wrap">
                                         <input type="text" class="form-control @error('nombre_sede') is-invalid @enderror"  name="nombre_sede" id="nombre_sede" value="{{old('nombre_sede')}}" autofocus style="text-transform:uppercase;">
-                                        <label for="floatingInputGrid">NOMBRE DE LA SEDE:</label>
+                                        <label for="floatingInputGrid">* NOMBRE DE LA SEDE:</label>
                                         @error('nombre_sede') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -43,7 +44,7 @@
                             <div class="row g-2">
                                 <div class="col-md">
                                     <div class="form-group">
-                                        <label for="floatingInputGrid">DEPARTAMENTO:</label>
+                                        <label for="floatingInputGrid">* DEPARTAMENTO:</label>
                                         <select class="form-control @error('departamento_sede') is-invalid @enderror"  name="departamento_sede" id="departamento_sede" value="{{old('departamento_sede')}}" autofocus style="text-transform:uppercase">
                                             <option value="">--SELECCIONE--</option>
                                             @foreach($departamentoscol as $depacol)
@@ -59,7 +60,7 @@
                                     </div>
 
                                     <div class="form-group" id="municipio_empresa" name="municipio_empresa">
-                                        <label for="floatingInputGrid">MUNICIPIO:</label>
+                                        <label for="floatingInputGrid">* MUNICIPIO:</label>
                                         <select class="form-control @error('municipio_sede') is-invalid @enderror" name="municipio_sede" id="municipio_sede" value="{{old('municipio_sede')}}" autofocus style="text-transform:uppercase">
 
                                         </select>
@@ -70,7 +71,7 @@
                             <br>
                             <div class="form-floating text-wrap">
                                 <input type="text" name="direccion_sede" id="direccion_sede" class="form-control @error('direccion_sede') is-invalid @enderror" value="{{old('direccion_sede')}}"  autofocus style="text-transform:uppercase;">
-                                <label for="">DIRECCIÓN:</label>
+                                <label for="">* DIRECCIÓN:</label>
                                 @error('direccion_sede') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </div>
                             <br>
@@ -79,7 +80,7 @@
                             <br>
                             <div class="row g-2">
                                 <div class="col-10">
-                                    <label for="">ESPECIALIDADES:</label>
+                                    <label for="">* ESPECIALIDADES:</label>
                                     <div class="form-floating">
                                         <select class="form-select @error('especialidades') is-invalid @enderror" id="especialidades" name="especialidades[]" autofocus aria-label="Floating label select example" multiple="true">
                                             @foreach($especialidades as $dep)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Holder;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class HolderController extends Controller
 {
@@ -18,15 +19,15 @@ class HolderController extends Controller
     }
 
     public function save(Request $request){
-
+    
         $request->validate([
-            'codigo_holder'                   => 'required',
-            'tipo_holder'                     => 'required',
-            'estado_holder'                   => 'required',
+            'codigo_holder'                   => ['required', Rule::unique('holders', 'codigo_holder')],
+            'tipo_holder'                     => ['required'],
+            'estado_holder'                   => ['required'],
         ]);
         $holder = new Holder();
 
-        $holder->codigo_holder  = $request->codigo_holder;
+        $holder->codigo_holder  = mb_strtoupper($request->codigo_holder);
         $holder->tipo_holder    = mb_strtoupper($request->tipo_holder);
         $holder->estado_holder  = mb_strtoupper($request->estado_holder);
         
@@ -50,12 +51,12 @@ class HolderController extends Controller
 
     public function update(Request $request, Holder $holder){
         $request->validate([
-            'codigo_holder'                   => 'required',
-            'tipo_holder'                     => 'required',
-            'estado_holder'                   => 'required',
+            'codigo_holder'                   => ['required', Rule::unique('holders', 'codigo_holder')->ignore($holder->id_holder, 'id_holder')],
+            'tipo_holder'                     => ['required'],
+            'estado_holder'                   => ['required'],
             
         ]);
-        $holder->codigo_holder      = $request->codigo_holder;
+        $holder->codigo_holder      = mb_strtoupper($request->codigo_holder);
         $holder->tipo_holder        = mb_strtoupper($request->tipo_holder);
         $holder->estado_holder      = mb_strtoupper($request->estado_holder);
 
@@ -64,6 +65,7 @@ class HolderController extends Controller
     }
 
     public function destroy(Holder $holder){   
+        
         $holder->delete();
         return redirect()->route('dosimetros.search')->with('eliminar', 'ok');
     }

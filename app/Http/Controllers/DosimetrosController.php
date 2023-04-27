@@ -6,6 +6,7 @@ use App\Models\Dosimetro;
 use App\Models\Holder;
 use App\Models\Trabajadordosimetro;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class DosimetrosController extends Controller
 {
@@ -20,11 +21,11 @@ class DosimetrosController extends Controller
     public function save(Request $request){
         
         $request->validate([
-            'tipo_dosimetro'                => 'required',
-            'tecnologia_dosimetro'          => 'required',              
-            'codigo_dosimetro'              => 'required',  
-            'fecha_ingre_serv_dosimetro'    => 'required',
-            'estado_dosimetro'              => 'required',
+            'tipo_dosimetro'                => ['required'],
+            'tecnologia_dosimetro'          => ['required'],              
+            'codigo_dosimetro'              => ['required', Rule::unique('dosimetros', 'codigo_dosimeter')],  
+            'fecha_ingre_serv_dosimetro'    => ['required'],
+            'estado_dosimetro'              => ['required'],
         ]);
         
         $dosimetro = new Dosimetro();
@@ -60,11 +61,11 @@ class DosimetrosController extends Controller
 
     public function update(Request $request, Dosimetro $dosimetro){
         $request->validate([
-            'tipo_dosimetro'                => 'required',
-            'tecnologia_dosimetro'          => 'required',              
-            'codigo_dosimetro'              => 'required',  
-            'fecha_ingre_serv_dosimetro'    => 'required',
-             
+            'tipo_dosimetro'                => ['required'],
+            'tecnologia_dosimetro'          => ['required'],              
+            'codigo_dosimetro'              => ['required', Rule::unique('dosimetros', 'codigo_dosimeter')->ignore($dosimetro->id_dosimetro, 'id_dosimetro')],  
+            'fecha_ingre_serv_dosimetro'    => ['required'],
+            'estado_dosimetro'              => ['required']
             
         ]);
         $dosimetro->tipo_dosimetro          =  mb_strtoupper($request->tipo_dosimetro);
@@ -78,6 +79,6 @@ class DosimetrosController extends Controller
     }
     public function destroy(Dosimetro $dosimetro){
         $dosimetro->delete();
-        return redirect()->route('dosimetros.search')->with('eliminar', 'ok');
+        return redirect()->route('dosimetros.search')->with('eliminar', 'ok'); 
     }
 }

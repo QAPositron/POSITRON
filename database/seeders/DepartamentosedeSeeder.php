@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Departamento;
+use App\Models\Departamentosede;
 use Illuminate\Database\Seeder;
 
-class DepartamentoSeeder extends Seeder
+class DepartamentosedeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,11 @@ class DepartamentoSeeder extends Seeder
      */
     public function run()
     {
-        //
-        Departamento::insert([
-            
-            'nombre_departamento' => 'ODONTOLOGIA',
+        Departamentosede::insert([
+            'sede_id' => '1',
+            'departamento_id' => '1',
             
         ]);
+        
     }
 }

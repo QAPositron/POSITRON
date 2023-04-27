@@ -728,7 +728,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                                 </a>
                                             </div>
                                             <div class="col">
-                                                <form id="form_eliminar_contacto" name="form_eliminar_contacto" action="{{-- {{route('contactos.destroy', $cont)}} --}}" method="POST" class="mb-1">
+                                                <form id="form_eliminar_contacto" name="form_eliminar_contacto" action="{{route('personas.destroy', $cont)}}" method="POST" class="mb-1">
                                                     @csrf  
                                                     @method('delete')
                                                     <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">

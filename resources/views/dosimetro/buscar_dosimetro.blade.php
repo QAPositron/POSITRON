@@ -61,7 +61,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="col">
-                                                        <form id="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetros.destroy', $dosi)}}" method="POST">
+                                                        <form id="form_eliminar_dosimetro" class="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetros.destroy', $dosi)}}" method="POST">
                                                             @csrf  
                                                             @method('delete')
                                                             <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
@@ -78,10 +78,7 @@
                                         </tr>
                                     @endforeach
                                 </table>
-                                {{-- <BR></BR>
-                                <div class="d-flex justify-content-center">
-                                    {{$dosimetro->links()}}
-                                </div> --}}
+                                
                             </div>
                             
                         </div>
@@ -99,50 +96,54 @@
                                 <div class="col"></div>
                             </div>
                             <h4 class="card-title text-center">TODOS LOS HOLDERS</h4>
-                            <div class="m-5">
-                                <table class="table table-responsive table-hover table-bordered p-4 holders">
-                                    <thead class="table-active text-center">
-                                        <th class="align-middle" scope='col'>CODIGO</th>
-                                        <th class="align-middle" scope='col'>TIPO</th>
-                                        <th class="align-middle" scope='col' style='width: 18.60%'>ESTADO</th>
-                                        <th class="align-middle" scope='col' style='width: 15.90%'>ACCIONES</th>
-                                    </thead>
-                                    @foreach($holder as $hol)
-                                        <tr>
-                                            <td class="align-middle">{{$hol->codigo_holder}}</td>
-                                            <td class="text-center align-middle">{{$hol->tipo_holder}}</td>
-                                            <td class="text-center align-middle">{{$hol->estado_holder}}</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <a href="{{route('holders.edit', $hol->id_holder)}}" class="btn colorQA">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
-                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col">
-                                                        <form id="form_eliminar_holder" name="form_eliminar_holder" action="{{route('holders.destroy', $hol)}}" method="POST">
-                                                            @csrf  
-                                                            @method('delete')
-                                                            <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </table>
-                                {{-- <BR></BR>
-                                <div class="d-flex justify-content-center">
-                                    {{$holder->links()}}
-                                </div> --}}
+                            <div class="row">
+
+                                <div class="col-md"></div>
+                                <div class="col-md-8 text-center">
+                                    <div class="m-5">
+                                        <table class="table table-responsive table-hover table-bordered p-4 holders">
+                                            <thead class="table-active text-center">
+                                                <th class="align-middle" scope='col'>CODIGO</th>
+                                                <th class="align-middle" scope='col'>TIPO</th>
+                                                <th class="align-middle" scope='col' >ESTADO</th>
+                                                <th class="align-middle" scope='col' >ACCIONES</th>
+                                            </thead>
+                                            @foreach($holder as $hol)
+                                                <tr>
+                                                    <td class="align-middle">{{$hol->codigo_holder}}</td>
+                                                    <td class="text-center align-middle">{{$hol->tipo_holder}}</td>
+                                                    <td class="text-center align-middle">{{$hol->estado_holder}}</td>
+                                                    <td class="text-center align-middle">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="{{route('holders.edit', $hol->id_holder)}}" class="btn colorQA">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col">
+                                                                <form id="form_eliminar_holder" name="form_eliminar_holder" action="{{route('holders.destroy', $hol)}}" method="POST">
+                                                                    @csrf  
+                                                                    @method('delete')
+                                                                    <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                                        </svg>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </table>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md"></div>
                             </div>
                         </div>
                     </div>
@@ -203,7 +204,7 @@
             $(this).tab('show')
         })
 
-        $('#form_eliminar_dosimetro').submit(function(e){
+        $('.form_eliminar_dosimetro').submit(function(e){
             e.preventDefault();
             Swal.fire({
                 text: "SEGURO QUE DESEA ELIMINAR ESTE DOSÍMETRO??",

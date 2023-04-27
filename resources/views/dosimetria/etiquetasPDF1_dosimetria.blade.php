@@ -15,6 +15,7 @@
     .contenedor{
         width: 300px;
         height: 740px;
+        padding-top:20px;
         /* border: 2px solid blue; */
        
         margin: 0 auto;
@@ -50,21 +51,21 @@
     .empresa_cont_torax{
         position: relative; 
         bottom: 82px;
-        left: 35px;
+        left: 28px;
         font-size: 8px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: yellow; */
-        width: 135px;
+        width: 142px;
         text-align:right;
     }
     .sede_cont_torax{
         position: relative; 
         bottom: 83px;
-        left: 35px;
+        left: 28px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
-        /* background: blue; */
-        width: 135px;
+        /*background: blue; */
+        width: 142px;
         text-align:right; 
     }.codigo_cont_torax{
         position: relative; 
@@ -174,28 +175,28 @@
     .empresa_torax{
         position: relative; 
         bottom: 84px;
-        left: 35px;
+        left: 28px;
         font-size: 8px;
         font-family: Arial, Helvetica, sans-serif;
-        /* background: yellow; */
-        width: 135px;
+        /*background: yellow;*/
+        width: 142px;
         text-align:right; 
     }
     .sede_torax{
         position: relative; 
         bottom: 85px;
-        left: 35px;
-        font-size: 8px;
+        left: 28px;
+        font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
-        /* background: blue; */
-        width: 135px;
+        /*background: blue;*/
+        width: 142px;
         text-align:right; 
     }
     .codigo_torax{
         position: relative; 
         bottom: 85px;
         left: 35px;
-        font-size: 8px;
+        font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: yellow; */
         width: 135px;
@@ -279,24 +280,28 @@
             @if($dosicont->ubicacion == 'TORAX')
                 {{-- //////// DOSIMETRO CONTROL TORAX ////////// --}}
                 <div class="imgtorax" style="page-break-inside: avoid;">
-                    @if($dosicont->mes_asignacion == 1 || $dosicont->mes_asignacion == 7)
+                    @php
+                        $fecha = strtotime($dosicont->primer_dia_uso);
+                        $mes = date("n", $fecha);
+                    @endphp
+                    @if($mes == 1 || $mes == 7)
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 2 || $dosicont->mes_asignacion == 8)
+                    @elseif($mes == 2 || $mes == 8)
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM2.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 3 || $dosicont->mes_asignacion == 9)
+                    @elseif($mes == 3 || $mes == 9)
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM3.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 4 || $dosicont->mes_asignacion == 10)
+                    @elseif($mes == 4 || $mes == 10)
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM4.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 5 || $dosicont->mes_asignacion == 11)
+                    @elseif($mes == 5 || $mes == 11)
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM5.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 6 || $dosicont->mes_asignacion == 12)
+                    @elseif($mes == 6 || $mes == 12)
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM6.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL TORAX ////////// --}}
                     @foreach($contratodosi as $contdosi)
                         <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @endif <b>NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b></div>
-                        <div class="empresa_cont_torax" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
-                        <div class="sede_cont_torax" >SEDE: {{substr($contdosi->nombre_sede, 0, 15)}} - ESP {{substr($contdosi->nombre_departamento, 0, 5)}}</div>
+                        <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 26, "UTF-8")}}</div>
+                        <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0,9,"UTF-8")}}</div>
                     @endforeach
                     <div class="codigo_cont_torax" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
                     @php
@@ -314,22 +319,26 @@
             @elseif($dosicont->ubicacion == 'CRISTALINO')
                 {{-- //////// DOSIMETRO CONTROL CRISTALINO ////////// --}}
                 <div class="imgcristalino" style="page-break-inside: avoid;">
-                    @if($dosicont->mes_asignacion == 1 || $dosicont->mes_asignacion == 7)
+                    @php
+                        $fecha = strtotime($dosicont->primer_dia_uso);
+                        $mes = date("n", $fecha);
+                    @endphp
+                    @if($mes == 1 || $mes == 7)
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 2 || $dosicont->mes_asignacion == 8)
+                    @elseif($mes == 2 || $mes == 8)
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 3 || $dosicont->mes_asignacion == 9)
+                    @elseif($mes == 3 || $mes == 9)
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 4 || $dosicont->mes_asignacion == 10)
+                    @elseif($mes == 4 || $mes == 10)
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM4.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 5 || $dosicont->mes_asignacion == 11)
+                    @elseif($mes == 5 || $mes == 11)
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM5.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 6 || $dosicont->mes_asignacion == 12)
+                    @elseif($mes == 6 || $mes == 12)
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM6.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL CRISTALINO ////////// --}}
                     @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_cristalino" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
+                        <div class="empresa_cont_cristalino" >{{mb_substr($contdosi->nombre_empresa, 0, 26, "UTF-8")}}</div>
                         <div class="num_iden_cont_cristalino">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
                     @endforeach
                         <div class="codigo_cont_cristalino" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
@@ -348,22 +357,26 @@
             @elseif($dosicont->ubicacion == 'ANILLO')
                 {{-- //////// DOSIMETRO CONTROL ANILLO ////////// --}}
                 <div class="imganillo" style="page-break-inside: avoid;">
-                    @if($dosicont->mes_asignacion == 1 || $dosicont->mes_asignacion == 7)
+                    @php
+                        $fecha = strtotime($dosicont->primer_dia_uso);
+                        $mes = date("n", $fecha);
+                    @endphp
+                    @if($mes == 1 || $mes == 7)
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM1.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 2 || $dosicont->mes_asignacion == 8)
+                    @elseif($mes == 2 || $mes == 8)
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM2.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 3 || $dosicont->mes_asignacion == 9)
+                    @elseif($mes == 3 || $mes == 9)
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM3.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 4 || $dosicont->mes_asignacion == 10)
+                    @elseif($mes == 4 || $mes == 10)
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM4.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 5 || $dosicont->mes_asignacion == 11)
+                    @elseif($mes == 5 || $mes == 11)
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM5.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($dosicont->mes_asignacion == 6 || $dosicont->mes_asignacion == 12)
+                    @elseif($mes == 6 || $mes == 12)
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM6.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
                     @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_anillo" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
+                        <div class="empresa_cont_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 26, "UTF-8")}}</div>
                         <div class="num_iden_cont_anillo">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
                     @endforeach
                     <div class="codigo_cont_anillo" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
@@ -385,25 +398,29 @@
             @if($trab->ubicacion == 'TORAX')
                 {{-- //////// DOSIMETRO TORAX ////////// --}}
                 <div class="imgtorax" style="page-break-inside: avoid;">
-                    @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
+                    @php
+                        $fecha = strtotime($trab->primer_dia_uso);
+                        $mes = date("n", $fecha);
+                    @endphp
+                    @if($mes== 1 || $mes == 7)
                         <img src="{{asset('imagenes/IMG_TORAX/TORAXM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 2 || $trab->mes_asignacion == 8)
+                    @elseif($mes == 2 || $mes == 8)
                         <img src="{{asset('imagenes/IMG_TORAX/TORAXM2.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 3 || $trab->mes_asignacion == 9)
+                    @elseif($mes == 3 || $mes == 9)
                         <img src="{{asset('imagenes/IMG_TORAX/TORAXM3.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 4 || $trab->mes_asignacion == 10)
+                    @elseif($mes == 4 || $mes == 10)
                         <img src="{{asset('imagenes/IMG_TORAX/TORAXM4.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 5 || $trab->mes_asignacion == 11)
+                    @elseif($mes == 5 || $mes == 11)
                         <img src="{{asset('imagenes/IMG_TORAX/TORAXM5.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 6 || $trab->mes_asignacion == 12)
+                    @elseif($mes == 6 || $mes == 12)
                         <img src="{{asset('imagenes/IMG_TORAX/TORAXM6.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @endif
 
                     {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
-                    <div class="nombre_torax" > <b>{{$trab->persona->primer_apellido_persona}} {{substr($trab->persona->segundo_apellido_persona, 0,1)}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</b> </div>
+                    <div class="nombre_torax" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1, "UTF-8")}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</b> </div>
                     @foreach($contratodosi as $contdosi)
-                        <div class="empresa_torax" >{{substr($contdosi->nombre_empresa, 0,26)}}</div>
-                        <div class="sede_torax" >{{substr($contdosi->nombre_sede, 0, 15)}} ESP: {{substr($contdosi->nombre_departamento, 0, 5)}}</div>
+                        <div class="empresa_torax" >{{mb_substr($contdosi->nombre_empresa, 0,26,"UTF-8")}}</div>
+                        <div class="sede_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}</div>
                     @endforeach
                     <div class="codigo_torax" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
                     @php
@@ -421,24 +438,28 @@
             @elseif($trab->ubicacion == 'CRISTALINO')
                 {{-- //////// DOSIMETRO CRISTALINO ////////// --}}
                 <div class="imgcristalino" style="page-break-inside: avoid;">
-                    @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
-                        <img src="{{asset('imagenes/IMG_CRISTALINO/2CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 2 || $trab->mes_asignacion == 8)
+                    @php
+                        $fecha = strtotime($trab->primer_dia_uso);
+                        $mes = date("n", $fecha);
+                    @endphp
+                    @if($mes == 1 || $mes == 7)
+                        <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    @elseif($mes == 2 || $mes == 8)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 3 || $trab->mes_asignacion == 9)
+                    @elseif($mes == 3 || $mes == 9)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 4 || $trab->mes_asignacion == 10)
+                    @elseif($mesn == 4 || $mes == 10)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM4.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 5 || $trab->mes_asignacion == 11)
+                    @elseif($mes == 5 || $mes == 11)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM5.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 6 || $trab->mes_asignacion == 12)
+                    @elseif($mes == 6 || $mes == 12)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM6.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
                     @foreach($contratodosi as $contdosi)
                         <div class="empresa_cristalino" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
                     @endforeach
-                    <div class="nombre_cristalino"> <b>{{$trab->persona->primer_apellido_persona}} {{substr($trab->persona->segundo_apellido_persona, 0,1)}}, {{$trab->persona->primer_nombre_persona}} {{substr($trab->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                    <div class="nombre_cristalino"> <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_cristalino">CC. {{$trab->persona->cedula_persona}}</div>
                     <div class="codigo_cristalino" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
                     @php
@@ -456,24 +477,28 @@
             @elseif($trab->ubicacion == 'ANILLO')
                 {{-- //////// DOSIMETRO ANILLO ////////// --}}
                 <div class="imganillo" style="page-break-inside: avoid;">
-                    @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
-                        <img src="{{asset('imagenes/IMG_ANILLO/2ANILLOM1.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 2 || $trab->mes_asignacion == 8)
+                    @php
+                        $fecha = strtotime($trab->primer_dia_uso);
+                        $mes = date("n", $fecha);
+                    @endphp
+                    @if($mes == 1 || $mes == 7)
+                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM1.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    @elseif($mes == 2 || $mes == 8)
                         <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM2.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 3 || $trab->mes_asignacion == 9)
+                    @elseif($mes == 3 || $mes == 9)
                         <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM3.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 4 || $trab->mes_asignacion == 10)
+                    @elseif($mes == 4 || $mes == 10)
                         <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM4.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 5 || $trab->mes_asignacion == 11)
+                    @elseif($mes == 5 || $mes == 11)
                         <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM5.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($trab->mes_asignacion == 6 || $trab->mes_asignacion == 12)
+                    @elseif($mes == 6 || $mes == 12)
                         <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM6.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO ANILLO ////////// --}}
                     @foreach($contratodosi as $contdosi)
-                        <div class="empresa_anillo" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
+                        <div class="empresa_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
                     @endforeach
-                    <div class="nombre_anillo" > <b>{{$trab->persona->primer_apellido_persona}} {{substr($trab->persona->segundo_apellido_persona, 0,1)}}, {{$trab->persona->primer_nombre_persona}} {{substr($trab->persona->segundo_nombre_persona, 0,1)}}</b> </div>
+                    <div class="nombre_anillo" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_anillo">CC. {{$trab->persona->cedula_persona}}</div>
                     <div class="codigo_anillo" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
                     @php
@@ -493,25 +518,29 @@
         @foreach($areadosiasig as $area)
             {{-- //////// DOSIMETRO TORAX ////////// --}}
             <div class="imgtorax" style="page-break-inside: avoid;">
-                @if($trab->mes_asignacion == 1 || $trab->mes_asignacion == 7)
+                @php
+                    $fecha = strtotime($area->primer_dia_uso);
+                    $mes = date("n", $fecha);
+                @endphp
+                @if($mes == 1 || $mes == 7)
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                @elseif($trab->mes_asignacion == 2 || $trab->mes_asignacion == 8)
+                @elseif($mes == 2 || $mes == 8)
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM2.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                @elseif($trab->mes_asignacion == 3 || $trab->mes_asignacion == 9)
+                @elseif($mes == 3 || $mes == 9)
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM3.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                @elseif($trab->mes_asignacion == 4 || $trab->mes_asignacion == 10)
+                @elseif($mes == 4 || $mes == 10)
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM4.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                @elseif($trab->mes_asignacion == 5 || $trab->mes_asignacion == 11)
+                @elseif($mes == 5 || $mes == 11)
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM5.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                @elseif($trab->mes_asignacion == 6 || $trab->mes_asignacion == 12)
+                @elseif($mes == 6 || $mes == 12)
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM6.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                 @endif
 
                 @foreach($contratodosi as $contdosi)
                     {{-- <div class="nom_area">{{$area->areadepartamentosede->nombre_area}}</div> --}}
                     <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @endif <b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b></div>
-                    <div class="empresa_cont_torax" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
-                    <div class="sede_cont_torax" >SEDE: {{substr($contdosi->nombre_sede, 0, 15)}} - ESP {{substr($contdosi->nombre_departamento, 0, 5)}}</div>
+                    <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
+                    <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}</div>
                 @endforeach
                 <div class="codigo_cont_torax" >No. {{$area->dosimetro->codigo_dosimeter}}</div>
                 @php

@@ -5,26 +5,24 @@
     <div class="col"></div>
     <div class="col-4">
         <div class="card text-dark bg-light">
-            <h2 class="text-center mt-3">CREAR DOSIMETRO</h2>
+            <h2 class="text-center mt-3">CREAR DOSÍMETRO</h2>
 
             <form class="m-4" id="form_create_dosimetro" name="form_create_dosimetro" action="{{route('dosimetros.save')}}" method="POST">
 
                 @csrf
 
                 <div class="row g-2">
-
+                    <label class="text-secondary">' * ' campo obligatorio</label>
                     <div class="col-md">
                         <div class="form-floating" >
-                            <select class="form-select" name="tipo_dosimetro" id="tipo_dosimetro" value="{{old('tipo_dosimetro')}}" autofocus style="text-transform:uppercase">
+                            <select class="form-select @error('tipo_dosimetro') is-invalid @enderror" name="tipo_dosimetro" id="tipo_dosimetro" value="{{old('tipo_dosimetro')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
                                 <option value="GENERAL">GENERAL</option>
                                 <option value="AMBIENTAL">AMBIENTAL</option>
                                 <option value="EZCLIP">EZCLIP</option>
                             </select>
-                            <label for="floatingInputGrid">TIPO:</label>
-                            @error('tipo_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <label for="floatingInputGrid">* TIPO:</label>
+                            @error('tipo_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -32,16 +30,14 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" name="tecnologia_dosimetro" id="tecnologia_dosimetro" value="{{old('tecnologia_dosimetro')}}" autofocus  style="text-transform:uppercase">
+                            <select class="form-select  @error('tecnologia_dosimetro') is-invalid @enderror" name="tecnologia_dosimetro" id="tecnologia_dosimetro" value="{{old('tecnologia_dosimetro')}}"  style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="OSL">OSL</option>
-                                <option value="TLD">TLD</option>
-                                <option value="ELECTRÓNICO">ELECTRÓNICO</option>
+                                <option value="OSL" @if (old('tecnologia_dosimetro') == "OSL") {{ 'selected' }} @endif selected>OSL</option>
+                                <option value="TLD" @if (old('tecnologia_dosimetro') == "TDL") {{ 'selected' }} @endif>TLD</option>
+                                <option value="ELECTRÓNICO" @if (old('tecnologia_dosimetro') == "ELECTRÓNICO") {{ 'selected' }} @endif>ELECTRÓNICO</option>
                             </select>
-                            <label for="floatingInputGrid">TECNOLOGÍA:</label>
-                            @error('tecnologia_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <label for="floatingInputGrid">* TECNOLOGÍA:</label>
+                            @error('tecnologia_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -49,11 +45,9 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating" >
-                            <input type="numeric" name="codigo_dosimetro" id="codigo_dosimetro" class="form-control" value="{{old('codigo_dosimetro')}}" autofocus >
-                            <label for="floatingInputGrid">CODIGO:</label>
-                            @error('codigo_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <input type="numeric" name="codigo_dosimetro" id="codigo_dosimetro" class="form-control @error('codigo_dosimetro') is-invalid @enderror" value="{{old('codigo_dosimetro')}}" autofocus >
+                            <label for="floatingInputGrid">* CODIGO:</label>
+                            @error('codigo_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -61,11 +55,9 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" name="fecha_ingre_serv_dosimetro" id="fecha_ingre_serv_dosimetro" class="form-control" value="{{old('fecha_ingre_serv_dosimetro')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">FECHA INGRESO AL SERVICIO:</label>
-                            @error('fecha_ingre_serv_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <input type="date" name="fecha_ingre_serv_dosimetro" id="fecha_ingre_serv_dosimetro" class="form-control @error('fecha_ingre_serv_dosimetro') is-invalid @enderror" value="{{old('fecha_ingre_serv_dosimetro')}}" style="text-transform:uppercase;">
+                            <label for="floatingInputGrid">* FECHA INGRESO AL SERVICIO:</label>
+                            @error('fecha_ingre_serv_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -73,17 +65,16 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" name="estado_dosimetro" id="estado_dosimetro" value="{{old('estado_dosimetro')}}" autofocus  style="text-transform:uppercase">
+                            <select class="form-select @error('estado_dosimetro') is-invalid @enderror" name="estado_dosimetro" id="estado_dosimetro" value="{{old('estado_dosimetro')}}"  style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="STOCK">STOCK</option>
-                                <option value="PERDIDO">PERDIDO</option>
-                                <option value="DAÑADO">DAÑADO</option>
-                                <option value="EN USO">EN USO</option>
+                                <option value="STOCK" @if (old('estado_dosimetro') == "STOCK") {{ 'selected' }} @endif selected>STOCK</option>
+                                <option value="PERDIDO" @if (old('estado_dosimetro') == "PERDIDO") {{ 'selected' }} @endif>PERDIDO</option>
+                                <option value="DAÑADO" @if (old('estado_dosimetro') == "DAÑADO") {{ 'selected' }} @endif>DAÑADO</option>
+                                <option value="EN USO" @if (old('estado_dosimetro') == "EN USO") {{ 'selected' }} @endif>EN USO</option>
                             </select>
-                            <label for="floatingInputGrid">ESTADO DOSÍMETRO:</label>
-                            @error('estado_dosimetro')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <label for="floatingInputGrid">* ESTADO DOSÍMETRO:</label>
+                            @error('estado_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+
                         </div>
                     </div>
                 </div>
@@ -114,6 +105,10 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        
+        var fecha = new Date();
+        document.getElementById("fecha_ingre_serv_dosimetro").value = fecha.toJSON().slice(0,10);
+
         $('#form_create_dosimetro').submit(function(e){
             e.preventDefault();
             Swal.fire({

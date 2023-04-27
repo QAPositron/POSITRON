@@ -7,7 +7,7 @@
         <div class="card text-dark bg-light ">
             <br>
             @if($id == 1)
-                <h3 class="text-center mt-3">CREAR TRABAJADOR DOSIMETRIA PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
+                <h3 class="text-center mt-3">CREAR TRABAJADOR DE DOSIMETRÍA PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
             @elseif($id == 2)
                 <h3 class="text-center mt-3">CREAR ESTUDIANTE DE A. VIRTUAL PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
             @elseif($id== 3)
@@ -17,6 +17,7 @@
             <form class="m-4" id="form_create_contacto" name="form_create_contacto" action="{{route('personasEmpresa.save')}}" method="POST">
                 @csrf
                 <div class="row g-2">
+                    <label class="text-secondary">' * ' campo obligatorio</label>
                     <div class="col-md-5">
                         <label for="">PERFIL LABORAL:</label>
                         <div class="form-floating">
@@ -37,7 +38,7 @@
                         </button>
                     </div>
                     <div class="col-md-6">
-                        <label for="">ROL:</label>
+                        <label for="">*ROL:</label>
                         <div class="form-floating">
                             <select class="form-select @error('rol_personas') is-invalid @enderror" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
                                 @foreach($roles as $rol)
@@ -96,7 +97,7 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="text" class="form-control @error('segundo_apellido_persona') is-invalid @enderror"  name="segundo_apellido_persona" id="segundo_apellido_persona" value="{{old('segundo_apellido_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">* SEGUNDO APELLIDO:</label>
+                            <label for="floatingInputGrid">SEGUNDO APELLIDO:</label>
                             @error('segundo_apellido_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -144,7 +145,7 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="email" class="form-control @error('correo_persona') is-invalid @enderror" name="correo_persona" id="correo_persona" value="{{old('correo_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="">* CORREO:</label>
+                            <label for="">CORREO:</label>
                             @error('correo_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -154,7 +155,7 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="number" class="form-control @error('telefono_persona') is-invalid @enderror"  name="telefono_persona" id="telefono_persona" value="{{old('telefono_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">* TELÉFONO:</label>
+                            <label for="floatingInputGrid">TELÉFONO:</label>
                             @error('telefono_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -169,13 +170,13 @@
                         <div class="form-floating">
                             <input type="text" class="form-control" name="empresa_persona" id="empresa_persona" value="{{$empresa->nombre_empresa}}" readonly>
                             <input type="number" class="form-control @error('id_empresa') is-invalid @enderror" name="id_empresa" id="id_empresa" value="{{$empresa->id_empresa}}"  hidden>
-                            <label for="floatingSelectGrid">EMPRESA:</label>
+                            <label for="floatingSelectGrid">* EMPRESA:</label>
                             @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md">
                         
-                        <label for="floatingSelectGrid">SEDE:</label>
+                        <label for="floatingSelectGrid">* SEDE:</label>
                         
                         <div class="form-floating" id="sede_empresa" name="sede_empresa">
                             <select class="form-select @error('id_sedes') is-invalid @enderror" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">

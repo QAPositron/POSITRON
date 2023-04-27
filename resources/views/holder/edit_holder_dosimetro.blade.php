@@ -15,8 +15,10 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating ">
-                            <input type="number" class="form-control"  name="codigo_holder" id="codigo_holder" value="{{old('codigo_holder', $holder->codigo_holder)}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid"> CODIGO HOLDER:</label>
+                            <input type="text" class="form-control @error('codigo_holder') is-invalid @enderror"  name="codigo_holder" id="codigo_holder" value="{{old('codigo_holder', $holder->codigo_holder)}}" autofocus style="text-transform:uppercase;">
+                            <label for="floatingInputGrid">* CODIGO HOLDER:</label>
+                            @error('codigo_holder') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+
                         </div>
                     </div>
                 </div>
@@ -24,7 +26,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating ">
-                            <select class="form-select" name="tipo_holder" id="tipo_holder" autofocus style="text-transform:uppercase">
+                            <select class="form-select @error('tipo_holder') is-invalid @enderror" name="tipo_holder" id="tipo_holder" autofocus style="text-transform:uppercase">
                                 <option value="{{old('tipo_holder', $holder->tipo_holder)}}">--{{old('tipo_holder', $holder->tipo_holder)}}--</option>
                                 @if($holder->tipo_holder == 'ANILLO')
                                     <option value="EXTREM" @if (old('tipo_holder') == "EXTREM") {{ 'selected' }} @endif>EXTREMIDAD</option>
@@ -37,7 +39,8 @@
                                     <option value="ANILLO"  @if (old('tipo_holder') == "ANILLO") {{ 'selected' }} @endif>ANILLO</option>
                                 @endif
                             </select>
-                            <label for="floatingInputGrid"> TIPO HOLDER:</label>
+                            <label for="floatingInputGrid">* TIPO HOLDER:</label>
+                            @error('tipo_holder') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -45,7 +48,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating ">
-                            <select class="form-select" name="estado_holder" id="estado_holder" value="{{old('estado_holder')}}" autofocus style="text-transform:uppercase">
+                            <select class="form-select @error('estado_holder') is-invalid @enderror" name="estado_holder" id="estado_holder" value="{{old('estado_holder')}}" autofocus style="text-transform:uppercase">
                                 <option value="{{old('estado_holder', $holder->estado_holder)}}">--{{old('estado_holder', $holder->estado_holder)}}--</option>
                                 @if($holder->estado_holder =='STOCK')
                                     <option value="PERDIDO" @if (old('estado_holder') == "PERDIDO") {{ 'selected' }} @endif>PERDIDO</option>
@@ -65,10 +68,9 @@
                                     <option value="DAÑADO" @if (old('estado_holder') == "DAÑADO") {{ 'selected' }} @endif>DAÑADO</option>
                                 @endif
                             </select>
-                            <label for="floatingInputGrid"> ESTADO:</label>
-                            @error('estado_holder')
-                                <small>*{{$message}}</small>
-                            @enderror
+                            <label for="floatingInputGrid">* ESTADO:</label>
+                            @error('estado_holder') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            
                         </div>
                     </div>
                 </div>

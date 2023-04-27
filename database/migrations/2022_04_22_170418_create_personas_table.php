@@ -16,14 +16,14 @@ class CreatePersonasTable extends Migration
         Schema::create('personas', function (Blueprint $table) {
             $table->bigincrements('id_persona')->unique();
             $table->text('primer_nombre_persona');
-            $table->text('segundo_nombre_persona');
+            $table->text('segundo_nombre_persona')->nullable();
             $table->text('primer_apellido_persona');
-            $table->text('segundo_apellido_persona');
+            $table->text('segundo_apellido_persona')->nullable();
             $table->text('genero_persona');
             $table->text('tipo_iden_persona');
             $table->integer('cedula_persona')->unique();
-            $table->string('correo_persona', 50)->unique();
-            $table->string('telefono_persona', 15);
+            $table->string('correo_persona', 50)->nullable();
+            $table->string('telefono_persona', 15)->nullable();
             $table->string('lider_ava', 50)->nullable();
             $table->string('lider_dosimetria', 50)->nullable();
             $table->string('lider_controlescalidad', 50)->nullable();

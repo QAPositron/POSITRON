@@ -58,18 +58,16 @@ class PersonaController extends Controller
     }
     
     public function save(Request $request){
-       /*  return $request; */
+        /* return $request; */
         $request->validate([
             'rol_personas'               => ['required'],
             'primer_nombre_persona'      => ['required'],              
             'primer_apellido_persona'    => ['required'],
-            /* 'segundo_apellido_persona'   => ['required'], */
             'tipoIden_persona'           => ['required'],
             'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],    
             'genero_persona'             => ['required'],
-            'correo_persona'             => ['email', Rule::unique('personas', 'correo_persona')],
-            'telefono_persona'           => ['min:10', 'max:10'],
-            
+            'correo_persona'             => ['nullable', 'email', Rule::unique('personas', 'correo_persona')],
+            'telefono_persona'           => ['nullable', 'min:10', 'max:10'],
             /* 'lider_dosiemtria'           => [Rule::unique('personas', 'lider_dosimetria')->where(fn ($query) => $query->where('personasedes', 'sede_id'))], */
         ]);
         
@@ -115,31 +113,26 @@ class PersonaController extends Controller
                 }
             }
         }
+        $personaContacto = Personasroles::where('persona_id', '=', $persona->id_persona)
+        ->where('rol_id', '=', 2)->get();
+
+        if($persona->lider_dosimetria == 'TRUE' && empty($personaContacto)){
+            $personasRoles = new Personasroles();
+            $personasRoles->persona_id  = $persona->id_persona;
+            $personasRoles->rol_id      = 2;
+            $personasRoles->save();
+        }
         if(!empty($request->rol_personas)){
             for($i=0; $i<count($request->rol_personas); $i++){
-                if($request->lider_dosimetria == 'TRUE' && $request->rol_personas[$i] == 2){
+                if( $request->rol_personas[$i] != 2){
+                    
                     $personasRoles = new Personasroles();
-        
-                    $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = 2;
-            
-                    $personasRoles->save();
-                }elseif($request->lider_dosimetria == 'TRUE'){
-                    $personasRoles = new Personasroles();
-        
-                    $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = 2;
-            
-                    $personasRoles->save();
-                }else{
-                    $personasRoles = new Personasroles();
-        
+    
                     $personasRoles->persona_id  = $persona->id_persona;
                     $personasRoles->rol_id      = $request->rol_personas[$i];
             
                     $personasRoles->save();
                 }
-                
             }
         }
         if(!empty($request->id_sedes)){
@@ -173,19 +166,18 @@ class PersonaController extends Controller
         return view('persona.crear_persona_trabajador_empresa', compact('empresa', 'id', 'perfiles', 'roles', 'sedes'));
     }
     public function savePersonasEmpresa(Request $request){
-        /* return $request; */
+       /*  return $request; */
         $request->validate([
             'rol_personas'               => ['required'],
             'primer_nombre_persona'      => ['required'],
             'primer_apellido_persona'    => ['required'],
-            /* 'segundo_apellido_persona'   => ['required'], */
             'tipoIden_persona'           => ['required'],
             'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],
             'genero_persona'             => ['required'],
-            'correo_persona'             => ['email', Rule::unique('personas', 'correo_persona')],
-            'telefono_persona'           => ['min:10', 'max:10'],
-            
-        ]);
+            'correo_persona'             => ['nullable', 'email', Rule::unique('personas', 'correo_persona')],
+            'telefono_persona'           => ['nullable','min:10', 'max:10'],
+            'id_sedes'                   => ['required']
+        ]); 
 
         $persona = new Persona();
 
@@ -203,6 +195,7 @@ class PersonaController extends Controller
         $persona->lider_controlescalidad    = $request->lider_contcal;
 
         $persona->save();
+
         if(!empty($request->perfil_personas)){
             for($i=0; $i<count($request->perfil_personas); $i++){
                 $personasPerfiles = new Personasperfiles();
@@ -213,35 +206,26 @@ class PersonaController extends Controller
                 $personasPerfiles->save();
             }
         }
-        
+        if($persona->lider_dosimetria == 'TRUE'){
+            $personasRoles = new Personasroles();
+            $personasRoles->persona_id  = $persona->id_persona;
+            $personasRoles->rol_id      = 2;
+            $personasRoles->save();
+        }
         if(!empty($request->rol_personas)){
             for($i=0; $i<count($request->rol_personas); $i++){
-                if($request->lider_dosimetria == 'TRUE' && $request->rol_personas[$i] == 2){
+                if( $request->rol_personas[$i] != 2){
+                    
                     $personasRoles = new Personasroles();
-        
-                    $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = 2;
-            
-                    $personasRoles->save();
-                }elseif($request->lider_dosimetria == 'TRUE'){
-                    $personasRoles = new Personasroles();
-        
-                    $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = 2;
-            
-                    $personasRoles->save();
-                }else{
-                    $personasRoles = new Personasroles();
-        
+    
                     $personasRoles->persona_id  = $persona->id_persona;
                     $personasRoles->rol_id      = $request->rol_personas[$i];
             
                     $personasRoles->save();
                 }
-                
             }
         }
-
+        
         if(!empty($request->id_sedes)){
             for($i=0; $i<count($request->id_sedes); $i++){
                 $personaSedes = new Personasedes();
@@ -274,17 +258,16 @@ class PersonaController extends Controller
     }
 
     public function update(Request $request, Persona $persona){
-        /*return $request;*/
+        
         $request->validate([
-            'rol_personas'               => ['required'],
+            /* 'rol_personas'               => ['required'], */
             'primer_nombre_persona'      => ['required'],             
             'primer_apellido_persona'    => ['required'],
-            /* 'segundo_apellido_persona'   => ['required'], */
             'tipoIden_persona'           => ['required'],
             'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')->ignore($persona->id_persona, 'id_persona')],    
             'genero_persona'             => ['required'],
-            'correo_persona'             => ['email', Rule::unique('personas', 'correo_persona')->ignore($persona->id_persona, 'id_persona')],
-            'telefono_persona'           => ['min:10', 'max:10'],
+            'correo_persona'             => ['nullable', 'email', Rule::unique('personas', 'correo_persona')->ignore($persona->id_persona, 'id_persona')],
+            'telefono_persona'           => ['nullable', 'min:10', 'max:10'],
             
         ]);
         $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);
@@ -297,50 +280,81 @@ class PersonaController extends Controller
         $persona->correo_persona            =  mb_strtoupper($request->correo_persona);
         $persona->telefono_persona          = $request->telefono_persona;
         $persona->lider_ava                 = $request->lider_ava;
-        $persona->lider_dosimetria          = $request->lider_dosimetria;
+        $persona->lider_dosimetria          = empty($request->lider_dosimetria) ? 'NULL' : $request->lider_dosimetria;
         $persona->lider_controlescalidad    = $request->lider_contcal;
 
         $persona->save();
+      
         if(!empty($request->perfil_personas)){
-
             for($i=0; $i<count($request->perfil_personas); $i++){
-                $personasPerfiles = new Personasperfiles();
-                
-                $personasPerfiles->persona_id = $persona->id_persona;
-                $personasPerfiles->perfil_id  = $request->perfil_personas[$i];
-                
-                $personasPerfiles->save();
-            }
-        }
-        if(!empty($request->rol_personas)){
+                $personaPerfil = Personasperfiles::where('persona_id', '=', $persona->id_persona)
+                ->where('perfil_id', '=', $request->perfil_personas[$i])->get();
+                if(count($personaPerfil) == 0){
+                    
 
-            for($i=0; $i<count($request->rol_personas); $i++){
-                $personasRoles = new Personasroles();
-    
-                $personasRoles->persona_id  = $persona->id_persona;
-                $personasRoles->rol_id      = $request->rol_personas[$i];
-    
-                $personasRoles->save();
+                    if($request->perfil_personas[$i] == 1){
+                        $personasPerfiles = new Personasperfiles();
+                        $personasPerfiles->persona_id = $persona->id_persona;
+                        $personasPerfiles->perfil_id  = $request->perfil_personas[$i];
+                        $personasPerfiles->save();
+                        $personaContacto = Personasroles::where('persona_id', '=', $persona->id_persona)
+                        ->where('rol_id', '=', 2)->get();
+                        if(count($personaContacto)== 0){
+                            $personasRoles = new Personasroles();
+                            $personasRoles->persona_id  = $persona->id_persona;
+                            $personasRoles->rol_id      = 2;
+                            $personasRoles->save();
+                        }
+                    }else{
+                        $personasPerfiles = new Personasperfiles();
+                        $personasPerfiles->persona_id = $persona->id_persona;
+                        $personasPerfiles->perfil_id  = $request->perfil_personas[$i];
+                        $personasPerfiles->save();
+                    }
+                }
             }
         }
-        if(!empty($request->lider_dosimetria) && $request->lider_dosimetria == 'TRUE'){
+        $personaContacto = Personasroles::where('persona_id', '=', $persona->id_persona)
+        ->where('rol_id', '=', 2)->get();
+
+        if($persona->lider_dosimetria == 'TRUE' && empty($personaContacto)){
+            $personasRoles = new Personasroles();
+            $personasRoles->persona_id  = $persona->id_persona;
+            $personasRoles->rol_id      = 2;
+            $personasRoles->save();
+        }
+        
+        if(!empty($request->rol_personas)){
+            for($i=0; $i<count($request->rol_personas); $i++){
+                $personaRoles = Personasroles::where('persona_id', '=', $persona->id_persona)
+                ->where('rol_id', '=', $request->rol_personas[$i])->get();
+                if( $request->rol_personas[$i] != 2 && count($personaRoles) == 0){
+                    $personasRoles = new Personasroles();
+                    $personasRoles->persona_id  = $persona->id_persona;
+                    $personasRoles->rol_id      = $request->rol_personas[$i];
+                    $personasRoles->save();
+                }
+            }
+        }
+        /* if(!empty($request->lider_dosimetria) && $request->lider_dosimetria == 'TRUE'){
             $personasRoles = new Personasroles();
     
             $personasRoles->persona_id  = $persona->id_persona;
             $personasRoles->rol_id      = 2;
     
             $personasRoles->save();
-        }
+        } */
         
         if(!empty($request->id_sedes)){
-
             for($i=0; $i<count($request->id_sedes); $i++){
-                $personaSedes = new Personasedes();
-    
-                $personaSedes->persona_id   = $persona->id_persona;
-                $personaSedes->sede_id      = $request->id_sedes[$i];
-    
-                $personaSedes->save();
+                $personaSedes = Personasedes::where('persona_id', '=', $persona->id_persona)
+                ->where('sede_id', '=', $request->id_sedes[$i])->get();
+                if(count($personaSedes) == 0){
+                    $personaSedes = new Personasedes();
+                    $personaSedes->persona_id   = $persona->id_persona;
+                    $personaSedes->sede_id      = $request->id_sedes[$i];
+                    $personaSedes->save();
+                }
             }
         }
 

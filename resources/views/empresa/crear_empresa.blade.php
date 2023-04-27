@@ -18,6 +18,7 @@
                     @csrf
 
                     <div class="row g-2">
+                        <label class="text-secondary">' * ' campo obligatorio</label>
                         <div class="col-md-6">
                             <div class="form-floating">
                                 <input type="text" class="form-control @error('nombre_empresa') is-invalid @enderror" name="nombre_empresa" id="nombre_empresa" value="{{old('nombre_empresa')}}" autofocus style="text-transform:uppercase">
@@ -224,7 +225,7 @@
                     <br>
                     <div class="row g-2">
                         <div class="col-10">
-                            <label for="">ESPECIALIDADES:</label>
+                            <label for="">*ESPECIALIDADES:</label>
                             <div class="form-floating">
                                 <select class="form-select @error('especialidades') is-invalid @enderror" id="especialidades" name="especialidades[]" autofocus aria-label="Floating label select example" multiple="true" disabled>
                                     @foreach($especialidades as $dep)

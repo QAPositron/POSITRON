@@ -10,6 +10,7 @@
             <form class="m-4" id="form_create_contacto" name="form_create_contacto" action="{{route('personas.save')}}" method="POST">
                 @csrf
                 <div class="row g-2">
+                    <label class="text-secondary">' * ' campo obligatorio</label>
                     <div class="col-md-5">
                         <label for="">PERFIL LABORAL:</label>
                         <div class="form-floating">
@@ -30,7 +31,7 @@
                         </button>
                     </div>
                     <div class="col-md-6">
-                        <label for="">ROL:</label>
+                        <label for="">* ROL:</label>
                         <div class="form-floating">
                             <select class="form-select @error('rol_personas') is-invalid @enderror" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
                                 @foreach($roles as $rol)
@@ -132,7 +133,7 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="email" class="form-control @error('correo_persona') is-invalid @enderror" name="correo_persona" id="correo_persona" value="{{old('correo_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="">* CORREO:</label>
+                            <label for="">CORREO:</label>
                             @error('correo_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -142,7 +143,7 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="number" class="form-control @error('telefono_persona') is-invalid @enderror"  name="telefono_persona" id="telefono_persona" value="{{old('telefono_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">* TELÉFONO:</label>
+                            <label for="floatingInputGrid">TELÉFONO:</label>
                             @error('telefono_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
