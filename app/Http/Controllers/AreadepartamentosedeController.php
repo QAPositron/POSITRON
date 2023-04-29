@@ -15,8 +15,8 @@ class AreadepartamentosedeController extends Controller
     public function save(Request $request){
         /* return $request; */
         $request->validate([
-            'nombre_area'       =>'required',
-            'descripcion_area'  =>'required',
+            'nombre_area'       =>'required'
+            
         ]);
 
         $areadepto = new Areadepartamentosede();

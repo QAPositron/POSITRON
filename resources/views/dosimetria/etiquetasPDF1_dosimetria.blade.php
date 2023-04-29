@@ -14,10 +14,10 @@
     }
     .contenedor{
         width: 300px;
-        height: 740px;
+        /* height: 740px; */
         padding-top:20px;
         /* border: 2px solid blue; */
-       
+       /* background-color:yellow; */
         margin: 0 auto;
        
         justify-content: center;

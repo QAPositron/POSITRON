@@ -416,121 +416,57 @@ class DosimetriaController extends Controller
         $dosisededeptocontra = Contratodosimetriasededepto::find($id);
         
         $mescontdosisededepto = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)->latest()->first();
-        /* $mesesdosisedeptocontra = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)->get(); */
-        /* $dosisededepacontra = Contratodosimetriasededepto::join('departamentosedes', 'departamentosede_id', '=', 'id_departamentosede')
-        ->where('contratodosimetriasede_id', '=', $id)
-        ->get(); */
+        
         $trabjasigcontra = Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->get();
         $areasigcontra = Dosiareacontdosisede::where('contdosisededepto_id', '=', $id)
         ->get();
-        $mes1Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 1)
+        $mesTotalTrabjasignados[0] = 'nada';
+        for($i= 1; $i<=12; $i++){
+            $mes='mes'.$i.'Assign';
+            $$mes=Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $i)
             ->select("*")
             ->count();
-        $mes2Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 2)
-            ->select("*")
-            ->count();
-        $mes3Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 3)
-            ->select("*")
-            ->count();
-        $mes4Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 4)
-            ->select("*")
-            ->count();
-        $mes5Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 5)
-            ->select("*")
-            ->count();
-        $mes6Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 6)
-            ->select("*")
-            ->count();
-        $mes7Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 7)
-            ->select("*")
-            ->count();
-        $mes8Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 8)
-            ->select("*")
-            ->count();
-        $mes9Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 9)
-            ->select("*")
-            ->count();
-        $mes10Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 10)
-            ->select("*")
-            ->count();
-        $mes11Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 11)
-            ->select("*")
-            ->count();
-        $mes12Assign = Trabajadordosimetro::where('contdosisededepto_id', $id)
-            ->where('mes_asignacion', 12)
-            ->select("*")
-            ->count(); 
-        $mesTotal = [
-            $mes1Assign, $mes2Assign,
-            $mes3Assign, $mes4Assign,
-            $mes5Assign, $mes6Assign,
-            $mes7Assign, $mes8Assign,
-            $mes9Assign, $mes10Assign,
-            $mes11Assign, $mes12Assign
-        ];
-        $mes1AssignRev = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 1)
-        ->get();
-        $mesAssignRev2 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 2)
-        ->get();
-        $mesAssignRev3 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 3)
-        ->get();
-        $mesAssignRev4 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 4)
-        ->get();
-        $mesAssignRev5 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 5)
-        ->get();
-        $mesAssignRev6 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 6)
-        ->get();
-        $mesAssignRev7 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 7)
-        ->get();
-        $mesAssignRev8 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 8)
-        ->get();
-        $mesAssignRev9 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 9)
-        ->get();
-        $mesAssignRev10 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 10)
-        ->get();
-        $mesAssignRev11 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 11)
-        ->get();
-        $mesAssignRev12 = Trabajadordosimetro::where('contdosisededepto_id', $id)
-        ->where('mes_asignacion', 12)
-        ->get();
-        $mesesAssig = [
-            $mes1AssignRev, $mesAssignRev2,
-            $mesAssignRev3, $mesAssignRev4,
-            $mesAssignRev5, $mesAssignRev6,
-            $mesAssignRev7, $mesAssignRev8,
-            $mesAssignRev9, $mesAssignRev10,
-            $mesAssignRev11, $mesAssignRev12
-        ];
+            array_push($mesTotalTrabjasignados, $$mes);
+        }
         
-       /*  return $mesTotal; */
+        $mesTotalAreasignados[0] = 'nada';
+        for($i= 1; $i<=12; $i++){
+            $mes='mes'.$i.'Assign';
+            $$mes=Dosiareacontdosisede::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $i)
+            ->select("*")
+            ->count();
+            array_push($mesTotalAreasignados, $$mes);
+            
+        }
+        $mesesAssigTrabj[0] = 'nada';
+        for($i= 1; $i<=12; $i++){
+            $mes='mesAssignRev'.$i;
+            $$mes=Trabajadordosimetro::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $i)
+            ->get();
+
+            array_push($mesesAssigTrabj, $$mes);
+            
+        }
+        $mesesAssigArea[0] = 'nada';
+        for($i= 1; $i<=12; $i++){
+            $mes='mesAssignRev'.$i;
+            $$mes=Dosiareacontdosisede::where('contdosisededepto_id', $id)
+            ->where('mes_asignacion', $i)
+            ->get();
+
+            array_push($mesesAssigArea, $$mes);
+            
+        }
+        
         $periodo = $dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->periodo_recambio;
         if($periodo == 'TRIMS'){
-            return view('dosimetria.detalle_sede_contrato_trimestral_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
+            return view('dosimetria.detalle_sede_contrato_trimestral_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'areasigcontra', 'mesTotalTrabjasignados','mesTotalAreasignados', 'mescontdosisededepto', 'mesesAssigTrabj', 'mesesAssigArea'));
         }else if($periodo == 'MENS'){
-            return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'mesTotal', 'mescontdosisededepto', 'mes1AssignRev', 'mesesAssig'));
+            return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'areasigcontra', 'mesTotalTrabjasignados','mesTotalAreasignados', 'mescontdosisededepto', 'mesesAssigTrabj', 'mesesAssigArea'));
         }
     }
 
@@ -1959,26 +1895,14 @@ class DosimetriaController extends Controller
         $dosiareasignados = Dosiareacontdosisede::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
+       /*  return $dosiareasignados; */
         $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
         $observacionesDelMes = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
-       /*  $dosimetros = Dosimetro::leftJoin('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
-            ->whereNull('trabajadordosimetros.dosimetro_uso')
-            ->orWhere(function ($query) {
-                $query->where('dosimetros.estado_dosimetro', 'STOCK');
-            })
-            ->select("*")
-            ->get(); */
-        /* $holders = Holder::leftJoin('trabajadordosimetros','holders.id_holder', '=', 'trabajadordosimetros.holder_id')
-            ->whereNull('trabajadordosimetros.dosimetro_uso')
-            ->orWhere(function ($query) {
-                $query->where('holders.estado_holder', 'STOCK');
-            })
-            ->select("*")
-            ->get(); */
+        /* $dosicontrolasig */
         $DosiControlAsignados = Dosicontrolcontdosisede::where('contdosisededepto_id', $id)
             ->where('mes_asignacion', $mesnumber)
             ->count();
@@ -2492,6 +2416,7 @@ class DosimetriaController extends Controller
         $areadosiasig = Dosiareacontdosisede::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
+        
         /* return $dosicontrolasig; */
         /* $pdf = PDF::loadView('dosimetria.etiquetasPDF_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig')); */
         $pdf =  PDF::loadView('dosimetria.etiquetasPDF1_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig', 'areadosiasig'));

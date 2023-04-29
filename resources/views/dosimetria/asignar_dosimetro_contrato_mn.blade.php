@@ -5,8 +5,9 @@
     <div class="col-md"></div>
     <div class="col-md-15">
         <div class="card text-dark bg-light">
-            <h2 class="modal-title w-100 text-center">ASIGNACIÓN DOSÍMETROS</h2>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ), ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} </h3>
+            <br>
+            <h2 class="text-center">ASIGNACIÓN DOSÍMETROS</h2>
+            <h3 class="text-center" id="nueva_empresaModalLabel"> <br><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br> ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} <br> PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ) </h3>
             <form action="{{route('asignadosicontratomn.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion_mn" name="form-nueva-asignacion_mn" class="form-nueva-asignacion_mn m-4">
                 @csrf
 
@@ -1307,14 +1308,28 @@ crossorigin="anonymous">
         
         console.log(fecha);
         if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
-            for($i=0; $i<=13; $i++){
-                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
+            
+            var xx = 1; 
+            for(var i=1; i<=11; i++){
+                /* console.log(i); */
+                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+i));
+                /* console.log("r1" +r); */
+                var r2 = new Date(new Date(r).setMonth(r.getMonth()+1));
                 var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-                console.log(r + fechaesp + "ESTA ES LA I"+($i+1)); 
-                if("{{$mesnumber}}" == ($i+1)){
-                    
-                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
-                } 
+                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                /* console.log("r2 " +r2final); */
+                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                /* console.log(fechaesp1); */
+                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                /* console.log(fechaesp2); */
+                xx++;
+                /* console.log("XX"+xx); */
+                for(var x=2; x<=12; x++){
+                    /* console.log("ESTA ES LA X="+x); */
+                    if("{{$mesnumber}}" == xx){
+                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                    }
+                }
             }
         }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
             var xx = 1;

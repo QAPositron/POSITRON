@@ -8,14 +8,16 @@
             <br>
             <h2 class="text-center">ASIGNACIÓN DOSÍMETROS</h2>
             <h3 class="text-center" id="nueva_empresaModalLabel"> <br> <i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
+                ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} <br>
                 PERÍODO {{$mesnumber}}
                 @if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS')
                     ( <span>
                         @php  
                             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                            $fecha1 = $meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio));
-                             
-                            echo $fecha1;
+                            $fecha1 = date("j",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))." ".$meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio));
+                            $fecha2_parcial =  date("j-m-Y",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio."+ 1 month"));
+                            $fecha2_total = date("j-m-Y",strtotime($fecha2_parcial."- 1 days")); 
+                            echo $fecha1." - ".date("j", strtotime($fecha2_total))." ".$meses[date("m", strtotime($fecha2_total))]." DE ".date("Y", strtotime($fecha2_total))
                         @endphp
                     </span> )
                 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS')
@@ -29,8 +31,9 @@
                         @endphp
                     </span> )
                 @endif
-                , ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} 
+                 
             </h3>
+
             <form action="{{route('asignadosicontratom1.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion" name="form-nueva-asignacion" class="form-nueva-asignacion m-4">
                 @csrf
                 
