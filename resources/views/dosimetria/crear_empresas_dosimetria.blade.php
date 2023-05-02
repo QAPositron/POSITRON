@@ -19,6 +19,13 @@
                 </div>
             </div>
         </div>
+        <div class="col">
+            <a class="btn colorQA" style="border-radius: 25px;  width: 50px; height: 50px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-graph-up mt-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
+                </svg>
+            </a>
+        </div>
     </div>
     
     <br>
@@ -28,37 +35,52 @@
         <div class="col-12">
             <div class="table table-responsive p-4 ">
                 <table class="table table-bordered empresasdosi">
-                    <thead class ="table-active">
+                    <thead class="table-light">
                         <tr>
-                            <th class="align-middle text-center">EMPRESA</th>
-                            <th class="align-middle text-center" style='width: 15.60%'>TIPO. IDEN</th>
-                            <th class="align-middle text-center" style='width: 14.80%'>No. IDEN</th>
-                            <th class="align-middle text-center" style='width: 10.60%'>DOSIM. TORAX</th>
-                            <th class="align-middle text-center" style='width: 10.60%'>DOSIM. CRISTALINO</th>
-                            <th class="align-middle text-center" style='width: 10.60%'>DOSIM. ANILLO</th>
-                            <th class="align-middle text-center" style='width: 10.60%'>DOSIM. MUÑECA</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. CONTROL TORAX</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. CONTROL CRISTALINO</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. CONTROL ANILLO</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. ÁREA</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>DOSIM. CASO</th>
+                            <th rowspan="2" class="align-middle text-center">EMPRESA</th>
+                            <th rowspan="2"class="align-middle text-center">CONTRATOS ACT.</th>
+                            <th colspan="6" class="align-middle text-center" style='width: 13.80%'>DOSÍMETROS</th>
+                            <th colspan="3" class="align-middle text-center" style='width: 9.80%'>CONTROLES</th>
+                            <th rowspan="2" class="align-middle text-center" style='width: 1.60%'>TOTAL</th>
+                        </tr>
+                        <tr>
+                            <th class="align-middle text-center">TOR.</th>
+                            <th class="align-middle text-center">CRIS.</th>
+                            <th class="align-middle text-center">ANI.</th>
+                            <th class="align-middle text-center">MUÑ.</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>AMB.</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>CASO</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>TOR.</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>CRIS.</th>
+                            <th class="align-middle text-center" style='width: 9.60%'>ANI.</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($empresaDosi as $empdosi)
                             <tr>
-                                <td class="align-middle text-center"><a class="btn btn-outline-primary rounded-pill" href="{{route('contratosdosi.createlist', $empdosi->empresa_id)}}">{{$empdosi->nombre_empresa}}</a></td>
-                                <td class="align-middle text-center">{{$empdosi->empresa->tipo_identificacion_empresa}}</td>
-                                <td class="align-middle text-center">{{$empdosi->num_iden_empresa}} {{$empdosi->empresa->DV}}</td>
+                                <td class="align-middle text-center"><a class="btn btn-outline-primary rounded-pill" href="{{route('contratosdosi.createlist', $empdosi->empresa_id)}}">{{strlen($empdosi->empresa->nombre_empresa) > 29 ? mb_substr($empdosi->empresa->nombre_empresa, 0, 29, "UTF-8")."..." : $empdosi->empresa->nombre_empresa}}</a></td>
+                                <td class="align-middle text-center">
+                                    @foreach($dosimetriacontrato as $dosicont)
+                                        @if($empdosi->empresa_id == $dosicont->empresa_id)
+                                            <div class="row">
+                                                <div class="col" id='{{$dosicont->id_contratodosimetria}}'></div>
+                                                <div class="col mt-2">{{$dosicont->periodo_recambio}}</div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </td>
+                                {{-- <td class="align-middle text-center">{{$empdosi->empresa->tipo_identificacion_empresa}}</td>
+                                <td class="align-middle text-center">{{$empdosi->num_iden_empresa}} {{$empdosi->empresa->DV}}</td> --}}
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_torax}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_cristalino}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_dedo}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_muñeca}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_ambiental}}</td>
+                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_caso}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_torax}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_cristalino}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_dedo}}</td>
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_ambiental}}</td>
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_caso}}</td>
+                                <td class="align-middle text-center" style='width: 1.60%'>{{$empdosi->numtotal_dosi_torax + $empdosi->numtotal_dosi_ambiental}}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -75,6 +97,15 @@
 </script>
 <script type="text/javascript">
     $(document).ready( function ()  {
+        @foreach($dosimetriacontrato as $dosicont)
+            var TDcontrato = document.getElementById("{{$dosicont->id_contratodosimetria}}");
+            var num = parseInt('{{$dosicont->codigo_contrato}}');
+            var n = num.toString().padStart(5,'0');
+            console.log("ESTE ES EL CODIGO" +n);
+           
+            TDcontrato.innerHTML = "<a class='btn btn-outline-primary rounded-pill' href='{{route('detallecontrato.create', "+$dosicont->id_contratodosimetria+")}}'>"+n+"</a>";
+            
+        @endforeach
         $('.empresasdosi').DataTable({
             language: {
                 "decimal": "",

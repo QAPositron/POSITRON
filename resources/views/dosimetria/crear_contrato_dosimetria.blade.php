@@ -51,8 +51,21 @@
                             <div class="col-md">
                                 <div class="form-floating my-3" id="fecha_finalizacion_contrato">
                                     <input type="date" name="fecha_finalizacion_contrato" id="fecha_finalizacion_contrato_input" class="form-control @error('fecha_finalizacion_contrato') is-invalid @enderror" autofocus >
-                                    <label for="floatingInputGrid" >FECHA DE FINALIZACIÓN</label>
+                                    <label for="floatingInputGrid" >FECHA DE FINALIZACIÓN:</label>
                                     @error('fecha_finalizacion_contrato')
+                                        <small class="invalid-feedback">*{{$message}}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-floating my-3" id="estado_contrato">
+                                    <select class="form-select @error('estado_contrato') is-invalid @enderror" name="estado_contrato" id="estado_contrato_select"  autofocus>
+                                        <option value="">--SELECCIONE--</option>
+                                        <option value="ACTIVO" selected>ACTIVO</option>
+                                        <option value="INACTIVO">INACTIVO</option>
+                                    </select>
+                                    <label for="floatingInputGrid">ESTADO:</label>
+                                    @error('estado_contrato')
                                         <small class="invalid-feedback">*{{$message}}</small>
                                     @enderror
                                 </div>

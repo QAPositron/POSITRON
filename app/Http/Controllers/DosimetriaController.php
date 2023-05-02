@@ -52,9 +52,10 @@ class DosimetriaController extends Controller
     public function createEmpresa(){
         $empresas = Empresa::all();
         $empresaDosi = ContratosDosimetriaEmpresa::all();
+        $dosimetriacontrato = Dosimetriacontrato::where('estado_contrato', '=', 'ACTIVO')->get();
         /* $sumaContratodosisededepto = Contratodosimetriasededepto::where */
-
-       return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi'));
+        
+        return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi', 'dosimetriacontrato'));
     }
     public function saveEmpresa(Request $request){
 
@@ -121,7 +122,7 @@ class DosimetriaController extends Controller
             'fecha_inicio_contrato'         => 'required',
             'fecha_finalizacion_contrato'   => 'required',
             'id_sede1'                      => 'required',
-
+            'estado_contrato'               => 'required'
         ]);
         $contratoDosi = new Dosimetriacontrato();
 
@@ -130,6 +131,7 @@ class DosimetriaController extends Controller
         $contratoDosi->fecha_inicio                 = $request->fecha_inicio_contrato;
         $contratoDosi->fecha_finalizacion           = $request->fecha_finalizacion_contrato;
         $contratoDosi->periodo_recambio             = $request->periodo_recambio_contrato;
+        $contratoDosi->estado_contrato              = $request->estado_contrato;
 
         $contratoDosi->save();
 

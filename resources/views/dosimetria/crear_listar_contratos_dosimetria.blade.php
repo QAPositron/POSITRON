@@ -28,7 +28,7 @@
 <br>
 <div class="row">
     <div class="col"></div>
-    <div class="col-8">
+    <div class="col-9">
         {{-- <h3 class="text-center">LISTADO DE CONTRATOS</h3> --}}
         <div class="table table-responsive p-4 ">
             <table class="table table-bordered contratosdosi">
@@ -38,6 +38,7 @@
                         <th style='width: 20.60%'>FECHA INICIO</th>
                         <th style='width: 20.60%'>FECHA FINALIZACIÓN</th>
                         <th style='width: 15.60%'>P. RECAMBIO</th>
+                        <th style='width: 15.60%'>ESTADO</th>
                         <th style='width: 30.60%'>ACCIONES</th>
                     </tr>
                 </thead>
@@ -48,6 +49,7 @@
                             <td class="align-middle">{{$dosicont->fecha_inicio}}</td>
                             <td class="align-middle">{{$dosicont->fecha_finalizacion}}</td>
                             <td class="align-middle text-center">{{$dosicont->periodo_recambio}}</td>
+                            <td class="align-middle text-center">{{$dosicont->estado_contrato}}</td>
                             <td class="align-middle text-center">
                                 <div class="row align-items-center">
                                     <div class="col">
