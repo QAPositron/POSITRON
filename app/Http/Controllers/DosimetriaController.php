@@ -2375,8 +2375,6 @@ class DosimetriaController extends Controller
         $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaDocemesesAreasasig','SumatoriaFechaIngresomesestrabajadoresaisg', 'SumatoriaFechaIngresomesesAreasasig', 'mesescantdosi', 'mesnumber'));
         $pdf->setPaper('8.5x14', 'landscape');
         
-        
-        
         /* for($i=0; $i<count($contratoDosi); $i++ ){
             
             $empresa = $contratoDosi[$i]->nombre_empresa;
@@ -2686,7 +2684,7 @@ class DosimetriaController extends Controller
         return response()->json($asignacionesControlall);
     }
     public function saveObservacionesReventrada(Request $request){
-       /*  return $request; */
+        /* return $request; */
         if(!empty($request->id_dosicontrolcontdosisedes)){
             for($i=0; $i<count($request->id_dosicontrolcontdosisedes); $i++){
                 if(!empty($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i]))){

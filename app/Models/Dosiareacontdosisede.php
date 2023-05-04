@@ -25,4 +25,9 @@ class Dosiareacontdosisede extends Model
     public function areadepartamentosede(){
       return $this->belongsTo(Areadepartamentosede::class, 'areadepartamentosede_id', 'id_areadepartamentosede');
     }
+    //relacion uno a uno con obsreventradas
+    public function obsreventradas(){
+      return $this->hasOne(Obsreventrada::class, 'dosiareacontdosimetro_id', 'id_dosiareacontdosisedes');
+      
+    }
 }

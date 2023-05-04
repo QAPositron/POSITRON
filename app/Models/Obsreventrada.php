@@ -29,4 +29,8 @@ class Obsreventrada extends Model
         /* return $this->hasMany('App\Models\Sede'); */
         return $this->belongsTo(Observacion::class, 'observacion_id', 'id_observacion');
     }
+     //Relacion uno a uno (inversa) con dosiareacontdosisede
+     public function dosiareacontdosisede(){
+        return $this->belongsTo(Dosiareacontdosisede::class, 'dosiareacontdosimetro_id', 'id_dosiareacontdosisedes');
+    }
 }

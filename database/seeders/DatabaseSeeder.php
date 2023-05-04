@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PersonaSeeder::class);
         $this->call(PersonasedesSeeder::class);
         $this->call(PersonasrolesSeeder::class);
+        $this->call(ObservacionesSeeder::class);
 
 
 

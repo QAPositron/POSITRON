@@ -2,11 +2,17 @@
 @extends('layouts.plantillabase')
 @section('contenido') 
     <div class="row">
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col">
-            <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_empresaModal" >NUEVA EMPRESA</button>
+        <div class="col-md"></div>
+        <div class="col-md-11">
+            <h2 class="text-center">EMPRESAS CON DOSIMETRÍA</h2>
+        </div>
+        <div class="col-md"></div>
+    </div>
+    <div class="row">
+        <div class="col-md"></div>
+        <div class="col-md"></div>
+        <div class="col-md-2 text-center">
+            <button type="button" class="btn colorQA mt-1" data-bs-toggle="modal" data-bs-target="#nueva_empresaModal" >NUEVA EMPRESA</button>
             <div class="modal fade" id="nueva_empresaModal" tabindex="-1" aria-labelledby="nueva_empresaModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -19,9 +25,9 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-md-1 text-center">
             <a class="btn colorQA" style="border-radius: 25px;  width: 50px; height: 50px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-graph-up mt-1" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-graph-up mt-1" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
                 </svg>
             </a>
@@ -29,17 +35,16 @@
     </div>
     
     <br>
-    <h2 class="text-center">EMPRESAS CON DOSIMETRÍA</h2>
     <div class="row">               
         <div class="col"></div>
         <div class="col-12">
             <div class="table table-responsive p-4 ">
                 <table class="table table-bordered empresasdosi">
-                    <thead class="table-light">
+                    <thead class="table-secondary">
                         <tr>
                             <th rowspan="2" class="align-middle text-center">EMPRESA</th>
                             <th rowspan="2"class="align-middle text-center">CONTRATOS ACT.</th>
-                            <th colspan="6" class="align-middle text-center" style='width: 13.80%'>DOSÍMETROS</th>
+                            <th colspan="5" class="align-middle text-center" style='width: 13.80%'>DOSÍMETROS</th>
                             <th colspan="3" class="align-middle text-center" style='width: 9.80%'>CONTROLES</th>
                             <th rowspan="2" class="align-middle text-center" style='width: 1.60%'>TOTAL</th>
                         </tr>
@@ -47,12 +52,12 @@
                             <th class="align-middle text-center">TOR.</th>
                             <th class="align-middle text-center">CRIS.</th>
                             <th class="align-middle text-center">ANI.</th>
-                            <th class="align-middle text-center">MUÑ.</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>AMB.</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>CASO</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>TOR.</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>CRIS.</th>
-                            <th class="align-middle text-center" style='width: 9.60%'>ANI.</th>
+                            {{-- <th class="align-middle text-center">MUÑ.</th> --}}
+                            <th class="align-middle text-center">AMB.</th>
+                            <th class="align-middle text-center">CASO</th>
+                            <th class="align-middle text-center">TOR.</th>
+                            <th class="align-middle text-center">CRIS.</th>
+                            <th class="align-middle text-center">ANI.</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,13 +79,13 @@
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_torax}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_cristalino}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_dedo}}</td>
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_muñeca}}</td>
+                                {{-- <td class="align-middle text-center">{{$empdosi->numtotal_dosi_muñeca}}</td> --}}
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_ambiental}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_caso}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_torax}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_cristalino}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_dedo}}</td>
-                                <td class="align-middle text-center" style='width: 1.60%'>{{$empdosi->numtotal_dosi_torax + $empdosi->numtotal_dosi_ambiental}}</td>
+                                <td class="align-middle text-center table-light" style='width: 1.60%'>{{$empdosi->numtotal_dosi_torax + $empdosi->numtotal_dosi_ambiental}}</td>
                             </tr>
                         @endforeach
                     </tbody>

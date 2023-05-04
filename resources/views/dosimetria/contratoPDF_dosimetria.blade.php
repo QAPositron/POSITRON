@@ -93,9 +93,9 @@
 
 </style>
 <body>
-    <div id="watermark">
+   {{--  <div id="watermark">
         <img src="{{asset('imagenes/fondoVerde3_min.png ')}}" width="643" height="890">
-    </div>
+    </div> --}}
     <header>
         <img src="{{asset('imagenes/1VerdeSF.png')}}" width="160" style="position:relative; right:20px; bottom: 10px; opacity:0.5;">
         <img src="{{asset('imagenes/1SERVICIOS_QA.png')}}" width="300" style="position:relative; left:170px; top:15px; opacity:0.5;">
@@ -127,14 +127,14 @@
                 ubicada en la dirección {{$cont->empresa->direccion_empresa}} de la ciudad de {{$cont->empresa->municipios->nombre_municol}} 
                 - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} e identificada con NIT: {{$cont->empresa->num_iden_empresa}} - {{$cont->empresa->DV}},
                 quien en el texto de este se denominará <b>EL USUARIO</b>, se ha celebrado un <b>CONTRATO COMERCIAL</b>, contenido en las siguientes cláusulas: <br>
-                <b>PRIMERA. - OBJETO:</b>  Por medio del presente contrato <b>QA POSITRON S.A.S.</b>, se compromete a entregar a manera de comodato o préstamo comercial al 
-                <b>USUARIO</b>, para que este utilice en forma gratuita y restituya al final de cada período de uso, uno o varios dosímetros personales con sus respectivos 
-                portadosímetros, y prestar el servicio global de dosimetría, el cual incluye entre otros, el servicio técnico, servicio al cliente, logística de distribución 
-                y recolección (de ser aplicable), servicios complementarios de lectura y reporte periódico de los resultados. Como contraprestación de estos servicios, <b>el USUARIO</b>  
-                se obliga a pagar el valor convenido, todo de conformidad con las condiciones sobre la duración del contrato, costo y plazos de entrega de resultados, 
-                se  establecen en el <b>“FORMATO DE SOLICITUD PARA SERVICIO DE DOSIMETRIA PERSONAL”</b> y <b> “COTIZACIONES”</b>, adjunto a este contrato formando parte integral del mismo, concordante con la correspondiente 
-                cotización del servicio y demás documentos y comunicaciones relativos a esta orden contractual, que hacen también parte integral de este contrato. <br>
+                <b>PRIMERA. - OBJETO:</b>  Por medio del presente contrato <b>QA POSITRON S.A.S.</b>, se compromete a proporcionar en comodato o préstamo comercial al 
+                <b>USUARIO</b> uno o varios dosímetros personales con sus respectivos portadosímetros, para su uso gratuito y posterior restitución al final 
+                de cada período de uso. Asimismo, se prestará el servicio global de dosimetría, que incluye, entre otros, servicios técnicos, atención al cliente, logística de distribución y recolección (si procede), así como servicios complementarios de lectura y
+                reporte periódico de los resultados. A cambio de estos servicios, el <b>USUARIO</b> se obliga a abonar el importe convenido, conforme a las condiciones de duración del contrato, coste y 
+                plazos de entrega de resultados, estipulados en el <b>“FORMATO DE SOLICITUD PARA SERVICIO DE DOSIMETRIA PERSONAL”</b> adjunto al presente contrato, que forman parte integral del mismo, 
+                junto con la cotización correspondiente al servicio y otros documentos y comunicaciones relacionados con esta orden contractual.<br>
                 <b>SEGUNDA. – <u>OBLIGACIONES DE QA POSITRON S.A.S.</u>:</b>
+                
             </p>
             
             <ol id="lista1">
@@ -152,8 +152,8 @@
                 <li>4. Notificar por escrito a <b>QA POSITRON S.A.S.</b>, al inicio del servicio, la persona encargada de entregar los dosímetros, y notificar  &nbsp;&nbsp;&nbsp;&nbsp;el día en que estarán a disposición para recolección al final de cada periodo de uso, en caso de aplicar. Para tal efecto, se tiene  &nbsp;&nbsp;&nbsp;&nbsp;a disposición el correo electrónico dosimetria.qapositron@gmail.com.</li>
                 <li>5. Informar a <b>QA POSITRON S.A.S.</b>, de manera escrita y/o en los formatos de novedades suministrados para tal fin, la necesidad  &nbsp;&nbsp;&nbsp;&nbsp;de cambios en los usuarios, adiciones, o cancelaciones, a más tardar treinta (30) días calendario antes de la fecha programada  &nbsp;&nbsp;&nbsp;&nbsp;para el inicio del periodo de uso para el cual se necesitan los cambios, de tal forma se puedan incorporar en la programación de  &nbsp;&nbsp;&nbsp;&nbsp;producción. <b>Solicitudes extemporáneas tendrán efectos en los cambios y la facturación para el siguiente periodo de uso  &nbsp;&nbsp;&nbsp;&nbsp;aplicable.</b></li>
                 <li>6. Restituir a <b>QA POSITRON S.A.S.</b> a la finalización del contrato el último de los dosímetros en su poder.</li>
-                <li>7. Pagar a <b>QA POSITRON S.A.S.</b> el valor del dosímetro en caso de pérdida o daño del mismo, el cual será de $180.000.oo por  &nbsp;&nbsp;&nbsp;&nbsp;dosímetro y de $50.000.oo por portadosímetro. Este cargo se causará cuando luego de treinta (30) días calendario de finalizado  &nbsp;&nbsp;&nbsp;&nbsp;el período de uso correspondiente no se haya hecho la devolución de los dosímetros a <b>QA POSITRON S.A.S.</b> por parte del <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USUARIO</b>. El valor causado deberá ser restituido tras recibo de las facturas o cuentas de cobro por este concepto.</li>
-                <li>8. Avisar a <b>QA POSITRON S.A.S.</b> con cuarenta y cinco (45) días calendario de antelación al vencimiento del período pactado en  &nbsp;&nbsp;&nbsp;&nbsp;el numeral sexto de “FORMATO DE SOLICITUD PARA SERVICIO DE DOSIMETRIA PERSONAL”, su intención de no continuar  &nbsp;&nbsp;&nbsp;&nbsp;con el servicio luego de terminado el periodo contratado. Si dicha comunicación no es recibida se entenderá que es intención  &nbsp;&nbsp;&nbsp;&nbsp;del <b>USUARIO</b> dar por prorrogado el contrato por un período igual al inicialmente pactado.</li>
+                <li>7. Pagar a <b>QA POSITRON S.A.S.</b> el valor del dosímetro en caso de pérdida o daño del mismo, el cual será de $180.000.oo por  &nbsp;&nbsp;&nbsp;&nbsp;dosímetro y de $50.000.oo por portadosímetro. Este cargo se causará cuando luego de treinta (30) días calendario de finalizado  &nbsp;&nbsp;&nbsp;&nbsp;el período de uso correspondiente no se haya hecho la devolución de los dosímetros a <b>QA POSITRON S.A.S.</b> por parte del <b>&nbsp;&nbsp;&nbsp;&nbsp;USUARIO</b>. El valor causado deberá ser restituido tras recibo de las facturas o cuentas de cobro por este concepto.</li>
+                <li>8. Avisar a <b>QA POSITRON S.A.S.</b> con sesenta (60) días calendario de antelación al vencimiento del período pactado en el &nbsp;&nbsp;&nbsp;&nbsp;“FORMATO DE SOLICITUD PARA SERVICIO DE DOSIMETRIA PERSONAL”, su intención de no continuar con el servicio &nbsp;&nbsp;&nbsp;&nbsp;luego de terminado el periodo contratado. Si dicha comunicación no es recibida se entenderá que es intención del <b>USUARIO</b> dar &nbsp;&nbsp;&nbsp;&nbsp;por prorrogado el contrato por un período igual al inicialmente pactado.</li>
             </ol>
             <p style="text-align:justify; margin-top: 0px; margin-bottom: 0px;"><b>CUARTA: QA POSITRON S.A.S.</b> no responderá por las variaciones en las lecturas de los dosímetros, producidas como 
                 consecuencia del mal manejo de los mismos por parte del <b>USUARIO</b>. <br>

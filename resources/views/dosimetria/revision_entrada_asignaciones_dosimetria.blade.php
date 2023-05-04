@@ -155,7 +155,7 @@
                                                                     @endforeach
                                                                 @endif
                                                             </select> 
-                                                            <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddCont{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
+                                                            <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddArea{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -435,11 +435,13 @@
             <h4 class="alert-heading"> <b>OBSERVACIONES:</b> </h4>
                 @foreach($observacionesAsig as $obsAsig)
                     @if($obsAsig->observacion_id == 9)
-                        - CORRESPONDIENTE AL DOSÍMETRO 
+                        
                         @if($obsAsig->dosicontrol_id != NULL)
-                            CONTROL {{$obsAsig->dosicontrolcontdosisedes->ubicacion}}:
+                        - CORRESPONDIENTE AL DOSÍMETRO CONTROL {{$obsAsig->dosicontrolcontdosisedes->ubicacion}}:
                         @elseif($obsAsig->trabajcontdosimetro_id != NULL)
-                            {{$obsAsig->trabajadordosimetro->ubicacion}} DEL TRABAJADOR {{$obsAsig->trabajadordosimetro->persona->primer_nombre_persona}} {{$obsAsig->trabajadordosimetro->persona->primer_apellido_persona}} {{$obsAsig->trabajadordosimetro->persona->segundo_apellido_persona}}:
+                        - CORRESPONDIENTE AL DOSÍMETRO  {{$obsAsig->trabajadordosimetro->ubicacion}} DEL TRABAJADOR {{$obsAsig->trabajadordosimetro->persona->primer_nombre_persona}} {{$obsAsig->trabajadordosimetro->persona->primer_apellido_persona}} {{$obsAsig->trabajadordosimetro->persona->segundo_apellido_persona}}:
+                        @elseif($obsAsig->dosiareacontdosimetro_id  != NULL)
+                        - CORRESPONDIENTE AL ÁREA {{$obsAsig->dosiareacontdosisede->areadepartamentosede->nombre_area}}:
                         @endif 
                         {{$obsAsig->nota_obs9}}<br>
                     @endif
@@ -868,6 +870,22 @@ crossorigin="anonymous">
                         $('#obsAddTrab'+'{{$trabasig->id_trabajadordosimetro}}').prop("hidden", false);
                     }else{
                         $('#obsAddTrab'+'{{$trabasig->id_trabajadordosimetro}}').prop("hidden", true);
+                    }
+                    
+                });
+                
+            })
+        @endforeach
+        @foreach($areasignados as $area)
+            $('#observacion_asig_dosiarea'+'{{$area->id_dosiareacontdosisedes}}').on('change', function(){
+                var id = 'observacion_asig_dosiarea'+'{{$area->id_dosiareacontdosisedes}}';
+                console.log(id);
+                $('#'+id+' option:selected').each(function() {
+                    if($(this).val() == 9){
+                        console.log("ES IGUAL A 9");
+                        $('#obsAddArea'+'{{$area->id_dosiareacontdosisedes}}').prop("hidden", false);
+                    }else{
+                        $('#obsAddArea'+'{{$area->id_dosiareacontdosisedes}}').prop("hidden", true);
                     }
                     
                 });

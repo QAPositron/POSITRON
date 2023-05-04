@@ -576,14 +576,14 @@ crossorigin="anonymous">
             $('#hp3_calc_dose').on('change', function(){
                 var hp3 = document.getElementById("hp3_calc_dose").value;
                 if (hp3 >= 12.5){
-                    alert("es CRISTALINO y se paso de la dosis roja"+hp3);
+                    /* alert("es CRISTALINO y se paso de la dosis roja"+hp3); */
                     let Divhp3 = document.getElementById("hp3_calc_dose");
                     Divhp3.classList.remove("dosisnaranja");
                     Divhp3.classList.add("dosisroja");
                     $('#nota1checked').prop("checked", false);
                     $('#nota3checked').prop("checked", true);
                 }else{
-                    alert("es CRISTALINO "+hp3);
+                    /* alert("es CRISTALINO "+hp3); */
                     let Divhp3 = document.getElementById("hp3_calc_dose");
                     Divhp3.classList.remove("dosisroja");
                     Divhp3.classList.remove("dosisnaranja");
@@ -596,23 +596,23 @@ crossorigin="anonymous">
         if('{{$trabjasig->ubicacion}}' == 'MUÑECA' || '{{$trabjasig->ubicacion}}' == 'DEDO'){
             $('#hp007_calc_dose').on('change', function(){
                 var hp007 = document.getElementById("hp007_calc_dose").value;
-                alert("no hay dosimetro de control"+hp007);
+                /* alert("no hay dosimetro de control"+hp007); */
                 if (hp007 >= 41.6 ){
-                    alert("es MUÑECA O DEDO y se paso de la dosis naranja"+hp007);
+                    /* alert("es MUÑECA O DEDO y se paso de la dosis naranja"+hp007); */
                     let Divhp007 = document.getElementById("hp007_calc_dose");
                     Divhp007.classList.remove("dosisroja");
                     Divhp007.classList.add("dosisnaranja");
                     $('#nota1checked').prop("checked", false);
                     $('#nota3checked').prop("checked", true);
                 } else if(hp007 >= 12){
-                    alert("es MUÑECA O DEDO y se paso de la dosis roja"+hp007);
+                    /* alert("es MUÑECA O DEDO y se paso de la dosis roja"+hp007); */
                     let Divhp007 = document.getElementById("hp007_calc_dose");
                     Divhp007.classList.remove("dosisnaranja");
                     Divhp007.classList.add("dosisroja");
                     $('#nota1checked').prop("checked", false);
                     $('#nota3checked').prop("checked", true);
                 }else{
-                    alert("es MUÑECA O DEDO "+hp007);
+                    /* alert("es MUÑECA O DEDO "+hp007); */
                     let Divhp007 = document.getElementById("hp007_calc_dose");
                     Divhp007.classList.remove("dosisroja");
                     Divhp007.classList.remove("dosisnaranja");
@@ -626,23 +626,23 @@ crossorigin="anonymous">
         if('{{$trabjasig->ubicacion}}' == 'TORAX' || '{{$trabjasig->ubicacion}}' == 'CASO'){
             $('#hp10_calc_dose').on('change', function(){
                 var hp10 = document.getElementById("hp10_calc_dose").value;
-                alert("no hay dosimetro de control"+hp10)
+                /* alert("no hay dosimetro de control"+hp10) */
                 if (hp10 >= 12) {
-                    alert("es TORAX y se paso de la dosis roja"+hp10);
+                    /* alert("es TORAX y se paso de la dosis roja"+hp10); */
                     let Divhp10 = document.getElementById("hp10_calc_dose");
                     Divhp10.classList.remove("dosisnaranja");
                     Divhp10.classList.add("dosisroja");
                     $('#nota1checked').prop("checked", false);
                     $('#nota3checked').prop("checked", true);
                 }else if(hp10 >= 1.67){
-                    alert("es TORAX y se paso de la dosis naranja"+hp10);
+                    /* alert("es TORAX y se paso de la dosis naranja"+hp10); */
                     let Divhp10 = document.getElementById("hp10_calc_dose");
                     Divhp10.classList.remove("dosisroja");
                     Divhp10.classList.add("dosisnaranja");
                     $('#nota1checked').prop("checked", false);
                     $('#nota3checked').prop("checked", true);
                 }else{
-                    alert("es TORAX "+hp10);
+                    /* alert("es TORAX "+hp10); */
                     let Divhp10 = document.getElementById("hp10_calc_dose");
                     Divhp10.classList.remove("dosisroja");
                     Divhp10.classList.remove("dosisnaranja");

@@ -448,7 +448,7 @@
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($mes == 3 || $mes == 9)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mesn == 4 || $mes == 10)
+                    @elseif($mes == 4 || $mes == 10)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM4.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
                     @elseif($mes == 5 || $mes == 11)
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM5.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">

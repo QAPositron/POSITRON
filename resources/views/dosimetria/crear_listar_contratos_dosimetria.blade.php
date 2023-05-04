@@ -21,8 +21,6 @@
     <div class="col"></div>
     <div class="col">
         <a href="{{route('contratosdosi.create', $empresa->id_empresa)}}" class="btn colorQA ">CREAR CONTRATO</a>
-        
-
     </div>
 </div>
 <br>
