@@ -78,9 +78,9 @@
     }
 </style>
 <body>
-    <div id="watermark">
+    {{-- <div id="watermark">
         <img src="{{asset('imagenes/FONDO1min.png')}}" width="643" height="890">
-    </div>
+    </div> --}}
     <header>
         <img src="{{asset('imagenes/1VerdeSF.png')}}" width="180" style="position:relative; right:20px; bottom: 10px;">
         <img src="{{asset('imagenes/1SERVICIOS_QA.png')}}" width="330" style="position:relative; left:130px; top:15px;">
@@ -113,13 +113,13 @@
                     <p style="position:relative;"><b>{{$empresa->nombre_empresa}}</b></p>
                     <p style="position:relative;">@if($empresa->empresa->tipo_identificacion_empresa == 'NIT') NIT: {{$empresa->empresa->num_iden_empresa}}-{{$empresa->empresa->DV}} @else {{$empresa->empresa->tipo_identificacion_empresa}}: {{$empresa->empresa->num_iden_empresa}} @endif</p>
                     <p style="position:relative;">Dirección: {{$empresa->empresa->direccion_empresa}}</p>
-                    <p style="position:relative;">Municipio: @php echo ucwords(strtolower($empresa->empresa->municipios->nombre_municol)); @endphp - @php echo ucwords(strtolower($empresa->empresa->municipios->coldepartamento->nombre_deptocol)); @endphp </p>
+                    <p style="position:relative;">Municipio: @php echo ucwords(mb_strtolower($empresa->empresa->municipios->nombre_municol, "UTF-8")); @endphp - @php echo ucwords(strtolower($empresa->empresa->municipios->coldepartamento->nombre_deptocol)); @endphp </p>
                 @endforeach
             @else
                 <p style="position:relative;"><b>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}</b></p>
                 <p style="position:relative;">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'NIT') NIT: {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}} @else {{$contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa}}: {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}} @endif</p>
                 <p style="position:relative;">Dirección: {{$contdosisededepto->contratodosimetriasede->sede->empresa->direccion_empresa}}</p>
-                <p style="position:relative;">Municipio: @php echo ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->empresa->municipios->nombre_municol)); @endphp - @php echo ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->empresa->municipios->coldepartamento->nombre_deptocol)); @endphp </p>
+                <p style="position:relative;">Municipio: @php echo ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->empresa->municipios->nombre_municol, 'UTF-8')); @endphp - @php echo ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->empresa->municipios->coldepartamento->nombre_deptocol)); @endphp </p>
             @endif
             <br>
             <p style="position:relative;"> <b>Ref.: notificación revisión salida dosímetros – RSD-OSL-QA- 
@@ -384,8 +384,9 @@
             <div style="position:relative; display:block;  page-break-inside: avoid; ">
                 <p style="position:relative; text-align:justify;">Cordialmente,</p>
 
-                <div style="position:relative; width: 200px; height: 70px; top:30px; page-break-inside: avoid;">
-                    <p style="position:relative; text-align:center;">_____________________________</p> <br>
+                <div style="position:relative; width: 200px; height: 140px; top:10px; page-break-inside: avoid;">
+                    <img src="{{asset('imagenes/FIRMAYUDI.png')}}" width="130" height="70" style="position:relative; left:30px; top:13px;">
+                    <p style="position:relative; text-align:center;">___________________________</p> <br>
                     <p style="position:relative; bottom: 15px; text-align: center; font-size: 11px; color:#1A9980;">JUDY J.GAVIRIA TORRES</p> <br>
                     <p style="position:relative; bottom: 33px; text-align: center; font-size: 11px;">Ingeniera</p> <br>
                     <p style="position:relative; bottom: 49px; text-align: center; font-size: 11px; ">Operador logístico</p>
@@ -396,7 +397,8 @@
                 <div style="position:relative; width: 200px; height: 50px; top:45px; page-break-inside: avoid; ">
                     
                     <p style="position: relative; text-align: center;">_____________________________</p> <br>
-                    <p style="position: relative; bottom: 17px; text-align: center; font-size: 11px; color:#1A9980;">**Nombre del responsable**</p> <br>
+                    
+                    <p style="position: relative; bottom: 17px; text-align: center; font-size: 11px; color:#1A9980;">@php if(count($trabjEncargado) == 0){echo "**Nombre del responsable**"; }else{ echo $trabjEncargado[0]->primer_nombre_persona." ".$trabjEncargado[0]->segundo_nombre_persona." ".$trabjEncargado[0]->primer_apellido_persona." ".$trabjEncargado[0]->segundo_apellido_persona ;}@endphp </p> <br>
                     <p style="position: relative; bottom: 35px; text-align: center; font-size: 11px; ">Responsable de recibir la dosimetría</p> <br>
                 </div>
             </div>

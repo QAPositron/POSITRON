@@ -117,6 +117,15 @@
             )
         </script>
     @endif
+    @if(session('error')== 'ok')
+    <script>
+        Swal.fire(
+        'ERROR!',
+        'NO SE HA PODIDO GUARDAR, PORQUE YA EXISTE LIDER DE DOSIMETRIA!!',
+        'error'
+        )
+    </script>
+@endif
     @if(session('eliminar')== 'ok')
         <script>
             Swal.fire(

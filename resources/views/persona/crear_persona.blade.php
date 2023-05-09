@@ -31,7 +31,7 @@
                         </button>
                     </div>
                     <div class="col-md-6">
-                        <label for="">* ROL:</label>
+                        <label for="">ROL:</label>
                         <div class="form-floating">
                             <select class="form-select @error('rol_personas') is-invalid @enderror" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
                                 @foreach($roles as $rol)

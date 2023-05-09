@@ -628,9 +628,33 @@ crossorigin="anonymous">
                             }
                         })
                     }else{
-                        var host = window.location.host;
+                        /* var host = window.location.host;
                         var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/pdf";
-                        window.open(path, '_blank');
+                        window.open(path, '_blank'); */
+                        $.get('trabjencargado', {id : id}, function(trabjencargado){
+                            console.log(trabjencargado)
+                            if(trabjencargado.length != 0){
+                                var host = window.location.host;
+                                var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/pdf";
+                                window.open(path, '_blank');
+                            }else{
+                                Swal.fire({
+                                    title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
+                                    text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#1A9980',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'SI, SEGURO!'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        var host = window.location.host;
+                                        var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/pdf";
+                                        window.open(path, '_blank');
+                                    }
+                                })
+                            } 
+                        })
                     }
                 })
             }

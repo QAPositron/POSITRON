@@ -77,9 +77,9 @@
     }
 </style>
 <body>
-    <div id="watermark">
+    {{-- <div id="watermark">
         <img src="{{asset('imagenes/FONDO1min.png')}}" width="643" height="890">
-    </div>
+    </div> --}}
     <header>
         <img src="{{asset('imagenes/1VerdeSF.png')}}" width="180" style="position:relative; right:20px; bottom: 10px;">
         <img src="{{asset('imagenes/1SERVICIOS_QA.png')}}" width="330" style="position:relative; left:130px; top:15px;">
@@ -427,7 +427,8 @@
             <br>
             <p style="position:relative; text-align:justify;">Cordialmente,</p>
             
-            <div style="position:relative; width: 200px; height: 70px; top:30px; page-break-inside: avoid;">
+            <div style="position:relative; width: 200px; height: 140px; top:10px; page-break-inside: avoid;">
+                <img src="{{asset('imagenes/FIRMAYUDI.png')}}" width="130" height="70" style="position:relative; left:30px; top:13px;">
                 <p style="position:relative; text-align:center;">_____________________________</p> <br>
                 <p style="position:relative; bottom: 15px; text-align: center; font-size: 11px; color:#1A9980;">JUDY J.GAVIRIA TORRES</p> <br>
                 <p style="position:relative; bottom: 33px; text-align: center; font-size: 11px;">Ingeniera</p> <br>

@@ -2532,12 +2532,19 @@ class DosimetriaController extends Controller
         ->get();
         return response()->json($asignacionesControl);
     }
-
+    public function trabjencargado(Request $request){
+        $contdosisededepto = Contratodosimetriasededepto::find($request->id);
+        $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
+        ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
+        ->where('personas.lider_dosimetria', '=', 'TRUE')
+        ->get();
+        return response()->json($trabjEncargado);
+    }
    
     public function pdfReporteRevisionSalida($empresa, $deptodosi, $mesnumber){
-        /* return $deptodosi; */
-
+        
         $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
+        
         $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
         ->where('mes_asignacion', '=', $mesnumber)
         ->where('revision_salida', '=', 'TRUE')
@@ -2550,7 +2557,11 @@ class DosimetriaController extends Controller
         ->where('mes_asignacion', '=', $mesnumber)
         ->where('revision_salida', '=', 'TRUE')
         ->get();
-
+        $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
+        ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
+        ->where('personas.lider_dosimetria', '=', 'TRUE')
+        ->get();
+        
         //PARA LA REVISION GENERAL///
         $temptrabajdosimrev = Temptrabajdosimrev::join('contratodosimetriasededeptos', 'temptrabajdosimrevs.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('departamentosedes', 'contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
@@ -2559,9 +2570,9 @@ class DosimetriaController extends Controller
         ->get();
         $empresainfo= ContratosDosimetriaEmpresa::where('empresa_id', '=', $empresa)
         ->get();
-
+        
        /*  return $temptrabajdosimrev; */
-        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionsalida_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados', 'temptrabajdosimrev', 'empresainfo', 'areasignados'));
+        $pdf =  PDF::loadView('dosimetria.reportePDF_revisionsalida_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados', 'temptrabajdosimrev', 'empresainfo', 'areasignados', 'trabjEncargado'));
         $pdf->setPaper('A4', 'portrait');
         date_default_timezone_set('America/Bogota');
         return $pdf->stream("RSD_OSL_QA_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
