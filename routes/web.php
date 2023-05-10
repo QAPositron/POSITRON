@@ -230,6 +230,7 @@ Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetroControl',[Dosim
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/dosimetroAmbiental',[DosimetriaController::class, 'revisionCheckAmbiental']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/asignacionesTrab', [DosimetriaController::class, 'asignacionesTrab']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/asignacionesCont', [DosimetriaController::class, 'asignacionesCont']);
+Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/asignacionesArea', [DosimetriaController::class, 'asignacionesArea']);
 Route::get('/revisiondosimetria/{deptodosi}/{mesnumber}/trabjencargado', [DosimetriaController::class, 'trabjencargado']);
 Route::get('revisiondosimetria/create', [DosimetriaController::class, 'revisionDosimetriaGeneral'])->name('revisiondosimetria.create');
 Route::get('/revisiondosimetria/asignaciones', [DosimetriaController::class, 'asignaciones']);
@@ -251,6 +252,8 @@ Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/ambientaldosimetr
 Route::post('/revisiondosimetriaentrada', [DosimetriaController::class, 'saveObservacionesReventrada'])->name('observacionesReventrada.save');
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/asignacionesTrab', [DosimetriaController::class, 'asignacionesTrab']);
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/asignacionesCont', [DosimetriaController::class, 'asignacionesCont']);
+Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/asignacionesArea', [DosimetriaController::class, 'asignacionesArea']);
+Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/trabjencargado', [DosimetriaController::class, 'trabjencargado']);
 Route::get('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/observacionesreventrada', [DosimetriaController::class, 'observacionesreventrada']);
 Route::post('/revisiondosimetriaentrada/{deptodosi}/{mesnumber}/observacionesremove', [DosimetriaController::class, 'observacionesremove'])->name('observaciones.remove');
 Route::get('revisiondosimetriaentrada/create', [DosimetriaController::class, 'revisionDosimetriaEntradaGeneral'])->name('revisiondosimetriaentrada.create');

@@ -49,8 +49,8 @@
 <!-- ////////////////////ENCABEZADO/////////////// -->
 
 
-<img src="{{asset('imagenes/VerdeSF.png')}}" width="200">
-<!-- <img src="public_path('../public/imagenes/LOGOVERDE.png');" width="200"> -->
+{{-- <img src="{{asset('imagenes/VerdeSF.png')}}" width="200"> --}}
+
 
 <h3 style="position:absolute; top:87px; left:30px;">REPORTE DE DOSIMETRÍA</h3>
 
@@ -116,25 +116,13 @@
             @endforeach
         </td>
         <td rowspan="6" style="width: 130px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="127" style="top:15px;"> 
+           {{--  <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="127" style="top:15px;">  --}}
         </td>
     </tr>
     <tr>
         <td style="border:0.1px solid black; text-align: right;">Código Depto.</td>
         <td style="width: 94px; border:0.1px solid black; color:#2646FA;" align="center">
-            {{-- @php
-                $chek = 'inicial';
-            @endphp      
-            @foreach($dosicontrolasig as $dosicontrol)
-                @php
-                    if($dosicontrol->nombre_departamento != $chek){
-                        echo "{$dosicontrol->nombre_departamento}";
-                        $chek = strval($dosicontrol->nombre_departamento);
-                    }else{ 
-                        echo " ";
-                    }
-                @endphp
-            @endforeach --}}
+            
             @foreach($contratoDosi as $cont)
                 {{$cont->nombre_departamento}}
             @endforeach
@@ -164,7 +152,7 @@
         @endforeach 
         </td>
         <td colspan="2" rowspan="3" style="width: 94px; border:0.1px solid black;">
-            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="48" style="top:65px; ">
+            {{-- <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="48" style="top:65px; "> --}}
         </td>
     </tr>
     <tr>
@@ -186,9 +174,6 @@
     </tr>
 </table>    
 
-
-
-{{-- <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="100" style="left:1150px;"> --}}
 
 <!-- ////////////////////FIN ENCABEZADO/////////////// -->
 
@@ -303,16 +288,14 @@
                         @endphp
                         @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                             @for($i=0; $i< count($sumadocemeses); $i++)
-                                @if($dosiarea->id_dosiareacontdosisedes == $sumadocemeses[$i]->id_dosiareacontdosisedes)
+                                @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id)
                                     @php
                                         $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_calc_dose;
                                     @endphp
                                 @endif
                             @endfor
                         @endforeach
-                        
                         {{$sumaHp10calcdose}}
-                        
                     </td>
                     <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
                         @php
@@ -320,7 +303,7 @@
                         @endphp
                         @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                             @for($i=0; $i< count($sumadocemeses); $i++)
-                                @if($dosiarea->id_dosiareacontdosisedes == $sumadocemeses[$i]->id_dosiareacontdosisedes)
+                                @if($dosiarea->areadepartamentosede_id== $sumadocemeses[$i]->areadepartamentosede_id)
                                     @php
                                         $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_calc_dose;
                                     @endphp
@@ -338,7 +321,7 @@
                         @endphp
                         @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                             @for($i=0; $i< count($sumaFImeses); $i++)
-                                @if($dosiarea->id_dosiareacontdosisedes == $sumaFImeses[$i]->id_dosiareacontdosisedes)
+                                @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id)
                                     @php
                                         $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_calc_dose;
                                     @endphp
@@ -353,7 +336,7 @@
                         @endphp
                         @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                             @for($i=0; $i< count($sumaFImeses); $i++)
-                                @if($dosiarea->id_dosiareacontdosisedes == $sumaFImeses[$i]->id_dosiareacontdosisedes)
+                                @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id)
                                     @php
                                         $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_calc_dose;
                                     @endphp
@@ -393,7 +376,7 @@
                                     $chek = $fec->persona_id;
                                     echo $datefix;
                                 @endphp
-                                {{-- {{$datefix}} --}}
+                                
                             @else
                             @endif
                         @endforeach
@@ -417,11 +400,7 @@
                     </td>
                     <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
                         {{$dositrabj->ubicacion}}
-                        {{-- @if($dositrabj->dosimetro->tipo_dosimetro == 'EZCLIP')
-                            {{$dositrabj->holder->tipo_holder}}
-                        @else
-                            {{$dositrabj->dosimetro->tipo_dosimetro}}
-                        @endif --}}
+                       
                     </td>
                     <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">{{$dositrabj->energia}}</td>
 
@@ -602,11 +581,8 @@
                             {{$sumaFIHp3calcdose}}
                         @endif
                     </td>
-                    
                     <!-- //////////NOTAS//////// -->
                     <td  style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
-                    
-                            
                         @for($i=1; $i<=6; $i++)
                             @if($dositrabj->{"nota$i"} == 'TRUE')
                                 {{$i}})
@@ -687,16 +663,13 @@
                     <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
                         @php
                             $sumaHp10calcdose = 0;
-                            
                         @endphp
                         @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                             @for($i=0; $i< count($sumadocemeses); $i++)
-                                @if($dosiarea->id_dosiareacontdosisedes == $sumadocemeses[$i]->id_dosiareacontdosisedes)
+                                @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id)
                                     @php
                                         $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_calc_dose;
                                     @endphp
-                                @else
-                                    {{'++'}}
                                 @endif
                             @endfor
                         @endforeach
@@ -710,7 +683,7 @@
                         @endphp
                         @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                             @for($i=0; $i< count($sumadocemeses); $i++)
-                                @if($dosiarea->id_dosiareacontdosisedes == $sumadocemeses[$i]->id_dosiareacontdosisedes)
+                                @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id)
                                     @php
                                         $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_calc_dose;
                                     @endphp
@@ -728,7 +701,7 @@
                         @endphp
                         @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                             @for($i=0; $i< count($sumaFImeses); $i++)
-                                @if($dosiarea->id_dosiareacontdosisedes == $sumaFImeses[$i]->id_dosiareacontdosisedes)
+                                @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id)
                                     
                                     @php
                                         $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_calc_dose;
@@ -744,7 +717,7 @@
                         @endphp
                         @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                             @for($i=0; $i< count($sumaFImeses); $i++)
-                                @if($dosiarea->id_dosiareacontdosisedes == $sumaFImeses[$i]->id_dosiareacontdosisedes)
+                                @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id)
                                     @php
                                         $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_calc_dose;
                                     @endphp

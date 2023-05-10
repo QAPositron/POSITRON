@@ -2371,7 +2371,7 @@ class DosimetriaController extends Controller
             ->where('mes_asignacion', '<=', $mesnumber)
             ->get();
         }
-       /*  return $SumatoriaFechaIngresomesesAreasasig; */
+        /* return $SumatoriaDocemesesAreasasig; */
         $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaDocemesesAreasasig','SumatoriaFechaIngresomesestrabajadoresaisg', 'SumatoriaFechaIngresomesesAreasasig', 'mesescantdosi', 'mesnumber'));
         $pdf->setPaper('8.5x14', 'landscape');
         
@@ -2532,6 +2532,12 @@ class DosimetriaController extends Controller
         ->get();
         return response()->json($asignacionesControl);
     }
+    public function asignacionesArea(Request $request){
+        $asignacionesArea = Dosiareacontdosisede::where('contdosisededepto_id', '=', $request->id)
+        ->where('mes_asignacion', '=', $request->mes)
+        ->get();
+        return response()->json($asignacionesArea);
+    }
     public function trabjencargado(Request $request){
         $contdosisededepto = Contratodosimetriasededepto::find($request->id);
         $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
@@ -2630,7 +2636,7 @@ class DosimetriaController extends Controller
         /* ->select('nota_cambiodosim') */
         ->get();
         
-        /* return $contdosisededepto->departamentosede->departamento->nombre_departamento; */
+        /* return $areasignados; */
         return view('dosimetria.revision_entrada_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'contdosisededepto', 'mesnumber', 'areasignados', 'observaciones', 'observacionesAsig', 'observacionesDelMes'));
     }
     public function revisionCheckControlEntrada(Request $request){

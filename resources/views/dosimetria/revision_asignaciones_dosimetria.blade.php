@@ -572,7 +572,7 @@ crossorigin="anonymous">
         console.log("SE SELECCIONO EL BOTON" +empresa+id+mes);
         var dosi = 0;
         var trab = 0;
-        
+        var area = 0;
         $.get('asignacionesTrab',{id : id, mes: mes}, function(asignacionesTrab){
             console.log("ASIGNACIONES");
             console.log(asignacionesTrab);
@@ -582,7 +582,7 @@ crossorigin="anonymous">
                     trab ++;
                 }
             });
-            console.log(trab);
+            console.log("trab="+trab);
             if(trab != 0){
                 Swal.fire({
                     title: "ALGUNOS DOSÍMETROS NO HAN SIDO REVISADOS !!!",
@@ -609,8 +609,8 @@ crossorigin="anonymous">
                             dosi ++;
                         }
                     });
-                    console.log(dosi);
-                    console.log(trab);
+                    console.log("dosi="+dosi);
+                    console.log("trab="+trab);
                     if(dosi != 0){
                         Swal.fire({
                             title: "ALGUNOS DOSÍMETROS DE CONTROL NO HAN SIDO REVISADOS !!!",
@@ -628,18 +628,21 @@ crossorigin="anonymous">
                             }
                         })
                     }else{
-                        /* var host = window.location.host;
-                        var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/pdf";
-                        window.open(path, '_blank'); */
-                        $.get('trabjencargado', {id : id}, function(trabjencargado){
-                            console.log(trabjencargado)
-                            if(trabjencargado.length != 0){
-                                var host = window.location.host;
-                                var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/pdf";
-                                window.open(path, '_blank');
-                            }else{
+                        $.get('asignacionesArea', {id : id, mes: mes}, function(asignacionesarea){
+                            console.log("ASIGNACIONES AREA");
+                            console.log(asignacionesarea);
+                            asignacionesarea.forEach(dosiarea => {
+                                if(dosiarea.revision_salida == null){
+                                    console.log("hay dosi area");
+                                    area ++;
+                                }
+                            });
+                            console.log("dosi="+dosi);
+                            console.log("trab="+trab);
+                            console.log("area="+trab);
+                            if(area != 0){
                                 Swal.fire({
-                                    title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
+                                    title: "ALGUNOS DOSÍMETROS AMBIENTAL NO HAN SIDO REVISADOS !!!",
                                     text:"DESEA GENERAR EL REPORTE DE SALIDA??",
                                     icon: 'warning',
                                     showCancelButton: true,
@@ -653,10 +656,35 @@ crossorigin="anonymous">
                                         window.open(path, '_blank');
                                     }
                                 })
-                            } 
-                        })
+                            }else{
+                                $.get('trabjencargado', {id : id}, function(trabjencargado){
+                                    console.log(trabjencargado)
+                                    if(trabjencargado.length != 0){
+                                        var host = window.location.host;
+                                        var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/pdf";
+                                        window.open(path, '_blank');
+                                    }else{
+                                        Swal.fire({
+                                            title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
+                                            text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#1A9980',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'SI, SEGURO!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                var host = window.location.host;
+                                                var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/pdf";
+                                                window.open(path, '_blank');
+                                            }
+                                        })
+                                    } 
+                                });
+                            }
+                        });
                     }
-                })
+                });
             }
             
         });
