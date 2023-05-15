@@ -17,16 +17,19 @@
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
                                     <tr class="text-center">
-                                        <th colspan='7'>DOSíMETROS CONTRATADOS</th>
+                                        <th colspan='10'>DOSíMETROS CONTRATADOS</th>
                                     </tr>
                                     <tr class="text-center">
-                                        <th>TÓRAX</th>
-                                        <th>CRISTALINO</th>
-                                        <th>ANILLO</th>
-                                        <th>MUÑECA</th>
-                                        <th>CONTROL</th>
-                                        <th>ÁREA</th>
-                                        <th>CASO</th>
+                                        <th class="align-middle">TÓRAX</th>
+                                        <th class="align-middle">CRISTALINO</th>
+                                        <th class="align-middle">ANILLO</th>
+                                        <th class="align-middle">MUÑECA</th>
+                                        <th class="align-middle">ÁREA</th>
+                                        <th class="align-middle">CASO</th>
+                                        <th class="align-middle">CONTROL TÓRAX</th>
+                                        <th class="align-middle">CONTROL CRISTALINO</th>
+                                        <th class="align-middle">CONTROL ANILLO</th>
+                                        <th class="align-middle">TOTAL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,12 +38,15 @@
                                         <td class="text-center">{{$mescontdosisededepto->dosi_cristalino}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_control}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_area}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_caso}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_cristalino}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_dedo}}</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            
                         </div>
                     </div>
                     <div class="col-md"></div>
@@ -94,6 +100,12 @@
                         <div class="form-floating">
                             <input type="text" class="form-control" name="periodorecambio_asigdosim" id="periodorecambio_asigdosim" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}" readonly>
                             <label for="floatingInputGrid">PERIODO RECAMBIO:</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="ocupacion_asigdosim" id="ocupacion_asigdosim" value="{{$contdosisededepto->ocupacion}}" readonly>
+                            <label for="floatingInputGrid">OCUPACIÓN:</label>
                         </div>
                     </div>
                 </div>

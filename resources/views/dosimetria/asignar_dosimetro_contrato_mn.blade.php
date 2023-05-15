@@ -14,12 +14,12 @@
                 <br>
                 <div class="row g-2 mx-3">
                     <div class="col-md"></div>
-                    <div class="col-md-7">    
+                    <div class="col-md-8">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
                                     <tr class="text-center">
-                                        <th colspan='9'>DOSíMETROS CONTRATADOS</th>
+                                        <th colspan='10'>DOSíMETROS CONTRATADOS</th>
                                     </tr>
                                     <tr class="text-center">
                                         <th class="align-middle">TÓRAX</th>
@@ -31,6 +31,7 @@
                                         <th class="align-middle">CONTROL TÓRAX</th>
                                         <th class="align-middle">CONTROL CRISTALINO</th>
                                         <th class="align-middle">CONTROL ANILLO</th>
+                                        <th class="align-middle">TOTAL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,6 +45,7 @@
                                         <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_control_cristalino}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_control_dedo}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_dedo + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_caso + $mescontdosisededepto->dosi_control_torax + $mescontdosisededepto->dosi_control_cristalino + $mescontdosisededepto->dosi_control_dedo}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -108,6 +110,12 @@
                             <label for="floatingInputGrid">PERIODO RECAMBIO:</label>
                         </div>
                     </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="ocupacion_asigdosim" id="ocupacion_asigdosim" value="{{$contdosisededepto->ocupacion}}" readonly>
+                            <label for="floatingInputGrid">OCUPACIÓN:</label>
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <div class="row g-2 mx-3">
@@ -119,7 +127,7 @@
                                     <th style='width: 16.40%'>UBICACIÓN</th>
                                     <th style='width: 16.40%'>DOSÍMETRO</th>
                                     <th style='width: 16.40%'>HOLDER</th>
-                                    <th style='width: 20.60%'>OCUPACIÓN</th>
+                                    {{-- <th style='width: 20.60%'>OCUPACIÓN</th> --}}
                                 </thead>
                                 <tbody>
                                     <input hidden name="mesNumber1" id="mesNumber1" value="{{$mesnumber}}">
@@ -139,7 +147,7 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
-                                            <td>
+                                            {{-- <td>
                                                 <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" style="text-transform:uppercase" @if($dosicontrolToraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicontrolToraxant->dosimetro_uso != 'FALSE')
                                                         @if($dosicontrolToraxant->ocupacion=='AM')
@@ -155,7 +163,7 @@
                                                     <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                             
                                         </tr>
                                     @endforeach
@@ -173,10 +181,10 @@
                                                     </select>
                                                 </td>
                                                 <td class='align-middle text-center'>N.A.</td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                         <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -190,12 +198,12 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option> --}}
+                                                        <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                                 <td></td>
                                             </tr>
                                         @endfor
@@ -222,7 +230,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" style="text-transform:uppercase" @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE')
                                                         @if($dosicontrolCristalinoant->ocupacion=='AM')
@@ -234,7 +242,7 @@
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -248,12 +256,12 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option> --}}
+                                                    <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                             
                                         </tr>
                                     @endforeach
@@ -278,10 +286,10 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -295,12 +303,12 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option> --}}
+                                                        <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                                 <td></td>
                                             </tr>
                                         @endfor
@@ -327,7 +335,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" style="text-transform:uppercase" @if($dosicontrolDedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicontrolDedoant->dosimetro_uso != 'FALSE')
                                                         @if($dosicontrolDedoant->ocupacion=='AM')
@@ -339,7 +347,7 @@
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -353,12 +361,12 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option> --}}
+                                                    <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                             
                                         </tr>
                                     @endforeach
@@ -383,10 +391,10 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -400,13 +408,13 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option> --}}
+                                                        <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
 
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                                 <td></td>
                                             </tr>
                                         @endfor
@@ -438,7 +446,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">N.A</td>
-                                            <td>
+                                            {{-- <td>
                                                 <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" style="text-transform:uppercase" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosiareant->dosimetro_uso != 'FALSE')
                                                         @if($dosiareant->ocupacion=='AM')
@@ -450,7 +458,7 @@
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -464,12 +472,12 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option> --}}
+                                                    <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                             {{-- <td>
                                                 <button id="changeArea" class="btn colorQA"  type="button" onclick="changueArea('{{$dosiareant->areadepartamentosede_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -502,10 +510,10 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">N.A</td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -519,13 +527,13 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option> --}}
+                                                        <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
 
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                                 {{-- <td>
                                                     <button id="changeArea" class="btn colorQA"  type="button" onclick="changueArea('{{$dosiareant->areadepartamentosede_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -567,7 +575,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">N.A</td>
-                                            <td class="align-middle text-center">
+                                            {{-- <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" style="text-transform:uppercase" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicasoant->dosimetro_uso != 'FALSE')
                                                         @if($dosicasoant->ocupacion=='AM')
@@ -579,7 +587,7 @@
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -593,13 +601,13 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option> --}}
+                                                    <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
 
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                             {{-- <td>
                                                 <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -636,10 +644,10 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">N.A</td>
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -653,13 +661,13 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option> --}}
+                                                        <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
 
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                                 {{-- <td>
                                                     <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -701,7 +709,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">N.A</td>
-                                            <td class="align-middle text-center">
+                                            {{-- <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" style="text-transform:uppercase" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dositoraxant->dosimetro_uso != 'FALSE')
                                                         @if($dositoraxant->ocupacion=='AM')
@@ -713,7 +721,7 @@
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -727,13 +735,13 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option> --}}
+                                                    <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
 
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                             {{-- <td>
                                                 <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -769,10 +777,10 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">N.A</td>
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -786,13 +794,13 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option> --}}
+                                                        <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
 
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                                 {{-- <td>
                                                     <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -841,7 +849,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class="align-middle text-center">
+                                            {{-- <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosicristalinoant->dosimetro_uso != 'FALSE')
                                                         @if($dosicristalinoant->ocupacion=='AM')
@@ -853,7 +861,7 @@
                                                         @endif
                                                     @endif    
                                                     <option value="">----</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -867,13 +875,13 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option> --}}
+                                                    <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
 
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                             {{-- <td>
                                                 <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -916,10 +924,10 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -933,13 +941,13 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option> --}}
+                                                        <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
 
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                                 {{-- <td>
                                                     <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -989,7 +997,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class="align-middle text-center">
+                                            {{-- <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca"  style="text-transform:uppercase" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosimuñecant->dosimetro_uso != 'FALSE')
                                                         @if($dosimuñecant->ocupacion=='AM')
@@ -1001,7 +1009,7 @@
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1015,13 +1023,13 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option> --}}
+                                                    <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
 
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                             {{-- <td>
                                                 <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -1062,10 +1070,10 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1079,13 +1087,13 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option> --}}
+                                                        <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
                                                         
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                                 {{-- <td>
                                                     <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -1134,7 +1142,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class="align-middle text-center">
+                                            {{-- <td class="align-middle text-center">
                                                 <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     @if($dosidedoant->dosimetro_uso != 'FALSE')
                                                         @if($dosidedoant->ocupacion=='AM')
@@ -1146,7 +1154,7 @@
                                                         @endif
                                                     @endif
                                                     <option value="">----</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                     <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1160,13 +1168,13 @@
                                                     <option value="HD">HEMODINAMIA</option>
                                                     <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option> --}}
+                                                    <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
                                                     <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
 
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                             {{-- <td>
                                                 <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->persona_id}}');">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
@@ -1209,10 +1217,10 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
                                                     <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -1226,13 +1234,13 @@
                                                         <option value="HD">HEMODINAMIA</option>
                                                         <option value="OD">RAYOS X ODONTOLÓGICO</option>
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option> --}}
+                                                        <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
                                                         <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
 
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                                 {{-- <td>
                                                     <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->persona_id}}');">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">

@@ -164,9 +164,9 @@
                                         @endif
                                     </td>
                                     <td style="text-align:center;">@if($temtrabasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($temtrabasig->ubicacion))}} @endif</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower(substr($temtrabasig->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower(substr($temtrabasig->nombre_departamento,0,6), "UTF-8"))}}.</td>
                                     <td style="text-align:center;">{{$temtrabasig->mes_asignacion}}/12</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower($temtrabasig->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower($temtrabasig->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$temtrabasig->primer_dia_uso}} - {{$temtrabasig->ultimo_dia_uso}}</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
@@ -175,7 +175,7 @@
                         @foreach($temptrabajdosimrev as $temtrabasig)
                             @if($temtrabasig->trabajcontdosimetro_id != NULL)
                                 <tr>
-                                    <td>{{ucwords(strtolower($temtrabasig->persona->primer_nombre_persona))}} {{ucwords(strtolower($temtrabasig->persona->segundo_nombre_persona))}} {{ucwords(strtolower($temtrabasig->persona->primer_apellido_persona))}} {{ucwords(strtolower($temtrabasig->persona->segundo_apellido_persona))}}</td>
+                                    <td>{{ucwords(mb_strtolower($temtrabasig->persona->primer_nombre_persona, "UTF-8"))}} {{ucwords(mb_strtolower($temtrabasig->persona->segundo_nombre_persona, "UTF-8"))}} {{ucwords(mb_strtolower($temtrabasig->persona->primer_apellido_persona, "UTF-8"))}} {{ucwords(mb_strtolower($temtrabasig->persona->segundo_apellido_persona, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$temtrabasig->dosimetro->codigo_dosimeter}}</td>
                                     <td style="text-align:center;">
                                         @if($temtrabasig->holder_id == NULL)
@@ -185,9 +185,9 @@
                                         @endif
                                     </td>
                                     <td style="text-align:center;">@if($temtrabasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($temtrabasig->ubicacion))}}@endif</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower(substr($temtrabasig->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower(substr($temtrabasig->nombre_departamento,0,6), "UTF-8"))}}.</td>
                                     <td style="text-align:center;">{{$temtrabasig->mes_asignacion}}/12</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower($temtrabasig->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower($temtrabasig->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$temtrabasig->primer_dia_uso}} - {{$temtrabasig->ultimo_dia_uso}}</td>
                                     <td></td>
                                 </tr>
@@ -197,7 +197,7 @@
                         @if($dosicontrolasig->isEmpty())
                             @foreach($areasignados as $area)
                                 <tr>
-                                    <td>{{ucwords(strtolower($area->areadepartamentosede->nombre_area))}}</td>
+                                    <td>{{ucwords(mb_strtolower($area->areadepartamentosede->nombre_area, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$area->dosimetro->codigo_dosimeter}}</td>
                                     <td style="text-align:center;">N.A.
                                         {{-- @if($trabjasig->holder_id == NULL)
@@ -207,16 +207,16 @@
                                         @endif --}}
                                     </td>
                                     <td style="text-align:center;">Ambiental</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
                                     <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @else {{$mesnumber}}/4 @endif </td>
-                                    <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$area->primer_dia_uso}} - {{$area->ultimo_dia_uso}}</td>
                                     <td></td>
                                 </tr>
                             @endforeach
                             @foreach($trabjasignados as $trabjasig)
                                 <tr>
-                                    <td>{{ucwords(strtolower($trabjasig->persona->primer_nombre_persona))}} {{ucwords(strtolower($trabjasig->persona->segundo_nombre_persona))}} {{ucwords(strtolower($trabjasig->persona->primer_apellido_persona))}} {{ucwords(strtolower($trabjasig->persona->segundo_apellido_persona))}}</td>
+                                    <td>{{ucwords(mb_strtolower($trabjasig->persona->primer_nombre_persona, "UTF-8"))}} {{ucwords(mb_strtolower($trabjasig->persona->segundo_nombre_persona, "UTF-8"))}} {{ucwords(mb_strtolower($trabjasig->persona->primer_apellido_persona, "UTF-8"))}} {{ucwords(mb_strtolower($trabjasig->persona->segundo_apellido_persona, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->dosimetro->codigo_dosimeter}}</td>
                                     <td style="text-align:center;">
                                         @if($trabjasig->holder_id == NULL)
@@ -226,9 +226,9 @@
                                         @endif
                                     </td>
                                     <td style="text-align:center;">@if($trabjasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($trabjasig->ubicacion))}}@endif</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
                                     <td style="text-align:center;">{{$mesnumber}}/12</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->primer_dia_uso}} - {{$trabjasig->ultimo_dia_uso}}</td>
                                     <td></td>
                                 </tr>
@@ -246,16 +246,16 @@
                                         @endif
                                     </td>
                                     <td style="text-align:center;">@if($dosicont->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($dosicont->ubicacion))}} @endif</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
                                     <td style="text-align:center;">{{$mesnumber}}/12</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$dosicont->primer_dia_uso}} - {{$dosicont->ultimo_dia_uso}}</td>
                                     <td style="text-align:center;"></td>
                                 </tr>
                             @endforeach
                             @foreach($areasignados as $area)
                                 <tr>
-                                    <td>{{ucwords(strtolower($area->areadepartamentosede->nombre_area))}}</td>
+                                    <td>{{ucwords(mb_strtolower($area->areadepartamentosede->nombre_area, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$area->dosimetro->codigo_dosimeter}}</td>
                                     <td style="text-align:center;">N.A.
                                         {{-- @if($trabjasig->holder_id == NULL)
@@ -265,16 +265,16 @@
                                         @endif --}}
                                     </td>
                                     <td style="text-align:center;">Ambiental</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
                                     <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @else {{$mesnumber}}/4 @endif </td>
-                                    <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$area->primer_dia_uso}} - {{$area->ultimo_dia_uso}}</td>
                                     <td></td>
                                 </tr>
                             @endforeach
                             @foreach($trabjasignados as $trabjasig)
                                 <tr>
-                                    <td>{{ucwords(strtolower($trabjasig->persona->primer_nombre_persona))}} {{ucwords(strtolower($trabjasig->persona->segundo_nombre_persona))}} {{ucwords(strtolower($trabjasig->persona->primer_apellido_persona))}} {{ucwords(strtolower($trabjasig->persona->segundo_apellido_persona))}}</td>
+                                    <td>{{ucwords(mb_strtolower($trabjasig->persona->primer_nombre_persona, "UTF-8"))}} {{ucwords(mb_strtolower($trabjasig->persona->segundo_nombre_persona, "UTF-8"))}} {{ucwords(mb_strtolower($trabjasig->persona->primer_apellido_persona, "UTF-8"))}} {{ucwords(mb_strtolower($trabjasig->persona->segundo_apellido_persona, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->dosimetro->codigo_dosimeter}}</td>
                                     <td style="text-align:center;">
                                         @if($trabjasig->holder_id == NULL)
@@ -284,9 +284,9 @@
                                         @endif
                                     </td>
                                     <td style="text-align:center;">@if($trabjasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($trabjasig->ubicacion))}} @endif</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,4)))}}.</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
                                     <td style="text-align:center;">{{$mesnumber}}/12</td>
-                                    <td style="text-align:center;">{{ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede))}}</td>
+                                    <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->primer_dia_uso}} - {{$trabjasig->ultimo_dia_uso}}</td>
                                     <td></td>
                                 </tr>

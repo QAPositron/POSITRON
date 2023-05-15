@@ -41,12 +41,12 @@
                 
                 <div class="row g-2 mx-3">
                     <div class="col-md"></div>
-                    <div class="col-md-7">    
+                    <div class="col-md-8">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
                                     <tr class="text-center">
-                                        <th colspan='9'>DOSíMETROS CONTRATADOS</th>
+                                        <th colspan='10'>DOSíMETROS CONTRATADOS</th>
                                     </tr>
                                     <tr class="text-center">
                                         <th class="align-middle">TÓRAX</th>
@@ -58,6 +58,7 @@
                                         <th class="align-middle">CONTROL TÓRAX</th>
                                         <th class="align-middle">CONTROL CRISTALINO</th>
                                         <th class="align-middle">CONTROL ANILLO</th>
+                                        <th class="align-middle">TOTAL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -71,6 +72,7 @@
                                         <td class="text-center">{{$contdosisededepto->dosi_control_torax}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_control_cristalino}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_control_dedo}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_torax + $contdosisededepto->dosi_cristalino + $contdosisededepto->dosi_dedo + $contdosisededepto->dosi_muñeca + $contdosisededepto->dosi_area + $contdosisededepto->dosi_caso + $contdosisededepto->dosi_control_torax + $contdosisededepto->dosi_control_cristalino + $contdosisededepto->dosi_control_dedo}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -136,6 +138,12 @@
                             <label for="floatingInputGrid">PERIODO RECAMBIO:</label>
                         </div>
                     </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="ocupacion_asigdosim" id="ocupacion_asigdosim" value="{{$contdosisededepto->ocupacion}}" readonly>
+                            <label for="floatingInputGrid">OCUPACIÓN:</label>
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <div class="row g-2 mx-3">
@@ -147,7 +155,7 @@
                                     <th style='width: 16.40%'>UBICACIÓN</th>
                                     <th style='width: 16.40%'>DOSÍMETRO</th>
                                     <th style='width: 16.40%'>HOLDER</th>
-                                    <th style='width: 16.60%'>OCUPACIÓN</th>
+                                    {{-- <th style='width: 16.60%'>OCUPACIÓN</th> --}}
                                 </thead> 
                                 <tbody>
                                     
@@ -168,13 +176,13 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
-                                            <td>
+                                            {{-- <td>
                                                 <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" autofocus style="text-transform:uppercase">
                                                     <option value="">----</option>
                                                     <option value="AM">APLICCIONES MÉDICAS</option>
                                                     <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -190,9 +198,9 @@
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
                                                     <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option> --}}
+                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endfor
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo control_cristalino DEL primer mes/////// --}}
@@ -215,13 +223,13 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" autofocus style="text-transform:uppercase">
                                                     <option value="">----</option>
                                                     <option value="AM">APLICCIONES MÉDICAS</option>
                                                     <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -237,9 +245,9 @@
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
                                                     <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option> --}}
+                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endfor
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo control_dedo DEL primer mes/////// --}}
@@ -262,13 +270,13 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" autofocus style="text-transform:uppercase">
                                                     <option value="">----</option>
                                                     <option value="AM">APLICCIONES MÉDICAS</option>
                                                     <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                     <option value="O">OTRO</option>
-                                                    {{-- <option value="T"> TELETERAPIA</option>
+                                                    <option value="T"> TELETERAPIA</option>
                                                     <option value="BQ">BRAQUITERAPIA</option>
                                                     <option value="MN">MEDICINA NUCLEAR</option>
                                                     <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -284,9 +292,9 @@
                                                     <option value="RX">RADIODIAGNÓSTICO</option>
                                                     <option value="FL">FLUOROSCOPIA</option>
                                                     <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option> --}}
+                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                 </select>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endfor
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo ambiental que falten por asignar en el primer mes/////// --}}
@@ -311,13 +319,13 @@
                                                     </select>
                                                 </td>
                                                 <td class='align-middle text-center'>N.A</td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="AM">APLICCIONES MÉDICAS</option>
                                                         <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -333,9 +341,9 @@
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
                                                         <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option> --}}
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor
@@ -362,13 +370,13 @@
                                                     </select>
                                                 </td>
                                                 <td class='align-middle text-center'>N.A</td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="AM">APLICCIONES MÉDICAS</option>
                                                         <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -384,9 +392,9 @@
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
                                                         <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option> --}}
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor
@@ -414,13 +422,13 @@
                                                     </select>
                                                 </td>
                                                 <td class='align-middle text-center'>N.A</td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="AM">APLICCIONES MÉDICAS</option>
                                                         <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -436,9 +444,9 @@
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
                                                         <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option> --}}
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor
@@ -473,13 +481,13 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="AM">APLICCIONES MÉDICAS</option>
                                                         <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -495,9 +503,9 @@
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
                                                         <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option> --}}
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor  
@@ -532,13 +540,13 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="AM">APLICCIONES MÉDICAS</option>
                                                         <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -554,9 +562,9 @@
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
                                                         <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option> --}}
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor 
@@ -590,13 +598,13 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td>
+                                                {{-- <td>
                                                     <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" autofocus style="text-transform:uppercase">
                                                         <option value="">----</option>
                                                         <option value="AM">APLICCIONES MÉDICAS</option>
                                                         <option value="AI">APLICCIONES INDUSTRIALES</option>
                                                         <option value="O">OTRO</option>
-                                                        {{-- <option value="T"> TELETERAPIA</option>
+                                                        <option value="T"> TELETERAPIA</option>
                                                         <option value="BQ">BRAQUITERAPIA</option>
                                                         <option value="MN">MEDICINA NUCLEAR</option>
                                                         <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
@@ -612,9 +620,9 @@
                                                         <option value="RX">RADIODIAGNÓSTICO</option>
                                                         <option value="FL">FLUOROSCOPIA</option>
                                                         <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option> --}}
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
                                                     </select>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor 

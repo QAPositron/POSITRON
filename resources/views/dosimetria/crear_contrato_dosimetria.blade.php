@@ -159,8 +159,17 @@
                                     <div class="row">
                                         <div class="col-md"></div>
                                         <div class="col-md"></div>
-                                        <div class="col-md"></div>
-                                        <div class="col-md"></div>
+                                        <div class="col-md-3">
+                                            <div class="form-floating">
+                                                <select class="form-select" id="ocupacion_contrato_sede" autofocus style="text-transform:uppercase">
+                                                    <option value="">----</option>
+                                                    <option value="AM">APLICACIONES MÉDICAS</option>
+                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">OTRO</option>
+                                                </select>
+                                                <label for="floatingSelectGrid">OCUPACIÓN:</label>
+                                            </div>
+                                        </div>
                                         <div class="col-md-2 text-center">
                                             <label for="" class="text-center">No. DOSÍM. CONTROL TÓRAX</label>
                                             <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_torax_contrato_sede" name="num_dosi_control_torax_contrato_sede">
@@ -272,6 +281,9 @@ crossorigin="anonymous">
         
         document.getElementById(`depa${depaNumber}`).querySelector(`#departamento_sede`)
             .setAttribute("name", `departamentos_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#ocupacion_contrato_sede`)
+            .setAttribute("name", `ocupacion_sede${sedesNumber-1}[]`);
 
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_torax_contrato_sede`)
             .setAttribute("name", `dosimetro_control_torax_sede${sedesNumber-1}[]`);

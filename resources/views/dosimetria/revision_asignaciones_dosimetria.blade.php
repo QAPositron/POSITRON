@@ -118,7 +118,7 @@
                                                 {{$areasig->holder->codigo_holder}}
                                             @endif --}}
                                         </td>
-                                        <td class='align-middle  py-3 text-center'>{{$areasig->ocupacion}}</td>
+                                        <td class='align-middle  py-3 text-center'>{{$contdosisededepto->ocupacion}}</td>
                                         <td class='align-middle py-3 text-center'>AMBIENTAL</td>
                                     </tr>
                                 @endforeach
@@ -134,7 +134,7 @@
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle  py-3 text-center'>{{$trabasig->ocupacion}}</td>
+                                        <td class='align-middle  py-3 text-center'>{{$contdosisededepto->ocupacion}}</td>
                                         <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
                                     </tr>
                                 @endforeach
@@ -151,7 +151,7 @@
                                                 {{$dosicontasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle py-3 text-center'>{{$dosicontasig->ocupacion}}</td>
+                                        <td class='align-middle py-3 text-center'>{{$contdosisededepto->ocupacion}}</td>
                                         <td class='align-middle py-3 text-center'>{{$dosicontasig->ubicacion}}</td>
                                         
                                     </tr>
@@ -168,7 +168,7 @@
                                                 {{$areasig->holder->codigo_holder}}
                                             @endif --}}
                                         </td>
-                                        <td class='align-middle  py-3 text-center'>{{$areasig->ocupacion}}</td>
+                                        <td class='align-middle  py-3 text-center'>{{$contdosisededepto->ocupacion}}</td>
                                         <td class='align-middle py-3 text-center'>AMBIENTAL</td>
                                     </tr>
                                 @endforeach
@@ -184,7 +184,7 @@
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle py-3  text-center'>{{$trabasig->ocupacion}}</td>
+                                        <td class='align-middle py-3  text-center'>{{$contdosisededepto->ocupacion}}</td>
                                         <td class='align-middle py-3  text-center'>{{$trabasig->ubicacion}}</td>
                                     </tr>
                                 @endforeach

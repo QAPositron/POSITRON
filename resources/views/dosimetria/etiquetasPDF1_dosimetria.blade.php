@@ -267,7 +267,7 @@
     }
    .codigobar_cristalino, .codigobar_anillo{
         position: relative; 
-        bottom: 57px;
+        bottom: 58px;
         left: 123px; 
         /* background: orange; */
         width: 75px;
@@ -300,8 +300,8 @@
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL TORAX ////////// --}}
                     @foreach($contratodosi as $contdosi)
                         <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @endif <b>NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b></div>
-                        <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 26, "UTF-8")}}</div>
-                        <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0,9,"UTF-8")}}</div>
+                        <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 29, "UTF-8")}}</div>
+                        <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0,11,"UTF-8")}}</div>
                     @endforeach
                     <div class="codigo_cont_torax" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
                     @php
@@ -312,7 +312,7 @@
                     <div class="ultimodia_cont_torax" >{{$datefix2}}</div>
                     <div class="codigobar_cont_torax">
                         @php
-                            echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.7,10);
+                            echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.7,14);
                         @endphp
                     </div>
                 </div>
@@ -338,7 +338,7 @@
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL CRISTALINO ////////// --}}
                     @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_cristalino" >{{mb_substr($contdosi->nombre_empresa, 0, 26, "UTF-8")}}</div>
+                        <div class="empresa_cont_cristalino" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
                         <div class="num_iden_cont_cristalino">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
                     @endforeach
                         <div class="codigo_cont_cristalino" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
@@ -350,7 +350,7 @@
                     <div class="ultimodia_cont_cristalino" >{{$datefix2}}</div>
                     <div class="codigobar_cont_cristalino">
                         @php
-                            echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.9,8);
+                            echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.9,10);
                         @endphp
                     </div>
                 </div>
@@ -376,7 +376,7 @@
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
                     @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 26, "UTF-8")}}</div>
+                        <div class="empresa_cont_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
                         <div class="num_iden_cont_anillo">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
                     @endforeach
                     <div class="codigo_cont_anillo" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
@@ -388,7 +388,7 @@
                     <div class="ultimodia_cont_anillo" >{{$datefix2}}</div>
                     <div class="codigobar_cont_anillo">
                         @php
-                            echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.9,8);
+                            echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.9,10);
                         @endphp
                     </div>
                 </div>
@@ -431,7 +431,7 @@
                     <div class="ultimodia_torax" >{{$datefix2}}</div>
                     <div class="codigobar_torax">
                         @php
-                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.7,10);
+                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.7,14);
                         @endphp
                     </div>
                 </div>
@@ -470,7 +470,7 @@
                     <div class="ultimodia_cristalino" >{{$datefix2}}</div>
                     <div class="codigobar_cristalino">
                         @php
-                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.9,8);
+                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.9,10);
                         @endphp
                     </div> 
                 </div>
@@ -509,7 +509,7 @@
                     <div class="ultimodia_anillo" >{{$datefix2}}</div>
                     <div class="codigobar_anillo">
                         @php
-                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.9,8);
+                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.9,10);
                         @endphp
                     </div>
                 </div>
@@ -551,7 +551,7 @@
                 <div class="ultimodia_cont_torax" >{{$datefix2}}</div>
                 <div class="codigobar_cont_torax">
                     @php
-                        echo DNS1D::getBarcodeHTML($area->dosimetro->codigo_dosimeter, 'C128',0.7,10);
+                        echo DNS1D::getBarcodeHTML($area->dosimetro->codigo_dosimeter, 'C128',0.7,14);
                     @endphp
                 </div>
             </div>

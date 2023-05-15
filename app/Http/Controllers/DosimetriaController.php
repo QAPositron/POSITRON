@@ -149,6 +149,7 @@ class DosimetriaController extends Controller
                     $contratoDosiSedeDepto->contratodosimetriasede_id = $contratoDosiSede->id_contratodosimetriasede;
                     $contratoDosiSedeDepto->departamentosede_id       = $request->input('departamentos_sede'.$i)[$x];
                     $contratoDosiSedeDepto->mes_actual                = 1;
+                    $contratoDosiSedeDepto->ocupacion                 = $request->input('ocupacion_sede'.$i)[$x] == NULL ? NULL : $request->input('ocupacion_sede'.$i)[$x];
                     $contratoDosiSedeDepto->dosi_control_torax        = empty($request->input('dosimetro_control_torax_sede'.$i)[$x]) ? 0 : 1;
                     $contratoDosiSedeDepto->dosi_control_cristalino   = empty($request->input('dosimetro_control_cristalino_sede'.$i)[$x])? 0 : 1;
                     $contratoDosiSedeDepto->dosi_control_dedo         = empty($request->input('dosimetro_control_dedo_sede'.$i)[$x]) ? 0 : 1;
@@ -814,7 +815,7 @@ class DosimetriaController extends Controller
                 $asigdosim_control->fecha_dosim_enviado         = $request->fecha_envio_dosim_asignado;
                 $asigdosim_control->fecha_dosim_recibido        = $request->fecha_recibido_dosim_asignado;
                 $asigdosim_control->fecha_dosim_devuelto        = $request->fecha_devuelto_dosim_asignado;
-                $asigdosim_control->ocupacion                   = $request->ocupacion_asigdosimControlTorax[$i];
+                /* $asigdosim_control->ocupacion                   = $request->ocupacion_asigdosimControlTorax[$i]; */
                 $asigdosim_control->ubicacion                   = 'TORAX';
                 $asigdosim_control->energia                     = $request->energia_asigdosim;
     
@@ -845,7 +846,7 @@ class DosimetriaController extends Controller
                 $asigdosim_control->fecha_dosim_enviado         = $request->fecha_envio_dosim_asignado;
                 $asigdosim_control->fecha_dosim_recibido        = $request->fecha_recibido_dosim_asignado;
                 $asigdosim_control->fecha_dosim_devuelto        = $request->fecha_devuelto_dosim_asignado;
-                $asigdosim_control->ocupacion                   = $request->ocupacion_asigdosimControlCristalino[$i];
+                /* $asigdosim_control->ocupacion                   = $request->ocupacion_asigdosimControlCristalino[$i]; */
                 $asigdosim_control->ubicacion                   = 'CRISTALINO';
                 $asigdosim_control->energia                     = $request->energia_asigdosim;
     
@@ -880,7 +881,7 @@ class DosimetriaController extends Controller
                 $asigdosim_control->fecha_dosim_enviado         = $request->fecha_envio_dosim_asignado;
                 $asigdosim_control->fecha_dosim_recibido        = $request->fecha_recibido_dosim_asignado;
                 $asigdosim_control->fecha_dosim_devuelto        = $request->fecha_devuelto_dosim_asignado;
-                $asigdosim_control->ocupacion                   = $request->ocupacion_asigdosimControlDedo[$i];
+                /* $asigdosim_control->ocupacion                   = $request->ocupacion_asigdosimControlDedo[$i]; */
                 $asigdosim_control->ubicacion                   = 'ANILLO';
                 $asigdosim_control->energia                     = $request->energia_asigdosim;
     
@@ -915,7 +916,7 @@ class DosimetriaController extends Controller
                 $asigdosimTorax->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimTorax->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimTorax->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimTorax->ocupacion                 = $request->ocupacion_asigdosimTorax[$i];
+                /* $asigdosimTorax->ocupacion                 = $request->ocupacion_asigdosimTorax[$i]; */
                 $asigdosimTorax->ubicacion                 = 'TORAX';
                 $asigdosimTorax->energia                   = $request->energia_asigdosim;
     
@@ -945,7 +946,7 @@ class DosimetriaController extends Controller
                 $asigdosimArea->fecha_dosim_enviado         = $request->fecha_envio_dosim_asignado;
                 $asigdosimArea->fecha_dosim_recibido        = $request->fecha_recibido_dosim_asignado;
                 $asigdosimArea->fecha_dosim_devuelto        = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimArea->ocupacion                   = $request->ocupacion_asigdosimArea[$i];
+                /* $asigdosimArea->ocupacion                   = $request->ocupacion_asigdosimArea[$i]; */
                 $asigdosimArea->energia                     = $request->energia_asigdosim;
 
                 $asigdosimArea->save();
@@ -974,7 +975,7 @@ class DosimetriaController extends Controller
                 $asigdosimCaso->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimCaso->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimCaso->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimCaso->ocupacion                 = $request->ocupacion_asigdosimCaso[$i];
+                /* $asigdosimCaso->ocupacion                 = $request->ocupacion_asigdosimCaso[$i]; */
                 $asigdosimCaso->ubicacion                 = 'CASO';
                 $asigdosimCaso->energia                   = $request->energia_asigdosim;
     
@@ -1006,7 +1007,7 @@ class DosimetriaController extends Controller
                 $asigdosimCristalino->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimCristalino->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimCristalino->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimCristalino->ocupacion                 = $request->ocupacion_asigdosimCristalino[$i];
+                /* $asigdosimCristalino->ocupacion                 = $request->ocupacion_asigdosimCristalino[$i]; */
                 $asigdosimCristalino->ubicacion                 = 'CRISTALINO';
                 $asigdosimCristalino->energia                   = $request->energia_asigdosim;
     
@@ -1042,7 +1043,7 @@ class DosimetriaController extends Controller
                 $asigdosimMuneca->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimMuneca->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimMuneca->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimMuneca->ocupacion                 = $request->ocupacion_asigdosimMuneca[$i];
+                /* $asigdosimMuneca->ocupacion                 = $request->ocupacion_asigdosimMuneca[$i]; */
                 $asigdosimMuneca->ubicacion                 = 'MUÑECA';
                 $asigdosimMuneca->energia                   = $request->energia_asigdosim;
     
@@ -1078,7 +1079,7 @@ class DosimetriaController extends Controller
                 $asigdosimDedo->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimDedo->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimDedo->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimDedo->ocupacion                 = $request->ocupacion_asigdosimDedo[$i];
+                /* $asigdosimDedo->ocupacion                 = $request->ocupacion_asigdosimDedo[$i]; */
                 $asigdosimDedo->ubicacion                 = 'ANILLO';
                 $asigdosimDedo->energia                   = $request->energia_asigdosim;
     
@@ -1301,7 +1302,7 @@ class DosimetriaController extends Controller
                 $asigdosim_control_torax->fecha_dosim_enviado         = $request->fecha_envio_dosim_asignado;
                 $asigdosim_control_torax->fecha_dosim_recibido        = $request->fecha_recibido_dosim_asignado;
                 $asigdosim_control_torax->fecha_dosim_devuelto        = $request->fecha_devuelto_dosim_asignado;
-                $asigdosim_control_torax->ocupacion                   = $request->ocupacion_asigdosimControlTorax[$i];
+                /* $asigdosim_control_torax->ocupacion                   = $request->ocupacion_asigdosimControlTorax[$i]; */
                 $asigdosim_control_torax->ubicacion                   = 'TORAX';
                 $asigdosim_control_torax->energia                     = $request->energia_asigdosim;
     
@@ -1338,7 +1339,7 @@ class DosimetriaController extends Controller
                 $asigdosim_control_cristalino->fecha_dosim_enviado         = $request->fecha_envio_dosim_asignado;
                 $asigdosim_control_cristalino->fecha_dosim_recibido        = $request->fecha_recibido_dosim_asignado;
                 $asigdosim_control_cristalino->fecha_dosim_devuelto        = $request->fecha_devuelto_dosim_asignado;
-                $asigdosim_control_cristalino->ocupacion                   = $request->ocupacion_asigdosimControlTorax[$i];
+                /* $asigdosim_control_cristalino->ocupacion                   = $request->ocupacion_asigdosimControlTorax[$i]; */
                 $asigdosim_control_cristalino->ubicacion                   = 'CRISTALINO';
                 $asigdosim_control_cristalino->energia                     = $request->energia_asigdosim;
     
@@ -1379,7 +1380,7 @@ class DosimetriaController extends Controller
                 $asigdosim_control_dedo->fecha_dosim_enviado         = $request->fecha_envio_dosim_asignado;
                 $asigdosim_control_dedo->fecha_dosim_recibido        = $request->fecha_recibido_dosim_asignado;
                 $asigdosim_control_dedo->fecha_dosim_devuelto        = $request->fecha_devuelto_dosim_asignado;
-                $asigdosim_control_dedo->ocupacion                   = $request->ocupacion_asigdosimControlTorax[$i];
+                /* $asigdosim_control_dedo->ocupacion                   = $request->ocupacion_asigdosimControlTorax[$i]; */
                 $asigdosim_control_dedo->ubicacion                   = 'ANILLO';
                 $asigdosim_control_dedo->energia                     = $request->energia_asigdosim;
     
@@ -1421,7 +1422,7 @@ class DosimetriaController extends Controller
                 $asigdosimTorax->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimTorax->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimTorax->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimTorax->ocupacion                 = $request->ocupacion_asigdosimTorax[$i];
+                /* $asigdosimTorax->ocupacion                 = $request->ocupacion_asigdosimTorax[$i]; */
                 $asigdosimTorax->ubicacion                 = 'TORAX';
                 $asigdosimTorax->energia                   = $request->energia_asigdosim;
     
@@ -1457,7 +1458,7 @@ class DosimetriaController extends Controller
                 $asigdosimArea->fecha_dosim_enviado         = $request->fecha_envio_dosim_asignado;
                 $asigdosimArea->fecha_dosim_recibido        = $request->fecha_recibido_dosim_asignado;
                 $asigdosimArea->fecha_dosim_devuelto        = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimArea->ocupacion                   = $request->ocupacion_asigdosimArea[$i];
+               /*  $asigdosimArea->ocupacion                   = $request->ocupacion_asigdosimArea[$i]; */
                 $asigdosimArea->energia                     = $request->energia_asigdosim;
 
                 $asigdosimArea->save();
@@ -1491,7 +1492,7 @@ class DosimetriaController extends Controller
                 $asigdosimCaso->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimCaso->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimCaso->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimCaso->ocupacion                 = $request->ocupacion_asigdosimCaso[$i];
+                /* $asigdosimCaso->ocupacion                 = $request->ocupacion_asigdosimCaso[$i]; */
                 $asigdosimCaso->ubicacion                 = 'CASO';
                 $asigdosimCaso->energia                   = $request->energia_asigdosim;
     
@@ -1528,7 +1529,7 @@ class DosimetriaController extends Controller
                 $asigdosimCristalino->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimCristalino->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimCristalino->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimCristalino->ocupacion                 = $request->ocupacion_asigdosimCristalino[$i];
+                /* $asigdosimCristalino->ocupacion                 = $request->ocupacion_asigdosimCristalino[$i]; */
                 $asigdosimCristalino->ubicacion                 = 'CRISTALINO';
                 $asigdosimCristalino->energia                   = $request->energia_asigdosim;
     
@@ -1569,7 +1570,7 @@ class DosimetriaController extends Controller
                 $asigdosimMuneca->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimMuneca->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimMuneca->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimMuneca->ocupacion                 = $request->ocupacion_asigdosimMuneca[$i];
+                /* $asigdosimMuneca->ocupacion                 = $request->ocupacion_asigdosimMuneca[$i]; */
                 $asigdosimMuneca->ubicacion                 = 'MUÑECA';
                 $asigdosimMuneca->energia                   = $request->energia_asigdosim;
     
@@ -1610,7 +1611,7 @@ class DosimetriaController extends Controller
                 $asigdosimDedo->fecha_dosim_enviado       = $request->fecha_envio_dosim_asignado;
                 $asigdosimDedo->fecha_dosim_recibido      = $request->fecha_recibido_dosim_asignado;
                 $asigdosimDedo->fecha_dosim_devuelto      = $request->fecha_devuelto_dosim_asignado;
-                $asigdosimDedo->ocupacion                 = $request->ocupacion_asigdosimDedo[$i];
+                /* $asigdosimDedo->ocupacion                 = $request->ocupacion_asigdosimDedo[$i]; */
                 $asigdosimDedo->ubicacion                 = 'ANILLO';
                 $asigdosimDedo->energia                   = $request->energia_asigdosim;
     

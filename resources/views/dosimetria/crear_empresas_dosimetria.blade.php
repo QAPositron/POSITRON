@@ -85,7 +85,7 @@
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_torax}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_cristalino}}</td>
                                 <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_dedo}}</td>
-                                <td class="align-middle text-center table-light" style='width: 1.60%'>{{$empdosi->numtotal_dosi_torax + $empdosi->numtotal_dosi_ambiental}}</td>
+                                <td class="align-middle text-center table-light" style='width: 1.60%'>{{$empdosi->numtotal_dosi_torax + $empdosi->numtotal_dosi_cristalino + $empdosi->numtotal_dosi_dedo + $empdosi->numtotal_dosi_caso + $empdosi->numtotal_dosi_ambiental + $empdosi->numtotal_dosi_control_torax + $empdosi->numtotal_dosi_control_cristalino + $empdosi->numtotal_dosi_control_dedo}}</td>
                             </tr>
                         @endforeach
                     </tbody>

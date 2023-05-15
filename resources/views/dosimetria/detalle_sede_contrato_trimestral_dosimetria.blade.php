@@ -24,12 +24,12 @@
     
     <div class="row g-2 mx-3">
         <div class="col-md"></div>
-        <div class="col-md-7">    
+        <div class="col-md-8">    
             <div class="table table-responsive">
                 <table class="table table-sm table-bordered">
                     <thead class="table-active">
                         <tr class="text-center">
-                            <th colspan='9'>DOSíMETROS CONTRATADOS</th>
+                            <th colspan='10'>DOSíMETROS CONTRATADOS</th>
                         </tr>
                         <tr class="text-center">
                             <th class="align-middle">TÓRAX</th>
@@ -41,6 +41,7 @@
                             <th class="align-middle">CONTROL TÓRAX</th>
                             <th class="align-middle">CONTROL CRISTALINO</th>
                             <th class="align-middle">CONTROL ANILLO</th>
+                            <th class="align-middle">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,6 +55,7 @@
                             <td class="text-center">{{$dosisededeptocontra->dosi_control_torax}}</td>
                             <td class="text-center">{{$dosisededeptocontra->dosi_control_cristalino}}</td>
                             <td class="text-center">{{$dosisededeptocontra->dosi_control_dedo}}</td>
+                            <td class="text-center">{{$dosisededeptocontra->dosi_torax + $dosisededeptocontra->dosi_cristalino + $dosisededeptocontra->dosi_dedo + $dosisededeptocontra->dosi_muñeca + $dosisededeptocontra->dosi_area + $dosisededeptocontra->dosi_caso + $dosisededeptocontra->dosi_control_torax + $dosisededeptocontra->dosi_control_cristalino + $dosisededeptocontra->dosi_control_dedo}}</td>
                         </tr>
                     </tbody>
                 </table>
