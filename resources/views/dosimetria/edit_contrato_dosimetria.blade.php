@@ -1,3 +1,4 @@
+@extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
 <div class="row">
@@ -30,8 +31,8 @@
                                         <select class="form-select @error('periodo_recambio_contrato') is-invalid @enderror" name="periodo_recambio_contrato" id="periodo_recambio_contrato_select"  autofocus>
                                             <option value="{{$contrato->periodo_recambio}}">--{{$contrato->periodo_recambio}}--</option>
                                             <option value="MENS">MENSUAL</option>
-                                            <option value="SEMS">SEMESTRAL</option>
-                                            <option value="BIMS">BIMESTRAL</option>
+                                            {{-- <option value="SEMS">SEMESTRAL</option> --}}
+                                            {{-- <option value="BIMS">BIMESTRAL</option> --}}
                                             <option value="TRIMS">TRIMESTRAL</option>
                                         </select>
                                         <label for="floatingInputGrid">PERIODO DE RECAMBIO:</label>
@@ -44,7 +45,7 @@
                             <div class="row">
                                 <div class="col-md">
                                     <div class="form-floating my-3" id="fecha_inicio_contrato">
-                                        <input type="date" name="fecha_inicio_contrato" id="fecha_inicio_contrato_input" class="form-control @error('fecha_inicio_contrato') is-invalid @enderror" onchange="fechafinalcontrato();" value="{{$contrato->fecha_inicio}}" autofocus>
+                                        <input type="date" name="fecha_inicio_contrato" id="fecha_inicio_contrato_input" class="form-control @error('fecha_inicio_contrato') is-invalid @enderror" {{-- onchange="fechafinalcontrato();" --}} value="{{$contrato->fecha_inicio}}" autofocus>
                                         <label for="floatingInputGrid">FECHA DE INICIO:</label>
                                         @error('fecha_inicio_contrato')
                                             <small class="invalid-feedback">*{{$message}}</small>
@@ -60,7 +61,23 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md">
+                                    <div class="form-floating my-3" id="estado_contrato">
+                                        <select class="form-select @error('estado_contrato') is-invalid @enderror" name="estado_contrato" id="estado_contrato_select"  autofocus>
+                                            <option value="{{$contrato->estado_contrato}}">--{{$contrato->estado_contrato}}--</option>
+                                            <option value="ACTIVO">ACTIVO</option>
+                                            <option value="INACTIVO">INACTIVO</option>
+                                        </select>
+                                        <label for="floatingInputGrid">ESTADO:</label>
+                                        @error('estado_contrato')
+                                            <small class="invalid-feedback">*{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
+                           
+
+                            
                             <hr>
                             <label class="text-center ms-4">ASIGNE A ESTE CONTRATO UNA O MÁS SEDES:</label>
         
@@ -185,16 +202,27 @@
                 <div class="col-md m-4">
                     <table class="table table-responsive hover table-bordered">
                         <thead class="table-active text-center">
-                            <th class='align-middle' style='width: 180px' >SEDE</th>
-                            <th class='align-middle' style='width: 200px' >ESP.</th>
-                            <th class='align-middle' >No. DOSÍM. CONTROL</th>
-                            <th class='align-middle' >No. DOSÍM. TÓRAX</th>
-                            <th class='align-middle' >No. DOSÍM. ÁREA</th>
-                            <th class='align-middle' >No. DOSÍM. CASO</th>
-                            <th class='align-middle' >No. DOSÍM. CRISTALINO</th>
-                            <th class='align-middle' >No. DOSÍM. MUÑECA</th>
-                            <th class='align-middle' >No. DOSÍM. DEDO</th>
-                            <th class='align-middle' style='width: 15.90px'>ACCIONES</th>
+                            <tr>
+                                <th rowspan="2" class='align-middle' style='width: 180px' >SEDE</th>
+                                <th rowspan="2" class='align-middle' style='width: 150px' >ESP.</th>
+                                <th rowspan="2" class='align-middle' style='width: 150px' >OCUP.</th>
+                                <th colspan="5" class="align-middle text-center" style='width: 13.80%'>DOSÍMETROS</th>
+                                <th colspan="3" class="align-middle text-center" style='width: 9.80%'>CONTROLES</th>
+                                <th rowspan="2" class='align-middle' style='width: 8%'>ACCIONES</th>
+                            </tr>
+                            <tr>
+                                <th class="align-middle text-center" style='width: 5%'>TOR.</th>
+                                <th class="align-middle text-center" style='width: 5%'>CRIS.</th>
+                                <th class="align-middle text-center" style='width: 5%'>ANI.</th>
+                                {{-- <th class="align-middle text-center">MUÑ.</th> --}}
+                                <th class="align-middle text-center" style='width: 5%'>AMB.</th>
+                                <th class="align-middle text-center" style='width: 5%'>CASO</th>
+                                <th class="align-middle text-center" style='width: 5%'>TOR.</th>
+                                <th class="align-middle text-center" style='width: 5%'>CRIS.</th>
+                                <th class="align-middle text-center" style='width: 5%'>ANI.</th>  
+                            </tr>
+                            
+                            
                         </thead>
                         {{-- @livewire('form-update-contdosisedepto', ['contrato'=>$contrato, 'sedes'=>$sedes, 'sedesdeptos' => $sedesdeptos]) --}}
                         <tbody>
@@ -202,19 +230,21 @@
                                 <form action="{{route('contratosdosisededepto.update',  ['contratodosisede' => $sedepto->id_contratodosimetriasede, 'contratodosisededepto'=>$sedepto->id_contdosisededepto])}}"  method="POST" id="form_contrato_dosi_sedesdepto" class="form_contrato_dosi_sedesdepto">
                                     @csrf
                                     @method('put')
-                                    
                                     <tr>
                                         <td class='align-middle'>
                                             <div class="form-floating my-3">
                                                 <input type="text" name="empresa_contrato" hidden id="empresa_contrato" value="{{$contrato->empresa->id_empresa}}">
+                                                <input type="text" name="mesactual_contrato" hidden id="mesactual_contrato" value="{{$sedepto->mes_actual}}">
+                                                <input type="text" name="contdosisededepto" hidden id="contdosisededepto" value="{{$sedepto->id_contdosisededepto}}">
                                                 <input type="text" name="id_contrato" hidden id="id_contrato" value="{{$contrato->id_contratodosimetria}}">
                                                 <select class="form-select id_sede" id="id_sede" name="id_sede">
-                                                    <option value={{$sedepto->id_sede}} >--{{$sedepto->nombre_sede}}--</option>
+                                                    <option value={{$sedepto->id_sede}}>--{{$sedepto->nombre_sede}}--</option>
                                                     @foreach($sedes as $sed)
-                                                        <option value ="{{$sed->id_sede}}">{{$sed->nombre_sede}}</option>
+                                                        @if($sedepto->id_sede != $sed->id_sede)
+                                                            <option value ="{{$sed->id_sede}}">{{$sed->nombre_sede}}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
-                                                
                                                 <label for="floatingSelectGrid">SEDE:</label>
                                             </div>
                                         </td>
@@ -227,14 +257,30 @@
                                                 <label for="floatingSelectGrid">ESPECLIALIDAD:</label>
                                             </div> 
                                         </td>
-                                        <td class="text-center align-middle">
-                                            <div class="col-md">
-                                                <input type="number" id="num_dosi_control_contrato_sede" name="num_dosi_control_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_control}}" autofocus >
+                                        <td>
+                                            <div class="form-floating my-3 align-middle">
+                                                <select class="form-select" id="ocupacion_contrato_sede" name="ocupacion_contrato_sede" autofocus style="text-transform:uppercase">
+                                                    <option value="{{$sedepto->ocupacion}}">--{{$sedepto->ocupacion}}--</option>
+                                                    <option value="AM">AM - APLICACIONES MÉDICAS</option>
+                                                    <option value="AI">AI - APLICACIONES INDUSTRIALES</option>
+                                                    <option value="O">O - OTRO</option>
+                                                </select>
+                                                <label for="floatingSelectGrid">OCUPACIÓN:</label>
                                             </div>
                                         </td>
                                         <td class="text-center align-middle">
                                             <div class="col-md">
                                                 <input type="number" id="num_dosi_torax_contrato_sede"  name="num_dosi_torax_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_torax}}" autofocus >
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="col-md">
+                                                <input type="number"  id="num_dosi_cristalino_contrato_sede" name="num_dosi_cristalino_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_cristalino}}" autofocus >
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="col-md">
+                                                <input type="number"  id="num_dosi_dedo_contrato_sede" name="num_dosi_dedo_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_dedo}}" autofocus >
                                             </div>
                                         </td>
                                         <td class="text-center align-middle">
@@ -247,19 +293,25 @@
                                                 <input type="number"  id="num_dosi_caso_contrato_sede" name="num_dosi_caso_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_caso}}" autofocus >
                                             </div>
                                         </td>
-                                        <td class="text-center align-middle">
-                                            <div class="col-md">
-                                                <input type="number"  id="num_dosi_cristalino_contrato_sede" name="num_dosi_cristalino_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_cristalino}}" autofocus >
-                                            </div>
-                                        </td>
-                                        <td class="text-center align-middle">
+                                        
+                                        {{-- <td class="text-center align-middle">
                                             <div class="col-md">
                                                 <input type="number"  id="num_dosi_muneca_contrato_sede" name="num_dosi_muneca_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_muñeca}}" autofocus >
                                             </div>
+                                        </td> --}}
+                                        <td class="text-center align-middle">
+                                            <div class="col-md">
+                                                <input type="number" id="num_dosi_controlTorax_contrato_sede" name="num_dosi_controlTorax_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_control_torax}}" autofocus >
+                                            </div>
                                         </td>
                                         <td class="text-center align-middle">
                                             <div class="col-md">
-                                                <input type="number"  id="num_dosi_dedo_contrato_sede" name="num_dosi_dedo_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_dedo}}" autofocus >
+                                                <input type="number" id="num_dosi_controlCristalino_contrato_sede" name="num_dosi_controlCristalino_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_control_cristalino}}" autofocus >
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="col-md">
+                                                <input type="number" id="num_dosi_controlDedo_contrato_sede" name="num_dosi_controlDedo_contrato_sede" class="form-control text-center" value="{{$sedepto->dosi_control_dedo}}" autofocus >
                                             </div>
                                         </td>
                                         <td class="text-center align-middle">
@@ -501,4 +553,4 @@ crossorigin="anonymous">
         })
     })
 </script>
-@endsection()
+@endsection

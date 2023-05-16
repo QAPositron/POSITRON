@@ -23,7 +23,9 @@ class CotizacionController extends Controller
     public function create(){
         $empresas = Empresa::all();
         $productos = Producto::all();
-        return view('cotizaciones.crear_cotizacion', compact('empresas', 'productos'));
+        $codigocotiant = Cotizacion::latest()->first();
+        /* return $codigocotiant; */
+        return view('cotizaciones.crear_cotizacion', compact('empresas', 'productos', 'codigocotiant'));
     }
     public function selectsedes(Request $request){
         $sedes = Sede::where('empresas_id', '=', $request->empresa_id)->get();

@@ -371,6 +371,12 @@
                 });
             }
         });
+
+        var num = parseInt('{{empty($codigocotiant->codigo_contrato) ? 0 : $codigocotiant->codigo_contrato}}')+1;
+        var n = num.toString().padStart(5,'0');
+        console.log("ESTE ES EL CODIGO" +n);
+        
+        document.getElementById("numero_cotizacion_input").value = n;
     });
     var inicio = 1;
     function agregarProducto(){
@@ -415,6 +421,9 @@
                 <select class="form-select" name="iva_producto" id="iva_producto"  autofocus>
                     <option value="">--</option>
                     <option value="19">19%</option>
+                    <option value="0">0% (EXENTO)</option>
+                    <option value="16">16%</option>
+                    <option value="5">5%</option>
                 </select>
             </td>
             <td class='align-middle'>
@@ -439,6 +448,8 @@
         $(this)[0].cells[0].outerHTML='<td class="align-middle"><b>'+ i +'</b></td>';
             i++;
         });
+        
+        
     }
     function eliminar(row){
         var d = row.parentNode.parentNode.rowIndex;

@@ -35,8 +35,8 @@
                         <td>{{$dosimetriacontrato->fecha_finalizacion}}</td>
                     </tr>
                     <tr>
-                        <th>DURACIÓN:</th>
-                        <td>12 MESES</td>
+                        <th>ESTADO:</th>
+                        <td>{{$dosimetriacontrato->estado_contrato}}</td>
                         <th>PERIODO DE RECAMBIO:</th>
                         <td>{{$dosimetriacontrato->periodo_recambio}}</td>
                     </tr>
@@ -75,17 +75,23 @@
                         $check = strval($dosicontsedep->nombre_sede);
                         echo "<thead class='table-active text-center'>";  
                             echo "<tr>";
-                                echo "<th class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
-                                echo "<th class='align-middle' style='width: 8.90%'>PERÍODO ACTUAL</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. TÓRAX</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CRISTALINO</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ANILLO</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. MUÑECA</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL TÓRAX</th>";    
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL CRISTALINO</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL ANILLO</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ÁREA</th>";
-                                echo "<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CASO</th>";
+                                echo "<th rowspan='2' class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
+                                echo "<th rowspan='2' class='align-middle' style='width: 8.90%'>PERÍODO ACTUAL</th>";
+                                echo "<th rowspan='2' class='align-middle' style='width: 8.90%'>OCUP.</th>";
+                                echo "<th colspan='5' class='align-middle' >DOSÍMETROS</th>";
+                                echo "<th colspan='3' class='align-middle' >CONTROLES</th>";
+                                echo "<th rowspan='2' class='align-middle' >TOTAL DOSÍMETROS</th>";
+                            echo "</tr>";
+                            echo "<tr>";
+                                echo "<th class='align-middle' style='width: 10.90%'>TÓRAX</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>CRISTALINO</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>ANILLO</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>AMBIENTAL</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>CASO</th>";
+                                /* echo "<th class='align-middle' style='width: 10.90%'>MUÑECA</th>"; */
+                                echo "<th class='align-middle' style='width: 10.90%'>TÓRAX</th>";    
+                                echo "<th class='align-middle' style='width: 10.90%'>CRISTALINO</th>";
+                                echo "<th class='align-middle' style='width: 10.90%'>ANILLO</th>";
                                 /* echo "<th class='align-middle'>ACCIONES</th>"; */
                             echo "</tr>";
                         echo "</thead>";
@@ -94,15 +100,17 @@
             <tr>
                 <td class="text-center align-middle"> <a class="btn btn-outline-primary rounded-pill" href="{{route('detallesedecont.create', $dosicontsedep->id_contdosisededepto)}}">{{$dosicontsedep->nombre_departamento}}</a></td>
                 <td class="text-center align-middle">{{$dosicontsedep->mes_actual}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->ocupacion}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_torax}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_cristalino}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_dedo}}</td> 
-                <td class="text-center align-middle">{{$dosicontsedep->dosi_muñeca}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_area}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_caso}}</td>
+                {{-- <td class="text-center align-middle">{{$dosicontsedep->dosi_muñeca}}</td> --}}
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_control_torax}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_control_cristalino}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_control_dedo}}</td>
-                <td class="text-center align-middle">{{$dosicontsedep->dosi_area}}</td>
-                <td class="text-center align-middle">{{$dosicontsedep->dosi_caso}}</td>
+                <td class="text-center align-middle">{{$dosicontsedep->dosi_torax + $dosicontsedep->dosi_cristalino + $dosicontsedep->dosi_dedo + $dosicontsedep->dosi_area + $dosicontsedep->dosi_caso + $dosicontsedep->dosi_control_torax + $dosicontsedep->dosi_control_cristalino + $dosicontsedep->dosi_control_dedo}}</td>
                 {{-- <td class="text-center align-middle">
                     <div class="row">
                         <div class="col">
