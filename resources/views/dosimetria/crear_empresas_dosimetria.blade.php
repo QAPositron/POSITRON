@@ -26,11 +26,148 @@
             </div>
         </div>
         <div class="col-md-1 text-center">
-            <a class="btn colorQA" style="border-radius: 25px;  width: 50px; height: 50px;">
+            <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#estadisticasDosim"style="border-radius: 25px;  width: 50px; height: 50px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-graph-up mt-1" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
                 </svg>
-            </a>
+            </button>
+            <div class="modal fade" id="estadisticasDosim" tabindex="-1" aria-labelledby="estadisticasDosimLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title w-100 text-center" id="nueva_empresaModalLabel">ESTADÍSTICAS DE LOS DOSÍMETROS</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-md-10">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <ul class="nav nav-tabs card-header-tabs" id="infoDosimetros" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" href="#general" role="tab" aria-controls="general" aria-selected="true">GENERAL</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link"  href="#empresas" role="tab" aria-controls="empresas" aria-selected="false">EMPRESAS</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="tab-content mt-3">
+                                                <!-- //////////////////// PESTAÑA DE GENERAL//////////////// -->
+                                                <div class="tab-pane active" id="general" role="tabpanel">
+                                                    <div class="table table-responsive p-4 ">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-secondary">
+                                                                <tr>
+                                                                    <th colspan="4" class="align-middle text-center">DOSÍMETROS</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="align-middle text-center">EN USO</th>
+                                                                    <th class="align-middle text-center">EN LECTURA</th>
+                                                                    <th class="align-middle text-center">STOCK</th>
+                                                                    <th class="align-middle text-center">TOTAL</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="align-middle text-center">{{$dosimetrosUsados}}</td>
+                                                                    <td class="align-middle text-center">{{$dosimetrosEnLectura}}</td>
+                                                                    <td class="align-middle text-center">{{$dosimestrosLibres}}</td>
+                                                                    <td class="align-middle text-center">{{$dosimetrosUsados + $dosimetrosEnLectura + $dosimestrosLibres}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!-- //////////////////// PESTAÑA DE EMPRESA //////////////// -->
+                                                <div class="tab-pane" id="empresas" role="tabpanel" aria-labelledby="sede-tab">
+                                                    <div class="table table-responsive p-4 ">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-secondary">
+                                                                <tr>
+                                                                    <th colspan="4" class="align-middle text-center">DOSÍMETROS DE EMPRESAS</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th class="align-middle text-center">EMPRESA</th>
+                                                                    <th class="align-middle text-center">EN USO</th>
+                                                                    <th class="align-middle text-center">EN LECTURA</th>
+                                                                    <th class="align-middle text-center">TOTAL</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($empresaDosi as $empdosi)
+                                                                    <tr>
+                                                                        <td>
+                                                                            {{$empdosi->nombre_empresa}}
+                                                                        </td>
+                                                                        <td>
+                                                                            @php
+                                                                                $dosimUso = 0;
+                                                                                foreach($empresasDosimTrabj as $empresasUsadosTrabj){
+                                                                                    if($empresasUsadosTrabj->empresa_id == $empdosi->empresa_id && $empresasUsadosTrabj->estado_dosimetro == 'EN USO'){
+                                                                                        $dosimUso += 1;
+                                                                                    }
+                                                                                }
+                                                                                foreach($empresasDosimDosicont as $empresasUsadosDosicont){
+                                                                                    if($empresasUsadosDosicont->empresa_id == $empdosi->empresa_id && $empresasUsadosDosicont->estado_dosimetro == 'EN USO'){
+                                                                                        $dosimUso += 1;
+                                                                                    }
+                                                                                }
+                                                                                foreach($empresasDosimDosiarea as $empresasUsadosDosiarea){
+                                                                                    if($empresasUsadosDosiarea->empresa_id == $empdosi->empresa_id && $empresasUsadosDosiarea->estado_dosimetro == 'EN USO'){
+                                                                                        $dosimUso += 1;
+                                                                                    }
+                                                                                }
+                                                                            @endphp
+                                                                            {{$dosimUso}}
+                                                                        </td>
+                                                                        <td>
+                                                                            @php
+                                                                                $dosimLectura = 0;
+                                                                                foreach($empresasDosimTrabj as $empresasLecturasTrabj){
+                                                                                    if($empresasLecturasTrabj->empresa_id == $empdosi->empresa_id && $empresasLecturasTrabj->estado_dosimetro == 'EN LECTURA'){
+                                                                                        $dosimLectura += 1;
+                                                                                    }
+                                                                                }
+                                                                                foreach($empresasDosimDosicont as $empresaLecturasDosicont){
+                                                                                    if($empresaLecturasDosicont->empresa_id == $empdosi->empresa_id && $empresaLecturasDosicont->estado_dosimetro == 'EN LECTURA'){
+                                                                                        $dosimLectura += 1;
+                                                                                    }
+                                                                                }
+                                                                                foreach($empresasDosimDosiarea as $empresasLecturasDosiarea){
+                                                                                    if($empresasLecturasDosiarea->empresa_id == $empdosi->empresa_id && $empresasLecturasDosiarea->estado_dosimetro == 'EN LECTURA'){
+                                                                                        $dosimLectura += 1;
+                                                                                    }
+                                                                                }
+                                                                            @endphp
+                                                                            {{$dosimLectura}}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{$dosimUso + $dosimLectura}}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                        </div>
+
+                        {{-- @livewire('form-crear-empresa-dosimetria', ['empresas' => $empresas]) --}}
+
+                    </div> 
+                </div>
+            </div>
         </div>
     </div>
     
@@ -133,6 +270,12 @@
                 }   
             },
         });
+        
+
+        $('#infoDosimetros a').on('click', function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
     })
 </script>
 

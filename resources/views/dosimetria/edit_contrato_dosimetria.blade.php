@@ -19,7 +19,7 @@
                                 <div class="col-md">
                                     <div class="form-floating my-3" id="codigo_contrato">
                                         <input type="text" name="empresa_contrato" hidden id="empresa_contrato" value="{{$contrato->empresa->id_empresa}}">
-                                        <input type="number" name="codigo_contrato" id="codigo_contrato_input" class="form-control @error('codigo_contrato') is-invalid @enderror"  value="{{$contrato->codigo_contrato}}" autofocus readonly>
+                                        <input type="number" name="codigo_contrato" id="codigo_contrato_input" class="form-control @error('codigo_contrato') is-invalid @enderror"  value="" autofocus readonly>
                                         <label for="floatingInputGrid">CODIGO:</label>
                                         @error('codigo_contrato')
                                             <small class="invalid-feedback">*{{$message}}</small>
@@ -134,35 +134,65 @@
                                                 </div>
                                             </div>
                                             <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. CONTROL</label>
-                                                <input type="number" id="num_dosi_control_contrato_sede" class="form-control text-center" autofocus>
-                                            </div>
-                                            <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. TÓRAX</label>
+                                                <label for="" class="text-center">No. DOSÍMETROS TÓRAX</label>
                                                 <input type="number" id="num_dosi_torax_contrato_sede" class="form-control text-center" autofocus>
                                             </div>
                                             <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. ÁREA</label>
-                                                <input type="number" id="num_dosi_area_contrato_sede" class="form-control text-center" autofocus>
-                                            </div>
-                                            <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. CASO</label>
-                                                <input type="number" id="num_dosi_caso_contrato_sede"  class="form-control text-center" autofocus >
-                                            </div>
-                                            <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. CRISTALINO</label>
+                                                <label for="" class="text-center">No. DOSÍMETROS CRISTALINO</label>
                                                 <input type="number"  id="num_dosi_cristalino_contrato_sede"  class="form-control text-center" autofocus>
                                             </div>
                                             <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. MUÑECA</label>
-                                                <input type="number"  id="num_dosi_muneca_contrato_sede"  class="form-control text-center" autofocus>
-                                            </div>
-                                            <div class="col-md">
-                                                <label for="" class="text-center">No. DOSÍM. DEDO</label>
+                                                <label for="" class="text-center">No. DOSÍMETROS ANILLO</label>
                                                 <input type="number"  id="num_dosi_dedo_contrato_sede" class="form-control text-center" autofocus>
                                             </div>
-            
+                                            <div class="col-md">
+                                                <label for="" class="text-center">No. DOSÍMETROS AMBIENTAL</label>
+                                                <input type="number" id="num_dosi_area_contrato_sede" class="form-control text-center" autofocus>
+                                            </div>
+                                            <div class="col-md">
+                                                <label for="" class="text-center">No. DOSÍMETROS CASO</label>
+                                                <input type="number" id="num_dosi_caso_contrato_sede"  class="form-control text-center" autofocus >
+                                            </div>
+                                            
+                                            {{-- <div class="col-md">
+                                                <label for="" class="text-center">No. DOSÍM. MUÑECA</label>
+                                                <input type="number"  id="num_dosi_muneca_contrato_sede"  class="form-control text-center" autofocus>
+                                            </div> --}}
+                                            {{-- <input type="number"  id="primer_mes_asignacion" name="primer_mes_asignacion" class="form-control text-center" value="1" hidden> --}}
                                         </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md"></div>
+                                            <div class="col-md-2  text-center">
+                                                <label for="" class="text-center">PERIODO ACTUAL</label>
+                                                <input type="number" id="periodo_actual_contrato_sede"  class="form-control text-center" autofocus >
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-floating">
+                                                    <select class="form-select" id="ocupacion_contrato_sede" autofocus style="text-transform:uppercase">
+                                                        <option value="">----</option>
+                                                        <option value="AM">APLICACIONES MÉDICAS</option>
+                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                                        <option value="O">OTRO</option>
+                                                    </select>
+                                                    <label for="floatingSelectGrid">OCUPACIÓN:</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <label for="" class="text-center">No. DOSÍM. CONTROL TÓRAX</label>
+                                                <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_torax_contrato_sede" name="num_dosi_control_torax_contrato_sede">
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <label for="" class="text-center">No. DOSÍM. CONTROL CRISTAL.</label>
+                                                <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_cristalino_contrato_sede" name="num_dosi_control_cristalino_contrato_sede">
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <label for="" class="text-center">No. DOSÍM. CONTROL ANILLO</label>
+                                                <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_dedo_contrato_sede" name="num_dosi_control_dedo_contrato_sede">
+                                            </div>
+                                            <div class="col-md"></div>
+                                        </div>
+                                        <br>
                                     </div>
             
                                     <div class="" id="contenedorDepto0">
@@ -431,8 +461,17 @@ crossorigin="anonymous">
         document.getElementById(`depa${depaNumber}`).querySelector(`#departamento_sede`)
             .setAttribute("name", `departamentos_sede${sedesNumber-1}[]`);
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_contrato_sede`)
-            .setAttribute("name", `dosimetro_control_sede${sedesNumber-1}[]`);
+        document.getElementById(`depa${depaNumber}`).querySelector(`#ocupacion_contrato_sede`)
+            .setAttribute("name", `ocupacion_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_torax_contrato_sede`)
+            .setAttribute("name", `dosimetro_control_torax_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_cristalino_contrato_sede`)
+            .setAttribute("name", `dosimetro_control_cristalino_sede${sedesNumber-1}[]`);
+
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_dedo_contrato_sede`)
+            .setAttribute("name", `dosimetro_control_dedo_sede${sedesNumber-1}[]`);
 
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_torax_contrato_sede`)
             .setAttribute("name", `dosimetro_torax_sede${sedesNumber-1}[]`);
@@ -443,16 +482,20 @@ crossorigin="anonymous">
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_caso_contrato_sede`)
             .setAttribute("name", `dosimetro_caso_sede${sedesNumber-1}[]`);
 
-        /* document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ezclip_contrato_sede`)
-            .setAttribute("name", `dosimetro_ezclip_sede${sedesNumber-1}[]`); */
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_dedo_contrato_sede`)
+            .setAttribute("name", `dosimetro_dedo_sede${sedesNumber-1}[]`);
+
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_cristalino_contrato_sede`)
             .setAttribute("name", `dosimetro_cristalino_sede${sedesNumber-1}[]`);
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_muneca_contrato_sede`)
-            .setAttribute("name", `dosimetro_muneca_sede${sedesNumber-1}[]`);
+        document.getElementById(`depa${depaNumber}`).querySelector(`#periodo_actual_contrato_sede`)
+        .setAttribute("name", `periodo_actual_sede${sedesNumber-1}[]`);
+        /* document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_ezclip_contrato_sede`)
+            .setAttribute("name", `dosimetro_ezclip_sede${sedesNumber-1}[]`); */
 
-        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_dedo_contrato_sede`)
-            .setAttribute("name", `dosimetro_dedo_sede${sedesNumber-1}[]`);
+        /* document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_muneca_contrato_sede`)
+            .setAttribute("name", `dosimetro_muneca_sede${sedesNumber-1}[]`); */
+
         depaNumber++;
         ///////////////
         
@@ -511,8 +554,14 @@ crossorigin="anonymous">
                     console.log(depas);
                 });
             }
-        })
-    })
+        });
+
+        var num = parseInt('{{empty($contrato->codigo_contrato) ? 0 : $contrato->codigo_contrato}}');
+        var n = num.toString().padStart(5,'0');
+        console.log("ESTE ES EL CODIGO" +n);
+        
+        document.getElementById("codigo_contrato_input").value = n;
+    });
 
 
 /* ___________________________ */

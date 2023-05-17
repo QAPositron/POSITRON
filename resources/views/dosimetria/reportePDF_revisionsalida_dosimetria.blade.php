@@ -407,7 +407,7 @@
         </div>
         <div class="indices">
             <p style=""><b>_____________________________________</b></p>
-            <p style="position: relative;"><small><sup>1</sup> Campo para que el encargado de la dosimetría del LDP revise la llagada de los dosímetros una vez es abierto el paquete. Usar las siguientes convenciones: 1) Buen Estado Físico, 2) inconsistencia información etiqueta-dosímetro, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 5) dosímetro sin etiqueta, 6) holder dañado, 7) dosímetro de otro periodo, 8) Dosímetro otra sede, 9) Otra adicional.</small></p>
+            <p style="position: relative;"><small><sup>1</sup> Campo para que el encargado de la dosimetría del LDP revise la llagada de los dosímetros una vez es abierto el paquete. Usar las siguientes convenciones: 1) Buen Estado Físico, 2) inconsistencia información etiqueta-dosímetro, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 6) dosímetro sin etiqueta, 7) holder dañado, 8) dosímetro de otro periodo, 9) Dosímetro otra sede, 10) Otra adicional.</small></p>
         </div>
         
     </main>

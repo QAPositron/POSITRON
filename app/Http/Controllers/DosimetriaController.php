@@ -53,9 +53,29 @@ class DosimetriaController extends Controller
         $empresas = Empresa::all();
         $empresaDosi = ContratosDosimetriaEmpresa::all();
         $dosimetriacontrato = Dosimetriacontrato::where('estado_contrato', '=', 'ACTIVO')->get();
-        /* $sumaContratodosisededepto = Contratodosimetriasededepto::where */
-        
-        return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi', 'dosimetriacontrato'));
+        $dosimetrosUsados = Dosimetro::where('estado_dosimetro', '=', 'EN USO')->count();
+        $dosimestrosLibres = Dosimetro::where('estado_dosimetro', '=', 'STOCK')->count();
+        $dosimetrosEnLectura = Dosimetro::where('estado_dosimetro', '=', 'EN LECTURA')->count();
+        $empresasDosimTrabj = Dosimetriacontrato::join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
+        ->join('contratodosimetriasedes', 'dosimetriacontratos.id_contratodosimetria', '=', 'contratodosimetriasedes.contratodosimetria_id')
+        ->join('contratodosimetriasededeptos', 'contratodosimetriasedes.id_contratodosimetriasede', '=', 'contratodosimetriasededeptos.contratodosimetriasede_id')
+        ->join('trabajadordosimetros', 'contratodosimetriasededeptos.id_contdosisededepto', '=', 'trabajadordosimetros.contdosisededepto_id')
+        ->join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+        ->get();
+        $empresasDosimDosicont = Dosimetriacontrato::join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
+        ->join('contratodosimetriasedes', 'dosimetriacontratos.id_contratodosimetria', '=', 'contratodosimetriasedes.contratodosimetria_id')
+        ->join('contratodosimetriasededeptos', 'contratodosimetriasedes.id_contratodosimetriasede', '=', 'contratodosimetriasededeptos.contratodosimetriasede_id')
+        ->join('dosicontrolcontdosisedes', 'contratodosimetriasededeptos.id_contdosisededepto', '=', 'dosicontrolcontdosisedes.contdosisededepto_id')
+        ->join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+        ->get();
+        $empresasDosimDosiarea = Dosimetriacontrato::join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
+        ->join('contratodosimetriasedes', 'dosimetriacontratos.id_contratodosimetria', '=', 'contratodosimetriasedes.contratodosimetria_id')
+        ->join('contratodosimetriasededeptos', 'contratodosimetriasedes.id_contratodosimetriasede', '=', 'contratodosimetriasededeptos.contratodosimetriasede_id')
+        ->join('dosiareacontdosisedes', 'contratodosimetriasededeptos.id_contdosisededepto', '=', 'dosiareacontdosisedes.contdosisededepto_id')
+        ->join('dosimetros', 'dosiareacontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+        ->get();
+        /* return $empresasDosimUsadosTrabj; */
+        return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi', 'dosimetriacontrato', 'dosimetrosUsados', 'dosimestrosLibres', 'dosimetrosEnLectura', 'empresasDosimTrabj', 'empresasDosimDosicont', 'empresasDosimDosiarea'));
     }
     public function saveEmpresa(Request $request){
 
@@ -157,7 +177,7 @@ class DosimetriaController extends Controller
                     $contratoDosiSedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_area_sede'.$i)[$x];
                     $contratoDosiSedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_caso_sede'.$i)[$x];
                     $contratoDosiSedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_cristalino_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x];
+                    /* $contratoDosiSedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x]; */
                     $contratoDosiSedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_dedo_sede'.$i)[$x];
                     $contratoDosiSedeDepto->save();
 
@@ -171,7 +191,7 @@ class DosimetriaController extends Controller
                     $mescontdosisedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_area_sede'.$i)[$x];
                     $mescontdosisedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_caso_sede'.$i)[$x];
                     $mescontdosisedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_cristalino_sede'.$i)[$x];
-                    $mescontdosisedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x];
+                    /* $mescontdosisedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x]; */
                     $mescontdosisedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_dedo_sede'.$i)[$x];
                     $mescontdosisedeDepto->save();
 
@@ -181,7 +201,7 @@ class DosimetriaController extends Controller
                         $totalEmpDosi->numtotal_dosi_torax              = ($totalEmpDosi->numtotal_dosi_torax + $request->input('dosimetro_torax_sede'.$i)[$x]);
                         $totalEmpDosi->numtotal_dosi_cristalino         = ($totalEmpDosi->numtotal_dosi_cristalino + $request->input('dosimetro_cristalino_sede'.$i)[$x]);
                         $totalEmpDosi->numtotal_dosi_dedo               = ($totalEmpDosi->numtotal_dosi_dedo + $request->input('dosimetro_dedo_sede'.$i)[$x]);
-                        $totalEmpDosi->numtotal_dosi_muñeca             = ($totalEmpDosi->numtotal_dosi_muñeca + $request->input('dosimetro_muneca_sede'.$i)[$x]);
+                        /* $totalEmpDosi->numtotal_dosi_muñeca             = ($totalEmpDosi->numtotal_dosi_muñeca + $request->input('dosimetro_muneca_sede'.$i)[$x]); */
                         $totalEmpDosi->numtotal_dosi_control_torax      = empty($request->input('dosimetro_control_torax_sede'.$i)[$x]) ? $totalEmpDosi->numtotal_dosi_control_torax : ($totalEmpDosi->numtotal_dosi_control_torax + 1);
                         $totalEmpDosi->numtotal_dosi_control_cristalino = empty($request->input('dosimetro_control_cristalino_sede'.$i)[$x]) ? $totalEmpDosi->numtotal_dosi_control_cristalino : ($totalEmpDosi->numtotal_dosi_control_cristalino + 1);
                         $totalEmpDosi->numtotal_dosi_control_dedo       = empty($request->input('dosimetro_control_dedo_sede'.$i)[$x]) ? $totalEmpDosi->numtotal_dosi_control_dedo : ($totalEmpDosi->numtotal_dosi_control_dedo + 1);
@@ -230,12 +250,13 @@ class DosimetriaController extends Controller
         ->where('id_contratodosimetria', '=', $id)
         /* ->select('id_contratodosimetriasede', 'id_contdosisededepto', 'id_sede', 'nombre_sede', 'id_departamentosede', 'nombre_departamento', 'dosi_torax', 'dosi_control', 'dosi_area', 'dosi_caso', 'dosi_cristalino', 'dosi_muñeca', 'dosi_dedo') */
         ->get();
-        $departamentos = Departamentosede::join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
+        $departamentos = Departamento::join('departamentosedes', 'departamentos.id_departamento', '=', 'departamentosedes.departamento_id')
+        ->join('sedes', 'departamentosedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('empresas.id_empresa', $empresa)
         ->get();
        
-       /*  return $sedesdeptos; */
+        /* return $departamentos; */
         return view('dosimetria.edit_contrato_dosimetria', compact('contrato', 'sedesdeptos', 'sedes', 'departamentos', 'empresa'));
     }
     public function updateContratodosi(Request $request, $contrato){
@@ -273,16 +294,49 @@ class DosimetriaController extends Controller
                     $contratoDosiSedeDepto = new Contratodosimetriasededepto();
 
                     $contratoDosiSedeDepto->contratodosimetriasede_id = $contratoDosiSede->id_contratodosimetriasede;
+                    $contratoDosiSedeDepto->ocupacion                 = $request->input('ocupacion_sede'.$i)[$x];
                     $contratoDosiSedeDepto->departamentosede_id       = $request->input('departamentos_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_control              = $request->input('dosimetro_control_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_torax                = $request->input('dosimetro_torax_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x];
-                    $contratoDosiSedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x];
-
+                    $contratoDosiSedeDepto->mes_actual                = $request->input('periodo_actual_sede'.$i)[$x];
+                    /* $contratoDosiSedeDepto->dosi_control              = $request->input('dosimetro_control_sede'.$i)[$x]; */
+                    $contratoDosiSedeDepto->dosi_control_torax        = empty($request->input('dosimetro_control_torax_sede'.$i)[$x]) ? 0 : 1;
+                    $contratoDosiSedeDepto->dosi_control_cristalino   = empty($request->input('dosimetro_control_cristalino_sede'.$i)[$x])? 0 : 1;
+                    $contratoDosiSedeDepto->dosi_control_dedo         = empty($request->input('dosimetro_control_dedo_sede'.$i)[$x]) ? 0 : 1;
+                    $contratoDosiSedeDepto->dosi_torax                = $request->input('dosimetro_torax_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_torax_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_area_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_caso_sede'.$i)[$x];
+                    $contratoDosiSedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_cristalino_sede'.$i)[$x];
+                    /* $contratoDosiSedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x]; */
+                    $contratoDosiSedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_dedo_sede'.$i)[$x];
                     $contratoDosiSedeDepto->save();
+
+                    $mescontdosisedeDepto = new Mesescontdosisedeptos();
+                    $mescontdosisedeDepto->contdosisededepto_id      = $contratoDosiSedeDepto->id_contdosisededepto;
+                    $mescontdosisedeDepto->mes_asignacion            = $request->input('periodo_actual_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_control_torax        = empty($request->input('dosimetro_control_torax_sede'.$i)[$x]) ? 0 : 1;
+                    $mescontdosisedeDepto->dosi_control_cristalino   = empty($request->input('dosimetro_control_cristalino_sede'.$i)[$x]) ? 0 : 1;
+                    $mescontdosisedeDepto->dosi_control_dedo         = empty($request->input('dosimetro_control_dedo_sede'.$i)[$x]) ? 0 : 1;
+                    $mescontdosisedeDepto->dosi_torax                = $request->input('dosimetro_torax_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_torax_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_area_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_caso_sede'.$i)[$x];
+                    $mescontdosisedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_cristalino_sede'.$i)[$x];
+                    /* $mescontdosisedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x]; */
+                    $mescontdosisedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_dedo_sede'.$i)[$x];
+                    $mescontdosisedeDepto->save();
+
+                    $numtotalEmpresasDosi = ContratosDosimetriaEmpresa::where('empresa_id', '=', $request->empresa_contrato)->get();
+                    foreach($numtotalEmpresasDosi as $totalEmpDosi){
+
+                        $totalEmpDosi->numtotal_dosi_torax              = ($totalEmpDosi->numtotal_dosi_torax + $request->input('dosimetro_torax_sede'.$i)[$x]);
+                        $totalEmpDosi->numtotal_dosi_cristalino         = ($totalEmpDosi->numtotal_dosi_cristalino + $request->input('dosimetro_cristalino_sede'.$i)[$x]);
+                        $totalEmpDosi->numtotal_dosi_dedo               = ($totalEmpDosi->numtotal_dosi_dedo + $request->input('dosimetro_dedo_sede'.$i)[$x]);
+                        /* $totalEmpDosi->numtotal_dosi_muñeca             = ($totalEmpDosi->numtotal_dosi_muñeca + $request->input('dosimetro_muneca_sede'.$i)[$x]); */
+                        $totalEmpDosi->numtotal_dosi_control_torax      = empty($request->input('dosimetro_control_torax_sede'.$i)[$x]) ? $totalEmpDosi->numtotal_dosi_control_torax : ($totalEmpDosi->numtotal_dosi_control_torax + 1);
+                        $totalEmpDosi->numtotal_dosi_control_cristalino = empty($request->input('dosimetro_control_cristalino_sede'.$i)[$x]) ? $totalEmpDosi->numtotal_dosi_control_cristalino : ($totalEmpDosi->numtotal_dosi_control_cristalino + 1);
+                        $totalEmpDosi->numtotal_dosi_control_dedo       = empty($request->input('dosimetro_control_dedo_sede'.$i)[$x]) ? $totalEmpDosi->numtotal_dosi_control_dedo : ($totalEmpDosi->numtotal_dosi_control_dedo + 1);
+                        $totalEmpDosi->numtotal_dosi_ambiental          = ($totalEmpDosi->numtotal_dosi_ambiental + $request->input('dosimetro_area_sede'.$i)[$x]);
+                        $totalEmpDosi->numtotal_dosi_caso               = ($totalEmpDosi->numtotal_dosi_caso + $request->input('dosimetro_caso_sede'.$i)[$x]);
+                        $totalEmpDosi->save();
+                    }
                 }
             }else{
                 break;
@@ -291,7 +345,7 @@ class DosimetriaController extends Controller
         return redirect()->route('contratosdosi.createlist', $request->empresa_contrato)->with('actualizar', 'ok');
     }
     public function updateContsedepto(Request $request, $contratodosisede, $contratodosisededepto){
-       /*  return $request; */
+        /*  return $request; */
         $request->validate([
             'id_sede'               => 'required',
             'departamento_sede'     => 'required',
@@ -305,37 +359,64 @@ class DosimetriaController extends Controller
         $contdosisede->save();
 
         $contdosisededepto = Contratodosimetriasededepto::find($contratodosisededepto);
-
+        $numtotalEmpresasDosi = ContratosDosimetriaEmpresa::where('empresa_id', '=', $request->empresa_contrato)->get();
+        foreach($numtotalEmpresasDosi as $totalEmpDosi){
+            if($request->num_dosi_torax_contrato_sede != $contdosisededepto->dosi_control_torax){
+                $totalEmpDosi->numtotal_dosi_torax              = ($totalEmpDosi->numtotal_dosi_torax - $contdosisededepto->dosi_control_torax + $request->num_dosi_torax_contrato_sede);
+            }
+            if($request->num_dosi_cristalino_contrato_sede != $contdosisededepto->dosi_cristalino){
+                $totalEmpDosi->numtotal_dosi_cristalino         = ($totalEmpDosi->numtotal_dosi_cristalino - $contdosisededepto->dosi_cristalino + $request->num_dosi_cristalino_contrato_sede);
+            }
+            if($request->num_dosi_dedo_contrato_sede != $contdosisededepto->dosi_dedo){
+                $totalEmpDosi->numtotal_dosi_dedo               = ($totalEmpDosi->numtotal_dosi_dedo - $contdosisededepto->dosi_dedo + $request->num_dosi_dedo_contrato_sede);
+            }
+            if($request->num_dosi_area_contrato_sede != $contdosisededepto->dosi_area){
+                $totalEmpDosi->numtotal_dosi_ambiental          = ($totalEmpDosi->numtotal_dosi_ambiental - $contdosisededepto->dosi_area + $request->num_dosi_area_contrato_sede);
+            }
+            if($request->num_dosi_caso_contrato_sede != $contdosisededepto->dosi_caso){
+                $totalEmpDosi->numtotal_dosi_caso               = ($totalEmpDosi->numtotal_dosi_caso  - $contdosisededepto->dosi_caso + $request->num_dosi_caso_contrato_sede);
+            }
+            if($request->num_dosi_controlTorax_contrato_sede == 1 && $contdosisededepto->dosi_control_torax == 0){
+                $totalEmpDosi->numtotal_dosi_control_torax      = ($totalEmpDosi->numtotal_dosi_control_torax + 1);
+            }
+            if($request->num_dosi_controlCristalino_contrato_sede == 1 && $contdosisededepto->dosi_control_cristalino == 0){
+                $totalEmpDosi->numtotal_dosi_control_cristalino      = ($totalEmpDosi->numtotal_dosi_control_cristalino + 1);
+            }
+            if($request->num_dosi_controlDedo_contrato_sede == 1 && $contdosisededepto->dosi_control_dedo == 0){
+                $totalEmpDosi->numtotal_dosi_control_dedo      = ($totalEmpDosi->numtotal_dosi_control_dedo + 1);
+            }
+            
+            $totalEmpDosi->save();
+        }
         $contdosisededepto->contratodosimetriasede_id   = $contratodosisede;
         $contdosisededepto->ocupacion                   = $request->ocupacion_contrato_sede;
         $contdosisededepto->departamentosede_id         = $request->departamento_sede;
-        $contdosisededepto->dosi_control_torax          = $request->num_dosi_controlTorax_contrato_sede;
-        $contdosisededepto->dosi_control_cristalino     = $request->num_dosi_controlCristalino_contrato_sede;
-        $contdosisededepto->dosi_control_dedo           = $request->num_dosi_controlDedo_contrato_sede;
-        $contdosisededepto->dosi_torax                  = $request->num_dosi_torax_contrato_sede;
-        $contdosisededepto->dosi_area                   = $request->num_dosi_area_contrato_sede;
-        $contdosisededepto->dosi_caso                   = $request->num_dosi_caso_contrato_sede;
-        $contdosisededepto->dosi_cristalino             = $request->num_dosi_cristalino_contrato_sede;
-        $contdosisededepto->dosi_dedo                   = $request->num_dosi_dedo_contrato_sede;
+        $contdosisededepto->dosi_control_torax          = $request->num_dosi_controlTorax_contrato_sede == null ? 0 : $request->num_dosi_controlTorax_contrato_sede;
+        $contdosisededepto->dosi_control_cristalino     = $request->num_dosi_controlCristalino_contrato_sede == null ? 0 : $request->num_dosi_controlCristalino_contrato_sede;
+        $contdosisededepto->dosi_control_dedo           = $request->num_dosi_dedo_contrato_sede == null ? 0 : $request->num_dosi_dedo_contrato_sede;
+        $contdosisededepto->dosi_torax                  = $request->num_dosi_torax_contrato_sede == null ? 0 : $request->num_dosi_torax_contrato_sede;
+        $contdosisededepto->dosi_area                   = $request->num_dosi_area_contrato_sede == null ? 0 : $request->num_dosi_area_contrato_sede;
+        $contdosisededepto->dosi_caso                   = $request->num_dosi_caso_contrato_sede == null ? 0 : $request->num_dosi_caso_contrato_sede;
+        $contdosisededepto->dosi_cristalino             = $request->num_dosi_cristalino_contrato_sede == null ? 0 : $request->num_dosi_cristalino_contrato_sede;
+        $contdosisededepto->dosi_dedo                   = $request->num_dosi_dedo_contrato_sede == null ? 0 : $request->num_dosi_dedo_contrato_sede;
         /* $contdosisededepto->dosi_muñeca                 = $request->num_dosi_muneca_contrato_sede; */
 
-        $contdosisededepto->save(); 
+        $contdosisededepto->save();  
 
         $mescontdosisedeDepto = new Mesescontdosisedeptos();
         $mescontdosisedeDepto->contdosisededepto_id      = $request->contdosisededepto;
         $mescontdosisedeDepto->mes_asignacion            = $request->mesactual_contrato;
-        $mescontdosisedeDepto->dosi_control_torax        = $request->num_dosi_controlTorax_contrato_sede;
-        $mescontdosisedeDepto->dosi_control_cristalino   = $request->num_dosi_controlCristalino_contrato_sede;
-        $mescontdosisedeDepto->dosi_control_dedo         = $request->num_dosi_controlDedo_contrato_sede;
-        $mescontdosisedeDepto->dosi_torax                = $request->num_dosi_torax_contrato_sede;
-        $mescontdosisedeDepto->dosi_area                 = $request->num_dosi_area_contrato_sede;
-        $mescontdosisedeDepto->dosi_caso                 = $request->num_dosi_caso_contrato_sede;
-        $mescontdosisedeDepto->dosi_cristalino           = $request->num_dosi_cristalino_contrato_sede;
-        $mescontdosisedeDepto->dosi_dedo                 = $request->num_dosi_dedo_contrato_sede;
+        $mescontdosisedeDepto->dosi_control_torax        = $request->num_dosi_controlTorax_contrato_sede == null ? 0 : $request->num_dosi_controlTorax_contrato_sede;
+        $mescontdosisedeDepto->dosi_control_cristalino   = $request->num_dosi_controlCristalino_contrato_sede == null ? 0 : $request->num_dosi_controlCristalino_contrato_sede;
+        $mescontdosisedeDepto->dosi_control_dedo         = $request->num_dosi_controlDedo_contrato_sede == null ? 0 : $request->num_dosi_controlDedo_contrato_sede;
+        $mescontdosisedeDepto->dosi_torax                = $request->num_dosi_torax_contrato_sede == null ? 0 : $request->num_dosi_torax_contrato_sede;
+        $mescontdosisedeDepto->dosi_area                 = $request->num_dosi_area_contrato_sede == null ? 0 : $request->num_dosi_area_contrato_sede;
+        $mescontdosisedeDepto->dosi_caso                 = $request->num_dosi_caso_contrato_sede == null ? 0 : $request->num_dosi_caso_contrato_sede;
+        $mescontdosisedeDepto->dosi_cristalino           = $request->num_dosi_cristalino_contrato_sede == null ? 0 : $request->num_dosi_cristalino_contrato_sede;
+        $mescontdosisedeDepto->dosi_dedo                 = $request->num_dosi_dedo_contrato_sede == null ? 0 : $request->num_dosi_dedo_contrato_sede;
         /* $mescontdosisedeDepto->dosi_muñeca               = $request->; */
         $mescontdosisedeDepto->save();
-
-
+       
         return redirect()->route('contratosdosi.edit', ['empresadosi' => $request->empresa_contrato, 'contratodosi' => $request->id_contrato])->with('actualizar', 'ok');
     }
     public function destroyContratodosi($empresadosi, $contratodosi){
