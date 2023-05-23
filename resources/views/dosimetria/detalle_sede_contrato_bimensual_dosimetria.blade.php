@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
-
-
     <div class="row">
         <div class="col-md">
             <a type="button" class="btn btn-circle colorQA" href="{{route('detallecontrato.create', $dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)}}">
@@ -11,10 +9,10 @@
                 </svg>
             </a>
         </div>
-        <div class="col-md-11">
+        <div class="col-md-9">
             <h2 class="text-center">DOSIMETRÍA DE</h2>
             <h3 class="text-center"><i>{{$dosisededeptocontra->contratodosimetriasede->sede->empresa->nombre_empresa}} </i></h3>
-            <h3 class="text-center">SEDE:<i> {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i></h3> 
+            <h3 class="text-center">SEDE:<i> {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i></h3>
             <h3 class="text-center">ESPECIALIDAD: <i>{{$dosisededeptocontra->departamentosede->departamento->nombre_departamento}}</i></h3>
         </div>
         <div class="col-md"></div>
@@ -65,23 +63,22 @@
         </div>
         <div class="col-md"></div>
     </div>
+
     <div class="row">
-        
         <div class="col"></div>
         <div class="col-12">
             <div class="table table-responsive p-4">
                 <table class="table table-bordered ">
                     <thead class="table-active">
+                        
                         <tr>
                             <th class="text-center align-middle" style='width: 8.90%'>NÚMERO</th>
-                            <th class="text-center align-middle" style='width: 31   .50%' >PERÍODOS</th>
+                            <th class="text-center align-middle" style='width:30.50%' >PERÍODOS</th>
                             <th class="text-center align-middle">ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        @for($i=1; $i<=12; $i++)
-                            
+                        @for($i=1; $i<=6; $i++)
                             <tr @if($dosisededeptocontra->mes_actual == ($i)) style="background-color: rgb(26, 153, 128, 0.1);" @endif>
                                 <th class="text-center align-middle">
                                     {{$i}}
@@ -91,7 +88,7 @@
                                         @php
                                             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
                                             $inicio = date($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
-                                            $fin_parcial = date("j-m-Y",strtotime($inicio."+ 1 month"));
+                                            $fin_parcial = date("j-m-Y",strtotime($inicio."+ 2 month"));
                                             $fin_total = date("j-m-Y",strtotime($fin_parcial."- 1 days")); 
                                             echo date("j", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio))." ".$meses[date("m", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio)). " - ".date("d", strtotime($fin_total))." ".$meses[date("m", strtotime($fin_total))]." DE ".date("Y", strtotime($fin_total));
                                         @endphp
@@ -104,9 +101,9 @@
                                         
                                         {{-- /////////SI SOLO EXISTEN AREAS ASIGNADAS A UN DEPTO///////// --}}
                                         @if($dosisededeptocontra->dosi_torax == 0 && $dosisededeptocontra->dosi_cristalino == 0 && $dosisededeptocontra->dosi_muñeca == 0 && $dosisededeptocontra->dosi_dedo == 0 && $dosisededeptocontra->dosi_caso == 0)
-                                            {{-- {{$mesTotalAreasignados[$i]}} --}}
+                                           {{--  {{$mesTotalAreasignados[$i]}} --}}
                                             @if($i == 1 && $mesTotalAreasignados[$i]>0)
-                                                {{-- ZZ mesTotal {{$i}} > 0 & i=1 --}}
+                                               {{--  ZZ mesTotal {{$i}} > 0 & i=1 --}}
                                                 <div class="col-md text-center">
                                                     <a onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" class="btn  btn-sm aling-middle">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -935,16 +932,13 @@
                                 </td>
                             </tr>
                         @endfor
-
-
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="col"></div>
     </div>
-    
-<script
+    <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 crossorigin="anonymous">
@@ -977,30 +971,30 @@ crossorigin="anonymous">
         fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset());
         console.log(fecha)
         var xx = 1; 
-        for(var i=1; i<=11; i++){
-            /* console.log(i); */
+        for(var i=2; i<=11; i= i+2){
+
+            console.log(i);
             var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+i));
-            /* console.log("r1" +r); */
-            var r2 = new Date(new Date(r).setMonth(r.getMonth()+1));
-            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-            var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
-            /* console.log("r2 " +r2final); */
+            console.log("r1" +r);
+             var r2 = new Date(new Date(r).setMonth(r.getMonth()+2));
+             var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+            console.log("r2 " +r2final);
             var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-            /* console.log(fechaesp1); */
+            console.log(fechaesp1);
+
             var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
-            /* console.log(fechaesp2); */
+            console.log(fechaesp2);
             xx++;
-            /* console.log("XX"+xx); */
-            for(var x=2; x<=12; x++){
-                /* console.log("ESTA ES LA X="+x); */
+            console.log("XX"+xx);
+            for(var x=2; x<=6; x++){
+                console.log("ESTA ES LA X="+x);
                 if(xx == x){
                     document.getElementById('mes'+xx).innerHTML = fechaesp1+' - '+fechaesp2;
                 }
             }
         }
         
-         
-    });
+    })
     function cambiaColor(){
         var boton = document.getElementById("botonEtiq");
         boton.style.backgroundColor = "#a0aec0"; 
@@ -1019,6 +1013,5 @@ crossorigin="anonymous">
 
 
     }
-
 </script>
 @endsection

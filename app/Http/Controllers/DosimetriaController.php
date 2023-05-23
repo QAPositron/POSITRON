@@ -569,6 +569,8 @@ class DosimetriaController extends Controller
             return view('dosimetria.detalle_sede_contrato_trimestral_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'areasigcontra', 'mesTotalTrabjasignados','mesTotalAreasignados', 'mescontdosisededepto', 'mesesAssigTrabj', 'mesesAssigArea'));
         }else if($periodo == 'MENS'){
             return view('dosimetria.detalle_sede_contrato_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'areasigcontra', 'mesTotalTrabjasignados','mesTotalAreasignados', 'mescontdosisededepto', 'mesesAssigTrabj', 'mesesAssigArea'));
+        }else if($periodo == 'BIMS'){
+            return view('dosimetria.detalle_sede_contrato_bimensual_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'areasigcontra', 'mesTotalTrabjasignados','mesTotalAreasignados', 'mescontdosisededepto', 'mesesAssigTrabj', 'mesesAssigArea'));
         }
     }
 

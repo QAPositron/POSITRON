@@ -19,14 +19,14 @@
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
                                     <tr class="text-center">
-                                        <th colspan='10'>DOSíMETROS CONTRATADOS</th>
+                                        <th colspan='9'>DOSíMETROS CONTRATADOS</th>
                                     </tr>
                                     <tr class="text-center">
                                         <th class="align-middle">TÓRAX</th>
                                         <th class="align-middle">CRISTALINO</th>
                                         <th class="align-middle">ANILLO</th>
-                                        <th class="align-middle">MUÑECA</th>
-                                        <th class="align-middle">ÁREA</th>
+                                        {{-- <th class="align-middle">MUÑECA</th> --}}
+                                        <th class="align-middle">AMBIENTAL</th>
                                         <th class="align-middle">CASO</th>
                                         <th class="align-middle">CONTROL TÓRAX</th>
                                         <th class="align-middle">CONTROL CRISTALINO</th>
@@ -39,7 +39,7 @@
                                         <td class="text-center">{{$mescontdosisededepto->dosi_torax}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_cristalino}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
+                                        {{-- <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td> --}}
                                         <td class="text-center">{{$mescontdosisededepto->dosi_area}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_caso}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
@@ -1362,6 +1362,29 @@ crossorigin="anonymous">
                         document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
                 }
             }
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
+            var xx = 1;
+            for(var i=2; i<=11; i= i+2){
+
+                console.log(i);
+                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+i));
+                console.log("r1" +r);
+                var r2 = new Date(new Date(r).setMonth(r.getMonth()+2));
+                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                console.log("r2 " +r2final);
+                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                console.log(fechaesp1);
+
+                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                console.log(fechaesp2);
+                
+                console.log("{{$mesnumber}}");
+                xx ++;
+                
+                if("{{$mesnumber}}" == xx){
+                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                }
+            }
         }
         $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",});
         $('#ocupacion_asigdosimControlTorax').select2({width: "100%",});
@@ -1511,6 +1534,37 @@ crossorigin="anonymous">
             var fecha_final_año = fecha_inicio.getFullYear();
             console.log(fecha_final_año);
             var mm = fecha_inicio.getMonth() + 4;
+            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            if(fecha_final_mes == 13){
+                fecha_final_mes = '01' ;
+            }
+            console.log("MES "+fecha_final_mes);
+            var dd = fecha_inicio.getDate();
+            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            console.log("DIA" + fecha_final_dia);
+            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
+            console.log("ESTA ES LA FECHA FINAL" + fecha_final);
+
+            if(fecha_final_mes == 01){
+                var fechaFinaly = fecha_final.getFullYear() + 1;
+                console.log("AÑO"+fechaFinaly);
+            }else{
+                var fechaFinaly = fecha_final.getFullYear();
+            }
+            console.log(fechaFinaly);
+            var fechaFinalm = fecha_final.getMonth()+1;
+            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
+            console.log(fechaFinalmm);
+            var fechaFinald = fecha_final.getDate();
+            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
+            console.log(fechaFinaldd);
+            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
+            console.log(fechaFinalymd);
+            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
+            var fecha_final_año = fecha_inicio.getFullYear();
+            console.log(fecha_final_año);
+            var mm = fecha_inicio.getMonth() + 3;
             var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
             if(fecha_final_mes == 13){
                 fecha_final_mes = '01' ;

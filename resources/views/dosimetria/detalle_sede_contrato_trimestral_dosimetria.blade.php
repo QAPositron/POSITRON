@@ -29,14 +29,14 @@
                 <table class="table table-sm table-bordered">
                     <thead class="table-active">
                         <tr class="text-center">
-                            <th colspan='10'>DOSíMETROS CONTRATADOS</th>
+                            <th colspan='9'>DOSíMETROS CONTRATADOS</th>
                         </tr>
                         <tr class="text-center">
                             <th class="align-middle">TÓRAX</th>
                             <th class="align-middle">CRISTALINO</th>
                             <th class="align-middle">ANILLO</th>
-                            <th class="align-middle">MUÑECA</th>
-                            <th class="align-middle">ÁREA</th>
+                            {{-- <th class="align-middle">MUÑECA</th> --}}
+                            <th class="align-middle">AMBIENTAL</th>
                             <th class="align-middle">CASO</th>
                             <th class="align-middle">CONTROL TÓRAX</th>
                             <th class="align-middle">CONTROL CRISTALINO</th>
@@ -49,7 +49,7 @@
                             <td class="text-center">{{$dosisededeptocontra->dosi_torax}}</td>
                             <td class="text-center">{{$dosisededeptocontra->dosi_cristalino}}</td>
                             <td class="text-center">{{$dosisededeptocontra->dosi_dedo}}</td>
-                            <td class="text-center">{{$dosisededeptocontra->dosi_muñeca}}</td>
+                            {{-- <td class="text-center">{{$dosisededeptocontra->dosi_muñeca}}</td> --}}
                             <td class="text-center">{{$dosisededeptocontra->dosi_area}}</td>
                             <td class="text-center">{{$dosisededeptocontra->dosi_caso}}</td>
                             <td class="text-center">{{$dosisededeptocontra->dosi_control_torax}}</td>

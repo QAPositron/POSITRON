@@ -30,6 +30,16 @@
                             echo $fecha1." - ".date("j", strtotime($fecha2_total))." ".$meses[date("m", strtotime($fecha2_total))]." DE ".date("Y", strtotime($fecha2_total))
                         @endphp
                     </span> )
+                @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS')
+                    ( <span>
+                        @php  
+                            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                            $fecha1 = date("j",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))." ".$meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio));
+                            $fecha2_parcial =  date("j-m-Y",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio."+ 2 month"));
+                            $fecha2_total = date("j-m-Y",strtotime($fecha2_parcial."- 1 days")); 
+                            echo $fecha1." - ".date("j", strtotime($fecha2_total))." ".$meses[date("m", strtotime($fecha2_total))]." DE ".date("Y", strtotime($fecha2_total))
+                        @endphp
+                    </span> )
                 @endif
                  
             </h3>
@@ -46,14 +56,14 @@
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
                                     <tr class="text-center">
-                                        <th colspan='10'>DOSíMETROS CONTRATADOS</th>
+                                        <th colspan='9'>DOSíMETROS CONTRATADOS</th>
                                     </tr>
                                     <tr class="text-center">
                                         <th class="align-middle">TÓRAX</th>
                                         <th class="align-middle">CRISTALINO</th>
                                         <th class="align-middle">ANILLO</th>
-                                        <th class="align-middle">MUÑECA</th>
-                                        <th class="align-middle">ÁREA</th>
+                                        {{-- <th class="align-middle">MUÑECA</th> --}}
+                                        <th class="align-middle">AMBIENTAL</th>
                                         <th class="align-middle">CASO</th>
                                         <th class="align-middle">CONTROL TÓRAX</th>
                                         <th class="align-middle">CONTROL CRISTALINO</th>
@@ -66,7 +76,7 @@
                                         <td class="text-center">{{$contdosisededepto->dosi_torax}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_cristalino}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_dedo}}</td>
-                                        <td class="text-center">{{$contdosisededepto->dosi_muñeca}}</td>
+                                        {{-- <td class="text-center">{{$contdosisededepto->dosi_muñeca}}</td> --}}
                                         <td class="text-center">{{$contdosisededepto->dosi_area}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_caso}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_control_torax}}</td>
@@ -835,6 +845,36 @@
         }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
             var fecha_final_año = fecha_inicio.getFullYear();
             var mm = fecha_inicio.getMonth() + 4;
+            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            if(fecha_final_mes == 13){
+                fecha_final_mes = '01' ;
+            } 
+            var dd = fecha_inicio.getDate();
+            
+          
+            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
+            
+            console.log(fecha_final);
+            if(fecha_final_mes == 01){
+                var fechaFinaly = fecha_final.getFullYear() + 1;
+                console.log("AÑO"+fechaFinaly);
+            }else{
+                var fechaFinaly = fecha_final.getFullYear();
+            }
+            console.log(fechaFinaly);
+            var fechaFinalm = fecha_final.getMonth()+1;
+            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
+            console.log(fechaFinalmm);
+            var fechaFinald = fecha_final.getDate();
+            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
+            console.log(fechaFinaldd);
+            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
+            console.log(fechaFinalymd);
+            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
+            var fecha_final_año = fecha_inicio.getFullYear();
+            var mm = fecha_inicio.getMonth() + 3;
             var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
             if(fecha_final_mes == 13){
                 fecha_final_mes = '01' ;

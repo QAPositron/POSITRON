@@ -29,6 +29,7 @@
                                     <select class="form-select @error('periodo_recambio_contrato') is-invalid @enderror" name="periodo_recambio_contrato" id="periodo_recambio_contrato_select"  autofocus>
                                         <option value="">--SELECCIONE--</option>
                                         <option value="MENS">MENSUAL</option>
+                                        <option value="BIMS">BIMENSUAL</option>
                                         <option value="TRIMS">TRIMESTRAL</option>
                                     </select>
                                     <label for="floatingInputGrid">PERIODO DE RECAMBIO:</label>
@@ -505,7 +506,7 @@ crossorigin="anonymous">
                         var valuesTorax = dosimetros_torax[x].value;
                         var valuesCristalino = dosimetros_cristalino[x].value;
                         var valuesDedo = dosimetros_dedo[x].value;
-                        var valuesMuneca = dosimetros_muneca[x].value;
+                        /* var valuesMuneca = dosimetros_muneca[x].value; */
                         var valuesControlTorax = dosimetros_control_torax[x].value;
                         var valuesArea = dosimetros_area[x].value;
                         var valuesCaso = dosimetros_caso[x].value;
@@ -517,7 +518,7 @@ crossorigin="anonymous">
                         console.log("DOSIMETROS CONTROL PARA EL VALOR MAYOR A UNO"+valuesControlTorax);
                         console.log("DOSIMETROS AREA PARA EL VALOR MAYOR A UNO"+valuesArea);
                         console.log("DOSIMETROS CASO PARA EL VALOR MAYOR A UNO"+valuesCaso);
-                        if(valuesTorax == '' && valuesCristalino == '' && valuesDedo == '' && valuesMuneca == '' && valuesControlTorax == '' && valuesArea == '' && valuesCaso == ''){
+                        if(valuesTorax == '' && valuesCristalino == '' && valuesDedo == '' /* && valuesMuneca == '' */ && valuesControlTorax == '' && valuesArea == '' && valuesCaso == ''){
                             return Swal.fire({
                                         title:"FALTA INGRESAR LA CANTIDAD DE DOSÍMETROS EN ALGUNA ESPECIALIDAD",
                                         text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
