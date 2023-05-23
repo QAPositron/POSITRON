@@ -48,13 +48,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    {{-- <div class="col-md">
-                        <div class="form-floating">
-                            <input class="form-control @error('persona') is-invalid @enderror" type="text" value="{{old('persona')}}">
-                            <label for="floatingInputGrid">DIRIGIDO A </label>
-                            @error('persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                        </div>
-                    </div> --}}
+                   
                     <div class="col-md">
                         <div class="form-floating">
                             <input value="" type="date" class="form-control @error('fecha_emision') is-invalid @enderror" name="fecha_emision" id="fecha_emision" onchange="fechaultimodia();" >
@@ -161,29 +155,33 @@
                                 </td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr id="desctoCortesia" hidden>
                                 <td colspan="8" class="text-end"><b>(-) DESCUENTO CORTESÍA</b></td>
                                 <td>
                                     <div class="form-group">
+                                        <input type="number" name="descuento_cortesiaint_periodo" id="descuento_cortesiaint_periodo" value="" class="form-control " hidden>
                                         <input type="text" name="descuento_cortesia_periodo" id="descuento_cortesia_periodo" value="" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
+                                        <input type="number" name="descuento_cortesiaint_ano" id="descuento_cortesiaint_ano" value="" class="form-control " hidden>
                                         <input type="text" name="descuento_cortesia_ano" id="descuento_cortesia_ano" value="" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr id="desctoProntoPago" hidden>
                                 <td colspan="8" class="text-end"><b>(-) DESCUENTO PRONTO PAGO</b></td>
                                 <td>
                                     <div class="form-group">
+                                        <input type="number" name="descuento_prontopagoint_periodo" id="descuento_prontopagoint_periodo" value="" class="form-control " hidden>
                                         <input type="text" name="descuento_prontopago_periodo" id="descuento_prontopago_periodo" value="" class="form-control " readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
+                                        <input type="number" name="descuento_prontopagoint_ano" id="descuento_prontopagoint_ano" value="" class="form-control " hidden>
                                         <input type="text" name="descuento_prontopago_ano" id="descuento_prontopago_ano" value="" class="form-control " readonly>
                                     </div>
                                 </td>
@@ -297,26 +295,26 @@
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
-        function fechaultimodia(){
-            var fecha = document.getElementById("fecha_emision").value;
-            var fecha_inicio = new Date(fecha);
-            var fechaIni = new Date(fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset()));
-            console.log("FECHA INICIO"+fechaIni);
-           
-            var fecha_final = fechaIni.setDate(fechaIni.getDate() + 30);
-            var fechaFin = new Date(fecha_final);
-            console.log("FECHA FINAL" +fechaFin);
-            var fechaFiny = fechaFin.getFullYear();
-            console.log(fechaFiny);
-            var fechaFinm = fechaFin.getMonth()+1;
-            var fechaFinmm = (fechaFinm < 10 ? '0' : '')+fechaFinm;
-            console.log(fechaFinmm);
-            var fechaFind = fechaFin.getDate();
-            var fechaFindd = (fechaFind < 10 ? '0' : '')+fechaFind;
-            console.log(fechaFindd);
-            document.getElementById("fecha_vencimiento").value = fechaFiny+'-'+fechaFinmm+'-'+fechaFindd;;
-            
-        }
+    function fechaultimodia(){
+        var fecha = document.getElementById("fecha_emision").value;
+        var fecha_inicio = new Date(fecha);
+        var fechaIni = new Date(fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset()));
+        console.log("FECHA INICIO"+fechaIni);
+        
+        var fecha_final = fechaIni.setDate(fechaIni.getDate() + 30);
+        var fechaFin = new Date(fecha_final);
+        console.log("FECHA FINAL" +fechaFin);
+        var fechaFiny = fechaFin.getFullYear();
+        console.log(fechaFiny);
+        var fechaFinm = fechaFin.getMonth()+1;
+        var fechaFinmm = (fechaFinm < 10 ? '0' : '')+fechaFinm;
+        console.log(fechaFinmm);
+        var fechaFind = fechaFin.getDate();
+        var fechaFindd = (fechaFind < 10 ? '0' : '')+fechaFind;
+        console.log(fechaFindd);
+        document.getElementById("fecha_vencimiento").value = fechaFiny+'-'+fechaFinmm+'-'+fechaFindd;;
+        
+    }
     $(document).ready(function() {
         $('#empresa').select2();
         $('#sede').select2();
@@ -348,6 +346,51 @@
         
         document.getElementById("numero_cotizacion_input").value = n;
 
+        $('#descuento_pronto_pago').change(function(){
+            console.log("descuentopp");
+            var desPP = document.getElementById('descuento_pronto_pago').value;
+            if(desPP != '' || desPP != 0){
+                $('#desctoProntoPago').prop('hidden', false); 
+                /////////OBTENEMOS EL DESCUENTO PRONTO PAGO POR PERIODO//////
+                console.log("DESCUENTO PP"+desPP);
+                var sumcostoPer = document.getElementById('totalAñoSDint_periodo').value;
+                var descPPcostPer  = sumcostoPer *(desPP/100);
+                console.log("DESCUENTO PP COST PERIODO"+ descPPcostPer);
+                document.getElementById('descuento_prontopagoint_periodo').value = descPPcostPer;
+                document.getElementById('descuento_prontopago_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostPer);
+                /////////OBTENEMOS EL DESCUENTO PRONTO PAGO POR AÑO//////
+                var sumcostoAño = document.getElementById('totalAñoSDint_ano').value;
+                var descPPcostAño  = sumcostoAño *(desPP/100);
+                console.log("DESCUENTO PP COST AÑO"+ descPPcostAño);
+                document.getElementById('descuento_prontopagoint_ano').value = descPPcostAño;
+                document.getElementById('descuento_prontopago_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostAño);
+            }else{
+                $('#desctoProntoPago').prop('hidden', true); 
+            }
+        });
+        $('#descuento_cortesia').change(function(){
+            console.log("descuentoCort");
+            var desCort = document.getElementById('descuento_cortesia').value;
+            if(desCort != '' || desCort != 0){
+                $('#desctoCortesia').prop('hidden', false);
+                /////////OBTENEMOS EL DESCUENTO CORTESIA POR PERIODO//////
+                console.log("DESCUENTO CORTESIA"+desCort);
+                var sumcostoPer = document.getElementById('totalAñoSDint_periodo').value;
+                var descCortcostPer = sumcostoPer *(desCort/100);
+                console.log("DESCUENTO CORTESIA COSTO PERIODO"+ descCortcostPer);
+                document.getElementById('descuento_cortesiaint_periodo').value = descCortcostPer;
+                document.getElementById('descuento_cortesia_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostPer);
+                /////////OBTENEMOS EL DESCUENTO CORTESIA POR AÑO//////
+                var sumcostoAño = document.getElementById('totalAñoSDint_ano').value;
+                var descCortcostAño = sumcostoAño *(desCort/100);
+                console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCortcostAño);
+                document.getElementById('descuento_cortesiaint_ano').value = descCortcostAño;
+                document.getElementById('descuento_cortesia_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostAño);
+            }else{
+                $('#desctoCortesia').prop('hidden', true); 
+            }
+        });
+       
         $('#servtransporte_periodo').change(function(){
             console.log("CAMBIO");
             let array = [];
@@ -390,7 +433,7 @@
             document.getElementById('totalAñoSDvar_ano').value = sumTranvalorSDaño;
 
             /////////OBTENEMOS EL DESCUENTO CORTESIA POR PERIODO Y POR AÑO//////
-            var descCortesia = document.getElementById('descuento_cortesia').value;
+            /* var descCortesia = document.getElementById('descuento_cortesia').value;
             console.log("DESCUENTO CORTESIA"+descCortesia);
             if(descCortesia != ''){
                 var descCORTcostPerProd  = sumTranvalorSDper *(descCortesia/100);
@@ -399,10 +442,10 @@
                 var descCORTcostAnoProd  = sumTranvalorSDaño *(descCortesia/100);
                 console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCORTcostAnoProd);
                 document.getElementById('descuento_cortesia_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCORTcostAnoProd);
-            } 
+            }  */
 
            ///////OBTENEMOS EL DESCUENTO POR PRONTO PAGO POR PERIODO Y POR AÑO//////
-           var descProntoPago = document.getElementById('descuento_pronto_pago').value;
+           /* var descProntoPago = document.getElementById('descuento_pronto_pago').value;
             console.log("DESCUENTO PP"+descProntoPago);
             if(descProntoPago != ''){
                 var descPPcostPerProd  = sumTranvalorSDper *(descProntoPago/100);
@@ -411,7 +454,7 @@
                 var descPPcostAnoProd  = sumTranvalorSDaño *(descProntoPago/100);
                 console.log("DESCUENTO PP COSTO AÑO"+ descPPcostPerProd);
                 document.getElementById('descuento_prontopago_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostAnoProd);
-            }
+            } */
             
         });
         
@@ -574,8 +617,7 @@
             @endforeach   
         
         });
-        const arrayCostPeriodo = [];
-        const arrayCostAno = [];
+        
         $('#cantidad_producto'+[i-1]).change(function(){
             var cant = document.getElementById('cantidad_producto'+[i-1]).value;
             var ref = document.getElementById('ref_producto'+[i-1]).value;
@@ -590,6 +632,7 @@
                     console.log("COSTO PRODUCTO ANTERIOR" + totalSDperi + "COSTO PRODUCTO ACTUAL" +costoPerProd);
                     console.log("SUMA VALOR TOTAL PERIODO SD" +sumcostoPerProd);
                     document.getElementById('totalAñoSDint_periodo').value = sumcostoPerProd;
+                    document.getElementById('totalAñoSD_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumcostoPerProd);
 
                     var lecAnoProd = document.getElementById('lecaño_producto'+[i-1]).value;
                     var costAnoProd = costoPerProd*lecAnoProd;
@@ -598,29 +641,39 @@
                     console.log("COSTO PRODUCTO ANTERIOR AÑO" + totalSDAno + "COSTO PRODUCTO ACTUAL AÑO" +costAnoProd);
                     console.log("SUMA VALOR TOTAL AÑO SD" +sumcostoAnoProd);
                     document.getElementById('totalAñoSDint_ano').value = sumcostoAnoProd;
-                    /* var descProntoPago = document.getElementById('descuento_pronto_pago').value;
-                    console.log("DESCUENTO PP"+descProntoPago);
-                    if(descProntoPago != ''){
-                        var descPPcostPerProd  = sumcostoPerProd *(descProntoPago/100);
-
-                        console.log("DESCUENTO PP COST PERIODO"+ descPPcostPerProd);
-                        document.getElementById('descuento_prontopago_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostPerProd);
-                        var descPPcostAnoProd  = sumcostoAnoProd *(descProntoPago/100);
-                        console.log("DESCUENTO PP COSTO AÑO"+ descPPcostPerProd);
-                        document.getElementById('descuento_prontopago_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostAnoProd);
-                    }
-                    var descCortesia = document.getElementById('descuento_cortesia').value;
-                    console.log("DESCUENTO CORTESIA"+descCortesia);
-                    if(descCortesia != ''){
-                        var descCORTcostPerProd  = sumcostoPerProd *(descCortesia/100);
-                        console.log("DESCUENTO CORTESIA COST PERIODO"+ descCORTcostPerProd);
-                        document.getElementById('descuento_cortesia_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCORTcostPerProd);
-                        var descCORTcostAnoProd  = sumcostoAnoProd *(descCortesia/100);
-                        console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCORTcostAnoProd);
-                        document.getElementById('descuento_cortesia_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCORTcostAnoProd);
-                    } */
+                    document.getElementById('totalAñoSD_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumcostoAnoProd);
                     
+                    ///////OBTENEMOS EL DESCUENTO POR PRONTO PAGO POR PERIODO//////
+                    var desPP = document.getElementById('descuento_pronto_pago').value;
+                    if(desPP != '' || desPP != 0){
+                        console.log("DESCUENTO PP"+desPP);
+                        var descPPcostPer  = sumcostoPerProd *(desPP/100);
+                        console.log("DESCUENTO PP COST PERIODO"+ descPPcostPer);
+                        document.getElementById('descuento_prontopagoint_periodo').value = descPPcostPer;
+                        document.getElementById('descuento_prontopago_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostPer);
+                        /////////OBTENEMOS EL DESCUENTO PRONTO PAGO POR AÑO//////
+                        var descPPcostAño  = sumcostoAnoProd *(desPP/100);
+                        console.log("DESCUENTO PP COST AÑO"+ descPPcostAño);
+                        document.getElementById('descuento_prontopagoint_ano').value = descPPcostAño;
+                        document.getElementById('descuento_prontopago_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostAño);
+                    }
+                    ///////OBTENEMOS EL DESCUENTO POR CORTESIA POR PERIODO//////
+                    var desCort = document.getElementById('descuento_cortesia').value;
+                    if(desCort != '' || desCort != 0){
+                        console.log("DESCUENTO CORTESIA"+desCort);
+                        var descCortcostPer = sumcostoPerProd *(desCort/100);
+                        console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCortcostPer);
+                        document.getElementById('descuento_cortesiaint_periodo').value = descCortcostPer;
+                        document.getElementById('descuento_cortesia_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostPer);
+                        /////////OBTENEMOS EL DESCUENTO CORTESIA POR AÑO//////
+                       var descCortcostAño = sumcostoAnoProd *(desCort/100);
+                       console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCortcostAño);
+                       document.getElementById('descuento_cortesiaint_ano').value = descCortcostAño;
+                       document.getElementById('descuento_cortesia_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostAño);
+                    }
 
+
+                   
                 }
             @endforeach
         });
