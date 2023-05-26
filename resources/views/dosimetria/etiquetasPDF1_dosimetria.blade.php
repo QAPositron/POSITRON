@@ -2,56 +2,48 @@
     
     @page{
         
-        margin-top: 5px;
-        margin-bottom: 5px;
-        margin-left: 5px;
-        margin-right: 5px;
-        
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
     }
     body{
         padding:0px; 
-       /*  background-color: aqua; */
+        /* background-color: aqua; */
     }
-    .contenedor{
-        width: 300px;
-        /* height: 740px; */
-        padding-top:20px;
-        /* border: 2px solid blue; */
-       /* background-color:yellow; */
-        margin: 0 auto;
-       
-        justify-content: center;
-    }
+    
     .imgtorax{
-        /* background-color:yellow; */
+        /* background-color:violet; */
         width: 191px;
-        height: 86px;
+        height: 88px;
         margin: 0 auto;
         justify-content: center;
+        position: relative; 
     }
 
     .img_torax{
+        position: absolute;
         height: auto;
         width: auto;
         max-width: 191px;
         max-height: 86px;
         margin: 0 auto;
+        /* background-color:orange; */
     }
-    
     .num_iden_cont_torax{
-        position: relative; 
-        bottom: 81px;
-        right: 0px;
-        font-size: 8px;
+        position: absolute;
+        top: 5px;
+        left: 30px;
+        font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
-        /* background: blue; */
-        width: 170px;
+       /*  background: blue; */
+        width: 142px;
         text-align:right;
     }
     .empresa_cont_torax{
-        position: relative; 
-        bottom: 82px;
-        left: 28px;
+        position: absolute;
+        top: 15px;
+        left: 30px;
         font-size: 8px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: yellow; */
@@ -59,28 +51,29 @@
         text-align:right;
     }
     .sede_cont_torax{
-        position: relative; 
-        bottom: 83px;
-        left: 28px;
+        position: absolute;
+        top: 26px;
+        left: 30px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
-        /*background: blue; */
+        /* background: green; */
         width: 142px;
         text-align:right; 
-    }.codigo_cont_torax{
-        position: relative; 
-        bottom: 84px;
-        left: 35px;
+    }
+    .codigo_cont_torax{
+        position: absolute; 
+        top: 36px;
+        left: 30px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
-        /* background: yellow; */
-        width: 135px;
+        /* background: greenyellow; */
+        width: 142px;
         text-align:right;
     }
     .primerdia_cont_torax{
-        position: relative; 
-        bottom: 78px;
-        left: 54px;
+        position: absolute;  
+        top: 53px; 
+        left: 55px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: red; */
@@ -88,9 +81,9 @@
         text-align:left; 
     }
     .ultimodia_cont_torax{
-        position: relative; 
-        bottom: 76px;
-        left: 54px;
+        position: absolute; 
+        top: 63px;
+        left: 55px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: blue; */
@@ -99,46 +92,46 @@
     }
     .codigobar_cont_torax{
         transform: rotate(-270deg);
-        position: relative; 
-        bottom: 107px;
+        position: absolute;
+        top: 33px;
         left: 147px;
         /* background: yellow; */
         width: 70px;
     }
     .empresa_cont_cristalino, .empresa_cont_anillo{
-        position: relative; 
-        bottom: 34px;
-        left: 8px;
-        font-size: 6px;
+        position: absolute; 
+        top: 8px;
+        left: 4px;
+        font-size: 5px;
         font-family: Arial, Helvetica, sans-serif;
-        /* background: yellow; */
-        width: 100px;
+       /*  background: yellow; */
+        width: 90px;
         /* text-align:right;  */
     }
     .num_iden_cont_cristalino, .num_iden_cont_anillo{
-        position: relative; 
-        bottom: 30px;
-        left: 8px;
-        font-size: 5px;
+        position: absolute; 
+        top: 23px;
+        left: 4px;
+        font-size: 4px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: red; */
-        width: 60px;
+        width: 36px;
         /* text-align:right;  */
     }
     .codigo_cont_cristalino, .codigo_cont_anillo{
-        position: relative; 
-        bottom: 31px;
-        left: 8px;
-        font-size: 5px;
+        position: absolute; 
+        top: 29px;
+        left: 4px;
+        font-size: 4px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: red; */
-        width: 60px;
+        width: 36px;
         /* text-align:right;  */
     }
     .primerdia_cont_cristalino, .primerdia_cont_anillo{
-        position: relative; 
-        bottom: 53px;
-        left:150px;
+        position: absolute; 
+        top: 12px;
+        left:128px;
         font-size: 5px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: blue; */
@@ -146,65 +139,65 @@
         /* text-align:left; */
     }
     .ultimodia_cont_cristalino, .ultimodia_cont_anillo{
-        position: relative; 
-        bottom: 53px;
-        left:150px;
+        position: absolute; 
+        top: 17px;
+        left:128px;
         font-size: 5px;
         font-family: Arial, Helvetica, sans-serif;
-        /* background: blue; */
+       /*  background: blue; */
         width: 35px;
         /* text-align:left; */
     }
     .codigobar_cont_cristalino, .codigobar_cont_anillo{
-        position: relative; 
-        bottom: 52px;
-        left: 123px; 
+        position: absolute; 
+        top: 24px;
+        left: 103px; 
         /* background: orange; */
-        width: 75px;
+        width: 65px;
    }
     .nombre_torax{
-        position: relative; 
-        bottom: 83px;
-        right: 0px;
+        position: absolute; 
+        top:5px;
+        right:19px;
         font-size: 8px;
         font-family: Arial, Helvetica, sans-serif;
         /* background:yellow; */
-        width: 170px;
+        width: 165px;
         text-align:right; 
     }
     .empresa_torax{
-        position: relative; 
-        bottom: 84px;
-        left: 28px;
+        position: absolute; 
+        top: 17px;
+        left: 30px;
         font-size: 8px;
         font-family: Arial, Helvetica, sans-serif;
-        /*background: yellow;*/
+        /* background: yellow; */
         width: 142px;
         text-align:right; 
     }
     .sede_torax{
-        position: relative; 
-        bottom: 85px;
-        left: 28px;
+        position: absolute; 
+        top:28px;
+        left: 30px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
-        /*background: blue;*/
+        /* background: blue; */
         width: 142px;
         text-align:right; 
     }
     .codigo_torax{
-        position: relative; 
-        bottom: 85px;
-        left: 35px;
+        position: absolute; 
+        top:38px;
+        left: 30px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: yellow; */
-        width: 135px;
+        width: 142px;
         text-align:right; 
     }
-    .primerdia_torax, .ultimodia_torax{
-        position: relative; 
-        bottom: 79px;
+    .primerdia_torax{
+        position: absolute; 
+        top:53px;
         left: 54px;
         font-size: 7px;
         font-family: Arial, Helvetica, sans-serif;
@@ -212,53 +205,94 @@
         width: 38px;
         text-align:left; 
     }
-    
+    .ultimodia_torax{
+        position: absolute; 
+        top:63px;
+        left: 54px;
+        font-size: 7px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 38px;
+        text-align:left; 
+    }
     .codigobar_torax{
         transform: rotate(-270deg);
-        position: relative; 
-        bottom: 107px;
+        position: absolute; 
+        top:33px;
         left: 147px;
         /* background: yellow; */
         width: 70px;
     }
     .imgcristalino, .imganillo{
         /* background-color:red; */
-        width: 236px;
+        width: 191px;
         height: 43px;
         margin: 0 auto;
         justify-content: center;
+        position: relative;
     }
     .img_cristalino, .img_anillo{
+        position: absolute;
         height: auto;
         width: auto;
-        max-width: 236px;
+        max-width: 191px;
         max-height: 43px;
         margin: 0 auto;
     }
     .empresa_cristalino, .empresa_anillo{
-        position: relative; 
-        bottom: 35px;
-        left: 5px;
-        font-size: 6px;
+        position: absolute; 
+        top:8px;
+        left:4px;
+        font-size: 5px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: yellow; */
-        width: 100px;
+        width: 90px;
         /* text-align:right;  */
     }
-    .nombre_cristalino, .cedula_cristalino, .codigo_cristalino, .nombre_anillo, .cedula_anillo, .codigo_anillo{
-        position: relative; 
-        bottom: 35px;
-        left: 5px;
+    .nombre_cristalino, .nombre_anillo{
+        position: absolute; 
+        top: 16px;
+        left: 4px;
         font-size: 5px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: red; */
-        width: 60px;
+        width: 70px;
         /* text-align:right;  */
     }
-    .primerdia_cristalino, .ultimodia_cristalino, .primerdia_anillo, .ultimodia_anillo{
-        position: relative; 
-        bottom: 59px;
-        left:150px;
+    .cedula_cristalino, .cedula_anillo{
+        position: absolute; 
+        top: 23px;
+        left: 4px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 36px;
+        /* text-align:right;  */
+    }
+    .codigo_cristalino, .codigo_anillo{
+        position: absolute; 
+        top: 28px;
+        left: 4px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 36px;
+        /* text-align:right;  */
+    }
+    .primerdia_cristalino, .primerdia_anillo{
+        position: absolute; 
+        top: 11px;
+        left:128px;
+        font-size: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 35px;
+        /* text-align:left; */
+    }
+    .ultimodia_cristalino, .ultimodia_anillo{
+        position: absolute; 
+        top: 17px;
+        left:128px;
         font-size: 5px;
         font-family: Arial, Helvetica, sans-serif;
         /* background: blue; */
@@ -266,16 +300,16 @@
         /* text-align:left; */
     }
    .codigobar_cristalino, .codigobar_anillo{
-        position: relative; 
-        bottom: 58px;
-        left: 123px; 
+        position: absolute; 
+        top: 24px;
+        left: 103px; 
         /* background: orange; */
-        width: 75px;
+        width: 65px;
    }
 </style>
 <body>
     
-    <div class="contenedor">
+    
         @foreach($dosicontrolasig as $dosicont)
             @if($dosicont->ubicacion == 'TORAX')
                 {{-- //////// DOSIMETRO CONTROL TORAX ////////// --}}
@@ -299,9 +333,9 @@
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL TORAX ////////// --}}
                     @foreach($contratodosi as $contdosi)
-                        <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @endif <b>NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b></div>
+                        <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
                         <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 29, "UTF-8")}}</div>
-                        <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0,11,"UTF-8")}}</div>
+                        <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0,9,"UTF-8")}}.</div>
                     @endforeach
                     <div class="codigo_cont_torax" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
                     @php
@@ -316,44 +350,7 @@
                         @endphp
                     </div>
                 </div>
-            @elseif($dosicont->ubicacion == 'CRISTALINO')
-                {{-- //////// DOSIMETRO CONTROL CRISTALINO ////////// --}}
-                <div class="imgcristalino" style="page-break-inside: avoid;">
-                    @php
-                        $fecha = strtotime($dosicont->primer_dia_uso);
-                        $mes = date("n", $fecha);
-                    @endphp
-                    @if($mes == 1 || $mes == 7)
-                        <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 2 || $mes == 8)
-                        <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 3 || $mes == 9)
-                        <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 4 || $mes == 10)
-                        <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM4.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 5 || $mes == 11)
-                        <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM5.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 6 || $mes == 12)
-                        <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM6.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @endif
-                    {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL CRISTALINO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_cristalino" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
-                        <div class="num_iden_cont_cristalino">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
-                    @endforeach
-                        <div class="codigo_cont_cristalino" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
-                    @php
-                        $datefix1 = date('d/m/Y',strtotime($dosicont->primer_dia_uso));
-                        $datefix2 = date('d/m/Y',strtotime($dosicont->ultimo_dia_uso));
-                    @endphp
-                    <div class="primerdia_cont_cristalino" >{{$datefix1}}</div>  
-                    <div class="ultimodia_cont_cristalino" >{{$datefix2}}</div>
-                    <div class="codigobar_cont_cristalino">
-                        @php
-                            echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.9,10);
-                        @endphp
-                    </div>
-                </div>
+            
             @elseif($dosicont->ubicacion == 'ANILLO')
                 {{-- //////// DOSIMETRO CONTROL ANILLO ////////// --}}
                 <div class="imganillo" style="page-break-inside: avoid;">
@@ -402,18 +399,34 @@
                         $fecha = strtotime($trab->primer_dia_uso);
                         $mes = date("n", $fecha);
                     @endphp
-                    @if($mes== 1 || $mes == 7)
-                        <img src="{{asset('imagenes/IMG_TORAX/TORAXM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 2 || $mes == 8)
-                        <img src="{{asset('imagenes/IMG_TORAX/TORAXM2.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 3 || $mes == 9)
-                        <img src="{{asset('imagenes/IMG_TORAX/TORAXM3.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 4 || $mes == 10)
-                        <img src="{{asset('imagenes/IMG_TORAX/TORAXM4.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 5 || $mes == 11)
-                        <img src="{{asset('imagenes/IMG_TORAX/TORAXM5.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 6 || $mes == 12)
-                        <img src="{{asset('imagenes/IMG_TORAX/TORAXM6.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    @if($trab->persona->genero_persona == 'FEMENINO')
+                        @if($mes== 1 || $mes == 7)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM1_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 2 || $mes == 8)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM2_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 3 || $mes == 9)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM3_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 4 || $mes == 10)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM4_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 5 || $mes == 11)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM5_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 6 || $mes == 12)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM6_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @endif
+                    @else
+                        @if($mes== 1 || $mes == 7)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM1_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 2 || $mes == 8)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM2_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 3 || $mes == 9)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM3_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 4 || $mes == 10)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM4_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 5 || $mes == 11)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM5_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 6 || $mes == 12)
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM6_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @endif
                     @endif
 
                     {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
@@ -435,45 +448,7 @@
                         @endphp
                     </div>
                 </div>
-            @elseif($trab->ubicacion == 'CRISTALINO')
-                {{-- //////// DOSIMETRO CRISTALINO ////////// --}}
-                <div class="imgcristalino" style="page-break-inside: avoid;">
-                    @php
-                        $fecha = strtotime($trab->primer_dia_uso);
-                        $mes = date("n", $fecha);
-                    @endphp
-                    @if($mes == 1 || $mes == 7)
-                        <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 2 || $mes == 8)
-                        <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 3 || $mes == 9)
-                        <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 4 || $mes == 10)
-                        <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM4.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 5 || $mes == 11)
-                        <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM5.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @elseif($mes == 6 || $mes == 12)
-                        <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM6.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
-                    @endif
-                    {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cristalino" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
-                    @endforeach
-                    <div class="nombre_cristalino"> <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
-                    <div class="cedula_cristalino">CC. {{$trab->persona->cedula_persona}}</div>
-                    <div class="codigo_cristalino" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
-                    @php
-                        $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
-                        $datefix2 = date('d/m/Y',strtotime($trab->ultimo_dia_uso));
-                    @endphp
-                    <div class="primerdia_cristalino" >{{$datefix1}}</div>  
-                    <div class="ultimodia_cristalino" >{{$datefix2}}</div>
-                    <div class="codigobar_cristalino">
-                        @php
-                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.9,10);
-                        @endphp
-                    </div> 
-                </div>
+            
             @elseif($trab->ubicacion == 'ANILLO')
                 {{-- //////// DOSIMETRO ANILLO ////////// --}}
                 <div class="imganillo" style="page-break-inside: avoid;">
@@ -516,7 +491,7 @@
             @endif
         @endforeach
         @foreach($areadosiasig as $area)
-            {{-- //////// DOSIMETRO TORAX ////////// --}}
+            {{-- //////// DOSIMETRO AMBIENTAL////////// --}}
             <div class="imgtorax" style="page-break-inside: avoid;">
                 @php
                     $fecha = strtotime($area->primer_dia_uso);
@@ -540,7 +515,7 @@
                     {{-- <div class="nom_area">{{$area->areadepartamentosede->nombre_area}}</div> --}}
                     <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @endif <b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b></div>
                     <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
-                    <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}</div>
+                    <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}.</div>
                 @endforeach
                 <div class="codigo_cont_torax" >No. {{$area->dosimetro->codigo_dosimeter}}</div>
                 @php
@@ -556,5 +531,89 @@
                 </div>
             </div>
         @endforeach
-    </div>
+        @foreach($dosicontrolasig as $dosicont)
+            @if($dosicont->ubicacion == 'CRISTALINO')
+                    {{-- //////// DOSIMETRO CONTROL CRISTALINO ////////// --}}
+                    <div class="imgcristalino" style="page-break-inside: avoid;">
+                        @php
+                            $fecha = strtotime($dosicont->primer_dia_uso);
+                            $mes = date("n", $fecha);
+                        @endphp
+                        @if($mes == 1 || $mes == 7)
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 2 || $mes == 8)
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 3 || $mes == 9)
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 4 || $mes == 10)
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM4.jpeg')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 5 || $mes == 11)
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM5.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 6 || $mes == 12)
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM6.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @endif
+                        {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL CRISTALINO ////////// --}}
+                        @foreach($contratodosi as $contdosi)
+                            <div class="empresa_cont_cristalino" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
+                            <div class="num_iden_cont_cristalino">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC.{{$contdosi->num_iden_empresa}} @endif NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
+                        @endforeach
+                            <div class="codigo_cont_cristalino" >No.{{$dosicont->dosimetro->codigo_dosimeter}}</div>
+                        @php
+                            $datefix1 = date('d/m/Y',strtotime($dosicont->primer_dia_uso));
+                            $datefix2 = date('d/m/Y',strtotime($dosicont->ultimo_dia_uso));
+                        @endphp
+                        <div class="primerdia_cont_cristalino" >{{$datefix1}}</div>  
+                        <div class="ultimodia_cont_cristalino" >{{$datefix2}}</div>
+                        <div class="codigobar_cont_cristalino">
+                            @php
+                                echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.8,10);
+                            @endphp
+                        </div>
+                    </div>
+            @endif
+        @endforeach
+
+        @foreach($trabajdosiasig as $trab)
+            @if($trab->ubicacion == 'CRISTALINO')
+                    {{-- //////// DOSIMETRO CRISTALINO ////////// --}}
+                    <div class="imgcristalino" style="page-break-inside: avoid;">
+                        @php
+                            $fecha = strtotime($trab->primer_dia_uso);
+                            $mes = date("n", $fecha);
+                        @endphp
+                        @if($mes == 1 || $mes == 7)
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 2 || $mes == 8)
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 3 || $mes == 9)
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 4 || $mes == 10)
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM4.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 5 || $mes == 11)
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM5.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @elseif($mes == 6 || $mes == 12)
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM6.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        @endif
+                        {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
+                        @foreach($contratodosi as $contdosi)
+                            <div class="empresa_cristalino" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
+                        @endforeach
+                        <div class="nombre_cristalino"> <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
+                        <div class="cedula_cristalino">CC. {{$trab->persona->cedula_persona}}</div>
+                        <div class="codigo_cristalino" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
+                        @php
+                            $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
+                            $datefix2 = date('d/m/Y',strtotime($trab->ultimo_dia_uso));
+                        @endphp
+                        <div class="primerdia_cristalino" >{{$datefix1}}</div>  
+                        <div class="ultimodia_cristalino" >{{$datefix2}}</div>
+                        <div class="codigobar_cristalino">
+                            @php
+                                echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.8,10);
+                            @endphp
+                        </div> 
+                    </div>
+            @endif
+        @endforeach
+        
 </body>

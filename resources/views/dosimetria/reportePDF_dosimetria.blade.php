@@ -255,7 +255,7 @@
                             {{'DSU'}}
                         @elseif($dosiarea->nota2 == 'TRUE')
                             {{'NP'}}
-                        @elseif($dosiarea->Hp10_calc_dose <= 0.1)
+                        @elseif($dosiarea->Hp10_calc_dose <= 0.049)
                             {{"ND"}}
                         @else 
                             {{$dosiarea->Hp10_calc_dose}} 
@@ -272,7 +272,7 @@
                             {{'DSU'}}
                         @elseif($dosiarea->nota2 == 'TRUE')
                             {{'NP'}}
-                        @elseif($dosiarea->Hp007_calc_dose  <= 0.1)  
+                        @elseif($dosiarea->Hp007_calc_dose  <= 0.049)  
                             {{"ND"}}
                         @else
                             {{$dosiarea->Hp007_calc_dose}} 
@@ -418,7 +418,7 @@
                             {{'NP'}}
                         @elseif($dositrabj->ubicacion == 'CRISTALINO' || $dositrabj->ubicacion == 'MUÑECA' || $dositrabj->ubicacion == 'DEDO') 
                             {{'NA'}}
-                        @elseif($dositrabj->Hp10_calc_dose<= 0.1)
+                        @elseif($dositrabj->Hp10_calc_dose<= 0.049)
                             {{"ND"}}
                         @else 
                             {{$dositrabj->Hp10_calc_dose}} 
@@ -437,7 +437,7 @@
                             {{'NP'}}
                         @elseif($dositrabj->ubicacion == 'CRISTALINO') 
                             {{'NA'}} 
-                        @elseif($dositrabj->Hp007_calc_dose <= 0.1)  
+                        @elseif($dositrabj->Hp007_calc_dose <= 0.049)  
                             {{"ND"}}
                         @else
                             {{$dositrabj->Hp007_calc_dose}} 
@@ -456,7 +456,7 @@
                             {{'NP'}} 
                         @elseif($dositrabj->ubicacion == 'MUÑECA'|| $dositrabj->ubicacion == 'DEDO')
                             {{'NA'}}
-                        @elseif($dositrabj->Hp3_calc_dose <= 0.1)
+                        @elseif($dositrabj->Hp3_calc_dose <= 0.049)
                             {{'ND'}}
                         @else
                             {{$dositrabj->Hp3_calc_dose}}
@@ -634,7 +634,7 @@
                             {{'DSU'}}
                         @elseif($dosiarea->nota2 == 'TRUE')
                             {{'NP'}}
-                        @elseif($dosiarea->Hp10_calc_dose <= 0.1)
+                        @elseif($dosiarea->Hp10_calc_dose <= 0.049)
                             {{"ND"}}
                         @else 
                             {{$dosiarea->Hp10_calc_dose}} 
@@ -651,7 +651,7 @@
                             {{'DSU'}}
                         @elseif($dosiarea->nota2 == 'TRUE')
                             {{'NP'}}
-                        @elseif($dosiarea->Hp007_calc_dose  <= 0.1)  
+                        @elseif($dosiarea->Hp007_calc_dose  <= 0.049)  
                             {{"ND"}}
                         @else
                             {{$dosiarea->Hp007_calc_dose}} 
@@ -780,7 +780,7 @@
                             {{'NP'}}
                         @elseif($dosicontrol->ubicacion == 'CRISTALINO' || $dosicontrol->ubicacion == 'MUÑECA' || $dosicontrol->ubicacion == 'ANILLO') 
                             {{'NA'}}
-                        @elseif($dosicontrol->Hp10_calc_dose <= 0.1)
+                        @elseif($dosicontrol->Hp10_calc_dose <= 0.049)
                             {{"ND"}}
                         @else 
                             {{$dosicontrol->Hp10_calc_dose}} 
@@ -800,7 +800,7 @@
                             {{'NP'}}
                         @elseif($dosicontrol->ubicacion == 'CRISTALINO') 
                             {{'NA'}} 
-                        @elseif($dosicontrol->Hp007_calc_dose  <= 0.1)  
+                        @elseif($dosicontrol->Hp007_calc_dose  <= 0.049)  
                             {{"ND"}}
                         @else
                             {{$dosicontrol->Hp007_calc_dose}} 
@@ -819,7 +819,7 @@
                             {{'NP'}} 
                         @elseif($dosicontrol->ubicacion == 'TORAX' || $dosicontrol->ubicacion == 'CASO'|| $dosicontrol->ubicacion == 'MUÑECA'|| $dosicontrol->ubicacion == 'ANILLO')
                             {{'NA'}}
-                        @elseif($dosicontrol->Hp3_calc_dose <= 0.1)
+                        @elseif($dosicontrol->Hp3_calc_dose <= 0.049)
                             {{'ND'}}
                         @else
                             {{$dosicontrol->Hp3_calc_dose}}
@@ -914,7 +914,7 @@
                                     {{'NP'}}
                                 @elseif($dositrabj->ubicacion == 'CRISTALINO' || $dositrabj->ubicacion == 'MUÑECA' || $dositrabj->ubicacion == 'ANILLO') 
                                     {{'NA'}}
-                                @elseif($dositrabj->Hp10_calc_dose - $dosicontrol->Hp10_calc_dose <= 0.1)
+                                @elseif($dositrabj->Hp10_calc_dose - $dosicontrol->Hp10_calc_dose <= 0.049)
                                     {{"ND"}}
                                 @else 
                                     {{$dositrabj->Hp10_calc_dose - $dosicontrol->Hp10_calc_dose}} 
@@ -933,7 +933,7 @@
                                     {{'NP'}}
                                 @elseif($dositrabj->ubicacion == 'CRISTALINO') 
                                     {{'NA'}} 
-                                @elseif($dositrabj->Hp007_calc_dose - $dosicontrol->Hp007_calc_dose  <= 0.1)  
+                                @elseif($dositrabj->Hp007_calc_dose - $dosicontrol->Hp007_calc_dose  <= 0.049)  
                                     {{"ND"}}
                                 @else
                                     {{$dositrabj->Hp007_calc_dose - $dosicontrol->Hp007_calc_dose}} 
@@ -952,7 +952,7 @@
                                     {{'NP'}} 
                                 @elseif($dositrabj->ubicacion == 'TORAX' || $dositrabj->ubicacion == 'CASO'|| $dositrabj->ubicacion == 'MUÑECA'|| $dositrabj->ubicacion == 'ANILLO')
                                     {{'NA'}}
-                                @elseif($dositrabj->Hp3_calc_dose - $dosicontrol->Hp3_calc_dose <= 0.1)
+                                @elseif($dositrabj->Hp3_calc_dose - $dosicontrol->Hp3_calc_dose <= 0.049)
                                     {{'ND'}}
                                 @else
                                     {{$dositrabj->Hp3_calc_dose - $dosicontrol->Hp3_calc_dose}}
@@ -1114,7 +1114,7 @@
 
     <div style="position:absolute; top:600px; border:solid 0.1px #000; width: 1255px;  height:35px; padding:5px 5px 5px 5px;">
         <p style="text-align:justify; margin:0px;">
-            <b>NOMENCLATURA:</b> <b>NA =</b> No Aplica (No se tiene observaciones), <b>ND =</b> Dosis No Detectable (Significa que la lectura esta entre cero y el umbral de detección=0,1 mSv), 
+            <b>NOMENCLATURA:</b> <b>NA =</b> No Aplica (No se tiene observaciones), <b>ND =</b> Dosis No Detectable (Significa que la lectura esta entre cero y el umbral de detección=0,05 mSv para Hp10 y entre cero y el umbral de detección= 0.03 para Hp0.007 y Hp3), 
             <b>NP =</b> Dosímetro No Presentado (No se llegó el dosímetro a las instalaciones de QA POSITRON), <b>DNL =</b> Dosímetro No Legible (Dosímetro llegó, pero no se puede leer por deterioro), 
             <b>EU =</b> Dosímetro en Uso (el dosímetro está en uso por el usuario), <b>DPL =</b> Dosímetro en Proceso de Lectura (El dosímetro llegó a las instalaciones y no se ha procesado la lectura), 
             <b>DSU =</b> Dosímetro sin usar (Dosímetro que indica el cliente que no se usó en ese periodo)

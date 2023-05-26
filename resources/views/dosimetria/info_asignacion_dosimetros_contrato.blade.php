@@ -80,24 +80,24 @@
     @csrf
     @method('put')
     <div class="row g-2 mx-3">
-        <div class="col-md">
-            <div class="form-floating">
-                <input value="" type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
-                <label for="floatingInputGrid">FECHA ENVIO</label>
+            <div class="col-md">
+                <div class="form-floating">
+                    <input @if(!empty($trabjasignados)) value="{{$trabjasignados[0]->fecha_dosim_enviado}}"@else value="{{$dosiareasignados[0]->fecha_dosim_enviado}}" @endif type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
+                    <label for="floatingInputGrid">FECHA ENVIO</label>
+                </div>
             </div>
-        </div>
-        <div class="col-md">
-            <div class="form-floating">
-                <input value="" type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
-                <label for="floatingInputGrid">FECHA RECIBIDO</label>
+            <div class="col-md">
+                <div class="form-floating">
+                    <input @if(!empty($trabjasignados)) value="{{$trabjasignados[0]->fecha_dosim_recibido}}"@else value="{{$dosiareasignados[0]->fecha_dosim_recibido}}" @endif type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
+                    <label for="floatingInputGrid">FECHA RECIBIDO</label>
+                </div>
             </div>
-        </div>
-        <div class="col-md">
-            <div class="form-floating">
-                <input value="" type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
-                <label for="floatingInputGrid">FECHA DEVUELTO</label>
+            <div class="col-md">
+                <div class="form-floating">
+                    <input @if(!empty($trabjasignados)) value="{{$trabjasignados[0]->fecha_dosim_devuelto}}"@else value="{{$dosiareasignados[0]->fecha_dosim_devuelto}}" @endif type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
+                    <label for="floatingInputGrid">FECHA DEVUELTO</label>
+                </div>
             </div>
-        </div>
     </div>
     <br>
     <br>

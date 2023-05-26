@@ -48,7 +48,6 @@
                 </div>
                 <br>
                 <div class="row">
-                   
                     <div class="col-md">
                         <div class="form-floating">
                             <input value="" type="date" class="form-control @error('fecha_emision') is-invalid @enderror" name="fecha_emision" id="fecha_emision" onchange="fechaultimodia();" >
@@ -67,12 +66,29 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <select class="form-select" name="periodolec_producto" id="periodolec_producto" autofocus>
+                                <option value="">--</option>
+                                <option value="MENS">MENSUAL</option>
+                                <option value="BIMS">BIMESTRAL</option>
+                                <option value="TRIMS">TRIMESTRAL</option>
+                            </select>
+                            <label for="floatingSelectGrid">PERIODO LECTURA:</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="number" name="numlecturas_año" id="numlecturas_año" value="" class="form-control @error('numlecturas_año') is-invalid @enderror">
+                            <label for="floatingInputGrid">LECTURAS AL AÑO:</label>
+                            @error('numlecturas_año')
+                                <small class="invalid-feedback">*{{$message}}</small>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-md">
-                        <label for="floatingInputGrid"></label>
-                    </div>
                     <div class="col-md-2 text-end align-middle">
                         <label for="floatingInputGrid">(-) DESCUENTO POR PRONTO PAGO</label>
                     </div>
@@ -97,9 +113,21 @@
                     <div class="col-md-1 text-start align-middle mt-2 ps-0">
                         <label  for="floatingInputGrid">%</label>
                     </div>
-                    <div class="col-md"></div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteEnvio" name="obsq_servitransporteEnvio" {{-- onchange="showContentEnvio();" --}}>
+                            <label class="form-check-label" for="defaultCheck1">
+                                OBSEQUIO EN EL SERVICIO DE TRANSPORTE (ENVÍO)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteReco" name="obsq_servitransporteReco" {{-- onchange="showContentReco();" --}}>
+                            <label class="form-check-label" for="defaultCheck1">
+                                OBSEQUIO EN EL SERVICIO DE TRANSPORTE (RECOLECCIÓN)
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <br>
                 <br>
                 <label class="text-center ms-4">ASIGNE A ESTA COTIZACIÓN UNO O MAS PRODUCTOS:</label>
                    
@@ -121,9 +149,7 @@
                             <tr>
                               <th scope="col">#</th>
                               <th scope="col" style="width: 10%;">REF. PRODUCTO</th>
-                              <th scope="col" style="width: 20%;">CONCEPTO</th>
-                              <th scope="col" style="width: 10%;">PERIODO LECTURA</th>
-                              <th scope="col" style="width: 5%;">LECTURAS AL AÑO</th>
+                              <th scope="col" style="width: 30%;">CONCEPTO</th>
                               <th scope="col">CANT.</th>
                               <th scope="col" style="width: 12%;">COSTO UNI.</th>
                               <th scope="col" style="width: 9%;">IVA</th>
@@ -138,17 +164,17 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="8" class="text-end"><b>VALOR TOTAL SIN DESCUENTO</b></td>
+                                <td colspan="6" class="text-end"><b>VALOR TOTAL SIN DESCUENTO</b></td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="totalAñoSDvar_periodo" id="totalAñoSDvar_periodo" value="" class="form-control " hidden>
+                                        {{-- <input type="number" name="totalAñoSDvar_periodo" id="totalAñoSDvar_periodo" value="" class="form-control " hidden> --}}
                                         <input type="number" name="totalAñoSDint_periodo" id="totalAñoSDint_periodo" value="" class="form-control " hidden>
                                         <input type="text" name="totalAñoSD_periodo" id="totalAñoSD_periodo" value="" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="totalAñoSDvar_ano" id="totalAñoSDvar_ano" value="" class="form-control " hidden>
+                                        {{-- <input type="number" name="totalAñoSDvar_ano" id="totalAñoSDvar_ano" value="" class="form-control " hidden> --}}
                                         <input type="number" name="totalAñoSDint_ano" id="totalAñoSDint_ano" value="" class="form-control " hidden>
                                         <input type="text" name="totalAñoSD_ano" id="totalAñoSD_ano" value="" class="form-control "readonly>
                                     </div>
@@ -156,7 +182,7 @@
                                 <td></td>
                             </tr>
                             <tr id="desctoCortesia" hidden>
-                                <td colspan="8" class="text-end"><b>(-) DESCUENTO CORTESÍA</b></td>
+                                <td colspan="6" class="text-end"><b>(-) DESCUENTO CORTESÍA</b></td>
                                 <td>
                                     <div class="form-group">
                                         <input type="number" name="descuento_cortesiaint_periodo" id="descuento_cortesiaint_periodo" value="" class="form-control " hidden>
@@ -172,7 +198,7 @@
                                 <td></td>
                             </tr>
                             <tr id="desctoProntoPago" hidden>
-                                <td colspan="8" class="text-end"><b>(-) DESCUENTO PRONTO PAGO</b></td>
+                                <td colspan="6" class="text-end"><b>(-) DESCUENTO PRONTO PAGO</b></td>
                                 <td>
                                     <div class="form-group">
                                         <input type="number" name="descuento_prontopagoint_periodo" id="descuento_prontopagoint_periodo" value="" class="form-control " hidden>
@@ -187,8 +213,8 @@
                                 </td>
                                 <td></td>
                             </tr>
-                            <tr>
-                                <td colspan="8" class="text-end"><b>SERVICIO DE TRANSPORTE (ENVÍO) <label id="periodos"></label></b></td>
+                            <tr id = "serviTransporteEnvio">
+                                <td colspan="6" class="text-end"><b>SERVICIO DE TRANSPORTE (ENVÍO) <label id="periodos"></label></b></td>
                                 <td>
                                     <div class="form-group">
                                         <div class="row">
@@ -209,8 +235,8 @@
                                 </td>
                                 <td></td>
                             </tr>
-                            <tr>
-                                <td colspan="8" class="text-end"><b>SERVICIO DE TRANSPORTE (RECOLECCIÓN) <label id="periodos"></label></b></td>
+                            <tr id = "serviTransporteReco">
+                                <td colspan="6" class="text-end"><b>SERVICIO DE TRANSPORTE (RECOLECCIÓN) <label id="periodosReco"></label></b></td>
                                 <td>
                                     <div class="form-group">
                                         <div class="row">
@@ -232,14 +258,16 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td colspan="8" class="text-end"><b>VALOR TOTAL DEL SERVICIO</b></td>
+                                <td colspan="6" class="text-end"><b>VALOR TOTAL DEL SERVICIO</b></td>
                                 <td>
                                     <div class="form-group">
+                                        <input type="number" name="totalservicioInt_periodo" id="totalservicioInt_periodo" value="" class="form-control" hidden>
                                         <input type="text" name="totalservicio_periodo" id="totalservicio_periodo" value="" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
+                                        <input type="number" name="totalservicioInt_ano" id="totalservicioInt_ano" value="" class="form-control" hidden>
                                         <input type="text" name="totalservicio_ano" id="totalservicio_ano" value="" class="form-control" readonly>
                                     </div>
                                 </td>
@@ -255,16 +283,11 @@
                         <div class="row">
                             <div class="col-md">
                                 <div class="form-group">
-                                    <label for="">PROMEDIO DOSÍMETRO SIN DESCUENTO</label>
+                                    <label for="">PROMEDIO DOSÍMETRO:</label>
                                     <input type="number" name="promds_SD" id="promds_SD" value="" class="form-control" >
                                 </div>
                             </div>
-                            <div class="col-md">
-                                <div class="form-group">
-                                    <label for="">PROMEDIO DOSÍMETRO CON DESCUENTO</label>
-                                    <input type="number" name="promds_CD" id="promds_CD" value="" class="form-control" >
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-md">
@@ -315,6 +338,7 @@
         document.getElementById("fecha_vencimiento").value = fechaFiny+'-'+fechaFinmm+'-'+fechaFindd;;
         
     }
+    
     $(document).ready(function() {
         $('#empresa').select2();
         $('#sede').select2();
@@ -339,13 +363,36 @@
                 });
             }
         });
-
+        ////////IMPRIMIR EL NUMERO DE COTIZACION ////////
         var num = parseInt('{{empty($codigocotiant->codigo_contrato) ? 0 : $codigocotiant->codigo_contrato}}')+1;
         var n = num.toString().padStart(5,'0');
         console.log("ESTE ES EL CODIGO" +n);
         
         document.getElementById("numero_cotizacion_input").value = n;
-
+        ////////////// DESHABILITAR CAMPOS DE OBSEQUIO PARA EL SERVICIO DE TRANSPORTE//////
+        $('#obsq_servitransporteEnvio').change(function(){
+            element = document.getElementById("serviTransporteEnvio");
+            check = document.getElementById("obsq_servitransporteEnvio");
+            if (check.checked) {
+                console.log("CHECKED");
+                $('#serviTransporteEnvio').prop('hidden', true);
+            }else{
+                console.log("NO CHECKED");
+                $('#serviTransporteEnvio').prop('hidden', false);
+            }
+        });
+        $('#obsq_servitransporteReco').change(function(){
+            element = document.getElementById("serviTransporteReco");
+            check = document.getElementById("obsq_servitransporteReco");
+            if (check.checked) {
+                console.log("CHECKED");
+                $('#serviTransporteReco').prop('hidden', true);
+            }else{
+                console.log("NO CHECKED");
+                $('#serviTransporteReco').prop('hidden', false);
+            }
+        });
+        //////OBTENEMOS LA CASILLA Y EL DESCUENTO POR PRONTO PAGO///////
         $('#descuento_pronto_pago').change(function(){
             console.log("descuentopp");
             var desPP = document.getElementById('descuento_pronto_pago').value;
@@ -368,6 +415,7 @@
                 $('#desctoProntoPago').prop('hidden', true); 
             }
         });
+        //////OBTENEMOS LA CASILLA Y EL DESCUENTO POR CORTESIA///////
         $('#descuento_cortesia').change(function(){
             console.log("descuentoCort");
             var desCort = document.getElementById('descuento_cortesia').value;
@@ -403,66 +451,111 @@
                 }
             }
             var trans = document.getElementById('servtransporte_periodo').value;
+            var reco = document.getElementById('servtransporteReco_periodo').value;
+            console.log("RECOLECCION"+reco);
             if(array.includes('MENS')){
-                document.getElementById('periodos').innerHTML = 'POR 12 PERIODOS' ;
+                document.getElementById('periodos').innerHTML = 'POR 12 PERIODOS';
                 document.getElementById('servtransporteInt_ano').value = trans*12;
                 document.getElementById('servtransporte_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(trans*12);
+            }else if(array.includes('BIMS')){
+                document.getElementById('periodos').innerHTML = 'POR 6 PERIODOS';
+                document.getElementById('servtransporteInt_ano').value = trans*6;
+                document.getElementById('servtransporte_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(trans*6);
             }else{
-                document.getElementById('periodos').innerHTML = 'POR 4 PERIODOS' ;
+                document.getElementById('periodos').innerHTML = 'POR 4 PERIODOS';
                 document.getElementById('servtransporteInt_ano').value = trans*4;
                 document.getElementById('servtransporte_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(trans*4); 
             }
+            //////OBTENEMOS EL VALOR TOTAL DEL SERVICIO INCLUIDO TRANSPORTE Y DESCUENTOS/////
+            var valorTotalSDper = document.getElementById('totalAñoSDint_periodo').value != '' ? document.getElementById('totalAñoSDint_periodo').value : 0;
+            var valorTotalSDaño = document.getElementById('totalAñoSDint_ano').value != '' ? document.getElementById('totalAñoSDint_ano').value : 0;
+            var descPPper = document.getElementById('descuento_prontopagoint_periodo').value != '' ? document.getElementById('descuento_prontopagoint_periodo').value : 0;
+            var descPPaño = document.getElementById('descuento_prontopagoint_ano').value != '' ? document.getElementById('descuento_prontopagoint_ano').value : 0;
+            var descCortper = document.getElementById('descuento_cortesiaint_periodo').value != '' ? document.getElementById('descuento_cortesiaint_periodo').value : 0;
+            var descCortaño = document.getElementById('descuento_cortesiaint_ano').value != '' ? document.getElementById('descuento_cortesiaint_ano').value : 0;
+            var tranEnvioPer = document.getElementById('servtransporte_periodo').value != '' ? document.getElementById('servtransporte_periodo').value : 0;
+            var tranEnvioAño = document.getElementById('servtransporteInt_ano').value != '' ? document.getElementById('servtransporteInt_ano').value : 0;
 
-            var costoTransPerProd = document.getElementById('servtransporte_periodo').value;
-            var costoTransAnoProd = document.getElementById('servtransporteInt_ano').value;
-            //////OBTENEMOS EL VALOR TOTAL SIN DESCUENTO CON EL VALOR DEL TRANSPORTE//////
-            var totalSDper = document.getElementById('totalAñoSDint_periodo').value;///VARIABLE QUE GUARDA EL TOTAL DEL PERIODO
-            var totalSDpervar = document.getElementById('totalAñoSDvar_periodo').value;///variable quie guarda la suma del transporte y el valor total ES LA Q NECESITAMOS
-            console.log("VALOR TOTAL DEL PERIODO SD"+totalSDper);
-            var sumTranvalorSDper = parseInt(totalSDper)+parseInt(costoTransPerProd);
-            console.log("SUMA TRANSPORTE Y VALOR PERIODO SD"+sumTranvalorSDper);
-            document.getElementById('totalAñoSD_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumTranvalorSDper);
-            document.getElementById('totalAñoSDvar_periodo').value = sumTranvalorSDper;
+            var sumaValorTotalper = parseInt(valorTotalSDper) - (parseInt(descPPper) + parseInt(descCortper)) + parseInt(tranEnvioPer);
+            console.log("VALOR SD PER ="+valorTotalSDper);
+            console.log("DESCUENTO PP PER ="+descPPper);
+            console.log("DESCUENTO CORTESIA PER ="+descCortper);
+            console.log("TRANSPORTE ENVIO PER ="+tranEnvioPer);
+            console.log("SUMA DEL VALOR TOTAL PER ="+sumaValorTotalper);
+            document.getElementById('totalservicioInt_periodo').value = sumaValorTotalper;
+            document.getElementById('totalservicio_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumaValorTotalper); 
 
-            var totalSDaño = document.getElementById('totalAñoSDint_ano').value;///VARIABLE QUE GUARDA EL TOTAL DEL PERIODO
-            var totalSDañovar = document.getElementById('totalAñoSDvar_ano').value;///variable quie guarda la suma del transporte y el valor total ES LA Q NECESITAMOS
-            console.log("VALOR TOTAL DEL AÑO SD"+totalSDaño);
-            var sumTranvalorSDaño = parseInt(totalSDaño)+parseInt(costoTransAnoProd);
-            console.log("SUMA TRANSPORTE Y VALOR AÑO SD"+sumTranvalorSDaño);
-            document.getElementById('totalAñoSD_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumTranvalorSDaño);
-            document.getElementById('totalAñoSDvar_ano').value = sumTranvalorSDaño;
+            console.log("***********");
+            var sumaValorTotalaño = parseInt(valorTotalSDaño) - (parseInt(descPPaño) + parseInt(descCortaño)) + parseInt(tranEnvioAño);
+            console.log("VALOR SD AÑO ="+valorTotalSDaño);
+            console.log("DESCUENTO PP AÑO ="+descPPaño);
+            console.log("DESCUENTO CORTESIA AÑO ="+descCortaño);
+            console.log("TRANSPORTE ENVIO AÑO ="+tranEnvioAño);
+            console.log("SUMA DEL VALOR TOTAL AÑO="+sumaValorTotalaño);
+            document.getElementById('totalservicioInt_ano').value = sumaValorTotalaño;
+            document.getElementById('totalservicio_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumaValorTotalaño); 
 
-            /////////OBTENEMOS EL DESCUENTO CORTESIA POR PERIODO Y POR AÑO//////
-            /* var descCortesia = document.getElementById('descuento_cortesia').value;
-            console.log("DESCUENTO CORTESIA"+descCortesia);
-            if(descCortesia != ''){
-                var descCORTcostPerProd  = sumTranvalorSDper *(descCortesia/100);
-                console.log("DESCUENTO CORTESIA COST PERIODO"+ descCORTcostPerProd);
-                document.getElementById('descuento_cortesia_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCORTcostPerProd);
-                var descCORTcostAnoProd  = sumTranvalorSDaño *(descCortesia/100);
-                console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCORTcostAnoProd);
-                document.getElementById('descuento_cortesia_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCORTcostAnoProd);
-            }  */
-
-           ///////OBTENEMOS EL DESCUENTO POR PRONTO PAGO POR PERIODO Y POR AÑO//////
-           /* var descProntoPago = document.getElementById('descuento_pronto_pago').value;
-            console.log("DESCUENTO PP"+descProntoPago);
-            if(descProntoPago != ''){
-                var descPPcostPerProd  = sumTranvalorSDper *(descProntoPago/100);
-                console.log("DESCUENTO PP COST PERIODO"+ descPPcostPerProd);
-                document.getElementById('descuento_prontopago_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostPerProd);
-                var descPPcostAnoProd  = sumTranvalorSDaño *(descProntoPago/100);
-                console.log("DESCUENTO PP COSTO AÑO"+ descPPcostPerProd);
-                document.getElementById('descuento_prontopago_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostAnoProd);
-            } */
             
         });
-        
+        $('#servtransporteReco_periodo').change(function(){
+            console.log("CAMBIO");
+            
+
+            /* var reco = document.getElementById('servtransporteReco_periodo').value;
+            console.log("RECOLECCION"+reco);
+            if(array.includes('MENS')){
+                document.getElementById('periodosReco').innerHTML = 'POR 12 PERIODOS';
+                document.getElementById('servtransporteRecoInt_ano').value = reco*12;
+                document.getElementById('servtransporteReco_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(reco*12);
+            }else if(array.includes('BIMS')){
+                document.getElementById('periodosReco').innerHTML = 'POR 6 PERIODOS';
+                document.getElementById('servtransporteRecoInt_ano').value = reco*6;
+                document.getElementById('servtransporteReco_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(reco*6);
+            }else{
+                document.getElementById('periodosReco').innerHTML = 'POR 4 PERIODOS';
+                document.getElementById('servtransporteRecoInt_ano').value = reco*4;
+                document.getElementById('servtransporteReco_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(reco*4); 
+            } */
+
+            //////OBTENEMOS EL VALOR TOTAL DEL SERVICIO INCLUIDO TRANSPORTE Y DESCUENTOS/////
+            var valorTotalSDper = document.getElementById('totalAñoSDint_periodo').value != '' ? document.getElementById('totalAñoSDint_periodo').value : 0;
+            var valorTotalSDaño = document.getElementById('totalAñoSDint_ano').value != '' ? document.getElementById('totalAñoSDint_ano').value : 0;
+            var descPPper = document.getElementById('descuento_prontopagoint_periodo').value != '' ? document.getElementById('descuento_prontopagoint_periodo').value : 0;
+            var descPPaño = document.getElementById('descuento_prontopagoint_ano').value != '' ? document.getElementById('descuento_prontopagoint_ano').value : 0;
+            var descCortper = document.getElementById('descuento_cortesiaint_periodo').value != '' ? document.getElementById('descuento_cortesiaint_periodo').value : 0;
+            var descCortaño = document.getElementById('descuento_cortesiaint_ano').value != '' ? document.getElementById('descuento_cortesiaint_ano').value : 0;
+            var tranEnvioPer = document.getElementById('servtransporte_periodo').value != '' ? document.getElementById('servtransporte_periodo').value : 0;
+            var tranEnvioAño = document.getElementById('servtransporteInt_ano').value != '' ? document.getElementById('servtransporteInt_ano').value : 0;
+            var tranRecoPer = document.getElementById('servtransporteReco_periodo').value != '' ? document.getElementById('servtransporteReco_periodo').value : 0;
+            var tranRecoAño = document.getElementById('servtransporteRecoInt_ano').value != '' ? document.getElementById('servtransporteRecoInt_ano').value : 0;
+
+            var sumaValorTotalper = parseInt(valorTotalSDper) - (parseInt(descPPper) + parseInt(descCortper)) + parseInt(tranEnvioPer) + parseInt(tranRecoPer);
+            console.log("VALOR SD PER ="+valorTotalSDper);
+            console.log("DESCUENTO PP PER ="+descPPper);
+            console.log("DESCUENTO CORTESIA PER ="+descCortper);
+            console.log("TRANSPORTE ENVIO PER ="+tranEnvioPer);
+            console.log("TRANSPORTE RECOLECCION PER ="+tranRecoPer);
+            console.log("SUMA DEL VALOR TOTAL PER ="+sumaValorTotalper);
+            document.getElementById('totalservicioInt_periodo').value = sumaValorTotalper;
+            document.getElementById('totalservicio_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumaValorTotalper); 
+
+            console.log("***********");
+            var sumaValorTotalaño = parseInt(valorTotalSDaño) - (parseInt(descPPaño) + parseInt(descCortaño)) + parseInt(tranEnvioAño) + parseInt(tranRecoAño);
+            console.log("VALOR SD AÑO ="+valorTotalSDaño);
+            console.log("DESCUENTO PP AÑO ="+descPPaño);
+            console.log("DESCUENTO CORTESIA AÑO ="+descCortaño);
+            console.log("TRANSPORTE ENVIO AÑO ="+tranEnvioAño);
+            console.log("TRANSPORTE RECOLECCION AÑO ="+tranRecoAño);
+            console.log("SUMA DEL VALOR TOTAL AÑO="+sumaValorTotalaño);
+            document.getElementById('totalservicioInt_ano').value = sumaValorTotalaño;
+            document.getElementById('totalservicio_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumaValorTotalaño); 
+        });
         
 
 
     });
     var inicio = 1;
+
     function agregarProducto(){
         /* alert("ESTA ES LA i "+i); */
         
@@ -486,16 +579,6 @@
                 <textarea class="form-control" name="concepto_producto" id="concepto_producto" autofocus style="text-transform:uppercase;"></textarea>
             </td>
             <td class='align-middle'>
-                <select class="form-select" name="periodolec_producto" id="periodolec_producto"  autofocus>
-                    <option value="">--</option>
-                    <option value="MENS">MENS</option>
-                    <option value="TRIMS">TRIMS</option>
-                </select>
-            </td>
-            <td class='align-middle text-center'>
-                <input type="number" name="lecaño_producto" id="lecaño_producto" value="" class="form-control text-center" readonly>
-            </td>
-            <td class='align-middle'>
                 <input type="number" name="cantidad_producto" id="cantidad_producto" value="" class="form-control">
             </td>
             <td class='align-middle'>
@@ -515,6 +598,7 @@
                 <input type="text" name="costoPeriodo_producto" id="costoPeriodo_producto" value="" class="form-control" readonly>
             </td>
             <td class='align-middle'>
+                <input type="number" name="costoAnoInt_producto" id="costoAnoInt_producto" value="" class="form-control" hidden>
                 <input type="text" name="costoAno_producto" id="costoAno_producto" value="" class="form-control" readonly>
             </td>
             <td class='align-middle text-center'>
@@ -530,7 +614,7 @@
         ////////SE INSERTA EL NUMERO DEL ITEM PARA CADA PRODUCTO //////
         var i = 1;
         $('#productos > tbody  > tr').each(function(e) {
-        $(this)[0].cells[0].outerHTML='<td class="align-middle"><b>'+ i +'</b></td>';
+            $(this)[0].cells[0].outerHTML='<td class="align-middle"><b>'+ i +'</b></td>';
             i++;
         });
 
@@ -545,16 +629,6 @@
         for(var x = 0; x < concProd.length; x++){
             concProd[x].setAttribute("name", "concepto_producto"+[i-1]);
             concProd[x].setAttribute("id", "concepto_producto"+[i-1]);
-        }
-        var pLecProd = document.querySelectorAll('select[name="periodolec_producto"]');
-        for(var x = 0; x < pLecProd.length; x++){
-            pLecProd[x].setAttribute("name", "periodolec_producto"+[i-1]);
-            pLecProd[x].setAttribute("id", "periodolec_producto"+[i-1]);
-        }
-        var lecAnoProd = document.querySelectorAll('input[name="lecaño_producto"]');
-        for(var x = 0; x < lecAnoProd.length; x++){
-            lecAnoProd[x].setAttribute("name", "lecaño_producto"+[i-1]);
-            lecAnoProd[x].setAttribute("id", "lecaño_producto"+[i-1]);
         }
         var cantProd = document.querySelectorAll('input[name="cantidad_producto"]');
         for(var x = 0; x < cantProd.length; x++){
@@ -576,10 +650,20 @@
             cosPerProd[x].setAttribute("name", "costoPeriodo_producto"+[i-1]);
             cosPerProd[x].setAttribute("id", "costoPeriodo_producto"+[i-1]);
         }
+        var cosPerProdint = document.querySelectorAll('input[name="costoPeriodoInt_producto"]');
+        for(var x = 0; x < cosPerProdint.length; x++){
+            cosPerProdint[x].setAttribute("name", "costoPeriodoInt_producto"+[i-1]);
+            cosPerProdint[x].setAttribute("id", "costoPeriodoInt_producto"+[i-1]);
+        }
         var cosAnoProd = document.querySelectorAll('input[name="costoAno_producto"]');
         for(var x = 0; x < cosAnoProd.length; x++){
             cosAnoProd[x].setAttribute("name", "costoAno_producto"+[i-1]);
             cosAnoProd[x].setAttribute("id", "costoAno_producto"+[i-1]);
+        }
+        var cosPerProdint = document.querySelectorAll('input[name="costoAnoInt_producto"]');
+        for(var x = 0; x < cosPerProdint.length; x++){
+            cosPerProdint[x].setAttribute("name", "costoAnoInt_producto"+[i-1]);
+            cosPerProdint[x].setAttribute("id", "costoAnoInt_producto"+[i-1]);
         }
         console.log("ESTA ES LA i="+i);
         ////////// SE OBTIENE EL VALOR SELECCIONADO PARA EL AUTOCOMPLEADO /////
@@ -595,8 +679,8 @@
                 }
             @endforeach
 	    });
-        $('#periodolec_producto'+[i-1]).change(function(){
-            /* alert("cambio en el periodo"); */
+        /*$('#periodolec_producto'+[i-1]).change(function(){
+           
             var lec = document.getElementById('periodolec_producto'+[i-1]).value;
             if(lec == 'MENS'){
                 document.getElementById('lecaño_producto'+[i-1]).value = '12';
@@ -616,43 +700,79 @@
                 }
             @endforeach   
         
-        });
-        
+        }); */
+       
         $('#cantidad_producto'+[i-1]).change(function(){
             var cant = document.getElementById('cantidad_producto'+[i-1]).value;
             var ref = document.getElementById('ref_producto'+[i-1]).value;
             var totalSDperi = document.getElementById('totalAñoSDint_periodo').value;
             var totalSDAno = document.getElementById('totalAñoSDint_ano').value;
             /* console.log("TOTAL PERIODO"+totalSDperi); */
+            var arrayPeriodo = [];
+            var arrayAño = [];
             @foreach($productos as $prod)
                 if('{{$prod->id_producto}}' == ref){
+                    /////GUARDA EL COSTO DEL PERIODO PARA CADA PRODUCTO/////
                     var costoPerProd ='{{$prod->valor_unitario}}'*cant;
+                    document.getElementById('costoPeriodoInt_producto'+[i-1]).value = costoPerProd;
                     document.getElementById('costoPeriodo_producto'+[i-1]).value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(costoPerProd);
-                    if(totalSDperi != ''){var sumcostoPerProd = parseInt(totalSDperi)+costoPerProd;}else{var sumcostoPerProd = totalSDperi+costoPerProd;}
-                    console.log("COSTO PRODUCTO ANTERIOR" + totalSDperi + "COSTO PRODUCTO ACTUAL" +costoPerProd);
-                    console.log("SUMA VALOR TOTAL PERIODO SD" +sumcostoPerProd);
-                    document.getElementById('totalAñoSDint_periodo').value = sumcostoPerProd;
-                    document.getElementById('totalAñoSD_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumcostoPerProd);
-
-                    var lecAnoProd = document.getElementById('lecaño_producto'+[i-1]).value;
-                    var costAnoProd = costoPerProd*lecAnoProd;
-                    document.getElementById('costoAno_producto'+[i-1]).value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(costAnoProd);
-                    if(totalSDAno != ''){var sumcostoAnoProd = parseInt(totalSDAno)+costAnoProd;}else{var sumcostoAnoProd = totalSDAno+costAnoProd;}
-                    console.log("COSTO PRODUCTO ANTERIOR AÑO" + totalSDAno + "COSTO PRODUCTO ACTUAL AÑO" +costAnoProd);
-                    console.log("SUMA VALOR TOTAL AÑO SD" +sumcostoAnoProd);
-                    document.getElementById('totalAñoSDint_ano').value = sumcostoAnoProd;
-                    document.getElementById('totalAñoSD_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumcostoAnoProd);
                     
-                    ///////OBTENEMOS EL DESCUENTO POR PRONTO PAGO POR PERIODO//////
+                    /////GUARDA EL COSTO DEL AÑO PARA CADA PRODUCTO/////
+                    var numlecAnoProd = document.getElementById('numlecturas_año').value;
+                    var costAnoProd = costoPerProd*numlecAnoProd;
+                    document.getElementById('costoAnoInt_producto'+[i-1]).value = costAnoProd;
+                    document.getElementById('costoAno_producto'+[i-1]).value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(costAnoProd);
+                    
+                    /////GUARDA EL VALOR TOTAL SD SUMANDO LOS PRODUCTOS POR PERIODO/////
+                    var x = 0;
+                    $('#productos > tbody  > tr').each(function(e) {
+                        x++;
+                    });
+                    console.log("# DE PRODUCTOS "+x);
+                    for(var y = 1; y <= x; y++){
+                        var costoPer = document.getElementById('costoPeriodoInt_producto'+y).value;
+                        console.log("costoPeriodoInt_producto"+y);
+                        console.log(costoPer);
+                        if(costoPer != 0 ){
+                            console.log("PARA EL PRODUCTO"+y);
+                            arrayPeriodo.push(costoPer); 
+                        } 
+                    };
+                    console.log(arrayPeriodo);
+                    let totalPeriodo=0;
+                    arrayPeriodo.forEach(function(a){totalPeriodo += parseInt(a);});
+                    console.log(totalPeriodo);
+                    document.getElementById('totalAñoSDint_periodo').value = totalPeriodo;
+                    document.getElementById('totalAñoSD_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(totalPeriodo);
+
+                    /////GUARDA EL VALOR TOTAL SD SUMANDO LOS PRODUCTOS POR AÑO/////
+                    for(var y = 1; y <= x; y++){
+                        var costoAño = document.getElementById('costoAnoInt_producto'+y).value;
+                        console.log("costoAñoInt_producto"+y);
+                        console.log(costoAño);
+                        if(costoAño != 0 ){
+                            console.log("PARA EL PRODUCTO"+y);
+                            arrayAño.push(costoAño); 
+                        } 
+                    };
+                    console.log(arrayAño);
+                    let totalAño=0;
+                    arrayAño.forEach(function(a){totalAño += parseInt(a);});
+                    console.log(totalAño);
+                    document.getElementById('totalAñoSDint_ano').value = totalAño;
+                    document.getElementById('totalAñoSD_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(totalAño);
+                    
+                    
+                   ///////OBTENEMOS EL DESCUENTO POR PRONTO PAGO POR PERIODO//////
                     var desPP = document.getElementById('descuento_pronto_pago').value;
                     if(desPP != '' || desPP != 0){
                         console.log("DESCUENTO PP"+desPP);
-                        var descPPcostPer  = sumcostoPerProd *(desPP/100);
+                        var descPPcostPer  = totalPeriodo *(desPP/100);
                         console.log("DESCUENTO PP COST PERIODO"+ descPPcostPer);
                         document.getElementById('descuento_prontopagoint_periodo').value = descPPcostPer;
                         document.getElementById('descuento_prontopago_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostPer);
                         /////////OBTENEMOS EL DESCUENTO PRONTO PAGO POR AÑO//////
-                        var descPPcostAño  = sumcostoAnoProd *(desPP/100);
+                        var descPPcostAño  = totalAño *(desPP/100);
                         console.log("DESCUENTO PP COST AÑO"+ descPPcostAño);
                         document.getElementById('descuento_prontopagoint_ano').value = descPPcostAño;
                         document.getElementById('descuento_prontopago_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostAño);
@@ -661,27 +781,136 @@
                     var desCort = document.getElementById('descuento_cortesia').value;
                     if(desCort != '' || desCort != 0){
                         console.log("DESCUENTO CORTESIA"+desCort);
-                        var descCortcostPer = sumcostoPerProd *(desCort/100);
+                        var descCortcostPer = totalPeriodo *(desCort/100);
                         console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCortcostPer);
                         document.getElementById('descuento_cortesiaint_periodo').value = descCortcostPer;
                         document.getElementById('descuento_cortesia_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostPer);
                         /////////OBTENEMOS EL DESCUENTO CORTESIA POR AÑO//////
-                       var descCortcostAño = sumcostoAnoProd *(desCort/100);
+                       var descCortcostAño = totalAño *(desCort/100);
                        console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCortcostAño);
                        document.getElementById('descuento_cortesiaint_ano').value = descCortcostAño;
                        document.getElementById('descuento_cortesia_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostAño);
                     }
+                    //////OBTENEMOS EL VALOR TOTAL DEL SERVICIO INCLUIDO TRANSPORTE Y DESCUENTOS/////
+                    var valorTotalSDper = document.getElementById('totalAñoSDint_periodo').value != '' ? document.getElementById('totalAñoSDint_periodo').value : 0;
+                    var valorTotalSDaño = document.getElementById('totalAñoSDint_ano').value != '' ? document.getElementById('totalAñoSDint_ano').value : 0;
+                    var descPPper = document.getElementById('descuento_prontopagoint_periodo').value != '' ? document.getElementById('descuento_prontopagoint_periodo').value : 0;
+                    var descPPaño = document.getElementById('descuento_prontopagoint_ano').value != '' ? document.getElementById('descuento_prontopagoint_ano').value : 0;
+                    var descCortper = document.getElementById('descuento_cortesiaint_periodo').value != '' ? document.getElementById('descuento_cortesiaint_periodo').value : 0;
+                    var descCortaño = document.getElementById('descuento_cortesiaint_ano').value != '' ? document.getElementById('descuento_cortesiaint_ano').value : 0;
+                    var tranEnvioPer = document.getElementById('servtransporte_periodo').value != '' ? document.getElementById('servtransporte_periodo').value : 0;
+                    var tranEnvioAño = document.getElementById('servtransporteInt_ano').value != '' ? document.getElementById('servtransporteInt_ano').value : 0;
+                    var tranRecoPer = document.getElementById('servtransporteReco_periodo').value != '' ? document.getElementById('servtransporteReco_periodo').value : 0;
+                    var tranRecoAño = document.getElementById('servtransporteRecoInt_ano').value != '' ? document.getElementById('servtransporteRecoInt_ano').value : 0;
 
+                    var sumaValorTotalper = parseInt(valorTotalSDper) - (parseInt(descPPper) + parseInt(descCortper)) + parseInt(tranEnvioPer) + parseInt(tranRecoPer);
+                    console.log("VALOR SD PER ="+valorTotalSDper);
+                    console.log("DESCUENTO PP PER ="+descPPper);
+                    console.log("DESCUENTO CORTESIA PER ="+descCortper);
+                    console.log("TRANSPORTE ENVIO PER ="+tranEnvioPer);
+                    console.log("TRANSPORTE RECOLECCION PER ="+tranRecoPer);
+                    console.log("SUMA DEL VALOR TOTAL PER ="+sumaValorTotalper);
+                    document.getElementById('totalservicioInt_periodo').value = sumaValorTotalper;
+                    document.getElementById('totalservicio_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumaValorTotalper); 
 
-                   
+                    console.log("***********");
+                    var sumaValorTotalaño = parseInt(valorTotalSDaño) - (parseInt(descPPaño) + parseInt(descCortaño)) + parseInt(tranEnvioAño) + parseInt(tranRecoAño);
+                    console.log("VALOR SD AÑO ="+valorTotalSDaño);
+                    console.log("DESCUENTO PP AÑO ="+descPPaño);
+                    console.log("DESCUENTO CORTESIA AÑO ="+descCortaño);
+                    console.log("TRANSPORTE ENVIO AÑO ="+tranEnvioAño);
+                    console.log("TRANSPORTE RECOLECCION AÑO ="+tranRecoAño);
+                    console.log("SUMA DEL VALOR TOTAL AÑO="+sumaValorTotalaño);
+                    document.getElementById('totalservicioInt_ano').value = sumaValorTotalaño;
+                    document.getElementById('totalservicio_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumaValorTotalaño); 
                 }
             @endforeach
         });
         
     }
+
     
     function eliminar(row){
+        
         var d = row.parentNode.parentNode.rowIndex;
+        console.log("ESTA ES LA d"+d);
+         //////RESTAR AL VALOR TOTAL SD DEL PERIODO /////
+        var valorTotalPer = document.getElementById('totalAñoSDint_periodo').value;
+        var costoPer = document.getElementById('costoPeriodoInt_producto'+d).value;
+        console.log("VALOR TOTAL DEL PERIODO "+valorTotalPer+ " COSTO DEL PERIODO"+costoPer);
+        var restaPer = valorTotalPer - costoPer;
+        console.log("RESTA EN EL VALOR TOTAL DEL PERIODO "+restaPer);
+        document.getElementById('totalAñoSDint_periodo').value = restaPer;
+        document.getElementById('totalAñoSD_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(restaPer);
+        //////RESTAR AL VALOR TOTAL SD DEL AÑO /////
+        var valorTotalAño = document.getElementById('totalAñoSDint_ano').value;
+        var costoAño = document.getElementById('costoAnoInt_producto'+d).value;
+        console.log("VALOR TOTAL DEL AÑO "+valorTotalAño+ " COSTO DEL AÑO PRODUCTO"+costoAño);
+        var restaAño = valorTotalAño - costoAño;
+        console.log("RESTA EN EL VALOR TOTAL DEl AÑO "+restaAño);
+        document.getElementById('totalAñoSDint_ano').value = restaAño;
+        document.getElementById('totalAñoSD_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(restaAño);
+        ///////ACTUALIZAMOS EL DESCUENTO POR PRONTO PAGO POR PERIODO//////
+        var desPP = document.getElementById('descuento_pronto_pago').value;
+        if(desPP != '' || desPP != 0){
+            console.log("DESCUENTO PP"+desPP);
+            var descPPcostPer  = restaPer *(desPP/100);
+            console.log("DESCUENTO PP COST PERIODO"+ descPPcostPer);
+            document.getElementById('descuento_prontopagoint_periodo').value = descPPcostPer;
+            document.getElementById('descuento_prontopago_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostPer);
+            /////////ACTUALIZAMOS EL DESCUENTO PRONTO PAGO POR AÑO//////
+            var descPPcostAño  = restaAño *(desPP/100);
+            console.log("DESCUENTO PP COST AÑO"+ descPPcostAño);
+            document.getElementById('descuento_prontopagoint_ano').value = descPPcostAño;
+            document.getElementById('descuento_prontopago_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostAño);
+        }
+        ///////ACTUALIZAMOS EL DESCUENTO POR CORTESIA POR PERIODO//////
+        var desCort = document.getElementById('descuento_cortesia').value;
+        if(desCort != '' || desCort != 0){
+            console.log("DESCUENTO CORTESIA"+desCort);
+            var descCortcostPer = restaPer *(desCort/100);
+            console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCortcostPer);
+            document.getElementById('descuento_cortesiaint_periodo').value = descCortcostPer;
+            document.getElementById('descuento_cortesia_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostPer);
+            /////////ACTUALIZAMOS EL DESCUENTO CORTESIA POR AÑO//////
+            var descCortcostAño = restaAño *(desCort/100);
+            console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCortcostAño);
+            document.getElementById('descuento_cortesiaint_ano').value = descCortcostAño;
+            document.getElementById('descuento_cortesia_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostAño);
+        }
+        //////ACTUALIZAMOS EL VALOR TOTAL DEL SERVICIO INCLUIDO TRANSPORTE Y DESCUENTOS/////
+        var valorTotalSDper = document.getElementById('totalAñoSDint_periodo').value != '' ? document.getElementById('totalAñoSDint_periodo').value : 0;
+        var valorTotalSDaño = document.getElementById('totalAñoSDint_ano').value != '' ? document.getElementById('totalAñoSDint_ano').value : 0;
+        var descPPper = document.getElementById('descuento_prontopagoint_periodo').value != '' ? document.getElementById('descuento_prontopagoint_periodo').value : 0;
+        var descPPaño = document.getElementById('descuento_prontopagoint_ano').value != '' ? document.getElementById('descuento_prontopagoint_ano').value : 0;
+        var descCortper = document.getElementById('descuento_cortesiaint_periodo').value != '' ? document.getElementById('descuento_cortesiaint_periodo').value : 0;
+        var descCortaño = document.getElementById('descuento_cortesiaint_ano').value != '' ? document.getElementById('descuento_cortesiaint_ano').value : 0;
+        var tranEnvioPer = document.getElementById('servtransporte_periodo').value != '' ? document.getElementById('servtransporte_periodo').value : 0;
+        var tranEnvioAño = document.getElementById('servtransporteInt_ano').value != '' ? document.getElementById('servtransporteInt_ano').value : 0;
+        var tranRecoPer = document.getElementById('servtransporteReco_periodo').value != '' ? document.getElementById('servtransporteReco_periodo').value : 0;
+        var tranRecoAño = document.getElementById('servtransporteRecoInt_ano').value != '' ? document.getElementById('servtransporteRecoInt_ano').value : 0;
+
+        var sumaValorTotalper = parseInt(valorTotalSDper) - (parseInt(descPPper) + parseInt(descCortper)) + parseInt(tranEnvioPer) + parseInt(tranRecoPer);
+        console.log("VALOR SD PER ="+valorTotalSDper);
+        console.log("DESCUENTO PP PER ="+descPPper);
+        console.log("DESCUENTO CORTESIA PER ="+descCortper);
+        console.log("TRANSPORTE ENVIO PER ="+tranEnvioPer);
+        console.log("TRANSPORTE RECOLECCION PER ="+tranRecoPer);
+        console.log("SUMA DEL VALOR TOTAL PER ="+sumaValorTotalper);
+        document.getElementById('totalservicioInt_periodo').value = sumaValorTotalper;
+        document.getElementById('totalservicio_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumaValorTotalper); 
+
+        console.log("***********");
+        var sumaValorTotalaño = parseInt(valorTotalSDaño) - (parseInt(descPPaño) + parseInt(descCortaño)) + parseInt(tranEnvioAño) + parseInt(tranRecoAño);
+        console.log("VALOR SD AÑO ="+valorTotalSDaño);
+        console.log("DESCUENTO PP AÑO ="+descPPaño);
+        console.log("DESCUENTO CORTESIA AÑO ="+descCortaño);
+        console.log("TRANSPORTE ENVIO AÑO ="+tranEnvioAño);
+        console.log("TRANSPORTE RECOLECCION AÑO ="+tranRecoAño);
+        console.log("SUMA DEL VALOR TOTAL AÑO="+sumaValorTotalaño);
+        document.getElementById('totalservicioInt_ano').value = sumaValorTotalaño;
+        document.getElementById('totalservicio_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(sumaValorTotalaño); 
+        /////// SE ELIMINA LA FILA DE LA TABLA, ES DECIR EL PRODUCTO Y SE ACTUALIZA EL NUMERO DEL ITEM///////
         document.getElementById('productos').deleteRow(d);
         
         var i = 1;
@@ -689,6 +918,8 @@
         $(this)[0].cells[0].outerHTML='<td class="align-middle"><b>'+ i +'</b></td>';
             i++;
         });
+        
+
     }
 </script>
 @endsection

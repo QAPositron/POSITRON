@@ -208,7 +208,7 @@
                                     </td>
                                     <td style="text-align:center;">Ambiental</td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
-                                    <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @else {{$mesnumber}}/4 @endif </td>
+                                    <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS') {{$mesnumber}}/6 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS') {{$mesnumber}}/4 @endif </td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$area->primer_dia_uso}} - {{$area->ultimo_dia_uso}}</td>
                                     <td></td>
@@ -227,7 +227,7 @@
                                     </td>
                                     <td style="text-align:center;">@if($trabjasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($trabjasig->ubicacion))}}@endif</td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
-                                    <td style="text-align:center;">{{$mesnumber}}/12</td>
+                                    <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS') {{$mesnumber}}/6 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS') {{$mesnumber}}/4 @endif </td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->primer_dia_uso}} - {{$trabjasig->ultimo_dia_uso}}</td>
                                     <td></td>
@@ -247,7 +247,7 @@
                                     </td>
                                     <td style="text-align:center;">@if($dosicont->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($dosicont->ubicacion))}} @endif</td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
-                                    <td style="text-align:center;">{{$mesnumber}}/12</td>
+                                    <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS') {{$mesnumber}}/6 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS') {{$mesnumber}}/4 @endif </td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$dosicont->primer_dia_uso}} - {{$dosicont->ultimo_dia_uso}}</td>
                                     <td style="text-align:center;"></td>
@@ -266,7 +266,7 @@
                                     </td>
                                     <td style="text-align:center;">Ambiental</td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
-                                    <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @else {{$mesnumber}}/4 @endif </td>
+                                    <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS') {{$mesnumber}}/6 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS') {{$mesnumber}}/4 @endif </td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$area->primer_dia_uso}} - {{$area->ultimo_dia_uso}}</td>
                                     <td></td>
@@ -285,7 +285,7 @@
                                     </td>
                                     <td style="text-align:center;">@if($trabjasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($trabjasig->ubicacion))}} @endif</td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower(substr($contdosisededepto->departamentosede->departamento->nombre_departamento,0,6), "UTF-8"))}}.</td>
-                                    <td style="text-align:center;">{{$mesnumber}}/12</td>
+                                    <td style="text-align:center;">@if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){{$mesnumber}}/12 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS') {{$mesnumber}}/6 @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS') {{$mesnumber}}/4 @endif </td>
                                     <td style="text-align:center;">{{ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->nombre_sede, "UTF-8"))}}</td>
                                     <td style="text-align:center;">{{$trabjasig->primer_dia_uso}} - {{$trabjasig->ultimo_dia_uso}}</td>
                                     <td></td>

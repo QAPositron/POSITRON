@@ -37,12 +37,12 @@
                 <div class="col-md m-3">
                     <h6 class="pt-4 text-center">CÓDIGO DE LA ETIQUETA </h6>
                     <br>
-                    <input class="form-control" type="number" name="codigo_etiqueta" id="codigo_etiqueta" placeholder="-DIGITE UN CODIGO-" autofocus >
+                    <input class="form-control" type="text" name="codigo_etiqueta" id="codigo_etiqueta" placeholder="-DIGITE UN CODIGO-" autofocus >
                 </div>
                 <div class="col-md m-3">
                     <h6 class="pt-4 text-center">CÓDIGO DEL DOSÍMETRO </h6>
                     <br>
-                    <input class="form-control" type="number" name="codigo_dosimetro" id="codigo_dosimetro" placeholder="-DIGITE UN CODIGO-" autofocus >
+                    <input class="form-control" type="text" name="codigo_dosimetro" id="codigo_dosimetro" placeholder="-DIGITE UN CODIGO-" autofocus >
                 </div>
             </div>
             

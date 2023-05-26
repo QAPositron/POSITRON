@@ -2523,7 +2523,7 @@ class DosimetriaController extends Controller
         /* $pdf = PDF::loadView('dosimetria.etiquetasPDF_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig')); */
         $pdf =  PDF::loadView('dosimetria.etiquetasPDF1_dosimetria', compact('contratodosi', 'trabajdosiasig', 'dosicontrolasig', 'areadosiasig'));
         /* $pdf->setPaper('A4', 'portrait'); */
-        $pdf->setPaper( array(0, 0, 396.85, 566.929), 'portrait'); 
+        $pdf->setPaper( array(0, 0, 144,66.04724), 'portrait'); 
         return $pdf->stream();
     }
     public function revisionDosimetria($id, $mesnumber){
