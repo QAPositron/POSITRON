@@ -223,8 +223,6 @@ class DosimetriaController extends Controller
         ->join('coldepartamentos', 'colmunicipios.departamentocol_id', '=', 'coldepartamentos.id_departamentocol')
         ->where('dosimetriacontratos.codigo_contrato', '=', $contdosi)->get(); */
         $contrato = Dosimetriacontrato::where('codigo_contrato', '=', $contdosi)->get();
-        /* return $contrato; */
-        
         
         $pdf =  PDF::loadView('dosimetria.contratoPDF_dosimetria', compact('contrato', 'contdosi'));
         $pdf->setPaper('A4', 'portrait');
@@ -2652,7 +2650,7 @@ class DosimetriaController extends Controller
     public function pdfReporteRevisionSalida($empresa, $deptodosi, $mesnumber){
         
         $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
-        
+      
         $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
         ->where('mes_asignacion', '=', $mesnumber)
         ->where('revision_salida', '=', 'TRUE')
@@ -2683,7 +2681,7 @@ class DosimetriaController extends Controller
         $pdf =  PDF::loadView('dosimetria.reportePDF_revisionsalida_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados', 'temptrabajdosimrev', 'empresainfo', 'areasignados', 'trabjEncargado'));
         $pdf->setPaper('A4', 'portrait');
         date_default_timezone_set('America/Bogota');
-        return $pdf->stream("RSD_OSL_QA_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
+        return $pdf->stream("RSD_OSL_QA_".mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0,6,"UTF-8")."_".mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,6,"UTF-8")."_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
     }
     public function pdfReporteRevisionEntrada($empresa, $deptodosi, $mesnumber){
         $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
@@ -2714,7 +2712,7 @@ class DosimetriaController extends Controller
         $pdf =  PDF::loadView('dosimetria.reportePDF_revisionentrada_dosimetria', compact('contdosisededepto', 'dosicontrolasig', 'mesnumber', 'trabjasignados', 'areasignados', 'observacionesAsig','temptrabajdosimentradarev', 'empresainfo'));
         $pdf->setPaper('A4', 'portrait');
         date_default_timezone_set('America/Bogota');
-        return $pdf->stream("RED_OSL_QA_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
+        return $pdf->stream("RED_OSL_QA_".mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0,6,"UTF-8")."_".mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,6,"UTF-8")."_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
         
     }
     public function revisionDosimetriaEntrada($id, $mesnumber){

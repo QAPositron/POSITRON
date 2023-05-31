@@ -54,4 +54,8 @@ class Sede extends Model
     public function municipios(){
         return $this->belongsTo(Colmunicipio::class, 'municipiocol_id', 'id_municipiocol');
     }
+    //relacion uno a muchos con COTIZACION
+    public function cotizacion(){
+        return $this->hasOne(Cotizacion::class, 'sede_id', 'id_sede');
+    }
 }

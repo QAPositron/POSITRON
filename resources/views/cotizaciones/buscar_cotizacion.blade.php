@@ -24,9 +24,43 @@
                 <th class="text-center">SEDE</th>
                 <th class="text-center">FECHA EMISIÓN</th>
                 <th class="text-center">FECHA VENCIMIENTO</th>
+                <th class="text-center">PERIODO LECTURA</th>
+                <th class="text-center">NÚMERO DE LECTURAS</th>
+                <th class="text-center">VALOR TOTAL SD PERIODO</th>
+                <th class="text-center">VALOR TOTAL PERIODO</th>
             </thead>
+            <tbody>
+                @foreach($cotizaciones as $coti)
+                    <tr>
+                        <td>{{$coti->codigo_cotizacion}}</td>
+                        <td>{{$coti->empresa->nombre_empresa}}</td>
+                        <td>{{$coti->sede->nombre_sede}}</td>
+                        <td>{{$coti->fecha_emision}}</td>
+                        <td>{{$coti->fecha_vencimiento}}</td>
+                        <td>{{$coti->periodoLec}}</td>
+                        <td>{{$coti->lecturas_ano}}</td>
+                        <td>{{$coti->valorTotalSDPeriodo}}</td>
+                        <td>{{$coti->valorTotalPeriodo}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
     <div class="col-md"></div>
 </div>
+<script
+src="https://code.jquery.com/jquery-3.6.0.js"
+integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+crossorigin="anonymous">
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('guardar')== 'ok')
+    <script>
+        Swal.fire(
+        'GUARDADA!',
+        'SE HA GUARDADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
 @endsection

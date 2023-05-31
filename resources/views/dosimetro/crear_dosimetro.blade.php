@@ -112,7 +112,7 @@
         $('#form_create_dosimetro').submit(function(e){
             e.preventDefault();
             Swal.fire({
-                text: "DESEA GUARDAR ESTE DOSIÍMETRO??",
+                text: "DESEA GUARDAR ESTE DOSÍMETRO??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

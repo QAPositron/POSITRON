@@ -6,7 +6,7 @@
     <div class="col-4">
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3">CREAR  PRODUCTO</h2>
-            <form class="m-4" action="{{route('productos.save')}}" method="POST">
+            <form class="m-4" action="{{route('productos.save')}}" method="POST" id="form_crear_producto">
 
                 @csrf
 
@@ -91,6 +91,23 @@ crossorigin="anonymous">
            var format = new Intl.NumberFormat('de-DE').format(number);
            document.getElementById("v_unitario_producto").value = format;
         });
+        $('#form_crear_producto').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "DESEA GUARDAR ESTE PRODUCTO ??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
+
     })
     
 

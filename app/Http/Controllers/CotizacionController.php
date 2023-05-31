@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cotizacion;
+use App\Models\Cotizacionproducto;
 use App\Models\Empresa;
 use App\Models\Producto;
 use App\Models\Sede;
@@ -35,6 +36,61 @@ class CotizacionController extends Controller
         return response()->json($sedesArray);
     }
     public function save(Request $request){
-        return $request;
+        /* return $request; */
+        $request->validate([
+            'numero_cotizacion'     => 'required|unique:cotizacions,codigo_cotizacion',
+            'empresa'               => 'required',
+            'sede'                  => 'required',
+            'fecha_emision'         => 'required',
+            'fecha_vencimiento'     => 'required',
+            'periodolec_producto'   => 'required',
+            'numlecturas_año'       => 'required'
+        ]);
+        $cotizacion = new Cotizacion();
+        $cotizacion->codigo_cotizacion      = $request->numero_cotizacion;
+        $cotizacion->empresa_id             = $request->empresa;
+        $cotizacion->sede_id                = $request->sede;
+        $cotizacion->fecha_emision          = $request->fecha_emision;
+        $cotizacion->fecha_vencimiento      = $request->fecha_vencimiento;
+        $cotizacion->periodoLec             = $request->periodolec_producto;
+        $cotizacion->lecturas_ano           = $request->numlecturas_año;
+        $cotizacion->obsq_transEnvio        = $request->obsq_servitransporteEnvio;
+        $cotizacion->obsq_transRecole       = $request->obsq_servitransporteReco;
+        $cotizacion->desc_cortesia          = $request->descuento_cortesia;
+        $cotizacion->desc_prontopago        = $request->descuento_pronto_pago;
+        $cotizacion->valorTotalSDPeriodo    = $request->totalAñoSDint_periodo;
+        $cotizacion->valorTotalSDAño        = $request->totalAñoSDint_ano;
+        $cotizacion->descCortesiaPeriodo    = $request->descuento_cortesiaint_periodo;
+        $cotizacion->descCortesiaAño        = $request->descuento_cortesiaint_ano;
+        $cotizacion->descProntopagoPeriodo  = $request->descuento_prontopagoint_periodo;
+        $cotizacion->descProntoPagoAño      = $request->descuento_prontopagoint_ano;
+        $cotizacion->servTransEnvioPeriodo  = $request->servtransporte_periodo;
+        $cotizacion->servTransEnvioAño      = $request->servtransporteInt_ano;
+        $cotizacion->servTransRecoPeriodo   = $request->servtransporteReco_periodo;
+        $cotizacion->servTransRecoAño       = $request->servtransporteRecoInt_ano;
+        $cotizacion->valorTotalPeriodo      = $request->totalservicioInt_periodo;
+        $cotizacion->valorTotalAño          = $request->totalservicioInt_ano;
+        $cotizacion->promedioDosimMes       = $request->promedioDosiMesInt;
+        $cotizacion->pago_anticipado        = $request->fpago_anticipado;
+        $cotizacion->pago_unmes             = $request->fpago_unmes;
+        $cotizacion->obs                    = mb_strtoupper($request->observaciones);
+
+        $cotizacion->save();
+
+        for($i=1; $i<= $request->totalProductos; $i++){
+
+            $cotiprod = new Cotizacionproducto();
+    
+            $cotiprod->cotizacion_id        = $cotizacion->id_cotizacion;
+            $cotiprod->producto_id          = $request->input('ref_producto'.$i);
+            $cotiprod->conceptoProd         = $request->input('concepto_producto'.$i);
+            $cotiprod->cantidadProd         = $request->input('cantidad_producto'.$i);
+            $cotiprod->costoUndProd         = $request->input('costoUnd_producto'.$i);
+            $cotiprod->ivaProd              = $request->input('iva_producto'.$i);
+            $cotiprod->costoPeriodoProd     = $request->input('costoPeriodoInt_producto'.$i);
+            $cotiprod->costoAñoProd         = $request->input('costoAnoInt_producto'.$i);
+            $cotiprod->save();
+        }
+        return redirect()->route('cotizaciones.search')->with('guardar', 'ok');
     }
 }

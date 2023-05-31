@@ -29,7 +29,7 @@ class Empresa extends Model
     //relacion uno a muchos
     public function dosimetriacontratos(){
         /* return $this->hasMany('App\Models\Sede'); */
-        return $this->hasMany(Dosimetriacontrato::class, 'id_contratodosimetria');
+        return $this->hasOne(Dosimetriacontrato::class, 'empresa_id', 'id_empresa');
     }
 
     //relacion uno a muchos
@@ -41,6 +41,9 @@ class Empresa extends Model
     public function municipios(){
         return $this->belongsTo(Colmunicipio::class, 'municipiocol_id', 'id_municipiocol');
     }
-    
+    //relacion uno a muchos con COTIZACION
+    public function cotizacion(){
+        return $this->hasOne(Cotizacion::class, 'empresa_id', 'id_empresa');
+    }
     
 }
