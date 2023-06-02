@@ -491,9 +491,6 @@
             document.getElementById('servtransporte_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(envio*lecturas);
 
             updateValorTotalyPromedio();
-            
-
-            
         });
         $('#servtransporteReco_periodo').change(function(){
             
@@ -504,7 +501,6 @@
             document.getElementById('servtransporteReco_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(reco*lecturas); 
             
             updateValorTotalyPromedio();
-           
         });
     });
     var inicio = 1;
@@ -867,6 +863,88 @@
         
         $('#form_cotizacion').submit(function(e){
             e.preventDefault();
+            ///////////////////////VALIDACION PARA LA EMPRESA Y SEDE /////////////////
+            var empresa = document.getElementById("empresa").value;
+            if(empresa == ''){
+                return Swal.fire({
+                            title:"FALTA SELECCIONAR LA EMPRESA",
+                            text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                            icon: 'error'
+                        });
+                    
+            };
+            var sede = document.getElementById("sede_empresa").value;
+            if(sede == ''){
+                return Swal.fire({
+                            title:"FALTA SELECCIONAR LA SEDE SUBSCRITA A DICHA EMPRESA",
+                            text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                            icon: 'error'
+                        });
+            };
+            ///////////////////////VALIDACION PARA LAS FECHAS/////////////////
+            var fecha_emision = document.getElementById("fecha_emision").value;
+            if(fecha_emision == ''){
+                return Swal.fire({
+                            title:"FALTA SELECCIONAR LA FECHA DE EMISIÓN",
+                            text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                            icon: 'error'
+                        });
+            };
+            var fecha_vencimiento = document.getElementById("fecha_vencimiento").value;
+            if(fecha_vencimiento == ''){
+                return Swal.fire({
+                            title:"FALTA SELECCIONAR LA FECHA DE VENCIMIENTO",
+                            text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                            icon: 'error'
+                        });
+                    
+            };
+            ///////////////////////VALIDACION PARA EL PERIODO Y NUMERO DE LECTURAS/////////////////
+            var periodo = document.querySelectorAll('select[name="periodolec_producto"]');
+            for(var i = 0; i < periodo.length; i++){
+                var values = periodo[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                        title:"SELECCIONE EL PERIODO DE LECTURA",
+                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                        icon: 'error'
+                    });
+                }
+            }
+            var lec = document.getElementById('numlecturas_año').value;
+            if( lec == ''){
+                return Swal.fire({
+                        title:" INGRESE EL NÚMERO DE LECTURAS AL AÑO PARA PODER AGREGAR UN PRODUCTO",
+                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                        icon: 'error'
+                    });
+            };
+            ///////////////////////VALIDACION PARA EL PROMEDIO DEL DOSIMETRO MES/////////////////
+            var promedio = document.querySelectorAll('input[id="promedioDosiMesInt"]');
+            for(var i = 0; i < promedio.length; i++){
+                var values = promedio[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"NO HAY NINGUN PROMEDIO, AÑADA UN PRODUCTO !!",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                }
+            }
+            
+            /* ///////////////////////VALIDACION PARA LAS FORMAS DE PAGO/////////////////
+            var fpago_anticipado = document.getElementById('fpago_anticipado');
+            var fp_unmes = document.getElementById("fpago_un'mes");
+            if(!fpago_anticipado.checked && !fp_unmes.checked){
+                return Swal.fire({
+                        title:"SELECCIONE ALGUNA FORMA DE PAGO",
+                        text: "SELECCIONE LA INFORMACIÓN DESEADA",
+                        icon: 'error'
+                    });
+            } */
+            
+            
+
             Swal.fire({
                 text: "DESEA GUARDAR ESTA COTIZACIÓN ??",
                 icon: 'warning',
@@ -876,8 +954,12 @@
                 confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
+                    var cotizacion = document.getElementById("numero_cotizacion_input").value;
+                    var host = window.location.host;
+                    var path = "http://"+host+"/POSITRON/public/cotizaciones/"+cotizacion+"/pdf";
                     
                     this.submit();
+                    window.open(path, '_blank');
                 }
             })
         })

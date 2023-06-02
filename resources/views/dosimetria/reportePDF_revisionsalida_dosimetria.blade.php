@@ -111,13 +111,13 @@
             @if(empty($contdosisededepto))
                 @foreach($empresainfo as $empresa)
                     <p style="position:relative;"><b>{{$empresa->nombre_empresa}}</b></p>
-                    <p style="position:relative;">@if($empresa->empresa->tipo_identificacion_empresa == 'NIT') NIT: {{$empresa->empresa->num_iden_empresa}}-{{$empresa->empresa->DV}} @else {{$empresa->empresa->tipo_identificacion_empresa}}: {{$empresa->empresa->num_iden_empresa}} @endif</p>
+                    <p style="position:relative;">@if($empresa->empresa->tipo_identificacion_empresa == 'NIT') NIT: {{$empresa->empresa->num_iden_empresa}}-{{$empresa->empresa->DV}} @elseif($empresa->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA')CC: {{$empresa->empresa->num_iden_empresa}} @endif</p>
                     <p style="position:relative;">Dirección: {{$empresa->empresa->direccion_empresa}}</p>
                     <p style="position:relative;">Municipio: @php echo ucwords(mb_strtolower($empresa->empresa->municipios->nombre_municol, "UTF-8")); @endphp - @php echo ucwords(strtolower($empresa->empresa->municipios->coldepartamento->nombre_deptocol)); @endphp </p>
                 @endforeach
             @else
                 <p style="position:relative;"><b>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}</b></p>
-                <p style="position:relative;">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'NIT') NIT: {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}} @else {{$contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa}}: {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}} @endif</p>
+                <p style="position:relative;">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'NIT') NIT: {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}} @elseif($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC: {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}} @endif</p>
                 <p style="position:relative;">Dirección: {{$contdosisededepto->contratodosimetriasede->sede->empresa->direccion_empresa}}</p>
                 <p style="position:relative;">Municipio: @php echo ucwords(mb_strtolower($contdosisededepto->contratodosimetriasede->sede->empresa->municipios->nombre_municol, 'UTF-8')); @endphp - @php echo ucwords(strtolower($contdosisededepto->contratodosimetriasede->sede->empresa->municipios->coldepartamento->nombre_deptocol)); @endphp </p>
             @endif
