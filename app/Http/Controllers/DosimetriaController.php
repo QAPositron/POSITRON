@@ -2374,6 +2374,11 @@ class DosimetriaController extends Controller
         return redirect()->route('asignadosicontrato.info',["asigdosicont" => $request->id_contratodosimetriasededepto, "mesnumber" => $request->mes_asignacion])->with('actualizar', 'ok');
         /* return $request; */
     }
+    public function editlecturadosiarea($id){
+        $dosiareasig = Dosiareacontdosisede::find($id);
+
+        return view('dosimetria.lectura_dosimetro_area_edit', compact('dosiareasig'));
+    }
     public function pdf($id, $mesnumber){
         
         $contratoDosi = Departamento::join('departamentosedes', 'departamentos.id_departamento', '=', 'departamentosedes.departamento_id')

@@ -214,7 +214,7 @@ Route::get('lecturadosicontrol/{lecdosicont}/edit', [DosimetriaController::class
 
 Route::get('lecturadosiarea/{lecdosicont}/create', [DosimetriaController::class, 'lecturadosiarea'])->name('lecturadosiarea.create');
 Route::put('lecturadosiarea/{lecdosicont}', [DosimetriaController::class, 'savelecturadosiarea'])->name('lecturadosiarea.save');
-
+Route::get('lecturadosiarea/{lecdosicont}/edit', [DosimetriaController::class, 'editlecturadosiarea'])->name('lecturadosiarea.edit');
 /////////RUTAS PARA LOS REPORTES O INFORMES DE DOSIMETRIA///////
 
 Route::get('repodosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');

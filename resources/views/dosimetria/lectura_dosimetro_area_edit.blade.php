@@ -22,7 +22,7 @@
 <h4 class="text-center" id="id_contrato"></h4>
 <br>
 <h3 class="text-center">
-    LECTURA DE DOSÍMETRO TIPO AMBIENTAL<br> PARA EL PERÍODO {{$dosiareasig->mes_asignacion}} (
+    EDITAR LECTURA DE DOSÍMETRO TIPO AMBIENTAL<br> PARA EL PERÍODO {{$dosiareasig->mes_asignacion}} (
     @if($dosiareasig->mes_asignacion == 1)
         @php
             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
@@ -47,7 +47,7 @@
                         <a class="nav-link"  href="#infocontrato" role="tab" aria-controls="infocontrato" aria-selected="false">INFO CONTRATO</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="#lectura" role="tab" aria-controls="lectura" aria-selected="false">LECTURA</a>
+                        <a class="nav-link link-danger" href="#lectura" role="tab" aria-controls="lectura" aria-selected="false">LECTURA</a>
                     </li>
                 </ul>
             </div>
@@ -137,13 +137,13 @@
                         <h4 class="card-title text-center pt-3">{{$dosiareasig->areadepartamentosede->nombre_area}} <br> CÓDIGO DEL DOSÍMETRO: {{$dosiareasig->dosimetro->codigo_dosimeter}}</h4>
                         
                         <BR></BR>
-                        <Label class="px-5">INGRESE LA INFORMACIÓN DE LA LECTURA DEL DOSÍMETRO ASIGNADO:</Label>
+                        <Label class="px-5">MODIFIQUE LA INFORMACIÓN DE LA LECTURA DEL DOSÍMETRO ASIGNADO:</Label>
                         <BR></BR>
                         <div class="row">
                             <div class="col"></div>
                             <div class="col-10">
                                 <div class="card text-dark bg-light">
-                                    <form class="m-4" id="form_save_lectura_dosim" name="form_save_lectura_dosim" action="{{route('lecturadosiarea.save', $dosiareasig)}}" method="POST">
+                                    <form class="m-4" id="form_edit_save_lectura_dosim" name="form_edit_save_lectura_dosim" action="{{route('lecturadosiarea.save', $dosiareasig)}}" method="POST">
                                         
                                         @csrf
 
@@ -156,157 +156,103 @@
                                             <div class="col-md-3 mx-4">
                                                 
                                                 <div class="form-floating">
-                                                    @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
-                                                        <input type="NUMBER" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose_readonly" value="{{$dosiareasig->Hp10_calc_dose}}" readonly>
-                                                    @else
-                                                        <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$dosiareasig->Hp10_calc_dose}}">
-                                                    @endif
+                                                    <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$dosiareasig->Hp10_calc_dose}}">
                                                     <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
                                                 </div>
                                                 <br>
                                                 <div class="form-floating">
-                                                    @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
-                                                        <input type="NUMBER" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose_readonly" value="{{$dosiareasig->Hp007_calc_dose}}" readonly>
-                                                    @else
-                                                        <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosiareasig->Hp007_calc_dose}}">
-                                                    @endif
+                                                    <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosiareasig->Hp007_calc_dose}}">
                                                     <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
                                                 </div>
                                                 <br>
                                                 <div class="form-floating">
-                                                    @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
-                                                        <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosiareasig->measurement_date}}" readonly>
-                                                    @else
-                                                        <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$dosiareasig->measurement_date}}">
-                                                    @endif
+                                                    <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$dosiareasig->measurement_date}}">
                                                     <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                     @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md">
-                                                @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->nota1 == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota1" checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota1" disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1">1 = Ninguna </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->nota2 == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota2" checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota2" disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1">2 = Extraviado</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->nota3 == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota3" checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota3" disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1">3 = Supera la dosis permitida</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->nota4 == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota4" checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota4" disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1">4 = Dosímetro reprocesado</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->nota5 == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota5" checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota5" disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1">5 = Control no utilizado en la evaluación</label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->nota6 == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota6" checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota6" disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1">6 = Dosímetro contaminado</label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->DNL == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dnl"  checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dnl"  disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1">DNL = Dosímetro No Legible</label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->EU == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="eu" checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="eu" disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1"> EU = Dosímetro en Uso </label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->DPL == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dpl" checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dpl" disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1">DPL = Dosímetro en Proceso de Lectura</label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        @if($dosiareasig->DSU == 'TRUE')
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dsu" checked disabled>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dsu" disabled>
-                                                        @endif
-                                                        <label class="form-check-label" for="reverseCheck1">DSU = Dosímetro sin usar</label> 
-                                                    </div>
-                                                @else
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="nota1checked" name="nota1">
-                                                        <label class="form-check-label" for="reverseCheck1">1 = Ninguna</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="extraviado" name="nota2">
-                                                        <label class="form-check-label" for="reverseCheck1">2 = Extraviado</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="nota3checked" name="nota3">
-                                                        <label class="form-check-label" for="reverseCheck1">3 = Supera la dosis permitida</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="nota4checked" name="nota4">
-                                                        <label class="form-check-label" for="reverseCheck1">4 = Dosímetro reprocesado</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="nota5checked" name="nota5" checked>
-                                                        <label class="form-check-label" for="reverseCheck1">5 = Control no utilizado en la evaluación </label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="nota6checked" name="nota6">
-                                                        <label class="form-check-label" for="reverseCheck1">6 = Dosímetro contaminado</label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="dnl_id" name="dnl">
-                                                        <label class="form-check-label" for="reverseCheck1">DNL = Dosímetro No Legible</label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="eu_id" name="eu">
-                                                        <label class="form-check-label" for="reverseCheck1">EU = Dosímetro en Uso </label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="dpl_id" name="dpl">
-                                                        <label class="form-check-label" for="reverseCheck1">DPL = Dosímetro en Proceso de Lectura</label> 
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="dsu_id" name="dsu">
-                                                        <label class="form-check-label" for="reverseCheck1">DSU = Dosímetro sin usar</label> 
-                                                    </div>
-                                                @endif
+                                                <div class="form-check">
+                                                    @if($dosiareasig->nota1 == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota1" checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota1">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1">1 = Ninguna </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    @if($dosiareasig->nota2 == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota2" checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota2">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1">2 = Extraviado</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    @if($dosiareasig->nota3 == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota3" checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota3">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1">3 = Supera la dosis permitida</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    @if($dosiareasig->nota4 == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota4" checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota4">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1">4 = Dosímetro reprocesado</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    @if($dosiareasig->nota5 == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota5" checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota5">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1">5 = Control no utilizado en la evaluación</label> 
+                                                </div>
+                                                <div class="form-check">
+                                                    @if($dosiareasig->nota6 == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota6" checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota6">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1">6 = Dosímetro contaminado</label> 
+                                                </div>
+                                                <div class="form-check">
+                                                    @if($dosiareasig->DNL == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dnl"  checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dnl">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1">DNL = Dosímetro No Legible</label> 
+                                                </div>
+                                                <div class="form-check">
+                                                    @if($dosiareasig->EU == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="eu" checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="eu">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1"> EU = Dosímetro en Uso </label> 
+                                                </div>
+                                                <div class="form-check">
+                                                    @if($dosiareasig->DPL == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dpl" checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dpl">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1">DPL = Dosímetro en Proceso de Lectura</label> 
+                                                </div>
+                                                <div class="form-check">
+                                                    @if($dosiareasig->DSU == 'TRUE')
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dsu" checked>
+                                                    @else
+                                                        <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dsu">
+                                                    @endif
+                                                    <label class="form-check-label" for="reverseCheck1">DSU = Dosímetro sin usar</label> 
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <br>
@@ -337,11 +283,7 @@
                                             <div class="col-md"></div>
                                             <div class="col-md"></div>
                                             <div class="col-md d-grid gap-2">
-                                                @if($dosiareasig->measurement_date !='')
-                                                    <input type="submit" class="btn colorQA mt-2" name="update" id="update" value="GUARDAR" disabled>
-                                                @else
                                                     <input type="submit" class="btn colorQA mt-2" name="update" id="update" value="GUARDAR" >
-                                                @endif
                                             </div>
                                             <div class="col-md"></div>
                                             <div class="col-md"></div>

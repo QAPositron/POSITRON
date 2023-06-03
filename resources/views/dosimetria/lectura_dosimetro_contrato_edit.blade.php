@@ -244,6 +244,14 @@
                                                         <label class="form-check-label" for="reverseCheck1">5 = Control no utilizado en la evaluación</label> 
                                                     </div>
                                                     <div class="form-check">
+                                                        @if($trabjasig->nota6 == 'TRUE')
+                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota6" checked >
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox" value="TRUE" id="" name="nota6" >
+                                                        @endif
+                                                        <label class="form-check-label" for="reverseCheck1">6 = Dosímetro contaminado</label> 
+                                                    </div>
+                                                    <div class="form-check">
                                                         @if($trabjasig->DNL == 'TRUE')
                                                             <input class="form-check-input" type="checkbox" value="TRUE" id="" name="dnl"  checked >
                                                         @else

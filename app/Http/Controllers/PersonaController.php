@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use App\Models\Perfiles;
-use App\Models\Persona;
+use App\Models\Persona; 
 use App\Models\Personasedes;
 use App\Models\Personasperfiles;
 use App\Models\Personasroles;
