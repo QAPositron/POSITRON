@@ -2471,7 +2471,7 @@ class DosimetriaController extends Controller
             ->where('mes_asignacion', '<=', $mesnumber)
             ->get();
         }
-        /* return $SumatoriaDocemesesAreasasig; */
+        /* return $personaEncargada; */
         $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaDocemesesAreasasig','SumatoriaFechaIngresomesestrabajadoresaisg', 'SumatoriaFechaIngresomesesAreasasig', 'mesescantdosi', 'mesnumber'));
         $pdf->setPaper('8.5x14', 'landscape');
         

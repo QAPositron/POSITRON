@@ -105,4 +105,17 @@ class CotizacionController extends Controller
         /* return $pdf->stream(); */
         return $pdf->stream("QA-COTI-DP-".$coti[0]->empresa->nombre_empresa."-".$codigo.".pdf");
     }
+    public function edit($coti){
+        $cotizacion  = Cotizacion::find($coti);
+        $productos = Cotizacionproducto::where('cotizacion_id', '=', $cotizacion->id_cotizacion)->get();
+        $empresas = Empresa::all();
+        $productos = Producto::all();
+        return view('cotizaciones.edit_cotizacion', compact('cotizacion', 'productos', 'empresas', 'productos'));
+    }
+    public function update(){
+        
+    }
+    public function destroy(){
+        
+    }
 }

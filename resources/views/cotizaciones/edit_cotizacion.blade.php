@@ -5,28 +5,26 @@
     <div class="col"></div>
     <div class="col-12">
         <div class="card text-dark bg-light">
-            <h2 class="text-center mt-3">CREAR COTIZACIÓN DE DOSIMETRÍA</h2>
+            <h2 class="text-center mt-3">EDITAR COTIZACIÓN DE DOSIMETRÍA</h2>
             <br>
-            <form class="m-4" action="{{route('cotizaciones.save')}}" method="POST" id="form_cotizacion">
+            <form class="m-4" action="{{route('cotizaciones.update', $cotizacion)}}" method="POST" id="form_edit_cotizacion">
 
                 @csrf
+                @method('put')
                 <div class="row">
                     <div class="col-md">
                         <div class="form-floating my-3" id="numero_cotizacion">
-                            <input type="number" name="numero_cotizacion" id="numero_cotizacion_input" value="" class="form-control @error('numero_cotizacion') is-invalid @enderror" readonly>
+                            <input type="number" name="numero_cotizacion" id="numero_cotizacion_input" value="" class="form-control " readonly>
                             <label for="floatingInputGrid">NÚMERO</label>
-                            @error('numero_cotizacion')
-                                <small class="invalid-feedback">*{{$message}}</small>
-                            @enderror
                         </div>
                     </div>
                     <div class="col-md mt-3">
                         <div class="form-group">
                             <label for="floatingInputGrid">EMPRESA</label>
-                            <select class="form-control @error('empresa') is-invalid @enderror"  name="empresa" id="empresa" value="{{old('empresa')}}" autofocus style="text-transform:uppercase">
-                                <option value="">--SELECCIONE--</option>
+                            <select class="form-control @error('empresa') is-invalid @enderror"  name="empresa" id="empresa" value="{{old('empresa', $cotizacion->empresa->nombre_empresa)}}" autofocus style="text-transform:uppercase">
+                                <option value="{{$cotizacion->empresa_id}}">{{$cotizacion->empresa->nombre_empresa}}</option>
                                 @foreach($empresas as $emp)
-                                    <option value ="{{$emp->id_empresa}}" @if (old('empresa') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option>
+                                    @if($cotizacion->empresa_id != $emp->id_empresa )<option value ="{{$emp->id_empresa}}" @if (old('empresa') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option> @endif
                                 @endforeach
                             </select>
                             @error('empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
@@ -38,8 +36,8 @@
                         </div>
                         <div class="form-group" id="sede_empresa" name="sede_empresa">
                             <label for="floatingInputGrid">SEDE</label>
-                            <select class="form-control @error('sede') is-invalid @enderror" name="sede" id="sede" value="{{old('sede')}}" autofocus style="text-transform:uppercase">
-                                <option value="">--SELECCIONE--</option>
+                            <select class="form-control @error('sede') is-invalid @enderror" name="sede" id="sede" value="{{old('sede', $cotizacion->sede->nombre_sede)}}" autofocus style="text-transform:uppercase">
+                                <option value="{{$cotizacion->sede_id}}">{{$cotizacion->sede->nombre_sede}}</option>
                             </select>
                             @error('sede') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
@@ -50,7 +48,7 @@
                 <div class="row">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input value="" type="date" class="form-control @error('fecha_emision') is-invalid @enderror" name="fecha_emision" id="fecha_emision" onchange="fechaultimodia();" >
+                            <input value="{{old('fecha_emision', $cotizacion->fecha_emision)}}" type="date" class="form-control @error('fecha_emision') is-invalid @enderror" name="fecha_emision" id="fecha_emision" onchange="fechaultimodia();" >
                             <label for="floatingInputGrid">FECHA EMISIÓN</label>
                             @error('fecha_emision')
                                 <small class="invalid-feedback">*{{$message}}</small>
@@ -59,7 +57,7 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input value="" type="date" class="form-control @error('fecha_vencimiento') is-invalid @enderror" name="fecha_vencimiento" id="fecha_vencimiento" {{-- onchange="fechaultimodia();" --}} >
+                            <input value="{{old('fecha_vencimiento', $cotizacion->fecha_vencimiento)}}" type="date" class="form-control @error('fecha_vencimiento') is-invalid @enderror" name="fecha_vencimiento" id="fecha_vencimiento" {{-- onchange="fechaultimodia();" --}} >
                             <label for="floatingInputGrid">FECHA VENCIMIENTO</label>
                             @error('fecha_vencimiento')
                                 <small class="invalid-feedback">*{{$message}}</small>
@@ -69,10 +67,10 @@
                     <div class="col-md">
                         <div class="form-floating">
                             <select class="form-select" name="periodolec_producto" id="periodolec_producto" autofocus>
-                                <option value="">--</option>
-                                <option value="MENS">MENSUAL</option>
-                                <option value="BIMS">BIMESTRAL</option>
-                                <option value="TRIMS">TRIMESTRAL</option>
+                                <option value="{{$cotizacion->periodoLec}}">@if($cotizacion->periodoLec == 'MENS') MENSUAL @elseif($cotizacion->periodoLec == 'TRIMS')TRIMESTRAL @elseif($cotizacion->periodoLec == 'BIMS') BIMESTRAL @endif</option>
+                                @if($cotizacion->periodoLec != 'MENS')<option value="MENS">MENSUAL</option>@endif
+                                @if($cotizacion->periodoLec != 'BIMS')<option value="BIMS">BIMESTRAL</option>@endif
+                                @if($cotizacion->periodoLec != 'TRIMS')<option value="TRIMS">TRIMESTRAL</option>@endif
                             </select>
                             <label for="floatingSelectGrid">PERIODO LECTURA:</label>
                         </div>
@@ -81,8 +79,8 @@
                         <label>LECTURAS AL AÑO:</label>
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="number" name="totalProductos" id="totalProductos" value="" class="form-control" hidden>
-                                <input type="number" name="numlecturas_año" id="numlecturas_año" value="" class="form-control">
+                                <input type="number" name="totalProductos" id="totalProductos" value="{{old('totalProductos', $cotizacion->lecturas_ano)}}" class="form-control" hidden>
+                                <input type="number" name="numlecturas_año" id="numlecturas_año" value="{{old('numlecturas_año', $cotizacion->lecturas_ano)}}" class="form-control">
                             </div>
                             <div class="col-md mt-2">
                                 <label id="maxLectuasAño"></label>
@@ -97,7 +95,7 @@
                     </div>
                     <div class="col-md-1 me-0">
                         <div class="form-group ">
-                            <input type="number" name="descuento_pronto_pago" id="descuento_pronto_pago" value="" class="form-control  @error('descuento_pronto_pago') is-invalid @enderror" style="width: 80px;">
+                            <input type="number" name="descuento_pronto_pago" id="descuento_pronto_pago" value="{{old('descuento_pronto_pago', $cotizacion->desc_prontopago)}}" class="form-control  @error('descuento_pronto_pago') is-invalid @enderror" style="width: 80px;">
                             @error('descuento_pronto_pago')<small class="invalid-feedback">*{{$message}}</small>@enderror
                         </div>
                     </div>
@@ -109,7 +107,7 @@
                     </div>
                     <div class="col-md-1 me-0">
                         <div class="form-group">
-                            <input type="number" name="descuento_cortesia" id="descuento_cortesia" value="" class="form-control @error('descuento_cortesia') is-invalid @enderror" style="width: 80px;">
+                            <input type="number" name="descuento_cortesia" id="descuento_cortesia" value="{{old('descuento_cortesia', $cotizacion->desc_cortesia)}}" class="form-control @error('descuento_cortesia') is-invalid @enderror" style="width: 80px;">
                             @error('descuento_cortesia')<small class="invalid-feedback">*{{$message}}</small>@enderror
                         </div>
                     </div>
@@ -118,13 +116,13 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteEnvio" name="obsq_servitransporteEnvio" {{-- onchange="showContentEnvio();" --}}>
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteEnvio" name="obsq_servitransporteEnvio">
                             <label class="form-check-label" for="defaultCheck1">
                                 OBSEQUIO EN EL SERVICIO DE TRANSPORTE (ENVÍO)
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteReco" name="obsq_servitransporteReco" {{-- onchange="showContentReco();" --}}>
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteReco" name="obsq_servitransporteReco" >
                             <label class="form-check-label" for="defaultCheck1">
                                 OBSEQUIO EN EL SERVICIO DE TRANSPORTE (RECOLECCIÓN)
                             </label>

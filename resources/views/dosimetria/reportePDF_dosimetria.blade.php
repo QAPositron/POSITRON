@@ -1,5 +1,11 @@
 <style type="text/css">
-    
+    @page{
+        
+        margin-top: 30pt;
+        margin-bottom: 30pt;
+        margin-left: 30pt;
+        margin-right: 30pt;
+    }
     html{
         margin: 30pt 30pt 30pt 30pt;
         font-family: sans-serif;
@@ -49,7 +55,7 @@
 <!-- ////////////////////ENCABEZADO/////////////// -->
 
 
-{{-- <img src="{{asset('imagenes/VerdeSF.png')}}" width="200"> --}}
+ <img src="{{asset('imagenes/VerdeSF.png')}}" width="200">
 
 
 <h3 style="position:absolute; top:87px; left:30px;">REPORTE DE DOSIMETRÍA</h3>
@@ -115,13 +121,13 @@
                 
             @endforeach
         </td>
-        <td rowspan="6" style="width: 130px; border:0.1px solid black;">
-           {{--  <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="127" style="top:15px;">  --}}
+        <td rowspan="6" style="width: 140px; border:0.1px solid black;">
+           <img src="{{asset('imagenes/LOGODOSIMETRIA.png')}}" width="120" style="top:15px; right: 14px;">
         </td>
     </tr>
     <tr>
         <td style="border:0.1px solid black; text-align: right;">Código Depto.</td>
-        <td style="width: 94px; border:0.1px solid black; color:#2646FA;" align="center">
+        <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
             
             @foreach($contratoDosi as $cont)
                 {{$cont->nombre_departamento}}
@@ -152,15 +158,13 @@
         @endforeach 
         </td>
         <td colspan="2" rowspan="3" style="width: 94px; border:0.1px solid black;">
-            {{-- <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="48" style="top:65px; "> --}}
+            <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="48" style="top:65px; ">
         </td>
     </tr>
     <tr>
         <td style="border:0.1px solid black; text-align: right;">Persona Contacto</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
-            @foreach($personaEncargada as $per)
-                {{$per->primer_nombre_persona}} {{$per->primer_apellido_persona}} {{$per->segundo_apellido_persona}}
-            @endforeach
+                {{$personaEncargada[0]->primer_nombre_persona}} {{$personaEncargada[0]->primer_apellido_persona}} {{$personaEncargada[0]->segundo_apellido_persona}}
         </td>
        
     </tr>
@@ -168,7 +172,7 @@
         <td style="border:0.1px solid black; text-align: right;">Cargo del contacto</td>
         <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
             @foreach($personaEncargada as $per)
-                {{$per->nombre_perfil}}
+                {{$per->nombre_perfil}}.
             @endforeach
         </td>
     </tr>
@@ -178,7 +182,7 @@
 <!-- ////////////////////FIN ENCABEZADO/////////////// -->
 
 <!-- ////////////////////CUERPO/////////////// -->
-<table style="top:140px; border-collapse:collapse;" cellspacing="4" cellpadding="0" class="tablaPrincipal">
+<table style="top:140px; border-collapse:collapse; width: 100%;" cellspacing="4" cellpadding="0" class="tablaPrincipal">
     <thead style="background-color:#DADADA;">
         <tr align="center">
             <th rowspan="2" style="width:60px; border:1px solid black;">Código Dosímetro </th>
@@ -190,7 +194,7 @@
             <th rowspan="2" style="width:60px; border:1px solid black;">Fecha de Ingreso al Servicio (1)</th>
             <th colspan="2" style="width:60px; padding:5px; border:1px solid black;">Periodo de uso del dosímetro</th>
             <th rowspan="2" style="width:50px; border:1px solid black;"><p class="verticalText">Período de recambio</p></th>
-            <th rowspan="2" style="width:50px; border:1px solid black;"><p class="verticalText">Ubicación <br> del  <br> dosímetro</p></th>
+            <th rowspan="2" style="width:70px; border:1px solid black;"><p class="verticalText">Ubicación <br> del  <br> dosímetro</p></th>
             <th rowspan="2" style="width:50px; border:1px solid black;"><p class="verticalText">Energía ó calidad de radiación</p></th>
             <th colspan="3" style="width:120px; padding:5px; border:1px solid black;">Dosis del Período<br>(mSv)</th>
             <th colspan="3" style="width:120px; padding:5px; border:1px solid black;">Dosis acumulada 12 meses anteriores (mSv)</th>
