@@ -61,7 +61,7 @@ class FormCrearEmpresaDosimetria extends Component
 
         return $this->reset(['empresa', 'numtotal_dosi_torax', 'numtotal_dosi_cristalino', 'numtotal_dosi_dedo', 'numtotal_dosi_muñeca', 'numtotal_dosi_control_torax', 'numtotal_dosi_control_cristalino', 'numtotal_dosi_control_dedo', 'numtotal_dosi_ambiental', 'numtotal_dosi_caso']);
     }
-    
+     
     public function render()
     {
         return view('livewire.form-crear-empresa-dosimetria');

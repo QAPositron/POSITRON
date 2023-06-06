@@ -21,7 +21,7 @@
     }
     footer{
         position: fixed;
-        bottom: 0.7cm; 
+        bottom: 0.5cm; 
         left: 2cm; 
         right: 2cm;
         height: 1.8cm;
@@ -97,7 +97,7 @@
             @endphp
             {{date("d", strtotime($cotiza->fecha_emision))}} {{$meses[date("m", strtotime($cotiza->fecha_emision))]}} {{date("Y", strtotime($cotiza->fecha_emision))}}</p>
             <p>Señores</p>
-            <p>{{$cotiza->empresa->nombre_empresa}}</p>
+            <p><b>{{$cotiza->empresa->nombre_empresa}}</b></p>
             <p>@if($cotiza->empresa->tipo_identificacion_empresa == 'NIT') 
                     NIT: {{$cotiza->empresa->num_iden_empresa}}-{{$cotiza->empresa->DV}} 
                 @elseif($cotiza->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA')
@@ -134,7 +134,7 @@
                         <tr>
                             <td style="border:0.1px solid black; padding:5px; font-size: 10px;">{{$i}}</td>
                             <td style="border:0.1px solid black; padding:5px; font-size: 10px;">{{$prod->cantidadProd}}</td>
-                            <td align="left" style="border:0.1px solid black; padding:5px; font-size: 9px;">{{ucwords(mb_strtolower($prod->conceptoProd, 'UTF-8'))}}</td>
+                            <td align="left" style="border:0.1px solid black; padding:5px; font-size: 9px;">{{ucfirst(mb_strtolower($prod->conceptoProd, 'UTF-8'))}}</td>
                             <td style="border:0.1px solid black; padding:5px; font-size: 9px;">
                                 @if($cotiza->periodoLec == 'MENS')
                                     Mensual
@@ -155,25 +155,35 @@
                 <tfoot>
                     @if($cotiza->desc_cortesia != 0 || $cotiza->desc_cortesia != NULL)
                         <tr>
-                            <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>(-) Descuento de cortesía periodo</b></td>
-                            <td style=" border:0.1px solid black; padding:5px; font-size: 10px;"><b>{{$cotiza->desc_cortesia}}%</b></td>
+                            <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>(-) Descuento de cortesía periodo</b></td>
+                            <td style=" border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>{{$cotiza->desc_cortesia}}%</b></td>
                             <td  align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>${{number_format($cotiza->descCortesiaPeriodo, 0, ',', '.')}}</b></td>
                         </tr>
                     @endif
                     @if($cotiza->servTransEnvioPeriodo != 0 || $cotiza->servTransEnvioPeriodo != NULL)
                         <tr>
-                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px;">(+) Servicio de transporte por periodo (envío)</td>
+                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (envío)</td>
                             <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;">${{number_format($cotiza->servTransEnvioPeriodo, 0, ',', '.')}}</td>
+                        </tr>
+                    @elseif($cotiza->obsq_transEnvio == 'TRUE')
+                        <tr>
+                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (envío)</td>
+                            <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>Obsequio</b></td>
                         </tr>
                     @endif
                     @if($cotiza->servTransRecoPeriodo != 0 || $cotiza->servTransRecoPeriodo != NULL)
                         <tr>
-                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px;">(+) Servicio de transporte por periodo (recolección)</td>
+                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (recolección)</td>
                             <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;">${{number_format($cotiza->servTransRecoPeriodo, 0, ',', '.')}}</td>
+                        </tr>
+                    @elseif($cotiza->obsq_transRecole == 'TRUE')
+                        <tr>
+                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (recolección)</td>
+                            <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>Obsequio</b></td>
                         </tr>
                     @endif
                     <tr>
-                        <td align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>VALOR TOTAL POR PERIODO<sup>1</sup></b></td>
+                        <td align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>VALOR TOTAL POR PERIODO<sup>1</sup></b></td>
                         <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"> 
                             @php
                                 $totalPer = $cotiza->valorTotalPeriodo + $cotiza->descProntopagoPeriodo
@@ -185,8 +195,8 @@
                         <td colspan="7" style="border:0.1px solid white; border-bottom:0.1px solid black;"></td>
                     </tr>
                     <tr>
-                        <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>Valor total del servicio (año) incluido transporte</b></td>
-                        <td style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>{{$cotiza->lecturas_ano}}</b></td>
+                        <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>Valor total del servicio (año) incluido transporte</b></td>
+                        <td style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>{{$cotiza->lecturas_ano}}</b></td>
                         <td  align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;">
                             @php
                                 $totalAñoSDP = $cotiza->valorTotalSDAño - $cotiza->descCortesiaAño + $cotiza->servTransEnvioAño + $cotiza->servTransRecoAño;
@@ -195,34 +205,43 @@
                     </tr>
                     @if($cotiza->desc_prontopago != 0 || $cotiza->desc_prontopago != NULL)
                         <tr>
-                            <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>(-) Descuento por pago anticipado del año</b></td>
-                            <td style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>{{$cotiza->desc_prontopago}}%</b></td>
+                            <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>(-) Descuento por pago anticipado del año</b></td>
+                            <td style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>{{$cotiza->desc_prontopago}}%</b></td>
                             <td  align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>${{number_format($cotiza->descProntopagoAño, 0, ',', '.')}}</b></td>
                         </tr>
                     @endif
                     <tr>
-                        <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>VALOR TOTAL DEL SERVICIO (AÑO) INCLUIDO TRANSPORTE CON DESCUENTO ADICIONAL POR PRONTO PAGO<sup>2</sup></b></td>
+                        <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">
+                            @if($cotiza->desc_prontopago != 0 || $cotiza->desc_prontopago != NULL)
+                                <b>VALOR TOTAL DEL SERVICIO (AÑO) INCLUIDO TRANSPORTE CON DESCUENTO POR PRONTO PAGO<sup>2</sup></b>
+                            @else
+                                <b>VALOR TOTAL DEL SERVICIO (AÑO) INCLUIDO TRANSPORTE<sup>2</sup></b>
+                            @endif
+                        </td>
                         <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"> <b>${{number_format($cotiza->valorTotalAño, 0, ',', '.')}}</b></td>
                     </tr>
                 </tfoot>
             </table>
             <br>
+            <p><b>OBSERVACIONES:</b></p>
+            <p>{{ucfirst(mb_strtolower($cotiza->obs, 'UTF-8'))}}</p>
+            <br>
             @if(($cotiza->servTransEnvioPeriodo == 0 || $cotiza->servTransEnvioPeriodo == NULL) && ($cotiza->servTransRecoPeriodo == 0 || $cotiza->servTransRecoPeriodo == NULL))
-                <p>NOTAS DE TRANSPORTE:</p>
-                <ol>
+                <p><b>NOTAS DE TRANSPORTE:</b></p>
+                <ul>
                     <li>En el costo no se incluye el envío de los dosímetros desde el laboratorio de QA POSITRON a sus instalaciones, este costo es responsabilidad de la institución contratante.</li>
                     <li>En el costo no se incluye el envío de los dosímetros a las instalaciones de QA POSITRON, este costo es responsabilidad de la institución contratante.</li>
-                </ol>
+                </ul>
             @elseif(($cotiza->servTransEnvioPeriodo == 0 || $cotiza->servTransEnvioPeriodo == NULL) && ($cotiza->servTransRecoPeriodo != 0 || $cotiza->servTransRecoPeriodo != NULL))
-                <p>NOTAS DE TRANSPORTE:</p>
-                <ol>
+                <p><b>NOTAS DE TRANSPORTE:</b></p>
+                <ul>
                     <li>En el costo no se incluye el envío de los dosímetros desde el laboratorio de QA POSITRON a sus instalaciones, este costo es responsabilidad de la institución contratante.</li>
-                </ol>
+                </ul>
             @elseif(($cotiza->servTransEnvioPeriodo != 0 || $cotiza->servTransEnvioPeriodo != NULL) && ($cotiza->servTransRecoPeriodo == 0 || $cotiza->servTransRecoPeriodo == NULL))
-                <p>NOTAS DE TRANSPORTE:</p>
-                <ol>
+                <p><b>NOTAS DE TRANSPORTE:</b></p>
+                <ul>
                     <li>En el costo no se incluye el envío de los dosímetros a las instalaciones de QA POSITRON, este costo es responsabilidad de la institución contratante.</li>
-                </ol>
+                </ul>
             @endif
         @endforeach
         <p style="text-align:center;"><b>TERMINOS Y CONDICIONES OFERTA</b></p>
@@ -241,7 +260,7 @@
             <li>Los dosímetros deben ser devueltos Máximo 5 cinco (05) hábiles después de fecha de inicio de periodo.</li>
         </ul>
         <p><b>VALORES AGREGADOS</b></p>
-        <ol>
+        <ul>
             <li>Tecnología de última generación en temas de dosimetría personal, tecnología OSL, es una tecnología que permite ser releídos los dosímetros en caso de inconsistencias en la lectura inicia.</li>
             <li>Entrega en la lectura en un máximo de Quince Días Hábiles después de la recepción de los dosímetros por parte de los usuarios.</li>
             <li>Tiempos de entrega de dosímetros para nuevos usuarios de 48 horas a nivel nacional.</li>
@@ -250,7 +269,7 @@
             <li>Acompañamiento para los parámetros de seguimiento y control en caso de accidentes radiológicos.</li>
             <li>Cobertura a Nivel Nacional.</li>
             <li>Amplio portafolio de servicios en protección radiológica, para la asesoría en el licenciamiento de equipos emisores de radiaciones ionizantes, con atención personalizada por medio de un asesor designado por QA POSITRON.</li>
-        </ol>
+        </ul>
     
         <p>Quedando atentos a su respuesta.</p>
         <br>
@@ -336,13 +355,14 @@
         </div>
     </main>
     <!-- ////////////////////SCRIPT PARA CONTAR LAS PAGINAS/////////////// -->
+    
     <script type="text/php">
         if (isset($pdf)) {
             $text = "página {PAGE_NUM} de {PAGE_COUNT}";
             $size = 8;
             $font = $fontMetrics->getFont("Verdana");
             $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
-            $x = ($pdf->get_width() - $width) / 1.9;
+            $x = $pdf->get_width()-110;
             $y = $pdf->get_height() - 20;
             $pdf->page_text($x, $y, $text, $font, $size);
         }

@@ -6,20 +6,56 @@
     <div class="col-4">
         <div class="card text-dark bg-light">
             <h2 class="text-center mt-3">CREAR DOSÍMETRO</h2>
-
+            {{-- @livewire('dosimetro-component') --}}
+            <label class="text-secondary mx-4">' * ' campo obligatorio</label>
+            <br>
+            <div class="row g-2 mx-4">
+                <div class="col-md">
+                    <label >OPRIMA EL BOTON PARA INGRESAR EL CODIGO DE DOSÍMETRO:</label>
+                </div>
+                <div class="col-md-3 text-center p-0">
+                    <button class="btn colorQA mt-1" onclick="agregarCodigo()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
             <form class="m-4" id="form_create_dosimetro" name="form_create_dosimetro" action="{{route('dosimetros.save')}}" method="POST">
 
                 @csrf
-
+                
+                <div id="rowCodigo">
+                    @if(count($errors) > 0)
+                        @for ($i = 0; $i < count(old('codigo_dosimetro')); $i++)
+                            <div class="row g-2" id="{{$i}}">
+                                <div class="col-md">
+                                    <div class="form-floating" >
+                                        <input type="text" name="codigo_dosimetro[]" id="codigo_dosimetro" class="form-control @error('codigo_dosimetro.'.$i) is-invalid @enderror" value="{{old('codigo_dosimetro.'.$i)}}">
+                                        <label for="floatingInputGrid">* CODIGO:</label>
+                                        @error('codigo_dosimetro.'.$i) <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3  text-center">
+                                    <button class="btn btn-danger mt-2" type="button" onclick="eliminarRow({{$i}})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-trash " viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div><br>
+                        @endfor
+                    @endif
+                </div>
                 <div class="row g-2">
-                    <label class="text-secondary">' * ' campo obligatorio</label>
                     <div class="col-md">
                         <div class="form-floating" >
                             <select class="form-select @error('tipo_dosimetro') is-invalid @enderror" name="tipo_dosimetro" id="tipo_dosimetro" value="{{old('tipo_dosimetro')}}" autofocus style="text-transform:uppercase">
                                 <option value="">--SELECCIONE--</option>
-                                <option value="GENERAL">GENERAL</option>
-                                <option value="AMBIENTAL">AMBIENTAL</option>
-                                <option value="EZCLIP">EZCLIP</option>
+                                <option value="GENERAL" @if (old('tipo_dosimetro') == "GENERAL") {{ 'selected' }} @endif>GENERAL</option>
+                                <option value="AMBIENTAL" @if (old('tipo_dosimetro') == "AMBIENTAL") {{ 'selected' }} @endif>AMBIENTAL</option>
+                                <option value="EZCLIP" @if (old('tipo_dosimetro') == "EZCLIP") {{ 'selected' }} @endif>EZCLIP</option>
                             </select>
                             <label for="floatingInputGrid">* TIPO:</label>
                             @error('tipo_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
@@ -38,16 +74,6 @@
                             </select>
                             <label for="floatingInputGrid">* TECNOLOGÍA:</label>
                             @error('tecnologia_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="row g-2">
-                    <div class="col-md">
-                        <div class="form-floating" >
-                            <input type="numeric" name="codigo_dosimetro" id="codigo_dosimetro" class="form-control @error('codigo_dosimetro') is-invalid @enderror" value="{{old('codigo_dosimetro')}}" autofocus >
-                            <label for="floatingInputGrid">* CODIGO:</label>
-                            @error('codigo_dosimetro') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -126,5 +152,31 @@
             })
         })
     })
+    var inicio = 1;
+    function agregarCodigo(){
+        var codigo = `<div class="row g-2" id="codigo">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" name="codigo_dosimetro[]" id="codigo_dosimetro" class="form-control" value="" autofocus >
+                                <label for="floatingInputGrid">* CODIGO:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3  text-center">
+                            <button class="btn btn-danger mt-2" type="button" onclick="eliminar(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-trash " viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div><br>`;
+        $("#rowCodigo").append(codigo);
+    }
+    function eliminar(codigo){
+        $("#codigo").remove();
+    }
+    function eliminarRow(id){
+        $("#"+id).remove();
+    }
 </script>
 @endsection

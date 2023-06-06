@@ -101,7 +101,8 @@ class CotizacionController extends Controller
         $pdf =  PDF::loadView('cotizaciones.cotizacionPDF_dosimetria', compact('coti','cotizacion', 'productos'));
         $pdf->setPaper('A4', 'portrait');
         $n = $cotizacion;
-        $codigo = str_pad($n, 5, "0", STR_PAD_LEFT); 
+        $codigo = str_pad($n, 5, "0", STR_PAD_LEFT);
+       
         /* return $pdf->stream(); */
         return $pdf->stream("QA-COTI-DP-".$coti[0]->empresa->nombre_empresa."-".$codigo.".pdf");
     }

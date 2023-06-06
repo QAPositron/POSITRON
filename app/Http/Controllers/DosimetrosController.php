@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dosimetro;
 use App\Models\Holder;
 use App\Models\Trabajadordosimetro;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -23,21 +24,24 @@ class DosimetrosController extends Controller
         $request->validate([
             'tipo_dosimetro'                => ['required'],
             'tecnologia_dosimetro'          => ['required'],              
-            'codigo_dosimetro'              => ['required', Rule::unique('dosimetros', 'codigo_dosimeter')],  
+            'codigo_dosimetro'              => ['required','array','min:1'],
+            'codigo_dosimetro.*'            => ['required','distinct', Rule::unique('dosimetros', 'codigo_dosimeter')],  
             'fecha_ingre_serv_dosimetro'    => ['required'],
             'estado_dosimetro'              => ['required'],
         ]);
-        
-        $dosimetro = new Dosimetro();
-
-        $dosimetro->tipo_dosimetro          =  mb_strtoupper($request->tipo_dosimetro);
-        $dosimetro->tecnologia_dosimetro    =  mb_strtoupper($request->tecnologia_dosimetro);
-        $dosimetro->codigo_dosimeter        = $request->codigo_dosimetro;
-        $dosimetro->fecha_ingreso_servicio  = $request->fecha_ingre_serv_dosimetro;
-        $dosimetro->estado_dosimetro        =  mb_strtoupper($request->estado_dosimetro);
-        $dosimetro->uso_dosimetro           = '';
-       
-        $dosimetro->save();
+        for ($i=0; $i <count($request->codigo_dosimetro) ; $i++) { 
+            
+            $dosimetro = new Dosimetro();
+    
+            $dosimetro->tipo_dosimetro          =  mb_strtoupper($request->tipo_dosimetro);
+            $dosimetro->tecnologia_dosimetro    =  mb_strtoupper($request->tecnologia_dosimetro);
+            $dosimetro->codigo_dosimeter        = $request->codigo_dosimetro[$i];
+            $dosimetro->fecha_ingreso_servicio  = $request->fecha_ingre_serv_dosimetro;
+            $dosimetro->estado_dosimetro        =  mb_strtoupper($request->estado_dosimetro);
+            $dosimetro->uso_dosimetro           = '';
+           
+            $dosimetro->save();
+        }
 
     
         /* return $request; */
