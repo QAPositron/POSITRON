@@ -319,17 +319,17 @@
                         $mes = date("n", $fecha);
                     @endphp
                     @if($mes == 1 || $mes == 7)
-                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM1.png')}}" class="img_torax">
                     @elseif($mes == 2 || $mes == 8)
-                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM2.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM2.png')}}" class="img_torax">
                     @elseif($mes == 3 || $mes == 9)
-                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM3.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM3.png')}}" class="img_torax">
                     @elseif($mes == 4 || $mes == 10)
-                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM4.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM4.png')}}" class="img_torax">
                     @elseif($mes == 5 || $mes == 11)
-                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM5.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM5.png')}}" class="img_torax">
                     @elseif($mes == 6 || $mes == 12)
-                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM6.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM6.png')}}" class="img_torax">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL TORAX ////////// --}}
                     @foreach($contratodosi as $contdosi)
@@ -359,17 +359,17 @@
                         $mes = date("n", $fecha);
                     @endphp
                     @if($mes == 1 || $mes == 7)
-                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM1.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM1.png')}}" class="img_anillo">
                     @elseif($mes == 2 || $mes == 8)
-                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM2.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM2.png')}}" class="img_anillo">
                     @elseif($mes == 3 || $mes == 9)
-                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM3.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM3.png')}}" class="img_anillo">
                     @elseif($mes == 4 || $mes == 10)
-                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM4.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM4.png')}}" class="img_anillo">
                     @elseif($mes == 5 || $mes == 11)
-                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM5.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM5.png')}}" class="img_anillo">
                     @elseif($mes == 6 || $mes == 12)
-                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM6.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM6.png')}}" class="img_anillo">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
                     @foreach($contratodosi as $contdosi)
@@ -401,31 +401,31 @@
                     @endphp
                     @if($trab->persona->genero_persona == 'FEMENINO')
                         @if($mes== 1 || $mes == 7)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM1_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM1_MUJER.png')}}" class="img_torax">
                         @elseif($mes == 2 || $mes == 8)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM2_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM2_MUJER.png')}}" class="img_torax">
                         @elseif($mes == 3 || $mes == 9)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM3_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM3_MUJER.png')}}" class="img_torax">
                         @elseif($mes == 4 || $mes == 10)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM4_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM4_MUJER.png')}}" class="img_torax">
                         @elseif($mes == 5 || $mes == 11)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM5_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM5_MUJER.png')}}" class="img_torax">
                         @elseif($mes == 6 || $mes == 12)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM6_MUJER.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM6_MUJER.png')}}" class="img_torax">
                         @endif
                     @else
                         @if($mes== 1 || $mes == 7)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM1_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM1_HOMBRE.png')}}" class="img_torax">
                         @elseif($mes == 2 || $mes == 8)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM2_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM2_HOMBRE.png')}}" class="img_torax">
                         @elseif($mes == 3 || $mes == 9)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM3_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM3_HOMBRE.png')}}" class="img_torax">
                         @elseif($mes == 4 || $mes == 10)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM4_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM4_HOMBRE.png')}}" class="img_torax">
                         @elseif($mes == 5 || $mes == 11)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM5_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM5_HOMBRE.png')}}" class="img_torax">
                         @elseif($mes == 6 || $mes == 12)
-                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM6_HOMBRE.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_TORAX/TORAXM6_HOMBRE.png')}}" class="img_torax">
                         @endif
                     @endif
 
@@ -457,17 +457,17 @@
                         $mes = date("n", $fecha);
                     @endphp
                     @if($mes == 1 || $mes == 7)
-                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM1.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM1.png')}}" class="img_anillo">
                     @elseif($mes == 2 || $mes == 8)
-                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM2.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM2.png')}}" class="img_anillo">
                     @elseif($mes == 3 || $mes == 9)
-                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM3.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM3.png')}}" class="img_anillo">
                     @elseif($mes == 4 || $mes == 10)
-                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM4.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM4.png')}}" class="img_anillo">
                     @elseif($mes == 5 || $mes == 11)
-                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM5.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM5.png')}}" class="img_anillo">
                     @elseif($mes == 6 || $mes == 12)
-                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM6.png')}}" class="img_anillo" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                        <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM6.png')}}" class="img_anillo">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO ANILLO ////////// --}}
                     @foreach($contratodosi as $contdosi)
@@ -498,17 +498,17 @@
                     $mes = date("n", $fecha);
                 @endphp
                 @if($mes == 1 || $mes == 7)
-                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM1.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM1.png')}}" class="img_torax">
                 @elseif($mes == 2 || $mes == 8)
-                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM2.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM2.png')}}" class="img_torax">
                 @elseif($mes == 3 || $mes == 9)
-                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM3.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM3.png')}}" class="img_torax">
                 @elseif($mes == 4 || $mes == 10)
-                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM4.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM4.png')}}" class="img_torax">
                 @elseif($mes == 5 || $mes == 11)
-                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM5.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM5.png')}}" class="img_torax">
                 @elseif($mes == 6 || $mes == 12)
-                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM6.png')}}" class="img_torax" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                    <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM6.png')}}" class="img_torax">
                 @endif
 
                 @foreach($contratodosi as $contdosi)
@@ -540,17 +540,17 @@
                             $mes = date("n", $fecha);
                         @endphp
                         @if($mes == 1 || $mes == 7)
-                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM1.png')}}" class="img_cristalino">
                         @elseif($mes == 2 || $mes == 8)
-                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM2.png')}}" class="img_cristalino">
                         @elseif($mes == 3 || $mes == 9)
-                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM3.png')}}" class="img_cristalino">
                         @elseif($mes == 4 || $mes == 10)
-                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM4.jpeg')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM4.jpeg')}}" class="img_cristalino">
                         @elseif($mes == 5 || $mes == 11)
-                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM5.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM5.png')}}" class="img_cristalino">
                         @elseif($mes == 6 || $mes == 12)
-                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM6.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM6.png')}}" class="img_cristalino">
                         @endif
                         {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL CRISTALINO ////////// --}}
                         @foreach($contratodosi as $contdosi)
@@ -582,17 +582,17 @@
                             $mes = date("n", $fecha);
                         @endphp
                         @if($mes == 1 || $mes == 7)
-                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM1.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM1.png')}}" class="img_cristalino">
                         @elseif($mes == 2 || $mes == 8)
-                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM2.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM2.png')}}" class="img_cristalino">
                         @elseif($mes == 3 || $mes == 9)
-                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM3.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM3.png')}}" class="img_cristalino">
                         @elseif($mes == 4 || $mes == 10)
-                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM4.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM4.png')}}" class="img_cristalino">
                         @elseif($mes == 5 || $mes == 11)
-                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM5.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM5.png')}}" class="img_cristalino">
                         @elseif($mes == 6 || $mes == 12)
-                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM6.png')}}" class="img_cristalino" style="border-width: 1px; border-style: dotted; border-color:black ; ">
+                            <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM6.png')}}" class="img_cristalino">
                         @endif
                         {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
                         @foreach($contratodosi as $contdosi)

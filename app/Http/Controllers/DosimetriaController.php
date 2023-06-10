@@ -1994,6 +1994,7 @@ class DosimetriaController extends Controller
         ->where('mes_asignacion', '=', $mesnumber)
         ->where('ubicacion', '=', 'ANILLO')
         ->get();    
+        
         $dosiareasignados = Dosiareacontdosisede::where('contdosisededepto_id', '=', $id)
         ->where('mes_asignacion', '=', $mesnumber)
         ->get();
@@ -2167,7 +2168,19 @@ class DosimetriaController extends Controller
 
         return redirect()->back()->with('eliminar', 'ok');
     }
+    public function destroyAreasig($id){
+        $new_estado = 'STOCK';
+        $liberar_dosim = Dosiareacontdosisede::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
+        ->where('id_dosiareacontdosisedes', $id)
+        ->update([
+            'estado_dosimetro' => $new_estado,
+            'uso_dosimetro'    => ''
+        ]);
+        $dosiAreasig = Dosiareacontdosisede::find($id);
+        $dosiAreasig->delete();
 
+        return redirect()->back()->with('eliminar', 'ok');
+    }
     public function lecturadosi($id){
         $trabjasig = Trabajadordosimetro::find($id);
         
@@ -2326,8 +2339,15 @@ class DosimetriaController extends Controller
     }
     public function lecturadosiarea($id){
         $dosiareasig = Dosiareacontdosisede::find($id);
-
         return view('dosimetria.lectura_dosimetro_area_contrato', compact('dosiareasig'));
+    }
+    public function lecturadosiareacontrl($id, $idcontrol){
+        $dosiareasig = Dosiareacontdosisede::find($id);
+        $dosicontrolasig = Dosicontrolcontdosisede::find($idcontrol);
+        /* return $dosicontrolasig; */
+        /* return "con dosimetro de control".$dosicontrolasig; */
+        return view('dosimetria.lectura_dosimetro_areacontrol_contrato', compact('dosiareasig', 'dosicontrolasig'));
+        /* return $trabjasig; */
     }
     public function savelecturadosiarea(Request $request, $id){
         /* return $request; */
@@ -2346,9 +2366,11 @@ class DosimetriaController extends Controller
         $dosiareacontasig->Hp007_calc_dose                     = $request->hp007_calc_dose;
         $dosiareacontasig->Hp007_background_dose               = $request->hp007_background_dose;
         $dosiareacontasig->Hp007_raw_dose                      = $request->hp007_raw_dose;
+        $dosiareacontasig->Hp007_dif_dosicont                  = $request->hp007_calc_dose - $request->hp007_calc_dose_control;
         $dosiareacontasig->Hp10_calc_dose                      = $request->hp10_calc_dose;
         $dosiareacontasig->Hp10_background_dose                = $request->hp10_background_dose;
         $dosiareacontasig->Hp10_raw_dose                       = $request->hp10_raw_dose;
+        $dosiareacontasig->Hp10_dif_dosicont                   = $request->hp10_calc_dose - $request->hp10_calc_dose_control;
         $dosiareacontasig->H_10_calc_dose                      = $request->h10_cal_dose;
         $dosiareacontasig->verification_date                   = $request->verification_Date;
         $dosiareacontasig->verification_required_on_or_before  = $request->verification_required_before;
@@ -2380,7 +2402,7 @@ class DosimetriaController extends Controller
         return view('dosimetria.lectura_dosimetro_area_edit', compact('dosiareasig'));
     }
     public function pdf($id, $mesnumber){
-        
+       
         $contratoDosi = Departamento::join('departamentosedes', 'departamentos.id_departamento', '=', 'departamentosedes.departamento_id')
         ->join('contratodosimetriasededeptos', 'departamentosedes.id_departamentosede', '=', 'contratodosimetriasededeptos.departamentosede_id')
         ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id','=','contratodosimetriasedes.id_contratodosimetriasede')
@@ -2390,19 +2412,16 @@ class DosimetriaController extends Controller
         ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
         ->join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
         ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $id)
-        ->select('empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato', 'departamentos.nombre_departamento', 'empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio')
+        ->select('empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato', 'departamentos.nombre_departamento', 'empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio', 'contratodosimetriasededeptos.ocupacion')
         ->get();
-
-        /* $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        
+        $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('personasedes', 'contratodosimetriasedes.sede_id', '=', 'personasedes.sede_id')
         ->join('personas', 'personasedes.persona_id', '=', 'personas.id_persona')
-        ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
-        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
-        ->where('personas.lider_dosimetria', '=', 'TRUE')
-        ->where('roles.nombre_rol', '=', 'CONTACTO')
-        ->select('personas.primer_nombre_persona', 'personas.primer_apellido_persona', 'personas.segundo_apellido_persona', 'roles.nombre_rol')
-        ->get(); */
-        $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $id)
+        ->where('lider_dosimetria', '=', 'TRUE')
+        ->get();
+        $personaEncargadaPerfiles = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('personasedes', 'contratodosimetriasedes.sede_id', '=', 'personasedes.sede_id')
         ->join('personas', 'personasedes.persona_id', '=', 'personas.id_persona')
         ->join('personasperfiles', 'personas.id_persona', '=', 'personasperfiles.persona_id')
@@ -2420,8 +2439,6 @@ class DosimetriaController extends Controller
             $fechainiciodositrabaj[]=Trabajadordosimetro::where('persona_id','=', $trabajdosiasig[$i]->persona_id)->first();
         }
 
-        /* SELECT * FROM `dosicontrolcontdosisedes` INNER JOIN contratodosimetriasededeptos ON dosicontrolcontdosisedes.contdosisededepto_id = contratodosimetriasededeptos.id_contdosisededepto
-        INNER JOIN departamentosedes ON contratodosimetriasededeptos.departamentosede_id = departamentosedes.id_departamentosede; */
         $dosicontrolasig = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
         ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('departamentosedes','contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
@@ -2459,6 +2476,7 @@ class DosimetriaController extends Controller
             ->take(12)
             ->get();
         }
+   
         $SumatoriaFechaIngresomesestrabajadoresaisg = array();
         for($i=0; $i<count($trabajdosiasig); $i++){
 
@@ -2476,8 +2494,9 @@ class DosimetriaController extends Controller
             ->where('mes_asignacion', '<=', $mesnumber)
             ->get();
         }
+     
         /* return $personaEncargada; */
-        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaDocemesesAreasasig','SumatoriaFechaIngresomesestrabajadoresaisg', 'SumatoriaFechaIngresomesesAreasasig', 'mesescantdosi', 'mesnumber'));
+        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'personaEncargadaPerfiles', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaDocemesesAreasasig','SumatoriaFechaIngresomesestrabajadoresaisg', 'SumatoriaFechaIngresomesesAreasasig', 'mesescantdosi', 'mesnumber'));
         $pdf->setPaper('8.5x14', 'landscape');
         
         /* for($i=0; $i<count($contratoDosi); $i++ ){

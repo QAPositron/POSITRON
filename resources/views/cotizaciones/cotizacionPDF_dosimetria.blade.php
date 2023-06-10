@@ -1,7 +1,7 @@
 <style>
     @page {
         margin: 0cm 0cm;
-    }
+    } 
     body{
        /*  background: orange; */
         font-family: "Calibri, sans-serif";
@@ -9,7 +9,7 @@
         margin-top: 1cm;
         margin-left: 2cm;
         margin-right: 2cm;
-        margin-bottom: 0.7cm;
+        margin-bottom: 0.5cm;
     }
     header{
         position: fixed;
@@ -31,6 +31,13 @@
         /* background: aqua; */
         font-size: 11px;
     }
+    footer p {
+        margin: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        opacity:0.5;
+       /*  background: yellow; */
+    }
     main{
         position: relative;
         top: 75px;
@@ -40,14 +47,6 @@
         padding-bottom: 50px;
         text-align:justify;
         /* background: yellow; */
-    }
-   
-    footer p {
-        margin: 0px;
-        padding-top: 0px;
-        padding-bottom: 0px;
-        opacity:0.5;
-       /*  background: yellow; */
     }
     main p {
         margin: 0px;
@@ -70,6 +69,7 @@
     .indices p{
         padding-top: 0px;
         padding-bottom:0px;
+        line-height: 1.2;
     }
 </style>
 <body>

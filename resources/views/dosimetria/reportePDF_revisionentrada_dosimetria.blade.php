@@ -9,7 +9,7 @@
         margin-top: 1cm;
         margin-left: 2cm;
         margin-right: 2cm;
-        margin-bottom: 1cm;
+        margin-bottom: 0.5cm; 
     }
     header{
         position: fixed;
@@ -21,56 +21,66 @@
     }
     footer{
         position: fixed;
-        bottom: 1cm; 
+        bottom: 0.5cm; 
         left: 2cm; 
         right: 2cm;
-        height: 2cm;
+        height: 1.5cm;
         margin-top: 100px;
         text-align:center;
         color:#1A9980;
         /* background: yellowgreen; */
        
     }
+    footer p {
+        margin: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        opacity:0.5;
+        /* background: yellow; */
+    }
     main{
         position: relative;
-        top: 100px;
+        top: 75px;
         left: 0cm;
         right: 0cm;
-        margin-bottom: 3cm/* 4.5cm */;
-        padding-bottom: 50px;
+        margin-bottom: 2.8cm;
         display:block;
-       /*  background: yellow; */
+        /* background: yellow; */
     }
-   
+    main p {
+        margin: 0px;
+        padding-top: 2px;
+        padding-bottom:2px;
+        line-height: 130%;
+    }
     td, th{
         border:0.1px solid black;
     }
-    p {
-        margin: 0px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-    }
+    
     .indices{
         position: fixed;
+        display:block;
         left: 2cm; 
         right: 2cm;
         text-align:justify;
-        bottom: 210px; 
-        /* background: yellow; */
+        bottom: 3.7cm; 
+        /* background: gray; */
+    }
+    .indices p{
+        padding-top: 0px;
+        padding-bottom:0px;
+        line-height: 1.2;
+       /*  background: yellow; */
     }
     #watermark {
         position: fixed;
-        
         /** 
             Set a position in the page for your image
             This should center it vertically
         **/
         top:      115px;
         left:     2cm;
-
         /** Change image dimensions**/
-       
-        
         /** Your watermark should be behind every content**/
         z-index:  -1000;
         opacity:0.03;
@@ -447,23 +457,23 @@
             @endif
             <p style="position:relative; text-align:justify;">En caso de encontrar inconsistencias en la información, por favor hacerla llegar vía correo electrónico indicando el número de revisión dosímetros (RSD) del presente documento al correo: <label style="color:#1A9980;">dosimetría.qapositron@gmail.com.</label> </p>
             <br>
-            <p style="position:relative; text-align:justify;">Cordialmente,</p>
-            
-            <div style="position:relative; width: 200px; height: 140px; top:10px; page-break-inside: avoid;">
-                <img src="{{asset('imagenes/FIRMAYUDI.png')}}" width="130" height="70" style="position:relative; left:30px; top:13px;">
-                <p style="position:relative; text-align:center;">_____________________________</p> <br>
-                <p style="position:relative; bottom: 15px; text-align: center; font-size: 11px; color:#1A9980;">JUDY J.GAVIRIA TORRES</p> <br>
-                <p style="position:relative; bottom: 33px; text-align: center; font-size: 11px;">Ingeniera</p> <br>
-                <p style="position:relative; bottom: 49px; text-align: center; font-size: 11px; ">Operador logístico</p>
+            <div style="position:relative; display:block; page-break-inside: avoid;">
+                <p style="position:relative; text-align:justify;">Cordialmente,</p>
+
+                <div style="position:relative; width: 200px; height: 136px; page-break-inside: avoid;">
+                    <img src="{{asset('imagenes/FIRMAYUDI.png')}}" width="130" height="70" style="position:relative; left:30px; top:13px;">
+                    <p style="position:relative; text-align:center;">_____________________________</p> <br>
+                    <p style="position:relative; bottom: 20px; text-align: center; font-size: 11px; color:#1A9980;">JUDY J.GAVIRIA TORRES</p> <br>
+                    <p style="position:relative; bottom: 37px; text-align: center; font-size: 11px;">Ingeniera</p> <br>
+                    <p style="position:relative; bottom: 55px; text-align: center; font-size: 11px; ">Operador logístico</p>
+                </div>
             </div>
-            <br>
             
             <div class="indices">
                 <p><b>_____________________________________</b></p>
                 <p style="position: relative;"><small><sup>1</sup> Campo para que el encargado de la dosimetría del LDP revise la llagada de los dosímetros una vez es abierto el paquete.</small></p>
                 <p style="position: relative;"><small><sup>2</sup> En caso de encontrarse contaminados deben iniciar investigación.</small></p>
             </div>
-            <br>
         </div>
         
     </main>
@@ -483,7 +493,7 @@
             $font = $fontMetrics->getFont("Verdana");
             $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
             $x = $pdf->get_width()-110;
-            $y = $pdf->get_height() - 35;
+            $y = $pdf->get_height() - 20;
             $pdf->page_text($x, $y, $text, $font, $size);
         }
     </script>

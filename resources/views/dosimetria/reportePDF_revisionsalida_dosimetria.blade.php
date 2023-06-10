@@ -1,7 +1,7 @@
 <style>
     @page {
         margin: 0cm 0cm;
-    }
+    } 
     body{
         /* background: orange; */
         font-family: "Calibri, sans-serif";
@@ -9,7 +9,7 @@
         margin-top: 1cm;
         margin-left: 2cm;
         margin-right: 2cm;
-        margin-bottom: 1cm;
+        margin-bottom: 0.5cm;
     }
     header{
         position: fixed;
@@ -21,57 +21,66 @@
     }
     footer{
         position: fixed;
-        bottom: 1cm; 
+        bottom: 0.5cm; 
         left: 2cm; 
         right: 2cm;
-        height: 2cm;
+        height: 1.5cm;
         margin-top: 100px;
         text-align:center;
         color:#1A9980;
         /* background: yellowgreen; */
        
     }
-    main{
-        position: relative;
-        top: 100px;
-        left: 0cm;
-        right: 0cm;
-        margin-bottom:3cm;
-        padding-bottom: 50px;
-        display:block;
+    footer p {
+        margin: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        opacity:0.5;
         /* background: yellow; */
     }
-   
+    main{
+        position: relative;
+        top: 75px;
+        left: 0cm;
+        right: 0cm;
+        margin-bottom: 4.5cm;
+        display:block;
+       /*  background: yellow; */
+    }
+    main p {
+        margin: 0px;
+        padding-top: 2px;
+        padding-bottom:2px;
+        line-height: 130%;
+    }
     td, th{
         border:0.1px solid black;
     }
-    p {
-        margin: 0px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-    }
+    
     .indices{
         position: fixed;
         display:block;
         left: 2cm; 
         right: 2cm;
         text-align:justify;
-        bottom: 210px; 
+        bottom: 3.7cm; 
         /* background: yellow; */
+    }
+    .indices p{
+        padding-top: 0px;
+        padding-bottom:0px;
+        line-height: 1.2;
+       /*  background: yellow; */
     }
     #watermark {
         position: fixed;
-        
         /** 
             Set a position in the page for your image
             This should center it vertically
         **/
         top:      115px;
         left:     2cm;
-
         /** Change image dimensions**/
-       
-        
         /** Your watermark should be behind every content**/
         z-index:  -1000;
         opacity:0.03;
@@ -384,26 +393,23 @@
             <div style="position:relative; display:block;  page-break-inside: avoid; ">
                 <p style="position:relative; text-align:justify;">Cordialmente,</p>
 
-                <div style="position:relative; width: 200px; height: 140px; top:10px; page-break-inside: avoid;">
+                <div style="position:relative; width: 200px; height: 147px; top:10px; page-break-inside: avoid;">
                     <img src="{{asset('imagenes/FIRMAYUDI.png')}}" width="130" height="70" style="position:relative; left:30px; top:13px;">
                     <p style="position:relative; text-align:center;">___________________________</p> <br>
                     <p style="position:relative; bottom: 15px; text-align: center; font-size: 11px; color:#1A9980;">JUDY J.GAVIRIA TORRES</p> <br>
                     <p style="position:relative; bottom: 33px; text-align: center; font-size: 11px;">Ingeniera</p> <br>
                     <p style="position:relative; bottom: 49px; text-align: center; font-size: 11px; ">Operador logístico</p>
                 </div>
-                <br>
-                <br>
+            </div>
+            <div style="position:relative; display:block;  page-break-inside: avoid;">
                 <p style="position:relative; display:block; top:15px;">Quien revisa la llegada de los dosímetros a la instalación:</p>
-                <div style="position:relative; width: 200px; height: 50px; top:45px; page-break-inside: avoid; ">
-                    
+                <div style="position:relative; width: 200px; height: 95px; top:45px; page-break-inside: avoid; ">
                     <p style="position: relative; text-align: center;">_____________________________</p> <br>
-                    
                     <p style="position: relative; bottom: 17px; text-align: center; font-size: 11px; color:#1A9980;">@php if(count($trabjEncargado) == 0){echo "**Nombre del responsable**"; }else{ echo $trabjEncargado[0]->primer_nombre_persona." ".$trabjEncargado[0]->segundo_nombre_persona." ".$trabjEncargado[0]->primer_apellido_persona." ".$trabjEncargado[0]->segundo_apellido_persona ;}@endphp </p> <br>
                     <p style="position: relative; bottom: 35px; text-align: center; font-size: 11px; ">Responsable de recibir la dosimetría</p> <br>
                 </div>
             </div>
             
-            <br>
         </div>
         <div class="indices">
             <p style=""><b>_____________________________________</b></p>
@@ -427,7 +433,7 @@
             $font = $fontMetrics->getFont("Verdana");
             $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
             $x = $pdf->get_width()-110;
-            $y = $pdf->get_height() - 35;
+            $y = $pdf->get_height() - 20;
             $pdf->page_text($x, $y, $text, $font, $size);
 
         }

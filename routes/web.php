@@ -186,6 +186,7 @@ Route::put('asignadosicontrato/{id}/{mesnumber}/update', [DosimetriaController::
 
 Route::delete('asignadosicontrato/{id}/destroycontrol', [DosimetriaController::class, 'destroyControlasig'])->name('asigdosicont.destroyInfoControl');
 Route::delete('asignadosicontrato/{id}/destroytrabajador', [DosimetriaController::class, 'destroyTrabajadorasig'])->name('asigdosicont.destroyInfoTrabajador');
+Route::delete('asignadosicontrato/{id}/destroyArea',[DosimetriaController::class, 'destroyAreasig'])->name('asigdosicont.destroyInfoArea');
 
 ///////////----------RUTA PARA AÑADIR OBSERVACIONES DEL MES SOBRE LAS ASIGNACIONES DE DOSIMETROS KATEEE -----///////////////////
 Route::post('asignadosicontrato/saveObservacionMesAsigdosim', [DosimetriaController::class, 'saveObservacionMesAsigdosim'])->name('asigdosicont.saveObservacionMesAsigdosim');
@@ -213,6 +214,7 @@ Route::put('lecturadosicontrol/{lecdosicont}', [DosimetriaController::class, 'sa
 Route::get('lecturadosicontrol/{lecdosicont}/edit', [DosimetriaController::class, 'editlecturadosicontrol'])->name('lecturadosicontrol.edit');
 
 Route::get('lecturadosiarea/{lecdosicont}/create', [DosimetriaController::class, 'lecturadosiarea'])->name('lecturadosiarea.create');
+Route::get('lecturadosiarea/{lecdosicont}/{lecdosicontrol}/create', [DosimetriaController::class, 'lecturadosiareacontrl'])->name('lecturadosiareacontrl.create');
 Route::put('lecturadosiarea/{lecdosicont}', [DosimetriaController::class, 'savelecturadosiarea'])->name('lecturadosiarea.save');
 Route::get('lecturadosiarea/{lecdosicont}/edit', [DosimetriaController::class, 'editlecturadosiarea'])->name('lecturadosiarea.edit');
 /////////RUTAS PARA LOS REPORTES O INFORMES DE DOSIMETRIA///////

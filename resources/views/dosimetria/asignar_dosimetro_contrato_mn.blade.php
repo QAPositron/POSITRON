@@ -440,8 +440,8 @@
                                             <td>
                                                 <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosiareant->dosimetro_uso != 'FALSE'){{$dosiareant->dosimetro_id}}@endif">@if($dosiareant->dosimetro_uso != 'FALSE'){{$dosiareant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
-                                                    @foreach($dosimLibresAmbiental as $dosiamblib)
-                                                        <option value="{{$dosiamblib->id_dosimetro}}">{{$dosiamblib->codigo_dosimeter}}</option>
+                                                    @foreach($dosimLibresGeneral as $dosigenlib)
+                                                        <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -504,8 +504,8 @@
                                                 <td>
                                                     <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
-                                                        @foreach($dosimLibresAmbiental as $dosiamblib)
-                                                            <option value="{{$dosiamblib->id_dosimetro}}">{{$dosiamblib->codigo_dosimeter}}</option>
+                                                        @foreach($dosimLibresGeneral as $dosigenlib)
+                                                            <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>

@@ -62,7 +62,7 @@
 <br>
 <div class="row">
     <div class="col-md"></div>
-    <div class="col-md-10">
+    <div class="col-md-11">
         @php
             $check = 'inicial';
         @endphp 
@@ -73,7 +73,7 @@
                     echo "<table class='table  table-bordered'>";
                         echo "<h4 class='text-center'>{$dosicontsedep->nombre_sede}</h4>";  
                         $check = strval($dosicontsedep->nombre_sede);
-                        echo "<thead class='table-active text-center'>";  
+                        echo "<thead class='table-active text-center border border-light' style='border-width: 5px;'>";  
                             echo "<tr>";
                                 echo "<th rowspan='2' class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
                                 echo "<th rowspan='2' class='align-middle' style='width: 8.90%'>PERÍODO ACTUAL</th>";

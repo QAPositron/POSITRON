@@ -21,7 +21,7 @@
     <h4 class="text-center align-middle" id="id_contrato"> </h4>
 
     <br>
-    
+     
     <div class="row g-2 mx-3">
         <div class="col-md"></div>
         <div class="col-md-8">    

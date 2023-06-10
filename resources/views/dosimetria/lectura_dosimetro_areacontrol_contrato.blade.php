@@ -184,6 +184,43 @@
                                                 </div>
                                             </div>
                                             <div class="col-md">
+                                                <label for="">DOSÍMETRO DE CONTROL {{ $dosicontrolasig->ubicacion}}:</label>
+                                                <div class="row">
+                                                    @if($dosicontrolasig->ubicacion == 'TORAX')
+                                                        <div class="col-md">
+                                                            <div class="form-floating">
+                                                                <input type="NUMBER" class="form-control" name="hp10_calc_dose_control" id="hp10_calc_dose_control_readonly" value="{{ $dosicontrolasig->Hp10_calc_dose}}" readonly>
+                                                                <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md">
+                                                            <div class="form-floating">
+                                                                <input type="NUMBER" class="form-control" name="hp007_calc_dose_control" id="hp007_calc_dose_control_readonly" value="{{ $dosicontrolasig->Hp007_calc_dose}}" readonly>
+                                                                <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md"></div>
+                                                    @elseif($dosicontrolasig->ubicacion == 'CRISTALINO')
+                                                        <div class="col-md">
+                                                            <div class="form-floating">
+                                                                <input type="NUMBER" class="form-control" name="hp3_calc_dose_control" id="hp3_calc_dose_control_readonly" value="{{$dosicontrolasig->Hp3_calc_dose}}" readonly>
+                                                                <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md"></div>
+                                                        <div class="col-md"></div>
+                                                    @elseif($dosicontrolasig->ubicacion == 'ANILLO')
+                                                        <div class="col-md">
+                                                            <div class="form-floating">
+                                                                <input type="NUMBER" class="form-control" name="hp007_calc_dose_control" id="hp007_calc_dose_control_readonly" value="{{ $dosicontrolasig->Hp007_calc_dose}}" readonly>
+                                                                <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md"></div>
+                                                        <div class="col-md"></div>
+                                                    @endif
+                                                </div>
+                                                <br>
                                                 @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
                                                     <div class="form-check">
                                                         @if($dosiareasig->nota1 == 'TRUE')
