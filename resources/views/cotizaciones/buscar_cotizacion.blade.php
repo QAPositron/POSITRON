@@ -121,7 +121,7 @@ crossorigin="anonymous">
             var n = num.toString().padStart(5,'0');
             console.log("ESTE ES EL CODIGO" +n);
         
-            TDcoti.innerHTML = "<a class='btn btn-outline-primary rounded-pill'>"+n+"</a>";
+            TDcoti.innerHTML = "<a class='btn btn-outline-primary rounded-pill' href='{{route('cotizaciones.info', "$coti->id_cotizacion")}}'>"+n+"</a>";
         @endforeach
 
         $('.form_eliminar_cotizacion').submit(function(e){

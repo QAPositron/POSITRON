@@ -320,6 +320,7 @@ Route::get('cotizaciones/{cotizacion}/pdf', [CotizacionController::class, 'pdfCo
 Route::get('cotizaciones/{cotizacion}/edit', [CotizacionController::class, 'edit'])->name('cotizaciones.edit');
 Route::put('cotizaciones/{cotizacion}', [CotizacionController::class, 'update'])->name('cotizaciones.update');
 Route::delete('cotizaciones/{cotizacion}', [CotizacionController::class, 'destroy'])->name('cotizaciones.destroy');
+Route::get('cotizaciones/{cotizacion}/info', [CotizacionController::class, 'info'])->name('cotizaciones.info');
 
 
 

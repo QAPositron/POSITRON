@@ -128,9 +128,12 @@
                             </tr>
                         </thead>
                         <tbody id="body_productos">
+                            @php
+                                $i = 1;
+                            @endphp
                            @foreach($cotiproductos as $cotiprod)
                                 <tr class="text-center align-middle">
-                                    <td></td>
+                                    <td>{{$i}}</td>
                                     <td>{{$cotiprod->producto->referencia}}</td>
                                     <td>{{$cotiprod->conceptoProd}}</td>
                                     <td>{{$cotiprod->cantidadProd}}</td>
@@ -139,6 +142,9 @@
                                     <td>{{$cotiprod->costoPeriodoProd}}</td>
                                     <td>{{$cotiprod->costoAñoProd}}</td>
                                 </tr>
+                                @php
+                                    $i ++;
+                                @endphp
                            @endforeach
                         </tbody>
                         <tfoot>

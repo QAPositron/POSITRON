@@ -156,4 +156,10 @@ class CotizacionController extends Controller
         $coti->delete();
         return redirect()->route('cotizaciones.search')->with('eliminar', 'ok');
     }
+    public function info($cotizacion){
+        $coti  = Cotizacion::find($cotizacion);
+        $cotiproductos = Cotizacionproducto::where('cotizacion_id', '=', $coti->id_cotizacion)->get();
+        $cotiobservaciones = Cotizacionobservacion::where('cotizacion_id', '=', $coti->id_cotizacion)->get();
+        return view('cotizaciones.info_cotizacion_dosimetria', compact('coti', 'cotiproductos', 'cotiobservaciones'));
+    }
 }
