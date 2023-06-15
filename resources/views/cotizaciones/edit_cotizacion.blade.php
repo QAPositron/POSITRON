@@ -13,33 +13,23 @@
                 @method('put')
                 <div class="row">
                     <div class="col-md">
-                        <div class="form-floating my-3" id="numero_cotizacion">
+                        <div class="form-floating" id="numero_cotizacion">
                             <input type="number" name="numero_cotizacion" id="numero_cotizacion_input" value="" class="form-control " readonly>
                             <label for="floatingInputGrid">NÚMERO</label>
                         </div>
                     </div>
-                    <div class="col-md mt-3">
+                    <div class="col-md">
                         <div class="form-group">
-                            <label for="floatingInputGrid">EMPRESA</label>
-                            <select class="form-control @error('empresa') is-invalid @enderror"  name="empresa" id="empresa" value="{{old('empresa', $cotizacion->empresa->nombre_empresa)}}" autofocus style="text-transform:uppercase">
-                                <option value="{{$cotizacion->empresa_id}}">{{$cotizacion->empresa->nombre_empresa}}</option>
-                                @foreach($empresas as $emp)
-                                    @if($cotizacion->empresa_id != $emp->id_empresa )<option value ="{{$emp->id_empresa}}" @if (old('empresa') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option> @endif
-                                @endforeach
-                            </select>
-                            @error('empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            <div class="form-floating">
+                                <input type="text" name="empresa" id="numeroempresa" value="{{$cotizacion->empresa->nombre_empresa}}" class="form-control " readonly>
+                                <label for="floatingInputGrid">EMPRESA</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md mt-3" id="div_sede">
-                        <div class="spinner_sede text-center" id="spinner_sede">
-
-                        </div>
-                        <div class="form-group" id="sede_empresa" name="sede_empresa">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="text" name="sede" id="sede" value="{{$cotizacion->sede->nombre_sede}}" class="form-control " readonly>
                             <label for="floatingInputGrid">SEDE</label>
-                            <select class="form-control @error('sede') is-invalid @enderror" name="sede" id="sede" value="{{old('sede', $cotizacion->sede->nombre_sede)}}" autofocus style="text-transform:uppercase">
-                                <option value="{{$cotizacion->sede_id}}">{{$cotizacion->sede->nombre_sede}}</option>
-                            </select>
-                            @error('sede') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
                     
@@ -64,25 +54,20 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md">
+                    <div class="col-md-2">
                         <div class="form-floating">
-                            <select class="form-select" name="periodolec_producto" id="periodolec_producto" autofocus>
-                                <option value="{{$cotizacion->periodoLec}}">@if($cotizacion->periodoLec == 'MENS') MENSUAL @elseif($cotizacion->periodoLec == 'TRIMS')TRIMESTRAL @elseif($cotizacion->periodoLec == 'BIMS') BIMESTRAL @endif</option>
-                                @if($cotizacion->periodoLec != 'MENS')<option value="MENS">MENSUAL</option>@endif
-                                @if($cotizacion->periodoLec != 'BIMS')<option value="BIMS">BIMESTRAL</option>@endif
-                                @if($cotizacion->periodoLec != 'TRIMS')<option value="TRIMS">TRIMESTRAL</option>@endif
-                            </select>
-                            <label for="floatingSelectGrid">PERIODO LECTURA:</label>
+                            <input type="text" name="periodoLec" id="periodoLec" value="@if($cotizacion->periodoLec == 'MENS') MENSUAL @elseif($cotizacion->periodoLec == 'TRIMS') TRIMESTRAL @elseif($cotizacion->periodoLec == 'BIMS') BIMESTRAL @endif" class="form-control " readonly>
+                            <label for="floatingSelectGrid">PERIODO LECTURA</label>
                         </div>
                     </div>
-                    <div class="col-md">
-                        <label>LECTURAS AL AÑO:</label>
+                    <div class="col-md-4">
                         <div class="row">
-                            <div class="col-md-4">
-                                <input type="number" name="totalProductos" id="totalProductos" value="{{old('totalProductos', $cotizacion->lecturas_ano)}}" class="form-control" hidden>
-                                <input type="number" name="numlecturas_año" id="numlecturas_año" value="{{old('numlecturas_año', $cotizacion->lecturas_ano)}}" class="form-control">
+                            <div class="col-md-5">
+                                <label for="floatingSelectGrid">LECTURAS AL AÑO</label>
+                                {{--  <input type="number" name="totalProductos" id="totalProductos" value="{{old('totalProductos', $cotizacion->lecturas_ano)}}" class="form-control" hidden> --}}
+                                <input type="number" name="numlecturas_año" id="numlecturas_año" value="{{old('numlecturas_año', $cotizacion->lecturas_ano)}}" class="form-control" readonly>
                             </div>
-                            <div class="col-md mt-2">
+                            <div class="col-md mt-4">
                                 <label id="maxLectuasAño"></label>
                             </div>
                         </div>
@@ -94,9 +79,8 @@
                         <label for="floatingInputGrid">(-) DESCUENTO POR PRONTO PAGO</label>
                     </div>
                     <div class="col-md-1 me-0">
-                        <div class="form-group ">
-                            <input type="number" name="descuento_pronto_pago" id="descuento_pronto_pago" value="{{old('descuento_pronto_pago', $cotizacion->desc_prontopago)}}" class="form-control  @error('descuento_pronto_pago') is-invalid @enderror" style="width: 80px;">
-                            @error('descuento_pronto_pago')<small class="invalid-feedback">*{{$message}}</small>@enderror
+                        <div class="form-group">
+                            <input type="number" name="descuento_pronto_pago" id="descuento_pronto_pago" value="{{old('descuento_pronto_pago', $cotizacion->desc_prontopago)}}" class="form-control" style="width: 80px;" readonly>
                         </div>
                     </div>
                     <div class="col-md-1 text-start align-middle mt-2 ps-0">
@@ -107,8 +91,7 @@
                     </div>
                     <div class="col-md-1 me-0">
                         <div class="form-group">
-                            <input type="number" name="descuento_cortesia" id="descuento_cortesia" value="{{old('descuento_cortesia', $cotizacion->desc_cortesia)}}" class="form-control @error('descuento_cortesia') is-invalid @enderror" style="width: 80px;">
-                            @error('descuento_cortesia')<small class="invalid-feedback">*{{$message}}</small>@enderror
+                            <input type="number" name="descuento_cortesia" id="descuento_cortesia" value="{{old('descuento_cortesia', $cotizacion->desc_cortesia)}}" class="form-control" style="width: 80px;" readonly>
                         </div>
                     </div>
                     <div class="col-md-1 text-start align-middle mt-2 ps-0">
@@ -116,31 +99,17 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteEnvio" name="obsq_servitransporteEnvio">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteEnvio" name="obsq_servitransporteEnvio" @if($cotizacion->obsq_transEnvio == 'TRUE')checked @endif disabled>
                             <label class="form-check-label" for="defaultCheck1">
                                 OBSEQUIO EN EL SERVICIO DE TRANSPORTE (ENVÍO)
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteReco" name="obsq_servitransporteReco" >
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteReco" name="obsq_servitransporteReco" @if($cotizacion->obsq_transRecole == 'TRUE')checked @endif disabled>
                             <label class="form-check-label" for="defaultCheck1">
                                 OBSEQUIO EN EL SERVICIO DE TRANSPORTE (RECOLECCIÓN)
                             </label>
                         </div>
-                    </div>
-                </div>
-                <br>
-                <label class="text-center ms-4">ASIGNE A ESTA COTIZACIÓN UNO O MAS PRODUCTOS:</label>
-                   
-                <div class="row mt-2">
-                    
-                    <div class="col-md text-center">
-                        
-                        <button onclick="agregarProducto()" class="btn btn-sm colorQA" id="agregar" type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus mb-1" viewBox="0 0 16 16">
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                            </svg>AÑADIR PRODUCTO
-                        </button>
                     </div>
                 </div>
                 <br>
@@ -156,63 +125,67 @@
                               <th scope="col" style="width: 9%;">IVA</th>
                               <th scope="col" style="width: 14%;">COSTO PERIODO</th>
                               <th scope="col" style="width: 14%;">COSTO AÑO</th>
-                              <th></th>
                             </tr>
                         </thead>
                         <tbody id="body_productos">
-                           
-                            
+                           @foreach($cotiproductos as $cotiprod)
+                                <tr class="text-center align-middle">
+                                    <td></td>
+                                    <td>{{$cotiprod->producto->referencia}}</td>
+                                    <td>{{$cotiprod->conceptoProd}}</td>
+                                    <td>{{$cotiprod->cantidadProd}}</td>
+                                    <td>{{$cotiprod->costoUndProd}}</td>
+                                    <td>{{$cotiprod->ivaProd}}%</td>
+                                    <td>{{$cotiprod->costoPeriodoProd}}</td>
+                                    <td>{{$cotiprod->costoAñoProd}}</td>
+                                </tr>
+                           @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="6" class="text-end"><b>VALOR TOTAL SIN DESCUENTO</b></td>
                                 <td>
                                     <div class="form-group">
-                                        {{-- <input type="number" name="totalAñoSDvar_periodo" id="totalAñoSDvar_periodo" value="" class="form-control " hidden> --}}
-                                        <input type="number" name="totalAñoSDint_periodo" id="totalAñoSDint_periodo" value="" class="form-control " hidden>
-                                        <input type="text" name="totalAñoSD_periodo" id="totalAñoSD_periodo" value="" class="form-control" readonly>
+                                        {{-- <input type="number" name="totalAñoSDint_periodo" id="totalAñoSDint_periodo" value="" class="form-control " hidden> --}}
+                                        <input type="number" name="totalAñoSD_periodo" id="totalAñoSD_periodo" value="{{$cotizacion->valorTotalSDPeriodo}}" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        {{-- <input type="number" name="totalAñoSDvar_ano" id="totalAñoSDvar_ano" value="" class="form-control " hidden> --}}
-                                        <input type="number" name="totalAñoSDint_ano" id="totalAñoSDint_ano" value="" class="form-control " hidden>
-                                        <input type="text" name="totalAñoSD_ano" id="totalAñoSD_ano" value="" class="form-control "readonly>
+                                        {{-- <input type="number" name="totalAñoSDint_ano" id="totalAñoSDint_ano" value="" class="form-control " hidden> --}}
+                                        <input type="number" name="totalAñoSD_ano" id="totalAñoSD_ano" value="{{$cotizacion->valorTotalSDAño}}" class="form-control "readonly>
                                     </div>
                                 </td>
-                                <td></td>
                             </tr>
                             <tr id="desctoCortesia" hidden>
                                 <td colspan="6" class="text-end"><b>(-) DESCUENTO CORTESÍA</b></td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="descuento_cortesiaint_periodo" id="descuento_cortesiaint_periodo" value="" class="form-control " hidden>
-                                        <input type="text" name="descuento_cortesia_periodo" id="descuento_cortesia_periodo" value="" class="form-control" readonly>
+                                        {{-- <input type="number" name="descuento_cortesiaint_periodo" id="descuento_cortesiaint_periodo" value="" class="form-control " hidden --}}>
+                                        <input type="number" name="descuento_cortesia_periodo" id="descuento_cortesia_periodo" value="{{$cotizacion->descCortesiaPeriodo}}" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="descuento_cortesiaint_ano" id="descuento_cortesiaint_ano" value="" class="form-control " hidden>
-                                        <input type="text" name="descuento_cortesia_ano" id="descuento_cortesia_ano" value="" class="form-control" readonly>
+                                        {{-- <input type="number" name="descuento_cortesiaint_ano" id="descuento_cortesiaint_ano" value="" class="form-control " hidden --}}>
+                                        <input type="number" name="descuento_cortesia_ano" id="descuento_cortesia_ano" value="{{$cotizacion->descCortesiaAño}}" class="form-control" readonly>
                                     </div>
                                 </td>
-                                <td></td>
                             </tr>
                             <tr id="desctoProntoPago" hidden>
                                 <td colspan="6" class="text-end"><b>(-) DESCUENTO PRONTO PAGO</b></td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="descuento_prontopagoint_periodo" id="descuento_prontopagoint_periodo" value="" class="form-control " hidden>
-                                        <input type="text" name="descuento_prontopago_periodo" id="descuento_prontopago_periodo" value="" class="form-control " readonly>
+                                        {{-- <input type="number" name="descuento_prontopagoint_periodo" id="descuento_prontopagoint_periodo" value="" class="form-control " hidden> --}}
+                                        <input type="number" name="descuento_prontopago_periodo" id="descuento_prontopago_periodo" value="{{$cotizacion->descProntopagoPeriodo}}" class="form-control " readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="descuento_prontopagoint_ano" id="descuento_prontopagoint_ano" value="" class="form-control " hidden>
-                                        <input type="text" name="descuento_prontopago_ano" id="descuento_prontopago_ano" value="" class="form-control " readonly>
+                                        {{-- <input type="number" name="descuento_prontopagoint_ano" id="descuento_prontopagoint_ano" value="" class="form-control " hidden> --}}
+                                        <input type="number" name="descuento_prontopago_ano" id="descuento_prontopago_ano" value="{{$cotizacion->descProntopagoAño}}" class="form-control " readonly>
                                     </div>
                                 </td>
-                                <td></td>
                             </tr>
                             <tr id = "serviTransporteEnvio">
                                 <td colspan="6" class="text-end"><b>SERVICIO DE TRANSPORTE (ENVÍO) <label id="periodos"></label></b></td>
@@ -223,18 +196,17 @@
                                                 <label for="" class="mt-2"><b>$</b></label>
                                             </div>
                                             <div class="col">
-                                                <input type="number" name="servtransporte_periodo" id="servtransporte_periodo" value="" class="form-control" >
+                                                <input type="number" name="servtransporte_periodo" id="servtransporte_periodo" value="{{$cotizacion->servTransEnvioPeriodo}}" class="form-control" readonly>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="servtransporteInt_ano" id="servtransporteInt_ano" value="" class="form-control" hidden>
-                                        <input type="text" name="servtransporte_ano" id="servtransporte_ano" value="" class="form-control" readonly>
+                                        {{-- <input type="number" name="servtransporteInt_ano" id="servtransporteInt_ano" value="" class="form-control" hidden> --}}
+                                        <input type="number" name="servtransporte_ano" id="servtransporte_ano" value="{{$cotizacion->servTransEnvioAño}}" class="form-control" readonly>
                                     </div>
                                 </td>
-                                <td></td>
                             </tr>
                             <tr id = "serviTransporteReco">
                                 <td colspan="6" class="text-end"><b>SERVICIO DE TRANSPORTE (RECOLECCIÓN) <label id="periodosReco"></label></b></td>
@@ -245,34 +217,32 @@
                                                 <label for="" class="mt-2"><b>$</b></label>
                                             </div>
                                             <div class="col">
-                                                <input type="number" name="servtransporteReco_periodo" id="servtransporteReco_periodo" value="" class="form-control" >
+                                                <input type="number" name="servtransporteReco_periodo" id="servtransporteReco_periodo" value="{{$cotizacion->servTransRecoPeriodo}}" class="form-control" readonly>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="servtransporteRecoInt_ano" id="servtransporteRecoInt_ano" value="" class="form-control" hidden>
-                                        <input type="text" name="servtransporteReco_ano" id="servtransporteReco_ano" value="" class="form-control" readonly>
+                                        {{-- <input type="number" name="servtransporteRecoInt_ano" id="servtransporteRecoInt_ano" value="" class="form-control" hidden> --}}
+                                        <input type="number" name="servtransporteReco_ano" id="servtransporteReco_ano" value="{{$cotizacion->servTransRecoAño}}" class="form-control" readonly>
                                     </div>
                                 </td>
-                                <td></td>
                             </tr>
                             <tr>
                                 <td colspan="6" class="text-end"><b>VALOR TOTAL DEL SERVICIO</b></td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="totalservicioInt_periodo" id="totalservicioInt_periodo" value="" class="form-control" hidden>
-                                        <input type="text" name="totalservicio_periodo" id="totalservicio_periodo" value="" class="form-control" readonly>
+                                        {{-- <input type="number" name="totalservicioInt_periodo" id="totalservicioInt_periodo" value="" class="form-control" hidden> --}}
+                                        <input type="text" name="totalservicio_periodo" id="totalservicio_periodo" value="{{$cotizacion->valorTotalPeriodo}}" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="totalservicioInt_ano" id="totalservicioInt_ano" value="" class="form-control" hidden>
-                                        <input type="text" name="totalservicio_ano" id="totalservicio_ano" value="" class="form-control" readonly>
+                                        {{-- <input type="number" name="totalservicioInt_ano" id="totalservicioInt_ano" value="" class="form-control" hidden> --}}
+                                        <input type="text" name="totalservicio_ano" id="totalservicio_ano" value="{{$cotizacion->valorTotalAño}}" class="form-control" readonly>
                                     </div>
                                 </td>
-                                <td></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -284,8 +254,8 @@
                         <div class="form-group">
                             <label for=""><b>PROMEDIO DOSÍMETRO:</b></label>
                             <br><br>
-                            <input type="number" name="promedioDosiMesInt" id="promedioDosiMesInt" value="" class="form-control" hidden>
-                            <input type="text" name="promedioDosimMes" id="promedioDosimMes" value="" class="form-control" >
+                            {{-- <input type="number" name="promedioDosiMesInt" id="promedioDosiMesInt" value="" class="form-control" hidden> --}}
+                            <input type="number" name="promedioDosimMes" id="promedioDosimMes" value="{{$cotizacion->promedioDosimMes}}" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -294,13 +264,13 @@
                             <br>
                             <br>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="TRUE" id="fpago_anticipado" name="fpago_anticipado">
+                                <input class="form-check-input" type="checkbox" value="TRUE" id="fpago_anticipado" name="fpago_anticipado" @if($cotizacion->pago_anticipado == 'TRUE') checked @endif>
                                 <label class="form-check-label" for="defaultCheck1">
                                     100% ANTICIPADO MENSUAL O ANUAL
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="TRUE" id="fpago_unmes" name="fpago_unmes">
+                                <input class="form-check-input" type="checkbox" value="TRUE" id="fpago_unmes" name="fpago_unmes" @if($cotizacion->pago_unmes == 'TRUE') checked @endif>
                                 <label class="form-check-label" for="defaultCheck1">
                                     A 30 DIAS DE GENERAR FACTURA
                                 </label>
@@ -308,8 +278,34 @@
                         </div>
                     </div>
                     <div class="col-md">
-                        <label for="floatingInputGrid"><b>OBSERVACIONES</b></label>
-                        <textarea class="form-control" name="observaciones" id="observaciones" autofocus style="text-transform:uppercase;" rows="5"></textarea>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="floatingInputGrid" class="mt-1"><b>OBSERVACIONES</b></label>
+                            </div>
+                            <div class="col-md text-start">
+                                <button onclick="agregarObs()" class="btn btn-sm colorQA" id="agregarobs" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="rowObs">
+                            @foreach($cotiobservaciones as $cotiobs)
+                                <div class="row g-2" id="{{$cotiobs->id_cotiobs}}">
+                                    <div class="col-md">
+                                        <textarea class="form-control" name="observaciones[]" id="observaciones" autofocus style="text-transform:uppercase;" rows="2">{{old('observaciones', $cotiobs->obs)}}</textarea>
+                                    </div>
+                                    <div class="col-md-1 text-center align-middle">
+                                        <button class="btn btn-danger mt-2" type="button" onclick="Obseliminar({{$cotiobs->id_cotiobs}})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div><br>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -357,46 +353,24 @@
     }
     
     $(document).ready(function() {
-        $('#empresa').select2();
-        $('#sede').select2();
-        $('#empresa').on('change', function(){
-            $('#sede_empresa').fadeOut();
-            $('#spinner_sede').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');
-            var empresa_id = $(this).val();
         
-            var padre = document.getElementById("spinner_sede");
-            var hijo = document.getElementById("spinner");
-            /* alert(departamento_id); */
-            if($.trim(empresa_id) != ''){
-                $.get('selectsedes', {empresa_id: empresa_id}, function(sedes){
-                    console.log(sedes);
-                    var remove = padre.removeChild(hijo);
-                    $('#sede_empresa').fadeIn();
-                    $('#sede').empty();
-                    $('#sede').append("<option value=''>--SELECCIONE--</option>");
-                    $.each(sedes, function(index, value){
-                        $('#sede').append("<option value='"+ index + "'>" + value + "</option>");
-                    })
-                });
-            }
-        });
+       
         ////////IMPRIMIR EL NUMERO DE COTIZACION ////////
-        var num = parseInt('{{empty($codigocotiant->codigo_cotizacion) ? 0 : $codigocotiant->codigo_cotizacion}}')+1;
+        var num = parseInt('{{$cotizacion->codigo_cotizacion}}');
         var n = num.toString().padStart(5,'0');
         console.log("ESTE ES EL CODIGO" +n);
         
         document.getElementById("numero_cotizacion_input").value = n;
         ////////OBTENER EL NUMERO MAXIMO DE LECTURAS SEGUN EL PERIDO SELECCIONADO////////
-        $('#periodolec_producto').change(function(){
-            var periodo = document.getElementById('periodolec_producto').value;
-            if(periodo == 'MENS'){
-                document.getElementById('maxLectuasAño').innerHTML = '/ 12';
-            }else if(periodo == 'TRIMS'){
-                document.getElementById('maxLectuasAño').innerHTML = '/ 4';
-            }else if(periodo == 'BIMS'){
-                document.getElementById('maxLectuasAño').innerHTML = '/ 6';
-            }
-        });
+        
+        var periodo = '{{$cotizacion->periodoLec}}';
+        if(periodo == 'MENS'){
+            document.getElementById('maxLectuasAño').innerHTML = '/ 12';
+        }else if(periodo == 'TRIMS'){
+            document.getElementById('maxLectuasAño').innerHTML = '/ 4';
+        }else if(periodo == 'BIMS'){
+            document.getElementById('maxLectuasAño').innerHTML = '/ 6';
+        }
         ///////////OBTENER EL NUMERO DE LECTURAS O DE PERIODOS PARA EL SERVICIO DE TRANSPORTE//////
         $('#numlecturas_año').change(function(){
             var lecturas = document.getElementById('numlecturas_año').value;
@@ -406,29 +380,30 @@
             }
         })
         ////////////// DESHABILITAR CAMPOS DE OBSEQUIO PARA EL SERVICIO DE TRANSPORTE//////
-        $('#obsq_servitransporteEnvio').change(function(){
-            element = document.getElementById("serviTransporteEnvio");
-            check = document.getElementById("obsq_servitransporteEnvio");
-            if (check.checked) {
-                console.log("CHECKED");
-                $('#serviTransporteEnvio').prop('hidden', true);
-            }else{
-                console.log("NO CHECKED");
-                $('#serviTransporteEnvio').prop('hidden', false);
-            }
-        });
-        $('#obsq_servitransporteReco').change(function(){
-            element = document.getElementById("serviTransporteReco");
-            check = document.getElementById("obsq_servitransporteReco");
-            if (check.checked) {
-                console.log("CHECKED");
-                $('#serviTransporteReco').prop('hidden', true);
-            }else{
-                console.log("NO CHECKED");
-                $('#serviTransporteReco').prop('hidden', false);
-            }
-        });
-        //////OBTENEMOS LA CASILLA Y EL DESCUENTO POR PRONTO PAGO///////
+
+        element = document.getElementById("serviTransporteEnvio");
+        check = document.getElementById("obsq_servitransporteEnvio");
+        if (check.checked) {
+            console.log("CHECKED");
+            $('#serviTransporteEnvio').prop('hidden', true);
+        }else{
+            console.log("NO CHECKED");
+            $('#serviTransporteEnvio').prop('hidden', false);
+        }
+      
+        
+        element = document.getElementById("serviTransporteReco");
+        check = document.getElementById("obsq_servitransporteReco");
+        if (check.checked) {
+            console.log("CHECKED");
+            $('#serviTransporteReco').prop('hidden', true);
+        }else{
+            console.log("NO CHECKED");
+            $('#serviTransporteReco').prop('hidden', false);
+        }
+    })
+      
+       /*  //////OBTENEMOS LA CASILLA Y EL DESCUENTO POR PRONTO PAGO///////
         $('#descuento_pronto_pago').change(function(){
             console.log("descuentopp");
             var desPP = document.getElementById('descuento_pronto_pago').value;
@@ -501,9 +476,9 @@
             updateValorTotalyPromedio();
         });
     });
-    var inicio = 1;
+    var inicio = 1; */
 
-    function agregarProducto(){
+    /* function agregarProducto(){
         var lec = document.getElementById("numlecturas_año").value;
         var periodo = document.getElementById("periodolec_producto").value;
         if((lec != '' || lec != 0) && periodo != ''){
@@ -819,10 +794,10 @@
             });
         }
         
-    }
+    } */
 
     
-    function eliminar(row){
+    /* function eliminar(row){
         
         var d = row.parentNode.parentNode.rowIndex;
         console.log("ESTA ES LA d"+d);
@@ -948,95 +923,33 @@
         
         document.getElementById('promedioDosiMesInt').value = promedioDosimMes;
         document.getElementById('promedioDosimMes').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(promedioDosimMes);
+    } */
+    function agregarObs(){
+        var obs = `<div class="row g-2" id="obs">
+                        <div class="col-md">
+                            <textarea class="form-control" name="observaciones[]" id="observaciones" autofocus style="text-transform:uppercase;" rows="2"></textarea>
+                        </div>
+                        <div class="col-md-1 text-center align-middle">
+                            <button class="btn btn-danger mt-2" type="button" onclick="eliminarObs(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div><br>`;
+        $("#rowObs").append(obs);
+    }
+    function eliminarObs(obs){
+        $("#obs").remove();
+    }
+    function Obseliminar(id){
+        $("#"+id).remove();
     }
     $(document).ready(function() {
-        
-        $('#form_cotizacion').submit(function(e){
+        $('#form_edit_cotizacion').submit(function(e){
             e.preventDefault();
-            ///////////////////////VALIDACION PARA LA EMPRESA Y SEDE /////////////////
-            var empresa = document.getElementById("empresa").value;
-            if(empresa == ''){
-                return Swal.fire({
-                            title:"FALTA SELECCIONAR LA EMPRESA",
-                            text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                            icon: 'error'
-                        });
-                    
-            };
-            var sede = document.getElementById("sede_empresa").value;
-            if(sede == ''){
-                return Swal.fire({
-                            title:"FALTA SELECCIONAR LA SEDE SUBSCRITA A DICHA EMPRESA",
-                            text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                            icon: 'error'
-                        });
-            };
-            ///////////////////////VALIDACION PARA LAS FECHAS/////////////////
-            var fecha_emision = document.getElementById("fecha_emision").value;
-            if(fecha_emision == ''){
-                return Swal.fire({
-                            title:"FALTA SELECCIONAR LA FECHA DE EMISIÓN",
-                            text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                            icon: 'error'
-                        });
-            };
-            var fecha_vencimiento = document.getElementById("fecha_vencimiento").value;
-            if(fecha_vencimiento == ''){
-                return Swal.fire({
-                            title:"FALTA SELECCIONAR LA FECHA DE VENCIMIENTO",
-                            text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                            icon: 'error'
-                        });
-                    
-            };
-            ///////////////////////VALIDACION PARA EL PERIODO Y NUMERO DE LECTURAS/////////////////
-            var periodo = document.querySelectorAll('select[name="periodolec_producto"]');
-            for(var i = 0; i < periodo.length; i++){
-                var values = periodo[i].value;
-                if(values == ''){
-                    return Swal.fire({
-                        title:"SELECCIONE EL PERIODO DE LECTURA",
-                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                        icon: 'error'
-                    });
-                }
-            }
-            var lec = document.getElementById('numlecturas_año').value;
-            if( lec == ''){
-                return Swal.fire({
-                        title:" INGRESE EL NÚMERO DE LECTURAS AL AÑO PARA PODER AGREGAR UN PRODUCTO",
-                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                        icon: 'error'
-                    });
-            };
-            ///////////////////////VALIDACION PARA EL PROMEDIO DEL DOSIMETRO MES/////////////////
-            var promedio = document.querySelectorAll('input[id="promedioDosiMesInt"]');
-            for(var i = 0; i < promedio.length; i++){
-                var values = promedio[i].value;
-                if(values == ''){
-                    return Swal.fire({
-                                title:"NO HAY NINGUN PROMEDIO, AÑADA UN PRODUCTO !!",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            }
-            
-            /* ///////////////////////VALIDACION PARA LAS FORMAS DE PAGO/////////////////
-            var fpago_anticipado = document.getElementById('fpago_anticipado');
-            var fp_unmes = document.getElementById("fpago_un'mes");
-            if(!fpago_anticipado.checked && !fp_unmes.checked){
-                return Swal.fire({
-                        title:"SELECCIONE ALGUNA FORMA DE PAGO",
-                        text: "SELECCIONE LA INFORMACIÓN DESEADA",
-                        icon: 'error'
-                    });
-            } */
-            
-            
-
             Swal.fire({
-                text: "DESEA GUARDAR ESTA COTIZACIÓN ??",
+                text: "DESEA EDITAR ESTA COTIZACIÓN ??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -1044,7 +957,7 @@
                 confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    var cotizacion = document.getElementById("numero_cotizacion_input").value;
+                    var cotizacion = '{{$cotizacion->codigo_cotizacion}}';
                     var host = window.location.host;
                     var path = "http://"+host+"/POSITRON/public/cotizaciones/"+cotizacion+"/pdf";
                     
@@ -1053,6 +966,7 @@
                 }
             })
         })
+        
     })
 </script>
 @endsection

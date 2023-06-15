@@ -56,7 +56,7 @@ class CreateCotizacionsTable extends Migration
             $table->integer('promedioDosimMes')->nullable();
             $table->string('pago_anticipado', 50)->nullable();
             $table->string('pago_unmes', 50)->nullable();
-            $table->text('obs')->nullable();
+            
 
             /* $table-> unsignedBigInteger('producto_id')->nullable();
             $table-> foreign('producto_id')->references('id_producto')->on('productos')->onDelete('cascade')->onUpdate('cascade'); */

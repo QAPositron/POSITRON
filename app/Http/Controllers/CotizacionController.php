@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cotizacion;
+use App\Models\Cotizacionobservacion;
 use App\Models\Cotizacionproducto;
 use App\Models\Empresa;
 use App\Models\Producto;
 use App\Models\Sede;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Validation\Rule;
 
 class CotizacionController extends Controller
 {
@@ -37,7 +39,7 @@ class CotizacionController extends Controller
         return response()->json($sedesArray);
     }
     public function save(Request $request){
-        /* return $request; */
+        /* return count($request->observaciones); */
         $request->validate([
             'numero_cotizacion'     => 'required|unique:cotizacions,codigo_cotizacion',
             'empresa'               => 'required',
@@ -74,7 +76,7 @@ class CotizacionController extends Controller
         $cotizacion->promedioDosimMes       = $request->promedioDosiMesInt;
         $cotizacion->pago_anticipado        = $request->fpago_anticipado;
         $cotizacion->pago_unmes             = $request->fpago_unmes;
-        $cotizacion->obs                    = mb_strtoupper($request->observaciones);
+        /* $cotizacion->obs                    = mb_strtoupper($request->observaciones); */
 
         $cotizacion->save();
 
@@ -92,13 +94,22 @@ class CotizacionController extends Controller
             $cotiprod->costoAñoProd         = $request->input('costoAnoInt_producto'.$i);
             $cotiprod->save();
         }
+        for($i=0; $i< count($request->observaciones); $i++){
+            $cotiobs = new Cotizacionobservacion();
+
+            $cotiobs->cotizacion_id        = $cotizacion->id_cotizacion;
+            $cotiobs->obs                  = mb_strtoupper($request->observaciones[$i]);
+
+            $cotiobs->save();
+        }
         return redirect()->route('cotizaciones.search')->with('guardar', 'ok');
     }
     public function pdfCotizacionDosimetria($cotizacion){
         
         $coti = Cotizacion::where('codigo_cotizacion', '=', $cotizacion)->get();
         $productos = Cotizacionproducto::where('cotizacion_id', '=', $coti[0]->id_cotizacion)->get();
-        $pdf =  PDF::loadView('cotizaciones.cotizacionPDF_dosimetria', compact('coti','cotizacion', 'productos'));
+        $observaciones = Cotizacionobservacion::where('cotizacion_id', '=', $coti[0]->id_cotizacion)->get();
+        $pdf =  PDF::loadView('cotizaciones.cotizacionPDF_dosimetria', compact('coti','cotizacion', 'productos', 'observaciones'));
         $pdf->setPaper('A4', 'portrait');
         $n = $cotizacion;
         $codigo = str_pad($n, 5, "0", STR_PAD_LEFT);
@@ -108,15 +119,41 @@ class CotizacionController extends Controller
     }
     public function edit($coti){
         $cotizacion  = Cotizacion::find($coti);
-        $productos = Cotizacionproducto::where('cotizacion_id', '=', $cotizacion->id_cotizacion)->get();
+        $cotiproductos = Cotizacionproducto::where('cotizacion_id', '=', $cotizacion->id_cotizacion)->get();
+        $cotiobservaciones = Cotizacionobservacion::where('cotizacion_id', '=', $cotizacion->id_cotizacion)->get();
         $empresas = Empresa::all();
         $productos = Producto::all();
-        return view('cotizaciones.edit_cotizacion', compact('cotizacion', 'productos', 'empresas', 'productos'));
+        return view('cotizaciones.edit_cotizacion', compact('cotizacion', 'cotiproductos', 'cotiobservaciones', 'empresas', 'productos'));
     }
-    public function update(){
-        
+    public function update(Request $request, $cotizacion){
+        $request->validate([
+            'numero_cotizacion'     => ['required', Rule::unique('cotizacions', 'codigo_cotizacion')->ignore($cotizacion, 'id_cotizacion')],
+            'empresa'               => ['required'],
+            'sede'                  => ['required'],
+            'fecha_emision'         => ['required'],
+            'fecha_vencimiento'     => ['required']
+        ]);
+
+        $coti = Cotizacion::find($cotizacion);
+        $coti->fecha_emision      = $request->fecha_emision;
+        $coti->fecha_vencimiento  = $request->fecha_vencimiento;
+        $coti->save();
+
+       $cotiobs = Cotizacionobservacion::where('cotizacion_id', '=', $coti->id_cotizacion)->delete();
+
+        for($i=0; $i< count($request->observaciones); $i++){
+            $cotizacionObs = new Cotizacionobservacion();
+
+            $cotizacionObs->cotizacion_id        = $coti->id_cotizacion;
+            $cotizacionObs->obs                  = mb_strtoupper($request->observaciones[$i]);
+
+            $cotizacionObs->save();
+        }
+        return redirect()->route('cotizaciones.search')->with('actualizar', 'ok');
     }
-    public function destroy(){
-        
+    public function destroy($cotizacion){
+        $coti = Cotizacion::find($cotizacion);
+        $coti->delete();
+        return redirect()->route('cotizaciones.search')->with('eliminar', 'ok');
     }
 }

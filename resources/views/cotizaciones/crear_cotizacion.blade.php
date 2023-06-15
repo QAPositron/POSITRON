@@ -81,7 +81,7 @@
                         <label>LECTURAS AL AÑO:</label>
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="number" name="totalProductos" id="totalProductos" value="" class="form-control" hidden>
+                                <input type="number" name="totalProductos" id="totalProductos" value="" step="any" class="form-control" hidden>
                                 <input type="number" name="numlecturas_año" id="numlecturas_año" value="" class="form-control">
                             </div>
                             <div class="col-md mt-2">
@@ -118,13 +118,13 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteEnvio" name="obsq_servitransporteEnvio" {{-- onchange="showContentEnvio();" --}}>
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteEnvio" name="obsq_servitransporteEnvio">
                             <label class="form-check-label" for="defaultCheck1">
                                 OBSEQUIO EN EL SERVICIO DE TRANSPORTE (ENVÍO)
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteReco" name="obsq_servitransporteReco" {{-- onchange="showContentReco();" --}}>
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="obsq_servitransporteReco" name="obsq_servitransporteReco">
                             <label class="form-check-label" for="defaultCheck1">
                                 OBSEQUIO EN EL SERVICIO DE TRANSPORTE (RECOLECCIÓN)
                             </label>
@@ -170,15 +170,13 @@
                                 <td colspan="6" class="text-end"><b>VALOR TOTAL SIN DESCUENTO</b></td>
                                 <td>
                                     <div class="form-group">
-                                        {{-- <input type="number" name="totalAñoSDvar_periodo" id="totalAñoSDvar_periodo" value="" class="form-control " hidden> --}}
-                                        <input type="number" name="totalAñoSDint_periodo" id="totalAñoSDint_periodo" value="" class="form-control " hidden>
+                                        <input type="number" name="totalAñoSDint_periodo" id="totalAñoSDint_periodo" value="" step="any" class="form-control " hidden>
                                         <input type="text" name="totalAñoSD_periodo" id="totalAñoSD_periodo" value="" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        {{-- <input type="number" name="totalAñoSDvar_ano" id="totalAñoSDvar_ano" value="" class="form-control " hidden> --}}
-                                        <input type="number" name="totalAñoSDint_ano" id="totalAñoSDint_ano" value="" class="form-control " hidden>
+                                        <input type="number" name="totalAñoSDint_ano" id="totalAñoSDint_ano" value="" step="any" class="form-control " hidden>
                                         <input type="text" name="totalAñoSD_ano" id="totalAñoSD_ano" value="" class="form-control "readonly>
                                     </div>
                                 </td>
@@ -188,13 +186,13 @@
                                 <td colspan="6" class="text-end"><b>(-) DESCUENTO CORTESÍA</b></td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="descuento_cortesiaint_periodo" id="descuento_cortesiaint_periodo" value="" class="form-control " hidden>
+                                        <input type="number" name="descuento_cortesiaint_periodo" id="descuento_cortesiaint_periodo" value="" step="any" class="form-control " hidden>
                                         <input type="text" name="descuento_cortesia_periodo" id="descuento_cortesia_periodo" value="" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="descuento_cortesiaint_ano" id="descuento_cortesiaint_ano" value="" class="form-control " hidden>
+                                        <input type="number" name="descuento_cortesiaint_ano" id="descuento_cortesiaint_ano" value="" step="any" class="form-control " hidden>
                                         <input type="text" name="descuento_cortesia_ano" id="descuento_cortesia_ano" value="" class="form-control" readonly>
                                     </div>
                                 </td>
@@ -204,13 +202,13 @@
                                 <td colspan="6" class="text-end"><b>(-) DESCUENTO PRONTO PAGO</b></td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="descuento_prontopagoint_periodo" id="descuento_prontopagoint_periodo" value="" class="form-control " hidden>
+                                        <input type="number" name="descuento_prontopagoint_periodo" id="descuento_prontopagoint_periodo" value="" step="any" class="form-control " hidden>
                                         <input type="text" name="descuento_prontopago_periodo" id="descuento_prontopago_periodo" value="" class="form-control " readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="descuento_prontopagoint_ano" id="descuento_prontopagoint_ano" value="" class="form-control " hidden>
+                                        <input type="number" name="descuento_prontopagoint_ano" id="descuento_prontopagoint_ano" value="" step="any" class="form-control " hidden>
                                         <input type="text" name="descuento_prontopago_ano" id="descuento_prontopago_ano" value="" class="form-control " readonly>
                                     </div>
                                 </td>
@@ -232,7 +230,7 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="servtransporteInt_ano" id="servtransporteInt_ano" value="" class="form-control" hidden>
+                                        <input type="number" name="servtransporteInt_ano" id="servtransporteInt_ano" value="" step="any" class="form-control" hidden>
                                         <input type="text" name="servtransporte_ano" id="servtransporte_ano" value="" class="form-control" readonly>
                                     </div>
                                 </td>
@@ -254,7 +252,7 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="servtransporteRecoInt_ano" id="servtransporteRecoInt_ano" value="" class="form-control" hidden>
+                                        <input type="number" name="servtransporteRecoInt_ano" id="servtransporteRecoInt_ano" value="" step="any" class="form-control" hidden>
                                         <input type="text" name="servtransporteReco_ano" id="servtransporteReco_ano" value="" class="form-control" readonly>
                                     </div>
                                 </td>
@@ -264,13 +262,13 @@
                                 <td colspan="6" class="text-end"><b>VALOR TOTAL DEL SERVICIO</b></td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="totalservicioInt_periodo" id="totalservicioInt_periodo" value="" class="form-control" hidden>
+                                        <input type="number" name="totalservicioInt_periodo" id="totalservicioInt_periodo" value="" step="any" class="form-control" hidden>
                                         <input type="text" name="totalservicio_periodo" id="totalservicio_periodo" value="" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" name="totalservicioInt_ano" id="totalservicioInt_ano" value="" class="form-control" hidden>
+                                        <input type="number" name="totalservicioInt_ano" id="totalservicioInt_ano" value="" step="any" class="form-control" hidden>
                                         <input type="text" name="totalservicio_ano" id="totalservicio_ano" value="" class="form-control" readonly>
                                     </div>
                                 </td>
@@ -286,7 +284,7 @@
                         <div class="form-group">
                             <label for=""><b>PROMEDIO DOSÍMETRO:</b></label>
                             <br><br>
-                            <input type="number" name="promedioDosiMesInt" id="promedioDosiMesInt" value="" class="form-control" hidden>
+                            <input type="number" name="promedioDosiMesInt" id="promedioDosiMesInt" class="form-control" step="any" hidden>
                             <input type="text" name="promedioDosimMes" id="promedioDosimMes" value="" class="form-control" >
                         </div>
                     </div>
@@ -310,15 +308,27 @@
                         </div>
                     </div>
                     <div class="col-md">
-                        <label for="floatingInputGrid"><b>OBSERVACIONES</b></label>
-                        <textarea class="form-control" name="observaciones" id="observaciones" autofocus style="text-transform:uppercase;" rows="5"></textarea>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="floatingInputGrid" class="mt-1"><b>OBSERVACIONES</b></label>
+                            </div>
+                            <div class="col-md text-start">
+                                <button onclick="agregarObs()" class="btn btn-sm colorQA" id="agregarobs" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="rowObs">
+                        </div>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col"></div>
                     <div class="col d-grid gap-2">
-                        <input class="btn colorQA" type="submit" id="boton-guardar" value="GUARDAR">
+                        <button class="btn colorQA"  type="submit" id="boton-guardar" name="boton-guardar" >GUARDAR</button>
                     </div>
                     <div class="col d-grid gap-2">
                         <a href="{{route('cotizaciones.search')}}" class="btn btn-danger " type="button" id="cancelar"role="button">CANCELAR</a>
@@ -872,17 +882,16 @@
             document.getElementById('descuento_cortesiaint_ano').value = descCortcostAño;
             document.getElementById('descuento_cortesia_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostAño);
         }
-        updateValorTotalyPromedio();
-        
         /////// SE ELIMINA LA FILA DE LA TABLA, ES DECIR EL PRODUCTO Y SE ACTUALIZA EL NUMERO DEL ITEM///////
-        document.getElementById('productos').deleteRow(d);
         
         var i = 1;
         $('#productos > tbody  > tr').each(function(e) {
-        $(this)[0].cells[0].outerHTML='<td class="align-middle"><b>'+ i +'</b></td>';
+            $(this)[0].cells[0].outerHTML='<td class="align-middle"><b>'+ i +'</b></td>';
             i++;
         });
         
+        document.getElementById('productos').deleteRow(d);
+        updateValorTotalyPromedio();
 
     }
     function updateValorTotalyPromedio(){
@@ -951,6 +960,24 @@
         document.getElementById('promedioDosiMesInt').value = promedioDosimMes;
         document.getElementById('promedioDosimMes').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(promedioDosimMes);
     }
+    function agregarObs(){
+        var obs = `<div class="row g-2" id="obs">
+                        <div class="col-md">
+                            <textarea class="form-control" name="observaciones[]" id="observaciones" autofocus style="text-transform:uppercase;" rows="2"></textarea>
+                        </div>
+                        <div class="col-md-1 text-center align-middle">
+                            <button class="btn btn-danger mt-2" type="button" onclick="eliminarObs(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div><br>`;
+        $("#rowObs").append(obs);
+    }
+    function eliminarObs(obs){
+        $("#obs").remove();
+    }
     $(document).ready(function() {
         
         $('#form_cotizacion').submit(function(e){
@@ -1011,18 +1038,7 @@
                         icon: 'error'
                     });
             };
-            ///////////////////////VALIDACION PARA EL PROMEDIO DEL DOSIMETRO MES/////////////////
-            var promedio = document.querySelectorAll('input[id="promedioDosiMesInt"]');
-            for(var i = 0; i < promedio.length; i++){
-                var values = promedio[i].value;
-                if(values == ''){
-                    return Swal.fire({
-                                title:"NO HAY NINGUN PROMEDIO, AÑADA UN PRODUCTO !!",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            }
+            
             
             /* ///////////////////////VALIDACION PARA LAS FORMAS DE PAGO/////////////////
             var fpago_anticipado = document.getElementById('fpago_anticipado');
@@ -1049,7 +1065,7 @@
                     var cotizacion = document.getElementById("numero_cotizacion_input").value;
                     var host = window.location.host;
                     var path = "http://"+host+"/POSITRON/public/cotizaciones/"+cotizacion+"/pdf";
-                    
+
                     this.submit();
                     window.open(path, '_blank');
                 }

@@ -63,7 +63,7 @@
         left: 2cm; 
         right: 2cm;
         text-align:justify;
-        bottom: 4.5cm; 
+        bottom: 4cm; 
         /* background: green; */
     }
     .indices p{
@@ -223,27 +223,18 @@
                 </tfoot>
             </table>
             <br>
-            <p><b>OBSERVACIONES:</b></p>
-            <p>{{ucfirst(mb_strtolower($cotiza->obs, 'UTF-8'))}}</p>
-            <br>
-            @if(($cotiza->servTransEnvioPeriodo == 0 || $cotiza->servTransEnvioPeriodo == NULL) && ($cotiza->servTransRecoPeriodo == 0 || $cotiza->servTransRecoPeriodo == NULL))
-                <p><b>NOTAS DE TRANSPORTE:</b></p>
-                <ul>
-                    <li>En el costo no se incluye el envío de los dosímetros desde el laboratorio de QA POSITRON a sus instalaciones, este costo es responsabilidad de la institución contratante.</li>
-                    <li>En el costo no se incluye el envío de los dosímetros a las instalaciones de QA POSITRON, este costo es responsabilidad de la institución contratante.</li>
-                </ul>
-            @elseif(($cotiza->servTransEnvioPeriodo == 0 || $cotiza->servTransEnvioPeriodo == NULL) && ($cotiza->servTransRecoPeriodo != 0 || $cotiza->servTransRecoPeriodo != NULL))
-                <p><b>NOTAS DE TRANSPORTE:</b></p>
-                <ul>
-                    <li>En el costo no se incluye el envío de los dosímetros desde el laboratorio de QA POSITRON a sus instalaciones, este costo es responsabilidad de la institución contratante.</li>
-                </ul>
-            @elseif(($cotiza->servTransEnvioPeriodo != 0 || $cotiza->servTransEnvioPeriodo != NULL) && ($cotiza->servTransRecoPeriodo == 0 || $cotiza->servTransRecoPeriodo == NULL))
-                <p><b>NOTAS DE TRANSPORTE:</b></p>
-                <ul>
-                    <li>En el costo no se incluye el envío de los dosímetros a las instalaciones de QA POSITRON, este costo es responsabilidad de la institución contratante.</li>
-                </ul>
-            @endif
+            <p><b>NOTAS DE TRANSPORTE:</b></p>
+            <ul>
+                @if(($cotiza->servTransEnvioPeriodo == 0 || $cotiza->servTransEnvioPeriodo == NULL) && $cotiza->obsq_transEnvio == NULL)<li>En el costo no se incluye el envío de los dosímetros desde el laboratorio de QA POSITRON a sus instalaciones, este costo es responsabilidad de la institución contratante.</li>@endif
+                @if(($cotiza->servTransRecoPeriodo == 0 || $cotiza->servTransRecoPeriodo == NULL) && $cotiza->obsq_transRecole == NULL)<li>En el costo no se incluye el envío de los dosímetros a las instalaciones de QA POSITRON, este costo es responsabilidad de la institución contratante.</li>@endif
+            </ul>
         @endforeach
+        <p><b>OBSERVACIONES:</b></p>
+        <ul>
+            @foreach($observaciones as $obs)
+                <li>{{ucfirst(mb_strtolower($obs->obs, 'UTF-8'))}}</li>
+            @endforeach
+        </ul>
         <p style="text-align:center;"><b>TERMINOS Y CONDICIONES OFERTA</b></p>
         <br>
         <p><b>VALIDEZ DE LA OFERTA: </b>30 Días</p>
@@ -334,11 +325,11 @@
         </table>
         <br>
         <p style="font-size: 11px;"><b>NOTA:</b></p>
-        <ol>
+        <ul>
             <li style="font-size: 11px;">Los dosímetros son enviados cinco (05) días antes de inicio de cada periodo.</li>
             <li style="font-size: 11px;">Los dosímetros deben ser devueltos como Máximo cinco (05) días calendario después de fecha de inicio de periodo.</li>
             <li style="font-size: 11px;">Para que el dosímetro sea leído en los tiempos estimados debe entregar dentro de las fechas establecidas.</li>
-        </ol>
+        </ul>
         <br>
         <p style="font-size: 11px;"><b>RETORNO: </b>La devolución de los dosímetros al laboratorio de QA POSITRON, será responsabilidad del cliente. Este debe ser a más tardar el quinto día calendario siguiente después de recibir los dispositivos a usar en el siguiente periodo. Los dosímetros no devueltos dentro del tiempo establecido no se podrá generar reporte para el periodo el cual fue asignado, dentro de los tiempos habituales, además uno o varios dosímetros que no sean retornados dentro de los siguientes 30 días terminado el periodo de uso para el cual hayan sido asignados se le dará el trámite de <b>"pérdida del dosímetro"</b>.</p>
         <br>

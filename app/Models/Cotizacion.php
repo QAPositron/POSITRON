@@ -22,4 +22,8 @@ class Cotizacion extends Model
     public function sede(){
         return $this->belongsTo(Sede::class, 'sede_id', 'id_sede');
     }
+     //relacion uno a muchos con CotizacionObservaciones
+     public function cotizacionObservaciones(){
+        return $this->hasMany(Cotizacionobservacion::class, 'id_cotiobs');
+    }
 }

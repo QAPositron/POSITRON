@@ -42,8 +42,8 @@
                         <td class="align-middle text-center">{{$coti->lecturas_ano}}</td>
                         <td class="align-middle text-center">$ {{number_format($coti->valorTotalSDPeriodo, 2, ',', '.')}}</td>
                         <td class="align-middle text-center">  $ {{number_format($coti->valorTotalPeriodo, 2, ',', '.')}}</td>
-                        <td>
-                            <div class="row">
+                        <td class="align-middle text-center">
+                            <div class="row align-items-center">
                                 <div class="col-md p-0 text-center" >
                                     <a href="{{route('cotizaciones.edit', $coti->id_cotizacion)}}" class="btn colorQA">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -52,10 +52,10 @@
                                     </a>
                                 </div>
                                 <div class="col-md p-0 text-center">
-                                    <form  name="eliminar_cotizacion" action="{{-- {{route('productos.destroy', $prod->id_producto)}} --}}" method="POST" class="mb-1 formeliminar_cotizacion">
+                                    <form  name="form_eliminar_cotizacion" action="{{route('cotizaciones.destroy', $coti->id_cotizacion)}}" method="POST" class="mb-1 form_eliminar_cotizacion">
                                         @method('DELETE')
                                         @csrf  
-                                        <button class="btn btn-danger" {{-- onclick="Eliminar(evt);" --}} type="submit">
+                                        <button class="btn btn-danger"type="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash " viewBox="0 0 16 16">
                                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -95,6 +95,24 @@ crossorigin="anonymous">
         )
     </script>
 @endif
+@if(session('actualizar')== 'ok')
+    <script>
+        Swal.fire(
+        'ACTUALIZADA!',
+        'SE HA ACTUALIZADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
+@if(session('eliminar')== 'ok')
+    <script>
+        Swal.fire(
+        'ELIMINADO!',
+        'SE HA ELIMINADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
 <script type="text/javascript">
     $(document).ready(function(){
         @foreach($cotizaciones as $coti)
@@ -105,6 +123,23 @@ crossorigin="anonymous">
         
             TDcoti.innerHTML = "<a class='btn btn-outline-primary rounded-pill'>"+n+"</a>";
         @endforeach
+
+        $('.form_eliminar_cotizacion').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+                text: "SEGURO QUE DESEA ELIMINAR ESTA COTIZACIÓN??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                   
+                    this.submit();
+                }
+            })
+        })
     })
 </script>
 @endsection
