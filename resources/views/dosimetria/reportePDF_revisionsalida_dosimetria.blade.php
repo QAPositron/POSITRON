@@ -336,11 +336,11 @@
                             }
                         }
                         $sum_control = $control_torax + $control_cristalino + $control_anillo;
-                        if($sum_control != 0){if($sum_control <= 9){echo "0".$sum_control." dosímetros de control, "; }else{ echo $sum_control." dosímetros de control, "; } }
-                        if($torax != 0){if($torax <= 9){ echo "0".$torax." dosímetros de tórax, "; }else{ echo $torax." dosímetros de tórax, ";}}
-                        if($anillo != 0){if($anillo <= 9){ echo "0".$anillo." dosímetro de anillo y ";}else{ echo $anillo." dosímetro de anillo y ";}}
-                        if($cristalino != 0){if($cristalino <= 9){ echo "0".$cristalino." dosímetro de cristalino, para un total de ".$sum_control+$torax+$anillo+$cristalino." dosimetros."; } else{ echo $cristalino." dosímetro de cristalino, para un total de ".$sum_control+$torax+$anillo+$cristalino." dosimetros."; }}
-                        $suma = $control+$torax+$anillo+$cristalino;
+                        if($sum_control != 0){if($sum_control <= 9){echo "0".$sum_control." dosímetros de control"; }else{ echo $sum_control." dosímetros de control"; } }
+                        if($torax != 0){if($torax <= 9){ echo ", 0".$torax." dosímetros de tórax"; }else{ echo ", ".$torax." dosímetros de tórax";}}
+                        if($anillo != 0){if($anillo <= 9){ echo ", 0".$anillo." dosímetro de anillo";}else{ echo ", ".$anillo." dosímetro de anillo";}}
+                        if($cristalino != 0){if($cristalino <= 9){ echo ", 0".$cristalino." dosímetro de cristalino"; } else{ echo ", ".$cristalino." dosímetro de cristalino"; }}
+                        $suma = $sum_control+$torax+$anillo+$cristalino;
                         if($suma != 0){if($suma <= 9){echo ", para un total de 0".$suma." dosimetros.";}else{echo ", para un total de ".$suma." dosimetros.";}}
                     @endphp
                 </p>

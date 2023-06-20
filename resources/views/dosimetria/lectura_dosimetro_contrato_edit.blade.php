@@ -117,7 +117,7 @@
                                     <input type="text"  class="form-control" name="primDiaUsoLectDosim" id="primDiaUsoLectDosim" value="{{$trabjasig->primer_dia_uso}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>OCUPACIÓN:</b> </label>
-                                    <input type="text"  class="form-control" name="ocupLectDosim" id="ocupLectDosim" value="{{$trabjasig->ocupacion}}" readonly>
+                                    <input type="text"  class="form-control" name="ocupLectDosim" id="ocupLectDosim" value="{{$trabjasig->contratodosimetriasede->dosimetriacontrato->ocupacion}}" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="floatingInputGrid"> <b>TIPO DOSÍMETRO:</b></label>

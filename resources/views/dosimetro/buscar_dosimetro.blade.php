@@ -35,7 +35,7 @@
                             <div class="m-5">
                                 <table class="table table-responsive table-hover table-bordered p-4 dosimetros">
                                     <thead class="table-active text-center">
-                                        <th class="align-middle" scope='col'  style='width: 18.60%'>CODIGO</th>
+                                        <th class="align-middle" scope='col' style='width: 18.60%'>CODIGO</th>
                                         <th class="align-middle" scope='col'>TIPO</th>
                                         <th class="align-middle" scope='col' style='width: 10.60%'>TECNOLOGIA</th>
                                         <th class="align-middle" scope='col' style='width: 13.90%'>F. ING. AL SERV.</th>
@@ -45,7 +45,13 @@
                                     </thead>
                                     @foreach($dosimetro as $dosi)
                                         <tr>
-                                            <td class="align-middle">{{$dosi->codigo_dosimeter}}</td>
+                                            <td class="align-middle">
+                                                @if($dosi->contdosisededepto_id != NULL && $dosi->mes_asignacion != NULL) 
+                                                    <a class='btn btn-outline-primary rounded-pill' href='{{route('asignadosicontrato.info', ['asigdosicont'=> $dosi->contdosisededepto_id, 'mesnumber'=> $dosi->mes_asignacion])}}'>{{$dosi->codigo_dosimeter}}</a> 
+                                                @else 
+                                                    {{$dosi->codigo_dosimeter}} 
+                                                @endif
+                                            </td>
                                             <td class="align-middle text-center">{{$dosi->tipo_dosimetro}}</td>
                                             <td class="align-middle text-center">{{$dosi->tecnologia_dosimetro}}</td>
                                             <td class="align-middle text-center">{{$dosi->fecha_ingreso_servicio}}</td>
@@ -61,7 +67,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="col">
-                                                        <form id="form_eliminar_dosimetro" class="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetros.destroy', $dosi)}}" method="POST">
+                                                        <form id="form_eliminar_dosimetro" class="form_eliminar_dosimetro" name="form_eliminar_dosimetro" action="{{route('dosimetros.destroy', $dosi->id_dosimetro)}}" method="POST">
                                                             @csrf  
                                                             @method('delete')
                                                             <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
@@ -110,7 +116,13 @@
                                             </thead>
                                             @foreach($holder as $hol)
                                                 <tr>
-                                                    <td class="align-middle">{{$hol->codigo_holder}}</td>
+                                                    <td class="align-middle">
+                                                        @if($hol->contdosisededepto_id != NULL && $hol->mes_asignacion != NULL) 
+                                                            <a class='btn btn-outline-primary rounded-pill' href='{{route('asignadosicontrato.info', ['asigdosicont'=> $hol->contdosisededepto_id, 'mesnumber'=> $hol->mes_asignacion])}}'>{{$hol->codigo_holder}}</a> 
+                                                        @else 
+                                                            {{$hol->codigo_holder}}
+                                                        @endif
+                                                    </td>
                                                     <td class="text-center align-middle">{{$hol->tipo_holder}}</td>
                                                     <td class="text-center align-middle">{{$hol->estado_holder}}</td>
                                                     <td class="text-center align-middle">
@@ -123,7 +135,7 @@
                                                                 </a>
                                                             </div>
                                                             <div class="col">
-                                                                <form id="form_eliminar_holder" name="form_eliminar_holder" action="{{route('holders.destroy', $hol)}}" method="POST">
+                                                                <form id="form_eliminar_holder" name="form_eliminar_holder" action="{{route('holders.destroy', $hol->id_holder)}}" method="POST">
                                                                     @csrf  
                                                                     @method('delete')
                                                                     <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
@@ -153,14 +165,6 @@
         <div class="col"></div>
     </div>
 
-
-
-
-{{-- <script type="text/javascript">
-    function Eliminar(evt) {
-        evt.preventDefault();
-    }
-</script>     --}} 
 <script
     src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

@@ -142,7 +142,7 @@
                                             {{$trabasig->holder->codigo_holder}}
                                         @endif
                                     </td>
-                                    <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                    <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                     <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
                                     <td class='align-middle text-center'>
                                         @if($trabasig->nota2 == 'TRUE')
@@ -239,7 +239,7 @@
                                {{--  <td class='align-middle text-center'>N.A.</td> --}}
                                 <td class='align-middle text-center'>{{$dosiareasig->dosimetro->codigo_dosimeter}}</td>
                                 <td class='align-middle text-center'>N.A.</td>
-                                <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                 <td class='align-middle text-center'>AMBIENTAL</td>
                                 <td colspan="2" class='align-middle text-center'>
                                     @if($dosiareasig->nota2 == 'TRUE')
@@ -338,7 +338,7 @@
                                 {{-- <td class='align-middle text-center'><b>N.A.</b> </td> --}}
                                 <td class='align-middle text-center'><b>{{$dosicontToraxasig->dosimetro->codigo_dosimeter}}</b> </td>
                                 <td class='align-middle text-center'><b>N.A.</b></td>
-                                <td class='align-middle text-center'><b>{{$contdosisededepto->ocupacion}}</b></td>
+                                <td class='align-middle text-center'><b>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</b></td>
                                 <td class='align-middle text-center'><b>CONTROL TÓRAX</b></td>
                                 <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontToraxasig->nota2 == 'TRUE')
@@ -438,7 +438,7 @@
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                        <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                         <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
                                         <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
@@ -541,7 +541,7 @@
                                     {{-- <td class='align-middle text-center'>N.A.</td> --}}
                                     <td class='align-middle text-center'>{{$dosiareasig->dosimetro->codigo_dosimeter}}</td>
                                     <td class='align-middle text-center'>N.A.</td>
-                                    <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                    <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                     <td class='align-middle text-center'>AMBIENTAL</td>
                                     <td class='align-middle text-center'>
                                         @if($dosiareasig->nota2 == 'TRUE')
@@ -657,7 +657,7 @@
                                             {{$trabasig->holder->codigo_holder}}
                                         @endif
                                     </td>
-                                    <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                    <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                     <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
                                     <td class='align-middle text-center'>
                                         @if($trabasig->nota2 == 'TRUE')
@@ -756,7 +756,7 @@
                                 {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
                                 <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->dosimetro->codigo_dosimeter}}</b></td>
                                 <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->holder->codigo_holder}}</b></td>
-                                <td class='align-middle text-center'><b>{{$contdosisededepto->ocupacion}}</b></td>
+                                <td class='align-middle text-center'><b>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</b></td>
                                 <td class='align-middle text-center'><b>CONTROL CRISTALINO</b></td>
                                 <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontCristalinoasig->nota2 == 'TRUE')
@@ -856,7 +856,7 @@
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                        <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                         <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
                                         <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
@@ -967,7 +967,7 @@
                                             {{$trabasig->holder->codigo_holder}}
                                         @endif
                                     </td>
-                                    <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                    <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                     <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
                                     <td class='align-middle text-center'>
                                         @if($trabasig->nota2 == 'TRUE')
@@ -1066,7 +1066,7 @@
                                 {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
                                 <td class='align-middle text-center'><b>{{$dosicontDedoasig->dosimetro->codigo_dosimeter}}</b></td>
                                 <td class='align-middle text-center'><b>{{$dosicontDedoasig->holder->codigo_holder}}</b></td>
-                                <td class='align-middle text-center'><b>{{$contdosisededepto->ocupacion}}</b></td>
+                                <td class='align-middle text-center'><b>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</b></td>
                                 <td class='align-middle text-center'><b>CONTROL ANILLO</b></td>
                                 <td colspan="2" class='align-middle text-center'>
                                     @if($dosicontDedoasig->nota2 == 'TRUE')
@@ -1166,7 +1166,7 @@
                                                 {{$trabasig->holder->codigo_holder}}
                                             @endif
                                         </td>
-                                        <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                        <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                         <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
                                         
                                         <td class='align-middle text-center'>

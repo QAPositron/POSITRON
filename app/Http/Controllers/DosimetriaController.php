@@ -142,7 +142,8 @@ class DosimetriaController extends Controller
             'fecha_inicio_contrato'         => 'required',
             'fecha_finalizacion_contrato'   => 'required',
             'id_sede1'                      => 'required',
-            'estado_contrato'               => 'required'
+            'estado_contrato'               => 'required',
+            'ocupacion_contrato'            => 'required'
         ]);
         $contratoDosi = new Dosimetriacontrato();
 
@@ -152,6 +153,7 @@ class DosimetriaController extends Controller
         $contratoDosi->fecha_finalizacion           = $request->fecha_finalizacion_contrato;
         $contratoDosi->periodo_recambio             = $request->periodo_recambio_contrato;
         $contratoDosi->estado_contrato              = $request->estado_contrato;
+        $contratoDosi->ocupacion                    = $request->ocupacion_contrato;
 
         $contratoDosi->save();
 
@@ -169,7 +171,7 @@ class DosimetriaController extends Controller
                     $contratoDosiSedeDepto->contratodosimetriasede_id = $contratoDosiSede->id_contratodosimetriasede;
                     $contratoDosiSedeDepto->departamentosede_id       = $request->input('departamentos_sede'.$i)[$x];
                     $contratoDosiSedeDepto->mes_actual                = 1;
-                    $contratoDosiSedeDepto->ocupacion                 = $request->input('ocupacion_sede'.$i)[$x] == NULL ? NULL : $request->input('ocupacion_sede'.$i)[$x];
+                   /*  $contratoDosiSedeDepto->ocupacion                 = $request->input('ocupacion_sede'.$i)[$x] == NULL ? NULL : $request->input('ocupacion_sede'.$i)[$x]; */
                     $contratoDosiSedeDepto->dosi_control_torax        = empty($request->input('dosimetro_control_torax_sede'.$i)[$x]) ? 0 : 1;
                     $contratoDosiSedeDepto->dosi_control_cristalino   = empty($request->input('dosimetro_control_cristalino_sede'.$i)[$x])? 0 : 1;
                     $contratoDosiSedeDepto->dosi_control_dedo         = empty($request->input('dosimetro_control_dedo_sede'.$i)[$x]) ? 0 : 1;
@@ -508,7 +510,7 @@ class DosimetriaController extends Controller
             ->select('nombre_empresa', 'nombre_sede', 'codigo_contrato','fecha_inicio', 'fecha_finalizacion', 'periodo_recambio','nombre_departamento', 'mes_actual', 'dosi_control_torax', 'dosi_control_cristalino', 'dosi_control_dedo', 'dosi_torax', 'dosi_area', 'dosi_caso', 'dosi_cristalino', 'dosi_muñeca', 'dosi_dedo', 'id_contdosisededepto', 'contratodosimetriasede_id', 'id_contratodosimetria', 'ocupacion') 
             ->where('id_contratodosimetria', '=', $id)
             ->get();
-            /* return $dosimecontrasedeptos; */
+           /*  return $dosimecontrasedeptos; */
         return view('dosimetria.detalle_contrato_dosimetria', compact('dosimetriacontrato', 'dosimecontrasedeptos'));
     }
 
@@ -2033,7 +2035,8 @@ class DosimetriaController extends Controller
             ->where('ubicacion', 'ANILLO')
             ->where('mes_asignacion', $mesnumber)
             ->count();
-        /* return $dosicontrolCristalinoasig; */
+        
+        
         return view('dosimetria.info_asignacion_dosimetros_contrato', compact('mesnumber','contdosisededepto', 'mescontdosisededepto', 'dosiareasignados', 'trabjasignados', 'observacionesDelMes', 'dosicontrolToraxasig', 'dosicontrolCristalinoasig', 'dosicontrolDedoasig', 'DosiControlAsignados', 'DosiToraxAsignados', 'DosiCasoAsignados', 'DosiCristalinoAsignados', 'DosiMuñecaAsignados', 'DosiDedoAsignados'));
     }
 
@@ -2411,7 +2414,7 @@ class DosimetriaController extends Controller
         ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
         ->join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
         ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $id)
-        ->select('empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato', 'departamentos.nombre_departamento', 'empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio', 'contratodosimetriasededeptos.ocupacion')
+        ->select('empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato','dosimetriacontratos.ocupacion', 'departamentos.nombre_departamento', 'empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio')
         ->get();
         
         $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')

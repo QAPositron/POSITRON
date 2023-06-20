@@ -46,7 +46,7 @@ class CreateTemptrabajdosimrevsTable extends Migration
             $table->date('fecha_dosim_enviado')->nullable();
             $table->date('fecha_dosim_recibido')->nullable();
             $table->date('fecha_dosim_devuelto')->nullable();
-            $table->string('ocupacion', 50)->nullable();
+            /* $table->string('ocupacion', 50)->nullable(); */
             $table->string('ubicacion', 50)->nullable();
             $table->string('energia', 50)->nullable();
             

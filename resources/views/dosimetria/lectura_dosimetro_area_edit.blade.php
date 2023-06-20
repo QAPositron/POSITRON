@@ -108,7 +108,7 @@
                                 <input type="text" class="form-control" name="primDiaUsoLectDosimControl" id="primDiaUsoLectDosimControl" value="{{$dosiareasig->primer_dia_uso}}" readonly>
                                 <br>
                                 <label for="floatingInputGrid"> <b>OCUPACIÓN:</b> </label>
-                                <input type="text"  class="form-control" name="ocupLectDosimControl" id="ocupLectDosimControl" value="{{$dosiareasig->ocupacion}}" readonly>
+                                <input type="text"  class="form-control" name="ocupLectDosimControl" id="ocupLectDosimControl" value="{{$dosiareasig->contratodosimetriasede->dosimetriacontrato->ocupacion}}" readonly>
                             </div>
                             <div class="col m-4">
                                 <label for="floatingInputGrid"> <b>TIPO DOSÍMETRO:</b></label>
@@ -283,7 +283,10 @@
                                             <div class="col-md"></div>
                                             <div class="col-md"></div>
                                             <div class="col-md d-grid gap-2">
-                                                    <input type="submit" class="btn colorQA mt-2" name="update" id="update" value="GUARDAR" >
+                                                <input type="submit" class="btn colorQA mt-2" name="update" id="update" value="EDITAR">
+                                            </div>
+                                            <div class="col-md d-grid gap-2">
+                                                <a class="btn btn-danger mt-2" type="button" id="cancelar" name="cancelar" href="{{route('asignadosicontrato.info', ['asigdosicont' => $dosiareasig->contdosisededepto_id, 'mesnumber' => $dosiareasig->mes_asignacion ])}}"  role="button">CANCELAR</a>
                                             </div>
                                             <div class="col-md"></div>
                                             <div class="col-md"></div>

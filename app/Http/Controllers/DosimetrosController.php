@@ -49,12 +49,12 @@ class DosimetrosController extends Controller
     }
     public function search(){
 
-        /* $trabajadores = Trabajador::all(); */
-        /* $dosimetro= Dosimetro::paginate(5);
-        $holder = Holder::paginate(5); */
-        $dosimetro= Dosimetro::all();
-        $holder = Holder::all();
-
+        $dosimetro= Dosimetro::leftJoin('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+        ->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.tecnologia_dosimetro', 'dosimetros.fecha_ingreso_servicio', 'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 'trabajadordosimetros.contdosisededepto_id', 'trabajadordosimetros.mes_asignacion')
+        ->get();
+        $holder = Holder::leftJoin('trabajadordosimetros','holders.id_holder','=','trabajadordosimetros.holder_id')
+        ->select('holders.id_holder','holders.codigo_holder', 'holders.tipo_holder', 'holders.estado_holder','trabajadordosimetros.contdosisededepto_id', 'trabajadordosimetros.mes_asignacion')
+        ->get();
         return view('dosimetro.buscar_dosimetro', compact('dosimetro', 'holder'));
     }
 

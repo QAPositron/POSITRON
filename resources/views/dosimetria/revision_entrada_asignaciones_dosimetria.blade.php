@@ -118,7 +118,7 @@
                                                 <td class='align-middle text-center'>N.A.</td>
                                                 <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
                                                 <td class='align-middle text-center'>N.A.</td>
-                                                <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                                <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                                 <td class='align-middle text-center'>AMBIENTAL</td>
                                                 <td class='align-middle text-center'>
                                                     @if(count($observacionesAsig) > 0)
@@ -173,7 +173,7 @@
                                                         {{$trabasig->holder->codigo_holder}}
                                                     @endif
                                                 </td>
-                                                <td class='align-middle py-3 text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                                <td class='align-middle py-3 text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                                 <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
                                                 <td class='align-middle py-3 text-center'>
                                                     @if(count($observacionesAsig) > 0)
@@ -230,7 +230,7 @@
                                                         {{$dosicontasig->holder->codigo_holder}}
                                                     @endif
                                                 </td>
-                                                <td class='align-middle py-3 text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                                <td class='align-middle py-3 text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                                 <td class='align-middle py-3 text-center'>{{$dosicontasig->ubicacion}}</td>
                                                 <td class='align-middle py-3 text-center'>
                                                     @if(count($observacionesAsig) > 0)
@@ -279,7 +279,7 @@
                                                 <td class='align-middle text-center'>N.A.</td>
                                                 <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
                                                 <td class='align-middle text-center'>N.A.</td>
-                                                <td class='align-middle text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                                <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                                 <td class='align-middle text-center'>AMBIENTAL</td>
                                                 <td class='align-middle text-center'>
                                                     @if(count($observacionesAsig) > 0)
@@ -334,7 +334,7 @@
                                                         {{$trabasig->holder->codigo_holder}}
                                                     @endif
                                                 </td>
-                                                <td class='align-middle py-3 text-center'>{{$contdosisededepto->ocupacion}}</td>
+                                                <td class='align-middle py-3 text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
                                                 <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
                                                 <td class='align-middle py-3 text-center'>
                                                     @if(count($observacionesAsig) > 0)

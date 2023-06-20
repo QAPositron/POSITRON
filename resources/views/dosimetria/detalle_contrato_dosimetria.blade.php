@@ -40,6 +40,12 @@
                         <th>PERIODO DE RECAMBIO:</th>
                         <td>{{$dosimetriacontrato->periodo_recambio}}</td>
                     </tr>
+                    <tr>
+                        <th>OCUPACIÓN:</th>
+                        <td>{{$dosimetriacontrato->ocupacion}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -77,7 +83,6 @@
                             echo "<tr>";
                                 echo "<th rowspan='2' class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
                                 echo "<th rowspan='2' class='align-middle' style='width: 8.90%'>PERÍODO ACTUAL</th>";
-                                echo "<th rowspan='2' class='align-middle' style='width: 8.90%'>OCUP.</th>";
                                 echo "<th colspan='5' class='align-middle' >DOSÍMETROS</th>";
                                 echo "<th colspan='3' class='align-middle' >CONTROLES</th>";
                                 echo "<th rowspan='2' class='align-middle' >TOTAL DOSÍMETROS</th>";
@@ -100,7 +105,6 @@
             <tr>
                 <td class="text-center align-middle"> <a class="btn btn-outline-primary rounded-pill" href="{{route('detallesedecont.create', $dosicontsedep->id_contdosisededepto)}}">{{$dosicontsedep->nombre_departamento}}</a></td>
                 <td class="text-center align-middle">{{$dosicontsedep->mes_actual}}</td>
-                <td class="text-center align-middle">{{$dosicontsedep->ocupacion}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_torax}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_cristalino}}</td>
                 <td class="text-center align-middle">{{$dosicontsedep->dosi_dedo}}</td> 
