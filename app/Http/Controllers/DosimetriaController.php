@@ -2440,7 +2440,6 @@ class DosimetriaController extends Controller
         for($i=0; $i<count($trabajdosiasig); $i++){
             $fechainiciodositrabaj[]=Trabajadordosimetro::where('persona_id','=', $trabajdosiasig[$i]->persona_id)->first();
         }
-
         $dosicontrolasig = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
         ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('departamentosedes','contratodosimetriasededeptos.departamentosede_id', '=', 'departamentosedes.id_departamentosede')
@@ -2672,7 +2671,6 @@ class DosimetriaController extends Controller
         ->get();
         return response()->json($trabjEncargado);
     }
-   
     public function pdfReporteRevisionSalida($empresa, $deptodosi, $mesnumber){
         
         $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
@@ -2841,6 +2839,13 @@ class DosimetriaController extends Controller
                         $obsdosicont->nota_obs9                 = $obsdosicont->observacion_id == 9 ? mb_strtoupper($request->input('obsAddCont'.$request->id_dosicontrolcontdosisedes[$i])) : null;
                         $obsdosicont->mes_asignacion            = $request->mes_asignacion;
                         $obsdosicont->save();
+                        if($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i])[$x] == 3){
+                            $updatedosicontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes[$i])
+                            ->update([
+                                'revision_entrada' => 'TRUE',
+                                'nota2'            => 'TRUE'
+                            ]);
+                        }
                     }
                 }
             };
@@ -2858,6 +2863,13 @@ class DosimetriaController extends Controller
                         $obsdosi->nota_obs9                 = $obsdosi->observacion_id == 9 ? mb_strtoupper($request->input('obsAddTrab'.$request->id_trabajadordosimetro[$i])) : null;
                         $obsdosi->mes_asignacion            = $request->mes_asignacion;
                         $obsdosi->save();
+                        if($request->input('observacion_asig'.$request->id_trabajadordosimetro[$i])[$x] == 3){
+                            $updatetrabajadordosim = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $request->id_trabajadordosimetro[$i])
+                            ->update([
+                                'revision_entrada' => 'TRUE',
+                                'nota2'            => 'TRUE'
+                            ]);
+                        }
                     }
                 }
             }
@@ -2875,6 +2887,13 @@ class DosimetriaController extends Controller
                         $obsdosi->nota_obs9                 = $obsdosi->observacion_id == 9 ? mb_strtoupper($request->input('obsAddArea'.$request->id_dosiareacontdosisedes[$i])) : null;
                         $obsdosi->mes_asignacion            = $request->mes_asignacion;
                         $obsdosi->save();
+                        if($request->input('observacion_asig_dosiarea'.$request->id_dosiareacontdosisedes[$i])[$x] == 3){
+                            $updateareadosi = Dosiareacontdosisede::where('id_dosiareacontdosisedes', '=', $request->id_dosiareacontdosisedes[$i])
+                            ->update([
+                                'revision_entrada' => 'TRUE',
+                                'nota2'            => 'TRUE'
+                            ]);
+                        }
                     }
                 }
             }

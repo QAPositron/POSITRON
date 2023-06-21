@@ -890,16 +890,19 @@
                             @foreach($fechainiciodositrabaj as $fec)
                                 @php
                                     $ckek = 0;
+                                    $checkubi = '';
                                 @endphp
-                                @if($dositrabj->persona_id == $fec->persona_id && $chek != $fec->persona_id)
+                                @if($dositrabj->persona_id == $fec->persona_id && $chek != $fec->persona_id && $checkubi != $fec->ubicacion)
                                     @php
                                     
                                         $datefix = date('d-m-Y',strtotime($fec->primer_dia_uso));
                                         $chek = $fec->persona_id;
+                                        $checkubi = $fec->ubicacion;
                                         echo $datefix;
                                     @endphp
                                     {{-- {{$datefix}} --}}
                                 @else
+                                    NO
                                 @endif
                             @endforeach
                         </td>
