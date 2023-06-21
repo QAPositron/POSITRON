@@ -333,7 +333,7 @@
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL TORAX ////////// --}}
                     @foreach($contratodosi as $contdosi)
-                        <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
+                        <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @else NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}} @endif</div>
                         <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 29, "UTF-8")}}</div>
                         <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0,9,"UTF-8")}}.</div>
                     @endforeach
@@ -374,7 +374,7 @@
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
                     @foreach($contratodosi as $contdosi)
                         <div class="empresa_cont_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
-                        <div class="num_iden_cont_anillo">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @endif NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
+                        <div class="num_iden_cont_anillo">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}}  @else NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}@endif</div>
                     @endforeach
                     <div class="codigo_cont_anillo" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
                     @php
@@ -513,7 +513,7 @@
 
                 @foreach($contratodosi as $contdosi)
                     {{-- <div class="nom_area">{{$area->areadepartamentosede->nombre_area}}</div> --}}
-                    <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @endif <b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b></div>
+                    <div class="num_iden_cont_torax" ><b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @else NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b>@endif</div>
                     <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
                     <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}.</div>
                 @endforeach
@@ -555,7 +555,7 @@
                         {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL CRISTALINO ////////// --}}
                         @foreach($contratodosi as $contdosi)
                             <div class="empresa_cont_cristalino" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
-                            <div class="num_iden_cont_cristalino">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC.{{$contdosi->num_iden_empresa}} @endif NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</div>
+                            <div class="num_iden_cont_cristalino">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC.{{$contdosi->num_iden_empresa}} @else NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}} @endif</div>
                         @endforeach
                             <div class="codigo_cont_cristalino" >No.{{$dosicont->dosimetro->codigo_dosimeter}}</div>
                         @php

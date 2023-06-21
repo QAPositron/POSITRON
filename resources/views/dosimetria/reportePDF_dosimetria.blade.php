@@ -149,7 +149,7 @@
             </td>
         </tr>
         <tr>
-            <td style="border:0.1px solid black; text-align: right;"> NIT Entidad Usuaria</td>
+            <td style="border:0.1px solid black; text-align: right;">@if($contratoDosi[0]->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC Entidad Usuaria @else NIT Entidad Usuaria @endif</td>
             <td style="width: 120px; border:0.1px solid black; color:#2646FA;" align="center">
                 @foreach($contratoDosi as $cont)
                     {{$cont->num_iden_empresa}} 
@@ -887,14 +887,13 @@
                         </td>
                         <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->cedula_persona}} @endif</td>
                         <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
+                            @php
+                                $ckek = 0;
+                                $checkubi = '';
+                            @endphp
                             @foreach($fechainiciodositrabaj as $fec)
-                                @php
-                                    $ckek = 0;
-                                    $checkubi = '';
-                                @endphp
-                                @if($dositrabj->persona_id == $fec->persona_id && $chek != $fec->persona_id && $checkubi != $fec->ubicacion)
+                                @if($dositrabj->persona_id == $fec->persona_id && ($chek != $fec->persona_id || $checkubi != $fec->ubicacion))
                                     @php
-                                    
                                         $datefix = date('d-m-Y',strtotime($fec->primer_dia_uso));
                                         $chek = $fec->persona_id;
                                         $checkubi = $fec->ubicacion;
@@ -902,7 +901,6 @@
                                     @endphp
                                     {{-- {{$datefix}} --}}
                                 @else
-                                    NO
                                 @endif
                             @endforeach
                         </td>

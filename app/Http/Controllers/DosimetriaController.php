@@ -2414,9 +2414,8 @@ class DosimetriaController extends Controller
         ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
         ->join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
         ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $id)
-        ->select('empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato','dosimetriacontratos.ocupacion', 'departamentos.nombre_departamento', 'empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio')
+        ->select('empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato','dosimetriacontratos.ocupacion', 'departamentos.nombre_departamento', 'empresas.tipo_identificacion_empresa','empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio')
         ->get();
-        
         $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('personasedes', 'contratodosimetriasedes.sede_id', '=', 'personasedes.sede_id')
         ->join('personas', 'personasedes.persona_id', '=', 'personas.id_persona')

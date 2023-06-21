@@ -47,7 +47,7 @@ class EmpresasController extends Controller
             'nombre_empresa'      => ['required', Rule::unique('empresas', 'nombre_empresa')],
             'tipo_empresa'        => ['required'],               
             'tipoIden_empresa'    => ['required'], 
-            
+            'numero_ident'        => ['required', Rule::unique('empresas', 'num_iden_empresa')],
             'nitdv_empresa'       => ['max:1'], 
             'actividad_empresa'   => ['required', 'min:4', 'max:4'],
             'respoIva_empresa'    => ['required'],   
@@ -62,15 +62,6 @@ class EmpresasController extends Controller
             'cedula_Repr_empresa' => ['required'] */
             
         ]);
-        if($request->tipoIden_empresa == 'NIT'){
-            $request->validate([
-                'numero_ident'    => ['required', 'min:9','max:9',  Rule::unique('empresas', 'num_iden_empresa')],
-            ]);
-        }elseif($request->tipoIden_empresa == 'CÉDULA DE CIUDADANIA'){
-            $request->validate([
-                'numero_ident'    => ['required', 'min:7',  Rule::unique('empresas', 'num_iden_empresa')],
-            ]);
-        }
         
         $empresa = new Empresa();
 
@@ -135,7 +126,7 @@ class EmpresasController extends Controller
             'nombre_empresa'      => ['required', Rule::unique('empresas', 'nombre_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
             'tipo_empresa'        => ['required'],              
             'tipoIden_empresa'    => ['required'],   
-            'numero_ident'        => ['required', 'max:10', Rule::unique('empresas', 'num_iden_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
+            'numero_ident'        => ['required', Rule::unique('empresas', 'num_iden_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
             'nitdv_empresa'       => ['max:1'],  
             'actividad_empresa'   => ['required', 'max:4', 'min:4'],
             'respoIva_empresa'    => ['required'],       

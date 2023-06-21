@@ -125,7 +125,7 @@
                 expedida de Bogotá, quien en el texto de este contrato se denominará, <b>QA POSITRON S.A.S.</b>, sociedad que actúa como distribuidor y prestador de servicio de dosimetría personal autorizado bajo licencia No. QAP-001 del Ministerio de Minas, por una parte, y {{$cont->empresa->nombre_representantelegal}},
                 identificado con el número de cédula No.{{$cont->empresa->cedula_representantelegal}}, que actúa como representante legal de {{$cont->empresa->nombre_empresa}}, 
                 ubicada en la dirección {{$cont->empresa->direccion_empresa}} de la ciudad de {{$cont->empresa->municipios->nombre_municol}} 
-                - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} e identificada con NIT: {{$cont->empresa->num_iden_empresa}} - {{$cont->empresa->DV}},
+                - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} e identificada con @if($cont->empresa->tipo_identificacion_empresa == 'NIT')NIT: {{$cont->empresa->num_iden_empresa}} - {{$cont->empresa->DV}}@elseif($cont->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA')CC: {{$cont->empresa->num_iden_empresa}}@endif,
                 quien en el texto de este se denominará <b>EL USUARIO</b>, se ha celebrado un <b>CONTRATO COMERCIAL</b>, contenido en las siguientes cláusulas: <br>
                 <b>PRIMERA. - OBJETO:</b>  Por medio del presente contrato <b>QA POSITRON S.A.S.</b>, se compromete a proporcionar en comodato o préstamo comercial al 
                 <b>USUARIO</b> uno o varios dosímetros personales con sus respectivos portadosímetros, para su uso gratuito y posterior restitución al final 
