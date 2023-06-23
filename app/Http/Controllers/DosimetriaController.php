@@ -2329,7 +2329,12 @@ class DosimetriaController extends Controller
             'estado_dosimetro' => 'STOCK',
             'uso_dosimetro'    => ''
         ]);
-
+        if($dosicontasig->holder_id != NULL ){
+            $estadoHolderControl = Holder::where('id_holder', $dosicontasig->holder->id_holder)
+            ->update([
+                'estado_holder' => 'STOCK',
+            ]);
+        }
         return redirect()->route('asignadosicontrato.info',["asigdosicont" => $request->id_contratodosimetriasededepto, "mesnumber" => $request->mes_asignacion])->with('actualizar', 'ok');
         /* return $request; */
     }
@@ -2839,10 +2844,22 @@ class DosimetriaController extends Controller
                         $obsdosicont->mes_asignacion            = $request->mes_asignacion;
                         $obsdosicont->save();
                         if($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i])[$x] == 3){
+                            $updatedosicontrol = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                            ->where('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes[$i])
+                            ->update([
+                                'dosicontrolcontdosisedes.revision_entrada' => 'TRUE',
+                                'dosicontrolcontdosisedes.nota2'            => 'TRUE',
+                                'dosimetros.estado_dosimetro'               => 'PERDIDO',
+                                'dosimetros.uso_dosimetro'                  => ''
+                            ]);
+                            
+                        }else if($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i])[$x] == 4){
                             $updatedosicontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes[$i])
                             ->update([
-                                'revision_entrada' => 'TRUE',
-                                'nota2'            => 'TRUE'
+                                'dosicontrolcontdosisedes.revision_entrada' => 'TRUE',
+                                'dosicontrolcontdosisedes.DNL'              => 'TRUE',
+                                'dosimetros.estado_dosimetro'               => 'DAÑADO',
+                                'dosimetros.uso_dosimetro'                  => ''
                             ]);
                         }
                     }
@@ -2863,10 +2880,22 @@ class DosimetriaController extends Controller
                         $obsdosi->mes_asignacion            = $request->mes_asignacion;
                         $obsdosi->save();
                         if($request->input('observacion_asig'.$request->id_trabajadordosimetro[$i])[$x] == 3){
-                            $updatetrabajadordosim = Trabajadordosimetro::where('id_trabajadordosimetro', '=', $request->id_trabajadordosimetro[$i])
+                            $updatetrabajadordosim = Trabajadordosimetro::join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                            ->where('trabajadordosimetros.id_trabajadordosimetro', '=', $request->id_trabajadordosimetro[$i])
                             ->update([
-                                'revision_entrada' => 'TRUE',
-                                'nota2'            => 'TRUE'
+                                'trabajadordosimetros.revision_entrada' => 'TRUE',
+                                'trabajadordosimetros.nota2'            => 'TRUE',
+                                'dosimetros.estado_dosimetro'           => 'PERDIDO',
+                                'dosimetros.uso_dosimetro'              => ''
+                            ]);
+                        }else if($request->input('observacion_asig'.$request->id_trabajadordosimetro[$i])[$x] == 4){
+                            $updatetrabajadordosim = Trabajadordosimetro::join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                            ->where('trabajadordosimetros.id_trabajadordosimetro', '=', $request->id_trabajadordosimetro[$i])
+                            ->update([
+                                'trabajadordosimetros.revision_entrada' => 'TRUE',
+                                'trabajadordosimetros.DNL'              => 'TRUE',
+                                'dosimetros.estado_dosimetro'           => 'DAÑADO',
+                                'dosimetros.uso_dosimetro'              => ''
                             ]);
                         }
                     }
@@ -2887,10 +2916,23 @@ class DosimetriaController extends Controller
                         $obsdosi->mes_asignacion            = $request->mes_asignacion;
                         $obsdosi->save();
                         if($request->input('observacion_asig_dosiarea'.$request->id_dosiareacontdosisedes[$i])[$x] == 3){
-                            $updateareadosi = Dosiareacontdosisede::where('id_dosiareacontdosisedes', '=', $request->id_dosiareacontdosisedes[$i])
+                            $updateareadosi = Dosiareacontdosisede::join('dosimetros', 'dosiareacontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                            ->where('dosiareacontdosisedes.id_dosiareacontdosisedes', '=', $request->id_dosiareacontdosisedes[$i])
                             ->update([
-                                'revision_entrada' => 'TRUE',
-                                'nota2'            => 'TRUE'
+                                'dosiareacontdosisedes.revision_entrada' => 'TRUE',
+                                'dosiareacontdosisedes.nota2'            => 'TRUE',
+                                'dosimetros.estado_dosimetro'            => 'PERDIDO',
+                                'dosimetros.uso_dosimetro'               => ''
+                            ]);
+
+                        }else if($request->input('observacion_asig_dosiarea'.$request->id_dosiareacontdosisedes[$i])[$x] == 4){
+                            $updateareadosi = Dosiareacontdosisede::join('dosimetros', 'dosiareacontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                            ->where('dosiareacontdosisedes.id_dosiareacontdosisedes', '=', $request->id_dosiareacontdosisedes[$i])
+                            ->update([
+                                'dosiareacontdosisedes.revision_entrada' => 'TRUE',
+                                'dosiareacontdosisedes.DNL'              => 'TRUE',
+                                'dosimetros.estado_dosimetro'            => 'DAÑADO',
+                                'dosimetros.uso_dosimetro'               => ''
                             ]);
                         }
                     }

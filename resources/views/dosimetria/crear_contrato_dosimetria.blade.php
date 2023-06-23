@@ -13,7 +13,7 @@
                     
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md">
+                            <div class="col-md-4">
                                 <div class="form-floating my-3" id="codigo_contrato">
                                     <input type="text" name="empresa_contrato" hidden id="empresa_contrato" value="{{$empresa->id_empresa}}">
                                     
@@ -24,7 +24,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md">
+                            <div class="col-md-4">
                                 <div class="form-floating my-3" id="periodo_recambio_contrato">
                                     <select class="form-select @error('periodo_recambio_contrato') is-invalid @enderror" name="periodo_recambio_contrato" id="periodo_recambio_contrato_select"  autofocus>
                                         <option value="">--SELECCIONE--</option>
@@ -38,11 +38,24 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="form-floating my-3">
+                                            <input type="number" name="numlecturas_año" id="numlecturas_año" min="1" class="form-control">
+                                            <label for="inputPassword6"  class="col-form-label">LECTUAS AL AÑO</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span id="maximoPeriodos" class="form-text"></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md">
                                 <div class="form-floating my-3" id="fecha_inicio_contrato">
-                                    <input type="date" name="fecha_inicio_contrato" id="fecha_inicio_contrato_input" class="form-control @error('fecha_inicio_contrato') is-invalid @enderror" onchange="fechafinalcontrato();" autofocus>
+                                    <input type="date" name="fecha_inicio_contrato" id="fecha_inicio_contrato_input" class="form-control @error('fecha_inicio_contrato') is-invalid @enderror" onchange="fechafinalcontrato();" autofocus disabled>
                                     <label for="floatingInputGrid">FECHA DE INICIO:</label>
                                     @error('fecha_inicio_contrato')
                                         <small class="invalid-feedback">*{{$message}}</small>
@@ -51,11 +64,8 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-floating my-3" id="fecha_finalizacion_contrato">
-                                    <input type="date" name="fecha_finalizacion_contrato" id="fecha_finalizacion_contrato_input" class="form-control @error('fecha_finalizacion_contrato') is-invalid @enderror" autofocus >
+                                    <input type="date" name="fecha_finalizacion_contrato" id="fecha_finalizacion_contrato_input" class="form-control" autofocus readonly>
                                     <label for="floatingInputGrid" >FECHA DE FINALIZACIÓN:</label>
-                                    @error('fecha_finalizacion_contrato')
-                                        <small class="invalid-feedback">*{{$message}}</small>
-                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md">
@@ -231,18 +241,65 @@ crossorigin="anonymous">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     function fechafinalcontrato(){
+        var numLec = document.getElementById("numlecturas_año").value;
+        var periodo = document.getElementById("periodo_recambio_contrato_select").value;
         var fecha_inicio = new Date(document.getElementById('fecha_inicio_contrato_input').value);
-        /* alert(fecha_inicio); */
-        var fecha_final_año = fecha_inicio.getFullYear()+1;
-        var mm = fecha_inicio.getMonth()+1;
-        var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-        var dd = fecha_inicio.getDate();
-        var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-        var fecha_final = fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia;
-        console.log(fecha_final);
-        document.getElementById("fecha_finalizacion_contrato_input").value = fecha_final;
-    };
+        console.log("****FECHA INICIO***")
+        fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
+        console.log(fecha_inicio);
+        if(periodo == 'MENS'){
+            var ultimoDia = new Date(fecha_inicio.getFullYear(), fecha_inicio.getMonth() + 1, 1);
+            console.log("ULTIMO DIA"+ ultimoDia);
+            var sumaMeses = new Date(new Date(ultimoDia).setMonth(ultimoDia.getMonth()+(numLec-1)));
+            console.log("FECHA DE LA SUMA DE MESES " +sumaMeses);
+            var ultimoDiaMesF = new Date(new Date(sumaMeses).setDate(sumaMeses.getDate()-1));
+            console.log("FECHA FINAL RESTANDO UN DIA "+ultimoDiaMesF);
 
+            var fecha_final_año = ultimoDiaMesF.getFullYear()+1;
+            var mm = ultimoDiaMesF.getMonth()+1;
+            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            var dd = ultimoDiaMesF.getDate();
+            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            var fecha_final = fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia;
+            console.log(fecha_final);
+            document.getElementById("fecha_finalizacion_contrato_input").value = fecha_final;
+            
+        }else if(periodo == 'TRIMS'){
+            var ultimoDia = new Date(fecha_inicio.getFullYear(), fecha_inicio.getMonth() + 3, 1);
+            console.log("ULTIMO DIA"+ ultimoDia);
+            var sumaMeses = new Date(new Date(ultimoDia).setMonth(ultimoDia.getMonth()+3*(numLec-1)));
+            console.log("FECHA FINALIZADO"+sumaMeses);
+            var ultimoDiaMesF = new Date(new Date(sumaMeses).setDate(sumaMeses.getDate()-1));
+            console.log("FECHA FINAL RESTANDO UN DIA "+ultimoDiaMesF);
+
+            var fecha_final_año = ultimoDiaMesF.getFullYear()+1;
+            var mm = ultimoDiaMesF.getMonth()+1;
+            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            var dd = ultimoDiaMesF.getDate();
+            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            var fecha_final = fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia;
+            console.log(fecha_final);
+            document.getElementById("fecha_finalizacion_contrato_input").value = fecha_final;
+        }else if(periodo == 'BIMS'){
+            var ultimoDia = new Date(fecha_inicio.getFullYear(), fecha_inicio.getMonth() + 2, 1);
+            console.log("ULTIMO DIA"+ ultimoDia);
+            var sumaMeses = new Date(new Date(ultimoDia).setMonth(ultimoDia.getMonth()+2*(numLec-1)));
+            console.log("FECHA FINALIZADO"+sumaMeses);
+            var ultimoDiaMesF = new Date(new Date(sumaMeses).setDate(sumaMeses.getDate()-1));
+            console.log("FECHA FINAL RESTANDO UN DIA "+ultimoDiaMesF);
+
+            var fecha_final_año = ultimoDiaMesF.getFullYear()+1;
+            var mm = ultimoDiaMesF.getMonth()+1;
+            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
+            var dd = ultimoDiaMesF.getDate();
+            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
+            var fecha_final = fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia;
+            console.log(fecha_final);
+            document.getElementById("fecha_finalizacion_contrato_input").value = fecha_final;
+        }
+        
+    };
+    
     let sedesNumber = 1;
     let depaNumber = 1;
     let agregar = document.getElementById('agregar');
@@ -385,7 +442,43 @@ crossorigin="anonymous">
         
         document.getElementById("codigo_contrato_input").value = n;
         
+        $('#periodo_recambio_contrato_select').on('change', function(){
+            var periodo = $(this).val();
+            if(periodo == 'MENS'){
+                document.getElementById('maximoPeriodos').innerHTML = 'Max. 12 lecturas al año';
+            }else if(periodo == 'TRIMS'){
+                document.getElementById('maximoPeriodos').innerHTML = 'Max. 4 lecturas al año';
+            }else if(periodo == 'BIMS'){
+                document.getElementById('maximoPeriodos').innerHTML = 'Max. 6 lecturas al año';
+            }
+        })
         
+        $('#numlecturas_año').on('change', function(){
+            var numLec = $(this).val();
+            var periodo = document.getElementById("periodo_recambio_contrato_select").value;
+            if(periodo == 'MENS' && numLec > 12){
+                return Swal.fire({
+                                    title:"EXCEDE EL MÁXIMO DE LECTURAS AL AÑO",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTA",
+                                    icon: 'error'
+                                });
+            }else if(periodo == 'TRIMS' && numLec > 4){
+                return Swal.fire({
+                                    title:"EXCEDE EL MÁXIMO DE LECTURAS AL AÑO",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTA",
+                                    icon: 'error'
+                                });
+            }else if(periodo == 'BIMS' && numLec > 6){
+                return Swal.fire({
+                                    title:"EXCEDE EL MÁXIMO DE LECTURAS AL AÑO",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTA",
+                                    icon: 'error'
+                                });
+            }
+            if(numLec != '' && periodo != ''){
+                document.getElementById('fecha_inicio_contrato_input').disabled = false;
+            }
+        })
 
     })
     $(document).ready(function(){

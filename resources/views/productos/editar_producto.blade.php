@@ -38,7 +38,7 @@
                     <div class="col-md">
                         <div class="form-floating ">
                             @php $number = number_format($producto->valor_unitario, 0, ',', '.'); @endphp
-                            <input type="number" class="form-control"  name="v_unitario_producto" id="v_unitario_producto" value="{{old('concepto_producto', $number )}}"  autofocus style="text-transform:uppercase;">
+                            <input type="number" class="form-control"  name="v_unitario_producto" id="v_unitario_producto" value="{{old('concepto_producto', $number )}}" step="any" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid"> VALOR UNITARIO $</label>
                             @error('v_unitario_producto')
                                 <small>*{{$message}}</small>

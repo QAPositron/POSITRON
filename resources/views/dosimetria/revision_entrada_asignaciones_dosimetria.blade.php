@@ -72,333 +72,13 @@
             <br>
         </div>
     </div>
-    <div class="col-md text-center">
-        
-        <a type="button" class="btn btn-circle colorQA"  {{-- href="{{route('Reporterevisionentrada.pdf', [ 'empresa'=> 0, 'deptodosi' =>$contdosisededepto->id_contdosisededepto , 'mesnumber' => $mesnumber])}}" --}} onclick="alertCertificado('{{0}}', '{{$contdosisededepto->id_contdosisededepto}}', '{{$mesnumber}}', {{$dosicontrolasig}}, {{$trabjasignados}});" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-pdf pt-1" viewBox="0 0 16 16">
-                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-                <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
-            </svg>
-        </a>
-        <br>
-        CERTIFICADO
-    </div>
-</div>
-<br>
-<br>
-<div class="row">
-    
-    <div class="col-md-9">
-        <form action="{{route('observacionesReventrada.save')}}" method="POST"  id="form-observacionesreventrada" name="form-observacionesreventrada" >
-            <div class="row">
-                <div class="col-md">
-                        @csrf
-                        
-                        <div class="table table-responsive p-2">
-                            <table class="table table-sm table-bordered">
-                                <thead>
-                                    <tr class="table-active text-center ">
-                                        <th class='align-middle py-4' style='width: 20%'>TRABAJADOR / ÁREA</th>
-                                        <th class='align-middle py-4' >No. IDEN.</th>
-                                        <th class='align-middle py-4' >DOSÍMETRO</th>
-                                        <th class='align-middle py-4' >HOLDER</th>
-                                        <th class='align-middle py-4' >OCUPACIÓN</th>
-                                        <th class='align-middle py-4' >UBICACIÓN</th>
-                                        <th class='align-middle py-4' style='width: 35%'>OBSERVACIÓN</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <input type="number" name="mes_asignacion" value="{{$mesnumber}}" hidden>
-                                    <input type="number" name="contdosisededepto" value="{{$contdosisededepto->id_contdosisededepto}}" hidden>
-                                    <input type="number" name="contratodosimetriasede" value="{{$contdosisededepto->contratodosimetriasede_id}}" hidden>
-                                    @if($dosicontrolasig->isEmpty())
-                                        @foreach($areasignados as $area)
-                                            <tr id='A{{$area->id_dosiareacontdosisedes}}'>
-                                                <td class='align-middle py-3'>{{$area->areadepartamentosede->nombre_area}}</td>
-                                                <td class='align-middle text-center'>N.A.</td>
-                                                <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
-                                                <td class='align-middle text-center'>N.A.</td>
-                                                <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
-                                                <td class='align-middle text-center'>AMBIENTAL</td>
-                                                <td class='align-middle text-center'>
-                                                    @if(count($observacionesAsig) > 0)
-                                                        <div class="row">
-                                                            @foreach($observacionesAsig as $obsAsig)
-                                                                @if($obsAsig->dosiareacontdosimetro_id == $area->id_dosiareacontdosisedes)
-                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
-                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
-                                                                        <br>
-                                                                    </div>
-                                                                    <div class="col-2 m-1">
-                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                                                            </svg>
-                                                                        </button>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                    @endif
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" name="id_dosiareacontdosisedes[]" value="{{$area->id_dosiareacontdosisedes}}" hidden>
-                                                            <select class="form-select" name="observacion_asig_dosiarea{{$area->id_dosiareacontdosisedes}}[]" id="observacion_asig_dosiarea" autofocus multiple="true">
-                                                                @if(count($observacionesAsig) == 0)
-                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @else
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select> 
-                                                            <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddArea{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        @foreach($trabjasignados as $trabasig)
-                                            <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                                <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                                <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                                <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                                <td class='align-middle py-3 text-center'>
-                                                    @if($trabasig->holder_id == '')
-                                                        N.A.
-                                                    @else
-                                                        {{$trabasig->holder->codigo_holder}}
-                                                    @endif
-                                                </td>
-                                                <td class='align-middle py-3 text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
-                                                <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
-                                                <td class='align-middle py-3 text-center'>
-                                                    @if(count($observacionesAsig) > 0)
-                                                        <div class="row">
-                                                            @foreach($observacionesAsig as $obsAsig)
-                                                                @if($obsAsig->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
-                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
-                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
-                                                                        <br>
-                                                                    </div>
-                                                                    <div class="col-2 m-1">
-                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                                                            </svg>
-                                                                        </button>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                    @endif
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" name="id_trabajadordosimetro[]" value="{{$trabasig->id_trabajadordosimetro}}" hidden>
-                                                            <select class="form-select"  name="observacion_asig{{$trabasig->id_trabajadordosimetro}}[]" id="observacion_asig" autofocus multiple="true">
-                                                                @if(count($observacionesAsig) == 0)
-                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @else
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
-                                                            <textarea class="form-control mt-1" name="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" id="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" cols="35" rows="3" hidden></textarea>
-                                                        </div>
-                                                    </div>
-                                                   
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        @foreach($dosicontrolasig as $dosicontasig)
-                                            <tr id="C{{$dosicontasig->id_dosicontrolcontdosisedes}}">
-                                                <td class='align-middle py-3'>CONTROL {{$dosicontasig->ubicacion}}</td>
-                                                <td class='align-middle py-3 text-center'>N.A.</td>
-                                                <td class='align-middle py-3 text-center'>{{$dosicontasig->dosimetro->codigo_dosimeter}}</td>
-                                                <td class='align-middle py-3 text-center'>
-                                                    @if($dosicontasig->holder_id == '')
-                                                        N.A.
-                                                    @else
-                                                        {{$dosicontasig->holder->codigo_holder}}
-                                                    @endif
-                                                </td>
-                                                <td class='align-middle py-3 text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
-                                                <td class='align-middle py-3 text-center'>{{$dosicontasig->ubicacion}}</td>
-                                                <td class='align-middle py-3 text-center'>
-                                                    @if(count($observacionesAsig) > 0)
-                                                        <div class="row">
-                                                            @foreach($observacionesAsig as $obsAsig)
-                                                                @if($obsAsig->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
-                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
-                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
-                                                                        <br>
-                                                                    </div>
-                                                                    <div class="col-2 m-1">
-                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                                                            </svg>
-                                                                        </button>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                    @endif
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" name="id_dosicontrolcontdosisedes[]" value="{{$dosicontasig->id_dosicontrolcontdosisedes}}" hidden>
-                                                            <select class="form-select" name="observacion_asig_dosicont{{$dosicontasig->id_dosicontrolcontdosisedes}}[]" id="observacion_asig_dosicont" autofocus multiple="true">
-                                                                @if(count($observacionesAsig) == 0)
-                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @else
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select> 
-                                                            <textarea class="form-control mt-1" name="obsAddCont{{$dosicontasig->id_dosicontrolcontdosisedes}}" id="obsAddCont{{$dosicontasig->id_dosicontrolcontdosisedes}}" cols="35" rows="3" hidden></textarea>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        @foreach($areasignados as $area)
-                                            <tr id='A{{$area->id_dosiareacontdosisedes}}'>
-                                                <td class='align-middle py-3'>{{$area->areadepartamentosede->nombre_area}}</td>
-                                                <td class='align-middle text-center'>N.A.</td>
-                                                <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
-                                                <td class='align-middle text-center'>N.A.</td>
-                                                <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
-                                                <td class='align-middle text-center'>AMBIENTAL</td>
-                                                <td class='align-middle text-center'>
-                                                    @if(count($observacionesAsig) > 0)
-                                                        <div class="row">
-                                                            @foreach($observacionesAsig as $obsAsig)
-                                                                @if($obsAsig->dosiareacontdosimetro_id == $area->id_dosiareacontdosisedes)
-                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
-                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
-                                                                        <br>
-                                                                    </div>
-                                                                    <div class="col-2 m-1">
-                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                                                            </svg>
-                                                                        </button>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                    @endif
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" name="id_dosiareacontdosisedes[]" value="{{$area->id_dosiareacontdosisedes}}" hidden>
-                                                            <select class="form-select" name="observacion_asig_dosiarea{{$area->id_dosiareacontdosisedes}}[]" id="observacion_asig_dosiarea" autofocus multiple="true">
-                                                                @if(count($observacionesAsig) == 0)
-                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @else
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select> 
-                                                            <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddCont{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        @foreach($trabjasignados as $trabasig)
-                                            <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                                <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                                <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
-                                                <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                                <td class='align-middle py-3 text-center'>
-                                                    @if($trabasig->holder_id == '')
-                                                        N.A.
-                                                    @else
-                                                        {{$trabasig->holder->codigo_holder}}
-                                                    @endif
-                                                </td>
-                                                <td class='align-middle py-3 text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
-                                                <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
-                                                <td class='align-middle py-3 text-center'>
-                                                    @if(count($observacionesAsig) > 0)
-                                                        <div class="row">
-                                                            @foreach($observacionesAsig as $obsAsig)
-                                                                @if($obsAsig->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
-                                                                    <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
-                                                                        {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
-                                                                        <br>
-                                                                    </div>
-                                                                    <div class="col-2 m-1">
-                                                                        <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                                                            </svg>
-                                                                        </button>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                    @endif
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" name="id_trabajadordosimetro[]" value="{{$trabasig->id_trabajadordosimetro}}" hidden>
-                                                            <select class="form-select"  name="observacion_asig{{$trabasig->id_trabajadordosimetro}}[]" id="observacion_asig" autofocus multiple="true">
-                                                                @if(count($observacionesAsig) == 0)
-                                                                    <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @else
-                                                                    @foreach($observaciones as $obs)
-                                                                        <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
-                                                            <textarea class="form-control mt-1" name="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" id="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" cols="35" rows="3" hidden></textarea>
-                                                        </div>
-                                                    </div>
-                                                   
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                        <!---------BOTON------------->
-                        <div class="col-md text-center">
-                            <button class="btn colorQA " type="submit" id="boton-guardar">GUARDAR</button>
-                        </div>
-                        <br>
-                    </div>
-                </div>
-            </div>
-        </form>
     <div class="col-md-3">
-        <br>
-        <div class="card border-secondary text-bg-light mb-3">
+        <div class="card border-secondary text-bg-light">
             <div class="card-header text-center">
-                <h4 class="card-title ">INFORMACIÓN DEL DOSÍMETRO</h4>
+                <h6 class="card-title ">INFORMACIÓN DEL DOSÍMETRO</h6>
             </div>
-            <div class="card-body">
-                <div class="table table-responsive">
+            <div class="card-body p-2">
+                <div class="table table-responsive m-0">
                     <table class="table table-sm">
                         <tbody>
                             <tr>
@@ -426,11 +106,332 @@
             </div>
         </div>
     </div>
-    
+    <div class="col-md text-center">
+        
+        <a type="button" class="btn btn-circle colorQA mt-5"  {{-- href="{{route('Reporterevisionentrada.pdf', [ 'empresa'=> 0, 'deptodosi' =>$contdosisededepto->id_contdosisededepto , 'mesnumber' => $mesnumber])}}" --}} onclick="alertCertificado('{{0}}', '{{$contdosisededepto->id_contdosisededepto}}', '{{$mesnumber}}', {{$dosicontrolasig}}, {{$trabjasignados}});" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-pdf pt-1" viewBox="0 0 16 16">
+                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
+            </svg>
+        </a>
+        <br>
+        CERTIFICADO
+    </div>
 </div>
+<br>
+<br>
+<div class="row">
+    <div class="col-md"><br></div>
+    <div class="col-md-8">
+        <form action="{{route('observacionesReventrada.save')}}" method="POST"  id="form-observacionesreventrada" name="form-observacionesreventrada" >
+            @csrf
+            <div class="row">
+                <div class="col-md">
+                    <input type="number" name="mes_asignacion" value="{{$mesnumber}}" hidden>
+                    <input type="number" name="contdosisededepto" value="{{$contdosisededepto->id_contdosisededepto}}" hidden>
+                    <input type="number" name="contratodosimetriasede" value="{{$contdosisededepto->contratodosimetriasede_id}}" hidden>
+                    <div class="table table-responsive p-2">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr class="table-active text-center ">
+                                    <th class='align-middle py-4' style='width: 20%'>TRABAJADOR / ÁREA</th>
+                                    <th class='align-middle py-4' >No. IDEN.</th>
+                                    <th class='align-middle py-4' >DOSÍMETRO</th>
+                                    <th class='align-middle py-4' >HOLDER</th>
+                                    <th class='align-middle py-4' >OCUPACIÓN</th>
+                                    <th class='align-middle py-4' >UBICACIÓN</th>
+                                    <th class='align-middle py-4' style='width: 35%'>OBSERVACIÓN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($dosicontrolasig->isEmpty())
+                                    @foreach($areasignados as $area)
+                                        <tr id='A{{$area->id_dosiareacontdosisedes}}'>
+                                            <td class='align-middle py-3'>{{$area->areadepartamentosede->nombre_area}}</td>
+                                            <td class='align-middle text-center'>N.A.</td>
+                                            <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
+                                            <td class='align-middle text-center'>N.A.</td>
+                                            <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
+                                            <td class='align-middle text-center'>AMBIENTAL</td>
+                                            <td class='align-middle text-center'>
+                                                @if(count($observacionesAsig) > 0)
+                                                    <div class="row">
+                                                        @foreach($observacionesAsig as $obsAsig)
+                                                            @if($obsAsig->dosiareacontdosimetro_id == $area->id_dosiareacontdosisedes)
+                                                                <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
+                                                                    {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
+                                                                    <br>
+                                                                </div>
+                                                                <div class="col-2 m-1">
+                                                                    <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="text" name="id_dosiareacontdosisedes[]" value="{{$area->id_dosiareacontdosisedes}}" hidden>
+                                                        <select class="form-select" name="observacion_asig_dosiarea{{$area->id_dosiareacontdosisedes}}[]" id="observacion_asig_dosiarea" autofocus multiple="true">
+                                                            @if(count($observacionesAsig) == 0)
+                                                                <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select> 
+                                                        <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddArea{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    @foreach($trabjasignados as $trabasig)
+                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
+                                            <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                            <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                            <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                            <td class='align-middle py-3 text-center'>
+                                                @if($trabasig->holder_id == '')
+                                                    N.A.
+                                                @else
+                                                    {{$trabasig->holder->codigo_holder}}
+                                                @endif
+                                            </td>
+                                            <td class='align-middle py-3 text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
+                                            <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
+                                            <td class='align-middle py-3 text-center'>
+                                                @if(count($observacionesAsig) > 0)
+                                                    <div class="row">
+                                                        @foreach($observacionesAsig as $obsAsig)
+                                                            @if($obsAsig->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
+                                                                    {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
+                                                                    <br>
+                                                                </div>
+                                                                <div class="col-2 m-1">
+                                                                    <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="text" name="id_trabajadordosimetro[]" value="{{$trabasig->id_trabajadordosimetro}}" hidden>
+                                                        <select class="form-select"  name="observacion_asig{{$trabasig->id_trabajadordosimetro}}[]" id="observacion_asig" autofocus multiple="true">
+                                                            @if(count($observacionesAsig) == 0)
+                                                                <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                        <textarea class="form-control mt-1" name="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" id="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" cols="35" rows="3" hidden></textarea>
+                                                    </div>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    @foreach($dosicontrolasig as $dosicontasig)
+                                        <tr id="C{{$dosicontasig->id_dosicontrolcontdosisedes}}">
+                                            <td class='align-middle py-3'>CONTROL {{$dosicontasig->ubicacion}}</td>
+                                            <td class='align-middle py-3 text-center'>N.A.</td>
+                                            <td class='align-middle py-3 text-center'>{{$dosicontasig->dosimetro->codigo_dosimeter}}</td>
+                                            <td class='align-middle py-3 text-center'>
+                                                @if($dosicontasig->holder_id == '')
+                                                    N.A.
+                                                @else
+                                                    {{$dosicontasig->holder->codigo_holder}}
+                                                @endif
+                                            </td>
+                                            <td class='align-middle py-3 text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
+                                            <td class='align-middle py-3 text-center'>{{$dosicontasig->ubicacion}}</td>
+                                            <td class='align-middle py-3 text-center'>
+                                                @if(count($observacionesAsig) > 0)
+                                                    <div class="row">
+                                                        @foreach($observacionesAsig as $obsAsig)
+                                                            @if($obsAsig->dosicontrol_id == $dosicontasig->id_dosicontrolcontdosisedes)
+                                                                <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
+                                                                    {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
+                                                                    <br>
+                                                                </div>
+                                                                <div class="col-2 m-1">
+                                                                    <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="text" name="id_dosicontrolcontdosisedes[]" value="{{$dosicontasig->id_dosicontrolcontdosisedes}}" hidden>
+                                                        <select class="form-select" name="observacion_asig_dosicont{{$dosicontasig->id_dosicontrolcontdosisedes}}[]" id="observacion_asig_dosicont" autofocus multiple="true">
+                                                            @if(count($observacionesAsig) == 0)
+                                                                <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select> 
+                                                        <textarea class="form-control mt-1" name="obsAddCont{{$dosicontasig->id_dosicontrolcontdosisedes}}" id="obsAddCont{{$dosicontasig->id_dosicontrolcontdosisedes}}" cols="35" rows="3" hidden></textarea>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    @foreach($areasignados as $area)
+                                        <tr id='A{{$area->id_dosiareacontdosisedes}}'>
+                                            <td class='align-middle py-3'>{{$area->areadepartamentosede->nombre_area}}</td>
+                                            <td class='align-middle text-center'>N.A.</td>
+                                            <td class='align-middle text-center'>{{$area->dosimetro->codigo_dosimeter}}</td>
+                                            <td class='align-middle text-center'>N.A.</td>
+                                            <td class='align-middle text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
+                                            <td class='align-middle text-center'>AMBIENTAL</td>
+                                            <td class='align-middle text-center'>
+                                                @if(count($observacionesAsig) > 0)
+                                                    <div class="row">
+                                                        @foreach($observacionesAsig as $obsAsig)
+                                                            @if($obsAsig->dosiareacontdosimetro_id == $area->id_dosiareacontdosisedes)
+                                                                <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
+                                                                    {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
+                                                                    <br>
+                                                                </div>
+                                                                <div class="col-2 m-1">
+                                                                    <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="text" name="id_dosiareacontdosisedes[]" value="{{$area->id_dosiareacontdosisedes}}" hidden>
+                                                        <select class="form-select" name="observacion_asig_dosiarea{{$area->id_dosiareacontdosisedes}}[]" id="observacion_asig_dosiarea" autofocus multiple="true">
+                                                            @if(count($observacionesAsig) == 0)
+                                                                <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select> 
+                                                        <textarea class="form-control mt-1" name="obsAddArea{{$area->id_dosiareacontdosisedes}}" id="obsAddCont{{$area->id_dosiareacontdosisedes}}" cols="35" rows="3" hidden></textarea>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    @foreach($trabjasignados as $trabasig)
+                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
+                                            <td class='align-middle py-3'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                            <td class='align-middle py-3 text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td>
+                                            <td class='align-middle py-3 text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                            <td class='align-middle py-3 text-center'>
+                                                @if($trabasig->holder_id == '')
+                                                    N.A.
+                                                @else
+                                                    {{$trabasig->holder->codigo_holder}}
+                                                @endif
+                                            </td>
+                                            <td class='align-middle py-3 text-center'>{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}</td>
+                                            <td class='align-middle py-3 text-center'>{{$trabasig->ubicacion}}</td>
+                                            <td class='align-middle py-3 text-center'>
+                                                @if(count($observacionesAsig) > 0)
+                                                    <div class="row">
+                                                        @foreach($observacionesAsig as $obsAsig)
+                                                            @if($obsAsig->trabajcontdosimetro_id == $trabasig->id_trabajadordosimetro)
+                                                                <div class="col-9 m-1 align-middle text-center" style="font-size: 14px;">
+                                                                    {{$obsAsig->observacion_id}}) {{$obsAsig->observaciones->obs}}
+                                                                    <br>
+                                                                </div>
+                                                                <div class="col-2 m-1">
+                                                                    <button  class="btn btn-danger"  type="button" onclick="removeObs('{{$obsAsig->id_obsreventrada}}');">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="text" name="id_trabajadordosimetro[]" value="{{$trabasig->id_trabajadordosimetro}}" hidden>
+                                                        <select class="form-select"  name="observacion_asig{{$trabasig->id_trabajadordosimetro}}[]" id="observacion_asig" autofocus multiple="true">
+                                                            @if(count($observacionesAsig) == 0)
+                                                                <option value="1" selected>--1) BUEN ESTADO FÍSICO--</option>
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="@if($obs->id_observacion != 1){{$obs->id_observacion}}@endif">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                @foreach($observaciones as $obs)
+                                                                    <option value="{{$obs->id_observacion}}">{{$obs->id_observacion}}) {{$obs->obs}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                        <textarea class="form-control mt-1" name="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" id="obsAddTrab{{$trabasig->id_trabajadordosimetro}}" cols="35" rows="3" hidden></textarea>
+                                                    </div>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    <!---------BOTON------------->
+                    <div class="col-md text-center">
+                        <button class="btn colorQA " type="submit" id="boton-guardar">GUARDAR</button>
+                    </div>
+                    <br>
+                    
+                </div>
+            </div>
+        </form>
+    </div>    
+    <div class="col-md"><br></div>
+</div>
+<br>
+<br>
 <div class="row">
     <div class="col-md"></div>
-    <div class="col-md-8 ">
+    <div class="col-md-8">
         <div class="alert alert-info" role="alert">
             <h4 class="alert-heading"> <b>OBSERVACIONES:</b> </h4>
                 @foreach($observacionesAsig as $obsAsig)

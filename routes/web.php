@@ -171,8 +171,8 @@ Route::get('asignadosicontratomnNovedad/{asigdosicont}/{mesnumber}/create',[Dosi
 Route::post('asignadosicontratomnNovedad/{asigdosicont}/{mesnumber}/',[DosimetriaController::class, 'saveAsignacionDosiContratoMnNovedad'])->name('asignadosicontratomnNovedad.save');
 /////////////
 
-Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/create', [DosimetriaController::class, 'asignaDosiContrato'])->name('asignadosicontrato.create');
-Route::post('asignadosicontrato', [DosimetriaController::class, 'saveAsignacionDosiContrato'])->name('asignadosicontrato.save');
+/* Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/create', [DosimetriaController::class, 'asignaDosiContrato'])->name('asignadosicontrato.create');
+Route::post('asignadosicontrato', [DosimetriaController::class, 'saveAsignacionDosiContrato'])->name('asignadosicontrato.save'); */
 
 Route::get('asignadosicontrato/{asigdosicont}/{mesnumber}/info', [DosimetriaController::class, 'info'])->name('asignadosicontrato.info');
 
@@ -193,14 +193,14 @@ Route::post('asignadosicontrato/saveObservacionMesAsigdosim', [DosimetriaControl
 
 ///////DELETE DOSIMETRO FOR WORK////////
 
-Route::delete('eliminatedDosiForWork/{idWork}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteDosimetro'])->name('dosimetroWork.destroy');
+/* Route::delete('eliminatedDosiForWork/{idWork}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteDosimetro'])->name('dosimetroWork.destroy');
 Route::delete('eliminatedDosiControl/{idDosiControl}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteDosimetroControl'])->name('dosimetroControl.destroy');
 Route::delete('eliminatedTrabajadorSede/{idWork}/{contratoId}/{mesnumber}', [DosimetriaController::class, 'deleteTrabajadorSede'])->name('trabajadorSede.destroy');
 Route::post('createdTrabajadorSede/{mesnumber}', [DosimetriaController::class, 'createTrabajadorSede'])->name('trabajadorSede.create');
 Route::patch('editDosimetroStock/{idDosimetro}/{contratoId}/{mesnumber}',
     [DosimetriaController::class, 'patchDosimetroStock'])->name('dosimetroStock.patch');
 Route::patch('editDosimetroDelete/{idDosimetro}/{contratoId}/{mesnumber}',
-    [DosimetriaController::class, 'patchDosimetroDelete'])->name('dosimetroStockDelete.patch');
+    [DosimetriaController::class, 'patchDosimetroDelete'])->name('dosimetroStockDelete.patch'); */
 
 /////////RUTAS PARA EL CRUD DE LA LECTURA DE DOSIMETROS///////
 Route::get('lecturadosi/{lecdosi}/create', [DosimetriaController::class, 'lecturadosi'])->name('lecturadosi.create');

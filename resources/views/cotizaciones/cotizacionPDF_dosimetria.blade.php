@@ -116,7 +116,7 @@
         
             <br>
             <table style="text-align:center; border-collapse: collapse; width: 100%; border:solid 0.1px #000;" cellpadding="10">
-                <thead style="background-color: #1A9980; color:white; font-size: 10px;" >
+                <thead style="background-color: #1A9980; color:white;" >
                     <tr>
                         <td style="border:0.1px solid black; width:5%;">ITEM</td>
                         <td style="border:0.1px solid black; width:10%;">CANT. USUARIOS</td>
@@ -132,10 +132,10 @@
                     @endphp
                     @foreach($productos as $prod)
                         <tr>
-                            <td style="border:0.1px solid black; padding:5px; font-size: 10px;">{{$i}}</td>
-                            <td style="border:0.1px solid black; padding:5px; font-size: 10px;">{{$prod->cantidadProd}}</td>
-                            <td align="left" style="border:0.1px solid black; padding:5px; font-size: 9px;">{{ucfirst(mb_strtolower($prod->conceptoProd, 'UTF-8'))}}</td>
-                            <td style="border:0.1px solid black; padding:5px; font-size: 9px;">
+                            <td style="border:0.1px solid black; padding:5px;">{{$i}}</td>
+                            <td style="border:0.1px solid black; padding:5px;">{{$prod->cantidadProd}}</td>
+                            <td align="left" style="border:0.1px solid black; padding:5px;">{{ucfirst(mb_strtolower($prod->conceptoProd, 'UTF-8'))}}</td>
+                            <td style="border:0.1px solid black; padding:5px;">
                                 @if($cotiza->periodoLec == 'MENS')
                                     Mensual
                                 @elseif($cotiza->periodoLec == 'TRIMS')  
@@ -144,8 +144,8 @@
                                     Bimestral  
                                 @endif
                             </td>
-                            <td colspan="2" style="border:0.1px solid black; padding:5px; font-size: 10px;">${{number_format($prod->costoUndProd, 0, ',', '.')}}</td>
-                            <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;">${{number_format($prod->costoPeriodoProd, 0, ',', '.')}}</td>
+                            <td colspan="2" style="border:0.1px solid black; padding:5px;">${{number_format($prod->costoUndProd, 0, ',', '.')}}</td>
+                            <td align="right" style="border:0.1px solid black; padding:5px;">${{number_format($prod->costoPeriodoProd, 0, ',', '.')}}</td>
                         </tr>
                         @php
                             $i ++;
@@ -155,36 +155,36 @@
                 <tfoot>
                     @if($cotiza->desc_cortesia != 0 || $cotiza->desc_cortesia != NULL)
                         <tr>
-                            <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>(-) Descuento de cortesía periodo</b></td>
-                            <td style=" border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>{{$cotiza->desc_cortesia}}%</b></td>
-                            <td  align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>${{number_format($cotiza->descCortesiaPeriodo, 0, ',', '.')}}</b></td>
+                            <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;"><b>(-) Descuento de cortesía periodo</b></td>
+                            <td style=" border:0.1px solid black; padding:5px; background-color: #EEEDEC;"><b>{{$cotiza->desc_cortesia}}%</b></td>
+                            <td  align="right" style="border:0.1px solid black; padding:5px;"><b>${{number_format($cotiza->descCortesiaPeriodo, 0, ',', '.')}}</b></td>
                         </tr>
                     @endif
                     @if($cotiza->servTransEnvioPeriodo != 0 || $cotiza->servTransEnvioPeriodo != NULL)
                         <tr>
-                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (envío)</td>
-                            <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;">${{number_format($cotiza->servTransEnvioPeriodo, 0, ',', '.')}}</td>
+                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (envío)</td>
+                            <td align="right" style="border:0.1px solid black; padding:5px;">${{number_format($cotiza->servTransEnvioPeriodo, 0, ',', '.')}}</td>
                         </tr>
                     @elseif($cotiza->obsq_transEnvio == 'TRUE')
                         <tr>
-                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (envío)</td>
-                            <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>Obsequio</b></td>
+                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (envío)</td>
+                            <td align="right" style="border:0.1px solid black; padding:5px;"><b>Obsequio</b></td>
                         </tr>
                     @endif
                     @if($cotiza->servTransRecoPeriodo != 0 || $cotiza->servTransRecoPeriodo != NULL)
                         <tr>
-                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (recolección)</td>
-                            <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;">${{number_format($cotiza->servTransRecoPeriodo, 0, ',', '.')}}</td>
+                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (recolección)</td>
+                            <td align="right" style="border:0.1px solid black; padding:5px;">${{number_format($cotiza->servTransRecoPeriodo, 0, ',', '.')}}</td>
                         </tr>
                     @elseif($cotiza->obsq_transRecole == 'TRUE')
                         <tr>
-                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (recolección)</td>
-                            <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>Obsequio</b></td>
+                            <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;">(+) Servicio de transporte por periodo (recolección)</td>
+                            <td align="right" style="border:0.1px solid black; padding:5px;"><b>Obsequio</b></td>
                         </tr>
                     @endif
                     <tr>
-                        <td align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>VALOR TOTAL POR PERIODO<sup>1</sup></b></td>
-                        <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"> 
+                        <td align="right" colspan="6" style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;"><b>VALOR TOTAL POR PERIODO<sup>1</sup></b></td>
+                        <td align="right" style="border:0.1px solid black; padding:5px;"> 
                             @php
                                 $totalPer = $cotiza->valorTotalPeriodo + $cotiza->descProntopagoPeriodo
                             @endphp
@@ -195,9 +195,9 @@
                         <td colspan="7" style="border:0.1px solid white; border-bottom:0.1px solid black;"></td>
                     </tr>
                     <tr>
-                        <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>Valor total del servicio (año) incluido transporte</b></td>
-                        <td style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>{{$cotiza->lecturas_ano}}</b></td>
-                        <td  align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;">
+                        <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;"><b>Valor total del servicio (año) incluido transporte</b></td>
+                        <td style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;"><b>{{$cotiza->lecturas_ano}}</b></td>
+                        <td  align="right" style="border:0.1px solid black; padding:5px;">
                             @php
                                 $totalAñoSDP = $cotiza->valorTotalSDAño - $cotiza->descCortesiaAño + $cotiza->servTransEnvioAño + $cotiza->servTransRecoAño;
                             @endphp
@@ -205,20 +205,20 @@
                     </tr>
                     @if($cotiza->desc_prontopago != 0 || $cotiza->desc_prontopago != NULL)
                         <tr>
-                            <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>(-) Descuento por pago anticipado del año</b></td>
-                            <td style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;"><b>{{$cotiza->desc_prontopago}}%</b></td>
-                            <td  align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"><b>${{number_format($cotiza->descProntopagoAño, 0, ',', '.')}}</b></td>
+                            <td  align="right" colspan="5" style="border:0.1px solid black; padding:5px;  background-color: #EEEDEC;"><b>(-) Descuento por pago anticipado del año</b></td>
+                            <td style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;"><b>{{$cotiza->desc_prontopago}}%</b></td>
+                            <td  align="right" style="border:0.1px solid black; padding:5px; "><b>${{number_format($cotiza->descProntopagoAño, 0, ',', '.')}}</b></td>
                         </tr>
                     @endif
                     <tr>
-                        <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; font-size: 10px; background-color: #EEEDEC;">
+                        <td  align="right" colspan="6" style="border:0.1px solid black; padding:5px; background-color: #EEEDEC;">
                             @if($cotiza->desc_prontopago != 0 || $cotiza->desc_prontopago != NULL)
                                 <b>VALOR TOTAL DEL SERVICIO (AÑO) INCLUIDO TRANSPORTE CON DESCUENTO POR PRONTO PAGO<sup>2</sup></b>
                             @else
                                 <b>VALOR TOTAL DEL SERVICIO (AÑO) INCLUIDO TRANSPORTE<sup>2</sup></b>
                             @endif
                         </td>
-                        <td align="right" style="border:0.1px solid black; padding:5px; font-size: 10px;"> <b>${{number_format($cotiza->valorTotalAño, 0, ',', '.')}}</b></td>
+                        <td align="right" style="border:0.1px solid black; padding:5px;"> <b>${{number_format($cotiza->valorTotalAño, 0, ',', '.')}}</b></td>
                     </tr>
                 </tfoot>
             </table>

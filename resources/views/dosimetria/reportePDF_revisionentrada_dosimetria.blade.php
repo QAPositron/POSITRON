@@ -357,7 +357,7 @@
                 </tbody>
             </table>
             <br>
-            <p style="position:relative; text-align:justify;"><b>Convenciones de las observaciones: </b>1) Buen Estado Físico, 2) Dosímetro contaminado<sup>2</sup>, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 6) dosímetro sin etiqueta, 7) holder dañado, 8) dosímetro de otro periodo, 9) Dosímetro otra sede, 10) Otra adicional.</p>
+            <p style="position:relative; text-align:justify;"><b>Convenciones de las observaciones: </b>1) Buen Estado Físico, 2) Dosímetro contaminado<sup>2</sup>, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 6) Dosímetro de otro periodo, 7) Dosímetro de otra sede, 8) Holder dañado, 9) Otra adicional.</p>
             <br>
             <p style="position:relative; text-align:justify;"><b>Observaciones Adicionales:</b></p>
             @foreach($observacionesAsig as $obsAsig)

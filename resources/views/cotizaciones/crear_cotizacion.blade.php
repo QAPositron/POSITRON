@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col"></div>
     <div class="col-12">
-        <div class="card text-dark bg-light">
+        <div class="card text-dark">
             <h2 class="text-center mt-3">CREAR COTIZACIÓN DE DOSIMETRÍA</h2>
             <br>
             <form class="m-4" action="{{route('cotizaciones.save')}}" method="POST" id="form_cotizacion">
@@ -147,9 +147,9 @@
                 </div>
                 <br>
                 <div class="table-responsive">
-                    <table class="table active table-hover" id="productos">
+                    <table class="table table-hover" id="productos">
                         <thead  class="text-center table-bordered align-middle">
-                            <tr>
+                            <tr class="table-active text-center ">
                               <th scope="col">#</th>
                               <th scope="col" style="width: 10%;">REF. PRODUCTO</th>
                               <th scope="col" style="width: 30%;">CONCEPTO</th>
@@ -165,7 +165,7 @@
                            
                             
                         </tbody>
-                        <tfoot>
+                        <tfoot class="table-light">
                             <tr>
                                 <td colspan="6" class="text-end"><b>VALOR TOTAL SIN DESCUENTO</b></td>
                                 <td>
@@ -638,7 +638,99 @@
                     }
                 @endforeach
             });
-           
+            $('#ref_producto'+[i-1]).change(function(){
+                var cant = document.getElementById('cantidad_producto'+[i-1]).value;
+                var ref = document.getElementById('ref_producto'+[i-1]).value;
+                var costoUnid = document.getElementById('costoUnd_producto'+[i-1]).value;
+                var totalSDperi = document.getElementById('totalAñoSDint_periodo').value;
+                var totalSDAno = document.getElementById('totalAñoSDint_ano').value;
+                var arrayPeriodo = [];
+                var arrayAño = [];
+                
+                /////GUARDA EL COSTO DEL PERIODO PARA CADA PRODUCTO/////
+                if(cant != ''){
+                    var costoPerProd = parseInt(costoUnid)*parseInt(cant);
+                    document.getElementById('costoPeriodoInt_producto'+[i-1]).value = costoPerProd;
+                    document.getElementById('costoPeriodo_producto'+[i-1]).value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(costoPerProd);
+                    /////GUARDA EL COSTO DEL AÑO PARA CADA PRODUCTO/////
+    
+                    var numlecAnoProd = document.getElementById('numlecturas_año').value;
+                    var costAnoProd = costoPerProd*numlecAnoProd;
+                    document.getElementById('costoAnoInt_producto'+[i-1]).value = costAnoProd;
+                    document.getElementById('costoAno_producto'+[i-1]).value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(costAnoProd);
+                }
+                
+                
+                /////GUARDA EL VALOR TOTAL SD SUMANDO LOS PRODUCTOS POR PERIODO/////
+                var x = 0;
+                $('#productos > tbody  > tr').each(function(e) {
+                    x++;
+                });
+                console.log("# DE PRODUCTOS "+x);
+                for(var y = 1; y <= x; y++){
+                    var costoPer = document.getElementById('costoPeriodoInt_producto'+y).value;
+                    console.log("costoPeriodoInt_producto"+y);
+                    console.log(costoPer);
+                    if(costoPer != 0 ){
+                        console.log("PARA EL PRODUCTO"+y);
+                        arrayPeriodo.push(costoPer); 
+                    } 
+                };
+                console.log(arrayPeriodo);
+                let totalPeriodo=0;
+                arrayPeriodo.forEach(function(a){totalPeriodo += parseInt(a);});
+                console.log(totalPeriodo);
+                document.getElementById('totalAñoSDint_periodo').value = totalPeriodo;
+                document.getElementById('totalAñoSD_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(totalPeriodo);
+
+                /////GUARDA EL VALOR TOTAL SD SUMANDO LOS PRODUCTOS POR AÑO/////
+                for(var y = 1; y <= x; y++){
+                    var costoAño = document.getElementById('costoAnoInt_producto'+y).value;
+                    console.log("costoAñoInt_producto"+y);
+                    console.log(costoAño);
+                    if(costoAño != 0 ){
+                        console.log("PARA EL PRODUCTO"+y);
+                        arrayAño.push(costoAño); 
+                    } 
+                };
+                console.log(arrayAño);
+                let totalAño=0;
+                arrayAño.forEach(function(a){totalAño += parseInt(a);});
+                console.log(totalAño);
+                document.getElementById('totalAñoSDint_ano').value = totalAño;
+                document.getElementById('totalAñoSD_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(totalAño);
+                
+                
+                ///////OBTENEMOS EL DESCUENTO POR PRONTO PAGO POR PERIODO//////
+                var desPP = document.getElementById('descuento_pronto_pago').value;
+                if(desPP != '' || desPP != 0){
+                    console.log("DESCUENTO PP"+desPP);
+                    var descPPcostPer  = totalPeriodo *(desPP/100);
+                    console.log("DESCUENTO PP COST PERIODO"+ descPPcostPer);
+                    document.getElementById('descuento_prontopagoint_periodo').value = descPPcostPer;
+                    document.getElementById('descuento_prontopago_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostPer);
+                    /////////OBTENEMOS EL DESCUENTO PRONTO PAGO POR AÑO//////
+                    var descPPcostAño  = totalAño *(desPP/100);
+                    console.log("DESCUENTO PP COST AÑO"+ descPPcostAño);
+                    document.getElementById('descuento_prontopagoint_ano').value = descPPcostAño;
+                    document.getElementById('descuento_prontopago_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descPPcostAño);
+                }
+                ///////OBTENEMOS EL DESCUENTO POR CORTESIA POR PERIODO//////
+                var desCort = document.getElementById('descuento_cortesia').value;
+                if(desCort != '' || desCort != 0){
+                    console.log("DESCUENTO CORTESIA"+desCort);
+                    var descCortcostPer = totalPeriodo *(desCort/100);
+                    console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCortcostPer);
+                    document.getElementById('descuento_cortesiaint_periodo').value = descCortcostPer;
+                    document.getElementById('descuento_cortesia_periodo').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostPer);
+                    /////////OBTENEMOS EL DESCUENTO CORTESIA POR AÑO//////
+                    var descCortcostAño = totalAño *(desCort/100);
+                    console.log("DESCUENTO CORTESIA COSTO AÑO"+ descCortcostAño);
+                    document.getElementById('descuento_cortesiaint_ano').value = descCortcostAño;
+                    document.getElementById('descuento_cortesia_ano').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(descCortcostAño);
+                };
+                updateValorTotalyPromedio();
+            })
             $('#cantidad_producto'+[i-1]).change(function(){
                 var cant = document.getElementById('cantidad_producto'+[i-1]).value;
                 var ref = document.getElementById('ref_producto'+[i-1]).value;
@@ -649,10 +741,11 @@
                 var arrayAño = [];
                 
                 /////GUARDA EL COSTO DEL PERIODO PARA CADA PRODUCTO/////
-                var costoPerProd = parseInt(costoUnid)*parseInt(cant);
-                document.getElementById('costoPeriodoInt_producto'+[i-1]).value = costoPerProd;
-                document.getElementById('costoPeriodo_producto'+[i-1]).value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(costoPerProd);
-                
+                if(cant != ''){
+                    var costoPerProd = parseInt(costoUnid)*parseInt(cant);
+                    document.getElementById('costoPeriodoInt_producto'+[i-1]).value = costoPerProd;
+                    document.getElementById('costoPeriodo_producto'+[i-1]).value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(costoPerProd);
+                }
                 /////GUARDA EL COSTO DEL AÑO PARA CADA PRODUCTO/////
                 var numlecAnoProd = document.getElementById('numlecturas_año').value;
                 var costAnoProd = costoPerProd*numlecAnoProd;
@@ -741,10 +834,11 @@
                 var arrayAño = [];
                 
                 /////GUARDA EL COSTO DEL PERIODO PARA CADA PRODUCTO/////
-                var costoPerProd = parseInt(costoUnid)*parseInt(cant);
-                document.getElementById('costoPeriodoInt_producto'+[i-1]).value = costoPerProd;
-                document.getElementById('costoPeriodo_producto'+[i-1]).value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(costoPerProd);
-                
+                if(cant != ''){
+                    var costoPerProd = parseInt(costoUnid)*parseInt(cant);
+                    document.getElementById('costoPeriodoInt_producto'+[i-1]).value = costoPerProd;
+                    document.getElementById('costoPeriodo_producto'+[i-1]).value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(costoPerProd);
+                }
                 /////GUARDA EL COSTO DEL AÑO PARA CADA PRODUCTO/////
                 var numlecAnoProd = document.getElementById('numlecturas_año').value;
                 var costAnoProd = costoPerProd*numlecAnoProd;
@@ -823,6 +917,7 @@
                          
                 
             });
+
         }else{
             Swal.fire({
                 title:"SELECCIONE EL PERIODO DE LECTURA E INGRESE EL NÚMERO DE LECTURAS AL AÑO PARA PODER AGREGAR UN PRODUCTO",
@@ -956,9 +1051,11 @@
         var numLecturasAño = document.getElementById('numlecturas_año').value;
         var promedioDosimMes = promedioDosim / (12/parseInt(numLecturasAño));
         console.log("PROMEDIO DOSIMETRO POR MES = "+promedioDosimMes);
-        
-        document.getElementById('promedioDosiMesInt').value = promedioDosimMes;
-        document.getElementById('promedioDosimMes').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(promedioDosimMes);
+        if(totalcantidadDosi != 0){
+
+            document.getElementById('promedioDosiMesInt').value = promedioDosimMes;
+            document.getElementById('promedioDosimMes').value = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(promedioDosimMes);
+        }
     }
     function agregarObs(){
         var obs = `<div class="row g-2" id="obs">

@@ -37,7 +37,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating ">
-                            <input type="number" class="form-control"  name="v_unitario_producto" id="v_unitario_producto" value="{{old('v_unitario_producto')}}" autofocus style="text-transform:uppercase;">
+                            <input type="number" class="form-control"  name="v_unitario_producto" id="v_unitario_producto" value="{{old('v_unitario_producto')}}" step="any" autofocus style="text-transform:uppercase;">
                             <label for="floatingInputGrid"> VALOR UNITARIO:</label>
                             @error('v_unitario_producto')
                                 <small>*{{$message}}</small>

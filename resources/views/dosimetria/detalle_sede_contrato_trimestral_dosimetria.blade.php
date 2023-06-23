@@ -225,7 +225,7 @@
                                                         $totalA = 0; 
                                                     @endphp 
                                                     @foreach($mesesAssigArea[1] as $mes)
-                                                        @if($mes->Hp007_calc_dose != NULL || $mes->Hp10_calc_dose != NULL)
+                                                        @if($mes->revision_entrada == 'TRUE')
                                                             @php $totalA += 1;  @endphp
                                                         @endif
                                                     @endforeach
@@ -386,7 +386,7 @@
                                                         $totalA = 0; 
                                                     @endphp 
                                                     @foreach($mesesAssigArea[$i] as $mes)
-                                                        @if($mes->Hp007_calc_dose != NULL || $mes->Hp10_calc_dose != NULL)
+                                                        @if($mes->revision_entrada == 'TRUE')
                                                             @php $totalA += 1;  @endphp
                                                         @endif
                                                     @endforeach
@@ -639,7 +639,7 @@
                                                         $totalT = 0; 
                                                     @endphp 
                                                     @foreach($mesesAssigTrabj[1] as $mes)
-                                                        @if($mes->measurement_date != NULL)
+                                                        @if($mes->revision_entrada == 'TRUE')
                                                             @php $totalT += 1;  @endphp
                                                         @endif
                                                     @endforeach
@@ -800,7 +800,7 @@
                                                         $totalT = 0; 
                                                     @endphp 
                                                     @foreach($mesesAssigTrabj[$i] as $mes)
-                                                        @if($mes->measurement_date != NULL)
+                                                        @if($mes->revision_entrada == 'TRUE')
                                                             @php $totalT += 1;  @endphp
                                                         @endif
                                                     @endforeach
