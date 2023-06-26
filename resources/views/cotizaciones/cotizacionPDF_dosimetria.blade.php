@@ -119,11 +119,11 @@
                 <thead style="background-color: #1A9980; color:white;" >
                     <tr>
                         <td style="border:0.1px solid black; width:5%;">ITEM</td>
-                        <td style="border:0.1px solid black; width:10%;">CANT. USUARIOS</td>
-                        <td style="border:0.1px solid black; width:50%;">CONCEPTO</td>
+                        <td style="border:0.1px solid black; width:8%;">CANT. USUA.</td>
+                        <td style="border:0.1px solid black; width:45%;">CONCEPTO</td>
                         <td style="border:0.1px solid black; width:10%;">PERIODO LECTURA</td>
                         <td colspan="2" style="border:0.1px solid black; width: 15%;">COSTO UNITARIO</td>
-                        <td style="border:0.1px solid black; width: 10%;">SUBTOTAL PERIODO</td>
+                        <td style="border:0.1px solid black; width: 15%;">SUBTOTAL PERIODO</td>
                     </tr>
                 </thead>
                 <tbody cellpadding="4">

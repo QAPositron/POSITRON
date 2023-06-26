@@ -73,12 +73,12 @@
                         
                         <tr>
                             <th class="text-center align-middle" style='width: 8.90%'>NÚMERO</th>
-                            <th class="text-center align-middle" style='width:30.50%' >PERÍODOS</th>
+                            <th class="text-center align-middle" style='width:35%' >PERÍODOS</th>
                             <th class="text-center align-middle">ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for($i=1; $i<=6; $i++)
+                        @for($i=1; $i<=$dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->numlecturas_año; $i++)
                             <tr @if($dosisededeptocontra->mes_actual == ($i)) style="background-color: rgb(26, 153, 128, 0.1);" @endif>
                                 <th class="text-center align-middle">
                                     {{$i}}
@@ -88,9 +88,10 @@
                                         @php
                                             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
                                             $inicio = date($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
-                                            $fin_parcial = date("j-m-Y",strtotime($inicio."+ 2 month"));
-                                            $fin_total = date("j-m-Y",strtotime($fin_parcial."- 1 days")); 
-                                            echo date("j", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio))." ".$meses[date("m", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio)). " - ".date("d", strtotime($fin_total))." ".$meses[date("m", strtotime($fin_total))]." DE ".date("Y", strtotime($fin_total));
+                                            $fin = date("t-m-Y",strtotime($inicio));
+                                            $fin_parcial = date("t-m-Y",strtotime($inicio."+ 1 month"));
+                                            /* $fin_total = date("j-m-Y",strtotime($fin_parcial."- 1 days"));  */
+                                            echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio)). " - ".date("d", strtotime($fin_parcial))." ".$meses[date("m", strtotime($fin_parcial))]." DE ".date("Y", strtotime($fin_parcial));
                                         @endphp
                                     @else
                                         <span id="mes{{$i}}"></span>
@@ -963,18 +964,19 @@ crossorigin="anonymous">
            
         TDcontrato.innerHTML = "CONTRATO No. "+n;
 
-
-
         // Creamos array con los meses del año
         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
         let fecha = new Date("{{$dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}");
         fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset());
-        console.log(fecha)
+        console.log(fecha);
+        var numLec = '{{$dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->numlecturas_año}}';
+        var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 2, 1);
+        console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
         var xx = 1; 
-        for(var i=2; i<=11; i= i+2){
+        for(var i=0; i<=(numLec); i= i+2){
 
-            console.log(i);
-            var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+i));
+            console.log("ESTA ES LA I = "+i);
+            var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
             console.log("r1" +r);
              var r2 = new Date(new Date(r).setMonth(r.getMonth()+2));
              var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
@@ -986,13 +988,15 @@ crossorigin="anonymous">
             console.log(fechaesp2);
             xx++;
             console.log("XX"+xx);
-            for(var x=2; x<=6; x++){
+            for(var x=2; x<=numLec; x++){
                 console.log("ESTA ES LA X="+x);
                 if(xx == x){
                     document.getElementById('mes'+xx).innerHTML = fechaesp1+' - '+fechaesp2;
                 }
             }
         }
+
+       
         
     })
     function cambiaColor(){

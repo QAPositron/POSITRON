@@ -255,7 +255,7 @@ crossorigin="anonymous">
             var ultimoDiaMesF = new Date(new Date(sumaMeses).setDate(sumaMeses.getDate()-1));
             console.log("FECHA FINAL RESTANDO UN DIA "+ultimoDiaMesF);
 
-            var fecha_final_año = ultimoDiaMesF.getFullYear()+1;
+            var fecha_final_año = ultimoDiaMesF.getFullYear();
             var mm = ultimoDiaMesF.getMonth()+1;
             var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
             var dd = ultimoDiaMesF.getDate();
@@ -272,7 +272,7 @@ crossorigin="anonymous">
             var ultimoDiaMesF = new Date(new Date(sumaMeses).setDate(sumaMeses.getDate()-1));
             console.log("FECHA FINAL RESTANDO UN DIA "+ultimoDiaMesF);
 
-            var fecha_final_año = ultimoDiaMesF.getFullYear()+1;
+            var fecha_final_año = ultimoDiaMesF.getFullYear();
             var mm = ultimoDiaMesF.getMonth()+1;
             var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
             var dd = ultimoDiaMesF.getDate();
@@ -288,7 +288,7 @@ crossorigin="anonymous">
             var ultimoDiaMesF = new Date(new Date(sumaMeses).setDate(sumaMeses.getDate()-1));
             console.log("FECHA FINAL RESTANDO UN DIA "+ultimoDiaMesF);
 
-            var fecha_final_año = ultimoDiaMesF.getFullYear()+1;
+            var fecha_final_año = ultimoDiaMesF.getFullYear();
             var mm = ultimoDiaMesF.getMonth()+1;
             var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
             var dd = ultimoDiaMesF.getDate();
@@ -443,6 +443,9 @@ crossorigin="anonymous">
         document.getElementById("codigo_contrato_input").value = n;
         
         $('#periodo_recambio_contrato_select').on('change', function(){
+            document.getElementById("numlecturas_año").value= '';
+            document.getElementById("fecha_inicio_contrato_input").value= '';
+            document.getElementById("fecha_finalizacion_contrato_input").value = '';
             var periodo = $(this).val();
             if(periodo == 'MENS'){
                 document.getElementById('maximoPeriodos').innerHTML = 'Max. 12 lecturas al año';
@@ -456,6 +459,9 @@ crossorigin="anonymous">
         $('#numlecturas_año').on('change', function(){
             var numLec = $(this).val();
             var periodo = document.getElementById("periodo_recambio_contrato_select").value;
+            document.getElementById('fecha_inicio_contrato_input').disabled = false;
+            document.getElementById("fecha_inicio_contrato_input").value= '';
+            document.getElementById("fecha_finalizacion_contrato_input").value = '';
             if(periodo == 'MENS' && numLec > 12){
                 return Swal.fire({
                                     title:"EXCEDE EL MÁXIMO DE LECTURAS AL AÑO",
@@ -475,9 +481,9 @@ crossorigin="anonymous">
                                     icon: 'error'
                                 });
             }
-            if(numLec != '' && periodo != ''){
-                document.getElementById('fecha_inicio_contrato_input').disabled = false;
-            }
+            
+                
+            
         })
 
     })

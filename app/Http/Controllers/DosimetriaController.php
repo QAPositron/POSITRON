@@ -139,6 +139,7 @@ class DosimetriaController extends Controller
         $request->validate([
             'codigo_contrato'               => 'required|unique:dosimetriacontratos,codigo_contrato',
             'periodo_recambio_contrato'     => 'required',
+            'numlecturas_año'               => 'required',
             'fecha_inicio_contrato'         => 'required',
             'fecha_finalizacion_contrato'   => 'required',
             'id_sede1'                      => 'required',
@@ -152,6 +153,7 @@ class DosimetriaController extends Controller
         $contratoDosi->fecha_inicio                 = $request->fecha_inicio_contrato;
         $contratoDosi->fecha_finalizacion           = $request->fecha_finalizacion_contrato;
         $contratoDosi->periodo_recambio             = $request->periodo_recambio_contrato;
+        $contratoDosi->numlecturas_año              = $request->numlecturas_año;
         $contratoDosi->estado_contrato              = $request->estado_contrato;
         $contratoDosi->ocupacion                    = $request->ocupacion_contrato;
 
@@ -507,10 +509,10 @@ class DosimetriaController extends Controller
             ->join('contratodosimetriasededeptos', 'id_contratodosimetriasede', '=', 'contratodosimetriasede_id')
             ->join('departamentosedes', 'departamentosede_id', '=', 'id_departamentosede')
             ->join('departamentos', 'departamento_id', '=', 'id_departamento')
-            ->select('nombre_empresa', 'nombre_sede', 'codigo_contrato','fecha_inicio', 'fecha_finalizacion', 'periodo_recambio','nombre_departamento', 'mes_actual', 'dosi_control_torax', 'dosi_control_cristalino', 'dosi_control_dedo', 'dosi_torax', 'dosi_area', 'dosi_caso', 'dosi_cristalino', 'dosi_muñeca', 'dosi_dedo', 'id_contdosisededepto', 'contratodosimetriasede_id', 'id_contratodosimetria', 'ocupacion') 
+            ->select('nombre_empresa', 'nombre_sede', 'codigo_contrato','fecha_inicio', 'fecha_finalizacion', 'periodo_recambio','nombre_departamento', 'mes_actual', 'dosi_control_torax', 'dosi_control_cristalino', 'dosi_control_dedo', 'dosi_torax', 'dosi_area', 'dosi_caso', 'dosi_cristalino', 'dosi_muñeca', 'dosi_dedo', 'id_contdosisededepto', 'contratodosimetriasede_id', 'id_contratodosimetria', 'ocupacion', 'numlecturas_año') 
             ->where('id_contratodosimetria', '=', $id)
             ->get();
-           /*  return $dosimecontrasedeptos; */
+            /* return $dosimetriacontrato; */
         return view('dosimetria.detalle_contrato_dosimetria', compact('dosimetriacontrato', 'dosimecontrasedeptos'));
     }
 

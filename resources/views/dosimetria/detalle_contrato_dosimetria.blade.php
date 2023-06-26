@@ -43,8 +43,8 @@
                     <tr>
                         <th>OCUPACIÓN:</th>
                         <td>{{$dosimetriacontrato->ocupacion}}</td>
-                        <td></td>
-                        <td></td>
+                        <th>No. LECTUAS AL AÑO:</th>
+                        <td>{{$dosimetriacontrato->numlecturas_año}}</td>
                     </tr>
                 </tbody>
             </table>

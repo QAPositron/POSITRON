@@ -23,8 +23,10 @@ class CreateDosimetriacontratosTable extends Migration
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_finalizacion')->nullable();
             $table->text('periodo_recambio')->nullable();
+            $table->integer('numlecturas_año')->nullable();
             $table->text('ocupacion')->nullable();
-            $table->text('estado_contrato');
+            $table->text('estado_contrato')->nullable();
+            
             $table->timestamps();
         });
     }
