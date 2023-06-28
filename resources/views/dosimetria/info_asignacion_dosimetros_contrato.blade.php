@@ -1527,7 +1527,7 @@ crossorigin="anonymous">
             }
         }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
             var xx = 1;
-            for(var i=0; i<=(numLec); i= i+3){
+            for(var i=0; i<=(numLec+1); i= i+3){
                 var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 3, 1);
                 console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                 console.log("ESTA ES LA I = "+i);
@@ -1543,17 +1543,16 @@ crossorigin="anonymous">
                 console.log(fechaesp2);
                 xx++;
                 console.log("XX"+xx);
-                for(var x=2; x<=numLec; x++){
-                    console.log("ESTA ES LA X="+x);
-                    if(xx == x){
-                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
-                        
-                    }
+               
+                if("{{$mesnumber}}" == xx){
+                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                    
                 }
+                
             }
         }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
             var xx = 1;
-            for(var i=0; i<=(numLec); i= i+2){
+            for(var i=0; i<=(numLec+1); i= i+2){
                 var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 2, 1);
                 console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                 console.log("ESTA ES LA I = "+i);
@@ -1569,13 +1568,12 @@ crossorigin="anonymous">
                 console.log(fechaesp2);
                 xx++;
                 console.log("XX"+xx);
-                for(var x=2; x<=numLec; x++){
-                    console.log("ESTA ES LA X="+x);
-                    if(xx == x){
-                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
-                        
-                    }
+                console.log("MES ACTUAL= "+"{{$mesnumber}}");
+                if("{{$mesnumber}}" == xx){
+                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                    
                 }
+                
             }
         }
        

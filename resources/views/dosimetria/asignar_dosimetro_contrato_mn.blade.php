@@ -1367,7 +1367,7 @@ crossorigin="anonymous">
             }
         }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
             var xx = 1;
-            for(var i=0; i<=(numLec); i= i+3){
+            for(var i=0; i<=(numLec+1); i= i+3){
                 var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 3, 1);
                 console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                 console.log("ESTA ES LA I = "+i);
@@ -1383,37 +1383,36 @@ crossorigin="anonymous">
                 console.log(fechaesp2);
                 xx++;
                 console.log("XX"+xx);
-                for(var x=2; x<=numLec; x++){
-                    console.log("ESTA ES LA X="+x);
-                    if(xx == x){
-                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
-                        var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
-                        var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
-                        var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
-                        if(r1dia<10){
-                            r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
-                        }
-                        if(r1mes<10){
-                            r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
-                        }
-                        document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
-                        //////////
-                        var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
-                        var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
-                        var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
-                        if(r2dia<10){
-                            r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
-                        }
-                        if(r2mes<10){
-                            r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
-                        }
-                        document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
+                
+                if("{{$mesnumber}}" == xx){
+                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                    var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
+                    var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
+                    var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
+                    if(r1dia<10){
+                        r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
                     }
+                    if(r1mes<10){
+                        r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
+                    }
+                    document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
+                    //////////
+                    var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
+                    var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
+                    var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
+                    if(r2dia<10){
+                        r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
+                    }
+                    if(r2mes<10){
+                        r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
+                    }
+                    document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
                 }
+                
             }
         }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
             var xx = 1;
-            for(var i=0; i<=(numLec); i= i+2){
+            for(var i=0; i<=(numLec+1); i= i+2){
                 var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 2, 1);
                 console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                 console.log("ESTA ES LA I = "+i);
@@ -1429,33 +1428,32 @@ crossorigin="anonymous">
                 console.log(fechaesp2);
                 xx++;
                 console.log("XX"+xx);
-                for(var x=2; x<=numLec; x++){
-                    console.log("ESTA ES LA X="+x);
-                    if(xx == x){
-                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
-                        var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
-                        var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
-                        var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
-                        if(r1dia<10){
-                            r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
-                        }
-                        if(r1mes<10){
-                            r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
-                        }
-                        document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
-                        //////////
-                        var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
-                        var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
-                        var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
-                        if(r2dia<10){
-                            r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
-                        }
-                        if(r2mes<10){
-                            r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
-                        }
-                        document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
+                
+                if("{{$mesnumber}}" == xx){
+                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                    var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
+                    var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
+                    var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
+                    if(r1dia<10){
+                        r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
                     }
+                    if(r1mes<10){
+                        r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
+                    }
+                    document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
+                    //////////
+                    var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
+                    var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
+                    var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
+                    if(r2dia<10){
+                        r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
+                    }
+                    if(r2mes<10){
+                        r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
+                    }
+                    document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
                 }
+                
             }
         }
         $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",});
@@ -1565,7 +1563,7 @@ crossorigin="anonymous">
 
 <script type="text/javascript">
    
-    function fechaultimodia(){
+    /* function fechaultimodia(){
         var fecha = document.getElementById("primerDia_asigdosim").value;
         var fecha_inicio = new Date(fecha);
         fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
@@ -1665,7 +1663,7 @@ crossorigin="anonymous">
             console.log(fechaFinalymd);
             document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
         }
-    };
+    }; */
     /* function changueArea(area){
         
         Swal.fire({

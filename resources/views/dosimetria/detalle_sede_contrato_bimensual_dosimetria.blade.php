@@ -973,7 +973,7 @@ crossorigin="anonymous">
         var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 2, 1);
         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
         var xx = 1; 
-        for(var i=0; i<=(numLec); i= i+2){
+        for(var i=0; i<=(numLec+1); i= i+2){
 
             console.log("ESTA ES LA I = "+i);
             var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));

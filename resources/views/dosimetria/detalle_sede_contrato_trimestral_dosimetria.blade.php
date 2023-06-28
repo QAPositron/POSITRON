@@ -977,7 +977,7 @@ crossorigin="anonymous">
         /* var ultimoDiaMesF = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
         console.log("FECHA FINAL RESTANDO UN DIA "+ultimoDiaMesF); */
         var xx = 1; 
-        for(var i=0; i<=(numLec); i= i+3){
+        for(var i=0; i<=(numLec+1); i= i+3){
 
             console.log("ESTA ES LA I = "+i);
             var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
