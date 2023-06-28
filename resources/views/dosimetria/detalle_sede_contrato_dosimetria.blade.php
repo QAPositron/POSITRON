@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
-
-
+ 
     <div class="row">
         <div class="col-md">
             <a type="button" class="btn btn-circle colorQA" href="{{route('detallecontrato.create', $dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)}}">

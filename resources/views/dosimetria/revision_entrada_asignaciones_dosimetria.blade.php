@@ -11,15 +11,40 @@
     </div>
     <div class="col-md-8 ">
         <h2 class="text-center">REVISIÓN DE ENTRADA PARA DOSÍMETROS ASIGNADOS</h2>
-        <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i></h3>
+        <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
+            ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}}
+        </h3>
         <h3 class="text-center">    
             @if($mesnumber == 1)
-                PERÍODO 1 (@php
-                    $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                    echo $meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ;
-                @endphp),  ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}}  </h3>
+                @if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS')
+                    PERÍODO 1 (@php
+                        $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                        $inicio = $contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio;
+                        $fin = date("t-m-Y",strtotime($inicio));
+                        echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio))." - ".date("t", strtotime($fin))." ".$meses[date("m", strtotime($fin))]." DE ".date("Y", strtotime($fin));
+                    @endphp)
+                @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS')
+                    PERÍODO 1 ( <span>
+                        @php  
+                            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                            $inicio = date($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
+                            $fecha1 = date("t-m-Y",strtotime($inicio));
+                            $fecha2= date("t-m-Y",strtotime($fecha1."+ 2 month"));
+                            echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio))." - ".date("j", strtotime($fecha2))." ".$meses[date("m", strtotime($fecha2))]." DE ".date("Y", strtotime($fecha2))
+                        @endphp
+                    </span> )
+                @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS')
+                    PERÍODO 1 ( <span>
+                        @php  
+                            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                            $fecha1 = date($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
+                            $fecha2_total = date("t-m-Y",strtotime($fecha1."+ 1 month"));
+                            echo date("j", strtotime($fecha1))." ".$meses[date("m", strtotime($fecha1))]." DE ".date("Y", strtotime($fecha1))." - ".date("j", strtotime($fecha2_total))." ".$meses[date("m", strtotime($fecha2_total))]." DE ".date("Y", strtotime($fecha2_total))
+                        @endphp
+                    </span> )
+                @endif
             @else
-                PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ),  ESPECIALIDAD:{{$contdosisededepto->departamentosede->departamento->nombre_departamento}}  
+                PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> )  
             @endif
         </h3>
     </div>
@@ -122,7 +147,7 @@
 <br>
 <div class="row">
     <div class="col-md"><br></div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         <form action="{{route('observacionesReventrada.save')}}" method="POST"  id="form-observacionesreventrada" name="form-observacionesreventrada" >
             @csrf
             <div class="row">
@@ -509,17 +534,87 @@ crossorigin="anonymous">
         // Creamos array con los meses del año
         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
         let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00" );
+        console.log(fecha);
+        var numLec = '{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->numlecturas_año}}';
         
-        for($i=0; $i<=12; $i++){
-            var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
-            console.log();
-            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-             console.log(r + fechaesp + "ESTA ES LA I"+($i+1)); 
-            if("{{$mesnumber}}" == ($i+1) && "{{$mesnumber}}" != 1){
-                
-                document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
+        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
+            var xx = 1; 
+            for(var i=0; i<=(numLec-2); i++){
+                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 1, 1);
+                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                /* console.log("esta es la i="+i); */
+                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                /* console.log("r1" +r); */
+                var r2 = new Date(new Date(r).setMonth(r.getMonth()+1));
+                var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                /* console.log("r2 " +r2final); */
+                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                /* console.log(fechaesp1); */
+                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                /* console.log(fechaesp2); */
+                xx++;
+                /* console.log("XX"+xx); */
+                for(var x=2; x<=numLec; x++){
+                    /* console.log("ESTA ES LA X="+x); */
+                    if("{{$mesnumber}}" == xx){
+                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                        
+                    }
+                }
             }
-        };
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
+            var xx = 1;
+            for(var i=0; i<=(numLec); i= i+3){
+                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 3, 1);
+                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                console.log("ESTA ES LA I = "+i);
+                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                console.log("r1" +r);
+                var r2 = new Date(new Date(r).setMonth(r.getMonth()+3));
+                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                console.log("r2 " +r2final);
+                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                console.log(fechaesp1);
+
+                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                console.log(fechaesp2);
+                xx++;
+                console.log("XX"+xx);
+                for(var x=2; x<=numLec; x++){
+                    console.log("ESTA ES LA X="+x);
+                    if(xx == x){
+                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                    }
+                }
+            }
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
+            var xx = 1;
+            for(var i=0; i<=(numLec); i= i+2){
+                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 2, 1);
+                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                console.log("ESTA ES LA I = "+i);
+                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                console.log("r1" +r);
+                var r2 = new Date(new Date(r).setMonth(r.getMonth()+2));
+                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                console.log("r2 " +r2final);
+                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                console.log(fechaesp1);
+
+                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                console.log(fechaesp2);
+                xx++;
+                console.log("XX"+xx);
+                for(var x=2; x<=numLec; x++){
+                    console.log("ESTA ES LA X="+x);
+                    if(xx == x){
+                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                        
+                    }
+                }
+            } 
+        }
 
         @foreach($dosicontrolasig as $dosicontasig)
             var asigdosicont = document.querySelectorAll('select[name="observacion_asig_dosicont{{$dosicontasig->id_dosicontrolcontdosisedes}}[]"]');

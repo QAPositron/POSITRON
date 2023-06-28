@@ -155,15 +155,15 @@
                                         </div>
                                         <div class="col-md">
                                             <label for="" class="text-center">No. DOSÍMETROS TÓRAX</label>
-                                            <input type="number" id="num_dosi_torax_contrato_sede"  class="form-control text-center" autofocus >
+                                            <input type="number" id="num_dosi_torax_contrato_sede"  class="form-control text-center" min="1" autofocus >
                                         </div>
                                         <div class="col-md">
                                             <label for="" class="text-center">No. DOSÍMETROS CRISTALINO</label>
-                                            <input type="number"  id="num_dosi_cristalino_contrato_sede"  class="form-control text-center" autofocus>
+                                            <input type="number"  id="num_dosi_cristalino_contrato_sede"  class="form-control text-center" min="1" autofocus>
                                         </div>
                                         <div class="col-md">
                                             <label for="" class="text-center">No. DOSÍMETROS ANILLO</label>
-                                            <input type="number"  id="num_dosi_dedo_contrato_sede" class="form-control text-center" autofocus>
+                                            <input type="number"  id="num_dosi_dedo_contrato_sede" class="form-control text-center" min="1" autofocus>
                                         </div>
                                         {{-- <div class="col-md">
                                             <label for="" class="text-center">No. DOSÍM. MUÑECA</label>
@@ -171,11 +171,11 @@
                                         </div> --}}
                                         <div class="col-md">
                                             <label for="" class="text-center">No. DOSÍMETROS AMBIENTAL</label>
-                                            <input type="number" id="num_dosi_area_contrato_sede"  class="form-control text-center" autofocus >
+                                            <input type="number" id="num_dosi_area_contrato_sede"  class="form-control text-center" min="1" autofocus >
                                         </div>
                                         <div class="col-md">
                                             <label for="" class="text-center">No. DOSÍMETROS CASO</label>
-                                            <input type="number" id="num_dosi_caso_contrato_sede"  class="form-control text-center" autofocus >
+                                            <input type="number" id="num_dosi_caso_contrato_sede"  class="form-control text-center" min="1" autofocus >
                                         </div>
                                         
                                         <input type="number"  id="primer_mes_asignacion" name="primer_mes_asignacion" class="form-control text-center" value="1" hidden>
@@ -187,16 +187,16 @@
                                         <div class="col-md-3"></div>
                                         <div class="col-md-2 text-center">
                                             <label for="" class="text-center">No. DOSÍM. CONTROL TÓRAX</label>
-                                            <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_torax_contrato_sede" name="num_dosi_control_torax_contrato_sede">
+                                            <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_torax_contrato_sede" name="num_dosi_control_torax_contrato_sede" min="1">
                                         </div>
                                         <div class="col-md-2 text-center">
                                             <label for="" class="text-center">No. DOSÍM. CONTROL CRISTALINO</label>
-                                            <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_cristalino_contrato_sede" name="num_dosi_control_cristalino_contrato_sede">
+                                            <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_cristalino_contrato_sede" name="num_dosi_control_cristalino_contrato_sede" min="1">
 
                                         </div>
                                         <div class="col-md-2 text-center">
                                             <label for="" class="text-center">No. DOSÍM. CONTROL ANILLO</label>
-                                            <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_dedo_contrato_sede" name="num_dosi_control_dedo_contrato_sede">
+                                            <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_dedo_contrato_sede" name="num_dosi_control_dedo_contrato_sede" min="1">
                                         </div>
                                         <div class="col-md"></div>
                                     </div>

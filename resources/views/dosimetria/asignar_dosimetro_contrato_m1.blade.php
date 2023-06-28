@@ -93,7 +93,7 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input value="" type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" onchange="fechaultimodia();" >
+                            <input type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}">
                             <label for="floatingInputGrid">PRIMER DÍA</label>
                             @error('primerDia_asigdosim')
                                 <small class="invalid-feedback">*{{$message}}</small>
@@ -102,16 +102,39 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input value="" type="date" class="form-control @error('ultimoDia_asigdosim') is-invalid @enderror" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
+                            <input type="date" class="form-control @error('ultimoDia_asigdosim') is-invalid @enderror" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" 
+                            @if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS')
+                                value="{{date("Y-m-t",strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))}}"
+                            @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS')
+                                @php
+                                    $inicio = date($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
+                                    $fecha1 = date("t-m-Y",strtotime($inicio));
+                                    $fecha2= date("t-m-Y",strtotime($fecha1."+ 2 month"));
+                                @endphp
+                                value="{{date("Y-m-t",strtotime($fecha2))}}"
+                            @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS')
+                                @php  
+                                    $fecha1 = date($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
+                                    $fecha2_total = date("t-m-Y",strtotime($fecha1."+ 1 month"));
+                                @endphp
+                                value="{{date("Y-m-t",strtotime($fecha2_total))}}"
+                            @endif>
                             <label for="floatingInputGrid">ULTIMO DÍA:</label>
                             @error('ultimoDia_asigdosim')
                                 <small class="invalid-feedback">*{{$message}}</small>
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
+                            <label for="floatingInputGrid">FECHA ENVIO</label>
+                            
+                        </div>
+                    </div>
                 </div> 
                 <br>   
-                <div class="row g-2 mx-3">
+                {{-- <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
                             <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
@@ -131,8 +154,8 @@
                             <label for="floatingInputGrid">FECHA DEVUELTO</label>
                         </div>
                     </div>
-                </div> 
-                <br>
+                </div>  
+                <br>--}}
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
@@ -803,105 +826,9 @@
             ocu_dedo[i].setAttribute("id", "ocupacion_asigdosimDedo"+[i]);
             $('#ocupacion_asigdosimDedo'+[i]).select2({width: "100%",});
         }
-//////////////////////////////
 
     });
-    function fechaultimodia(){
-        var fecha = document.getElementById("primerDia_asigdosim").value;
-        var fecha_inicio = new Date(fecha);
-        fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
-        /* alert(fecha_inicio); */
-        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
-            var fecha_final_año = fecha_inicio.getFullYear();
-            var mm = fecha_inicio.getMonth() + 2;
-            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-            if(fecha_final_mes == 13){
-                fecha_final_mes = '01' ;
-            } 
-            var dd = fecha_inicio.getDate();
-            /* console.log(dd); */
-            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            
-            console.log(fecha_final);
-            if(fecha_final_mes == 01){
-                var fechaFinaly = fecha_final.getFullYear() + 1;
-                console.log("AÑO"+fechaFinaly);
-            }else{
-                var fechaFinaly = fecha_final.getFullYear();
-            }
-            console.log(fechaFinaly);
-            var fechaFinalm = fecha_final.getMonth()+1;
-            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
-            console.log(fechaFinalmm);
-            var fechaFinald = fecha_final.getDate();
-            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
-            console.log(fechaFinaldd);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
-            console.log(fechaFinalymd);
-            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
-        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
-            var fecha_final_año = fecha_inicio.getFullYear();
-            var mm = fecha_inicio.getMonth() + 4;
-            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-            if(fecha_final_mes == 13){
-                fecha_final_mes = '01' ;
-            } 
-            var dd = fecha_inicio.getDate();
-            
-          
-            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            
-            console.log(fecha_final);
-            if(fecha_final_mes == 01){
-                var fechaFinaly = fecha_final.getFullYear() + 1;
-                console.log("AÑO"+fechaFinaly);
-            }else{
-                var fechaFinaly = fecha_final.getFullYear();
-            }
-            console.log(fechaFinaly);
-            var fechaFinalm = fecha_final.getMonth()+1;
-            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
-            console.log(fechaFinalmm);
-            var fechaFinald = fecha_final.getDate();
-            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
-            console.log(fechaFinaldd);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
-            console.log(fechaFinalymd);
-            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
-        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
-            var fecha_final_año = fecha_inicio.getFullYear();
-            var mm = fecha_inicio.getMonth() + 3;
-            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-            if(fecha_final_mes == 13){
-                fecha_final_mes = '01' ;
-            } 
-            var dd = fecha_inicio.getDate();
-            
-          
-            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            
-            console.log(fecha_final);
-            if(fecha_final_mes == 01){
-                var fechaFinaly = fecha_final.getFullYear() + 1;
-                console.log("AÑO"+fechaFinaly);
-            }else{
-                var fechaFinaly = fecha_final.getFullYear();
-            }
-            console.log(fechaFinaly);
-            var fechaFinalm = fecha_final.getMonth()+1;
-            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
-            console.log(fechaFinalmm);
-            var fechaFinald = fecha_final.getDate();
-            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
-            console.log(fechaFinaldd);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
-            console.log(fechaFinalymd);
-            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
-        }
-    };
+    
 </script>
 
 <script type="text/javascript">

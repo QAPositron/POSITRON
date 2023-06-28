@@ -7,7 +7,10 @@
         <div class="card text-dark bg-light">
             <br>
             <h2 class="text-center">ASIGNACIÓN DOSÍMETROS</h2>
-            <h3 class="text-center" id="nueva_empresaModalLabel"> <br><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br> ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} <br> PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ) </h3>
+            <h3 class="text-center" id="nueva_empresaModalLabel"> <br><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
+                ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} <br>
+                PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ) 
+            </h3>
             <form action="{{route('asignadosicontratomn.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion_mn" name="form-nueva-asignacion_mn" class="form-nueva-asignacion_mn m-4">
                 @csrf
 
@@ -57,7 +60,7 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input value="" type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" onchange="fechaultimodia();">
+                            <input value="" type="date" class="form-control @error('primerDia_asigdosim') is-invalid @enderror" name="primerDia_asigdosim" id="primerDia_asigdosim" {{-- onchange="fechaultimodia();" --}}>
                             <label for="floatingInputGrid">PRIMER DÍA</label>
                             @error('primerDia_asigdosim')
                                 <small class="invalid-feedback">*{{$message}}</small>
@@ -73,9 +76,6 @@
                             @enderror
                         </div>
                     </div>
-                </div> 
-                <br>   
-                <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
                             <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
@@ -83,6 +83,10 @@
                             
                         </div>
                     </div>
+                </div> 
+                <br>   
+                {{-- <div class="row g-2 mx-3">
+                    
                     <div class="col-md">
                         <div class="form-floating">
                             <input type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
@@ -96,7 +100,7 @@
                         </div>
                     </div>
                 </div> 
-                <br>
+                <br> --}}
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
@@ -437,7 +441,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">ÁREA</td>
-                                            <td>
+                                            <td class='align-middle'>
                                                 <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosiareant->dosimetro_uso != 'FALSE'){{$dosiareant->dosimetro_id}}@endif">@if($dosiareant->dosimetro_uso != 'FALSE'){{$dosiareant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -501,7 +505,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">ÁREA</td>
-                                                <td>
+                                                <td class='align-middle'>
                                                     <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresGeneral as $dosigenlib)
@@ -566,7 +570,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">CASO</td>
-                                            <td class="align-middle text-center">
+                                            <td class="align-middle">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicasoant->dosimetro_uso != 'FALSE') {{$dosicasoant->dosimetro_id}} @endif">@if($dosicasoant->dosimetro_uso != 'FALSE') {{$dosicasoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -635,7 +639,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">CASO</td>
-                                                <td class="align-middle text-center">
+                                                <td class="align-middle">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresGeneral as $dosigenlib)
@@ -700,7 +704,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">TÓRAX</td>
-                                            <td class="align-middle text-center">
+                                            <td class="align-middle">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dositoraxant->dosimetro_uso != 'FALSE') {{$dositoraxant->dosimetro_id}}@endif">@if($dositoraxant->dosimetro_uso != 'FALSE') {{$dositoraxant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -768,7 +772,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">TÓRAX</td>
-                                                <td class="align-middle text-center">
+                                                <td class="align-middle">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresGeneral as $dosigenlib)
@@ -833,7 +837,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">CRISTALINO</td>
-                                            <td class="align-middle text-center">
+                                            <td class="align-middle">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->dosimetro_id}}@endif">@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -908,7 +912,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">CRISTALINO</td>
-                                                <td class="align-middle text-center">
+                                                <td class="align-middle">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -981,7 +985,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">MUÑECA</td>
-                                            <td class="align-middle text-center">
+                                            <td class="align-middle">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->dosimetro_id}}@endif">@if($dosimuñecant->dosimetro_uso != 'FALSE'){{$dosimuñecant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -1054,7 +1058,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">MUÑECA</td>
-                                                <td class="align-middle text-center">
+                                                <td class="align-middle">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -1126,7 +1130,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">ANILLO</td>
-                                            <td class="align-middle text-center">
+                                            <td class="align-middle">
                                                 <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo"  @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro_id}}@endif">@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->dosimetro->codigo_dosimeter}}@else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -1201,7 +1205,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">ANILLO</td>
-                                                <td class="align-middle text-center">
+                                                <td class="align-middle">
                                                     <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -1313,14 +1317,15 @@ crossorigin="anonymous">
         // Creamos array con los meses del año
         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
         let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
-        
         console.log(fecha);
+        var numLec = '{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->numlecturas_año}}';
         if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
-            
             var xx = 1; 
-            for(var i=1; i<=11; i++){
-                /* console.log(i); */
-                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+i));
+            for(var i=0; i<=(numLec-2); i++){
+                /* console.log("esta es la i="+i); */
+                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 1, 1);
+                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
                 /* console.log("r1" +r); */
                 var r2 = new Date(new Date(r).setMonth(r.getMonth()+1));
                 var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
@@ -1332,19 +1337,41 @@ crossorigin="anonymous">
                 /* console.log(fechaesp2); */
                 xx++;
                 /* console.log("XX"+xx); */
-                for(var x=2; x<=12; x++){
+                for(var x=2; x<=numLec; x++){
                     /* console.log("ESTA ES LA X="+x); */
                     if("{{$mesnumber}}" == xx){
                         document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                        var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
+                        var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
+                        var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
+                        if(r1dia<10){
+                            r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
+                        }
+                        if(r1mes<10){
+                            r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
+                        }
+                        document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
+                        //////////
+                        var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
+                        var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
+                        var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
+                        if(r2dia<10){
+                            r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
+                        }
+                        if(r2mes<10){
+                            r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
+                        }
+                        document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
                     }
                 }
             }
         }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
             var xx = 1;
-            for(var i=3; i<=11; i= i+3){
-
-                console.log(i);
-                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+i));
+            for(var i=0; i<=(numLec); i= i+3){
+                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 3, 1);
+                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                console.log("ESTA ES LA I = "+i);
+                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
                 console.log("r1" +r);
                 var r2 = new Date(new Date(r).setMonth(r.getMonth()+3));
                 var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
@@ -1354,20 +1381,43 @@ crossorigin="anonymous">
 
                 var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
                 console.log(fechaesp2);
-                
-                console.log("{{$mesnumber}}");
-                xx ++;
-                
-                if("{{$mesnumber}}" == xx){
+                xx++;
+                console.log("XX"+xx);
+                for(var x=2; x<=numLec; x++){
+                    console.log("ESTA ES LA X="+x);
+                    if(xx == x){
                         document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                        var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
+                        var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
+                        var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
+                        if(r1dia<10){
+                            r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
+                        }
+                        if(r1mes<10){
+                            r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
+                        }
+                        document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
+                        //////////
+                        var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
+                        var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
+                        var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
+                        if(r2dia<10){
+                            r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
+                        }
+                        if(r2mes<10){
+                            r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
+                        }
+                        document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
+                    }
                 }
             }
         }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
             var xx = 1;
-            for(var i=2; i<=11; i= i+2){
-
-                console.log(i);
-                var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+i));
+            for(var i=0; i<=(numLec); i= i+2){
+                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 2, 1);
+                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                console.log("ESTA ES LA I = "+i);
+                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
                 console.log("r1" +r);
                 var r2 = new Date(new Date(r).setMonth(r.getMonth()+2));
                 var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
@@ -1377,12 +1427,34 @@ crossorigin="anonymous">
 
                 var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
                 console.log(fechaesp2);
-                
-                console.log("{{$mesnumber}}");
-                xx ++;
-                
-                if("{{$mesnumber}}" == xx){
+                xx++;
+                console.log("XX"+xx);
+                for(var x=2; x<=numLec; x++){
+                    console.log("ESTA ES LA X="+x);
+                    if(xx == x){
                         document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                        var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
+                        var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
+                        var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
+                        if(r1dia<10){
+                            r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
+                        }
+                        if(r1mes<10){
+                            r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
+                        }
+                        document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
+                        //////////
+                        var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
+                        var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
+                        var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
+                        if(r2dia<10){
+                            r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
+                        }
+                        if(r2mes<10){
+                            r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
+                        }
+                        document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
+                    }
                 }
             }
         }
