@@ -955,7 +955,15 @@ crossorigin="anonymous">
         })
     </script>
 @endif
- 
+@if(session('crear')== 'ok')
+    <script>
+        Swal.fire(
+        'GUARDADO!',
+        'SE HA GUARDADO CON ÉXITO.',
+        'success'
+        )
+    </script>
+@endif
 <script type="text/javascript">
     $(document).ready(function(){
         var TDcontrato = document.getElementById("id_contrato");

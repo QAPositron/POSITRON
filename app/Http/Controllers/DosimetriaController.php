@@ -78,57 +78,76 @@ class DosimetriaController extends Controller
         ->join('dosiareacontdosisedes', 'contratodosimetriasededeptos.id_contdosisededepto', '=', 'dosiareacontdosisedes.contdosisededepto_id')
         ->join('dosimetros', 'dosiareacontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
         ->get(); */
-        
-        $empresasDosimTrabjUSO = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+        //////////////
+        /* $empresasDosimTrabjUSO = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
         ->join('contratodosimetriasededeptos', 'trabajadordosimetros.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
         ->where('trabajadordosimetros.dosimetro_uso', 'TRUE')
         ->where('dosimetros.estado_dosimetro', 'EN USO')
+        ->get(); */
+        $empresasDosimTrabjUSO= Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+        ->join('contratodosimetriasededeptos', 'trabajadordosimetros.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
+        ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
+        ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
+        ->where('dosimetros.estado_dosimetro', 'EN USO')
+        ->where('trabajadordosimetros.dosimetro_uso','=', 'TRUE')
+        ->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 
+        'trabajadordosimetros.contdosisededepto_id', 'trabajadordosimetros.dosimetro_uso', 'trabajadordosimetros.mes_asignacion', 'empresas.id_empresa', 'empresas.nombre_empresa')
         ->get();
         $empresasDosimTrabjLECTURA = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
         ->join('contratodosimetriasededeptos', 'trabajadordosimetros.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
-        ->where('trabajadordosimetros.dosimetro_uso', 'FALSE')
         ->where('dosimetros.estado_dosimetro', 'EN LECTURA')
+        ->where('trabajadordosimetros.dosimetro_uso','=', 'FALSE')
+        ->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 
+        'trabajadordosimetros.contdosisededepto_id', 'trabajadordosimetros.dosimetro_uso', 'trabajadordosimetros.mes_asignacion', 'empresas.id_empresa', 'empresas.nombre_empresa')
         ->get();
         $empresasDosimDosicontUSO = Dosimetro::join('dosicontrolcontdosisedes','dosimetros.id_dosimetro','=','dosicontrolcontdosisedes.dosimetro_id')
         ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
-        ->where('dosicontrolcontdosisedes.dosimetro_uso', 'TRUE')
         ->where('dosimetros.estado_dosimetro', 'EN USO')
+        ->where('dosicontrolcontdosisedes.dosimetro_uso','=', 'TRUE')
+        ->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 
+        'dosicontrolcontdosisedes.contdosisededepto_id', 'dosicontrolcontdosisedes.dosimetro_uso', 'dosicontrolcontdosisedes.mes_asignacion', 'empresas.id_empresa', 'empresas.nombre_empresa')
         ->get();
         $empresasDosimDosicontLECTURA = Dosimetro::join('dosicontrolcontdosisedes','dosimetros.id_dosimetro','=','dosicontrolcontdosisedes.dosimetro_id')
         ->join('contratodosimetriasededeptos', 'dosicontrolcontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
-        ->where('dosicontrolcontdosisedes.dosimetro_uso', 'FALSE')
         ->where('dosimetros.estado_dosimetro', 'EN LECTURA')
+        ->where('dosicontrolcontdosisedes.dosimetro_uso', 'FALSE')
+        ->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 
+        'dosicontrolcontdosisedes.contdosisededepto_id', 'dosicontrolcontdosisedes.dosimetro_uso', 'dosicontrolcontdosisedes.mes_asignacion', 'empresas.id_empresa', 'empresas.nombre_empresa')
         ->get();
         $empresasDosimDosiareaUSO =  Dosimetro::join('dosiareacontdosisedes','dosimetros.id_dosimetro','=','dosiareacontdosisedes.dosimetro_id')
         ->join('contratodosimetriasededeptos', 'dosiareacontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
-        ->where('dosiareacontdosisedes.dosimetro_uso', 'TRUE')
         ->where('dosimetros.estado_dosimetro', 'EN USO')
+        ->where('dosiareacontdosisedes.dosimetro_uso', 'TRUE')
+        ->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 
+        'dosiareacontdosisedes.contdosisededepto_id', 'dosiareacontdosisedes.dosimetro_uso', 'dosiareacontdosisedes.mes_asignacion', 'empresas.id_empresa', 'empresas.nombre_empresa')
         ->get(); 
         $empresasDosimDosiareaLECTURA =  Dosimetro::join('dosiareacontdosisedes','dosimetros.id_dosimetro','=','dosiareacontdosisedes.dosimetro_id')
         ->join('contratodosimetriasededeptos', 'dosiareacontdosisedes.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
         ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('sedes', 'contratodosimetriasedes.sede_id', '=', 'sedes.id_sede')
         ->join('empresas', 'sedes.empresas_id', '=', 'empresas.id_empresa')
-        ->where('dosiareacontdosisedes.dosimetro_uso', 'FALSE')
         ->where('dosimetros.estado_dosimetro', 'EN LECTURA')
+        ->where('dosiareacontdosisedes.dosimetro_uso', 'FALSE')
+        ->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 
+        'dosiareacontdosisedes.contdosisededepto_id', 'dosiareacontdosisedes.dosimetro_uso', 'dosiareacontdosisedes.mes_asignacion', 'empresas.id_empresa', 'empresas.nombre_empresa')
         ->get(); 
         return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi', 'dosimetriacontrato', 'dosimetrosUsados', 'dosimestrosLibres', 'dosimetrosEnLectura', 'empresasDosimTrabjUSO', 'empresasDosimTrabjLECTURA', 'empresasDosimDosicontUSO', 'empresasDosimDosicontLECTURA', 'empresasDosimDosiareaUSO', 'empresasDosimDosiareaLECTURA'));
-        /* return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi', 'dosimetriacontrato', 'dosimetrosUsados', 'dosimestrosLibres', 'dosimetrosEnLectura', 'empresasDosimTrabj', 'empresasDosimDosicont', 'empresasDosimDosiarea')); */
     }
     public function saveEmpresa(Request $request){
 
@@ -1252,8 +1271,7 @@ class DosimetriaController extends Controller
                 ]);
             } 
         }
-
-        return redirect()->route('asignadosicontrato.info', ["asigdosicont" => $asigdosicont, "mesnumber" => $mesnumber])->with('crear', 'ok');
+        return redirect()->route('detallesedecont.create', $asigdosicont)->with('crear', 'ok');
     }
     public function asignaDosiContratoMn($id, $mesnumber){
         $contdosisededepto = Contratodosimetriasededepto::find($id);
@@ -1790,7 +1808,7 @@ class DosimetriaController extends Controller
                 ]);
             } 
         }
-        return redirect()->route('asignadosicontrato.info', ["asigdosicont" => $id, "mesnumber" => $mesnumber])->with('crear', 'ok');
+        return redirect()->route('detallesedecont.create', $id)->with('crear', 'ok');
     } 
     public function saveAsignacionDosiContratoMnNovedad($id, $mesnumber, Request $request){
         /* return $request; */

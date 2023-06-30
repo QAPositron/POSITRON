@@ -106,17 +106,17 @@
                                                                             @php
                                                                                 $dosimUso = 0;
                                                                                 foreach($empresasDosimTrabjUSO as $empTrabjuso){
-                                                                                    if($empTrabjuso->empresa_id == $empdosi->empresa_id){
+                                                                                    if($empTrabjuso->id_empresa == $empdosi->empresa_id){
                                                                                         $dosimUso += 1;
-                                                                                    }
+                                                                                    } 
                                                                                 }
                                                                                 foreach($empresasDosimDosicontUSO as $empContruso){
-                                                                                    if($empContruso->empresa_id == $empdosi->empresa_id){
+                                                                                    if($empContruso->id_empresa == $empdosi->empresa_id){
                                                                                         $dosimUso += 1;
                                                                                     }
                                                                                 }
                                                                                 foreach($empresasDosimDosiareaUSO as $empAreauso){
-                                                                                    if($empAreauso->empresa_id == $empdosi->empresa_id){
+                                                                                    if($empAreauso->id_empresa == $empdosi->empresa_id){
                                                                                         $dosimUso += 1;
                                                                                     }
                                                                                 }
@@ -127,17 +127,17 @@
                                                                             @php
                                                                                 $dosimLectura = 0;
                                                                                 foreach($empresasDosimTrabjLECTURA as $empTrabjlect){
-                                                                                    if($empTrabjlect->empresa_id == $empdosi->empresa_id){
+                                                                                    if($empTrabjlect->id_empresa == $empdosi->empresa_id){
                                                                                         $dosimLectura += 1;
                                                                                     }
                                                                                 }
                                                                                 foreach($empresasDosimDosicontLECTURA as $empContlect){
-                                                                                    if($empContlect->empresa_id == $empdosi->empresa_id){
+                                                                                    if($empContlect->id_empresa == $empdosi->empresa_id){
                                                                                         $dosimLectura += 1;
                                                                                     }
                                                                                 }
                                                                                 foreach($empresasDosimDosiareaLECTURA as $empArealect){
-                                                                                    if($empArealect->empresa_id == $empdosi->empresa_id){
+                                                                                    if($empArealect->id_empresa == $empdosi->empresa_id){
                                                                                         $dosimLectura += 1;
                                                                                     }
                                                                                 }
