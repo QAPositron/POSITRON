@@ -123,7 +123,7 @@
             <p style="text-align:justify; margin-bottom: 0px; position:relative">Entre los suscritos <b>QA POSITRON S.A.S.</b>, sociedad comercial, constituida legalmente con domicilio en la ciudad de Bucaramanga,
                 debidamente inscrita en la Cámara de Comercio de esta ciudad, representada en este acto por su Representante Legal y Gerente General Asociado, <b>DIEGO FERNANDO APONTE CASTAÑEDA</b>, mayor de edad, con domicilio en la ciudad de Bucaramanga, identificado con Cédula de Ciudadanía número 80.115.846 
                 expedida de Bogotá, quien en el texto de este contrato se denominará, <b>QA POSITRON S.A.S.</b>, sociedad que actúa como distribuidor y prestador de servicio de dosimetría personal autorizado bajo licencia No. QAP-001 del Ministerio de Minas, por una parte, y {{$cont->empresa->nombre_representantelegal}},
-                identificado con el número de cédula No.{{$cont->empresa->cedula_representantelegal}}, que actúa como representante legal de {{$cont->empresa->nombre_empresa}}, 
+                identificado con el número de cédula No.{{$cont->empresa->cedula_representantelegal}}, que actúa como representante legal de {{$cont->empresa->razon_social_empresa}}, 
                 ubicada en la dirección {{$cont->empresa->direccion_empresa}} de la ciudad de {{$cont->empresa->municipios->nombre_municol}} 
                 - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} e identificada con @if($cont->empresa->tipo_identificacion_empresa == 'NIT')NIT: {{$cont->empresa->num_iden_empresa}} - {{$cont->empresa->DV}}@elseif($cont->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA')CC: {{$cont->empresa->num_iden_empresa}}@endif,
                 quien en el texto de este se denominará <b>EL USUARIO</b>, se ha celebrado un <b>CONTRATO COMERCIAL</b>, contenido en las siguientes cláusulas: <br>
@@ -177,7 +177,7 @@
                 Dirección para Notificaciones: <br>
                 <br>
                 <b>QA POSITRON S.A.S.:</b> CL 36 No.27 – 71 OFI 919 Bucaramanga <b>Cel.</b> 3106079373- 3014495401 - 3043386581 <br>
-                <b>USUARIO: </b>{{$cont->empresa->nombre_empresa}}  <b>CIUDAD:</b>{{$cont->empresa->direccion_empresa}}, {{$cont->empresa->municipios->nombre_municol}} - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} <b>Cel.</b> {{$cont->empresa->telefono_empresa}}
+                <b>USUARIO: </b>{{$cont->empresa->razon_social_empresa}}  <b>CIUDAD:</b>{{$cont->empresa->direccion_empresa}}, {{$cont->empresa->municipios->nombre_municol}} - {{$cont->empresa->municipios->coldepartamento->nombre_deptocol}} <b>Cel.</b> {{$cont->empresa->telefono_empresa}}
 
             </p>
             <div style="position:relative; width:50%; height: 170px; top:80px; page-break-inside: avoid; ">
@@ -190,7 +190,7 @@
 
             <div style="position:relative; width: 50%; height: 170px; left: 320px; top:-90px; page-break-inside: avoid;">
                 <p style="position: relative; top:70px; text-align: center;"><b>{{$cont->empresa->nombre_representantelegal}}</b></p> <br>
-                <p style="position: relative; top:53px;text-align: center; font-size: 11px;">REP. LEGAL {{$cont->empresa->nombre_empresa}}</p> <br>
+                <p style="position: relative; top:53px;text-align: center; font-size: 11px;">REP. LEGAL {{$cont->empresa->razon_social_empresa}}</p> <br>
                 <p style="position: relative; top:35px; text-align: center; font-size: 11px; ">CEL. (+57) {{$cont->empresa->telefono_representantelegal}}</p> <br>
                 <p style="position:relative; top:15px; text-align: center; font-size: 11px; ">e-mail: <u style="color: blue;">{{mb_strtolower($cont->empresa->email_empresa)}}</u> </p>
             </div>

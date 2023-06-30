@@ -15,6 +15,7 @@ class EmpresaSeeder extends Seeder
     public function run()
     {
         Empresa::insert([
+            'razon_social_empresa'        => 'SANITAS S.A.S.',
             'nombre_empresa'              => 'SANITAS',
             'num_iden_empresa'            => '1098799034',
             'DV'                          => '0',
@@ -33,6 +34,7 @@ class EmpresaSeeder extends Seeder
             'respo_fiscal_empresa'        => 'NO RESPONSABLE (R-99-PN)',
         ]);
         Empresa::insert([
+            'razon_social_empresa'        => 'SALUDCOOP S.A.S.',
             'nombre_empresa'              => 'SALUDCOOP',
             'num_iden_empresa'            => '1098799035',
             'DV'                          => '0',

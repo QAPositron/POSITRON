@@ -94,7 +94,7 @@
         <tr>
             <th style="font-size: 11px; border: solid 0.4px #000; padding:5px;">
                 @foreach($contratoDosi as $cont)
-                    {{$cont->nombre_empresa}} - SEDE: {{$cont->nombre_sede}}
+                    {{$cont->razon_social_empresa}} - SEDE: {{$cont->nombre_sede}}
                 @endforeach 
             </th>
         </tr>

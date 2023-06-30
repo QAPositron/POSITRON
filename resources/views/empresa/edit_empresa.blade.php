@@ -24,7 +24,7 @@
                     <div class="col-md">
                         <div class="form-floating">
                             <input type="text" class="form-control @error('nombre_empresa') is-invalid @enderror" name="nombre_empresa" id="nombre_empresa" value="{{old('nombre_empresa', $empresa->nombre_empresa)}}" autofocus style="text-transform:uppercase">
-                            <label for="floatingInput">NOMBRE</label>
+                            <label for="floatingInput">ACRÓNIMO</label>
                             @error('nombre_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>

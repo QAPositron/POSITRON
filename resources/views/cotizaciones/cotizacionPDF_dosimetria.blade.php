@@ -97,7 +97,7 @@
             @endphp
             {{date("d", strtotime($cotiza->fecha_emision))}} {{$meses[date("m", strtotime($cotiza->fecha_emision))]}} {{date("Y", strtotime($cotiza->fecha_emision))}}</p>
             <p>Señores</p>
-            <p><b>{{$cotiza->empresa->nombre_empresa}}</b></p>
+            <p><b>{{$cotiza->empresa->razon_social_empresa}}</b></p>
             <p>@if($cotiza->empresa->tipo_identificacion_empresa == 'NIT') 
                     NIT: {{$cotiza->empresa->num_iden_empresa}}-{{$cotiza->empresa->DV}} 
                 @elseif($cotiza->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA')
