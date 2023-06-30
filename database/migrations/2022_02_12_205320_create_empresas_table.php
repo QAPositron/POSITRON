@@ -15,6 +15,7 @@ class CreateEmpresasTable extends Migration
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->bigincrements('id_empresa')->unique();
+            $table->text('razon_social_empresa');
             $table->string('nombre_empresa')->unique();
             $table->integer('num_iden_empresa')->unique();
             $table->integer('DV')->nullable();

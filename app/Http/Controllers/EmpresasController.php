@@ -44,6 +44,7 @@ class EmpresasController extends Controller
     public function save(Request $request){
         
         $request->validate([
+            'razonsocial_empresa' => ['required', Rule::unique('empresas', 'razon_social_empresa')],
             'nombre_empresa'      => ['required', Rule::unique('empresas', 'nombre_empresa')],
             'tipo_empresa'        => ['required'],               
             'tipoIden_empresa'    => ['required'], 
@@ -65,6 +66,7 @@ class EmpresasController extends Controller
         
         $empresa = new Empresa();
 
+        $empresa->razon_social_empresa              = mb_strtoupper($request->razonsocial_empresa);
         $empresa->nombre_empresa                    = mb_strtoupper($request->nombre_empresa);
         $empresa->tipo_identificacion_empresa       = mb_strtoupper($request->tipoIden_empresa);
         $empresa->num_iden_empresa                  = $request->numero_ident;
@@ -123,6 +125,7 @@ class EmpresasController extends Controller
     public function update(Request $request, Empresa $empresa){
        
         $request->validate([
+            'razonsocial_empresa' => ['required', Rule::unique('empresas', 'razon_social_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
             'nombre_empresa'      => ['required', Rule::unique('empresas', 'nombre_empresa')->ignore($empresa->id_empresa, 'id_empresa')],
             'tipo_empresa'        => ['required'],              
             'tipoIden_empresa'    => ['required'],   
@@ -142,6 +145,7 @@ class EmpresasController extends Controller
             'cedula_Repr_empresa' => ['required']
         ]);
         
+        $empresa->razon_social_empresa              = mb_strtoupper($request->razonsocial_empresa);
         $empresa->nombre_empresa                    = mb_strtoupper($request->nombre_empresa);
         $empresa->tipo_identificacion_empresa       = mb_strtoupper($request->tipoIden_empresa);
         $empresa->num_iden_empresa                  = $request->numero_ident;

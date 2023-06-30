@@ -61,12 +61,13 @@ class DosimetrosController extends Controller
         ->get();
         $dosimLecTrabj = Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
         ->where('trabajadordosimetros.dosimetro_uso', 'FALSE')
+        ->where('trabajadordosimetros.revision_entrada', NULL)
         ->where(function($query) {
             $query->orWhere('dosimetros.estado_dosimetro', 'EN LECTURA');
         })->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.tecnologia_dosimetro', 'dosimetros.fecha_ingreso_servicio',
         'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 'trabajadordosimetros.contdosisededepto_id', 'trabajadordosimetros.dosimetro_uso', 'trabajadordosimetros.mes_asignacion')
         ->get();
-        /* return $dosimLecTrabj; */
+
         $dosimAreas = Dosimetro::join('dosiareacontdosisedes','dosimetros.id_dosimetro','=','dosiareacontdosisedes.dosimetro_id')
         ->where('dosiareacontdosisedes.dosimetro_uso', 'TRUE')
         ->where(function($query) {
@@ -76,11 +77,13 @@ class DosimetrosController extends Controller
         ->get();
         $dosimLecAreas = Dosimetro::join('dosiareacontdosisedes','dosimetros.id_dosimetro','=','dosiareacontdosisedes.dosimetro_id')
         ->where('dosiareacontdosisedes.dosimetro_uso', 'FALSE')
+        ->where('dosiareacontdosisedes.revision_entrada', NULL)
         ->where(function($query) {
             $query->orWhere('dosimetros.estado_dosimetro', 'EN LECTURA');
         })->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.tecnologia_dosimetro', 'dosimetros.fecha_ingreso_servicio',
         'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 'dosiareacontdosisedes.contdosisededepto_id', 'dosiareacontdosisedes.dosimetro_uso', 'dosiareacontdosisedes.mes_asignacion')
         ->get();
+
         $dosimControl = Dosimetro::join('dosicontrolcontdosisedes','dosimetros.id_dosimetro','=','dosicontrolcontdosisedes.dosimetro_id')
         ->where('dosicontrolcontdosisedes.dosimetro_uso', 'TRUE')
         ->where(function($query) {
@@ -90,11 +93,13 @@ class DosimetrosController extends Controller
         ->get();
         $dosimLecControl = Dosimetro::join('dosicontrolcontdosisedes','dosimetros.id_dosimetro','=','dosicontrolcontdosisedes.dosimetro_id')
         ->where('dosicontrolcontdosisedes.dosimetro_uso', 'FALSE')
+        ->where('dosicontrolcontdosisedes.revision_entrada', NULL)
         ->where(function($query) {
             $query->orWhere('dosimetros.estado_dosimetro', 'EN LECTURA');
         })->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.tecnologia_dosimetro', 'dosimetros.fecha_ingreso_servicio',
         'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 'dosicontrolcontdosisedes.contdosisededepto_id', 'dosicontrolcontdosisedes.dosimetro_uso', 'dosicontrolcontdosisedes.mes_asignacion')
         ->get();
+
         $holder = Holder::where('estado_holder','=','STOCK')->get();
         $holderTrabj = Holder::join('trabajadordosimetros','holders.id_holder','=','trabajadordosimetros.holder_id')
         ->select('holders.id_holder','holders.codigo_holder', 'holders.tipo_holder', 'holders.estado_holder','trabajadordosimetros.contdosisededepto_id', 'trabajadordosimetros.mes_asignacion')

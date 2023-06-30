@@ -19,14 +19,21 @@
 
                     <div class="row g-2">
                         <label class="text-secondary">' * ' campo obligatorio</label>
-                        <div class="col-md-6">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control @error('razonsocial_empresa') is-invalid @enderror" name="razonsocial_empresa" id="razonsocial_empresa" value="{{old('razonsocial_empresa')}}" autofocus style="text-transform:uppercase">
+                                <label for="floatingInput">*RAZÓN SOCIAL</label>
+                                @error('razonsocial_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-md">
                             <div class="form-floating">
                                 <input type="text" class="form-control @error('nombre_empresa') is-invalid @enderror" name="nombre_empresa" id="nombre_empresa" value="{{old('nombre_empresa')}}" autofocus style="text-transform:uppercase">
                                 <label for="floatingInput">*NOMBRE</label>
                                 @error('nombre_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div class="col-md">
+                        <div class="col-md-3">
                             <div class="form-floating" >
                                 <select class="form-select @error('tipo_empresa') is-invalid @enderror" name="tipo_empresa" id="tipo_empresa" value="{{old('tipo_empresa')}}" autofocus style="text-transform:uppercase">
                                     <option value="">--SELECCIONE--</option>

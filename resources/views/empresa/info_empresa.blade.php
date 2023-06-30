@@ -32,13 +32,13 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                     <!-- //////////////////// PESTAÑA DE EMPRESA //////////////// -->
                     <div class="tab-content mt-3">
                         <div class="tab-pane active" id="empresa" role="tabpanel">  
-                            <h3 class="card-title text-center pt-3"> <i>{{$empresa->nombre_empresa}}</i></h3>
+                            <h3 class="card-title text-center pt-3"><i>{{$empresa->razon_social_empresa}}</i></h3>
                             
                             <div class="table table-responsive p-4 ">
                                 <table class="table table-bordered">
                                     <tbody >
                                         <tr>
-                                            <th colspan="4" class="table-active text-center align-middle">EMPRESA</th>
+                                            <th colspan="4" class="table-active text-center align-middle">{{$empresa->nombre_empresa}}</th>
                                         </tr>
                                         <tr>
                                             <th class="m-auto align-middle" style='width: 12.55%'>TIPO IDENTIFICACIÓN:</th>
