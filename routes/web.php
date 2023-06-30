@@ -207,6 +207,7 @@ Route::get('lecturadosi/{lecdosi}/create', [DosimetriaController::class, 'lectur
 Route::get('lecturadosi/{lecdosi}/{lecdosicontrol}/create', [DosimetriaController::class, 'lecturadosicontrl'])->name('lecturadosicontrl.create');
 Route::put('lecturadosi/{lecdosi}', [DosimetriaController::class, 'savelecturadosi'])->name('lecturadosi.save');
 Route::get('lecturadosi/{lecdosicont}/edit', [DosimetriaController::class, 'editlecturadosi'])->name('lecturadosi.edit');
+Route::get('lecturadosi/{lecdosi}/{lecdosicontrol}/edit', [DosimetriaController::class, 'editlecturadosicontrl'])->name('lecturadosicontrl.edit');
 Route::get('lecturadosi/{lecdosi}/getextraviado',[DosimetriaController::class,'getextraviado']);
 
 Route::get('lecturadosicontrol/{lecdosicont}/create', [DosimetriaController::class, 'lecturadosicontrol'])->name('lecturadosicontrol.create');
@@ -217,6 +218,7 @@ Route::get('lecturadosiarea/{lecdosicont}/create', [DosimetriaController::class,
 Route::get('lecturadosiarea/{lecdosicont}/{lecdosicontrol}/create', [DosimetriaController::class, 'lecturadosiareacontrl'])->name('lecturadosiareacontrl.create');
 Route::put('lecturadosiarea/{lecdosicont}', [DosimetriaController::class, 'savelecturadosiarea'])->name('lecturadosiarea.save');
 Route::get('lecturadosiarea/{lecdosicont}/edit', [DosimetriaController::class, 'editlecturadosiarea'])->name('lecturadosiarea.edit');
+Route::get('lecturadosiarea/{lecdosicont}/{lecdosicontrol}/edit', [DosimetriaController::class, 'editlecturadosiareacontrl'])->name('lecturadosiareacontrl.edit');
 /////////RUTAS PARA LOS REPORTES O INFORMES DE DOSIMETRIA///////
 
 Route::get('repodosimetria/{deptodosi}/{mesnumber}/pdf', [DosimetriaController::class, 'pdf'])->name('repodosimetria.pdf');

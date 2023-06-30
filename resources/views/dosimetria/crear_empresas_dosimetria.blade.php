@@ -105,18 +105,18 @@
                                                                         <td>
                                                                             @php
                                                                                 $dosimUso = 0;
-                                                                                foreach($empresasDosimTrabj as $empresasUsadosTrabj){
-                                                                                    if($empresasUsadosTrabj->empresa_id == $empdosi->empresa_id && $empresasUsadosTrabj->estado_dosimetro == 'EN USO'){
+                                                                                foreach($empresasDosimTrabjUSO as $empTrabjuso){
+                                                                                    if($empTrabjuso->empresa_id == $empdosi->empresa_id){
                                                                                         $dosimUso += 1;
                                                                                     }
                                                                                 }
-                                                                                foreach($empresasDosimDosicont as $empresasUsadosDosicont){
-                                                                                    if($empresasUsadosDosicont->empresa_id == $empdosi->empresa_id && $empresasUsadosDosicont->estado_dosimetro == 'EN USO'){
+                                                                                foreach($empresasDosimDosicontUSO as $empContruso){
+                                                                                    if($empContruso->empresa_id == $empdosi->empresa_id){
                                                                                         $dosimUso += 1;
                                                                                     }
                                                                                 }
-                                                                                foreach($empresasDosimDosiarea as $empresasUsadosDosiarea){
-                                                                                    if($empresasUsadosDosiarea->empresa_id == $empdosi->empresa_id && $empresasUsadosDosiarea->estado_dosimetro == 'EN USO'){
+                                                                                foreach($empresasDosimDosiareaUSO as $empAreauso){
+                                                                                    if($empAreauso->empresa_id == $empdosi->empresa_id){
                                                                                         $dosimUso += 1;
                                                                                     }
                                                                                 }
@@ -126,18 +126,18 @@
                                                                         <td>
                                                                             @php
                                                                                 $dosimLectura = 0;
-                                                                                foreach($empresasDosimTrabj as $empresasLecturasTrabj){
-                                                                                    if($empresasLecturasTrabj->empresa_id == $empdosi->empresa_id && $empresasLecturasTrabj->estado_dosimetro == 'EN LECTURA'){
+                                                                                foreach($empresasDosimTrabjLECTURA as $empTrabjlect){
+                                                                                    if($empTrabjlect->empresa_id == $empdosi->empresa_id){
                                                                                         $dosimLectura += 1;
                                                                                     }
                                                                                 }
-                                                                                foreach($empresasDosimDosicont as $empresaLecturasDosicont){
-                                                                                    if($empresaLecturasDosicont->empresa_id == $empdosi->empresa_id && $empresaLecturasDosicont->estado_dosimetro == 'EN LECTURA'){
+                                                                                foreach($empresasDosimDosicontLECTURA as $empContlect){
+                                                                                    if($empContlect->empresa_id == $empdosi->empresa_id){
                                                                                         $dosimLectura += 1;
                                                                                     }
                                                                                 }
-                                                                                foreach($empresasDosimDosiarea as $empresasLecturasDosiarea){
-                                                                                    if($empresasLecturasDosiarea->empresa_id == $empdosi->empresa_id && $empresasLecturasDosiarea->estado_dosimetro == 'EN LECTURA'){
+                                                                                foreach($empresasDosimDosiareaLECTURA as $empArealect){
+                                                                                    if($empArealect->empresa_id == $empdosi->empresa_id){
                                                                                         $dosimLectura += 1;
                                                                                     }
                                                                                 }

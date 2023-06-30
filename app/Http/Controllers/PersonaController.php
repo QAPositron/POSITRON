@@ -63,14 +63,30 @@ class PersonaController extends Controller
             /* 'rol_personas'               => ['required'], */
             'primer_nombre_persona'      => ['required'],              
             'primer_apellido_persona'    => ['required'],
-            'tipoIden_persona'           => ['required'],
-            'cedula_persona'             => ['nullable', Rule::unique('personas', 'cedula_persona')],    
+            'tipoIden_persona'           => ['required'],    
             'genero_persona'             => ['required'],
             'correo_persona'             => ['nullable', 'email', Rule::unique('personas', 'correo_persona')],
             'telefono_persona'           => ['nullable', 'min:10', 'max:10'],
             /* 'lider_dosiemtria'           => [Rule::unique('personas', 'lider_dosimetria')->where(fn ($query) => $query->where('personasedes', 'sede_id'))], */
         ]);
-        
+        if(!empty($request->rol_personas)){
+            for($i=0; $i<count($request->rol_personas); $i++){
+                if( $request->rol_personas[$i] == 2){
+                    $request->validate([
+                        'cedula_persona'             => ['nullable', Rule::unique('personas', 'cedula_persona')],    
+                    ]);
+                }else{
+                    $request->validate([
+                        'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],    
+                    ]);
+                }
+            }
+        }else{
+            $request->validate([
+                'rol_personas'               => ['required'],
+            ]);
+        }
+
         $persona = new Persona();
 
         $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);
@@ -192,17 +208,32 @@ class PersonaController extends Controller
     public function savePersonasEmpresa(Request $request){
        /*  return $request; */
         $request->validate([
-            'rol_personas'               => ['required'],
+            /* 'rol_personas'               => ['required'], */
             'primer_nombre_persona'      => ['required'],
             'primer_apellido_persona'    => ['required'],
             'tipoIden_persona'           => ['required'],
-            'cedula_persona'             => ['nullable', Rule::unique('personas', 'cedula_persona')],
             'genero_persona'             => ['required'],
             'correo_persona'             => ['nullable', 'email', Rule::unique('personas', 'correo_persona')],
             'telefono_persona'           => ['nullable','min:10', 'max:10'],
             'id_sedes'                   => ['required']
         ]); 
-
+        if(!empty($request->rol_personas)){
+            for($i=0; $i<count($request->rol_personas); $i++){
+                if( $request->rol_personas[$i] == 2){
+                    $request->validate([
+                        'cedula_persona'             => ['nullable', Rule::unique('personas', 'cedula_persona')],    
+                    ]);
+                }else{
+                    $request->validate([
+                        'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],    
+                    ]);
+                }
+            }
+        }else{
+            $request->validate([
+                'rol_personas'               => ['required'],
+            ]);
+        }
         $persona = new Persona();
 
         $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);
@@ -327,12 +358,29 @@ class PersonaController extends Controller
             'primer_nombre_persona'      => ['required'],             
             'primer_apellido_persona'    => ['required'],
             'tipoIden_persona'           => ['required'],
-            'cedula_persona'             => ['nullable', Rule::unique('personas', 'cedula_persona')->ignore($persona->id_persona, 'id_persona')],    
             'genero_persona'             => ['required'],
             'correo_persona'             => ['nullable', 'email', Rule::unique('personas', 'correo_persona')->ignore($persona->id_persona, 'id_persona')],
             'telefono_persona'           => ['nullable', 'min:10', 'max:10'],
             
         ]);
+        if(!empty($request->rol_personas)){
+            for($i=0; $i<count($request->rol_personas); $i++){
+                if( $request->rol_personas[$i] == 2){
+                    $request->validate([
+                        'cedula_persona'             => ['nullable', Rule::unique('personas', 'cedula_persona')->ignore($persona->id_persona, 'id_persona')],    
+                    ]);
+                }else{
+                    $request->validate([
+                        'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')->ignore($persona->id_persona, 'id_persona')],    
+                    ]);
+                }
+            }
+        }else{
+            $request->validate([
+                'rol_personas'               => ['required'],
+            ]);
+        }
+        
         $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);
         $persona->segundo_nombre_persona    =  mb_strtoupper($request->segundo_nombre_persona);
         $persona->primer_apellido_persona   =  mb_strtoupper($request->primer_apellido_persona);

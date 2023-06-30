@@ -21,7 +21,7 @@ class CreatePersonasTable extends Migration
             $table->text('segundo_apellido_persona')->nullable();
             $table->text('genero_persona');
             $table->text('tipo_iden_persona');
-            $table->integer('cedula_persona')->unique();
+            $table->integer('cedula_persona')->unique()->nullable();
             $table->string('correo_persona', 50)->nullable();
             $table->string('telefono_persona', 15)->nullable();
             $table->string('lider_ava', 50)->nullable();
