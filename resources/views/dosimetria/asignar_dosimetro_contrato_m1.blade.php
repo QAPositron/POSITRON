@@ -128,7 +128,7 @@
                     <div class="col-md">
                         <div class="form-floating">
                             <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
-                            <label for="floatingInputGrid">FECHA ENVIO</label>
+                            <label for="floatingInputGrid">FECHA ENVÍO AL USUARIO</label>
                             
                         </div>
                     </div>

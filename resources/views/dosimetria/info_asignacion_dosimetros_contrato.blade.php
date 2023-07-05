@@ -64,38 +64,38 @@
             <div class="col-md">
                 <div class="form-floating">
                     <input value="{{$trabjasignados[0]->fecha_dosim_enviado}}" type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
-                    <label for="floatingInputGrid">FECHA ENVIO</label>
+                    <label for="floatingInputGrid">FECHA ENVÍO AL USUARIO</label>
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-floating">
                     <input value="{{$trabjasignados[0]->fecha_dosim_recibido}}" type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
-                    <label for="floatingInputGrid">FECHA RECIBIDO</label>
+                    <label for="floatingInputGrid">FECHA RECIBIÓ EL USUARIO</label>
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-floating">
                     <input value="{{$trabjasignados[0]->fecha_dosim_devuelto}}" type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
-                    <label for="floatingInputGrid">FECHA DEVUELTO</label>
+                    <label for="floatingInputGrid">FECHA DEVUELTO A QA POSITRON</label>
                 </div>
             </div>
         @else
             <div class="col-md">
                 <div class="form-floating">
                     <input value="{{$dosiareasignados[0]->fecha_dosim_enviado}}" type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
-                    <label for="floatingInputGrid">FECHA ENVIO</label>
+                    <label for="floatingInputGrid">FECHA ENVÍO AL USUARIO</label>
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-floating">
                     <input value="{{$dosiareasignados[0]->fecha_dosim_recibido}}" type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
-                    <label for="floatingInputGrid">FECHA RECIBIDO</label>
+                    <label for="floatingInputGrid">FECHA RECIBIÓ EL USUARIO</label>
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-floating">
                     <input value="{{$dosiareasignados[0]->fecha_dosim_devuelto}}" type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
-                    <label for="floatingInputGrid">FECHA DEVUELTO</label>
+                    <label for="floatingInputGrid">FECHA DEVUELTO A QA POSITRON</label>
                 </div>
             </div>
         @endif

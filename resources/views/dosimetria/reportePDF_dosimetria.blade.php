@@ -142,10 +142,17 @@
             </td>
             <td style="border:0.1px solid black; text-align: right;">Fecha del reporte</td>
             <td style="width: 94px; border:0.1px solid black; color:#2646FA;" align="center">
-                @php
-                    $fecha = date("d-m-Y");
-                    echo "$fecha";
-                @endphp
+                @if($trabajdosiasig->isEmpty())
+                    @php
+                        $datefix = date('d-m-Y',strtotime($dosiareasig[0]->measurement_date));
+                    @endphp
+                    {{$datefix}}
+                @elseif($dosiareasig->isEmpty())
+                    @php
+                        $datefix = date('d-m-Y',strtotime($trabajdosiasig[0]->measurement_date));
+                    @endphp
+                    {{$datefix}}
+                @endif
             </td>
         </tr>
         <tr>

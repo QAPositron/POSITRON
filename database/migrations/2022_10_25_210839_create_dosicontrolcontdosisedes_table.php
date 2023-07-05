@@ -30,6 +30,8 @@ class CreateDosicontrolcontdosisedesTable extends Migration
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
             
             $table->integer('mes_asignacion');
+            $table->string('unicoContrato', 50)->nullable();
+            $table->string('unicoSede', 50)->nullable();
             $table->string('dosimetro_uso', 50);
             $table->date('primer_dia_uso')->nullable();
             $table->date('ultimo_dia_uso')->nullable();
