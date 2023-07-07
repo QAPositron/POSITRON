@@ -210,28 +210,28 @@
                                         
                                         <input type="number"  id="primer_mes_asignacion" name="primer_mes_asignacion" class="form-control text-center" value="1" hidden>
                                     </div>
-                                    {{-- <br>
-                                    <div id="rowDosim1">
+                                    <br>
+                                    <div id="rowDosim" hidden>
                                         <div class="row" >
                                             <div class="col-md"></div>
                                             <div class="col-md"></div>
                                             <div class="col-md-3"></div>
                                             <div class="col-md-2 text-center">
-                                                <label for="" class="text-center">No. DOSÍM. CONTROL TÓRAX</label>
+                                                <label for="" class="text-center">No. DOSÍM. CONTROL TRANSPORTE T.</label>
                                                 <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_torax_contrato_sede" name="num_dosi_control_torax_contrato_sede" min="1">
                                             </div>
                                             <div class="col-md-2 text-center">
-                                                <label for="" class="text-center">No. DOSÍM. CONTROL CRISTALINO</label>
+                                                <label for="" class="text-center">No. DOSÍM. CONTROL TRANSPORTE CRIS.</label>
                                                 <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_cristalino_contrato_sede" name="num_dosi_control_cristalino_contrato_sede" min="1">
                                             </div>
                                             <div class="col-md-2 text-center">
-                                                <label for="" class="text-center">No. DOSÍM. CONTROL ANILLO</label>
+                                                <label for="" class="text-center">No. DOSÍM. CONTROL TRANSPORTE A.</label>
                                                 <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_dedo_contrato_sede" name="num_dosi_control_dedo_contrato_sede" min="1">
                                             </div>
                                             <div class="col-md">
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <br>
                                 </div>
                                 <div class="" id="contenedorDepto0">
@@ -272,69 +272,6 @@ crossorigin="anonymous">
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
-    function agregarDosim(){
-        var dosim = `<div class="row" id="control">
-                            <div class="col-md"></div>
-                            <div class="col-md"></div>
-                            <div class="col-md-2 text-center">
-                                <label for="" class="text-center">No. DOSÍM. CONTROL TÓRAX</label>
-                                <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_torax_contrato" name="num_dosi_control_torax_contrato" min="1">
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <label for="" class="text-center">No. DOSÍM. CONTROL CRISTALINO</label>
-                                <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_cristalino_contrato" name="num_dosi_control_cristalino_contrato" min="1">
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <label for="" class="text-center">No. DOSÍM. CONTROL ANILLO</label>
-                                <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_dedo_contrato" name="num_dosi_control_dedo_contrato" min="1">
-                            </div>
-                            <div class="col-md"></div>
-                            <div class="col-md">
-                                <button class="btn btn-danger mt-2" type="button" onclick="eliminar()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div> `;
-        $("#rowDosimetros").append(dosim);
-    }
-    
-    function eliminar(){
-        $("#control").remove();
-    }
-    /* function agregarDosimSede(){
-        var dosim = `<div class="row" id="controlSede${sedesNumber}">
-                            <div class="col-md"></div>
-                            <div class="col-md"></div>
-                            <div class="col-md-2 text-center">
-                                <label for="" class="text-center">No. DOSÍM. CONTROL TÓRAX</label>
-                                <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_torax_sede" name="num_dosi_control_torax_sede" min="1">
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <label for="" class="text-center">No. DOSÍM. CONTROL CRISTALINO</label>
-                                <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_cristalino_sede" name="num_dosi_control_cristalino_sede" min="1">
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <label for="" class="text-center">No. DOSÍM. CONTROL ANILLO</label>
-                                <input class="form-check-input" type="checkbox" value="TRUE"  id="num_dosi_control_dedo_sede" name="num_dosi_control_dedo_sede" min="1">
-                            </div>
-                            <div class="col-md"></div>
-                            <div class="col-md">
-                                <button class="btn btn-danger mt-2" type="button" onclick="eliminarSede(${sedesNumber})" id="botoneliminar">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div> `;
-        $(`#rowDosimSede${sedesNumber-1}`).append(dosim);
-        
-    }
-    function eliminarSede(idsede){
-        $(`#controlSede${idsede}`).remove();
-        
-    } */
     
     function fechafinalcontrato(){
         var numLec = document.getElementById("numlecturas_año").value;
@@ -444,25 +381,26 @@ crossorigin="anonymous">
 
         /* document.getElementById(`depa${depaNumber}`).querySelector(`#ocupacion_contrato_sede`)
             .setAttribute("name", `ocupacion_sede${sedesNumber-1}[]`); */
-        /* document.querySelector('#rowDosim1').setAttribute("id", `rowDosim${depaNumber}`);
-        var filaDosiSede = document.getElementById(`rowDosimSede${sedesNumber}`);
-        console.log("EXISTE ROWDOSIMSEDE")
-        console.log(filaDosiSede);
-        if(filaDosiSede != null){
-            console.log("EXISTE ROWDOSIMSEDE")
-            console.log(filaDosiSede);
-            filaDosiSede.setAttribute("hidden", "true");
-        }
-         */
-        /* document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_torax_contrato_sede`)
-            .setAttribute("name", `dosimetro_control_torax_sede${sedesNumber-1}[]`);
-
+        document.getElementById(`depa${depaNumber}`).querySelector('#rowDosim').setAttribute("id", `rowDosim${depaNumber}`);
+        document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_torax_contrato_sede`)
+                .setAttribute("name", `dosimetro_control_torax_sede${sedesNumber-1}[]`);
+    
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_cristalino_contrato_sede`)
-            .setAttribute("name", `dosimetro_control_cristalino_sede${sedesNumber-1}[]`);
-
+                .setAttribute("name", `dosimetro_control_cristalino_sede${sedesNumber-1}[]`);
+    
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_control_dedo_contrato_sede`)
-            .setAttribute("name", `dosimetro_control_dedo_sede${sedesNumber-1}[]`); */
+                .setAttribute("name", `dosimetro_control_dedo_sede${sedesNumber-1}[]`);
 
+        var filaDosicontrol = document.getElementById('control');
+
+        if(filaDosicontrol != null){
+            console.log("EXISTE ROWDOSIM")
+            console.log(filaDosicontrol);
+        }else{
+            console.log("es distinto a null")
+            document.getElementById(`rowDosim${depaNumber}`).removeAttribute("hidden");
+        }
+        
         document.getElementById(`depa${depaNumber}`).querySelector(`#num_dosi_torax_contrato_sede`)
             .setAttribute("name", `dosimetro_torax_sede${sedesNumber-1}[]`);
 
@@ -481,7 +419,48 @@ crossorigin="anonymous">
         ///////////////
         
     }
+    function agregarDosim(){
+        var dosim = `<div class="row" id="control">
+                            <input type="text" name="unicoControl_contrato" hidden id="unicoControl_contrato" value="TRUE">
+                            <div class="col-md"></div>
+                            <div class="col-md"></div>
+                            <div class="col-md-2 text-center">
+                                <label for="" class="text-center">No. DOSÍM. CONTROL TRANSPORTE T.</label>
+                                <input class="form-check-input" type="checkbox" value="TRUE"  id="dosi_controlTrans_torax_contrato" name="dosi_controlTrans_torax_contrato" min="1">
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <label for="" class="text-center">No. DOSÍM. CONTROL TRANSPORTE CRIS.</label>
+                                <input class="form-check-input" type="checkbox" value="TRUE"  id="dosi_controlTrans_cristalino_contrato" name="dosi_controlTrans_cristalino_contrato" min="1">
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <label for="" class="text-center">No. DOSÍM. CONTROL TRANSPORTE A.</label>
+                                <input class="form-check-input" type="checkbox" value="TRUE"  id="dosi_controlTrans_dedo_contrato" name="dosi_controlTrans_dedo_contrato" min="1">
+                            </div>
+                            <div class="col-md"></div>
+                            <div class="col-md">
+                                <button class="btn btn-danger mt-2" type="button" onclick="eliminar()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div> `;
+        $("#rowDosimetros").append(dosim);
+
+        var id = `${depaNumber}`;
+        for(var i = 1; i < id; i++){
+            document.getElementById("rowDosim"+i).setAttribute("hidden", "true");
+        }
+    }
     
+    function eliminar(){
+        
+        var id = `${depaNumber}`;
+        for(var i = 1; i < id; i++){
+            document.getElementById("rowDosim"+i).removeAttribute("hidden");
+        }
+        $("#control").remove();
+    }
    
     function readySede() {
         $(document).ready(function () {

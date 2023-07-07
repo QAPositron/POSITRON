@@ -31,7 +31,10 @@ class CreateContratosDosimetriaEmpresasTable extends Migration
             $table->integer('numtotal_dosi_control_dedo')->nullable();
             $table->integer('numtotal_dosi_ambiental')->nullable();
             $table->integer('numtotal_dosi_caso')->nullable();
-            
+            $table->string('controlTransT_unicoCont', 50)->nullable();
+            $table->string('controlTransC_unicoCont', 50)->nullable();
+            $table->string('controlTransA_unicoCont', 50)->nullable();
+
             $table->timestamps();
         });
     }

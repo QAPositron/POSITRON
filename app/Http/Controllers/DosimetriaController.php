@@ -253,8 +253,13 @@ class DosimetriaController extends Controller
                     $contratoDosiSedeDepto->dosi_area                 = $request->input('dosimetro_area_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_area_sede'.$i)[$x];
                     $contratoDosiSedeDepto->dosi_caso                 = $request->input('dosimetro_caso_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_caso_sede'.$i)[$x];
                     $contratoDosiSedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_cristalino_sede'.$i)[$x];
-                    /* $contratoDosiSedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x]; */
                     $contratoDosiSedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_dedo_sede'.$i)[$x];
+                    /* $contratoDosiSedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x]; */
+                    if($request->unicoControl_contrato == 'TRUE'){
+                        $contratoDosiSedeDepto->controlTransT_unicoCont = empty($request->dosi_controlTrans_torax_contrato) ? NULL : 'TRUE';
+                        $contratoDosiSedeDepto->controlTransC_unicoCont = empty($request->dosi_controlTrans_cristalino_contrato) ? NULL : 'TRUE';
+                        $contratoDosiSedeDepto->controlTransA_unicoCont = empty($request->dosi_controlTrans_dedo_contrato) ? NULL : 'TRUE';
+                    }
                     $contratoDosiSedeDepto->save();
 
                     $mescontdosisedeDepto = new Mesescontdosisedeptos();
@@ -269,6 +274,11 @@ class DosimetriaController extends Controller
                     $mescontdosisedeDepto->dosi_cristalino           = $request->input('dosimetro_cristalino_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_cristalino_sede'.$i)[$x];
                     /* $mescontdosisedeDepto->dosi_muñeca               = $request->input('dosimetro_muneca_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_muneca_sede'.$i)[$x]; */
                     $mescontdosisedeDepto->dosi_dedo                 = $request->input('dosimetro_dedo_sede'.$i)[$x] == NULL ? 0 : $request->input('dosimetro_dedo_sede'.$i)[$x];
+                    if($request->unicoControl_contrato == 'TRUE'){
+                        $mescontdosisedeDepto->controlTransT_unicoCont = empty($request->dosi_controlTrans_torax_contrato) ? NULL : 'TRUE';
+                        $mescontdosisedeDepto->controlTransC_unicoCont = empty($request->dosi_controlTrans_cristalino_contrato) ? NULL : 'TRUE';
+                        $mescontdosisedeDepto->controlTransA_unicoCont = empty($request->dosi_controlTrans_dedo_contrato) ? NULL : 'TRUE';
+                    }
                     $mescontdosisedeDepto->save();
 
                     $numtotalEmpresasDosi = ContratosDosimetriaEmpresa::where('empresa_id', '=', $request->empresa_contrato)->get();
@@ -283,6 +293,11 @@ class DosimetriaController extends Controller
                         $totalEmpDosi->numtotal_dosi_control_dedo       = empty($request->input('dosimetro_control_dedo_sede'.$i)[$x]) ? $totalEmpDosi->numtotal_dosi_control_dedo : ($totalEmpDosi->numtotal_dosi_control_dedo + 1);
                         $totalEmpDosi->numtotal_dosi_ambiental          = ($totalEmpDosi->numtotal_dosi_ambiental + $request->input('dosimetro_area_sede'.$i)[$x]);
                         $totalEmpDosi->numtotal_dosi_caso               = ($totalEmpDosi->numtotal_dosi_caso + $request->input('dosimetro_caso_sede'.$i)[$x]);
+                        if($request->unicoControl_contrato == 'TRUE'){
+                            $totalEmpDosi->controlTransT_unicoCont = empty($request->dosi_controlTrans_torax_contrato) ? NULL : 'TRUE';
+                            $totalEmpDosi->controlTransC_unicoCont = empty($request->dosi_controlTrans_cristalino_contrato) ? NULL : 'TRUE';
+                            $totalEmpDosi->controlTransA_unicoCont = empty($request->dosi_controlTrans_dedo_contrato) ? NULL : 'TRUE';
+                        }
                         $totalEmpDosi->save();
                     }
                 }

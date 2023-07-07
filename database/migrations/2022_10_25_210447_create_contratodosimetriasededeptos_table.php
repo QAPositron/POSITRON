@@ -36,6 +36,9 @@ class CreateContratodosimetriasededeptosTable extends Migration
             $table->integer('dosi_cristalino')->nullable();
             $table->integer('dosi_muñeca')->nullable();
             $table->integer('dosi_dedo')->nullable();
+            $table->string('controlTransT_unicoCont', 50)->nullable();
+            $table->string('controlTransC_unicoCont', 50)->nullable();
+            $table->string('controlTransA_unicoCont', 50)->nullable();
             $table->timestamps();
         });
     }
