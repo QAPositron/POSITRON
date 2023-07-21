@@ -1,21 +1,38 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
-<div class="row">
-    <div class="col-md">
-        <a type="button" class="btn btn-circle colorQA" href="{{route('asignadosicontrato.info', ['asigdosicont' => $dosicontasig->contdosisededepto_id, 'mesnumber' => $dosicontasig->mes_asignacion ])}}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-            </svg>
-        </a>
+@if($dosicontasig->controlTransT_unicoCont == 'TRUE' || $dosicontasig->controlTransC_unicoCont == 'TRUE' || $dosicontasig->controlTransA_unicoCont == 'TRUE')
+    <div class="row">
+        <div class="col-md">
+            <a type="button" class="btn btn-circle colorQA" href="{{route('asignadosicontrato.info', ['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $dosicontasig->mes_asignacion ])}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </a>
+        </div>
+        <div class="col-md-9">
+            <h2 class="text-center">DOSIMETRÍA DE </h2>
+            <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
+        </div>
+        <div class="col-md"></div>
     </div>
-    <div class="col-md-9">
-        <h2 class="text-center">DOSIMETRÍA DE </h2>
-        <h3 class="text-center"><i>{{$dosicontasig->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$dosicontasig->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
-        <h4 class="text-center">ESPECIALIDAD: {{$dosicontasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}</h4>
+@else
+    <div class="row">
+        <div class="col-md">
+            <a type="button" class="btn btn-circle colorQA" href="{{route('asignadosicontrato.info', ['asigdosicont' => $dosicontasig->contdosisededepto_id, 'mesnumber' => $dosicontasig->mes_asignacion ])}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </a>
+        </div>
+        <div class="col-md-9">
+            <h2 class="text-center">DOSIMETRÍA DE </h2> 
+            <h3 class="text-center"><i>{{$dosicontasig->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$dosicontasig->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
+            <h4 class="text-center">ESPECIALIDAD: {{$dosicontasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}</h4>    
+        </div>
+        <div class="col-md"></div>
     </div>
-    <div class="col-md"></div>
-</div>
+@endif
 <br>
 <br>
     <h4 class="text-center" id="id_contrato"></h4>
@@ -23,25 +40,26 @@
 <br>
 <h3 class="text-center">
     EDITAR LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}}<br>
+    @if($dosicontasig->contratodosimetria_id != null) UNICO PARA EL CONTRATO <br>@endif
     DEL PERÍODO {{$dosicontasig->mes_asignacion}} (
     @if($dosicontasig->mes_asignacion == 1)
-        @if($dosicontasig->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS')
+        @if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS')
             @php
                 $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                $inicio = $dosicontasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio;
+                $inicio = $contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio;
                 $fin = date("t-m-Y",strtotime($inicio));
                 echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio))." - ".date("t", strtotime($fin))." ".$meses[date("m", strtotime($fin))]." DE ".date("Y", strtotime($fin));
                 /* echo $meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ; */
             @endphp
-        @elseif($dosicontasig->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS')
+        @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS')
             @php  
                 $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                $inicio = date($dosicontasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
+                $inicio = date($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
                 $fecha1 = date("t-m-Y",strtotime($inicio));
                 $fecha2= date("t-m-Y",strtotime($fecha1."+ 2 month"));
                 echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio))." - ".date("j", strtotime($fecha2))." ".$meses[date("m", strtotime($fecha2))]." DE ".date("Y", strtotime($fecha2))
             @endphp
-        @elseif($dosicontasig->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS')
+        @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS')
             @php  
                 $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
                 $fecha1 = date($dosicontasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
@@ -84,26 +102,28 @@
                                 <div class="col"></div>
                                 <div class="col-md m-4">
                                     <label for="floatingInputGrid"> <b>EMPRESA:</b> </label>
-                                    <input type="text"  class="form-control text-center" name="empresaLectDosimControl" id="empresaLectDosimControl" value="{{$dosicontasig->contratodosimetriasede->sede->empresa->nombre_empresa}}" readonly>
+                                    <input type="text"  class="form-control text-center" name="empresaLectDosimControl" id="empresaLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}" readonly>
                                     <br>
                                     
                                 </div>
                                 <div class="col-md m-4">
                                     <label for="floatingInputGrid"> <b>NÚM. IDEN.:</b> </label>
-                                    <input type="text" class="form-control text-center" name="numIdenEmpresaLectDosimControl" id="numIdenEmpresaLectDosimControl" value="{{$dosicontasig->contratodosimetriasede->sede->empresa->num_iden_empresa}}" readonly>
+                                    <input type="text" class="form-control text-center" name="numIdenEmpresaLectDosimControl" id="numIdenEmpresaLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}" readonly>
                                     <br>
                                    
                                 </div>
                                 <div class="col-md m-4">
                                     <label for="floatingInputGrid"> <b>SEDE:</b> </label>
-                                    <input type="text"  class="form-control text-center" name="sedeLectDosimControl" id="sedeLectDosimControl" value="{{$dosicontasig->contratodosimetriasede->sede->nombre_sede}}" readonly>
+                                    <input type="text"  class="form-control text-center" name="sedeLectDosimControl" id="sedeLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}" readonly>
                                     <br>
                                 </div>
-                                <div class="col-md m-4">
-                                    <label for="floatingInputGrid"> <b>DEPARTAMENTO:</b> </label>
-                                    <input type="text"  class="form-control text-center" name="deptoLectDosimControl" id="deptoLectDosimControl" value="{{$dosicontasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}" readonly>
-                                    <br>
-                                </div>
+                                @if($dosicontasig->contratodosimetria_id == null)
+                                    <div class="col-md m-4">
+                                        <label for="floatingInputGrid"> <b>DEPARTAMENTO:</b> </label>
+                                        <input type="text"  class="form-control text-center" name="deptoLectDosimControl" id="deptoLectDosimControl" value="{{$dosicontasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}" readonly>
+                                        <br>
+                                    </div>
+                                @endif
                                 <div class="col-md"></div>
                             </div>
                             <br>
@@ -125,7 +145,7 @@
                                     <input type="text" class="form-control" name="primDiaUsoLectDosimControl" id="primDiaUsoLectDosimControl" value="{{$dosicontasig->primer_dia_uso}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>OCUPACIÓN:</b> </label>
-                                    <input type="text"  class="form-control" name="ocupLectDosimControl" id="ocupLectDosimControl" value="{{$dosicontasig->contratodosimetriasede->dosimetriacontrato->ocupacion}}" readonly>
+                                    <input type="text"  class="form-control" name="ocupLectDosimControl" id="ocupLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}" readonly>
                                 </div>
                                 <div class="col m-4">
                                     <label for="floatingInputGrid"> <b>TIPO DOSÍMETRO:</b></label>
@@ -142,7 +162,7 @@
                                     <input type="text"  class="form-control" name="FIngServLectDosimControl" id="FIngServLectDosimControl" value="{{$dosicontasig->dosimetro->fecha_ingreso_servicio}}" readonly>
                                     <br>
                                     <label for="floatingInputGrid"> <b>PERIODO DE RECAMBIO:</b> </label>
-                                    <input type="text"  class="form-control" name="pRecamLectDosimControl" id="pRecamLectDosimControl" value="{{$dosicontasig->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}" readonly>
+                                    <input type="text"  class="form-control" name="pRecamLectDosimControl" id="pRecamLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}" readonly>
                                     <br>
                                 </div>
                                 <div class="col"></div>
@@ -167,7 +187,7 @@
                                             @method('put')
 
                                             <input type="NUMBER" id="mes_asignacion" name="mes_asignacion" value="{{$dosicontasig->mes_asignacion}}" hidden>
-                                            <input type="NUMBER" id="id_contratodosimetriasededepto" name="id_contratodosimetriasededepto" value="{{$dosicontasig->contdosisededepto_id}}" hidden>
+                                            <input type="NUMBER" id="id_contratodosimetriasededepto" name="id_contratodosimetriasededepto" value="{{$contdosisededepto->id_contdosisededepto}}" hidden>
                                             <div class="row g-2">
                                                 <div class="col-md-4 mx-4">
                                                     @if($dosicontasig->ubicacion == 'TORAX')
@@ -179,6 +199,11 @@
                                                         <div class="form-floating">
                                                             <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosicontasig->Hp007_calc_dose}}">
                                                             <label for="floatingInputGrid">Hp007 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
+                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosicontasig->Hp3_calc_dose}}">
+                                                            <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
                                                         </div>
                                                         <br>
                                                         <div class="form-floating">
@@ -420,7 +445,7 @@
                                                     <input type="submit" class="btn colorQA mt-2" name="update" id="update" value="EDITAR">
                                                 </div>
                                                 <div class="col-md d-grid gap-2">
-                                                    <a class="btn btn-danger mt-2" type="button" id="cancelar" name="cancelar" href="{{route('asignadosicontrato.info', ['asigdosicont' => $dosicontasig->contdosisededepto_id, 'mesnumber' => $dosicontasig->mes_asignacion ])}}"  role="button">CANCELAR</a>
+                                                    <a class="btn btn-danger mt-2" type="button" id="cancelar" name="cancelar" href="{{route('asignadosicontrato.info', ['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $dosicontasig->mes_asignacion ])}}"  role="button">CANCELAR</a>
                                                 </div>
                                                 <div class="col-md"></div>
                                                 <div class="col-md"></div>
@@ -450,7 +475,7 @@ crossorigin="anonymous">
     $(document).ready(function(){
         
         var TDcontrato = document.getElementById("id_contrato");
-        var num = parseInt('{{$dosicontasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}');
+        var num = parseInt('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->codigo_contrato}}');
         var n = num.toString().padStart(5,'0');
         console.log("ESTE ES EL CODIGO" +n);
         TDcontrato.innerHTML = "CONTRATO No."+n;
@@ -458,12 +483,12 @@ crossorigin="anonymous">
         
         // Creamos array con los meses del año
         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-        let fecha = new Date("{{$dosicontasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
+        let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
         console.log(fecha);
-        var numLec = '{{$dosicontasig->contratodosimetriasede->dosimetriacontrato->numlecturas_año}}';
+        var numLec = '{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->numlecturas_año}}';
         var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 1, 1);
         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
-        if('{{$dosicontasig->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
+        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
             var xx = 1; 
             for(var i=0; i<=(numLec-2); i++){
                 /* console.log("esta es la i="+i); */
@@ -487,7 +512,7 @@ crossorigin="anonymous">
                     }
                 }
             }
-        }else if('{{$dosicontasig->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
             var xx = 1;
             for(var i=0; i<=(numLec+1); i= i+3){
                 var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 3, 1);
@@ -512,7 +537,7 @@ crossorigin="anonymous">
                 }
                 
             }
-        }else if('{{$dosicontasig->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
             var xx = 1;
             for(var i=0; i<=(numLec+1); i= i+2){
                 var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 2, 1);
@@ -542,6 +567,10 @@ crossorigin="anonymous">
         $('#infoLectura a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')
+        });
+        $('#hp10_calc_dose').on('change', function(){
+            var hp10 = document.getElementById("hp10_calc_dose").value;
+            var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
         })
     })
 </script>

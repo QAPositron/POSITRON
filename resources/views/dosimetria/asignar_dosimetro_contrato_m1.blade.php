@@ -63,9 +63,11 @@
                                         {{-- <th class="align-middle">MUÑECA</th> --}}
                                         <th class="align-middle">AMBIENTAL</th>
                                         <th class="align-middle">CASO</th>
-                                        <th class="align-middle">CONTROL TÓRAX</th>
-                                        <th class="align-middle">CONTROL CRISTALINO</th>
-                                        <th class="align-middle">CONTROL ANILLO</th>
+                                        @if($contdosisededepto->controlTransT_unicoCont != 'TRUE' && $contdosisededepto->controlTransC_unicoCont != 'TRUE' && $contdosisededepto->controlTransA_unicoCont != 'TRUE')
+                                            <th class="align-middle">CONTROL TÓRAX</th>
+                                            <th class="align-middle">CONTROL CRISTALINO</th>
+                                            <th class="align-middle">CONTROL ANILLO</th>
+                                        @endif
                                         <th class="align-middle">TOTAL</th>
                                     </tr>
                                 </thead>
@@ -77,12 +79,33 @@
                                         {{-- <td class="text-center">{{$contdosisededepto->dosi_muñeca}}</td> --}}
                                         <td class="text-center">{{$contdosisededepto->dosi_area}}</td>
                                         <td class="text-center">{{$contdosisededepto->dosi_caso}}</td>
-                                        <td class="text-center">{{$contdosisededepto->dosi_control_torax}}</td>
-                                        <td class="text-center">{{$contdosisededepto->dosi_control_cristalino}}</td>
-                                        <td class="text-center">{{$contdosisededepto->dosi_control_dedo}}</td>
-                                        <td class="text-center">{{$contdosisededepto->dosi_torax + $contdosisededepto->dosi_cristalino + $contdosisededepto->dosi_dedo + $contdosisededepto->dosi_muñeca + $contdosisededepto->dosi_area + $contdosisededepto->dosi_caso + $contdosisededepto->dosi_control_torax + $contdosisededepto->dosi_control_cristalino + $contdosisededepto->dosi_control_dedo}}</td>
+                                        @if($contdosisededepto->controlTransT_unicoCont == 'TRUE' || $contdosisededepto->controlTransC_unicoCont == 'TRUE' || $contdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                            <td class="text-center">{{$contdosisededepto->dosi_torax + $contdosisededepto->dosi_cristalino + $contdosisededepto->dosi_dedo + $contdosisededepto->dosi_muñeca + $contdosisededepto->dosi_area + $contdosisededepto->dosi_caso}}</td>
+                                        @else
+                                            <td class="text-center">{{$contdosisededepto->dosi_control_torax}}</td>
+                                            <td class="text-center">{{$contdosisededepto->dosi_control_cristalino}}</td>
+                                            <td class="text-center">{{$contdosisededepto->dosi_control_dedo}}</td>
+                                            <td class="text-center">{{$contdosisededepto->dosi_torax + $contdosisededepto->dosi_cristalino + $contdosisededepto->dosi_dedo + $contdosisededepto->dosi_muñeca + $contdosisededepto->dosi_area + $contdosisededepto->dosi_caso + $contdosisededepto->dosi_control_torax + $contdosisededepto->dosi_control_cristalino + $contdosisededepto->dosi_control_dedo}}</td>
+                                        @endif
                                     </tr>
                                 </tbody>
+                                @if($contdosisededepto->controlTransT_unicoCont == 'TRUE' || $contdosisededepto->controlTransC_unicoCont == 'TRUE' || $contdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                    <tfoot>
+                                        <tr class="text-center table-active">
+                                            <th colspan='9'>DOSÍMETROS DE CONTROL TRANSPORTE</th>
+                                        </tr>
+                                        <tr class="text-center table-active">
+                                            <th  colspan='2' class="align-middle">TÓRAX</th>
+                                            <th  colspan='2' class="align-middle">CRISTALINO</th>
+                                            <th  colspan='2' class="align-middle">ANILLO</th>
+                                        </tr>
+                                        <tr class="text-center bg-light">
+                                            <td  colspan='2' >{{$contdosisededepto->controlTransT_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                            <td  colspan='2' >{{$contdosisededepto->controlTransC_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                            <td  colspan='2' >{{$contdosisededepto->controlTransA_unicoCont == 'TRUE' ? 1 : 0}}</td>   
+                                        </tr>
+                                    </tfoot>
+                                @endif
                             </table>
                         </div>
                     </div>
@@ -133,29 +156,7 @@
                         </div>
                     </div>
                 </div> 
-                <br>   
-                {{-- <div class="row g-2 mx-3">
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
-                            <label for="floatingInputGrid">FECHA ENVIO</label>
-                            
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
-                            <label for="floatingInputGrid">FECHA RECIBIDO</label>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
-                            <label for="floatingInputGrid">FECHA DEVUELTO</label>
-                        </div>
-                    </div>
-                </div>  
-                <br>--}}
+                <br> 
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
@@ -186,14 +187,72 @@
                                     <th style='width: 16.40%'>UBICACIÓN</th>
                                     <th style='width: 16.40%'>DOSÍMETRO</th>
                                     <th style='width: 16.40%'>HOLDER</th>
-                                    {{-- <th style='width: 16.60%'>OCUPACIÓN</th> --}}
                                 </thead> 
                                 <tbody>
                                     
                                     <input hidden name="mesNumber1" id="mesNumber1" value="{{$mesnumber}}">
                                     <input type="number" name="id_departamento_asigdosim" id="id_departamento_asigdosim" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                     <input type="number" name="id_contrato_asigdosim_sede" id="id_contrato_asigdosim_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
-                                        
+                                    <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria}}">
+                                    {{-- ///Filas creadas para el dosimetro de control transporte TORAX de todo el contrato/////// --}} 
+                                    @if($contdosisededepto->controlTransT_unicoCont == 'TRUE')
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TRANS. T.</td>
+                                            <td>
+                                                <select class="form-control id_dosimetro_ControlToraxUnico"  name="id_dosimetro_ControlToraxUnico" id="id_dosimetro_ControlToraxUnico" autofocus aria-label="Floating label select example" @if(count($dosimControlTransT) != 0) { disabled } @endif>
+                                                    <option value="@if(count($dosimControlTransT) != 0) {{$dosimControlTransT[0]->dosimetro_id}} @endif"> @if(count($dosimControlTransT) != 0) {{$dosimControlTransT[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                    @foreach($dosimLibresGeneral as $dosigenlib)
+                                                        <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle text-center'>N.A.</td>
+                                        </tr>
+                                    @endif
+                                    {{-- ///Filas creadas para el dosimetro de control transporte CRISTALINO de todo el contrato/////// --}} 
+                                    @if($contdosisededepto->controlTransC_unicoCont == 'TRUE')
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TRANS. C.</td>
+                                            <td>
+                                                <select class="form-select id_dosimetro_ControlCristalinoUnico"  name="id_dosimetro_ControlCristalinoUnico" id="id_dosimetro_ControlCristalinoUnico" autofocus aria-label="Floating label select example" @if(count($dosimControlTransC) != 0) { disabled } @endif>
+                                                    <option value="@if(count($dosimControlTransC) != 0) {{$dosimControlTransC[0]->dosimetro_id}} @endif">@if(count($dosimControlTransC) != 0) {{$dosimControlTransC[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                        <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select"  name="id_holder_ControlCristalinoUnico" id="id_holder_ControlCristalinoUnico" autofocus aria-label="Floating label select example" @if(count($dosimControlTransC) != 0) { disabled } @endif>
+                                                    <option value="@if(count($dosimControlTransC) != 0){{$dosimControlTransC[0]->holder_id}}@endif">@if(count($dosimControlTransC) != 0) {{$dosimControlTransC[0]->holder->codigo_holder}}@else ---- @endif</option>
+                                                    @foreach($holderLibresCristalino as $holibcris)
+                                                        <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    {{-- ///Filas creadas para el dosimetro de control transporte ANILLO de todo el contrato/////// --}} 
+                                    @if($contdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TRANS. A.</td>
+                                            <td>
+                                                <select class="form-select id_dosimetro_ControlDedoUnico"  name="id_dosimetro_ControlDedoUnico" id="id_dosimetro_ControlDedoUnico" @if(count($dosimControlTransA)) { disabled } @endif>
+                                                    <option value="@if(count($dosimControlTransA) != 0) {{$dosimControlTransA[0]->dosimetro_id}} @endif"> @if(count($dosimControlTransA) != 0) {{$dosimControlTransA[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                        <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select id_holder_ControlDedoUnico"  name="id_holder_ControlDedoUnico" id="id_holder_ControlDedoUnico" @if(count($dosimControlTransA) != 0) { disabled } @endif>
+                                                    <option value="@if(count($dosimControlTransA) != 0){{$dosimControlTransA[0]->holder_id}}@endif">@if(count($dosimControlTransA)!= 0){{$dosimControlTransA[0]->holder->codigo_holder}}@else ---- @endif</option>
+                                                    @foreach($holderLibresAnillo as $holibanillo)
+                                                        <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    @endif
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo control_torax DEL primer mes/////// --}}
                                     @for($i=1; $i<=$contdosisededepto->dosi_control_torax; $i++)
                                         <tr>
@@ -207,31 +266,6 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
-                                            {{-- <td>
-                                                <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" autofocus style="text-transform:uppercase">
-                                                    <option value="">----</option>
-                                                    <option value="AM">APLICCIONES MÉDICAS</option>
-                                                    <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                </select>
-                                            </td> --}}
                                         </tr>
                                     @endfor
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo control_cristalino DEL primer mes/////// --}}
@@ -254,31 +288,6 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            {{-- <td>
-                                                <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" autofocus style="text-transform:uppercase">
-                                                    <option value="">----</option>
-                                                    <option value="AM">APLICCIONES MÉDICAS</option>
-                                                    <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                </select>
-                                            </td> --}}
                                         </tr>
                                     @endfor
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo control_dedo DEL primer mes/////// --}}
@@ -301,31 +310,6 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            {{-- <td>
-                                                <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" autofocus style="text-transform:uppercase">
-                                                    <option value="">----</option>
-                                                    <option value="AM">APLICCIONES MÉDICAS</option>
-                                                    <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                </select>
-                                            </td> --}}
                                         </tr>
                                     @endfor
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo ambiental que falten por asignar en el primer mes/////// --}}
@@ -350,35 +334,10 @@
                                                     </select>
                                                 </td>
                                                 <td class='align-middle text-center'>N.A</td>
-                                                {{-- <td>
-                                                    <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="AM">APLICCIONES MÉDICAS</option>
-                                                        <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    </select>
-                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor
-
+                                    
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo caso que falten por asignar en el primer mes/////// --}}
                                     @for($i=1; $i<=$contdosisededepto->dosi_caso; $i++)
                                         @if($mesnumber = 1)
@@ -401,31 +360,6 @@
                                                     </select>
                                                 </td>
                                                 <td class='align-middle text-center'>N.A</td>
-                                                {{-- <td>
-                                                    <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="AM">APLICCIONES MÉDICAS</option>
-                                                        <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    </select>
-                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor
@@ -453,31 +387,6 @@
                                                     </select>
                                                 </td>
                                                 <td class='align-middle text-center'>N.A</td>
-                                                {{-- <td>
-                                                    <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="AM">APLICCIONES MÉDICAS</option>
-                                                        <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    </select>
-                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor
@@ -512,37 +421,12 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                {{-- <td>
-                                                    <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="AM">APLICCIONES MÉDICAS</option>
-                                                        <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    </select>
-                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor  
 
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo EXTREMIDAD  que falten por asignar en el primer mes/////// --}}
-                                    @for($i=1; $i<=$contdosisededepto->dosi_muñeca; $i++)
+                                    {{-- @for($i=1; $i<=$contdosisededepto->dosi_muñeca; $i++)
                                         @if($mesnumber = 1)
                                             <tr>
                                                 <td>
@@ -571,34 +455,10 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                {{-- <td>
-                                                    <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="AM">APLICCIONES MÉDICAS</option>
-                                                        <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    </select>
-                                                </td> --}}
                                             </tr>
                                         @endif
-                                    @endfor 
+                                    @endfor  --}}
+
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo ANILLO  que falten por asignar en el primer mes/////// --}}
                                     @for($i=1; $i<=$contdosisededepto->dosi_dedo; $i++)
                                         @if($mesnumber = 1)
@@ -629,31 +489,6 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                {{-- <td>
-                                                    <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="AM">APLICCIONES MÉDICAS</option>
-                                                        <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    </select>
-                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endfor 
@@ -708,14 +543,16 @@
     $(document).ready(function() {
         //select2 para dosimetros de tipo control////
         $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",});
-        $('#ocupacion_asigdosimControlTorax').select2({width: "100%",});
         $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%",});
         $('#id_holder_asigdosimControlCristalino').select2({width: "100%",});
-        $('#ocupacion_asigdosimControlCristalino').select2({width: "100%",});
         $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%",});
         $('#id_holder_asigdosimControlDedo').select2({width: "100%",});
-        $('#ocupacion_asigdosimControlDedo').select2({width: "100%",});
-        
+
+        $('#id_dosimetro_ControlToraxUnico').select2({width: "100%",});
+        $('#id_dosimetro_ControlCristalinoUnico').select2({width: "100%",});
+        $('#id_holder_ControlCristalinoUnico').select2({width: "100%",});
+        $('#id_dosimetro_ControlDedoUnico').select2({width: "100%",});
+        $('#id_holder_ControlDedoUnico').select2({width: "100%",});
         /////SELECT2 PARA LOS SELECTS DE TRABAJADORES//////// 
         var trabj_torax = document.querySelectorAll('select[name="id_trabajador_asigdosimTorax[]"]');
         for(var i = 0; i < trabj_torax.length; i++){
@@ -795,38 +632,6 @@
             holder_dedo[i].setAttribute("id", "id_holder_asigdosimDedo"+[i]);
             $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%",});
         }
-        ///SELECT2 PAR LOS SELECT DE LAS OCUPACIONES/////
-        var ocu_area = document.querySelectorAll('select[name="ocupacion_asigdosimArea[]"');
-        for(var i = 0; i < ocu_area.length; i++){
-            ocu_area[i].setAttribute("id", "ocupacion_asigdosimArea"+[i]);
-            $('#ocupacion_asigdosimArea'+[i]).select2({width: "100%",});
-        }
-        var ocu_caso = document.querySelectorAll('select[name="ocupacion_asigdosimCaso[]"');
-        for(var i = 0; i < ocu_caso.length; i++){
-            ocu_caso[i].setAttribute("id", "ocupacion_asigdosimCaso"+[i]);
-            $('#ocupacion_asigdosimCaso'+[i]).select2({width: "100%",});
-        }
-        var ocu_torax = document.querySelectorAll('select[name="ocupacion_asigdosimTorax[]"');
-        for(var i = 0; i < ocu_torax.length; i++){
-            ocu_torax[i].setAttribute("id", "ocupacion_asigdosimTorax"+[i]);
-            $('#ocupacion_asigdosimTorax'+[i]).select2({width: "100%",});
-        }
-        var ocu_cristalino = document.querySelectorAll('select[name="ocupacion_asigdosimCristalino[]"');
-        for(var i = 0; i < ocu_cristalino.length; i++){
-            ocu_cristalino[i].setAttribute("id", "ocupacion_asigdosimCristalino"+[i]);
-            $('#ocupacion_asigdosimCristalino'+[i]).select2({width: "100%",});
-        }
-        var ocu_muñeca = document.querySelectorAll('select[name="ocupacion_asigdosimMuneca[]"');
-        for(var i = 0; i < ocu_muñeca.length; i++){
-            ocu_muñeca[i].setAttribute("id", "ocupacion_asigdosimMuneca"+[i]);
-            $('#ocupacion_asigdosimMuneca'+[i]).select2({width: "100%",});
-        }
-        var ocu_dedo = document.querySelectorAll('select[name="ocupacion_asigdosimDedo[]"');
-        for(var i = 0; i < ocu_dedo.length; i++){
-            ocu_dedo[i].setAttribute("id", "ocupacion_asigdosimDedo"+[i]);
-            $('#ocupacion_asigdosimDedo'+[i]).select2({width: "100%",});
-        }
-
     });
     
 </script>
@@ -853,6 +658,175 @@
                                 icon: 'error'
                             });
                     
+            };
+            /////////////////////VALIDACION PARA LOS DOSIMETROS CONTROL /////////////////
+            var dosimControlTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlTorax[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL TORAX");
+            console.log(dosimControlTorax);
+            for(var i = 0; i < dosimControlTorax.length; i++){
+                var values = dosimControlTorax[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimControlTorax.length; x++){
+                    var valuesX = dosimControlTorax[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            
+            var dosimControlCristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlCristalino[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL CRISTALINO");
+            console.log(dosimControlCristalino);
+            for(var i = 0; i < dosimControlCristalino.length; i++){
+                var values = dosimControlCristalino[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimControlCristalino.length; x++){
+                    var valuesX = dosimControlCristalino[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            var dosimControlDedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlDedo[]"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL DEDO");
+            console.log(dosimControlDedo);
+            for(var i = 0; i < dosimControlDedo.length; i++){
+                var values = dosimControlDedo[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var x = 0; x < dosimControlDedo.length; x++){
+                    var valuesX = dosimControlDedo[x].value;
+                    if(values == valuesX && i != x){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+
+                for(var y = 0; y < dosimControlCristalino.length; y++){
+                    var valuesCrist = dosimControlCristalino[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            /////VALIDACION DOSIMETROS CONTROL TRANSPORTE UNICO//////
+            
+            var dosimControlToraxUni = document.querySelectorAll('select[name="id_dosimetro_ControlToraxUnico"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL TORAX UNICO");
+            console.log(dosimControlToraxUni);
+            for(var i = 0; i < dosimControlToraxUni.length; i++){
+                var values = dosimControlToraxUni[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL TRANSPORTE TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+            };
+            
+            var dosimControlCristalinoUni = document.querySelectorAll('select[name="id_dosimetro_ControlCristalinoUnico"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL CRISTALINO UNICO");
+            console.log(dosimControlCristalinoUni);
+            for(var i = 0; i < dosimControlCristalinoUni.length; i++){
+                var values = dosimControlCristalinoUni[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL TRANSPORTE CRISTALINO ",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+            };
+            
+            var dosimControlDedoUni = document.querySelectorAll('select[name="id_dosimetro_ControlDedoUnico"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL DEDO UNICO");
+            console.log(dosimControlDedoUni);
+            for(var i = 0; i < dosimControlDedoUni.length; i++){
+                var values = dosimControlDedoUni[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL TRANSPORTE ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+
+                for(var y = 0; y < dosimControlCristalinoUni.length; y++){
+                    var valuesCrist = dosimControlCristalinoUni[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE CRISTALINO ",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+
+            for(var i = 0; i < dosimControlCristalinoUni.length; i++){
+                var values = dosimControlCristalinoUni[i].value;
+                for(var y = 0; y < dosimControlDedoUni.length; y++){
+                    var valuesDedo = dosimControlDedoUni[y].value;
+                    if(values == valuesDedo){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSIMETROS DE UBICACIÓN CONTROL TRANSPORTE ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            for(var i = 0; i < dosimControlDedoUni.length; i++){
+                var values = dosimControlDedoUni[i].value;
+                for(var y = 0; y < dosimControlCristalinoUni.length; y++){
+                    var valuesCrist = dosimControlCristalinoUni[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN CONTROL TRANSPORTE CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
             };
             ///////////////////////VALIDACION PARA LOS TRABAJADORES Y AREAS /////////////////
             var trabjTorax = document.querySelectorAll('select[name="id_trabajador_asigdosimTorax[]"]');
@@ -940,97 +914,14 @@
                     
                 }
             }
-            /////////////////////VALIDACION PARA LOS DOSIMETROS  /////////////////
-            var dosimControlTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlTorax[]"]');
-            console.log("ESTAS SON LOS  DOSIM CONTROL TORAX");
-            console.log(dosimControlTorax);
-            for(var i = 0; i < dosimControlTorax.length; i++){
-                var values = dosimControlTorax[i].value;
-                if(values == ''){
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL TÓRAX",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                    
-                };
-                for(var x = 0; x < dosimControlTorax.length; x++){
-                    var valuesX = dosimControlTorax[x].value;
-                    if(values == valuesX && i != x){
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS DE CONTROL TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            }
-            var dosimControlCristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlCristalino[]"]');
-            console.log("ESTAS SON LOS  DOSIM CONTROL CRISTALINO");
-            console.log(dosimControlCristalino);
-            for(var i = 0; i < dosimControlCristalino.length; i++){
-                var values = dosimControlCristalino[i].value;
-                if(values == ''){
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL CRISTALINO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                    
-                };
-                for(var x = 0; x < dosimControlCristalino.length; x++){
-                    var valuesX = dosimControlCristalino[x].value;
-                    if(values == valuesX && i != x){
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS DE CONTROL CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            }
-            var dosimControlDedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlDedo[]"]');
-            console.log("ESTAS SON LOS  DOSIM CONTROL DEDO");
-            console.log(dosimControlDedo);
-            for(var i = 0; i < dosimControlDedo.length; i++){
-                var values = dosimControlDedo[i].value;
-                if(values == ''){
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUN DOSÍMETRO DE TIPO CONTROL ANILLO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                    
-                };
-                for(var x = 0; x < dosimControlDedo.length; x++){
-                    var valuesX = dosimControlDedo[x].value;
-                    if(values == valuesX && i != x){
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS DE CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-
-                for(var y = 0; y < dosimControlCristalino.length; y++){
-                    var valuesCrist = dosimControlCristalino[y].value;
-                    if(values == valuesCrist){
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS DE CONTROL ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL CRISTALINO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            }
-
-
+            /////////////////////VALIDACION PARA LOS DOSIMETROS /////////////////
             var dosimArea = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
             console.log("ESTAS SON LOS DOSIMTROS AREA");
             console.log(dosimArea);
             for(var i = 0; i < dosimArea.length; i++){
                 var values = dosimArea[i].value;
+                console.log("***SON LOS DOSIM AREA");
+                console.log(values);
                 if(values == ''){
                     /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
                     return Swal.fire({
@@ -1050,7 +941,20 @@
                             });
                     }
                 }
-            }
+                for(var x = 0; x < dosimControlToraxUni.length; x++){
+                    var valuesX = dosimControlToraxUni[x].value;
+                    console.log("***SON LOS DOSIMTORAX UNICOS");
+                    console.log(valuesX);
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN ÁREA SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
+                }
+                
+            };
             var dosimCaso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
             console.log("ESTAS SON LOS DOSIMETROS CASO");
             console.log(dosimCaso);
@@ -1074,7 +978,27 @@
                             });
                     }
                 }
-            }
+                for(var x = 0; x < dosimControlToraxUni.length; x++){
+                    var valuesX = dosimControlToraxUni[x].value;
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CASO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
+                }
+                for(var x = 0; x < dosimArea.length; x++){
+                    var valuesX = dosimArea[x].value;
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CASO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACION ÁREA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
+                }
+            };
             var dosimTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
             console.log("ESTAS SON LOS DOSIMETROS TORAX");
             console.log(dosimTorax);
@@ -1109,7 +1033,38 @@
                             });
                     }
                 }
-            }
+                for(var x = 0; x < dosimControlToraxUni.length; x++){
+                    var valuesX = dosimControlToraxUni[x].value;
+                    if(values == valuesX){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACION TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
+                }
+                for(var x = 0; x < dosimArea.length; x++){
+                    var valuesX = dosimArea[x].value;
+                    if(values == valuesX){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACION ÁREA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
+                }
+                for(var x = 0; x < dosimCaso.length; x++){
+                    var valuesX = dosimCaso[x].value;
+                    if(values == valuesX){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACION CASO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
+                }
+            
+            };
             var dosimCristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
             console.log("ESTAS SON LOS DOSIMETROS CRISTALINO");
             console.log(dosimCristalino);
@@ -1154,33 +1109,27 @@
                             });
                     }
                 }
-            }
-            var dosimMuneca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"]');
-            console.log("ESTAS SON LOS DOSIMETROS MUÑECA");
-            console.log(dosimMuneca);
-            for(var i = 0; i < dosimMuneca.length; i++){
-                var values = dosimMuneca[i].value;
-                if(values == ''){
-                    /* return alert("FALTA SELECCIONAR ALGUN TRABAJADOR"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR EL DOSÍMETRO PARA UNO DE UBICACIÓN MUÑECA",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                    
-                };
-                for(var x = 0; x < dosimMuneca.length; x++){
-                    var valuesX = dosimMuneca[x].value;
-                    if(values == valuesX && i != x){
+                for(var y = 0; y < dosimControlCristalinoUni.length; y++){
+                    var valuesCrist = dosimControlCristalinoUni[y].value;
+                    if(values == valuesCrist){
                         return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN MUÑECA SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE CRISTALINO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
                     }
                 }
-            }
-
+                for(var y = 0; y < dosimControlDedoUni.length; y++){
+                    var valuesDedo = dosimControlDedoUni[y].value;
+                    if(values == valuesDedo){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
             var dosimAnillo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
             console.log("ESTAS SON LOS DOSIMETROS ANILLO");
             console.log(dosimAnillo);
@@ -1221,6 +1170,26 @@
                     if(values == valuesCrist){
                         return Swal.fire({
                                 title:"ALGUNOS DOSÍMETROS DE CONTROL CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimControlDedoUni.length; y++){
+                    var valuesDedo = dosimControlDedoUni[y].value;
+                    if(values == valuesDedo){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimControlCristalinoUni.length; y++){
+                    var valuesCrist = dosimControlCristalinoUni[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN ANILLO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
@@ -1277,6 +1246,7 @@
                     }
                 }
             }
+
             /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE CRISTALINO y (ANILLO, MUÑECA) /////////////////
             
             var dosimCrist = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
@@ -1324,52 +1294,7 @@
                     }
                 }
             }
-            /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE MUÑECA y (ANILLO, CRISTALINO) /////////////////
-            var dosimMun = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"]');
-            console.log("DOSIMETROS DE TIPO MUÑECA");
-            console.log(dosimMun);
-            for(var i = 0; i < dosimMun.length; i++){
-                console.log("DOSIMETRO MUÑECA POSICION" +i);
-                var valuesMun = dosimMun[i].value;
-                console.log(valuesMun);
-                var dosimAni = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
-                console.log("DOSIMETROS DE TIPO ANILLO");
-                console.log(dosimAni);
-                for(var x = 0; x < dosimAni.length; x++){
-                    console.log("DOSIMETRO ANILLO POSICION" +x);
-                    var valuesAni = dosimAni[x].value;
-                    console.log(valuesAni);
-                    if(valuesMun == valuesAni){
-
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            }); 
-                    }
-                }
-            };
-            for(var i = 0; i < dosimMun.length; i++){
-                console.log("DOSIMETRO MUÑECA POSICION" +i);
-                var valuesMun = dosimMun[i].value;
-                console.log(valuesMun);
-                var dosimCris = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
-                console.log("DOSIMETROS DE TIPO CRISTALINO");
-                console.log(dosimCris);
-                console.log("TAMAÑO DOSIMETRO CRISTALINO" +dosimCris.length)
-                for(var x = 0; x < dosimCris.length; x++){
-                    console.log("DOSIMETRO CRISTALINO POSICION" +x);
-                    var valuesCris = dosimCris[x].value;
-                    console.log(valuesCris);
-                    if(valuesMun == valuesCris){
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            }
+            
             /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE ANILLO y (MUÑECA, CRISTALINO) /////////////////
             var dosimAni = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
             console.log("DOSIMETROS DE TIPO ANILLO");
@@ -1419,6 +1344,46 @@
             };
             
             /////////////////////VALIDACION PARA LOS HOLDERS /////////////////
+            var holContTransCristalino = document.querySelectorAll('select[name="id_holder_ControlCristalinoUnico"]');
+            console.log("ESTAS SON LOS HOLDERS DE CRISTALINO DE LOS CONTROLES TRANSPORTE UNICOS");
+            console.log(holContTransCristalino);
+            for(var i = 0; i < holContTransCristalino.length; i++) {
+                var values = holContTransCristalino[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER PARA DOSÍMETRO DE CONTROL TRANSPORTE CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                };
+               
+            };
+            var holContTransAnillo = document.querySelectorAll('select[name="id_holder_ControlDedoUnico"]');
+            console.log("ESTAS SON LOS HOLDERS DE ANILLO DE LOS CONTROLES TRANSPORTE UNICOS");
+            console.log(holContTransAnillo);
+            for(var i = 0; i < holContTransAnillo.length; i++) {
+                var values = holContTransAnillo[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER PARA DOSÍMETRO DE CONTROL TRANSPORTE ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                };
+                for(var x = 0; x < holContTransCristalino.length; x++){
+                    var valuesX = holContTransCristalino[x].value;
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS DE CONTROL TRANSPORTE ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS HOLDERS DE CONTROL TRANSPORTE CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+               
+            };
             var holCristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"]');
             console.log("ESTAS SON LOS HOLDERS DE CRISTALINO");
             console.log(holCristalino);
@@ -1437,6 +1402,16 @@
                     if(values == valuesX && i != x){
                         return Swal.fire({
                                 title:"ALGUNOS HOLDERS DE UBICACIÓN CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var x = 0; x < holContTransCristalino.length; x++){
+                    var valuesX = holContTransCristalino[x].value;
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS DE CONTROL TRANSPORTE CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS HOLDERS DE CONTROL TRANSPORTE CRISTALINO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
@@ -1467,130 +1442,9 @@
                     }
                 }
             };
-            var holMuneca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"]');
-            console.log("ESTAS SON LOS HOLDERS DE ANILLO");
-            console.log(holMuneca);
-            for(var i = 0; i < holMuneca.length; i++) {
-                var values = holMuneca[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGÚN HOLDER PARA DOSÍMETRO DE UBICACIÓN MUÑECA",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                };
-                for(var x = 0; x < holMuneca.length; x++){
-                    var valuesX = holMuneca[x].value;
-                    if(values == valuesX && i != x){
-                        return Swal.fire({
-                                title:"ALGUNOS HOLDERS DE UBICACIÓN MUÑECA SELECCIONADOS SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            };  
 
-            /////////////////////VALIDACION PARA LAS OCUPACIONES /////////////////
-            var ocuControl = document.querySelectorAll('select[name="ocupacion_asigdosimControl[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE CONTROL");
-            console.log(ocuControl);  
-            for(var i = 0; i < ocuControl.length; i++) {
-                var values = ocuControl[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE DOSIMETRO CONTROL",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuArea = document.querySelectorAll('select[name="ocupacion_asigdosimArea[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE AREA");
-            console.log(ocuArea);  
-            for(var i = 0; i < ocuArea.length; i++) {
-                var values = ocuArea[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN ÁREA",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuCaso = document.querySelectorAll('select[name="ocupacion_asigdosimCaso[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE CASO");
-            console.log(ocuCaso);  
-            for(var i = 0; i < ocuCaso.length; i++) {
-                var values = ocuCaso[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN CASO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuTorax = document.querySelectorAll('select[name="ocupacion_asigdosimTorax[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE TORAX");
-            console.log(ocuTorax);  
-            for(var i = 0; i < ocuTorax.length; i++) {
-                var values = ocuTorax[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN TÓRAX",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuCristalino = document.querySelectorAll('select[name="ocupacion_asigdosimCristalino[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE CRISTALINO");
-            console.log(ocuCristalino);  
-            for(var i = 0; i < ocuCristalino.length; i++) {
-                var values = ocuCristalino[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN CRISTALINO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuMuneca = document.querySelectorAll('select[name="ocupacion_asigdosimMuneca[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE MUÑECA");
-            console.log(ocuMuneca);  
-            for(var i = 0; i < ocuMuneca.length; i++) {
-                var values = ocuMuneca[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN MUÑECA",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuAnillo = document.querySelectorAll('select[name="ocupacion_asigdosimDedo[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE ANILLO");
-            console.log(ocuAnillo);  
-            for(var i = 0; i < ocuAnillo.length; i++) {
-                var values = ocuAnillo[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN ANILLO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
+            
+            
 
             Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN??",

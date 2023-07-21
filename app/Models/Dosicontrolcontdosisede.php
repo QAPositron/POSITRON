@@ -38,4 +38,9 @@ class Dosicontrolcontdosisede extends Model
      public function obsreventradas(){
         return $this->hasOne(Obsreventrada::class, 'dosicontrol_id', 'id_dosicontrolcontdosisedes');
     }
+    //Relacion uno a muchos (inversa) con dosimetria contrato
+    public function dosimetriacontrato(){
+        /* return $this->belongsTo('App\Models\Empresa'); */
+        return $this->belongsTo(Dosimetriacontrato::class, 'contratodosimetria_id', 'id_contratodosimetria');
+    }
 }

@@ -9,10 +9,6 @@
             </svg>
         </a>
     </div>
-    {{-- <div class="col-md-6">
-        <h3 class="text-center">xxxxLECTURA DE DOSÍMETRO </h3>
-        <h3 class="text-center">ESPECIALIDAD: {{$trabjasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}} <br> CONTRATO No. {{$trabjasig->contratodosimetriasede->dosimetriacontrato->codigo_contrato}} - MES {{$trabjasig->mes_asignacion}}</h3>
-    </div> --}}
     <div class="col-md-9">
         <h2 class="text-center">DOSIMETRÍA DE </h2> 
         <h3 class="text-center"><i>{{$trabjasig->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$trabjasig->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
@@ -203,6 +199,15 @@
                                                             <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$trabjasig->Hp007_calc_dose}}">
                                                         @endif
                                                         <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-floating">
+                                                        @if($trabjasig->nota2 == 'TRUE'|| $trabjasig->DNL == 'TRUE'|| $trabjasig->EU == 'TRUE' || $trabjasig->DSU =='TRUE' || $trabjasig->DPL =='TRUE'|| $trabjasig->measurement_date != '')
+                                                            <input type="NUMBER" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose_readonly" value="{{$trabjasig->Hp3_calc_dose}}" readonly>
+                                                        @else
+                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$trabjasig->Hp3_calc_dose}}">
+                                                        @endif
+                                                        <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
                                                     </div>
                                                     <br>
                                                     <div class="form-floating">
@@ -743,7 +748,7 @@ crossorigin="anonymous">
     })
     $(document).ready(function(){
         if('{{$trabjasig->ubicacion}}' == 'TORAX' || '{{$trabjasig->ubicacion}}' == 'CASO'){
-            $('#hp10_calc_dose').on('change', function(){
+            $('#hp10_calc_dose').on('keyup', function(){
                 var hp10 = document.getElementById("hp10_calc_dose").value;
                 var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
             })

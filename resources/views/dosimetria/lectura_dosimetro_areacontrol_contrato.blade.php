@@ -154,7 +154,7 @@
                     </div>
                     <!-- //////////////////// PESTAÑA DE LECTURA//////////////// -->
                     <div class="tab-pane" id="lectura" role="tabpanel" aria-labelledby="lectura-tab">
-                        <h4 class="card-title text-center pt-3">{{$dosiareasig->areadepartamentosede->nombre_area}} <br> CÓDIGO DEL DOSÍMETRO: {{$dosiareasig->dosimetro->codigo_dosimeter}}</h4>
+                        <h4 class="card-title text-center pt-3">ÁREA: {{$dosiareasig->areadepartamentosede->nombre_area}} <br> CÓDIGO DEL DOSÍMETRO: {{$dosiareasig->dosimetro->codigo_dosimeter}}</h4>
                         
                         <BR></BR>
                         <Label class="px-5">INGRESE LA INFORMACIÓN DE LA LECTURA DEL DOSÍMETRO ASIGNADO:</Label>
@@ -195,6 +195,15 @@
                                                 <br>
                                                 <div class="form-floating">
                                                     @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose_readonly" value="{{$dosiareasig->Hp3_calc_dose}}" readonly>
+                                                    @else
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosiareasig->Hp3_calc_dose}}">
+                                                    @endif
+                                                    <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
+                                                </div>
+                                                <br>
+                                                <div class="form-floating">
+                                                    @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
                                                         <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosiareasig->measurement_date}}" readonly>
                                                     @else
                                                         <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$dosiareasig->measurement_date}}">
@@ -204,7 +213,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md">
-                                                <label for="">DOSÍMETRO DE CONTROL {{ $dosicontrolasig->ubicacion}}:</label>
+                                                <label for="">DOSÍMETRO DE CONTROL TRANSPORTE {{$dosicontrolasig->ubicacion}}:</label>
                                                 <div class="row">
                                                     @if($dosicontrolasig->ubicacion == 'TORAX')
                                                         <div class="col-md">
@@ -219,25 +228,12 @@
                                                                 <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md"></div>
-                                                    @elseif($dosicontrolasig->ubicacion == 'CRISTALINO')
                                                         <div class="col-md">
                                                             <div class="form-floating">
                                                                 <input type="NUMBER" class="form-control" name="hp3_calc_dose_control" id="hp3_calc_dose_control_readonly" value="{{$dosicontrolasig->Hp3_calc_dose}}" readonly>
                                                                 <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md"></div>
-                                                        <div class="col-md"></div>
-                                                    @elseif($dosicontrolasig->ubicacion == 'ANILLO')
-                                                        <div class="col-md">
-                                                            <div class="form-floating">
-                                                                <input type="NUMBER" class="form-control" name="hp007_calc_dose_control" id="hp007_calc_dose_control_readonly" value="{{ $dosicontrolasig->Hp007_calc_dose}}" readonly>
-                                                                <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md"></div>
-                                                        <div class="col-md"></div>
                                                     @endif
                                                 </div>
                                                 <br>
@@ -723,14 +719,14 @@ crossorigin="anonymous">
             })
         
     })
-    /* $(document).ready(function(){
+    $(document).ready(function(){
         
-        $('#hp10_calc_dose').on('change', function(){
+        $('#hp10_calc_dose').on('keyup', function(){
             var hp10 = document.getElementById("hp10_calc_dose").value;
             var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
         })
         
-    })  */
+    })
 </script>
 
 

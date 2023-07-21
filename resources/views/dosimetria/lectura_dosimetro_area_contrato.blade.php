@@ -195,6 +195,15 @@
                                                 <br>
                                                 <div class="form-floating">
                                                     @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
+                                                        <input type="NUMBER" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose_readonly" value="{{$dosiareasig->Hp3_calc_dose}}" readonly>
+                                                    @else
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosiareasig->Hp3_calc_dose}}">
+                                                    @endif
+                                                    <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
+                                                </div>
+                                                <br>
+                                                <div class="form-floating">
+                                                    @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
                                                         <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosiareasig->measurement_date}}" readonly>
                                                     @else
                                                         <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$dosiareasig->measurement_date}}">
@@ -687,14 +696,14 @@ crossorigin="anonymous">
             })
         
     })
-    /* $(document).ready(function(){
+    $(document).ready(function(){
         
-        $('#hp10_calc_dose').on('change', function(){
+        $('#hp10_calc_dose').on('keyup', function(){
             var hp10 = document.getElementById("hp10_calc_dose").value;
             var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
         })
         
-    })  */
+    })
 </script>
 
 

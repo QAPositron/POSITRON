@@ -31,9 +31,11 @@
                                         {{-- <th class="align-middle">MUÑECA</th> --}}
                                         <th class="align-middle">AMBIENTAL</th>
                                         <th class="align-middle">CASO</th>
-                                        <th class="align-middle">CONTROL TÓRAX</th>
-                                        <th class="align-middle">CONTROL CRISTALINO</th>
-                                        <th class="align-middle">CONTROL ANILLO</th>
+                                        @if($mescontdosisededepto->controlTransT_unicoCont != 'TRUE' && $mescontdosisededepto->controlTransC_unicoCont != 'TRUE' && $mescontdosisededepto->controlTransA_unicoCont != 'TRUE')
+                                            <th class="align-middle">CONTROL TÓRAX</th>
+                                            <th class="align-middle">CONTROL CRISTALINO</th>
+                                            <th class="align-middle">CONTROL ANILLO</th>
+                                        @endif
                                         <th class="align-middle">TOTAL</th>
                                     </tr>
                                 </thead>
@@ -45,12 +47,33 @@
                                         {{-- <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td> --}}
                                         <td class="text-center">{{$mescontdosisededepto->dosi_area}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_caso}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_cristalino}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_dedo}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_dedo + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_caso + $mescontdosisededepto->dosi_control_torax + $mescontdosisededepto->dosi_control_cristalino + $mescontdosisededepto->dosi_control_dedo}}</td>
+                                        @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransC_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_dedo + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_caso}}</td>
+                                        @else
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_control_cristalino}}</td>
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_control_dedo}}</td>
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_dedo + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_caso + $mescontdosisededepto->dosi_control_torax + $mescontdosisededepto->dosi_control_cristalino + $mescontdosisededepto->dosi_control_dedo}}</td>
+                                        @endif
                                     </tr>
                                 </tbody>
+                                @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransC_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                    <tfoot>
+                                        <tr class="text-center table-active">
+                                            <th colspan='9'>DOSÍMETROS DE CONTROL TRANSPORTE</th>
+                                        </tr>
+                                        <tr class="text-center table-active">
+                                            <th  colspan='2' class="align-middle">TÓRAX</th>
+                                            <th  colspan='2' class="align-middle">CRISTALINO</th>
+                                            <th  colspan='2' class="align-middle">ANILLO</th>
+                                        </tr>
+                                        <tr class="text-center bg-light">
+                                            <td  colspan='2' >{{$mescontdosisededepto->controlTransT_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                            <td  colspan='2' >{{$mescontdosisededepto->controlTransC_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                            <td  colspan='2' >{{$mescontdosisededepto->controlTransA_unicoCont == 'TRUE' ? 1 : 0}}</td>   
+                                        </tr>
+                                    </tfoot>
+                                @endif
                             </table>
                         </div>
                     </div>
@@ -84,23 +107,7 @@
                         </div>
                     </div>
                 </div> 
-                <br>   
-                {{-- <div class="row g-2 mx-3">
-                    
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
-                            <label for="floatingInputGrid">FECHA RECIBIDO</label>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
-                            <label for="floatingInputGrid">FECHA DEVUELTO</label>
-                        </div>
-                    </div>
-                </div> 
-                <br> --}}
+                <br>
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
@@ -131,12 +138,12 @@
                                     <th style='width: 16.40%'>UBICACIÓN</th>
                                     <th style='width: 16.40%'>DOSÍMETRO</th>
                                     <th style='width: 16.40%'>HOLDER</th>
-                                    {{-- <th style='width: 20.60%'>OCUPACIÓN</th> --}}
                                 </thead>
                                 <tbody>
                                     <input hidden name="mesNumber1" id="mesNumber1" value="{{$mesnumber}}">
                                     <input type="number" name="id_departamento_asigdosim" id="id_departamento_asigdosim" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                     <input type="number" name="id_contrato_asigdosim_sede" id="id_contrato_asigdosim_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
+                                    <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria}}">
                                     
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo CONTROL TORAX asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
                                     @foreach($dosicontrolToraxmesant as $dosicontrolToraxant)
@@ -151,24 +158,6 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
-                                            {{-- <td>
-                                                <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" style="text-transform:uppercase" @if($dosicontrolToraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosicontrolToraxant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicontrolToraxant->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                        @elseif($dosicontrolToraxant->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        @elseif($dosicontrolToraxant->ocupacion=='O')
-                                                            <option selected hidden value="O">OTRO</option>
-                                                        @endif
-                                                    @endif
-                                                    <option value="">----</option>
-                                                    <option value="AM">APLICCIONES MÉDICAS</option>
-                                                    <option value="AI">APLICCIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-                                                </select>
-                                            </td> --}}
-                                            
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL TORAX asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
@@ -178,41 +167,33 @@
                                                 <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
                                                 <td class='align-middle'>
                                                     <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" autofocus aria-label="Floating label select example">
-                                                        <option value="">----</option>
+                                                        <option value="">--</option>
                                                         @foreach($dosimLibresGeneral as $dosigenlib)
                                                             <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>
                                                 <td class='align-middle text-center'>N.A.</td>
-                                                {{-- <td>
-                                                    <select class="form-select ocupacion_asigdosimControlTorax" name="ocupacion_asigdosimControlTorax[]" id="ocupacion_asigdosimControlTorax" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                         <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-                                                    </select>
-                                                </td> --}}
                                                 <td></td>
                                             </tr>
                                         @endfor
                                     @endif
-                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CONTROL TORAX/////// --}}
+                                    {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL TORAX POR CONTRATO/////// --}}
+                                    @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE')
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TRANS. T.</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_ControlToraxUnico"  name="id_dosimetro_ControlToraxUnico" id="id_dosimetro_ControlToraxUnico" @if(count($dosicontrolToraxUnicomesact) != 0) { disabled } @elseif($dosicontrolToraxUnicomesant[0]->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if(count($dosicontrolToraxUnicomesact) != 0) {{$dosicontrolToraxUnicomesact[0]->dosimetro_id}} @elseif($dosicontrolToraxUnicomesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolToraxUnicomesant[0]->dosimetro_id}} @endif"> @if(count($dosicontrolToraxUnicomesact) != 0){{$dosicontrolToraxUnicomesact[0]->dosimetro->codigo_dosimeter}} @elseif($dosicontrolToraxUnicomesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolToraxUnicomesant[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                    @foreach($dosimLibresGeneral as $dosigenlib)
+                                                        <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle text-center'>N.A.</td>
+                                        </tr>
+                                    @endif
+                                    {{-- ///FIN DE LA CREACION DE LAS Filas creadas PARA LA CANTIDAD DE DOSIMETROS tipo  CONTROL TORAX/////// --}}
 
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo CONTROL CRISTALINO asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
                                     @foreach($dosicontrolCristalinomesant as $dosicontrolCristalinoant)
@@ -234,41 +215,9 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            {{-- <td>
-                                                <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" style="text-transform:uppercase" @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicontrolCristalinoant->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                        @elseif($dosicontrolCristalinoant->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        @elseif($dosicontrolCristalinoant->ocupacion=='O')
-                                                            <option selected hidden value="O">OTRO</option>
-                                                        @endif
-                                                    @endif
-                                                    <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-                                                </select>
-                                            </td> --}}
-                                            
                                         </tr>
                                     @endforeach
+
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL CRISTALINO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
                                     @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_control_cristalino - count($dosicontrolCristalinomesant)); $i++)
@@ -290,32 +239,31 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                {{-- <td>
-                                                    <select class="form-select ocupacion_asigdosimControlCristalino" name="ocupacion_asigdosimControlCristalino[]" id="ocupacion_asigdosimControlCristalino" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-                                                    </select>
-                                                </td> --}}
                                                 <td></td>
                                             </tr>
                                         @endfor
+                                    @endif
+                                    {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL CRISTALINO POR CONTRATO/////// --}}
+                                    @if($mescontdosisededepto->controlTransC_unicoCont == 'TRUE')
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TRANS. C.</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_ControlCristalinoUnico"  name="id_dosimetro_ControlCristalinoUnico" id="id_dosimetro_ControlCristalinoUnico" @if(count($dosicontrolCristalinoUnicomesact) != 0) { disabled } @elseif($dosicontrolCristalinoUnicomesant[0]->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if(count($dosicontrolCristalinoUnicomesact) != 0) {{$dosicontrolCristalinoUnicomesact[0]->dosimetro_id}} @elseif($dosicontrolCristalinoUnicomesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolCristalinoUnicomesant[0]->dosimetro_id}} @endif"> @if(count($dosicontrolCristalinoUnicomesact) != 0) {{$dosicontrolCristalinoUnicomesact[0]->dosimetro->codigo_dosimeter}} @elseif($dosicontrolCristalinoUnicomesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolCristalinoUnicomesant[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                        <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_holder_ControlCristalinoUnico"  name="id_holder_ControlCristalinoUnico" id="id_holder_ControlCristalinoUnico" @if(count($dosicontrolCristalinoUnicomesact) != 0) { disabled } @elseif($dosicontrolCristalinoUnicomesant[0]->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if(count($dosicontrolCristalinoUnicomesact) != 0) {{$dosicontrolCristalinoUnicomesact[0]->holder_id}} @elseif($dosicontrolCristalinoUnicomesant[0]->dosimetro_uso != 'FALSE'){{$dosicontrolCristalinoUnicomesant[0]->holder_id}}@endif">@if(count($dosicontrolCristalinoUnicomesact) != 0) {{$dosicontrolCristalinoUnicomesact[0]->holder->codigo_holder}} @elseif($dosicontrolCristalinoUnicomesant[0]->dosimetro_uso != 'FALSE'){{$dosicontrolCristalinoUnicomesant[0]->holder->codigo_holder}}@else ---- @endif</option>
+                                                    @foreach($holderLibresCristalino as $holibcris)
+                                                        <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        </tr>
                                     @endif
                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CONTROL CRISTALINO/////// --}}
                                     
@@ -339,38 +287,6 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            {{-- <td>
-                                                <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" style="text-transform:uppercase" @if($dosicontrolDedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosicontrolDedoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicontrolDedoant->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                        @elseif($dosicontrolDedoant->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        @elseif($dosicontrolDedoant->ocupacion=='0')
-                                                            <option selected hidden value="0">OTRO</option>
-                                                        @endif
-                                                    @endif
-                                                    <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-                                                </select>
-                                            </td> --}}
                                             
                                         </tr>
                                     @endforeach
@@ -395,33 +311,31 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                {{-- <td>
-                                                    <select class="form-select ocupacion_asigdosimControlDedo" name="ocupacion_asigdosimControlDedo[]" id="ocupacion_asigdosimControlDedo" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-
-                                                    </select>
-                                                </td> --}}
                                                 <td></td>
                                             </tr>
                                         @endfor
+                                    @endif
+                                    {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL ANILLO POR CONTRATO/////// --}}
+                                    @if($mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                        <tr>
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TRANS. A</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_ControlDedoUnico"  name="id_dosimetro_ControlDedoUnico" id="id_dosimetro_ControlDedoUnico" @if(count($dosicontrolDedoUnicomesact) != 0) { disabled } @elseif($dosicontrolDedoUnicomesant[0]->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if(count($dosicontrolDedoUnicomesact) != 0){{$dosicontrolDedoUnicomesact[0]->dosimetro_id}}  @elseif($dosicontrolDedoUnicomesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolDedoUnicomesant[0]->dosimetro_id}} @endif"> @if(count($dosicontrolDedoUnicomesact) != 0) {{$dosicontrolDedoUnicomesact[0]->dosimetro->codigo_dosimeter}} @elseif($dosicontrolDedoUnicomesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolDedoUnicomesant[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiezcliplib)
+                                                        <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_holder_ControlDedoUnico"  name="id_holder_ControlDedoUnico" id="id_holder_ControlDedoUnico" @if(count($dosicontrolDedoUnicomesact) != 0) { disabled } @elseif($dosicontrolDedoUnicomesant[0]->dosimetro_uso != 'FALSE') { disabled } @endif >
+                                                    <option value="@if(count($dosicontrolDedoUnicomesact) != 0) {{$dosicontrolDedoUnicomesact[0]->holder_id}} @elseif($dosicontrolDedoUnicomesant[0]->dosimetro_uso != 'FALSE'){{$dosicontrolDedoUnicomesant[0]->holder_id}}@endif">@if(count($dosicontrolDedoUnicomesact) != 0) {{$dosicontrolDedoUnicomesact[0]->holder->codigo_holder}} @elseif($dosicontrolDedoUnicomesant[0]->dosimetro_uso != 'FALSE'){{$dosicontrolDedoUnicomesant[0]->holder->codigo_holder}}@else ---- @endif</option>
+                                                    @foreach($holderLibresAnillo as $holibanillo)
+                                                        <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        </tr>
                                     @endif
                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CONTROL DEDO/////// --}}
 
@@ -450,46 +364,6 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">N.A</td>
-                                            {{-- <td>
-                                                <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" style="text-transform:uppercase" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosiareant->dosimetro_uso != 'FALSE')
-                                                        @if($dosiareant->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                        @elseif($dosiareant->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        @elseif($dosiareant->ocupacion=='O')
-                                                            <option selected hidden value="O">OTRO</option>
-                                                        @endif
-                                                    @endif
-                                                    <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-                                                </select>
-                                            </td> --}}
-                                            {{-- <td>
-                                                <button id="changeArea" class="btn colorQA"  type="button" onclick="changueArea('{{$dosiareant->areadepartamentosede_id}}');">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </button>
-                                            </td> --}}
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo AREA asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
@@ -514,38 +388,6 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">N.A</td>
-                                                {{-- <td>
-                                                    <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-
-                                                    </select>
-                                                </td> --}}
-                                                {{-- <td>
-                                                    <button id="changeArea" class="btn colorQA"  type="button" onclick="changueArea('{{$dosiareant->areadepartamentosede_id}}');">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                        </svg>
-                                                    </button>
-                                                </td> --}}
                                             </tr>
                                         @endfor
                                     @endif
@@ -579,47 +421,6 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">N.A</td>
-                                            {{-- <td class="align-middle text-center">
-                                                <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" style="text-transform:uppercase" @if($dosicasoant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosicasoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicasoant->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                        @elseif($dosicasoant->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        @elseif($dosicasoant->ocupacion=='O')
-                                                            <option selected hidden value="O">OTRO</option>
-                                                        @endif
-                                                    @endif
-                                                    <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-
-                                                </select>
-                                            </td> --}}
-                                            {{-- <td>
-                                                <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->persona_id}}');">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </button>
-                                            </td> --}}
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CASO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
@@ -648,38 +449,6 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">N.A</td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-
-                                                    </select>
-                                                </td> --}}
-                                                {{-- <td>
-                                                    <button id="changeCaso" class="btn btn-danger"  type="button" onclick="changueCaso('{{$dosicasoant->persona_id}}');">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                        </svg>
-                                                    </button>
-                                                </td> --}}
                                             </tr>
                                         @endfor
                                     @endif
@@ -713,47 +482,7 @@
                                                 </select>
                                             </td>
                                             <td class="align-middle text-center">N.A</td>
-                                            {{-- <td class="align-middle text-center">
-                                                <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" style="text-transform:uppercase" @if($dositoraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dositoraxant->dosimetro_uso != 'FALSE')
-                                                        @if($dositoraxant->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                        @elseif($dositoraxant->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        @elseif($dositoraxant->ocupacion=='O')
-                                                            <option selected hidden value="O">OTRO</option>
-                                                        @endif
-                                                    @endif
-                                                    <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-
-                                                </select>
-                                            </td> --}}
-                                            {{-- <td>
-                                                <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->persona_id}}');">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </button>
-                                            </td> --}}
+                                            
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo TORAX asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
@@ -781,38 +510,7 @@
                                                     </select>
                                                 </td>
                                                 <td class="align-middle text-center">N.A</td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-
-                                                    </select>
-                                                </td> --}}
-                                                {{-- <td>
-                                                    <button id="changeTorax" class="btn btn-danger"  type="button" onclick="changueTorax('{{$dositoraxant->persona_id}}');">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                        </svg>
-                                                    </button>
-                                                </td> --}}
+                                                
                                             </tr>
                                         @endfor
                                     @endif
@@ -845,7 +543,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class="align-middle text-center">
+                                            <td class="align-middle">
                                                 <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
                                                     <option value="@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->holder_id}}@endif">@if($dosicristalinoant->dosimetro_uso != 'FALSE'){{$dosicristalinoant->holder->codigo_holder}}@else ---- @endif</option>
                                                     @foreach($holderLibresCristalino as $holibcris)
@@ -853,47 +551,6 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            {{-- <td class="align-middle text-center">
-                                                <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" @if($dosicristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosicristalinoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosicristalinoant->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                        @elseif($dosicristalinoant->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        @elseif($dosicristalinoant->ocupacion=='O')
-                                                            <option selected hidden value="O">OTRO</option>
-                                                        @endif
-                                                    @endif    
-                                                    <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-
-                                                </select>
-                                            </td> --}}
-                                            {{-- <td>
-                                                <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->persona_id}}');">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </button>
-                                            </td> --}}
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CRISTALINO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
@@ -920,7 +577,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td class="align-middle text-center">
+                                                <td class="align-middle">
                                                     <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($holderLibresCristalino as $holibcris)
@@ -928,55 +585,23 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-
-                                                    </select>
-                                                </td> --}}
-                                                {{-- <td>
-                                                    <button id="changeCristalino" class="btn btn-danger"  type="button" onclick="changueCristalino('{{$dosicristalinoant->persona_id}}');">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                        </svg>
-                                                    </button>
-                                                </td> --}}
                                             </tr>
                                         @endfor
                                     
                                     @endif
                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CRISTALINO/////// --}}
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo  MUÑECA asignados en EL MES ANTERIOR/////// --}}
-                                    @foreach($dosimuñecamesant as $dosimuñecant)
+                                    {{-- @foreach($dosimuñecamesant as $dosimuñecant)
                                         <tr>
                                             <td>
                                                 <input type="number" name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca_mesant" value="{{$dosimuñecant->persona_id}}" hidden>
                                                 <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca{{$dosimuñecant->persona_id}}" disabled>
                                                     <option value="{{$dosimuñecant->persona_id}}">@if($dosimuñecant->persona_id != NULL) {{$dosimuñecant->persona->primer_nombre_persona}} {{$dosimuñecant->persona->segundo_nombre_persona}} {{$dosimuñecant->persona->primer_apellido_persona}} {{$dosimuñecant->persona->segundo_apellido_persona}} @endif</option>
-                                                    {{-- @foreach($trabajadoreSede as $trabsed)
+                                                    @foreach($trabajadoreSede as $trabsed)
                                                         @if($trabsed->trabajador->id_trabajador != $dosimuñecant->trabajador_id)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
                                                         @endif
-                                                    @endforeach --}}
+                                                    @endforeach
                                                     @foreach($personaSede as $persed)
                                                         @if($persed->id_persona != $dosimuñecant->persona_id)
                                                             <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
@@ -1001,51 +626,10 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            {{-- <td class="align-middle text-center">
-                                                <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca"  style="text-transform:uppercase" @if($dosimuñecant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosimuñecant->dosimetro_uso != 'FALSE')
-                                                        @if($dosimuñecant->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                        @elseif($dosimuñecant->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        @elseif($dosimuñecant->ocupacion=='O')
-                                                            <option selected hidden value="O">OTRO</option>
-                                                        @endif
-                                                    @endif
-                                                    <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-
-                                                </select>
-                                            </td> --}}
-                                            {{-- <td>
-                                                <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->persona_id}}');">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </button>
-                                            </td> --}}
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo MUÑECA asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
-                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                    {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_muñeca - count($dosimuñecamesant)); $i++)
                                             <tr>
                                                 <td>
@@ -1074,41 +658,9 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-                                                        
-                                                    </select>
-                                                </td> --}}
-                                                {{-- <td>
-                                                    <button id="changeMuneca" class="btn btn-danger"  type="button" onclick="changueMuneca('{{$dosimuñecant->persona_id}}');">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                        </svg>
-                                                    </button>
-                                                </td> --}}
                                             </tr>
                                         @endfor
-                                    @endif
+                                    @endif --}}
                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas para LA CANTIDAD DE DOSIMETROS tipo  MUÑECA/////// --}}
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo DEDO asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dosidedomesant as $dosidedoant)
@@ -1138,7 +690,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class="align-middle text-center">
+                                            <td class="align-middle">
                                                 <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo" @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif >
                                                     <option value="@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->holder_id}}@endif">@if($dosidedoant->dosimetro_uso != 'FALSE'){{$dosidedoant->holder->codigo_holder}}@else ---- @endif</option>
                                                     @foreach($holderLibresAnillo as $holibanillo)
@@ -1146,47 +698,6 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            {{-- <td class="align-middle text-center">
-                                                <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" @if($dosidedoant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosidedoant->dosimetro_uso != 'FALSE')
-                                                        @if($dosidedoant->ocupacion=='AM')
-                                                            <option selected hidden value="AM">APLICACIONES MÉDICAS</option>
-                                                        @elseif($dosidedoant->ocupacion=='AI')
-                                                            <option selected hidden value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        @elseif($dosidedoant->ocupacion=='O')
-                                                            <option selected hidden value="O">OTRO</option>
-                                                        @endif
-                                                    @endif
-                                                    <option value="">----</option>
-                                                     <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    <option value="O">OTRO</option>
-
-                                                </select>
-                                            </td> --}}
-                                            {{-- <td>
-                                                <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->persona_id}}');">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                        <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </button>
-                                            </td> --}}
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo DEDO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
@@ -1213,7 +724,7 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td class="align-middle text-center">
+                                                <td class="align-middle">
                                                     <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         @foreach($holderLibresAnillo as $holibanillo)
@@ -1221,38 +732,6 @@
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                {{-- <td class="align-middle text-center">
-                                                    <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo" autofocus style="text-transform:uppercase">
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                        <option value="O">OTRO</option>
-
-                                                    </select>
-                                                </td> --}}
-                                                {{-- <td>
-                                                    <button id="changeDedo" class="btn btn-danger"  type="button" onclick="changueDedo('{{$dosidedoant->persona_id}}');">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                                                            <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                                                        </svg>
-                                                    </button>
-                                                </td> --}}
                                             </tr>
                                         @endfor
                                     @endif
@@ -1262,10 +741,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row align-items-center ">
                     <div class="col"></div>
-                    <div class="col">
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                    <div class="col-md-2">
+                        <div class="d-grip gap-2 text-center">
                             <button id="assignBtn" class="btn colorQA"  type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
                                     <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
@@ -1273,8 +752,8 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="d-grip gap-2 col-6 mx-auto">
+                    <div class="col-md-2">
+                        <div class="d-grip gap-2 text-center">
                             {{-- <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="ESTE ES EL CONTENIDO DEL POPOVER" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button> --}}
                             <a href="{{route('detallesedecont.create', $contdosisededepto->id_contdosisededepto)}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -1285,8 +764,29 @@
                         </div>
                     </div>
             </form>
+               {{--  @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransC_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransA_unicoCont == 'TRUE') --}}
+                    <div class="col-md-2">
+                        <div class="d-grid gap-2 text-center">
+                            <a href="{{route('asignadosicontratomn.clear',['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $mesnumber] )}}" class="btn btn-primary limpiar_asig"  type="button" id="limpiar_asig" name="limpiar_asig" role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                </svg> <br> LIMPIAR ASIGNACIONES 
+                            </a>
+                        </div>
+                    </div>
+                    {{-- <div class="col">
+                        <div class="d-grid gap-2 text-center">
+                            <a href="" class="btn btn-info"  type="button"  role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                </svg> <br> LIMPIAR ASIG. DE CONTROL TRANS.
+                            </a>
+                        </div>
+                    </div> --}}
+                    <div class="col"></div>
+                {{-- @else
                     <div class="col">
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <div class="d-grid gap-2 text-center">
                             <a href="{{route('asignadosicontratomn.clear',['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $mesnumber] )}}" class="btn btn-primary limpiar_asig"  type="button" id="limpiar_asig" name="limpiar_asig" role="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                     <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
@@ -1295,6 +795,7 @@
                         </div>
                     </div>
                     <div class="col"></div>
+                @endif --}}
                 </div>
                 
             
@@ -1457,14 +958,18 @@ crossorigin="anonymous">
             }
         }
         $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",});
-        $('#ocupacion_asigdosimControlTorax').select2({width: "100%",});
         $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%",});
         $('#id_holder_asigdosimControlCristalino').select2({width: "100%",});
-        $('#ocupacion_asigdosimControlCristalino').select2({width: "100%",});
         $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%",});
         $('#id_holder_asigdosimControlDedo').select2({width: "100%",});
-        $('#ocupacion_asigdosimControlDedo').select2({width: "100%",});
-         ///////SELECT2 PARA LOS SELECTS DE DOSIMETROS //////
+
+        $('#id_dosimetro_ControlToraxUnico').select2({width: "100%",});
+        $('#id_dosimetro_ControlCristalinoUnico').select2({width: "100%",});
+        $('#id_holder_ControlCristalinoUnico').select2({width: "100%",});
+        $('#id_dosimetro_ControlDedoUnico').select2({width: "100%",});
+        $('#id_holder_ControlDedoUnico').select2({width: "100%",});
+        
+        ///////SELECT2 PARA LOS SELECTS DE DOSIMETROS //////
         
          var dosim_area = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
         for(var i = 0; i < dosim_area.length; i++){
@@ -1562,240 +1067,6 @@ crossorigin="anonymous">
 
 
 <script type="text/javascript">
-   
-    /* function fechaultimodia(){
-        var fecha = document.getElementById("primerDia_asigdosim").value;
-        var fecha_inicio = new Date(fecha);
-        fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
-        
-        console.log("FECHA INICIO"+fecha_inicio);
-        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
-            var fecha_final_año = fecha_inicio.getFullYear();
-            console.log(fecha_final_año);
-            var mm = fecha_inicio.getMonth() + 2;
-            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-            if(fecha_final_mes == 13){
-                fecha_final_mes = '01' ;
-            }
-            console.log("MES "+fecha_final_mes);
-            var dd = fecha_inicio.getDate();
-            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-            console.log("DIA" + fecha_final_dia);
-            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            console.log("ESTA ES LA FECHA FINAL" + fecha_final);
-
-            if(fecha_final_mes == 01){
-                var fechaFinaly = fecha_final.getFullYear() + 1;
-                console.log("AÑO"+fechaFinaly);
-            }else{
-                var fechaFinaly = fecha_final.getFullYear();
-            }
-            console.log(fechaFinaly);
-            var fechaFinalm = fecha_final.getMonth()+1;
-            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
-            console.log(fechaFinalmm);
-            var fechaFinald = fecha_final.getDate();
-            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
-            console.log(fechaFinaldd);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
-            console.log(fechaFinalymd);
-            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
-        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
-            var fecha_final_año = fecha_inicio.getFullYear();
-            console.log(fecha_final_año);
-            var mm = fecha_inicio.getMonth() + 4;
-            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-            if(fecha_final_mes == 13){
-                fecha_final_mes = '01' ;
-            }
-            console.log("MES "+fecha_final_mes);
-            var dd = fecha_inicio.getDate();
-            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-            console.log("DIA" + fecha_final_dia);
-            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            console.log("ESTA ES LA FECHA FINAL" + fecha_final);
-
-            if(fecha_final_mes == 01){
-                var fechaFinaly = fecha_final.getFullYear() + 1;
-                console.log("AÑO"+fechaFinaly);
-            }else{
-                var fechaFinaly = fecha_final.getFullYear();
-            }
-            console.log(fechaFinaly);
-            var fechaFinalm = fecha_final.getMonth()+1;
-            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
-            console.log(fechaFinalmm);
-            var fechaFinald = fecha_final.getDate();
-            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
-            console.log(fechaFinaldd);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
-            console.log(fechaFinalymd);
-            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
-        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
-            var fecha_final_año = fecha_inicio.getFullYear();
-            console.log(fecha_final_año);
-            var mm = fecha_inicio.getMonth() + 3;
-            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-            if(fecha_final_mes == 13){
-                fecha_final_mes = '01' ;
-            }
-            console.log("MES "+fecha_final_mes);
-            var dd = fecha_inicio.getDate();
-            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-            console.log("DIA" + fecha_final_dia);
-            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            console.log("ESTA ES LA FECHA FINAL" + fecha_final);
-
-            if(fecha_final_mes == 01){
-                var fechaFinaly = fecha_final.getFullYear() + 1;
-                console.log("AÑO"+fechaFinaly);
-            }else{
-                var fechaFinaly = fecha_final.getFullYear();
-            }
-            console.log(fechaFinaly);
-            var fechaFinalm = fecha_final.getMonth()+1;
-            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
-            console.log(fechaFinalmm);
-            var fechaFinald = fecha_final.getDate();
-            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
-            console.log(fechaFinaldd);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
-            console.log(fechaFinalymd);
-            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
-        }
-    }; */
-    /* function changueArea(area){
-        
-        Swal.fire({
-            title: 'DESEA CAMBIAR DE ÁREA EN UN DOSÍMETRO TIPO "AMBIENTAL"?',
-            text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL ÁREA NUEVA",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#1A9980',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI, SEGURO!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @foreach($dosiareamesant as $ant)
-                    if('{{$ant->areadepartamentosede_id}}' == area){
-                        $("#id_area_asigdosimArea{{$ant->areadepartamentosede_id}}").attr("disabled", false);
-                        document.getElementById("id_area_asigdosimArea_mesant").remove();
-                        
-                    }
-                @endforeach
-            }
-        })
-    }
-    function changueCaso(caso){
-        alert(caso);
-        Swal.fire({
-            title: 'DESEA CAMBIAR EL TRABAJADOR DE UN DOSÍMETRO TIPO "CASO"?',
-            text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#1A9980',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI, SEGURO!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @foreach($dosicasomesant as $casoant)
-                    if('{{$casoant->trabajador_id}}' == caso){
-                        $("#id_trabajador_asigdosimCaso{{$casoant->trabajador_id}}").attr("disabled", false);
-                        document.getElementById("id_trabajador_asigdosimCaso_mesant").remove();
-                    }
-                @endforeach
-            }
-        })
-    }
-    function changueTorax(torax){
-        
-        Swal.fire({
-            title: 'DESEA CAMBIAR EL TRABAJADOR DE UN DOSÍMETRO TIPO "TÓRAX"?',
-            text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#1A9980',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI, SEGURO!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @foreach($dositoraxmesant as $toraxant)
-                    if('{{$toraxant->trabajador_id}}' == torax){
-                        $("#id_trabajador_asigdosimTorax{{$toraxant->trabajador_id}}").attr("disabled", false);
-                        document.getElementById("id_trabajador_asigdosimTorax_mesant").remove();
-                    }
-                @endforeach
-            }
-        })
-    }
-    function changueCristalino(cristalino){
-        
-        Swal.fire({
-            title: 'DESEA CAMBIAR EL TRABAJADOR DE UN DOSÍMETRO TIPO "CRISTALINO"?',
-            text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#1A9980',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI, SEGURO!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @foreach($dosicristalinomesant as $cristalinoant)
-                    if('{{$cristalinoant->trabajador_id}}' == cristalino){
-                        $("#id_trabajador_asigdosimCristalino{{$cristalinoant->trabajador_id}}").attr("disabled", false);
-                        document.getElementById("id_trabajador_asigdosimCristalino_mesant").remove();
-                    }
-                @endforeach
-            }
-        })
-    }
-    function changueMuneca(muñeca){
-        
-        Swal.fire({
-            title: 'DESEA CAMBIAR EL TRABAJADOR DE UN DOSÍMETRO TIPO "MUÑECA"?',
-            text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#1A9980',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI, SEGURO!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @foreach($dosimuñecamesant as $muñecant)
-                    if('{{$muñecant->trabajador_id}}' == muñeca){
-                        $("#id_trabajador_asigdosimMuneca{{$muñecant->trabajador_id}}").attr("disabled", false);
-                        document.getElementById("id_trabajador_asigdosimMuneca_mesant").remove();
-                    }
-                @endforeach
-            }
-        })
-    }
-    function changueDedo(dedo){
-        
-        Swal.fire({
-            title: 'DESEA CAMBIAR EL TRABAJADOR DE UN DOSÍMETRO TIPO "ANILLO"?',
-            text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#1A9980',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI, SEGURO!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @foreach($dosidedomesant as $dedoant)
-                    if('{{$dedoant->persona_id}}' == dedo){
-                        $("#id_trabajador_asigdosimDedo{{$dedoant->persona_id}}").attr("disabled", false);
-                        document.getElementById("id_trabajador_asigdosimDedo_mesant").remove();
-                        
-                    }
-                @endforeach
-            }
-        })
-    } */
-
-</script>
-
-<script type="text/javascript">
     $(document).ready(function(){
 
         $('#limpiar_asig').click(function(e){
@@ -1842,8 +1113,8 @@ crossorigin="anonymous">
                             });
                     
             };
-            /////////////////////VALIDACION PARA LOS DOSIMETROS/////////////////
-            var dosimControlTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlTorax[]"]');
+             /////////////////////VALIDACION PARA LOS DOSIMETROS CONTROL /////////////////
+             var dosimControlTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimControlTorax[]"]');
             console.log("ESTAS SON LOS  DOSIM CONTROL TORAX");
             console.log(dosimControlTorax);
             for(var i = 0; i < dosimControlTorax.length; i++){
@@ -1926,7 +1197,87 @@ crossorigin="anonymous">
                     }
                 }
             };
-
+            /////VALIDACION DOSIMETROS CONTROL TRANSPORTE UNICO//////
+            var dosimControlUniTorax = document.querySelectorAll('select[name="id_dosimetro_ControlToraxUnico"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL TORAX UNICOS");
+            console.log(dosimControlUniTorax);
+            for(var i = 0; i < dosimControlUniTorax.length; i++){
+                var values = dosimControlUniTorax[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO DE TIPO CONTROL TRANSPORTE TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+            };
+            var dosimControlUniCristalino = document.querySelectorAll('select[name="id_dosimetro_ControlCristalinoUnico"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL CRISTALINO UNICOS");
+            console.log(dosimControlUniCristalino);
+            for(var i = 0; i < dosimControlUniCristalino.length; i++){
+                var values = dosimControlUniCristalino[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO DE TIPO CONTROL TRANSPORTE CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+            };
+            var dosimControlUniAnillo = document.querySelectorAll('select[name="id_dosimetro_ControlDedoUnico"]');
+            console.log("ESTAS SON LOS  DOSIM CONTROL ANILLO UNICOS");
+            console.log(dosimControlUniAnillo);
+            for(var i = 0; i < dosimControlUniAnillo.length; i++){
+                var values = dosimControlUniAnillo[i].value;
+                if(values == ''){
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR EL DOSÍMETRO DE TIPO CONTROL TRANSPORTE ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                    
+                };
+                for(var y = 0; y < dosimControlUniCristalino.length; y++){
+                    var valuesCrist = dosimControlUniCristalino[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE CRISTALINO ",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            for(var i = 0; i < dosimControlUniCristalino.length; i++){
+                var values = dosimControlUniCristalino[i].value;
+                for(var y = 0; y < dosimControlUniAnillo.length; y++){
+                    var valuesDedo = dosimControlUniAnillo[y].value;
+                    if(values == valuesDedo){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSIMETROS DE UBICACIÓN CONTROL TRANSPORTE ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            for(var i = 0; i < dosimControlUniAnillo.length; i++){
+                var values = dosimControlUniAnillo[i].value;
+                for(var y = 0; y < dosimControlUniCristalino.length; y++){
+                    var valuesCrist = dosimControlUniCristalino[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN CONTROL TRANSPORTE CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+            };
+            
+            /////////////////////VALIDACION PARA LOS DOSIMETROS /////////////////
             var dosimArea = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
             console.log("ESTAS SON LOS DOSIMTROS AREA");
             console.log(dosimArea);
@@ -1949,6 +1300,26 @@ crossorigin="anonymous">
                                 icon: 'error'
                             });
                     }
+                }
+                for(var y = 0; y < dosimControlTorax.length; y++){
+                    var valuesTorax = dosimControlTorax[y].value;
+                    if(values == valuesTorax){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var x = 0; x < dosimControlUniTorax.length; x++){
+                    var valuesX = dosimControlUniTorax[x].value;
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN ÁREA SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
                 }
             };
             var dosimCaso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
@@ -1973,6 +1344,36 @@ crossorigin="anonymous">
                                 icon: 'error'
                             });
                     }
+                }
+                for(var y = 0; y < dosimControlTorax.length; y++){
+                    var valuesTorax = dosimControlTorax[y].value;
+                    if(values == valuesTorax){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var x = 0; x < dosimControlUniTorax.length; x++){
+                    var valuesX = dosimControlUniTorax[x].value;
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CASO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
+                }
+                for(var x = 0; x < dosimArea.length; x++){
+                    var valuesX = dosimArea[x].value;
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CASO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACION ÁREA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
                 }
             };
             var dosimTorax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
@@ -2003,6 +1404,36 @@ crossorigin="anonymous">
                     if(values == valuesTorax){
                         return Swal.fire({
                                 title:"ALGUNOS DOSÍMETROS DE CONTROL TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimControlUniTorax.length; y++){
+                    var valuesTorax = dosimControlUniTorax[y].value;
+                    if(values == valuesTorax){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimArea.length; y++){
+                    var valuesArea = dosimArea[y].value;
+                    if(values == valuesArea){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN AMBIENTAL",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimCaso.length; y++){
+                    var valuesCaso = dosimCaso[y].value;
+                    if(values == valuesCaso){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS TÓRAX SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN CASO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
@@ -2042,6 +1473,16 @@ crossorigin="anonymous">
                             });
                     }
                 }
+                for(var y = 0; y < dosimControlUniCristalino.length; y++){
+                    var valuesCrist = dosimControlUniCristalino[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
                 for(var y = 0; y < dosimControlDedo.length; y++){
                     var valuesDedo = dosimControlDedo[y].value;
                     if(values == valuesDedo){
@@ -2052,32 +1493,17 @@ crossorigin="anonymous">
                             });
                     }
                 }
-            };
-            var dosimMuneca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"]');
-            console.log("ESTAS SON LOS DOSIMETROS MUÑECA");
-            console.log(dosimMuneca);
-            for(var i = 0; i < dosimMuneca.length; i++){
-                var values = dosimMuneca[i].value;
-                if(values == ''){
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR EL DOSÍMETRO PARA UNO DE UBICACIÓN MUÑECA",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                    
-                };
-                for(var x = 0; x < dosimMuneca.length; x++){
-                    var valuesX = dosimMuneca[x].value;
-                    if(values == valuesX && i != x){
+                for(var y = 0; y < dosimControlUniAnillo.length; y++){
+                    var valuesDedo = dosimControlUniAnillo[y].value;
+                    if(values == valuesDedo){
                         return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN MUÑECA SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSIMETROS DE UBICACIÓN CRISTALINO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
                     }
                 }
             };
-
             var dosimAnillo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
             console.log("ESTAS SON LOS DOSIMETROS ANILLO");
             console.log(dosimAnillo);
@@ -2112,11 +1538,31 @@ crossorigin="anonymous">
                             });
                     }
                 }
+                for(var y = 0; y < dosimControlUniAnillo.length; y++){
+                    var valuesDedo = dosimControlUniAnillo[y].value;
+                    if(values == valuesDedo){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
                 for(var y = 0; y < dosimControlCristalino.length; y++){
                     var valuesCrist = dosimControlCristalino[y].value;
                     if(values == valuesCrist){
                         return Swal.fire({
                                 title:"ALGUNOS DOSÍMETROS DE CONTROL CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+                for(var y = 0; y < dosimControlUniCristalino.length; y++){
+                    var valuesCrist = dosimControlUniCristalino[y].value;
+                    if(values == valuesCrist){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE CONTROL TRANSPORTE CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACIÓN ANILLO",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
@@ -2195,52 +1641,6 @@ crossorigin="anonymous">
                     }
                 }
             };
-            /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE MUÑECA y (ANILLO, CRISTALINO) /////////////////
-            var dosimMun = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"]');
-            console.log("DOSIMETROS DE TIPO MUÑECA");
-            console.log(dosimMun);
-            for(var i = 0; i < dosimMun.length; i++){
-                console.log("DOSIMETRO MUÑECA POSICION" +i);
-                var valuesMun = dosimMun[i].value;
-                console.log(valuesMun);
-                var dosimAni = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
-                console.log("DOSIMETROS DE TIPO ANILLO");
-                console.log(dosimAni);
-                for(var x = 0; x < dosimAni.length; x++){
-                    console.log("DOSIMETRO ANILLO POSICION" +x);
-                    var valuesAni = dosimAni[x].value;
-                    console.log(valuesAni);
-                    if(valuesMun == valuesAni){
-
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            }); 
-                    }
-                }
-            };
-            for(var i = 0; i < dosimMun.length; i++){
-                console.log("DOSIMETRO MUÑECA POSICION" +i);
-                var valuesMun = dosimMun[i].value;
-                console.log(valuesMun);
-                var dosimCris = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
-                console.log("DOSIMETROS DE TIPO CRISTALINO");
-                console.log(dosimCris);
-                console.log("TAMAÑO DOSIMETRO CRISTALINO" +dosimCris.length)
-                for(var x = 0; x < dosimCris.length; x++){
-                    console.log("DOSIMETRO CRISTALINO POSICION" +x);
-                    var valuesCris = dosimCris[x].value;
-                    console.log(valuesCris);
-                    if(valuesMun == valuesCris){
-                        return Swal.fire({
-                                title:"ALGUNOS DOSÍMETROS EZCLIP SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            };
             /////////////////////VALIDACION PARA DOSIMETROS REPETIDOS ENTRE ANILLO y (MUÑECA, CRISTALINO) /////////////////
             var dosimAni = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"]');
             console.log("DOSIMETROS DE TIPO ANILLO");
@@ -2289,6 +1689,46 @@ crossorigin="anonymous">
                 }
             };
             /////////////////////VALIDACION PARA LOS HOLDERS /////////////////
+            var holContTransCristalino = document.querySelectorAll('select[name="id_holder_ControlCristalinoUnico"]');
+            console.log("ESTAS SON LOS HOLDERS DE CRISTALINO DE LOS CONTROLES TRANSPORTE UNICOS");
+            console.log(holContTransCristalino);
+            for(var i = 0; i < holContTransCristalino.length; i++) {
+                var values = holContTransCristalino[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER PARA DOSÍMETRO DE CONTROL TRANSPORTE CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                };
+               
+            };
+            var holContTransAnillo = document.querySelectorAll('select[name="id_holder_ControlDedoUnico"]');
+            console.log("ESTAS SON LOS HOLDERS DE ANILLO DE LOS CONTROLES TRANSPORTE UNICOS");
+            console.log(holContTransAnillo);
+            for(var i = 0; i < holContTransAnillo.length; i++) {
+                var values = holContTransAnillo[i].value;
+                if(values == ''){
+                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
+                    return Swal.fire({
+                                title:"FALTA SELECCIONAR ALGÚN HOLDER PARA DOSÍMETRO DE CONTROL TRANSPORTE ANILLO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                };
+                for(var x = 0; x < holContTransCristalino.length; x++){
+                    var valuesX = holContTransCristalino[x].value;
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS DE CONTROL TRANSPORTE ANILLO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS HOLDERS DE CONTROL TRANSPORTE CRISTALINO",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }
+                }
+               
+            };
             var holCristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"]');
             console.log("ESTAS SON LOS HOLDERS DE CRISTALINO");
             console.log(holCristalino);
@@ -2337,130 +1777,7 @@ crossorigin="anonymous">
                     }
                 }
             };
-            var holMuneca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"]');
-            console.log("ESTAS SON LOS HOLDERS DE ANILLO");
-            console.log(holMuneca);
-            for(var i = 0; i < holMuneca.length; i++) {
-                var values = holMuneca[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGÚN HOLDER PARA UN DOSÍMETRO DE UBICACIÓN MUÑECA",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                };
-                for(var x = 0; x < holMuneca.length; x++){
-                    var valuesX = holMuneca[x].value;
-                    if(values == valuesX && i != x){
-                        return Swal.fire({
-                                title:"ALGUNOS HOLDERS DE UBICACIÓN MUÑECA SELECCIONADOS SE ENCUENTRAN REPETIDOS",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
-                                icon: 'error'
-                            });
-                    }
-                }
-            };  
-            /////////////////////VALIDACION PARA LAS OCUPACIONES /////////////////
-            var ocuControl = document.querySelectorAll('select[name="ocupacion_asigdosimControl[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE CONTROL");
-            console.log(ocuControl);  
-            for(var i = 0; i < ocuControl.length; i++) {
-                var values = ocuControl[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR LA OCUPACIÓN DEL DOSIMETRO CONTROL",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuArea = document.querySelectorAll('select[name="ocupacion_asigdosimArea[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE AREA");
-            console.log(ocuArea);  
-            for(var i = 0; i < ocuArea.length; i++) {
-                var values = ocuArea[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN ÁREA",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuCaso = document.querySelectorAll('select[name="ocupacion_asigdosimCaso[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE CASO");
-            console.log(ocuCaso);  
-            for(var i = 0; i < ocuCaso.length; i++) {
-                var values = ocuCaso[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN CASO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuTorax = document.querySelectorAll('select[name="ocupacion_asigdosimTorax[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE TORAX");
-            console.log(ocuTorax);  
-            for(var i = 0; i < ocuTorax.length; i++) {
-                var values = ocuTorax[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN TÓRAX",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuCristalino = document.querySelectorAll('select[name="ocupacion_asigdosimCristalino[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE CRISTALINO");
-            console.log(ocuCristalino);  
-            for(var i = 0; i < ocuCristalino.length; i++) {
-                var values = ocuCristalino[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN CRISTALINO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuMuneca = document.querySelectorAll('select[name="ocupacion_asigdosimMuneca[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE MUÑECA");
-            console.log(ocuMuneca);  
-            for(var i = 0; i < ocuMuneca.length; i++) {
-                var values = ocuMuneca[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN MUÑECA",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-            var ocuAnillo = document.querySelectorAll('select[name="ocupacion_asigdosimDedo[]"]');
-            console.log("ESTAS SON LAS OCUPACIONES DE ANILLO");
-            console.log(ocuAnillo);  
-            for(var i = 0; i < ocuAnillo.length; i++) {
-                var values = ocuAnillo[i].value;
-                if(values == ''){
-                    /* alert("FALTA SELECCIONAR ALGUN HOLDER"); */
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA OCUPACIÓN DE UN DOSÍMETRO CON UBICACIÓN ANILLO",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                                icon: 'error'
-                            });
-                }
-            };
-
+           
             Swal.fire({
                 text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
                 icon: 'warning',

@@ -196,6 +196,11 @@
                                                         </div>
                                                         <br>
                                                         <div class="form-floating">
+                                                            <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$trabjasig->Hp3_calc_dose}}">
+                                                            <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
+                                                        </div>
+                                                        <br>
+                                                        <div class="form-floating">
                                                             <input type="date" class="form-control" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
                                                             <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                         </div>
@@ -590,7 +595,13 @@ crossorigin="anonymous">
         $('#infoLectura a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')
+        });
+        
+        $('#hp10_calc_dose').on('keyup', function(){
+            var hp10 = document.getElementById("hp10_calc_dose").value;
+            var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
         })
+        
     })
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

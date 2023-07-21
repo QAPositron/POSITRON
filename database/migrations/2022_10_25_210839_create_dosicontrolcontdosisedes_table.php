@@ -23,15 +23,16 @@ class CreateDosicontrolcontdosisedesTable extends Migration
             $table-> unsignedBigInteger('holder_id')->nullable();
             $table-> foreign('holder_id')->references('id_holder')->on('holders')->onDelete('cascade')->onUpdate('cascade');
             
-            $table-> unsignedBigInteger('contratodosimetriasede_id');
+            $table-> unsignedBigInteger('contratodosimetriasede_id')->nullable();
             $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
 
-            $table-> unsignedBigInteger('contdosisededepto_id');
+            $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('contratodosimetria_id')->nullable();
+            $table-> foreign('contratodosimetria_id')->references('id_contratodosimetria')->on('dosimetriacontratos')->onDelete('cascade')->onUpdate('cascade');
             
             $table->integer('mes_asignacion');
-            $table->string('unicoContrato', 50)->nullable();
-            $table->string('unicoSede', 50)->nullable();
             $table->string('dosimetro_uso', 50);
             $table->date('primer_dia_uso')->nullable();
             $table->date('ultimo_dia_uso')->nullable();
@@ -41,6 +42,9 @@ class CreateDosicontrolcontdosisedesTable extends Migration
             /* $table->string('ocupacion', 50)->nullable(); */
             $table->string('ubicacion', 50)->nullable();
             $table->string('energia', 50)->nullable();
+            $table->string('controlTransT_unicoCont', 50)->nullable();
+            $table->string('controlTransC_unicoCont', 50)->nullable();
+            $table->string('controlTransA_unicoCont', 50)->nullable();
             $table->date('zero_level_date')->nullable();
             $table->date('measurement_date')->nullable();
             $table->double('Hp007_calc_dose', 8, 5)->nullable();

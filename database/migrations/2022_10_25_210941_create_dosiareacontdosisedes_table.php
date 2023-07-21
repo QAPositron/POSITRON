@@ -48,6 +48,9 @@ class CreateDosiareacontdosisedesTable extends Migration
             $table->double('Hp10_background_dose', 8, 5)->nullable();
             $table->double('Hp10_raw_dose', 8, 5)->nullable();
             $table->double('Hp10_dif_dosicont', 8, 5)->nullable();
+            $table->double('Hp3_calc_dose', 8, 5)->nullable();
+            $table->double('Hp3_background_dose', 8, 5)->nullable();
+            $table->double('Hp3_raw_dose', 8, 5)->nullable();
             /*$table->double('Cu_calc_dose', 8, 5)->nullable();
             $table->double('Cu_background_dose', 8, 5)->nullable();
             $table->double('Cu_raw_dose', 8, 5)->nullable();

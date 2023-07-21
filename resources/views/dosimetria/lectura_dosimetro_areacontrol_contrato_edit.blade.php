@@ -75,7 +75,7 @@
                 <div class="tab-content mt-3">
                     <!-- //////////////////// PESTAÑA DE INFO EMPRESA //////////////// -->
                     <div class="tab-pane active" id="infotrabajador" role="tabpanel">
-                        <h4 class="card-title text-center pt-3">INFORMACIÓN DEL TRABAJADOR</h4>
+                        <h4 class="card-title text-center pt-3">INFORMACIÓN DEL ÁREA</h4>
                         <BR></BR>
                         <Label class="mx-5">LA SIGUIENTE ES INFORMACIÓN DE LA EMPRESA Y EL TRABAJADOR, QUE FUERON RELACIONADOS AL DOSÍMETRO EN EL PROCESO DE ASIGNACIÓN:</Label>
                         <BR></BR>
@@ -85,36 +85,36 @@
                                 <label for="floatingInputGrid"> <b>EMPRESA:</b> </label>
                                 <input type="text" class="form-control" name="empresaLectDosim" id="empresaLectDosim" value="{{$dosiareasig->contratodosimetriasede->sede->empresa->nombre_empresa}}" readonly>
                                 <br>
-                                <label for="floatingInputGrid"> <b>NOMBRES:</b> </label>
-                                <input type="text"  class="form-control" name="nombrestrabLectDosim" id="nombrestrabLectDosim" value="{{$dosiareasig->persona->primer_nombre_persona}} {{$dosiareasig->persona->segundo_nombre_persona}}" readonly>
+                                <label for="floatingInputGrid"> <b>ÁREA:</b> </label>
+                                <input type="text"  class="form-control" name="nombrestrabLectDosim" id="nombrestrabLectDosim" value="{{$dosiareasig->areadepartamentosede->nombre_area}}" readonly>
                                 <br>
-                                <label for="floatingInputGrid"> <b>EMAIL:</b> </label>
-                                <input type="text"  class="form-control" name="correotrabLectDosim" id="correotrabLectDosim" value="{{$dosiareasig->persona->correo_persona}}" readonly>
+                               {{--  <label for="floatingInputGrid"> <b>EMAIL:</b> </label>
+                                <input type="text"  class="form-control" name="correotrabLectDosim" id="correotrabLectDosim" value="{{$dosiareasig->persona->correo_persona}}" readonly> --}}
                             </div>
                             <div class="col-md-2 m-4">
                                 <label for="floatingInputGrid"> <b>NÚM. IDEN.:</b> </label>
                                 <input type="text" style="width: 120px;" class="form-control" name="numIdenEmpresaLectDosim" id="numIdenEmpresaLectDosim" value="{{$dosiareasig->contratodosimetriasede->sede->empresa->num_iden_empresa}}" readonly>
-                                <br>
+                                {{-- <br>
                                 <label for="floatingInputGrid"> <b>APELLIDOS:</b> </label>
-                                <input type="text" class="form-control" name="apellidostrabLectDosim" id="apellidostrabLectDosim" value="{{$dosiareasig->persona->primer_apellido_persona}} {{$dosiareasig->persona->segundo_apellido_persona}}" readonly>
+                                <input type="text" class="form-control" name="apellidostrabLectDosim" id="apellidostrabLectDosim" value="{{$dosiareasig->persona->primer_apellido_persona}} {{$dosiareasig->persona->segundo_apellido_persona}}" readonly> 
                                 <br>
                                 <label for="floatingInputGrid"> <b>TELÉFONO:</b> </label>
-                                <input type="text" style="width: 150px;" class="form-control" name="telefonotrabLectDosim" id="telefonotrabLectDosim" value="{{$dosiareasig->persona->telefono_persona}}" readonly>
+                                <input type="text" style="width: 150px;" class="form-control" name="telefonotrabLectDosim" id="telefonotrabLectDosim" value="{{$dosiareasig->persona->telefono_persona}}" readonly>--}}
                             </div>
                             <div class="col m-4">
                                 <label for="floatingInputGrid"> <b>SEDE:</b> </label>
                                 <input type="text"  class="form-control" name="sedeLectDosim" id="sedeLectDosim" value="{{$dosiareasig->contratodosimetriasede->sede->nombre_sede}}" readonly>
-                                <br>
+                                {{-- <br>
                                 <label for="floatingInputGrid"> <b>GÉNERO:</b> </label>
-                                <input type="text" style="width: 130px;" class="form-control" name="generoLectDosim" id="generoLectDosim" value="{{$dosiareasig->persona->genero_persona}}" readonly>
+                                <input type="text" style="width: 130px;" class="form-control" name="generoLectDosim" id="generoLectDosim" value="{{$dosiareasig->persona->genero_persona}}" readonly> --}}
                                 
                             </div>
                             <div class="col-md-2 m-4">
                                 <label for="floatingInputGrid"> <b>ESPECIALIDAD:</b> </label>
                                 <input type="text"  class="form-control text-center" name="deptoLectDosim" id="deptoLectDosim" value="{{$dosiareasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}" readonly>
-                                <br>
+                                {{-- <br>
                                 <label for="floatingInputGrid"> <b>CEDULA:</b> </label>
-                                <input type="text"  class="form-control" name="cedulatrabLectDosim" id="cedulatrabLectDosim" value="{{$dosiareasig->persona->cedula_persona}}" readonly>
+                                <input type="text"  class="form-control" name="cedulatrabLectDosim" id="cedulatrabLectDosim" value="{{$dosiareasig->persona->cedula_persona}}" readonly> --}}
                             </div>
                             <div class="col-md m-4"></div>
                         </div>
@@ -146,7 +146,7 @@
                                 <input type="text" style="width: 200px;" class="form-control" name="ultDiaUsobLectDosim" id="ultDiaUsobLectDosim" value="{{$dosiareasig->ultimo_dia_uso}}" readonly>
                                 <br>
                                 <label for="floatingInputGrid"> <b>UBICACIÓN:</b></label>
-                                <input type="text"  class="form-control" name="ubicacionLectDosim" id="ubicacionLectDosim" value="{{$dosiareasig->ubicacion}}" readonly>
+                                <input type="text"  class="form-control" name="ubicacionLectDosim" id="ubicacionLectDosim" value="AMBIENTAL" readonly>
                             </div>
                             <div class="col-3">
                                 <label for="floatingInputGrid"> <b>FECHA INGRESO AL SERVICIO:</b> </label>
@@ -165,17 +165,16 @@
                     <!-- //////////////////// PESTAÑA DE LECTURA//////////////// -->
                     <div class="tab-pane" id="lectura" role="tabpanel" aria-labelledby="lectura-tab">
                         
-                        <h4 class="card-title text-center pt-3">CÓDIGO DEL DOSÍMETRO: {{$dosiareasig->dosimetro->codigo_dosimeter}} - UBICACIÓN: {{$dosiareasig->ubicacion}}</h4>
-                        <h4 class="card-title text-center">TRABAJADOR: {{$dosiareasig->persona->primer_nombre_persona}} {{$dosiareasig->persona->segundo_nombre_persona}} {{$dosiareasig->persona->primer_apellido_persona}} {{$dosiareasig->persona->segundo_apellido_persona}}</h4>
-                        <BR></BR>
+                        <h4 class="card-title text-center pt-3">ÁREA: {{$dosiareasig->areadepartamentosede->nombre_area}}<br> CÓDIGO DEL DOSÍMETRO: {{$dosiareasig->dosimetro->codigo_dosimeter}} </h4>
+                        <br>
                         <Label class="mx-5">INGRESE LA INFORMACIÓN DE LA LECTURA DEL DOSÍMETRO ASIGNADO:</Label>
-                        <BR></BR>
+                        <br>
                         <div class="row">
                             <div class="col"></div>
                             <div class="col-10">
                                 <div class="card text-dark bg-light">
                                     
-                                    <form class="m-4" action="{{route('lecturadosi.save', $dosiareasig)}}" method="POST">
+                                    <form class="m-4" action="{{route('lecturadosiarea.save', $dosiareasig)}}" method="POST">
                                     
                                         @csrf
 
@@ -185,82 +184,48 @@
 
                                         <div class="row g-2">
                                             <div class="col-md-3 mx-4">
-                                                @if($dosiareasig->ubicacion == 'TORAX' || $dosiareasig->ubicacion == 'CASO')
-                                                    <div class="form-floating">
-                                                        <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$dosiareasig->Hp10_calc_dose}}">
-                                                        <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosiareasig->Hp007_calc_dose}}">
-                                                        <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$dosiareasig->measurement_date}}">
-                                                        <label for="floatingInputGrid">MEASUREMENT DATE:</label>
-                                                        @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                                                    </div>
-                                                @elseif($dosiareasig->ubicacion == 'CRISTALINO')
-                                                    <div class="form-floating">
-                                                        <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosiareasig->Hp3_calc_dose}}">
-                                                        <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$dosiareasig->measurement_date}}">
-                                                        <label for="floatingInputGrid">MEASUREMENT DATE:</label>
-                                                        @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                                                    </div>
-                                                @elseif($dosiareasig->ubicacion == 'ANILLO')
-                                                    <div class="form-floating">
-                                                        <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosiareasig->Hp007_calc_dose}}">
-                                                        <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
-                                                    </div>
-                                                    <br>
-                                                    <div class="form-floating">
-                                                        <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$dosiareasig->measurement_date}}">
-                                                        <label for="floatingInputGrid">MEASUREMENT DATE:</label>
-                                                        @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                                                    </div>
-                                                @endif
+                                                <div class="form-floating">
+                                                    <input type="NUMBER" step="any" class="form-control" name="hp10_calc_dose" id="hp10_calc_dose" value="{{$dosiareasig->Hp10_calc_dose}}">
+                                                    <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
+                                                </div>
+                                                <br>
+                                                <div class="form-floating">
+                                                    <input type="NUMBER" step="any" class="form-control" name="hp007_calc_dose" id="hp007_calc_dose" value="{{$dosiareasig->Hp007_calc_dose}}">
+                                                    <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
+                                                </div>
+                                                <br>
+                                                <div class="form-floating">
+                                                    <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$dosiareasig->Hp3_calc_dose}}">
+                                                    <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
+                                                </div>
+                                                <br>
+                                                <div class="form-floating">
+                                                    <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$dosiareasig->measurement_date}}">
+                                                    <label for="floatingInputGrid">MEASUREMENT DATE:</label>
+                                                    @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                                                </div>
                                             </div>
                                             <div class="col-md mx-4">
                                                 <label for="">DOSÍMETRO DE CONTROL {{ $dosicontrolasig->ubicacion}}:</label>
                                                 <div class="row">
-                                                    @if($dosicontrolasig->ubicacion == 'TORAX')
-                                                        <div class="col-md">
-                                                            <div class="form-floating">
-                                                                <input type="NUMBER" class="form-control" name="hp10_calc_dose_control" id="hp10_calc_dose_control_readonly" value="{{ $dosicontrolasig->Hp10_calc_dose}}" readonly>
-                                                                <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
-                                                            </div>
+                                                    <div class="col-md">
+                                                        <div class="form-floating">
+                                                            <input type="NUMBER" class="form-control" name="hp10_calc_dose_control" id="hp10_calc_dose_control_readonly" value="{{$dosicontrolasig->Hp10_calc_dose}}" readonly>
+                                                            <label for="floatingInputGrid">Hp10 CALC DOSE:</label>
                                                         </div>
-                                                        <div class="col-md">
-                                                            <div class="form-floating">
-                                                                <input type="NUMBER" class="form-control" name="hp007_calc_dose_control" id="hp007_calc_dose_control_readonly" value="{{ $dosicontrolasig->Hp007_calc_dose}}" readonly>
-                                                                <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-md">
+                                                        <div class="form-floating">
+                                                            <input type="NUMBER" class="form-control" name="hp007_calc_dose_control" id="hp007_calc_dose_control_readonly" value="{{$dosicontrolasig->Hp007_calc_dose}}" readonly>
+                                                            <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
                                                         </div>
-                                                        <div class="col-md"></div>
-                                                    @elseif($dosicontrolasig->ubicacion == 'CRISTALINO')
-                                                        <div class="col-md">
-                                                            <div class="form-floating">
-                                                                <input type="NUMBER" class="form-control" name="hp3_calc_dose_control" id="hp3_calc_dose_control_readonly" value="{{$dosicontrolasig->Hp3_calc_dose}}" readonly>
-                                                                <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-md">
+                                                        <div class="form-floating">
+                                                            <input type="NUMBER" class="form-control" name="hp3_calc_dose_control" id="hp3_calc_dose_control_readonly" value="{{$dosicontrolasig->Hp3_calc_dose}}" readonly>
+                                                            <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
                                                         </div>
-                                                        <div class="col-md"></div>
-                                                        <div class="col-md"></div>
-                                                    @elseif($dosicontrolasig->ubicacion == 'ANILLO')
-                                                        <div class="col-md">
-                                                            <div class="form-floating">
-                                                                <input type="NUMBER" class="form-control" name="hp007_calc_dose_control" id="hp007_calc_dose_control_readonly" value="{{ $dosicontrolasig->Hp007_calc_dose}}" readonly>
-                                                                <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md"></div>
-                                                        <div class="col-md"></div>
-                                                    @endif
+                                                    </div>
                                                 </div>
                                                 <br>
                                                 <div class="form-check">
@@ -709,6 +674,14 @@ crossorigin="anonymous">
                 }
             })
         } 
+    });
+    $(document).ready(function(){
+        
+        $('#hp10_calc_dose').on('keyup', function(){
+            var hp10 = document.getElementById("hp10_calc_dose").value;
+            var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
+        })
+        
     })
 </script>
 @endsection

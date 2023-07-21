@@ -197,6 +197,11 @@
                                                     </div>
                                                     <br>
                                                     <div class="form-floating">
+                                                        <input type="NUMBER" step="any" class="form-control" name="hp3_calc_dose" id="hp3_calc_dose" value="{{$trabjasig->Hp3_calc_dose}}">
+                                                        <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-floating">
                                                         <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$trabjasig->measurement_date}}">
                                                         <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                         @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
@@ -241,7 +246,12 @@
                                                                 <label for="floatingInputGrid">Hp0.07 CALC DOSE:</label>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md"></div>
+                                                        <div class="col-md">
+                                                            <div class="form-floating">
+                                                                <input type="NUMBER" class="form-control" name="hp3_calc_dose_control" id="hp3_calc_dose_control_readonly" value="{{$dosicontrolasig->Hp3_calc_dose}}" readonly>
+                                                                <label for="floatingInputGrid">Hp3 CALC DOSE:</label>
+                                                            </div>
+                                                        </div>
                                                     @elseif($dosicontrolasig->ubicacion == 'CRISTALINO')
                                                         <div class="col-md">
                                                             <div class="form-floating">
@@ -709,6 +719,12 @@ crossorigin="anonymous">
                 }
             })
         } 
+    });
+    $(document).ready(function(){
+        $('#hp10_calc_dose').on('keyup', function(){
+            var hp10 = document.getElementById("hp10_calc_dose").value;
+            var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
+        })
     })
 </script>
 @endsection

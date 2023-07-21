@@ -41,6 +41,19 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <div class="form-floating my-3">
+                                                <input type="number" name="numlecturas_año" id="numlecturas_año" min="1" class="form-control" value="{{$contrato->numlecturas_año}}">
+                                                <label for="inputPassword6"  class="col-form-label">LECTUAS AL AÑO</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <span id="maximoPeriodos" class="form-text"></span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md">
@@ -57,6 +70,20 @@
                                         <input type="date" name="fecha_finalizacion_contrato" id="fecha_finalizacion_contrato_input" class="form-control @error('fecha_finalizacion_contrato') is-invalid @enderror" value="{{$contrato->fecha_finalizacion}}" autofocus >
                                         <label for="floatingInputGrid" >FECHA DE FINALIZACIÓN</label>
                                         @error('fecha_finalizacion_contrato')
+                                            <small class="invalid-feedback">*{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md">
+                                    <div class="form-floating my-3">
+                                        <select class="form-select @error('ocupacion_contrato') is-invalid @enderror" id="ocupacion_contrato" name="ocupacion_contrato" autofocus style="text-transform:uppercase">
+                                            <option value="{{$contrato->ocupacion}}">--{{$contrato->ocupacion}}--</option>
+                                            <option value="AM">APLICACIONES MÉDICAS</option>
+                                            <option value="AI">APLICACIONES INDUSTRIALES</option>
+                                            <option value="O">OTRO</option>
+                                        </select>
+                                        <label for="floatingSelectGrid">OCUPACIÓN:</label>
+                                        @error('ocupacion_contrato')
                                             <small class="invalid-feedback">*{{$message}}</small>
                                         @enderror
                                     </div>

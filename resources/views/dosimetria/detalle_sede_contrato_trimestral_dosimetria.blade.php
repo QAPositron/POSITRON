@@ -19,9 +19,7 @@
     </div>
     <br>
     <h4 class="text-center align-middle" id="id_contrato"> </h4>
-
     <br>
-    
     <div class="row g-2 mx-3">
         <div class="col-md"></div>
         <div class="col-md-8">    
@@ -38,9 +36,11 @@
                             {{-- <th class="align-middle">MUÑECA</th> --}}
                             <th class="align-middle">AMBIENTAL</th>
                             <th class="align-middle">CASO</th>
-                            <th class="align-middle">CONTROL TÓRAX</th>
-                            <th class="align-middle">CONTROL CRISTALINO</th>
-                            <th class="align-middle">CONTROL ANILLO</th>
+                            @if($dosisededeptocontra->controlTransT_unicoCont != 'TRUE' && $dosisededeptocontra->controlTransC_unicoCont != 'TRUE' && $dosisededeptocontra->controlTransA_unicoCont != 'TRUE')
+                                <th class="align-middle">CONTROL TÓRAX</th>
+                                <th class="align-middle">CONTROL CRISTALINO</th>
+                                <th class="align-middle">CONTROL ANILLO</th>
+                            @endif
                             <th class="align-middle">TOTAL</th>
                         </tr>
                     </thead>
@@ -52,18 +52,67 @@
                             {{-- <td class="text-center">{{$dosisededeptocontra->dosi_muñeca}}</td> --}}
                             <td class="text-center">{{$dosisededeptocontra->dosi_area}}</td>
                             <td class="text-center">{{$dosisededeptocontra->dosi_caso}}</td>
-                            <td class="text-center">{{$dosisededeptocontra->dosi_control_torax}}</td>
-                            <td class="text-center">{{$dosisededeptocontra->dosi_control_cristalino}}</td>
-                            <td class="text-center">{{$dosisededeptocontra->dosi_control_dedo}}</td>
-                            <td class="text-center">{{$dosisededeptocontra->dosi_torax + $dosisededeptocontra->dosi_cristalino + $dosisededeptocontra->dosi_dedo + $dosisededeptocontra->dosi_muñeca + $dosisededeptocontra->dosi_area + $dosisededeptocontra->dosi_caso + $dosisededeptocontra->dosi_control_torax + $dosisededeptocontra->dosi_control_cristalino + $dosisededeptocontra->dosi_control_dedo}}</td>
+                            @if($dosisededeptocontra->controlTransT_unicoCont == 'TRUE' || $dosisededeptocontra->controlTransC_unicoCont == 'TRUE' || $dosisededeptocontra->controlTransA_unicoCont == 'TRUE')
+                                <td class="text-center">{{$dosisededeptocontra->dosi_torax + $dosisededeptocontra->dosi_cristalino + $dosisededeptocontra->dosi_dedo + $dosisededeptocontra->dosi_muñeca + $dosisededeptocontra->dosi_area + $dosisededeptocontra->dosi_caso}}</td>
+                            @else
+                                <td class="text-center">{{$dosisededeptocontra->dosi_control_torax}}</td>
+                                <td class="text-center">{{$dosisededeptocontra->dosi_control_cristalino}}</td>
+                                <td class="text-center">{{$dosisededeptocontra->dosi_control_dedo}}</td>
+                                <td class="text-center">{{$dosisededeptocontra->dosi_torax + $dosisededeptocontra->dosi_cristalino + $dosisededeptocontra->dosi_dedo + $dosisededeptocontra->dosi_muñeca + $dosisededeptocontra->dosi_area + $dosisededeptocontra->dosi_caso + $dosisededeptocontra->dosi_control_torax + $dosisededeptocontra->dosi_control_cristalino + $dosisededeptocontra->dosi_control_dedo}}</td>
+                            @endif
                         </tr>
                     </tbody>
+                    @if($dosisededeptocontra->controlTransT_unicoCont == 'TRUE' || $dosisededeptocontra->controlTransC_unicoCont == 'TRUE' || $dosisededeptocontra->controlTransA_unicoCont == 'TRUE')
+                        <tfoot>
+                            <tr class="text-center table-active">
+                                <th colspan='9'>DOSÍMETROS DE CONTROL TRANSPORTE</th>
+                            </tr>
+                            <tr class="text-center table-active">
+                                <th  colspan='2' class="align-middle">TÓRAX</th>
+                                <th  colspan='2' class="align-middle">CRISTALINO</th>
+                                <th  colspan='2' class="align-middle">ANILLO</th>
+                            </tr>
+                            <tr class="text-center">
+                                <td  colspan='2' >{{$dosisededeptocontra->controlTransT_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                <td  colspan='2' >{{$dosisededeptocontra->controlTransC_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                <td  colspan='2' >{{$dosisededeptocontra->controlTransA_unicoCont == 'TRUE' ? 1 : 0}}</td>   
+                            </tr>
+                        </tfoot>
+                    @endif
                 </table>
             </div>
         </div>
         <div class="col-md"></div>
     </div>
-
+    {{-- @if($dosisededeptocontra->controlTransT_unicoCont == 'TRUE' || $dosisededeptocontra->controlTransC_unicoCont == 'TRUE' || $dosisededeptocontra->controlTransA_unicoCont == 'TRUE')
+        <div class="row">
+            <div class="col-md"></div>
+            <div class="col-md-4">
+                <div class="table table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-active text-center" >
+                            <tr>
+                                <th colspan="3" >DOSÍMETROS DE CONTROL TRANSPORTE</th>
+                            </tr>
+                            <tr class="text-center" align-middle>
+                                <th>TÓRAX</th>
+                                <th>CRISTALINO</th>
+                                <th>ANILLO</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center aling-middle" >
+                            <tr>
+                                <td class="text-center">{{$dosisededeptocontra->controlTransT_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                <td class="text-center">{{$dosisededeptocontra->controlTransC_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                <td class="text-center">{{$dosisededeptocontra->controlTransA_unicoCont == 'TRUE' ? 1 : 0}}</td>   
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md"></div>
+        </div>
+    @endif --}}
     <div class="row">
         <div class="col"></div>
         <div class="col-12">

@@ -235,7 +235,7 @@
         </thead>
         <tbody style="color:#2646FA;">
             {{-- ////////NO HAY DOSIMETROS DE CONTROL//////////// --}}
-            @if($dosicontrolasig->isEmpty())
+            @if($dosicontrolasig->isEmpty() && $dosicontrolasigUnico->isEmpty())
                 @foreach($dosiareasig as $dosiarea)
                     <tr>
                         <td style="padding:2px; border:0.1px solid black; border-left:1px solid black; border-right:1px solid black;" align="center">{{$dosiarea->dosimetro->codigo_dosimeter}}</td>
@@ -281,7 +281,7 @@
                                 {{'DSU'}}
                             @elseif($dosiarea->nota2 == 'TRUE')
                                 {{'NP'}}
-                            @elseif($dosiarea->Hp10_calc_dose <= 0.049)
+                            @elseif($dosiarea->Hp10_calc_dose <= 0)
                                 {{"ND"}}
                             @else 
                                 {{$dosiarea->Hp10_calc_dose}} 
@@ -298,7 +298,7 @@
                                 {{'DSU'}}
                             @elseif($dosiarea->nota2 == 'TRUE')
                                 {{'NP'}}
-                            @elseif($dosiarea->Hp007_calc_dose  <= 0.049)  
+                            @elseif($dosiarea->Hp007_calc_dose  <= 0)  
                                 {{"ND"}}
                             @else
                                 {{$dosiarea->Hp007_calc_dose}} 
@@ -314,7 +314,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_calc_dose >= 0.049)
+                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_calc_dose > 0)
                                         @php
                                             $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_calc_dose;
                                         @endphp
@@ -329,7 +329,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_calc_dose >= 0.049)
+                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_calc_dose > 0)
                                         @php
                                             $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_calc_dose;
                                         @endphp
@@ -347,7 +347,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_calc_dose >= 0.049)
+                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_calc_dose > 0)
                                         @php
                                             $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_calc_dose;
                                         @endphp
@@ -362,7 +362,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_calc_dose >= 0.049)
+                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_calc_dose > 0)
                                         @php
                                             $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_calc_dose;
                                         @endphp
@@ -395,17 +395,19 @@
                         </td>
                         <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->cedula_persona}} @endif</td>
                         <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
+                            @php
+                                $ckek = 0;
+                                $checkubi = '';
+                            @endphp
                             @foreach($fechainiciodositrabaj as $fec)
-                                @php
-                                    $ckek = 0;
-                                @endphp
-                                @if($dositrabj->persona_id == $fec->persona_id && $chek != $fec->persona_id)
+                                @if($dositrabj->persona_id == $fec->persona_id && ($chek != $fec->persona_id || $checkubi != $fec->ubicacion))
                                     @php
                                         $datefix = date('d-m-Y',strtotime($fec->primer_dia_uso));
                                         $chek = $fec->persona_id;
+                                        $checkubi = $fec->ubicacion;
                                         echo $datefix;
                                     @endphp
-                                @else
+                                    {{-- {{$datefix}} --}}
                                 @endif
                             @endforeach
                         </td>
@@ -445,7 +447,7 @@
                                 {{'NP'}}
                             @elseif($dositrabj->ubicacion == 'CRISTALINO' || $dositrabj->ubicacion == 'ANILLO') 
                                 {{'NA'}}
-                            @elseif($dositrabj->Hp10_calc_dose <= 0.049)
+                            @elseif($dositrabj->Hp10_calc_dose <= 0)
                                 {{"ND"}}
                             @else 
                                 {{$dositrabj->Hp10_calc_dose}} 
@@ -464,7 +466,7 @@
                                 {{'NP'}}
                             @elseif($dositrabj->ubicacion == 'CRISTALINO') 
                                 {{'NA'}} 
-                            @elseif($dositrabj->Hp007_calc_dose <= 0.049)  
+                            @elseif($dositrabj->Hp007_calc_dose <= 0)  
                                 {{"ND"}}
                             @else
                                 {{$dositrabj->Hp007_calc_dose}} 
@@ -483,7 +485,7 @@
                                 {{'NP'}} 
                             @elseif($dositrabj->ubicacion == 'ANILLO' || $dositrabj->ubicacion == 'TORAX')
                                 {{'NA'}}
-                            @elseif($dositrabj->Hp3_calc_dose <= 0.03)
+                            @elseif($dositrabj->Hp3_calc_dose <= 0)
                                 {{'ND'}}
                             @else
                                 {{$dositrabj->Hp3_calc_dose}}
@@ -496,7 +498,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_calc_dose >= 0.049)
+                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_calc_dose > 0)
                                         
                                         @php
                                             $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_calc_dose;
@@ -516,7 +518,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_calc_dose >= 0.049)
+                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_calc_dose > 0)
                                         @php
                                             $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_calc_dose;
                                         @endphp
@@ -535,7 +537,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_calc_dose >= 0.03)
+                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_calc_dose > 0)
                                         @php
                                             $sumaHp3calcdose += $sumadocemeses[$i]->Hp3_calc_dose;
                                         @endphp
@@ -556,7 +558,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_calc_dose >= 0.049)
+                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_calc_dose > 0)
                                         
                                         @php
                                             $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_calc_dose;
@@ -576,7 +578,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_calc_dose >= 0.049)
+                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_calc_dose > 0)
                                         @php
                                             $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_calc_dose;
                                         @endphp
@@ -595,7 +597,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_calc_dose >= 0.03)
+                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_calc_dose > 0)
                                         @php
                                             $sumaFIHp3calcdose += $sumaFImeses[$i]->Hp3_calc_dose;
                                         @endphp
@@ -617,10 +619,512 @@
                             @endfor
                         </td>    
                     </tr>
-                @endforeach  
-            {{-- //////// SI HAY DOSIMETRO DE CONTROL TORAX//////////// --}}
+                @endforeach 
+            @elseif($dosicontrolasig->isEmpty()) 
+                {{-- //////// SI HAY DOSIMETRO DE CONTROL UNO PARA TODO EL CONTRATO//////////// --}}
+                @foreach($dosicontrolasigUnico as $dosicontUnic)
+                    <tr>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-left:1px solid black; border-right:1px solid black;" align="center">{{$dosicontUnic->dosimetro->codigo_dosimeter}}</td>
+                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">CONTROL TRANS. {{mb_substr($dosicontUnic->ubicacion, 0,1,"UTF-8")}}</td>
+                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @foreach($contratoDosi as $cont)
+                                {{$cont->ocupacion}}
+                            @endforeach
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $datefix = date('d-m-Y',strtotime($dosicontUnic->primer_dia_uso));
+                            @endphp
+                            {{$datefix}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $datefix = date('d-m-Y',strtotime($dosicontUnic->ultimo_dia_uso));
+                            @endphp
+                            {{$datefix}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @foreach($contratoDosi as $cont)
+                                {{$cont->periodo_recambio}}
+                            @endforeach
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">N.A.</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">{{$dosicontUnic->energia}}</td>
+                        
+                        <!--  /////////DOSIS DEL PERIODO///// -->
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @if($dosicontUnic->DNL =='TRUE')
+                                {{'DNL'}}
+                            @elseif($dosicontUnic->EU == 'TRUE')
+                                {{'EU'}}
+                            @elseif($dosicontUnic->DPL == 'TRUE')
+                                {{'DPL'}}
+                            @elseif($dosicontUnic->DSU == 'TRUE')
+                                {{'DSU'}}
+                            @elseif($dosicontUnic->nota2 == 'TRUE')
+                                {{'NP'}}
+                            @elseif($dosicontUnic->ubicacion == 'CRISTALINO'|| $dosicontUnic->ubicacion == 'ANILLO') 
+                                {{'NA'}}
+                            @elseif($dosicontUnic->Hp10_calc_dose <= 0)
+                                {{"ND"}}
+                            @else 
+                                {{$dosicontUnic->Hp10_calc_dose}} 
+                            @endif
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            
+                            @if($dosicontUnic->DNL =='TRUE')
+                                {{'DNL'}}
+                            @elseif($dosicontUnic->EU == 'TRUE')
+                                {{'EU'}}
+                            @elseif($dosicontUnic->DPL == 'TRUE')
+                                {{'DPL'}}
+                            @elseif($dosicontUnic->DSU == 'TRUE')
+                                {{'DSU'}}
+                            @elseif($dosicontUnic->nota2 == 'TRUE')
+                                {{'NP'}}
+                            @elseif($dosicontUnic->ubicacion == 'CRISTALINO') 
+                                {{'NA'}} 
+                            @elseif($dosicontUnic->Hp007_calc_dose  <= 0)  
+                                {{"ND"}}
+                            @else
+                                {{$dosicontUnic->Hp007_calc_dose}} 
+                            @endif
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
+                            @if($dosicontUnic->DNL =='TRUE')
+                                {{'DNL'}}
+                            @elseif($dosicontUnic->EU == 'TRUE')
+                                {{'EU'}}
+                            @elseif($dosicontUnic->DPL == 'TRUE')
+                                {{'DPL'}}
+                            @elseif($dosicontUnic->DSU == 'TRUE')
+                                {{'DSU'}}
+                            @elseif($dosicontUnic->nota2 == 'TRUE')
+                                {{'NP'}} 
+                            @elseif($dosicontUnic->ubicacion == 'TORAX' || $dosicontUnic->ubicacion == 'CASO'|| $dosicontUnic->ubicacion == 'ANILLO')
+                                {{'NA'}}
+                            @elseif($dosicontUnic->Hp3_calc_dose <= 0)
+                                {{'ND'}}
+                            @else
+                                {{$dosicontUnic->Hp3_calc_dose}}
+                            @endif 
+                        </td>
+    
+                        <!-- ///////DOSIS ACUMULADA 12 MESES ANTERIORES/////// -->
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">NA</td>
+    
+                        <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">NA</td>
+    
+                        <!-- //////////NOTAS//////// -->
+                        <td  style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
+                            @for($i=1; $i<=6; $i++)
+                                @if($dosicontUnic->{"nota$i"} == 'TRUE')
+                                    {{$i}})
+                                @endif 
+                            @endfor
+                        </td>
+                    </tr>
+                @endforeach
+                @foreach($dosiareasig as $dosiarea)
+                    <tr>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-left:1px solid black; border-right:1px solid black;" align="center">{{$dosiarea->dosimetro->codigo_dosimeter}}</td>
+                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">{{$dosiarea->areadepartamentosede->nombre_area}}</td>
+                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @foreach($contratoDosi as $cont)
+                                {{$cont->ocupacion}}
+                            @endforeach
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">NA</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border-left:1px solid black; " align="center">
+                            @php
+                                $datefix = date('d-m-Y',strtotime($dosiarea->primer_dia_uso));
+                            @endphp
+                            {{$datefix}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $datefix = date('d-m-Y',strtotime($dosiarea->ultimo_dia_uso));
+                            @endphp
+                            {{$datefix}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @foreach($contratoDosi as $cont)
+                                {{$cont->periodo_recambio}}
+                            @endforeach
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">AMBIENTAL</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">{{$dosiarea->energia}}</td>
+                        
+                        <!--  /////////DOSIS DEL PERIODO///// -->
+                        <td style="padding-top:5px; padding-bottom:5px; border-left:1px solid black;" align="center">
+                            @if($dosiarea->DNL =='TRUE')
+                                {{'DNL'}}
+                            @elseif($dosiarea->EU == 'TRUE')
+                                {{'EU'}}
+                            @elseif($dosiarea->DPL == 'TRUE')
+                                {{'DPL'}}
+                            @elseif($dosiarea->DSU == 'TRUE')
+                                {{'DSU'}}
+                            @elseif($dosiarea->nota2 == 'TRUE')
+                                {{'NP'}}
+                            @elseif($dosiarea->Hp10_dif_dosicont <= 0)
+                                {{"ND"}}
+                            @else 
+                                {{$dosiarea->Hp10_dif_dosicont}} 
+                            @endif
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @if($dosiarea->DNL =='TRUE')
+                                {{'DNL'}}
+                            @elseif($dosiarea->EU == 'TRUE')
+                                {{'EU'}}
+                            @elseif($dosiarea->DPL == 'TRUE')
+                                {{'DPL'}}
+                            @elseif($dosiarea->DSU == 'TRUE')
+                                {{'DSU'}}
+                            @elseif($dosiarea->nota2 == 'TRUE')
+                                {{'NP'}}
+                            @elseif($dosiarea->Hp007_dif_dosicont <= 0)  
+                                {{"ND"}}
+                            @else
+                                {{$dosiarea->Hp007_dif_dosicont}} 
+                            @endif
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center"> {{'NA'}}</td>
+
+                        <!-- ///////DOSIS ACUMULADA 12 MESES ANTERIORES/////// -->
+                        <td style="padding-top:5px; padding-bottom:5px; border-left:1px solid black; " align="center">
+                            @php
+                                $sumaHp10calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
+                                @for($i=0; $i< count($sumadocemeses); $i++)
+                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont > 0)
+                                        @php
+                                            $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            
+                            {{$sumaHp10calcdose}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $sumaHp007calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
+                                @for($i=0; $i< count($sumadocemeses); $i++)
+                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_dif_dosicont > 0)
+                                        @php
+                                            $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            {{$sumaHp007calcdose}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">{{'NA'}}</td>
+    
+                        <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
+                        <td style="padding-top:5px; padding-bottom:5px; border-left:1px solid black;" align="center">
+                            @php
+                                $sumaFIHp10calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
+                                @for($i=0; $i< count($sumaFImeses); $i++)
+                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont > 0)
+                                        
+                                        @php
+                                            $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            {{$sumaFIHp10calcdose}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $sumaFIHp007calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
+                                @for($i=0; $i< count($sumaFImeses); $i++)
+                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_dif_dosicont > 0)
+                                        @php
+                                            $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            {{$sumaFIHp007calcdose}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">{{'NA'}}</td>
+                        <!-- //////////NOTAS//////// -->
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-left:1px solid black; border-right:1px solid black;" align="center">
+                            @for($i=1; $i<=6; $i++)
+                                @if($dosiarea->{"nota$i"} == 'TRUE')
+                                    {{$i}})
+                                @endif 
+                            @endfor
+                        </td>
+                    </tr>
+                @endforeach
+                @foreach($trabajdosiasig as $dositrabj)
+                    <tr>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-left:1px solid black; border-right:1px solid black;" align="center">{{$dositrabj->dosimetro->codigo_dosimeter}}</td>
+                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->primer_apellido_persona}} {{$dositrabj->persona->segundo_apellido_persona}} @endif</td>
+                        <td style="padding-top:5px; padding-bottom:5px; padding-left:3px; border:0.1px solid black;">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->primer_nombre_persona}} {{$dositrabj->persona->segundo_nombre_persona}} @endif</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->genero_persona == 'FEMENINO' ? 'F' : 'M'}} @endif</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @foreach($contratoDosi as $cont)
+                                {{$cont->ocupacion}}
+                            @endforeach
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">@if($dositrabj->persona_id == NULL) @else {{$dositrabj->persona->cedula_persona}} @endif</td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
+                            @php
+                                $ckek = 0;
+                                $checkubi = '';
+                            @endphp
+                            @foreach($fechainiciodositrabaj as $fec)
+                                @if($dositrabj->persona_id == $fec->persona_id && ($chek != $fec->persona_id || $checkubi != $fec->ubicacion))
+                                    @php
+                                        $datefix = date('d-m-Y',strtotime($fec->primer_dia_uso));
+                                        $chek = $fec->persona_id;
+                                        $checkubi = $fec->ubicacion;
+                                        echo $datefix;
+                                    @endphp
+                                    {{-- {{$datefix}} --}}
+                                @endif
+                            @endforeach
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $datefix = date('d-m-Y',strtotime($dositrabj->primer_dia_uso));
+                            @endphp
+                            {{$datefix}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $datefix = date('d-m-Y',strtotime($dositrabj->ultimo_dia_uso));
+                            @endphp
+                            {{$datefix}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @foreach($contratoDosi as $cont)
+                                {{$cont->periodo_recambio}}
+                            @endforeach
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            {{$dositrabj->ubicacion}}
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">{{$dositrabj->energia}}</td>
+
+                        <!--  /////////DOSIS DEL PERIODO///// -->
+                        <td id ="hp10_trabjasig" style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; @if($dositrabj->nota3 == 'TRUE') color: #ff0000;  @endif " align="center">
+                            @if($dositrabj->DNL =='TRUE')
+                                {{'DNL'}}
+                            @elseif($dositrabj->EU == 'TRUE')
+                                {{'EU'}}
+                            @elseif($dositrabj->DPL == 'TRUE')
+                                {{'DPL'}}
+                            @elseif($dositrabj->DSU == 'TRUE')
+                                {{'DSU'}}
+                            @elseif($dositrabj->nota2 == 'TRUE')
+                                {{'NP'}}
+                            @elseif($dositrabj->ubicacion == 'CRISTALINO' || $dositrabj->ubicacion == 'ANILLO') 
+                                {{'NA'}}
+                            @elseif($dositrabj->Hp10_dif_dosicont <= 0)
+                                {{"ND"}}
+                            @else 
+                                {{$dositrabj->Hp10_dif_dosicont}} 
+                            @endif
+                        </td>
+                        <td id="hp007_trabjasig" style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; @if($dositrabj->nota3 == 'TRUE') color: #ff0000;  @endif" align="center">
+                            @if($dositrabj->DNL =='TRUE')
+                                {{'DNL'}}
+                            @elseif($dositrabj->EU == 'TRUE')
+                                {{'EU'}}
+                            @elseif($dositrabj->DPL == 'TRUE')
+                                {{'DPL'}}
+                            @elseif($dositrabj->DSU == 'TRUE')
+                                {{'DSU'}}
+                            @elseif($dositrabj->nota2 == 'TRUE')
+                                {{'NP'}}
+                            @elseif($dositrabj->ubicacion == 'CRISTALINO') 
+                                {{'NA'}} 
+                            @elseif($dositrabj->Hp007_dif_dosicont <= 0.049)  
+                                {{"ND"}}
+                            @else
+                                {{$dositrabj->Hp007_dif_dosicont}} 
+                            @endif
+                        </td>
+                        <td id="hp3_trabjasig" style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;  @if($dositrabj->nota3 == 'TRUE') color: #ff0000;  @endif" align="center">
+                            @if($dositrabj->DNL =='TRUE')
+                                {{'DNL'}}
+                            @elseif($dositrabj->EU == 'TRUE')
+                                {{'EU'}}
+                            @elseif($dositrabj->DPL == 'TRUE')
+                                {{'DPL'}}
+                            @elseif($dositrabj->DSU == 'TRUE')
+                                {{'DSU'}}
+                            @elseif($dositrabj->nota2 == 'TRUE')
+                                {{'NP'}} 
+                            @elseif($dositrabj->ubicacion == 'TORAX' || $dositrabj->ubicacion == 'CASO'|| $dositrabj->ubicacion == 'ANILLO')
+                                {{'NA'}}
+                            @elseif($dositrabj->Hp3_dif_dosicont <= 0.03)
+                                {{'ND'}}
+                            @else
+                                {{$dositrabj->Hp3_dif_dosicont}}
+                            @endif
+                        </td>
+
+                        <!-- ///////DOSIS ACUMULADA 12 MESES ANTERIORES/////// -->
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $sumaHp10calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
+                                @for($i=0; $i< count($sumadocemeses); $i++)
+                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_dif_dosicont > 0)
+                                        
+                                        @php
+                                            $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            @if($dositrabj->ubicacion == 'CRISTALINO' || $dositrabj->ubicacion == 'ANILLO') 
+                                {{'NA'}}
+                            @else
+                                {{$sumaHp10calcdose}}
+                            @endif
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $sumaHp007calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
+                                @for($i=0; $i< count($sumadocemeses); $i++)
+                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_dif_dosicont > 0)
+                                        @php
+                                            $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            @if($dositrabj->ubicacion == 'CRISTALINO') 
+                                {{'NA'}} 
+                            @else
+                                {{$sumaHp007calcdose}}
+                            @endif
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
+                            @php
+                                $sumaHp3calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
+                                @for($i=0; $i< count($sumadocemeses); $i++)
+                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_dif_dosicont > 0)
+                                        @php
+                                            $sumaHp3calcdose += $sumadocemeses[$i]->Hp3_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            @if($dositrabj->ubicacion == 'TORAX' || $dositrabj->ubicacion == 'CASO'|| $dositrabj->ubicacion == 'ANILLO')
+                                {{'NA'}}
+                            @else
+                                {{$sumaHp3calcdose}}
+                            @endif
+                        </td>
+
+                        <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $sumaFIHp10calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
+                                @for($i=0; $i< count($sumaFImeses); $i++)
+                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_dif_dosicont > 0)
+                                        
+                                        @php
+                                            $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            @if($dositrabj->ubicacion == 'CRISTALINO' || $dositrabj->ubicacion == 'ANILLO') 
+                                {{'NA'}}
+                            @else
+                                {{$sumaFIHp10calcdose}}
+                            @endif
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
+                            @php
+                                $sumaFIHp007calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
+                                @for($i=0; $i< count($sumaFImeses); $i++)
+                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_dif_dosicont > 0)
+                                        @php
+                                            $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            @if($dositrabj->ubicacion == 'CRISTALINO') 
+                                {{'NA'}} 
+                            @else
+                                {{$sumaFIHp007calcdose}}
+                            @endif
+                        </td>
+                        <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
+                            @php
+                                $sumaFIHp3calcdose = 0;
+                            @endphp
+                            @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
+                                @for($i=0; $i< count($sumaFImeses); $i++)
+                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_dif_dosicont > 0)
+                                        @php
+                                            $sumaFIHp3calcdose += $sumaFImeses[$i]->Hp3_dif_dosicont;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            @endforeach
+                            @if($dositrabj->ubicacion == 'TORAX' || $dositrabj->ubicacion == 'CASO'|| $dositrabj->ubicacion == 'ANILLO')
+                                {{'NA'}}
+                            @else
+                                {{$sumaFIHp3calcdose}}
+                            @endif
+                        </td>
+                        
+                        <!-- //////////NOTAS//////// -->
+                        <td  style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-right:1px solid black;" align="center">
+                            @for($i=1; $i<=6; $i++)
+                                @if($dositrabj->{"nota$i"} == 'TRUE')
+                                    {{$i}})
+                                @endif 
+                            @endfor
+                        </td>   
+                    </tr>
+                    
+                @endforeach
             @else
-                
+                {{-- //////// SI HAY DOSIMETRO DE CONTROL POR ESPECIALIDAD//////////// --}}
                 @foreach($dosicontrolasig as $dosicontrol)
                     <tr>
                         <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-left:1px solid black; border-right:1px solid black;" align="center">{{$dosicontrol->codigo_dosimeter}}</td>
@@ -668,7 +1172,7 @@
                                 {{'NP'}}
                             @elseif($dosicontrol->ubicacion == 'CRISTALINO'|| $dosicontrol->ubicacion == 'ANILLO') 
                                 {{'NA'}}
-                            @elseif($dosicontrol->Hp10_calc_dose <= 0.049)
+                            @elseif($dosicontrol->Hp10_calc_dose <= 0)
                                 {{"ND"}}
                             @else 
                                 {{$dosicontrol->Hp10_calc_dose}} 
@@ -688,7 +1192,7 @@
                                 {{'NP'}}
                             @elseif($dosicontrol->ubicacion == 'CRISTALINO') 
                                 {{'NA'}} 
-                            @elseif($dosicontrol->Hp007_calc_dose  <= 0.049)  
+                            @elseif($dosicontrol->Hp007_calc_dose  <= 0)  
                                 {{"ND"}}
                             @else
                                 {{$dosicontrol->Hp007_calc_dose}} 
@@ -707,7 +1211,7 @@
                                 {{'NP'}} 
                             @elseif($dosicontrol->ubicacion == 'TORAX' || $dosicontrol->ubicacion == 'CASO'|| $dosicontrol->ubicacion == 'ANILLO')
                                 {{'NA'}}
-                            @elseif($dosicontrol->Hp3_calc_dose <= 0.03)
+                            @elseif($dosicontrol->Hp3_calc_dose <= 0)
                                 {{'ND'}}
                             @else
                                 {{$dosicontrol->Hp3_calc_dose}}
@@ -779,7 +1283,7 @@
                                 {{'DSU'}}
                             @elseif($dosiarea->nota2 == 'TRUE')
                                 {{'NP'}}
-                            @elseif($dosiarea->Hp10_dif_dosicont <= 0.049)
+                            @elseif($dosiarea->Hp10_dif_dosicont <= 0)
                                 {{"ND"}}
                             @else 
                                 {{$dosiarea->Hp10_dif_dosicont}} 
@@ -796,7 +1300,7 @@
                                 {{'DSU'}}
                             @elseif($dosiarea->nota2 == 'TRUE')
                                 {{'NP'}}
-                            @elseif($dosiarea->Hp007_dif_dosicont <= 0.049)  
+                            @elseif($dosiarea->Hp007_dif_dosicont <= 0)  
                                 {{"ND"}}
                             @else
                                 {{$dosiarea->Hp007_dif_dosicont}} 
@@ -811,7 +1315,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont >= 0.049)
+                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont > 0)
                                         @php
                                             $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
                                         @endphp
@@ -827,7 +1331,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_dif_dosicont >= 0.049)
+                                    @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_dif_dosicont > 0)
                                         @php
                                             $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_dif_dosicont;
                                         @endphp
@@ -845,7 +1349,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont >= 0.049)
+                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont > 0)
                                         
                                         @php
                                             $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
@@ -861,7 +1365,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_dif_dosicont >= 0.049)
+                                    @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_dif_dosicont > 0)
                                         @php
                                             $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_dif_dosicont;
                                         @endphp
@@ -907,7 +1411,6 @@
                                         echo $datefix;
                                     @endphp
                                     {{-- {{$datefix}} --}}
-                                @else
                                 @endif
                             @endforeach
                         </td>
@@ -947,7 +1450,7 @@
                                 {{'NP'}}
                             @elseif($dositrabj->ubicacion == 'CRISTALINO' || $dositrabj->ubicacion == 'ANILLO') 
                                 {{'NA'}}
-                            @elseif($dositrabj->Hp10_dif_dosicont <= 0.049)
+                            @elseif($dositrabj->Hp10_dif_dosicont <= 0)
                                 {{"ND"}}
                             @else 
                                 {{$dositrabj->Hp10_dif_dosicont}} 
@@ -999,7 +1502,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_dif_dosicont >= 0.049)
+                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_dif_dosicont > 0)
                                         
                                         @php
                                             $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
@@ -1019,7 +1522,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_dif_dosicont >= 0.049)
+                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_dif_dosicont > 0)
                                         @php
                                             $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_dif_dosicont;
                                         @endphp
@@ -1038,7 +1541,7 @@
                             @endphp
                             @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                 @for($i=0; $i< count($sumadocemeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_dif_dosicont >= 0.03)
+                                    @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_dif_dosicont > 0)
                                         @php
                                             $sumaHp3calcdose += $sumadocemeses[$i]->Hp3_dif_dosicont;
                                         @endphp
@@ -1059,7 +1562,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_dif_dosicont >= 0.049)
+                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_dif_dosicont > 0)
                                         
                                         @php
                                             $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
@@ -1079,7 +1582,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_dif_dosicont >= 0.049)
+                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_dif_dosicont > 0)
                                         @php
                                             $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_dif_dosicont;
                                         @endphp
@@ -1098,7 +1601,7 @@
                             @endphp
                             @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                 @for($i=0; $i< count($sumaFImeses); $i++)
-                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_dif_dosicont >= 0.03)
+                                    @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_dif_dosicont > 0)
                                         @php
                                             $sumaFIHp3calcdose += $sumaFImeses[$i]->Hp3_dif_dosicont;
                                         @endphp
@@ -1133,7 +1636,7 @@
 <footer>
     <div style="position: static; border:solid 0.1px #000; width: 99.2%; height:35px; padding:5px 5px 5px 5px; display:block">
         <p style="text-align:justify; margin:0px;">
-            <b>NOMENCLATURA:</b> <b>NA =</b> No Aplica (No se tiene observaciones), <b>ND =</b> Dosis No Detectable (Significa que la lectura esta entre cero y el umbral de detección=0,05 mSv para Hp10 y entre cero y el umbral de detección= 0.03 para Hp0.007 y Hp3), 
+            <b>NOMENCLATURA:</b> <b>NA =</b> No Aplica (No se tiene observaciones), <b>ND =</b> Dosis No Detectable (Significa que la lectura esta entre cero y algún número negativo), 
             <b>NP =</b> Dosímetro No Presentado (No se llegó el dosímetro a las instalaciones de QA POSITRON), <b>DNL =</b> Dosímetro No Legible (Dosímetro llegó, pero no se puede leer por deterioro), 
             <b>EU =</b> Dosímetro en Uso (el dosímetro está en uso por el usuario), <b>DPL =</b> Dosímetro en Proceso de Lectura (El dosímetro llegó a las instalaciones y no se ha procesado la lectura), 
             <b>DSU =</b> Dosímetro sin usar (Dosímetro que indica el cliente que no se usó en ese periodo)
