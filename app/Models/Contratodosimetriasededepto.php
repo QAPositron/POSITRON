@@ -16,7 +16,7 @@ class Contratodosimetriasededepto extends Model
     }
     //relacion uno a uno con la tabla dosicontrolcontdosisedes
     public function dosicontrolcontratodosisede(){
-        return $this->hasOne(Dosicontrolcontdosisede::class, 'contdosisededepto_id', 'id_contdosisededepto');
+        return $this->hasMany(Dosicontrolcontdosisede::class, 'id_dosicontrolcontdosisedes');
     }
     //relacion uno a muchos con la tabla trabajadordosimetros
     public function trabajadordosimetro(){
@@ -46,8 +46,13 @@ class Contratodosimetriasededepto extends Model
     public function novedadmesescontdosi(){
         return $this->hasMany(Novedadmesescontdosisededepto::class, 'id_novedadmesescontdosi');
     }
+    //relacion uno a muchos con la tabla novcontdosisededeptos
+    public function novcontdosisededepto(){
+        return $this->hasMany(Novcontdosisededepto::class, 'id_novcontdosisededepto');
+    }
     //relacion uno a muchos con la tabla obsreventrada
     public function obsreventrada(){
         return $this->hasMany(Obsreventrada::class, 'id_obsreventrada');
     }
+
 }

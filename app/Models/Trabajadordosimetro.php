@@ -41,7 +41,11 @@ class Trabajadordosimetro extends Model
     //relacion uno a uno con obsreventradas
     public function obsreventradas(){
         return $this->hasOne(Obsreventrada::class, 'trabajcontdosimetro_id', 'id_trabajadordosimetro');
-        
+    }
+   
+     //Relacion uno a muchos (inversa) con novcontdosisededepto
+     public function novcontdosisededepto(){
+        return $this->belongsTo(Novcontdosisededepto::class, 'novcontdosisededepto_id','id_novcontdosisededepto');
     }
     
 }

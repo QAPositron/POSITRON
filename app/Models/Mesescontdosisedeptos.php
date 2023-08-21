@@ -16,9 +16,8 @@ class Mesescontdosisedeptos extends Model
         return $this->belongsTo(Contratodosimetriasededepto::class, 'contdosisededepto_id', 'id_contdosisededepto');
     }
 
-    //relacion uno a muchos 
-    public function novedadmesescontdosi(){
-        /* return $this->hasMany('App\Models\Sede'); */
-        return $this->hasMany(Novedadmesescontdosisededepto::class, 'id_novedadmesescontdosi');
+    //relacion uno a muchos (inversa) con novcontdosisededeptos
+    public function novcontdosisededepto(){
+        return $this->belongsTo(Novcontdosisededepto::class, 'novcontdosisededepto_id ', 'id_novcontdosisededepto');
     }
 }

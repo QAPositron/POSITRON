@@ -245,7 +245,7 @@
             var n = num.toString().padStart(5,'0');
             console.log("ESTE ES EL CODIGO" +n);
            
-            TDcontrato.innerHTML = "<a class='btn btn-outline-primary rounded-pill' href='{{route('detallecontrato.create', "+$dosicont->id_contratodosimetria+")}}'>"+n+"</a>";
+            TDcontrato.innerHTML = "<a class='btn btn-outline-primary rounded-pill' href='{{route('detallecontrato.create', "$dosicont->id_contratodosimetria")}}'>"+n+"</a>";
             
         @endforeach
         $('.empresasdosi').DataTable({

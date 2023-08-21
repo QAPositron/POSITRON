@@ -26,7 +26,7 @@ class Dosicontrolcontdosisede extends Model
     public function holder(){
         return $this->belongsTo(Holder::class, 'holder_id', 'id_holder');
     }
-     //Relacion uno a muchos (inversa) con contratodosimetriasededepto
+    //Relacion uno a muchos (inversa) con contratodosimetriasededepto
     public function contratodosimetriasededepto(){
         return $this->belongsTo(Contratodosimetriasededepto::class, 'contdosisededepto_id','id_contdosisededepto');
     }
@@ -42,5 +42,9 @@ class Dosicontrolcontdosisede extends Model
     public function dosimetriacontrato(){
         /* return $this->belongsTo('App\Models\Empresa'); */
         return $this->belongsTo(Dosimetriacontrato::class, 'contratodosimetria_id', 'id_contratodosimetria');
+    }
+    //Relacion uno a muchos (inversa) con novcontdosisededepto
+    public function novcontdosisededepto(){
+        return $this->belongsTo(Novcontdosisededepto::class, 'novcontdosisededepto_id','id_novcontdosisededepto');
     }
 }

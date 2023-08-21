@@ -25,8 +25,14 @@ class CreateNovedadmesescontdosisededeptosTable extends Migration
             $table-> unsignedBigInteger('dosicontrol_id')->nullable();
             $table-> foreign('dosicontrol_id')->references('id_dosicontrolcontdosisedes')->on('dosicontrolcontdosisedes')->onDelete('cascade')->onUpdate('cascade');
             
-            $table-> unsignedBigInteger('contdosisededepto_id');
+            $table-> unsignedBigInteger('dosiarea_id')->nullable();
+            $table-> foreign('dosiarea_id')->references('id_dosiareacontdosisedes')->on('dosiareacontdosisedes')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table-> unsignedBigInteger('novcontdosisededepto_id')->nullable();
+            $table-> foreign('novcontdosisededepto_id')->references('id_novcontdosisededepto')->on('novcontdosisededeptos')->onDelete('cascade')->onUpdate('cascade');
             
             $table->integer('mes_asignacion');
             $table->integer('tipo_novedad');

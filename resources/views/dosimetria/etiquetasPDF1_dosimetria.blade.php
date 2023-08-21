@@ -350,13 +350,11 @@
                 @elseif($mes == 6 || $mes == 12)
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM6.png')}}" class="img_torax">
                 @endif
-
-                @foreach($contratodosi as $contdosi)
-                    {{-- <div class="nom_area">{{$area->areadepartamentosede->nombre_area}}</div> --}}
-                    <div class="num_iden_cont_torax" ><b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @else NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b>@endif</div>
-                    <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
-                    <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}.</div>
-                @endforeach
+                
+                <div class="num_iden_cont_torax" ><b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; @if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}</b> @else NIT. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}}</b>@endif</div>
+                <div class="empresa_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 26,"UTF-8")}}</div>
+                <div class="sede_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0, 9,"UTF-8")}}.</div>
+                
                 <div class="codigo_cont_torax" >No. {{$area->dosimetro->codigo_dosimeter}}</div>
                 @php
                     $datefix1 = date('d/m/Y',strtotime($area->primer_dia_uso));
@@ -411,10 +409,10 @@
 
                     {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
                     <div class="nombre_torax" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1, "UTF-8")}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</b> </div>
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_torax" >{{mb_substr($contdosi->nombre_empresa, 0,26,"UTF-8")}}</div>
-                        <div class="sede_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}</div>
-                    @endforeach
+                    
+                    <div class="empresa_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0,26,"UTF-8")}}</div>
+                    <div class="sede_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0, 9,"UTF-8")}}</div>
+                    
                     <div class="codigo_torax" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
@@ -449,9 +447,9 @@
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM6.png')}}" class="img_cristalino">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cristalino" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
-                    @endforeach
+                    
+                    <div class="empresa_cristalino" >{{substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 26)}}</div>
+                    
                     <div class="nombre_cristalino"> <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_cristalino">CC. {{$trab->persona->cedula_persona}}</div>
                     <div class="codigo_cristalino" >No.Dosí.{{$trab->dosimetro->codigo_dosimeter}}</div>
@@ -489,9 +487,9 @@
                         <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM6.png')}}" class="img_anillo">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO ANILLO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
-                    @endforeach
+                    
+                    <div class="empresa_anillo" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 26,"UTF-8")}}</div>
+                    
                     <div class="nombre_anillo" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_anillo">CC. {{$trab->persona->cedula_persona}}</div>
                     <div class="codigo_anillo" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
@@ -533,11 +531,11 @@
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM6.png')}}" class="img_torax">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL TORAX ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @else NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}} @endif</div>
-                        <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 29, "UTF-8")}}</div>
-                        <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0,9,"UTF-8")}}.</div>
-                    @endforeach
+                    
+                    <div class="num_iden_cont_torax" > @if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}} @else NIT.{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}} @endif</div>
+                    <div class="empresa_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 29, "UTF-8")}}</div>
+                    <div class="sede_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,9,"UTF-8")}}.</div>
+                    
                     <div class="codigo_cont_torax" >No. {{$dosicontUnic->dosimetro->codigo_dosimeter}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($dosicontUnic->primer_dia_uso));
@@ -574,12 +572,11 @@
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM6.png')}}" class="img_torax">
                 @endif
 
-                @foreach($contratodosi as $contdosi)
-                    {{-- <div class="nom_area">{{$area->areadepartamentosede->nombre_area}}</div> --}}
-                    <div class="num_iden_cont_torax" ><b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @else NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b>@endif</div>
-                    <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
-                    <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}.</div>
-                @endforeach
+                
+                <div class="num_iden_cont_torax" ><b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; @if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}</b> @else NIT. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}}</b>@endif</div>
+                <div class="empresa_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 26,"UTF-8")}}</div>
+                <div class="sede_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0, 9,"UTF-8")}}.</div>
+               
                 <div class="codigo_cont_torax" >No. {{$area->dosimetro->codigo_dosimeter}}</div>
                 @php
                     $datefix1 = date('d/m/Y',strtotime($area->primer_dia_uso));
@@ -635,10 +632,10 @@
 
                     {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
                     <div class="nombre_torax" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1, "UTF-8")}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</b> </div>
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_torax" >{{mb_substr($contdosi->nombre_empresa, 0,26,"UTF-8")}}</div>
-                        <div class="sede_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}</div>
-                    @endforeach
+                    
+                    <div class="empresa_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0,26,"UTF-8")}}</div>
+                    <div class="sede_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0, 9,"UTF-8")}}</div>
+                    
                     <div class="codigo_torax" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
@@ -677,12 +674,12 @@
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM6.png')}}" class="img_cristalino">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL CRISTALINO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_cristalino" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
-                        <div class="num_iden_cont_cristalino">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC.{{$contdosi->num_iden_empresa}} @else NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}} @endif</div>
-                    @endforeach
-                        <div class="codigo_cont_cristalino" >No.Dosí.{{$dosicontUnic->dosimetro->codigo_dosimeter}}</div>
-                        <div class="codigo_hol_cont_cristalino" >No.Hol.{{$dosicontUnic->holder->codigo_holder}}</div>
+                    
+                    <div class="empresa_cont_cristalino" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 27, "UTF-8")}}</div>
+                    <div class="num_iden_cont_cristalino">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC.{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}} @else NIT.{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}} @endif</div>
+                    
+                    <div class="codigo_cont_cristalino" >No.Dosí.{{$dosicontUnic->dosimetro->codigo_dosimeter}}</div>
+                    <div class="codigo_hol_cont_cristalino" >No.Hol.{{$dosicontUnic->holder->codigo_holder}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($dosicontUnic->primer_dia_uso));
                         $datefix2 = date('d/m/Y',strtotime($dosicontUnic->ultimo_dia_uso));
@@ -716,10 +713,10 @@
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM6.png')}}" class="img_anillo">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
-                        <div class="num_iden_cont_anillo">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}}  @else NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}@endif</div>
-                    @endforeach
+                    
+                    <div class="empresa_cont_anillo" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 27, "UTF-8")}}</div>
+                    <div class="num_iden_cont_anillo">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}  @else NIT. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}}@endif</div>
+                    
                     <div class="codigo_cont_anillo" >No. {{$dosicontUnic->dosimetro->codigo_dosimeter}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($dosicontUnic->primer_dia_uso));
@@ -758,9 +755,9 @@
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM6.png')}}" class="img_cristalino">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cristalino" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
-                    @endforeach
+                    
+                    <div class="empresa_cristalino" >{{substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 26)}}</div>
+                    
                     <div class="nombre_cristalino"> <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_cristalino">CC. {{$trab->persona->cedula_persona}}</div>
                     <div class="codigo_cristalino">No.Dosí.{{$trab->dosimetro->codigo_dosimeter}}</div>
@@ -798,9 +795,9 @@
                         <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM6.png')}}" class="img_anillo">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO ANILLO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
-                    @endforeach
+                    
+                    <div class="empresa_anillo" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 26,"UTF-8")}}</div>
+                   
                     <div class="nombre_anillo" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_anillo">CC. {{$trab->persona->cedula_persona}}</div>
                     <div class="codigo_anillo" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
@@ -843,11 +840,11 @@
                         <img src="{{asset('imagenes/IMG_CONTROL_TORAX/CONT_TORAXM6.png')}}" class="img_torax">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL TORAX ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="num_iden_cont_torax" > @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}} @else NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}} @endif</div>
-                        <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 29, "UTF-8")}}</div>
-                        <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0,9,"UTF-8")}}.</div>
-                    @endforeach
+                    
+                    <div class="num_iden_cont_torax" > @if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}} @else NIT.{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}} @endif</div>
+                    <div class="empresa_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 29, "UTF-8")}}</div>
+                    <div class="sede_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,9,"UTF-8")}}.</div>
+                    
                     <div class="codigo_cont_torax" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($dosicont->primer_dia_uso));
@@ -886,13 +883,11 @@
                 @elseif($mes == 6 || $mes == 12)
                     <img src="{{asset('imagenes/IMG_AREA/AMBIENTALM6.png')}}" class="img_torax">
                 @endif
-
-                @foreach($contratodosi as $contdosi)
-                    {{-- <div class="nom_area">{{$area->areadepartamentosede->nombre_area}}</div> --}}
-                    <div class="num_iden_cont_torax" ><b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; @if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosi->num_iden_empresa}}</b> @else NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}</b>@endif</div>
-                    <div class="empresa_cont_torax" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
-                    <div class="sede_cont_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}.</div>
-                @endforeach
+                
+                <div class="num_iden_cont_torax" ><b>{{$area->areadepartamentosede->nombre_area}} &nbsp; &nbsp; @if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') <b>CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}</b> @else NIT. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}}</b>@endif</div>
+                <div class="empresa_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 26,"UTF-8")}}</div>
+                <div class="sede_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0, 9,"UTF-8")}}.</div>
+                
                 <div class="codigo_cont_torax" >No. {{$area->dosimetro->codigo_dosimeter}}</div>
                 @php
                     $datefix1 = date('d/m/Y',strtotime($area->primer_dia_uso));
@@ -948,10 +943,10 @@
 
                     {{-- //////// TEXTO PARA EL DOSIMETRO TORAX ////////// --}}
                     <div class="nombre_torax" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1, "UTF-8")}}, {{$trab->persona->primer_nombre_persona}}. CC. {{$trab->persona->cedula_persona}}</b> </div>
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_torax" >{{mb_substr($contdosi->nombre_empresa, 0,26,"UTF-8")}}</div>
-                        <div class="sede_torax" >{{mb_substr($contdosi->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosi->nombre_departamento, 0, 9,"UTF-8")}}</div>
-                    @endforeach
+                   
+                    <div class="empresa_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0,26,"UTF-8")}}</div>
+                    <div class="sede_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15,"UTF-8")}} - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0, 9,"UTF-8")}}</div>
+                    
                     <div class="codigo_torax" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
@@ -992,12 +987,12 @@
                         <img src="{{asset('imagenes/IMG_CONTROL_CRISTALINO/CONT_CRISTALINOM6.png')}}" class="img_cristalino">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL CRISTALINO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_cristalino" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
-                        <div class="num_iden_cont_cristalino">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC.{{$contdosi->num_iden_empresa}} @else NIT.{{$contdosi->num_iden_empresa}}-{{$contdosi->DV}} @endif</div>
-                    @endforeach
-                        <div class="codigo_cont_cristalino" >No.Dosí.{{$dosicont->dosimetro->codigo_dosimeter}}</div>
-                        <div class="codigo_hol_cont_cristalino" >No.Hol.{{$dosicont->holder->codigo_holder}}</div>
+                    
+                    <div class="empresa_cont_cristalino" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 27, "UTF-8")}}</div>
+                    <div class="num_iden_cont_cristalino">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC.{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}} @else NIT.{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}} @endif</div>
+                    
+                    <div class="codigo_cont_cristalino" >No.Dosí.{{$dosicont->dosimetro->codigo_dosimeter}}</div>
+                    <div class="codigo_hol_cont_cristalino" >No.Hol.{{$dosicont->holder->codigo_holder}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($dosicont->primer_dia_uso));
                         $datefix2 = date('d/m/Y',strtotime($dosicont->ultimo_dia_uso));
@@ -1031,10 +1026,10 @@
                         <img src="{{asset('imagenes/IMG_CONTROL_ANILLO/CONT_ANILLOM6.png')}}" class="img_anillo">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cont_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 27, "UTF-8")}}</div>
-                        <div class="num_iden_cont_anillo">@if($contdosi->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosi->num_iden_empresa}}  @else NIT. {{$contdosi->num_iden_empresa}}-{{$contdosi->DV}}@endif</div>
-                    @endforeach
+                    
+                    <div class="empresa_cont_anillo" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 27, "UTF-8")}}</div>
+                    <div class="num_iden_cont_anillo">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}  @else NIT. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}}@endif</div>
+                    
                     <div class="codigo_cont_anillo" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($dosicont->primer_dia_uso));
@@ -1073,9 +1068,9 @@
                         <img src="{{asset('imagenes/IMG_CRISTALINO/CRISTALINOM6.png')}}" class="img_cristalino">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO CRISTALINO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_cristalino" >{{substr($contdosi->nombre_empresa, 0, 26)}}</div>
-                    @endforeach
+                    
+                    <div class="empresa_cristalino" >{{substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 26)}}</div>
+                    
                     <div class="nombre_cristalino"> <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_cristalino">CC. {{$trab->persona->cedula_persona}}</div>
                     <div class="codigo_cristalino" >No.Dosí.{{$trab->dosimetro->codigo_dosimeter}}</div>
@@ -1113,9 +1108,9 @@
                         <img src="{{asset('imagenes/IMG_ANILLO/ANILLOM6.png')}}" class="img_anillo">
                     @endif
                     {{-- //////// TEXTO PARA EL DOSIMETRO ANILLO ////////// --}}
-                    @foreach($contratodosi as $contdosi)
-                        <div class="empresa_anillo" >{{mb_substr($contdosi->nombre_empresa, 0, 26,"UTF-8")}}</div>
-                    @endforeach
+                    
+                    <div class="empresa_anillo" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 26,"UTF-8")}}</div>
+                    
                     <div class="nombre_anillo" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_anillo">CC. {{$trab->persona->cedula_persona}}</div>
                     <div class="codigo_anillo" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>

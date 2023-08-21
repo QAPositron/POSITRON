@@ -23,11 +23,18 @@ class Dosiareacontdosisede extends Model
         return $this->belongsTo(Dosimetro::class, 'dosimetro_id', 'id_dosimetro');
     }
     public function areadepartamentosede(){
-      return $this->belongsTo(Areadepartamentosede::class, 'areadepartamentosede_id', 'id_areadepartamentosede');
+        return $this->belongsTo(Areadepartamentosede::class, 'areadepartamentosede_id', 'id_areadepartamentosede');
+    }
+     //relacion uno a uno con novedadmesescontdosisedepto
+    public function novedadmesescontdosi(){
+        return $this->hasOne(Novedadmesescontdosisededepto::class, 'dosiarea_id', 'id_dosiareacontdosisedes');
     }
     //relacion uno a uno con obsreventradas
     public function obsreventradas(){
-      return $this->hasOne(Obsreventrada::class, 'dosiareacontdosimetro_id', 'id_dosiareacontdosisedes');
-      
+        return $this->hasOne(Obsreventrada::class, 'dosiareacontdosimetro_id', 'id_dosiareacontdosisedes');
+    }
+    //Relacion uno a muchos (inversa) con novcontdosisededepto
+    public function novcontdosisededepto(){
+        return $this->belongsTo(Novcontdosisededepto::class, 'novcontdosisededepto_id','id_novcontdosisededepto');
     }
 }

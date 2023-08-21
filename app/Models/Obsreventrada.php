@@ -25,6 +25,10 @@ class Obsreventrada extends Model
     public function contdosisededepto(){
         return $this->belongsTo(contdosisededepto::class, 'contdosisededepto_id', 'id_contdosisededepto');
     }
+    //Relacion uno a uno (inversa) con novcontdosisededeptos
+    public function novcontdosisededepto(){
+        return $this->belongsTo(Novcontdosisededepto::class, 'novcontdosisededepto_id', 'id_novcontdosisededepto');
+    }
     public function observaciones(){
         /* return $this->hasMany('App\Models\Sede'); */
         return $this->belongsTo(Observacion::class, 'observacion_id', 'id_observacion');

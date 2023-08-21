@@ -48,7 +48,7 @@
                                     @foreach($dosimControl as $dosicont)
                                         <tr>
                                             <td class="align-middle">
-                                                <a class='btn btn-outline-primary rounded-pill' href='{{route('asignadosicontrato.info', ['asigdosicont'=> $dosicont->contdosisededepto_id, 'mesnumber'=> $dosicont->mes_asignacion])}}'>{{$dosicont->codigo_dosimeter}}</a> 
+                                                <a class='btn btn-outline-primary rounded-pill' @if($dosicont->contdosisededepto_id != null) href='{{route('asignadosicontrato.info', ['asigdosicont'=> $dosicont->contdosisededepto_id, 'mesnumber'=> $dosicont->mes_asignacion])}}'@endif>{{$dosicont->codigo_dosimeter}}</a> 
                                             </td>
                                             <td class="align-middle text-center">{{$dosicont->tipo_dosimetro}}</td>
                                             <td class="align-middle text-center">{{$dosicont->tecnologia_dosimetro}}</td>
@@ -85,7 +85,7 @@
                                     @foreach($dosimLecControl as $dosiLCont)
                                         <tr>
                                             <td class="align-middle">
-                                                <a class='btn btn-outline-secondary rounded-pill' href='{{route('asignadosicontrato.info', ['asigdosicont'=> $dosiLCont->contdosisededepto_id, 'mesnumber'=> $dosiLCont->mes_asignacion])}}'>{{$dosiLCont->codigo_dosimeter}}</a> 
+                                                <a class='btn btn-outline-secondary rounded-pill' @if($dosiLCont->contdosisededepto_id != null) href='{{route('asignadosicontrato.info', ['asigdosicont'=> $dosiLCont->contdosisededepto_id, 'mesnumber'=> $dosiLCont->mes_asignacion])}}' @endif>{{$dosiLCont->codigo_dosimeter}}</a> 
                                             </td>
                                             <td class="align-middle text-center">{{$dosiLCont->tipo_dosimetro}}</td>
                                             <td class="align-middle text-center">{{$dosiLCont->tecnologia_dosimetro}}</td>
@@ -337,7 +337,7 @@
                                             @foreach($holderControl as $holcont)
                                                 <tr>
                                                     <td class="align-middle">
-                                                        <a class='btn btn-outline-primary rounded-pill' href='{{route('asignadosicontrato.info', ['asigdosicont'=> $holcont->contdosisededepto_id, 'mesnumber'=> $holcont->mes_asignacion])}}'>{{$holcont->codigo_holder}}</a> 
+                                                        <a class='btn btn-outline-primary rounded-pill' @if($holcont->contdosisededepto_id != null) href='{{route('asignadosicontrato.info', ['asigdosicont'=> $holcont->contdosisededepto_id, 'mesnumber'=> $holcont->mes_asignacion])}}'@endif>{{$holcont->codigo_holder}}</a> 
                                                     </td>
                                                     <td class="text-center align-middle">{{$holcont->tipo_holder}}</td>
                                                     <td class="text-center align-middle">{{$holcont->estado_holder}}</td>

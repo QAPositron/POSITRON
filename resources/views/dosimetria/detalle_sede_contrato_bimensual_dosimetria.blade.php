@@ -85,35 +85,7 @@
         </div>
         <div class="col-md"></div>
     </div>
-    {{-- @if($dosisededeptocontra->controlTransT_unicoCont == 'TRUE' || $dosisededeptocontra->controlTransC_unicoCont == 'TRUE' || $dosisededeptocontra->controlTransA_unicoCont == 'TRUE')
-        <div class="row">
-            <div class="col-md"></div>
-            <div class="col-md-4">
-                <div class="table table-responsive">
-                    <table class="table table-bordered">
-                        <thead class="table-active text-center" >
-                            <tr>
-                                <th colspan="3" >DOSÍMETROS DE CONTROL TRANSPORTE</th>
-                            </tr>
-                            <tr class="text-center" align-middle>
-                                <th>TÓRAX</th>
-                                <th>CRISTALINO</th>
-                                <th>ANILLO</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center aling-middle" >
-                            <tr>
-                                <td class="text-center">{{$dosisededeptocontra->controlTransT_unicoCont == 'TRUE' ? 1 : 0}}</td>
-                                <td class="text-center">{{$dosisededeptocontra->controlTransC_unicoCont == 'TRUE' ? 1 : 0}}</td>
-                                <td class="text-center">{{$dosisededeptocontra->controlTransA_unicoCont == 'TRUE' ? 1 : 0}}</td>   
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md"></div>
-        </div>
-    @endif --}}
+    
     <div class="row">
         <div class="col"></div>
         <div class="col-12">
@@ -173,14 +145,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 != $totalA)
-                                                        <a class="btn btn-sm boton-alert colorQA" id="botonEtiq" onclick="cambiaColor()" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                        <a class="btn btn-sm boton-alert colorQA" id="botonEtiq" onclick="cambiaColor()" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                                 <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                                 <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
                                                             </svg> <br> ETIQUETAS
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                                 <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                                 <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
@@ -199,14 +171,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 != $totalA)
-                                                        <a class="btn btn-sm colorQA boton-alert" id="botoRsalida" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm colorQA boton-alert" id="botoRsalida" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
                                                             </svg><br> REV. SAL.
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -229,14 +201,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 == $totala && $totalA1 != $totalA)
-                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
                                                             </svg> <br> REV. ENT.
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -255,14 +227,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 == $totalA)
-                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i ])}}">
+                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0 ])}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
                                                             </svg> <br> LECTURA
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i ])}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0 ])}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -281,14 +253,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 == $totalA)
-                                                        <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank"  {{-- onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}');" --}}>
+                                                        <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank"  {{-- onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}');" --}}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                                 <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                                             </svg> <br> INFORMES
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank"  {{-- onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}');" --}}>
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank"  {{-- onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}');" --}}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                                 <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -334,14 +306,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 == $totalA)
-                                                        <a class="btn btn-sm boton-alert colorQA" id="botonEtiq" onclick="cambiaColor()" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                        <a class="btn btn-sm boton-alert colorQA" id="botonEtiq" onclick="cambiaColor()" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                                 <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                                 <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
                                                             </svg> <br> ETIQUETAS
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" id="botonEtiq"  href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" id="botonEtiq"  href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                                 <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                                 <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
@@ -360,14 +332,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 != $totalA)
-                                                        <a class="btn btn-sm boton-alert colorQA"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm boton-alert colorQA"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
                                                             </svg> <br> REV. SAL.
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -390,14 +362,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 == $totala && $totalA1 != $totalA)
-                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
                                                             </svg> <br> REV. ENT.
                                                         </a>
                                                     @else
-                                                        <a class="btn  btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn  btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -416,14 +388,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 == $totalA)
-                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i])}}">
+                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
                                                             </svg> <br> LECTURA
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i])}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -442,14 +414,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalA1 == $totalA)
-                                                        <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank"  id="botoninfo" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
+                                                        <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank"  id="botoninfo" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                                 <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                                             </svg> <br> INFORMES
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank"  id="botoninfo" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank"  id="botoninfo" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                                 <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -468,7 +440,7 @@
                                                     </a>
                                                 </div> 
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                             <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                             <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
@@ -476,7 +448,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                             <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -484,7 +456,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                             <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -492,7 +464,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i ])}}">
+                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                             <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                             <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -500,7 +472,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -525,7 +497,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                             <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                             <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
@@ -533,7 +505,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                             <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -541,7 +513,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                             <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -549,7 +521,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i])}}">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                             <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                             <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -557,7 +529,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert"  onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank">
+                                                    <a class="btn btn-sm boton-alert"  onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -587,14 +559,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 != $totalT)
-                                                        <a class="btn btn-sm boton-alert colorQA" id="botonEtiq" onclick="cambiaColor()" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                        <a class="btn btn-sm boton-alert colorQA" id="botonEtiq" onclick="cambiaColor()" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                                 <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                                 <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
                                                             </svg> <br> ETIQUETAS
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                                 <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                                 <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
@@ -613,14 +585,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 != $totalT)
-                                                        <a class="btn btn-sm colorQA boton-alert" id="botoRsalida" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm colorQA boton-alert" id="botoRsalida" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
                                                             </svg><br> REV. SAL.
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -643,14 +615,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 == $totalt && $totalT1 != $totalT)
-                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
                                                             </svg> <br> REV. ENT.
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -669,14 +641,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 == $totalT)
-                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i ])}}">
+                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
                                                             </svg> <br> LECTURA
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i ])}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -695,14 +667,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 == $totalT)
-                                                        <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank" >
+                                                        <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank" >
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                                 <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                                             </svg> <br> INFORMES
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank"  >
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank"  >
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                                 <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -748,14 +720,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 == $totalT)
-                                                        <a class="btn btn-sm boton-alert colorQA" id="botonEtiq" onclick="cambiaColor()" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                        <a class="btn btn-sm boton-alert colorQA" id="botonEtiq" onclick="cambiaColor()" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                                 <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                                 <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
                                                             </svg> <br> ETIQUETAS
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" id="botonEtiq"  href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" id="botonEtiq"  href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                                 <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                                 <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
@@ -774,14 +746,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 != $totalT)
-                                                        <a class="btn btn-sm boton-alert colorQA"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm boton-alert colorQA"  href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
                                                             </svg> <br> REV. SAL.
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -804,14 +776,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 == $totalt && $totalT1 != $totalT)
-                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
                                                             </svg> <br> REV. ENT.
                                                         </a>
                                                     @else
-                                                        <a class="btn  btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                        <a class="btn  btn-sm boton-alert" style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                                 <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -830,14 +802,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 == $totalT)
-                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i])}}">
+                                                        <a class="btn colorQA btn-sm boton-alert"  href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
                                                             </svg> <br> LECTURA
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i])}}">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -856,14 +828,14 @@
                                                         @endif
                                                     @endforeach
                                                     @if($totalT1 == $totalT)
-                                                        <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank"  id="botoninfo" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
+                                                        <a class="btn colorQA btn-sm boton-alert" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank"  id="botoninfo" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                                 <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                                             </svg> <br> INFORMES
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank"  id="botoninfo" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
+                                                        <a class="btn btn-sm boton-alert" style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank"  id="botoninfo" onclick="alertInforme('{{$i+1}}', '{{$dosisededeptocontra->id_contdosisededepto}}' );">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                                 <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -881,7 +853,7 @@
                                                     </a>
                                                 </div> 
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                             <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                             <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
@@ -889,7 +861,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                             <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -897,7 +869,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                             <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -905,7 +877,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i ])}}">
+                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                             <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                             <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -913,7 +885,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
@@ -938,7 +910,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" target="_blank">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('etiquetasdosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0])}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-ticket-detailed" viewBox="0 0 16 16">
                                                             <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5ZM5 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z"/>
                                                             <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
@@ -946,7 +918,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('revisiondosimetria.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-box-arrow-up" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
                                                             <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -954,7 +926,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}">
+                                                    <a class="btn  btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0"  href="{{route('revisiondosimetriaEntrada.check', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-up" viewBox="0 0 16 16">
                                                             <path fill-rule="evenodd" d="M3.5 10a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 0 0 1h2A1.5 1.5 0 0 0 14 9.5v-8A1.5 1.5 0 0 0 12.5 0h-9A1.5 1.5 0 0 0 2 1.5v8A1.5 1.5 0 0 0 3.5 11h2a.5.5 0 0 0 0-1h-2z"/>
                                                             <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
@@ -962,7 +934,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i])}}">
+                                                    <a class="btn btn-sm boton-alert" onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontrato.info', [ 'asigdosicont' => $dosisededeptocontra->id_contdosisededepto , 'mesnumber' => $i, 'item'=> 0])}}">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                             <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                             <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -970,7 +942,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md text-center">
-                                                    <a class="btn btn-sm boton-alert"  onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i] )}}" target="_blank">
+                                                    <a class="btn btn-sm boton-alert"  onclick="return false"  style="background-color: #a0aec0" href="{{route('repodosimetria.pdf', ['deptodosi' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i, 'item'=> 0] )}}" target="_blank">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
                                                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>

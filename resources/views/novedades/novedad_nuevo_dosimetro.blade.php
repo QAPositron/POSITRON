@@ -12,7 +12,7 @@
         </div> 
     </div>
     <div class="col-7">
-        <h2 class="text-center">NOVEDAD DE DOSIMETRÍA <br> NUEVO DOSÍMETRO</h2>
+        <h2 class="text-center">NOVEDAD DE DOSIMETRÍA <br> <b><i>NUEVO DOSÍMETRO</i></b></h2>
     </div>
     <div class="col md"></div>
 </div>
@@ -46,6 +46,7 @@
                 </div>
                 <div class="col-md">
                     <div class="form-floating">
+                        <input type="number" hidden name="contratodosimetriasede" id="contratodosimetriasede" value="">
                         <select class="form-select" name="sedes_empresadosi" id="sedes_empresadosi" value="" autofocus style="text-transform:uppercase">
 
                         </select>
@@ -86,109 +87,127 @@
             <br>
             <br>
             <div class="row">
-                <div class="col-md-5">
-                    {{-- <label class="px-4 ">OPRIMA EL BOTÓN PARA AÑADIR UN NUEVO DOSÍMETRO: </label> --}}
+                <div class="col-md"></div>
+                <div class="col-md-2 text-center">
+                    {{-- <button class="btn colorQA" id="agregar" name="agregar" onclick="agregarFila()"></button> --}}
+                    <div class="dropdown">
+                        <button class="btn colorQA dropdown-toggle"  type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            NUEVO <br> DOSÍMETRO
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" onclick="agregarFila('1')">DOSÍMETRO TÓRAX</a></li>
+                          <li><a class="dropdown-item" onclick="agregarFila('2')">DOSÍMETRO CASO</a></li>
+                          <li><a class="dropdown-item" onclick="agregarFila('3')">DOSÍMETRO AMBIENTAL</a></li>
+                          <li><a class="dropdown-item" onclick="agregarFila('4')">DOSÍMETRO CRISTALINO</a></li>
+                          <li><a class="dropdown-item" onclick="agregarFila('5')">DOSÍMETRO ANILLO</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-2 d-grid gap-2">
-                    <button class="btn colorQA" id="agregar" name="agregar" onclick="agregarFila()">NUEVO DOSÍMETRO</button>
+                <div class="col-md-2 text-center">
+                    <button class="btn colorQA" id="agregarEsp" name="agregarEsp" onclick="agregarSubEsp()">NUEVA <br> SUB-ESPECIALIDAD</button>
                 </div>
                 <div class="col-md"></div>
             </div>
             <br>
-            <div >
+            <h3 class="text-center" id="trabjPeriodo"></h3>
+            <h4 class="text-center" id="codigoNov"></h4>
+            <div class="table-responsive px-4 text-center">
+                <table class="table table-bordered">
+                    <thead class="text-center table-active">
+                        <th style='width: 200px'>TRABAJADOR / ÁREA</th>
+                        <th style='width: 100px'>UBICACIÓN</th>
+                        <th style='width: 100px'>DOSÍMETRO</th>
+                        <th style='width: 100px'>HOLDER</th>
+                        <th style='width: 100px'>ACCIONES</th>
+                    </thead>
+                    <tbody id="body_asignaciones">
+                        <tr>
+                            <div class="table table-responsive text-center">
+                                <table class="table table-bordered" id="tabla_auxiliar">
+                                    <tbody id="tr_control">
+                                            
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table table-responsive text-center px-4">
 
-                <div class="table table-responsive text-center px-4">
-                    <table  class="table table-bordered" id="tablaAsignacionDosimetrosmn">
-                        <thead class="text-center">
-                            <th style='width: 200px'>TRABAJADOR / ÁREA</th>
-                            <th style='width: 100px'>UBICACIÓN</th>
-                            <th style='width: 100px'>DOSÍMETRO</th>
-                            <th style='width: 100px'>HOLDER</th>
-                            <th style='width: 100px'>OCUPACIÓN</th>
-                        </thead>
-                        <tbody id="body_asignaciones">
-                           
-                            <tr>
-                                <div class="table table-responsive text-center">
-                                    <table class="table table-bordered" id="tabla_auxiliar">
-                                        <tbody id="tr_control">
-                                                
+                                <form id="form_cambio_cantdosim" name="form_cambio_cantdosim" action="{{route('cambiocantdosim.save')}}" method="POST">
+                                    @csrf
+                                    <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="1">
+                                    <input type="number" hidden name="mestrabj_asig" id="mestrabj_asig" value="">
+                                    <input type="number" hidden name="id_contdosisededepto" id="id_contdosisededepto" value="">
+                                    <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value="">
+                                    <input type="date" hidden name="primerDia_asigdosim" id="primerDia_asigdosim" value="">
+                                    <input type="date" hidden name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" value="">
+                                    <input type="date" hidden name="fecha_dosim_enviado" id="fecha_dosim_enviado" value="">
+                                    <input type="number" hidden name="dosi_control_torax" id="dosi_control_torax" value="">
+                                    <input type="number" hidden name="dosi_control_cristalino" id="dosi_control_cristalino" value="">
+                                    <input type="number" hidden name="dosi_control_dedo" id="dosi_control_dedo" value="">
+                                    <input type="number" hidden name="dosi_torax" id="dosi_torax" value="">
+                                    <input type="number" hidden name="dosi_area" id="dosi_area" value="">
+                                    <input type="number" hidden name="dosi_caso" id="dosi_caso" value="">
+                                    <input type="number" hidden name="dosi_cristalino" id="dosi_cristalino" value="">
+                                    <input type="number" hidden name="dosi_dedo" id="dosi_dedo" value="">
+                                    <input type="text" hidden name="controlTransT_unicoCont" id="controlTransT_unicoCont" value="">
+                                    <input type="text" hidden name="controlTransC_unicoCont" id="controlTransC_unicoCont" value="">
+                                    <input type="text" hidden name="controlTransA_unicoCont" id="controlTransA_unicoCont" value="">
+                                    <input type="text" hidden name="subEspecialidad" id="subEspecialidad" value="">
+                                    <input type="number" hidden name="id_departamentosede" id="id_departamentosede" value="">
+
+                                    <table class="table table-bordered" id="tabla_adicional">
+                                        <tbody id="tr_newAsignacion">
+
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="table table-responsive text-center px-4">
-
-                                    <form id="form_cambio_cantdosim" name="form_cambio_cantdosim" action="{{route('cambiocantdosim.save')}}" method="POST">
-                                        @csrf
-                                        <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="1">
-                                        <input type="number" hidden name="mestrabj_asig" id="mestrabj_asig" value="">
-                                        <input type="number" hidden name="id_contdosisededepto" id="id_contdosisededepto" value="">
-                                        <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value="">
-                                        <input type="date" hidden name="primerDia_asigdosim" id="primerDia_asigdosim" value="">
-                                        <input type="date" hidden name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" value="">
-                                        <input type="date" hidden name="fecha_dosim_enviado" id="fecha_dosim_enviado" value="">
-                                        <input type="number" hidden name="dosi_control" id="dosi_control" value="">
-                                        <input type="number" hidden name="dosi_torax" id="dosi_torax" value="">
-                                        <input type="number" hidden name="dosi_area" id="dosi_area" value="">
-                                        <input type="number" hidden name="dosi_caso" id="dosi_caso" value="">
-                                        <input type="number" hidden name="dosi_cristalino" id="dosi_cristalino" value="">
-                                        <input type="number" hidden name="dosi_muñeca" id="dosi_muñeca" value="">
-                                        <input type="number" hidden name="dosi_dedo" id="dosi_dedo" value="">
-
-                                        <table class="table table-bordered" id="tabla_adicional">
-                                            <tbody id="tr_newAsignacion">
-
-                                            </tbody>
-                                        </table>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col"></div>
-                                            <div class="col-10">
-                                                <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
-                                                <div class="card">
-                                                    <div class="card-body" id="textCard1">
-                                                      
-                                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col"></div>
+                                        <div class="col-10">
+                                            <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
+                                            <div class="card">
+                                                <div class="card-body" id="textCard1">
+                                                  
                                                 </div>
                                             </div>
-                                            <div class="col-md text-start">
-                                                <button class="btn btn-circle colorQA" onclick="Generarnotas1()" type="button" id="notas" name="notas" role="button">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
-                                                    </svg>
+                                        </div>
+                                        <div class="col-md text-start">
+                                            <button class="btn btn-circle colorQA" onclick="Generarnotas1()" type="button" id="notas" name="notas" role="button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row" id="botonesAsig">
+                                        <div class="col"></div>
+                                        <div class="col">
+                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                <button id="assignBtn" class="btn colorQA" type="submit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                                                        <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                                                    </svg> <br> GUARDAR ASIGNACIÓN
                                                 </button>
                                             </div>
                                         </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col"></div>
-                                            <div class="col">
-                                                <div class="d-grid gap-2 col-6 mx-auto">
-                                                    <button id="assignBtn" class="btn colorQA" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
-                                                            <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
-                                                        </svg> <br> GUARDAR ASIGNACIÓN
-                                                    </button>
-                                                </div>
+                                        <div class="col">
+                                            <div class="d-grip gap-2 col-6 mx-auto">
+                                                <a href="" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                                    </svg> 
+                                                    <br> CANCELAR ASIGNACIÓN
+                                                </a>
                                             </div>
-                                            <div class="col">
-                                                <div class="d-grip gap-2 col-6 mx-auto">
-                                                    <a href="" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                                                        </svg> 
-                                                        <br> CANCELAR ASIGNACIÓN
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col"></div>
                                         </div>
-                                    </form>
-                                </div>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                        <div class="col"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
+                  
             </div>
         </div>
         <div class="card text-dark bg-light" id='Formulario2' style="display: none; position: relative;">
@@ -203,7 +222,7 @@
                 <div class="col-md"></div>
             </div>
             <br>
-            <div >
+            <div>
                 <div class="table table-responsive text-center px-4">
                     <form id="form_cambio_cantdosim2" name="form_cambio_cantdosim2" action="{{route('cambiocantdosimesig.save')}}" method="POST">
                         @csrf
@@ -247,7 +266,7 @@
                             </div>
                         </div>
                         <br>
-                        <table  class="table table-bordered" id="tablaAsignacionDosimetrosmn">
+                        <table  class="table table-bordered">
                             <thead class="text-center">
                                 <th style='width: 200px'>TRABAJADOR / ÁREA</th>
                                 <th style='width: 120px'>UBICACIÓN</th>
@@ -358,16 +377,16 @@
             var check = 0;
             if($.trim(contrato_id) != ''){
                 $.get('sedescontDosi', {contrato_id: contrato_id}, function(sedes){
+                    console.log("ESTAS SON LAS SEDES")
                     console.log(sedes);
                     $('#sedes_empresadosi').empty();
                     $('#especialidades_empresadosi').empty();
                     $('#sedes_empresadosi').append("<option value=''>--SELECCIONE UNA SEDE DEL CONTRATO--</option>");
-                    $.each(sedes, function(index, value){
-                        if(check != value){
-                            $('#sedes_empresadosi').append("<option value='"+ index + "'>" + value + "</option>");
-                            check = value; 
-                        }
-                    })
+                    for(var i = 0; i < sedes.length; i++){
+                        $('#sedes_empresadosi').append("<option value='"+ sedes[i].id_sede + "'>" + sedes[i].nombre_sede + "</option>");
+                        document.getElementById("contratodosimetriasede").value = sedes[i].id_contratodosimetriasede;
+                    }
+                    
                 });
                 $.get('contdosisededepto', {contrato_id: contrato_id}, function(contratodosi){
                     console.log(contratodosi);
@@ -381,22 +400,26 @@
                    
                     
                 });
-            }
-        });
-        $('#sedes_empresadosi').on('change', function(){
-            var sede_id = $(this).val();
-            if($.trim(sede_id) != ''){
-                $.get('especialidadescontDosi', {sede_id: sede_id}, function(especialidades){
-                    console.log("ESTAS SON LAS ESPECIALIDADES");
-                    console.log(especialidades);
-                    $('#especialidades_empresadosi').empty();
-                    $('#especialidades_empresadosi').append("<option value=''>--SELECCIONE UNA ESPECIALIDAD DEL CONTRATO--</option>");
-                    $.each(especialidades, function(index, value){
-                        $('#especialidades_empresadosi').append("<option value='"+ index + "'>" + value + "</option>");
-                    })
+                $('#sedes_empresadosi').on('change', function(sedes){
+                    var sede_id = $(this).val();
+                    if($.trim(sede_id) != ''){
+                        var contratodosimetriasede = document.getElementById("contratodosimetriasede").value;
+                        console.log("ID_CONTRATODOSIMETRIASEDE" +contratodosimetriasede);
+                        $.get('especialidadescontDosi', {contratodosimetriasede_id: contratodosimetriasede}, function(especialidades){
+                            console.log("ESTAS SON LAS ESPECIALIDADES");
+                            console.log(especialidades);
+                            $('#especialidades_empresadosi').empty();
+                            $('#especialidades_empresadosi').append("<option value=''>--SELECCIONE UNA ESPECIALIDAD DEL CONTRATO--</option>");
+                            $.each(especialidades, function(index, value){
+                                $('#especialidades_empresadosi').append("<option value='"+ index + "'>" + value + "</option>");
+                            }) 
+                        });
+                    }
                 });
+                
             }
         });
+        
         var selectDosimetros = document.createElement("select");
         @foreach($dosimetrosDisponibles as $dosimetros)
             option = document.createElement("option");
@@ -425,21 +448,65 @@
             $.get('mesactualcontdosisededepto', {especialidad_id: especialidad_id}, function(mesactual_trabjasig){
                 console.log("ESTE ES EL MES ACTUAL**");
                 console.log(mesactual_trabjasig);
-                const vacio = mesactual_trabjasig.mes_asignacion;
+                document.getElementById('id_departamentosede').value = mesactual_trabjasig[0].departamentosede_id;
+                const vacio = mesactual_trabjasig[0].mes_actual;
                 console.log("ESTE ES VACIO" +vacio);
                 $('#mesacambiar').empty();
                 $('#mesacambiar').append("<option value=''>--</option>");
                 const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-                
-                if(vacio == '{}'){
+                var numLec = mesactual_trabjasig[0].numlecturas_año;
+                if(vacio == '1'){
                     console.log("ESTA EN VACIO**");
                     var r = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+1));
                     var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
                     $('#mesacambiar').append("<option value='1'> 1 - "+ meses[myFechaInicial.getMonth()]+" DE "+myFechaInicial.getUTCFullYear()+"  </option>");
+
+                    if(mesactual_trabjasig[0].periodo_recambio == 'MENS'){
+                        var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 2, 1);
+                        console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                        
+                        var r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
+                        console.log("r2 " +r2final);
+                        var fechaesp1 = myFechaInicial.getDate()+' '+meses[myFechaInicial.getMonth()] + ' DE ' + myFechaInicial.getUTCFullYear();
+                        console.log(fechaesp1);
+
+                        var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                        console.log(fechaesp2);
+                        
+                        document.getElementById('trabjPeriodo').innerHTML = "TRABAJADORES ASIGNADOS AL PERÍODO 1 <br> ( "+fechaesp1+' - '+fechaesp2+' )';
+
+                    }else if(mesactual_trabjasig[0].periodo_recambio == 'TRIMS'){
+                        var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 4, 1);
+                        console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                        
+                        var r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
+                        console.log("r2 " +r2final);
+                        var fechaesp1 = myFechaInicial.getDate()+' '+meses[myFechaInicial.getMonth()] + ' DE ' + myFechaInicial.getUTCFullYear();
+                        console.log(fechaesp1);
+
+                        var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                        console.log(fechaesp2);
+                        
+                        document.getElementById('trabjPeriodo').innerHTML = "TRABAJADORES ASIGNADOS AL PERÍODO 1 <br> ( "+fechaesp1+' - '+fechaesp2+' )';
+                        
+                    }else if(mesactual_trabjasig[0].periodo_recambio == 'BIMS'){
+                        var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 3, 1);
+                        console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                        
+                        var r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
+                        console.log("r2 " +r2final);
+                        var fechaesp1 = myFechaInicial.getDate()+' '+meses[myFechaInicial.getMonth()] + ' DE ' + myFechaInicial.getUTCFullYear();
+                        console.log(fechaesp1);
+
+                        var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                        console.log(fechaesp2);
+                        
+                        document.getElementById('trabjPeriodo').innerHTML = "TRABAJADORES ASIGNADOS AL PERÍODO 1 <br> ( "+fechaesp1+' - '+fechaesp2+' )';
+                    } 
                 }else{
                     console.log("NO ESTA EN VACIO**");
-                    console.log(mesactual_trabjasig.mes_asignacion);
-                    var value = mesactual_trabjasig.mes_asignacion;
+                    console.log(mesactual_trabjasig[0].mes_actual);
+                    var value = mesactual_trabjasig[0].mes_actual;
                     var r = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+value-1));
                     console.log("ESTE ES EL MES ACTUAL"+r);  
                     var r2 = new Date(new Date(myFechaInicial).setMonth(myFechaInicial.getMonth()+value));    
@@ -451,13 +518,86 @@
                     console.log("MES SIGUIENTE" + siguientemes);
                     $('#mesacambiar').append("<option value='"+ value + "'>ACTUAL: " + value + " ("+ fechaesp + ")" + "</option>");
                     $('#mesacambiar').append("<option value='"+ siguientemes + "'>SIGUIENTE: " + siguientemes + " ("+ fechaesp2 + ")" + "</option>");
+                    
+                    if(mesactual_trabjasig[0].periodo_recambio == 'MENS'){
+                        var xx = 1; 
+                        for(var i=0; i<=(numLec-2); i++){
+                            var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 1, 1);
+                            console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                            console.log("esta es la i="+i);
+                            var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                            console.log("r1" +r);
+                            var r2 = new Date(new Date(r).setMonth(r.getMonth()+1));
+                            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                            var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                            console.log("r2 " +r2final);
+                            var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                            console.log(fechaesp1);
+                            var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                            console.log(fechaesp2);
+                            xx++;
+                            console.log("XX"+xx);
+                            /* console.log("ESTA ES LA X="+x); */
+                            if(value == xx){
+                                document.getElementById('trabjPeriodo').innerHTML = "TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
+                            }
+                        }
+                    }else if(mesactual_trabjasig[0].periodo_recambio == 'TRIMS'){
+                        var xx = 1;
+                        for(var i=0; i<=(numLec+1); i= i+3){
+                            var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 3, 1);
+                            console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                            console.log("ESTA ES LA I = "+i);
+                            var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                            console.log("r1" +r);
+                            var r2 = new Date(new Date(r).setMonth(r.getMonth()+3));
+                            var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                            console.log("r2 " +r2final);
+                            var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                            console.log(fechaesp1);
 
+                            var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                            console.log(fechaesp2);
+                            xx++;
+                            console.log("XX"+xx);
+                        
+                            if(value == xx){
+                                document.getElementById('trabjPeriodo').innerHTML = "TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
+                            }
+                        }
+                    }else if(mesactual_trabjasig[0].periodo_recambio == 'BIMS'){
+                        var xx = 1;
+                        for(var i=0; i<=(numLec+1); i= i+2){
+                            var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 2, 1);
+                            console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                            console.log("ESTA ES LA I = "+i);
+                            var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                            console.log("r1" +r);
+                            var r2 = new Date(new Date(r).setMonth(r.getMonth()+2));
+                            var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                            console.log("r2 " +r2final);
+                            var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                            console.log(fechaesp1);
+
+                            var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                            console.log(fechaesp2);
+                            xx++;
+                            console.log("XX"+xx);
+                            if(value == xx){
+                                document.getElementById('trabjPeriodo').innerHTML = "TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
+                                
+                            }
+                            
+                        }
+                    }
                 };
                 $('#mesacambiar').on('change', function(){
                     var mes = $(this).val();
                     Formulario1.style.display= "none";
                     Formulario2.style.display= "none";
-                    var dosi_control = 0;
+                    var dosi_control_torax = 0;
+                    var dosi_control_cristalino = 0;
+                    var dosi_control_dedo = 0;
                     var dosi_torax= 0;
                     var dosi_area = 0;
                     var dosi_caso = 0;
@@ -466,8 +606,8 @@
                     var dosi_dedo = 0;
 
                     console.log("ESTE ES EL MES SELECCIONADO" +mes);
-                    console.log(mesactual_trabjasig.mes_asignacion);
-                    var consultaMesactual = mesactual_trabjasig.mes_asignacion;
+                    console.log(mesactual_trabjasig[0].mes_actual);
+                    var consultaMesactual = mesactual_trabjasig[0].mes_actual;
                     console.log("LA CONSULTA"+consultaMesactual);
 
                     if(mes == consultaMesactual){
@@ -478,30 +618,34 @@
                         Formulario2.style.display= "none";
                     }
                     var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
-                    var contratodosimetriasede_id  = document.getElementById("sedes_empresadosi").value;
-                    $.get('dosiasginadoscontrolmesactual', {contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual}, function(asignacionescontrolmesactual){
+                    console.log("**contdosisededepto_id " +contdosisededepto_id);
+                    console.log("**mes actual "+consultaMesactual);
+                    var contratodosimetriasede_id  = document.getElementById("contratodosimetriasede").value;
+                    var contratodosimetria = document.getElementById("contratos_empresadosi").value;
+
+                    $.get('dosiasginadoscontrolmesactual', {contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual, contratodosimetria_id: contratodosimetria}, function(asignacionescontrolmesactual){
                         console.log("ASIGNACIONES CONTROL DEL MES ACTUAL");
                         console.log(asignacionescontrolmesactual);
                         $('#tr_control').html("");
                         if(mes > consultaMesactual){
                             //////////////// PARA CUANDO SELECCIONA EL MES SIGUIENTE AL ACTUAL DEL CONTRATO ///////////////////////
-                            /* alert("CNTROL PARA EL MES SIGUEINTE AL ACTUAL"); */
+                            alert("CNTROL PARA EL MES SIGUEINTE AL ACTUAL");
                             for(var i=0; i<asignacionescontrolmesactual.length; i++){
                                 if(asignacionescontrolmesactual[i].dosimetro_uso != 'FALSE'){
                                     var disacont = 'disabled';
                                     var id_dosimetro = asignacionescontrolmesactual[i].id_dosimetro;
                                     var codigo_dosimeter = asignacionescontrolmesactual[i].codigo_dosimeter;
-                                    var id_ocupacion = asignacionescontrolmesactual[i].ocupacion;  
-                                    var ocupacion = asignacionescontrolmesactual[i].ocupacion;
+                                    var ubicacion = asignacionescontrolmesactual[i].ubicacion;
+                                    var codigo_holder = asignacionescontrolmesactual[i].codigo_holder;
                                 }else{
                                     var id_dosimetro = '';
                                     var codigo_dosimeter = '---';
-                                    var id_ocupacion = '';
-                                    var ocupacion = '---';
+                                    var codigo_holder = '---';
+                                    var ubicacion = asignacionescontrolmesactual[i].ubicacion;
                                 }
-                                
+                                console.log("//CODIGO DEL DOSIMETRO MES SIGUIENTE" +codigo_dosimeter);
                                 var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`control">
-                                        <td colspan='2' style='width: 75px' class='align-middle'>CONTROL</td>
+                                        <td colspan='2' style='width: 75px' class='align-middle'>CONTROL TRANS. `+ubicacion+`</td>
                                         <td style='width: 190px' class='align-middle'>
                                             
                                             <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
@@ -510,54 +654,105 @@
                                             </select>
                                         </td>
                                         <td style='width: 163px' class='align-middle text-center'>NA</td>
-                                        <td style='width: 185px' class='align-middle text-center'>
-                                           
-                                            <select class="form-select cambiar" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" ${disacont} >
-                                                <option value="`+id_ocupacion+`">`+ocupacion+`</option>
-                                                <option value="T">T = TELETERAPIA</option>
-                                                <option value="BQ">BQ = BRAQUITERAPIA</option>
-                                                <option value="MN">MN = MEDICINA NUCLEAR</option>
-                                                <option value="GI">GI = GAMMAGRAFÍA INDUSTRIAL</option>
-                                                <option value="MF">MF = MEDIDORES FIJOS</option>
-                                                <option value="IV">IV = INVESTIGACIÓN</option>
-                                                <option value="DN">DN = DENSÍMETRO NUCLEAR</option>
-                                                <option value="MM">MM = MEDIDORES MÓVILES</option>
-                                                <option value="E">E = DOCENCIA</option>
-                                                <option value="PR">PR = PERFILAJE Y REGISTRO</option>
-                                                <option value="TR">TR = TRAZADORES</option>
-                                                <option value="HD">HD = HEMODINAMIA</option>
-                                                <option value="OD">OD = RAYOS X ODONTOLÓGICO</option>
-                                                <option value="RX">RX = RADIODIAGNÓSTICO</option>
-                                                <option value="FL">FL = FLUOROSCOPIA</option>
-                                                <option value="AM">AM = APLICACIONES MÉDICAS</option>
-                                                <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
-                                            </select>
-                                        </td>
                                     </tr>`;
                                 $("#body_asignaciones2").append(tr);
                             } 
                         }else{
                             //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
                             $('#body_asignaciones2').html("");
-                            /* alert("CNTROL PARA EL MES ACTUAL"); */
+                            alert("CNTROL PARA EL MES ACTUAL");
+                            console.log("//CODIGO DEL DOSIMETRO MES ACTUAL" +codigo_dosimeter);
+                            
                             for(var i=0; i<asignacionescontrolmesactual.length; i++){
+                                if(asignacionescontrolmesactual[i].dosimetro_uso != 'FALSE'){
+                                    var disacont = 'disabled';
+                                    var id_dosimetro = asignacionescontrolmesactual[i].id_dosimetro;
+                                    var codigo_dosimeter = asignacionescontrolmesactual[i].codigo_dosimeter;
+                                    var ubicacion = asignacionescontrolmesactual[i].ubicacion;
+                                    var codigo_holder = asignacionescontrolmesactual[i].codigo_holder;
+                                }else{
+                                    var id_dosimetro = '';
+                                    var codigo_dosimeter = '---';
+                                    var codigo_holder = '---';
+                                    var ubicacion = asignacionescontrolmesactual[i].ubicacion;
+                                }
+                                if(asignacionescontrolmesactual[i].contratodosimetria_id != null){
+                                    if(asignacionescontrolmesactual[i].codigo_holder != null){
+                                        var tr = `<tr>
+                                                <td colspan='2' class='align-middle' >CONTROL TRANS. `+ubicacion+`</td>
+                                                <td class="text-center align-middle" style='width: 190px'>N.A.</td>
+                                                <td class="text-center" style='width: 208px'class='align-middle'>`
+                                                    +asignacionescontrolmesactual[i].codigo_dosimeter+
+                                                `</td>
+                                                <td class="text-center align-middle" style='width: 190px'>`+codigo_holder+`</td>
+                                                <td class="text-center align-middle" style='width: 190px'></td>
+                                            </tr>`;
+                                        $("#tr_control").append(tr);
+                                    }else{
+                                        var tr = `<tr>
+                                                <td colspan='2' class='align-middle' >CONTROL TRANS. `+ubicacion+`</td>
+                                                <td class="text-center align-middle" style='width: 190px'>N.A.</td>
+                                                <td class="text-center" style='width: 208px'class='align-middle'>`
+                                                    +asignacionescontrolmesactual[i].codigo_dosimeter+
+                                                `</td>
+                                                <td class="text-center align-middle" style='width: 190px'>N.A.</td>
+                                                <td class="text-center align-middle" style='width: 190px'></td>
+                                            </tr>`;
+                                        $("#tr_control").append(tr);
+                                    }
+                                    if(ubicacion == 'TORAX'){
+                                        document.getElementById("controlTransT_unicoCont").value = 'TRUE';
+                                        console.log("TRUE PARA EL CONTROL UNICO TORAX");
+                                    }else if(ubicacion == 'CRISTALINO'){
+                                        document.getElementById("controlTransC_unicoCont").value = 'TRUE';
+                                        console.log("TRUE PARA EL CONTROL UNICO CRISTALINO");
+                                    }else if(ubicacion == 'ANILLO'){
+                                        document.getElementById("controlTransA_unicoCont").value = 'TRUE';
+                                        console.log("TRUE PARA EL CONTROL UNICO ANILLO");
+                                    }
+                                }else{
+                                    if(asignacionescontrolmesactual[i].codigo_holder != null){
+                                        var tr = `<tr>
+                                                <td colspan='2' class='align-middle' >CONTROL `+ubicacion+`</td>
+                                                <td class="text-center align-middle" style='width: 208px' >N.A.</td>
+                                                <td class="text-center" style='width: 208px'class='align-middle'>`
+                                                    +asignacionescontrolmesactual[i].codigo_dosimeter+
+                                                `</td>
+                                                <td class="text-center align-middle" style='width: 208px'>`+codigo_holder+`</td>
+                                                <td></td>
+                                            </tr>`;
+                                        $("#tr_control").append(tr);
+                                    }else{
+                                        var tr = `<tr>
+                                                <td colspan='2' class='align-middle' >CONTROL `+ubicacion+`</td>
+                                                <td class="text-center align-middle" style='width: 208px' >N.A.</td>
+                                                <td class="text-center" style='width: 208px'class='align-middle'>`
+                                                    +asignacionescontrolmesactual[i].codigo_dosimeter+
+                                                `</td>
+                                                <td class="text-center align-middle" style='width: 208px'>N.A.</td>
+                                                <td></td>
+                                            </tr>`;
+                                        $("#tr_control").append(tr);
+                                    }
+                                    if(ubicacion == 'TORAX'){
+                                        dosi_control_torax += 1;
+                                        console.log("EL VALOR DEL DOSI CONTROL TORAX PARA EL MES ACTUAL");
+                                        console.log(dosi_control_torax);
+                                    }else if(ubicacion == 'CRISTALINO'){
+                                        dosi_control_cristalino += 1;
+                                        console.log("EL VALOR DEL DOSI CONTROL CRISTALINO PARA EL MES ACTUAL");
+                                        console.log(dosi_control_cristalino);
+                                    }else if(ubicacion == 'ANILLO'){
+                                        dosi_control_dedo += 1;
+                                        console.log("EL VALOR DEL DOSI CONTROL ANILLO PARA EL MES ACTUAL");
+                                        console.log(dosi_control_dedo);
+                                    }
+                                }
                                 
-                                var tr = `<tr>
-                                        <td colspan='2' class='align-middle'>CONTROL</td>
-                                        <td class="text-center" style='width: 208px'class='align-middle'>`
-                                            +asignacionescontrolmesactual[i].codigo_dosimeter+
-                                        `</td>
-                                        <td class="text-center align-middle" style='width: 208px' >NA</td>
-                                        <td class="text-center align-middle" style='width: 208px' >`+asignacionescontrolmesactual[i].ocupacion+`</td>
-                                            
-                                    </tr>`;
-                                $("#tr_control").append(tr);
-                                
-                                dosi_control += 1;
-                                console.log("EL VALOR DEL DOSI CONTROL PARA EL MES ACTUAL");
-                                console.log(dosi_control);
                             }; 
-                            document.getElementById("dosi_control").value = dosi_control;
+                            document.getElementById("dosi_control_torax").value = dosi_control_torax;
+                            document.getElementById("dosi_control_cristalino").value = dosi_control_cristalino;
+                            document.getElementById("dosi_control_dedo").value = dosi_control_dedo;
                         }
                     });
                     $.get('dosiasginadosmesactual', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual}, function(asignacionesmesactual){
@@ -590,8 +785,6 @@
                                         var codigo_dosimeter = asignacionesmesactual[i].codigo_dosimeter;
                                         var id_holder = asignacionesmesactual[i].id_holder;
                                         var codigo_holder = asignacionesmesactual[i].codigo_holder;
-                                        var id_ocupacion = asignacionesmesactual[i].ocupacion;
-                                        var ocupacion = asignacionesmesactual[i].ocupacion;
                                         document.getElementById('agregar2').disabled = true;
                                     }else{
                                         document.getElementById('agregar2').disabled = false;
@@ -599,8 +792,6 @@
                                         var codigo_dosimeter = '---';
                                         var id_holder = '';
                                         var codigo_holder = '---';
-                                        var id_ocupacion = '';
-                                        var ocupacion = '---';
                                     }
                                     var mestrabj_asig = document.getElementById("mesacambiar").value;
                                     var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
@@ -632,29 +823,7 @@
                                                     ${selectHolders.innerHTML}
                                                 </select>
                                             </td>
-                                            <td class='align-middle'>
-                                                <select class="form-select cambiar"  name="id_ocupacion_asigdosim[]" id="id_ocupacion_asigdosim" ${dis} >
-                                                    <option value="`+id_ocupacion+`">`+ocupacion+`</option>
-                                                    <option value="T">T = TELETERAPIA</option>
-                                                    <option value="BQ">BQ = BRAQUITERAPIA</option>
-                                                    <option value="MN">MN = MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GI = GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MF = MEDIDORES FIJOS</option>
-                                                    <option value="IV">IV = INVESTIGACIÓN</option>
-                                                    <option value="DN">DN = DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MM = MEDIDORES MÓVILES</option>
-                                                    <option value="E">E = DOCENCIA</option>
-                                                    <option value="PR">PR = PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TR = TRAZADORES</option>
-                                                    <option value="HD">HD = HEMODINAMIA</option>
-                                                    <option value="OD">OD = RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RX = RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FL = FLUOROSCOPIA</option>
-                                                    <option value="AM">AM = APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
-                                                </select>
-                                            </td>
-                                            
+                                           
                                         </tr>`;
                                         $("#body_asignaciones2").append(tr);
                                     }else{
@@ -674,29 +843,6 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'> NA </td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select cambiar"  name="id_ocupacion_asigdosim_null[]" id="id_ocupacion_asigdosim_null" ${dis}>
-                                                    <option value="`+id_ocupacion+`">`+ocupacion+`</option>
-                                                    <option value="T">T = TELETERAPIA</option>
-                                                    <option value="BQ">BQ = BRAQUITERAPIA</option>
-                                                    <option value="MN">MN = MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GI = GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MF = MEDIDORES FIJOS</option>
-                                                    <option value="IV">IV = INVESTIGACIÓN</option>
-                                                    <option value="DN">DN = DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MM = MEDIDORES MÓVILES</option>
-                                                    <option value="E">E = DOCENCIA</option>
-                                                    <option value="PR">PR = PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TR = TRAZADORES</option>
-                                                    <option value="HD">HD = HEMODINAMIA</option>
-                                                    <option value="OD">OD = RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RX = RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FL = FLUOROSCOPIA</option>
-                                                    <option value="AM">AM = APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">AI = APLICACIONES INDUSTRIALES</option>
-                                                </select>
-                                            </td>
-                                            
                                         </tr>`;
                                         $("#body_asignaciones2").append(tr);
                                         
@@ -716,21 +862,21 @@
                                     if(asignacionesmesactual[i].codigo_holder != null){
 
                                         var tr = `<tr>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
+                                            <td class='align-middle' style='width: 250px'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
                                             <td class='align-middle text-center'>`+asignacionesmesactual[i].ubicacion+`</td>
                                             <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
                                             <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_holder+`</td>
-                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].ocupacion+`</td>
+                                            <td></td>
                                             
                                         </tr>`;
                                         $("#body_asignaciones").append(tr);
                                     }else{
                                         var tr = `<tr>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
+                                            <td class='align-middle' style='width: 250px'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
                                             <td class='align-middle text-center'>`+asignacionesmesactual[i].ubicacion+`</td>
                                             <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
-                                            <td class='align-middle text-center'> NA </td>
-                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].ocupacion+`</td>
+                                            <td class='align-middle text-center'> N.A.</td>
+                                            <td></td>
                                             
                                         </tr>`;
                                         $("#body_asignaciones").append(tr);
@@ -738,10 +884,10 @@
                                     }
                                     if(asignacionesmesactual[i].ubicacion == 'TORAX'){
                                         dosi_torax += 1;
+                                    }else if(asignacionesmesactual[i].ubicacion == 'CASO'){
+                                        dosi_caso += 1;
                                     }else if(asignacionesmesactual[i].ubicacion == 'CRISTALINO'){
                                         dosi_cristalino += 1;
-                                    }else if(asignacionesmesactual[i].ubicacion == 'MUÑECA'){
-                                        dosi_muñeca += 1 ;
                                     }else if(asignacionesmesactual[i].ubicacion == 'ANILLO'){
                                         dosi_dedo += 1;
                                     }
@@ -749,25 +895,56 @@
                                     /* document.getElementById("dosi_control").value = dosi_control; */
                                     
                                     document.getElementById("dosi_torax").value = dosi_torax;
+                                    document.getElementById("dosi_caso").value = dosi_caso;
                                     document.getElementById("dosi_cristalino").value = dosi_cristalino;
-                                    document.getElementById("dosi_muñeca").value = dosi_muñeca;
                                     document.getElementById("dosi_dedo").value = dosi_dedo;
 
                                 }
                             }
                         });
                     });
-                    
+                    $.get('dosiareasginadosmesactual', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual}, function(asignacionesareamesactual){
+                        console.log("ASIGNACIONES AREA DEL MES ACTUAL");
+                        console.log(asignacionesareamesactual);
+                        $('#body_asignaciones').html("");
+                        if(mes > consultaMesactual){
+                            /* alert("ASIGNACIONES PARA EL MES SIGUIENTE AL ACTUAL"); */
+                        }else{
+                             /* alert("ASIGNACIONES PARA EL MES ACTUAL"); */
+                            for(var i=0; i<asignacionesareamesactual.length; i++){
+                                var fechaEnviado = asignacionesareamesactual[i].fecha_dosim_enviado;
+                                document.getElementById("fecha_dosim_enviado").value = fechaEnviado;
+                                var primerDiaUso = asignacionesareamesactual[i].primer_dia_uso;
+                                document.getElementById("primerDia_asigdosim").value = primerDiaUso;
+                                var ultimoDiaUso = asignacionesareamesactual[i].ultimo_dia_uso;
+                                document.getElementById("ultimoDia_asigdosim").value = ultimoDiaUso;
+                                
+                                var tr = `<tr>
+                                    <td class='align-middle' style='width: 250px'>`+asignacionesareamesactual[i].nombre_area+`</td>
+                                    <td class='align-middle text-center'>ÁREA</td>
+                                    <td class='align-middle text-center'>`+asignacionesareamesactual[i].codigo_dosimeter+`</td>
+                                    <td class='align-middle text-center'> N.A.</td>
+                                    <td></td>
+                                </tr>`;
+                                $("#body_asignaciones").append(tr);
+
+                                dosi_area += 1;
+                                console.log("EL VALOR DEL DOSI AREA PARA EL MES ACTUAL");
+                                console.log(dosi_area);
+                            }
+                            document.getElementById("dosi_area").value = dosi_area;
+                        }
+                    })
                 });
             })
         });
     });
-    function agregarFila(){
-    
+    function agregarFila(num){
+        console.log("NUMERO SELECCIONADO" +num);
         var mes = document.getElementById("mesacambiar").value;
         
         /* alert("EL MES SELECCIONADO es"+mes); */
-        var especialidad_id= document.getElementById("especialidades_empresadosi").value;
+        var contdosisededepto_id= document.getElementById("especialidades_empresadosi").value;
 
         $('#mesacambiar').on('change', function(){
             $('#tr_newAsignacion').html("");
@@ -775,18 +952,20 @@
         })
         
         var selectTrabajadores = document.createElement("select");
+        var selectAreas = document.createElement("select");
         var selectDosimetros = document.createElement("select");
         var selectDosimetrosEzclip = document.createElement("select");
         var selectHolders = document.createElement("select");
         var id_empresa = document.getElementById("empresaDosimetria").value;
         var sede = document.getElementById("sedes_empresadosi");
+        var sede_id = sede.value;
         var id_sede = sede.options[sede.selectedIndex].text;
         
         console.log("SEDE:" +id_sede);
         $.get('trabajadoresempresa', {id_sede: id_sede}, function(trabajadores){
+            console.log("ESTOS SON LOS TRABAJADORES" + trabajadores);
             console.log(trabajadores);
-            const vacio = JSON.stringify(trabajadores);
-            console.log("ESTOS SON LOS TRABAJADORES" + vacio);
+            /* const vacio = JSON.stringify(trabajadores);*/
             for(var i = 0; i < trabajadores.length; i++){
                 option = document.createElement("option");
                 option.value = trabajadores[i].id_persona;
@@ -795,6 +974,18 @@
             }
             console.log(selectTrabajadores.innerHTML);
 
+            $.get('areasespecialidadesempresa', {contdosisededepto_id: contdosisededepto_id, id_sede: sede_id}, function(areasespecialidad){
+                console.log("ESTAS SON LAS AREAS DEL DEPARTAMENTO"+contdosisededepto_id+" Y LA SEDE "+sede_id);
+                console.log(areasespecialidad);
+                for(var i = 0; i < areasespecialidad.length; i++){
+                    option = document.createElement("option");
+                    option.value = areasespecialidad[i].id_areadepartamentosede;
+                    option.text = areasespecialidad[i].nombre_area;
+                    selectAreas.appendChild(option);
+                }
+                console.log(selectAreas.innerHTML);
+            });
+
             @foreach($dosimetrosDisponibles as $dosimetros)
                 option = document.createElement("option");
                 option.value = '{{$dosimetros->id_dosimetro}}';
@@ -802,7 +993,6 @@
                 selectDosimetros.appendChild(option);
             @endforeach
             console.log(selectDosimetros.innerHTML);
-
             
             @foreach($dosimetrosDisponiblesEzclip as $dosimetrosezclip)
                 option = document.createElement("option");
@@ -819,7 +1009,7 @@
             @endforeach
             console.log(selectHolders.innerHTML);
 
-            $.get('mesactualcontdosisededepto', {especialidad_id: especialidad_id}, function(mesactual_trabjasig){
+            $.get('mesactualcontdosisededepto', {especialidad_id: contdosisededepto_id}, function(mesactual_trabjasig){
                 /* console.log("CONSULTA MES ACTUAL" + JSON.stringify(mesactual_trabjasig)); */
                 var consultaMesactual = mesactual_trabjasig.mes_asignacion;
                 if(mes > consultaMesactual){
@@ -871,29 +1061,7 @@
                                 ${selectHolders.innerHTML}
                             </select>
                         </td>
-                        <td style="width: 14.20%">
-                            <select class="form-select @error('ocupacion_asig') is-invalid @enderror" name="ocupacion_asig[]" id="ocupacion_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="T"> TELETERAPIA</option>
-                                <option value="BQ">BRAQUITERAPIA</option>
-                                <option value="MN">MEDICINA NUCLEAR</option>
-                                <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                <option value="MF">MEDIDORES FIJOS</option>
-                                <option value="IV">INVESTIGACIÓN</option>
-                                <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                <option value="MM">MEDIDORES MÓVILES</option>
-                                <option value="E"> DOCENCIA</option>
-                                <option value="PR">PERFILAJE Y REGISTRO</option>
-                                <option value="TR">TRAZADORES</option>
-                                <option value="HD">HEMODINAMIA</option>
-                                <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                <option value="RX">RADIODIAGNÓSTICO</option>
-                                <option value="FL">FLUOROSCOPIA</option>
-                                <option value="AM">APLICACIONES MÉDICAS</option>
-                                <option value="AI">APLICACIONES INDUSTRIALES</option>
-                            </select>
-                            @error('ocupacion_asig') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                        </td>   
+                        
                         <td class="text-center" style="width: 24.80%">
                             <button id="" class="btn btn-danger"  type="button" onclick="eliminarFilaform2(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -907,75 +1075,152 @@
 
                     var mestrabj_asig = document.getElementById("mesacambiar").value;
                     var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
-                    var id_contratodosimetriasede =  document.getElementById("sedes_empresadosi").value; 
+                    var id_contratodosimetriasede =  document.getElementById("contratodosimetriasede").value; 
                     document.getElementById("mestrabj_asig").value = mestrabj_asig;
                     document.getElementById("id_contdosisededepto").value = id_contdosisededepto;
                     document.getElementById("id_contratodosimetriasede").value = id_contratodosimetriasede;
+                    if(num == 1){
+                        document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
+                            `<td style="width: 32.30%">
+                                <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectTrabajadores.innerHTML}
+                                </select>
+                            </td>
+                            <td class='align-middle text-center'style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="TORAX" readonly></td> 
+                            <td style="width: 15.0%">
+                                <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectDosimetros.innerHTML}
+                                </select>
+                            </td>
+                            <td class='align-middle text-center' style="width: 14.20%">
+                                <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                    <option value="NA" selected>N.A</option>
+                                </select>
+                            </td>
+                            <td class="text-center" style="width: 15.80%">
+                                <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        `;
 
-                    document.getElementById("tabla_adicional")
-                    .insertRow(-1).innerHTML += 
-                        `<td style="width: 32.30%">
-                            <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                ${selectTrabajadores.innerHTML}
-                            </select>
-                        </td>
-                        <td style="width: 14.50%">
-                            <select class="form-select"  name="id_ubicacion_asig[]" id="id_ubicacion_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="TORAX">TORAX</option>
-                                <option value="CRISTALINO">CRISTALINO</option>
-                                <option value="ANILLO">ANILLO</option>
-                                <option value="MUÑECA">MUÑECA</option>
-                                <option value="CONTROL">CONTROL</option>
-                                <option value="AREA">ÁREA</option>
-                                <option value="CASO">CASO</option>
-                            </select>
-                        </td> 
-                        <td style="width: 15.0%">
-                            <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                ${selectDosimetrosEzclip.innerHTML}
-                                ${selectDosimetros.innerHTML}
-                            </select>
-                        </td>
-                        <td style="width: 14.20%">
-                            <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="NA">N.A</option>
-                                ${selectHolders.innerHTML}
-                            </select>
-                        </td>
-                        <td style="width: 14.20%">
-                            <select class="form-select" name="ocupacion_asig[]" id="ocupacion_asig" style="text-transform:uppercase">
-                                <option value="">----</option>
-                                <option value="T"> TELETERAPIA</option>
-                                <option value="BQ">BRAQUITERAPIA</option>
-                                <option value="MN">MEDICINA NUCLEAR</option>
-                                <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                <option value="MF">MEDIDORES FIJOS</option>
-                                <option value="IV">INVESTIGACIÓN</option>
-                                <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                <option value="MM">MEDIDORES MÓVILES</option>
-                                <option value="E"> DOCENCIA</option>
-                                <option value="PR">PERFILAJE Y REGISTRO</option>
-                                <option value="TR">TRAZADORES</option>
-                                <option value="HD">HEMODINAMIA</option>
-                                <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                <option value="RX">RADIODIAGNÓSTICO</option>
-                                <option value="FL">FLUOROSCOPIA</option>
-                                <option value="AM">APLICACIONES MÉDICAS</option>
-                                <option value="AI">APLICACIONES INDUSTRIALES</option>
-                            </select>
-                        </td>   
-                        <td class="text-center" style="width: 15.80%">
-                            <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                </svg>
-                            </button>
-                        </td>
-                    `;
+                    }else if(num == 2){
+                        document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
+                            `<td style="width: 32.30%">
+                                <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectTrabajadores.innerHTML}
+                                </select>
+                            </td>
+                            <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="CASO" readonly></td> 
+                            <td style="width: 15.0%">
+                                <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectDosimetros.innerHTML}
+                                </select>
+                            </td>
+                            <td class='align-middle text-center' style="width: 14.20%">
+                                <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                    <option value="NA" selected>N.A</option>
+                                </select>
+                            </td>
+                            <td class="text-center" style="width: 15.80%">
+                                <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        `;
+                    }else if(num == 3){
+                        document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
+                            `<td style="width: 32.30%">
+                                <select class="form-select id_area_asig" name="id_area_asig[]"  id="id_area_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectAreas.innerHTML} 
+                                </select>
+                            </td>
+                            <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_area_asig[]" id="id_ubicacion_asig" class="form-control" value="AMBIENTAL" readonly></td> 
+                            <td style="width: 15.0%">
+                                <select class="form-select"  name="id_dosimetro_area_asig[]" id="id_dosimetro_area_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectDosimetros.innerHTML}
+                                </select>
+                            </td>
+                            <td class='align-middle text-center' style="width: 14.20%">N.A.</td>
+                            <td class="text-center" style="width: 15.80%">
+                                <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        `;
+                    }else if(num == 4){
+                        document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
+                            `<td style="width: 32.30%">
+                                <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectTrabajadores.innerHTML}
+                                </select>
+                            </td>
+                            <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="CRISTALINO" readonly></td> 
+                            <td style="width: 15.0%">
+                                <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectDosimetrosEzclip.innerHTML}
+                                </select>
+                            </td>
+                            <td style="width: 14.20%">
+                                <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    <option value="NA">N.A</option>
+                                    ${selectHolders.innerHTML}
+                                </select>
+                            </td>
+                            <td class="text-center" style="width: 15.80%">
+                                <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        `;
+                    }else if(num == 5){
+                        document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
+                            `<td style="width: 32.30%">
+                                <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectTrabajadores.innerHTML}
+                                </select>
+                            </td>
+                            <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="ANILLO" readonly></td> 
+                            <td style="width: 15.0%">
+                                <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    ${selectDosimetrosEzclip.innerHTML}
+                                </select>
+                            </td>
+                            <td style="width: 14.20%">
+                                <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                    <option value="">----</option>
+                                    <option value="NA">N.A</option>
+                                    ${selectHolders.innerHTML}
+                                </select>
+                            </td>
+                            <td class="text-center" style="width: 15.80%">
+                                <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        `;
+                    }
                 }
                     
                     
@@ -999,12 +1244,30 @@
     }
     function Generarnotas1(){
         var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
-        /* console.log(trabajadores); */
-        var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
-        /* console.log("ESTAS SON LAS UBICACIONES");
-        console.log(ubicacion); */
+        console.log("ESTAS SON LOS TRABAJADORES");
+        console.log(trabajadores);
+        var areas = document.querySelectorAll('select[name="id_area_asig[]"]');
+        console.log("ESTAS SON LAS AREAS");
+        console.log(areas);
+        var ubicacion = document.querySelectorAll('input[name="id_ubicacion_asig[]"]');
+        var ubicacionAreas = document.querySelectorAll('input[name="id_ubicacion_area_asig[]"]');
+        console.log("ESTAS SON LAS UBICACIONES");
+        console.log(ubicacion);
+        var ubicacionControl = document.querySelectorAll('select[name="id_ubicacion_control_asig[]"]');
+
+        var contdosisededepto_id= document.getElementById("especialidades_empresadosi").value;
         var sede = document.getElementById("sedes_empresadosi");
+        var sede_id = document.getElementById("sedes_empresadosi").value;
         var id_sede = sede.options[sede.selectedIndex].text;
+
+        if(ubicacionControl.length != 0){
+            for(var x = 0; x < ubicacionControl.length; x++) {
+                var value = ubicacionControl[x].value;
+                console.log("NUEVO DOSÍMETRO CONTROL TRANSPORTE "+value);
+                let input = `<input type="text" name="inputnotasControl[]" id="inputnotasControl`+x+`" class="form-control inputs" value="NUEVO DOSÍMETRO CONTROL TRANSPORTE `+value+`" readonly>`;
+                $('#textCard1').append(input);
+            }
+        }
         $.get('trabajadoresempresa', {id_sede: id_sede}, function(trabjDisponibles){
             console.log(trabjDisponibles);
             for(var i = 0; i < trabajadores.length; i++) {
@@ -1020,14 +1283,36 @@
                             console.log("ITERACION DEL FOREACH"+trabj.id_persona);
                             if(values == trabj.id_persona){
                                 console.log("NUEVO DOSIMETRO PARA"+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+"CON UBICACION:"+valuesX);
-                                let input = `<input type="text" name="inputnotas[]" id="inputnotas`+i+`" class="form-control inputs" value="NUEVO DOSIMETRO PARA `+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+` CON UBICACION: `+valuesX+`" readonly>`;
+                                let input = `<input type="text" name="inputnotas[]" id="inputnotas`+i+`" class="form-control inputs" value="NUEVO DOSÍMETRO PARA `+trabj.primer_nombre_persona+` `+trabj.primer_apellido_persona+` `+trabj.segundo_apellido_persona+` CON UBICACION: `+valuesX+`" readonly>`;
                                 $('#textCard1').append(input);
                             }
                         })
                     }
                 };
             };
-        })
+        });
+        $.get('areasespecialidadesempresa', {contdosisededepto_id: contdosisededepto_id, id_sede: sede_id}, function(areasespecialidad){
+            console.log("ESTAS SON LAS AREAS DEL DEPARTAMENTO"+contdosisededepto_id+" Y LA SEDE "+sede_id);
+            console.log(areasespecialidad);
+            for(var i = 0; i < areas.length; i++) {
+                var values = areas[i].value;
+                for(var x = 0; x < ubicacionAreas.length; x++) {
+                    var valuesX = ubicacionAreas[x].value;
+                    if(i == x && valuesX == 'AMBIENTAL'){
+                        console.log("NUEVO DOSIMETRO PARA"+values+"CON UBICACION:"+valuesX);
+                        areasespecialidad.forEach(function(areasig){
+                            console.log("ENTRO AL FOREACH CON VALUE"+values);
+                            console.log("ITERACION DEL FOREACH"+areasig.id_areadepartamentosede);
+                            if(values == areasig.id_areadepartamentosede){
+                                console.log("NUEVO DOSIMETRO PARA EL ÁREA"+areasig.nombre_area+"CON UBICACION:"+valuesX);
+                                let input = `<input type="text" name="inputnotasAreas[]" id="inputnotasAreas`+i+`" class="form-control inputs" value="NUEVO DOSÍMETRO PARA EL ÁREA '`+areasig.nombre_area+`' CON UBICACION: `+valuesX+`" readonly>`;
+                                $('#textCard1').append(input);
+                            }
+                        })
+                    }
+                }
+            }
+        });
     }
     function Generarnotas2(){
         var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
@@ -1094,6 +1379,122 @@
         var año = fecha.getFullYear();
         document.getElementById("ultimoDia_asigdosim2").value = año+'-'+mm+'-'+dia;
 
+
+    }
+    function agregarSubEsp(){
+        alert("se selecciono la sub especialidad");
+       
+        var esp = document.getElementById("especialidades_empresadosi");
+        var textEsp = esp.options[esp.selectedIndex].text;
+        $('#tr_control').html("");
+        $('#body_asignaciones').html("");
+        var num = parseInt('{{empty($codigoNovedadSubEsp->id_novcontdosisededepto) ? 0 : $codigoNovedadSubEsp->id_novcontdosisededepto}}')+1;
+        var n = num.toString().padStart(5,'0');
+        console.log("ESTE ES EL CODIGO" +n);
+        document.getElementById('trabjPeriodo').innerHTML = "NUEVA SUB-ESPECIALIDAD";
+        document.getElementById('codigoNov').innerHTML = "<b><i>NOV-"+textEsp+"-"+n+"</i></b>";
+        var selectTrabajadores = document.createElement("select");
+        var selectAreas = document.createElement("select");
+        var selectDosimetros = document.createElement("select");
+        var selectDosimetrosEzclip = document.createElement("select");
+        var selectHolders = document.createElement("select");
+        var id_empresa = document.getElementById("empresaDosimetria").value;
+        var sede = document.getElementById("sedes_empresadosi");
+        var sede_id = sede.value;
+        var id_sede = sede.options[sede.selectedIndex].text;
+        var contdosisededepto_id= document.getElementById("especialidades_empresadosi").value;
+        console.log("SEDE:" +id_sede);
+        $.get('trabajadoresempresa', {id_sede: id_sede}, function(trabajadores){
+            console.log("ESTOS SON LOS TRABAJADORES" + trabajadores);
+            console.log(trabajadores);
+            /* const vacio = JSON.stringify(trabajadores);*/
+            for(var i = 0; i < trabajadores.length; i++){
+                option = document.createElement("option");
+                option.value = trabajadores[i].id_persona;
+                option.text = trabajadores[i].primer_nombre_persona+` `+trabajadores[i].primer_apellido_persona+` `+trabajadores[i].segundo_apellido_persona;
+                selectTrabajadores.appendChild(option);
+            }
+            console.log(selectTrabajadores.innerHTML);
+        });
+        $.get('areasespecialidadesempresa', {contdosisededepto_id: contdosisededepto_id, id_sede: sede_id}, function(areasespecialidad){
+            console.log("ESTAS SON LAS AREAS DEL DEPARTAMENTO"+contdosisededepto_id+" Y LA SEDE "+sede_id);
+            console.log(areasespecialidad);
+            for(var i = 0; i < areasespecialidad.length; i++){
+                option = document.createElement("option");
+                option.value = areasespecialidad[i].id_areadepartamentosede;
+                option.text = areasespecialidad[i].nombre_area;
+                selectAreas.appendChild(option);
+            }
+            console.log(selectAreas.innerHTML);
+        });
+
+        @foreach($dosimetrosDisponibles as $dosimetros)
+            option = document.createElement("option");
+            option.value = '{{$dosimetros->id_dosimetro}}';
+            option.text = '{{$dosimetros->codigo_dosimeter}}';
+            selectDosimetros.appendChild(option);
+        @endforeach
+        console.log(selectDosimetros.innerHTML);
+            
+        @foreach($dosimetrosDisponiblesEzclip as $dosimetrosezclip)
+            option = document.createElement("option");
+            option.value = '{{$dosimetrosezclip->id_dosimetro}}';
+            option.text = '{{$dosimetrosezclip->codigo_dosimeter}}';
+            selectDosimetrosEzclip.appendChild(option);
+        @endforeach
+
+        @foreach($holdersDisponibles as $holders)
+            option = document.createElement("option");
+            option.value = '{{$holders->id_holder}}';
+            option.text = '{{$holders->codigo_holder}}';
+            selectHolders.appendChild(option);
+        @endforeach
+        console.log(selectHolders.innerHTML);
+        
+        document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
+            `<td style="width: 26.30%" class='align-middle'>CONTROL TRANS.</td>
+            <td class='align-middle text-center'style="width: 14.50%">
+                <select class="form-select" name="id_ubicacion_control_asig[]" id="id_ubicacion_control_asig" style="text-transform:uppercase">
+                    <option value="">----</option>
+                    <option value="TORAX">TÓRAX</option>
+                    <option value="CRISTALINO">CRISTALINO</option>
+                    <option value="ANILLO">ANILLO</option>
+                </select>
+            </td> 
+            <td style="width: 15.0%">
+                <select class="form-select"  name="id_dosimetro_control_asig[]" id="id_dosimetro_control_asig" style="text-transform:uppercase">
+                    <option value="">----</option>
+                    ${selectDosimetrosEzclip.innerHTML}
+                    ${selectDosimetros.innerHTML}
+                </select>
+            </td>
+            <td class='align-middle text-center' style="width: 14.20%">
+                <select class="form-select"  name="id_holder_control_asig[]" id="id_holder_control_asig" style="text-transform:uppercase">
+                    <option value="">----</option>
+                    <option value="NA">N.A</option>
+                    ${selectHolders.innerHTML}
+                </select>
+            </td>
+            <td class="text-center" style="width: 12.40%">
+                <button class="btn btn-sm"  type="button" style="background-color: #a0aec0" onclick="return false"">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            </td>
+        `;
+        document.getElementById('dosi_control_torax').value = 0;
+        document.getElementById('dosi_control_cristalino').value = 0;
+        document.getElementById('dosi_control_dedo').value = 0;
+        document.getElementById('dosi_torax').value = 0;
+        document.getElementById('dosi_area').value = 0;
+        document.getElementById('dosi_caso').value = 0;
+        document.getElementById('dosi_cristalino').value = 0;
+        document.getElementById('dosi_dedo').value = 0;
+        document.getElementById('controlTransT_unicoCont').value = null;
+        document.getElementById('controlTransC_unicoCont').value = null;
+        document.getElementById('controlTransA_unicoCont').value = null;
+        document.getElementById('subEspecialidad').value = 'TRUE';
 
     }
 </script>
@@ -1168,7 +1569,7 @@
             console.log(holder); 
             for(var i = 0; i < holder.length; i++) {
                 var values = holder[i].value;
-                
+                console.log("values HOLDER" + values);
                 for(var x = 0; x < holder.length; x++){
                     var valuesX = holder[x].value;
                     if(values == valuesX && i != x){
@@ -1197,19 +1598,23 @@
                 }
             }; */
             /*if(trabajadores.length == 0 && ubicacion.length == 0 && dosimetros.length == 0 && holder.length == 0 && ocupaciones.length == 0){ */
-            if(trabajadores.length == 0 && ubicacion.length == 0){
-                /* alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA"); */
+            /* var areas = document.querySelectorAll('select[name="id_area_asig[]"]');
+            var ubicacionArea = document.querySelectorAll('input[name="id_ubicacion_area_asig[]"]');
+            if((trabajadores.length == 0 && ubicacion.length == 0) || (ubicacionArea.length == 0 && areas.length == 0)){
+             alert("OPRIMA EL BOTON DE NUEVO DOSIMETRO O INGRESE LA INFORMACION SOLICITADA");
                 return Swal.fire({
                                 title:"OPRIMA EL BOTÓN DE NUEVO DOSÍMETRO",
                                 text: "INGRESE LA INFORMACIÓN SOLICITADA",
                                 icon: 'error'
                             });
-            };
-             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
+            }; */
+            ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
             var observaciones = document.querySelectorAll('input[name="inputnotas[]"]');
+            var observacionesAreas = document.querySelectorAll('input[name="inputnotasAreas[]"]');
+            var observacionesControl = document.querySelectorAll('input[name="inputnotasControl[]"]');
             console.log("ESTAS SON LAS OBSERVACIONES");
             console.log(observaciones);
-            if(observaciones.length == 0){
+            if(observaciones.length == 0 && observacionesAreas.length == 0 && observacionesControl.length == 0){
                 return Swal.fire({
                                 title:"FALTA OPRIMIR EL BOTÓN PARA GENERAR LAS OBSERVACIONES DE LAS NOVEDADES ",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",

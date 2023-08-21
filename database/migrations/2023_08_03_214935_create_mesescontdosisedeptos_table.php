@@ -11,14 +11,18 @@ class CreateMesescontdosisedeptosTable extends Migration
      *
      * @return void
      */
+    
     public function up()
     {
         
         Schema::create('mesescontdosisedeptos', function (Blueprint $table) {
             $table->bigincrements('id_mescontdosisededepto')->unique();
 
-            $table-> unsignedBigInteger('contdosisededepto_id');
+            $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table-> unsignedBigInteger('novcontdosisededepto_id')->nullable();
+            $table-> foreign('novcontdosisededepto_id')->references('id_novcontdosisededepto')->on('novcontdosisededeptos')->onDelete('cascade')->onUpdate('cascade');
 
             $table->integer('mes_asignacion');
             $table->integer('dosi_control_torax')->nullable();

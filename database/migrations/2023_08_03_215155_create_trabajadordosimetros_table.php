@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDosiareacontdosisedesTable extends Migration
+class CreateTrabajadordosimetrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,32 +14,39 @@ class CreateDosiareacontdosisedesTable extends Migration
     public function up()
     {
         
-        Schema::create('dosiareacontdosisedes', function (Blueprint $table) {
-            $table->bigincrements('id_dosiareacontdosisedes')->unique();
-
-            $table-> unsignedBigInteger('areadepartamentosede_id');
-            $table-> foreign('areadepartamentosede_id')->references('id_areadepartamentosede')->on('areadepartamentosedes')->onDelete('cascade')->onUpdate('cascade');
-
-            $table-> unsignedBigInteger('dosimetro_id');
-            $table-> foreign('dosimetro_id')->references('id_dosimetro')->on('dosimetros')->onDelete('cascade')->onUpdate('cascade');
-
+        Schema::create('trabajadordosimetros', function (Blueprint $table) {
+            $table->bigincrements('id_trabajadordosimetro')->unique();
+            
             $table-> unsignedBigInteger('contratodosimetriasede_id');
             $table-> foreign('contratodosimetriasede_id')->references('id_contratodosimetriasede')->on('contratodosimetriasedes')->onDelete('cascade')->onUpdate('cascade');
 
+            $table-> unsignedBigInteger('persona_id');
+            $table-> foreign('persona_id')->references('id_persona')->on('personas')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('dosimetro_id')->nullable();
+            $table-> foreign('dosimetro_id')->references('id_dosimetro')->on('dosimetros')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('holder_id')->nullable();
+            $table-> foreign('holder_id')->references('id_holder')->on('holders')->onDelete('cascade')->onUpdate('cascade');
+
             $table-> unsignedBigInteger('contdosisededepto_id');
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('novcontdosisededepto_id')->nullable();
+            $table-> foreign('novcontdosisededepto_id')->references('id_novcontdosisededepto')->on('novcontdosisededeptos')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->integer('mes_asignacion');
-            $table->string('dosimetro_uso', 10);
+            $table->string('dosimetro_uso',50);
             $table->date('primer_dia_uso')->nullable();
             $table->date('ultimo_dia_uso')->nullable();
             $table->date('fecha_dosim_enviado')->nullable();
             $table->date('fecha_dosim_recibido')->nullable();
             $table->date('fecha_dosim_devuelto')->nullable();
             /* $table->string('ocupacion', 50)->nullable(); */
+            $table->string('ubicacion', 50)->nullable();
             $table->string('energia', 50)->nullable();
             $table->date('zero_level_date')->nullable();
-            $table->date('measurement_date')->nullable(); 
-            ///// EL DIA 12 DE ABIRL DEL 2023 SE CREO EL PRIMER CLIENTE CON DOSIMETROS AMBIENTAL O AREA PERO SE UTILIZARON DOSIMETROS CUERPO ENTERO, POR ELLO SE DEBIO MODIFICAR LA MIGRACION Y PONER LOS PARAMETROS DE CE///////
+            $table->date('measurement_date')->nullable();
             $table->double('Hp007_calc_dose', 8, 5)->nullable();
             $table->double('Hp007_background_dose', 8, 5)->nullable();
             $table->double('Hp007_raw_dose', 8, 5)->nullable();
@@ -48,10 +55,7 @@ class CreateDosiareacontdosisedesTable extends Migration
             $table->double('Hp10_background_dose', 8, 5)->nullable();
             $table->double('Hp10_raw_dose', 8, 5)->nullable();
             $table->double('Hp10_dif_dosicont', 8, 5)->nullable();
-            $table->double('Hp3_calc_dose', 8, 5)->nullable();
-            $table->double('Hp3_background_dose', 8, 5)->nullable();
-            $table->double('Hp3_raw_dose', 8, 5)->nullable();
-            /*$table->double('Cu_calc_dose', 8, 5)->nullable();
+            $table->double('Cu_calc_dose', 8, 5)->nullable();
             $table->double('Cu_background_dose', 8, 5)->nullable();
             $table->double('Cu_raw_dose', 8, 5)->nullable();
             $table->double('Pb/Sn_calc_dose', 8, 5)->nullable();
@@ -62,7 +66,8 @@ class CreateDosiareacontdosisedesTable extends Migration
             $table->double('EzClip_raw_dose', 8, 5)->nullable();
             $table->double('Hp3_calc_dose', 8, 5)->nullable();
             $table->double('Hp3_background_dose', 8, 5)->nullable();
-            $table->double('Hp3_raw_dose', 8, 5)->nullable(); */
+            $table->double('Hp3_raw_dose', 8, 5)->nullable();
+            $table->double('Hp3_dif_dosicont', 8, 5)->nullable();
             $table->double('H_10_calc_dose', 8, 5)->nullable();
             $table->date('verification_date')->nullable();
             $table->date('verification_required_on_or_before')->nullable();
@@ -79,6 +84,7 @@ class CreateDosiareacontdosisedesTable extends Migration
             $table->string('DSU', 50)->nullable();
             $table->string('revision_salida', 50)->nullable();
             $table->string('revision_entrada', 50)->nullable();
+            
             $table->timestamps();
         });
     }
@@ -90,6 +96,6 @@ class CreateDosiareacontdosisedesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dosiareacontdosisedes');
+        Schema::dropIfExists('trabajadordosimetros');
     }
 }

@@ -3,7 +3,7 @@
 @section('contenido')
 <div class="row">
     <div class="col-md ">
-        <a type="button" class="btn btn-circle colorQA" href="{{route('detallesedecont.create', $contdosisededepto->id_contdosisededepto)}}">
+        <a type="button" class="btn btn-circle colorQA"  @if($item == 0) href="{{route('detallesedecont.create', $contdosisededepto->id_contdosisededepto)}}" @else href="{{route('detallesedecontsubEsp.create', $contdosisededepto->id_novcontdosisededepto)}}" @endif>
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg>
@@ -133,7 +133,7 @@
     </div>
     <div class="col-md text-center">
         
-        <a type="button" class="btn btn-circle colorQA mt-5"  {{-- href="{{route('Reporterevisionentrada.pdf', [ 'empresa'=> 0, 'deptodosi' =>$contdosisededepto->id_contdosisededepto , 'mesnumber' => $mesnumber])}}" --}} onclick="alertCertificado('{{0}}', '{{$contdosisededepto->id_contdosisededepto}}', '{{$mesnumber}}', {{$dosicontrolasig}}, {{$trabjasignados}});" target="_blank">
+        <a type="button" class="btn btn-circle colorQA mt-5"  @if($item == 0) onclick="alertCertificado('{{0}}', '{{$contdosisededepto->id_contdosisededepto}}', '{{$mesnumber}}', '{{$item}}');" @else onclick="alertCertificado('{{0}}', '{{$contdosisededepto->id_novcontdosisededepto}}', '{{$mesnumber}}', '{{$item}}');" @endif target="_blank">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-pdf pt-1" viewBox="0 0 16 16">
                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                 <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
@@ -153,7 +153,11 @@
             <div class="row">
                 <div class="col-md">
                     <input type="number" name="mes_asignacion" value="{{$mesnumber}}" hidden>
-                    <input type="number" name="contdosisededepto" value="{{$contdosisededepto->id_contdosisededepto}}" hidden>
+                    @if($item == 1) 
+                        <input type="number" name="novcontdosisededepto" value="{{$contdosisededepto->id_novcontdosisededepto}}" hidden>
+                    @elseif($item == 0)
+                        <input type="number" name="contdosisededepto" value="{{$contdosisededepto->id_contdosisededepto}}" hidden>
+                    @endif
                     <input type="number" name="contratodosimetriasede" value="{{$contdosisededepto->contratodosimetriasede_id}}" hidden>
                     <input type="number" name="contratodosimetria" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria}}" hidden>
                     <div class="table table-responsive p-2">
@@ -753,7 +757,7 @@ crossorigin="anonymous">
             }
         @endforeach
         @foreach($dosicontrolUnicoasig as $dosicontUniasig)
-            if('{{$dosicontUniasig->revision_salida}}' == 'TRUE'){
+            if('{{$dosicontUniasig->revision_entrada}}' == 'TRUE'){
                 let tr = document.getElementById('C{{$dosicontUniasig->id_dosicontrolcontdosisedes}}'); 
                 tr.style.boxShadow = "0px 0px 7px 1px rgb(26, 153, 128)";  
             }
@@ -1097,279 +1101,198 @@ crossorigin="anonymous">
                 
             })
         @endforeach
-        /* $('#codigo_etiqueta').on('change', function(){
-            var codigoEtiq = document.querySelector('#codigo_etiqueta').value;
-            const js = document.querySelector('#dosi_control').checked;
-            console.log("ESTADO INICIAL"+js);
-            console.log("codigo etiqueta con checkbox estado inicial"+codigoEtiq+js);
-            document.getElementById("codigo_dosimetro").value = "";
-            
-            if(js){
-                console.log("ESTTRO AL IF TRUE");
-                consultarDosiControl();
-            }else{
-                consultarTrabDosi();
-            }
-        }); */
+        
         
         
         
     })
-    function removeObs(id){
+    function removeObs(id, item){
         console.log("id" +id);
-        Swal.fire({
-            title: "DESEA ELIMINAR LA OBSERVACIÓN ??",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#1A9980',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI, SEGURO!'
-        }).then((result) => {
-            $.ajax({
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                type: "post",
-                url: "{{route('observaciones.remove', ['deptodosi' => $contdosisededepto->id_contdosisededepto, 'mesnumber' =>$mesnumber])}}",
-                data:{
-                    'id': id,
-                    '_token': $('#signup-token').val()
-                },
-                dataType: 'JSON',
-                success: function (msg) {
-                    Swal.fire({
-                        title: 'ELIMINADO!',
-                        text: 'SE HA ELIMINADO CON EXITO!',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 8000
-                    });
-                    window.location.reload();
-                }
-            });
-        })
-    }
-    function alertCertificado(empresa, id, mes){
-        console.log("SE SELECCIONO EL BOTON" +empresa+id+mes);
+        console.log("item"+item);
         
+            Swal.fire({
+                title: "DESEA ELIMINAR LA OBSERVACIÓN ??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1A9980',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+            }).then((result) => {
+                $.ajax({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    type: "post",
+                    url: "{{route('observaciones.remove')}}",
+                    data:{
+                        'id': id,
+                        '_token': $('#signup-token').val()
+                    },
+                    dataType: 'JSON',
+                    success: function (msg) {
+                        Swal.fire({
+                            title: 'ELIMINADO!',
+                            text: 'SE HA ELIMINADO CON EXITO!',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 8000
+                        });
+                        window.location.reload();
+                    }
+                });
+            })
+         
+
+    }
+    function alertCertificado(empresa, id, mes, item){
+        console.log("SE SELECCIONO EL BOTON" +empresa+id+mes);
+        console.log("item "+ item);
         var obsdosi = 0;
         var obstrab = 0;
         var obsarea = 0;
-        $.get('observacionesreventrada',{id : id, mes: mes})
-        .done(function( obsrevent ){
-            console.log("OBSERVACIONES");
-            console.log(obsrevent);
-            if(obsrevent.length == 0){
+        if('{{$observacionesAsig}}'.length == 0){
+            console.log("ES IGUAL A CERO");
+            Swal.fire({
+                title: "LAS ASIGNACIONES NO TIENEN NINGUNA OBSERVACIÓN !!!",
+                text:"OPRIMA EL BOTÓN GUARDAR",
+                icon: 'warning',
+            });
+            
+        }else{
+            var arrayCONT = [];
+            @foreach($observacionesAsig as $obsAsig)
+                if('{{$obsAsig->dosicontrol_id}}' != ""){
+                    arrayCONT.push('{{$obsAsig->dosicontrol_id}}');
+                }
+            @endforeach
+            console.log("arrayCONT="+arrayCONT);
+            @foreach($dosicontrolasig as $dosicontasig)
+                console.log('{{$dosicontasig->id_dosicontrolcontdosisedes}}');
+                if(arrayCONT.includes('{{$dosicontasig->id_dosicontrolcontdosisedes}}')){
+                    console.log("está presente control");
+                }else{
+                    console.log("No encontrado control");
+                    obsdosi ++;
+                }
+            @endforeach 
+            var arrayTRAB = [];
+            @foreach($observacionesAsig as $obsAsig)
+                if('{{$obsAsig->trabajcontdosimetro_id}}' != ""){
+                    arrayTRAB.push('{{$obsAsig->trabajcontdosimetro_id}}');
+                }
+            @endforeach
+            console.log("arrayTRAB="+arrayTRAB);
+            @foreach($trabjasignados as $trabasig)
+                console.log('{{$trabasig->id_trabajadordosimetro}}');
+                if(arrayTRAB.includes('{{$trabasig->id_trabajadordosimetro}}')){
+                    console.log("está presente");
+                }else{
+                    console.log("No encontrado");
+                    obstrab ++;
+                }
+            @endforeach 
+            var arrayAREA = [];
+            @foreach($observacionesAsig as $obsAsig)
+                if('{{$obsAsig->dosiareacontdosimetro_id}}' != ""){
+                    arrayAREA.push('{{$obsAsig->dosiareacontdosimetro_id}}');
+                }
+            @endforeach
+            console.log("arrayAREA="+arrayAREA);
+            @foreach($areasignados as $area)
+                console.log('{{$area->id_dosiareacontdosisedes}}');
+                if(arrayAREA.includes('{{$area->id_dosiareacontdosisedes}}')){
+                    console.log("está presente");
+                }else{
+                    console.log("No encontrado");
+                    obsarea ++;
+                }
+            @endforeach
+        };
+        if(obsdosi != 0){
+            Swal.fire({
+                title: "ALGUNAS ASIGNACIONES DE DOSÍMETRO CONTROL NO TIENEN OBSERVACIÓN",
+                text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
+                icon: 'warning',
+            })
+        }else if(obstrab != 0){
+            Swal.fire({
+                title: "ALGUNAS ASIGNACIONES NO TIENEN OBSERVACIÓN",
+                text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
+                icon: 'warning',
+            })
+        }else if(obsarea != 0){
+            Swal.fire({
+                title: "ALGUNAS ASIGNACIONES DE DOSÍMETRO AMBIENTAL NO TIENEN OBSERVACIÓN",
+                text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
+                icon: 'warning',
+            })
+        };
+        var dosi = 0;
+        var trab = 0;
+        var area = 0;
+        if(obsdosi == 0 && obstrab == 0 && obsarea == 0){
+            @foreach($dosicontrolasig as $dosicont)
+                if('{{$dosicont->revision_salida}}' == 'NULL'){
+                    cont ++;
+                    console.log("dosicont"+cont);
+                }
+            @endforeach
+            @foreach($dosicontrolUnicoasig as $dosicontUnic)
+                if('{{$dosicontUnic->revision_salida}}' == 'NULL'){
+                    cont ++;
+                    console.log("dosicontUnic "+cont);
+                }
+            @endforeach
+            @foreach($trabjasignados as $trabj)
+                if('{{$trabj->revision_salida}}' == 'NULL'){
+                    trab ++;
+                    console.log("trabj "+trab);
+                }
+            @endforeach
+            @foreach($areasignados as $area)
+                if('{{$area->revision_salida}}' == 'NULL'){
+                    area ++;
+                    console.log("area "+area);
+                }
+            @endforeach
+            if(cont != 0 || trab != 0 || area != 0){
                 Swal.fire({
-                    title: "LAS ASIGNACIONES NO TIENEN NINGUNA OBSERVACIÓN !!!",
-                    text:"OPRIMA EL BOTÓN GUARDAR",
+                    title: "ALGUNAS ASIGNACIONES NO HAN SIDO REVISADAS !!!",
+                    text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
                     icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#1A9980',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var host = window.location.host;
+                        var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                        window.open(path, '_blank');
+                    }
                 })
             }else{
-                var arrayCONT = [];
-                @foreach($observacionesAsig as $obsAsig)
-                    if('{{$obsAsig->dosicontrol_id}}' != ""){
-                        arrayCONT.push('{{$obsAsig->dosicontrol_id}}');
-                    }
-                @endforeach
-                console.log("arrayCONT="+arrayCONT);
-                @foreach($dosicontrolasig as $dosicontasig)
-                    console.log('{{$dosicontasig->id_dosicontrolcontdosisedes}}');
-                    if(arrayCONT.includes('{{$dosicontasig->id_dosicontrolcontdosisedes}}')){
-                        console.log("está presente control");
-                    }else{
-                        console.log("No encontrado control");
-                        obsdosi ++;
-                    }
-                @endforeach 
-                var arrayTRAB = [];
-                @foreach($observacionesAsig as $obsAsig)
-                    if('{{$obsAsig->trabajcontdosimetro_id}}' != ""){
-                        arrayTRAB.push('{{$obsAsig->trabajcontdosimetro_id}}');
-                    }
-                @endforeach
-                console.log("arrayTRAB="+arrayTRAB);
-                @foreach($trabjasignados as $trabasig)
-                    console.log('{{$trabasig->id_trabajadordosimetro}}');
-                    if(arrayTRAB.includes('{{$trabasig->id_trabajadordosimetro}}')){
-                        console.log("está presente");
-                    }else{
-                        console.log("No encontrado");
-                        obstrab ++;
-                    }
-                @endforeach 
-                var arrayAREA = [];
-                @foreach($observacionesAsig as $obsAsig)
-                    if('{{$obsAsig->dosiareacontdosimetro_id}}' != ""){
-                        arrayAREA.push('{{$obsAsig->dosiareacontdosimetro_id}}');
-                    }
-                @endforeach
-                console.log("arrayAREA="+arrayAREA);
-                @foreach($areasignados as $area)
-                    console.log('{{$area->id_dosiareacontdosisedes}}');
-                    if(arrayAREA.includes('{{$area->id_dosiareacontdosisedes}}')){
-                        console.log("está presente");
-                    }else{
-                        console.log("No encontrado");
-                        obsarea ++;
-                    }
-                @endforeach
-                
-            };
-            if(obsdosi != 0){
-                Swal.fire({
-                    title: "ALGUNAS ASIGNACIONES DE DOSÍMETRO CONTROL NO TIENEN OBSERVACIÓN",
-                    text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
-                    icon: 'warning',
-                })
-            }else if(obstrab != 0){
-                Swal.fire({
-                    title: "ALGUNAS ASIGNACIONES NO TIENEN OBSERVACIÓN",
-                    text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
-                    icon: 'warning',
-                })
-            }else if(obsarea != 0){
-                Swal.fire({
-                    title: "ALGUNAS ASIGNACIONES DE DOSÍMETRO AMBIENTAL NO TIENEN OBSERVACIÓN",
-                    text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
-                    icon: 'warning',
-                })
-            };
-
-
-            var dosi = 0;
-            var trab = 0;
-            var area = 0;
-
-            console.log("SON CERO "+obsdosi + obstrab + obsarea);
-            if(obsdosi == 0 && obstrab == 0 && obsarea == 0){
-                $.get('asignacionesTrab',{id : id, mes: mes})
-                .done(function(asignacionesTrab){
-                    console.log("ASIGNACIONES");
-                    console.log(asignacionesTrab);
-                    asignacionesTrab.forEach(trabj => {
-                        if(trabj.revision_entrada == null){
-                            console.log("hay trabj");
-                            trab ++;
+                if('{{$trabjEncargado}}'.length != 0){
+                    var host = window.location.host;
+                    var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                    window.open(path, '_blank');
+                }else{
+                    Swal.fire({
+                        title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
+                        text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#1A9980',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'SI, SEGURO!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var host = window.location.host;
+                            var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                            window.open(path, '_blank');
                         }
-                    });
-                    console.log(trab);
-                    if(trab != 0){
-                        Swal.fire({
-                            title: "ALGUNOS DOSÍMETROS NO HAN SIDO REVISADOS !!!",
-                            text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#1A9980',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'SI, SEGURO!'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                var host = window.location.host;
-                                var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/pdf";
-                                window.open(path, '_blank');
-                            }
-                        })
-                    
-                    }else{
-                        $.get('asignacionesCont', {id : id, mes: mes})
-                        .done(function(asignacionesCont){
-                            console.log("ASIGNACIONES CONTROL");
-                            console.log(asignacionesCont);
-                            asignacionesCont.forEach(dosicont => {
-                                if(dosicont.revision_entrada == null){
-                                    console.log("hay dosi");
-                                    dosi ++;
-                                }
-                            });
-                            console.log("dosi="+dosi);
-                            console.log("trab="+trab);
-                            
-                            if(dosi != 0){
-                                Swal.fire({
-                                    title: "ALGUNOS DOSÍMETROS DE CONTROL NO HAN SIDO REVISADOS !!!",
-                                    text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#1A9980',
-                                    cancelButtonColor: '#d33',
-                                    confirmButtonText: 'SI, SEGURO!'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        var host = window.location.host;
-                                        var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/pdf";
-                                        window.open(path, '_blank');
-                                    }
-                                })
-                            
-                            
-                            }else{
-                                /* var host = window.location.host;
-                                var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/pdf";
-                                window.open(path, '_blank'); */
-                                $.get('asignacionesArea', {id : id, mes: mes})
-                                .done(function(asignacionesarea){
-                                 
-                                    console.log("ASIGNACIONES AREA");
-                                    console.log(asignacionesarea);
-                                    asignacionesarea.forEach(dosiarea => {
-                                        if(dosiarea.revision_entrada == null){
-                                            console.log("hay dosi area");
-                                            area ++;
-                                        }
-                                    });
-                                    console.log("dosi="+dosi);
-                                    console.log("trab="+trab);
-                                    console.log("area="+trab);
-                                    if(area != 0){
-                                        Swal.fire({
-                                            title: "ALGUNOS DOSÍMETROS AMBIENTAL NO HAN SIDO REVISADOS !!!",
-                                            text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
-                                            icon: 'warning',
-                                            showCancelButton: true,
-                                            confirmButtonColor: '#1A9980',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: 'SI, SEGURO!'
-                                        }).then((result) => {
-                                            if (result.isConfirmed) {
-                                                var host = window.location.host;
-                                                var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/pdf";
-                                                window.open(path, '_blank');
-                                            }
-                                        })
-                                    }else{
-                                        $.get('trabjencargado', {id : id}, function(trabjencargado){
-                                            console.log(trabjencargado)
-                                            if(trabjencargado.length != 0){
-                                                var host = window.location.host;
-                                                var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/pdf";
-                                                window.open(path, '_blank');
-                                            }else{
-                                                Swal.fire({
-                                                    title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
-                                                    text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
-                                                    icon: 'warning',
-                                                    showCancelButton: true,
-                                                    confirmButtonColor: '#1A9980',
-                                                    cancelButtonColor: '#d33',
-                                                    confirmButtonText: 'SI, SEGURO!'
-                                                }).then((result) => {
-                                                    if (result.isConfirmed) {
-                                                        var host = window.location.host;
-                                                        var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/pdf";
-                                                        window.open(path, '_blank');
-                                                    }
-                                                })
-                                            } 
-                                        });
-                                    }
-                                });
-                            }
-                        })
-                    }
-                    
-                });
+                    })
+                } 
             }
-        });
-        
+        }
     }
 </script>
 @endsection
