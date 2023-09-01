@@ -199,8 +199,8 @@
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. T.</td>
                                             <td>
-                                                <select class="form-control id_dosimetro_ControlToraxUnico"  name="id_dosimetro_ControlToraxUnico" id="id_dosimetro_ControlToraxUnico" autofocus aria-label="Floating label select example" @if(count($dosimControlTransT) != 0) { disabled } @endif>
-                                                    <option value="@if(count($dosimControlTransT) != 0) {{$dosimControlTransT[0]->dosimetro_id}} @endif"> @if(count($dosimControlTransT) != 0) {{$dosimControlTransT[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                <select class="form-control id_dosimetro_ControlToraxUnico"  name="id_dosimetro_ControlToraxUnico" id="id_dosimetro_ControlToraxUnico" autofocus aria-label="Floating label select example" @if(!isset($dosimControlTransT[0])) @else{ disabled } @endif>
+                                                    <option @if(!isset($dosimControlTransT[0])) value="" @else value="{{$dosimControlTransT[0]->dosimetro_id}}" @endif>@if(!isset($dosimControlTransT[0])) ---- @else  {{$dosimControlTransT[0]->dosimetro->codigo_dosimeter}} @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
                                                     @endforeach
@@ -214,16 +214,16 @@
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. C.</td>
                                             <td>
-                                                <select class="form-select id_dosimetro_ControlCristalinoUnico"  name="id_dosimetro_ControlCristalinoUnico" id="id_dosimetro_ControlCristalinoUnico" autofocus aria-label="Floating label select example" @if(count($dosimControlTransC) != 0) { disabled } @endif>
-                                                    <option value="@if(count($dosimControlTransC) != 0) {{$dosimControlTransC[0]->dosimetro_id}} @endif">@if(count($dosimControlTransC) != 0) {{$dosimControlTransC[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                <select class="form-select id_dosimetro_ControlCristalinoUnico"  name="id_dosimetro_ControlCristalinoUnico" id="id_dosimetro_ControlCristalinoUnico" autofocus aria-label="Floating label select example" @if(!isset($dosimControlTransC[0])) @else{ disabled } @endif>
+                                                    <option @if(!isset($dosimControlTransC[0])) value="" @else value="{{$dosimControlTransC[0]->dosimetro_id}}" @endif>@if(!isset($dosimControlTransC[0])) ---- @else  {{$dosimControlTransC[0]->dosimetro->codigo_dosimeter}} @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
                                                         <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select"  name="id_holder_ControlCristalinoUnico" id="id_holder_ControlCristalinoUnico" autofocus aria-label="Floating label select example" @if(count($dosimControlTransC) != 0) { disabled } @endif>
-                                                    <option value="@if(count($dosimControlTransC) != 0){{$dosimControlTransC[0]->holder_id}}@endif">@if(count($dosimControlTransC) != 0) {{$dosimControlTransC[0]->holder->codigo_holder}}@else ---- @endif</option>
+                                                <select class="form-select"  name="id_holder_ControlCristalinoUnico" id="id_holder_ControlCristalinoUnico" autofocus aria-label="Floating label select example" @if(!isset($dosimControlTransC[0])) @else{ disabled } @endif>
+                                                    <option @if(!isset($dosimControlTransC[0])) value="" @else value="{{$dosimControlTransC[0]->holder_id}}" @endif >@if(!isset($dosimControlTransC[0])) ---- @else {{$dosimControlTransC[0]->holder->codigo_holder}}@endif</option>
                                                     @foreach($holderLibresCristalino as $holibcris)
                                                         <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
                                                     @endforeach
@@ -236,16 +236,16 @@
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. A.</td>
                                             <td>
-                                                <select class="form-select id_dosimetro_ControlDedoUnico"  name="id_dosimetro_ControlDedoUnico" id="id_dosimetro_ControlDedoUnico" @if(count($dosimControlTransA)) { disabled } @endif>
-                                                    <option value="@if(count($dosimControlTransA) != 0) {{$dosimControlTransA[0]->dosimetro_id}} @endif"> @if(count($dosimControlTransA) != 0) {{$dosimControlTransA[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                <select class="form-select id_dosimetro_ControlDedoUnico"  name="id_dosimetro_ControlDedoUnico" id="id_dosimetro_ControlDedoUnico" @if(!isset($dosimControlTransA[0])) @else{ disabled } @endif>
+                                                    <option @if(!isset($dosimControlTransA[0])) value="" @else value="{{$dosimControlTransA[0]->dosimetro_id}}" @endif> @if(!isset($dosimControlTransA[0])) ---- @else  {{$dosimControlTransA[0]->dosimetro->codigo_dosimeter}} @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
                                                         <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="form-select id_holder_ControlDedoUnico"  name="id_holder_ControlDedoUnico" id="id_holder_ControlDedoUnico" @if(count($dosimControlTransA) != 0) { disabled } @endif>
-                                                    <option value="@if(count($dosimControlTransA) != 0){{$dosimControlTransA[0]->holder_id}}@endif">@if(count($dosimControlTransA)!= 0){{$dosimControlTransA[0]->holder->codigo_holder}}@else ---- @endif</option>
+                                                <select class="form-select id_holder_ControlDedoUnico"  name="id_holder_ControlDedoUnico" id="id_holder_ControlDedoUnico" @if(!isset($dosimControlTransA[0])) @else{ disabled } @endif>
+                                                    <option @if(!isset($dosimControlTransA[0])) value="" @else value="{{$dosimControlTransA[0]->holder_id}}" @endif> @if(!isset($dosimControlTransA[0])) ---- @else  {{$dosimControlTransA[0]->holder->codigo_holder}} @endif</option>
                                                     @foreach($holderLibresAnillo as $holibanillo)
                                                         <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
                                                     @endforeach

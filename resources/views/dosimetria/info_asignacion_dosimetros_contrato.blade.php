@@ -1403,7 +1403,7 @@
                         {{-- ///////ASIGNACIONES CRISTALINO CON DOSIMETROS DE CONTROL UNICO POR CONTRATO//////// --}} 
                         @foreach($dosicontrolUnicoCristasig as $dosicontUniCrist)
                             <tr id="C{{$dosicontUniCrist->id_dosicontrolcontdosisedes}}">
-                                <td class='align-middle'> <b>CONTROL CRISTALINO</b> </td>
+                                <td class='align-middle'> <b>CONTROL TRANS. C.</b> </td>
                                 {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
                                 <td class='align-middle text-center'><b>{{$dosicontUniCrist->dosimetro->codigo_dosimeter}}</b></td>
                                 <td class='align-middle text-center'><b>{{$dosicontUniCrist->holder->codigo_holder}}</b></td>
@@ -1924,7 +1924,7 @@
                         {{-- ///////ASIGNACIONES ANILLO CON DOSIMETROS DE CONTROL UNICO POR CONTRATO//////// --}} 
                         @foreach($dosicontrolUnicoAnilloasig as $dosicontUniDedo)
                             <tr id="C{{$dosicontUniDedo->id_dosicontrolcontdosisedes}}">
-                                <td class='align-middle'><b>CONTROL ANILLO</b></td>
+                                <td class='align-middle'><b>CONTROL TRANS. A.</b></td>
                                 {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
                                 <td class='align-middle text-center'><b>{{$dosicontUniDedo->dosimetro->codigo_dosimeter}}</b></td>
                                 <td class='align-middle text-center'><b>{{$dosicontUniDedo->holder->codigo_holder}}</b></td>

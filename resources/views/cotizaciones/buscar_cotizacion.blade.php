@@ -17,7 +17,7 @@
     <div class="col-md-11">
         <h2 class="text-center">TODAS LAS COTIZACIONES</h2>
         <br>
-        <table class="table table-responsive hover table-bordered" id="cotizaciones">
+        <table class="table table-responsive hover table-bordered" id="cotizaciones" data-order='[[ 0, "desc" ]]' data-page-length='25'>
             <thead class="table-active align-middle">
                 <th class="text-center">No. COTIZACIÓN</th>
                 <th class="text-center" style='width: 13%'>EMPRESA</th>
@@ -25,7 +25,7 @@
                 <th class="text-center" style='width: 10%'>FECHA EMISIÓN</th>
                 <th class="text-center" style='width: 10%'>FECHA VENCIMI.</th>
                 <th class="text-center">PERIODO LECTURA</th>
-                <th class="text-center">No. LECTURAS</th>
+                <th class="text-center">No. LECT.</th>
                 <th class="text-center" style='width: 12%'>VALOR TOTAL SD PERIODO</th>
                 <th class="text-center" style='width: 12%'>VALOR TOTAL PERIODO</th>
                 <th class="text-center" style='width: 22%'>ACCIONES</th>
@@ -139,7 +139,29 @@ crossorigin="anonymous">
                     this.submit();
                 }
             })
-        })
+        });
+        $('#cotizaciones').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "NO HAY REGISTROS",
+                "info": "MOSTRANDO REGISTROS DEL  _START_ AL _END_ DE UN TOTAL DE  _TOTAL_ REGISTROS",
+                "infoEmpty": "MOSTRANDO 0 DE 0 REGISTROS",
+                "infoFiltered": "(FILTRADO DE UN TOTAL DE _MAX_ REGISTROS)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "MOSTRAR _MENU_ REGISTROS",
+                "loadingRecords": "CARGANDO...",
+                "processing": "PROCESANDO...",
+                "search": "BUSCAR:",
+                "zeroRecords": "NO SE ENCONTRARON RESULTADOS",
+                "paginate": {
+                    "first": "PRIMERO",
+                    "last": "ÚLTIMO",
+                    "next": "SIGUIENTE",
+                    "previous": "ANTERIOR"
+                }   
+            },
+        });
     })
 </script>
 @endsection

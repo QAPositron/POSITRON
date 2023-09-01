@@ -273,7 +273,7 @@
                                                 </div>
                                                 
                                             @elseif($i != 1 && $mesTotalAreasignados[$i]>0)
-                                                {{-- ZZ mesTotal{{$i}} > 0 & i != 1 --}}
+                                                 {{-- ZZ mesTotal{{$i}} > 0 & i != 1  --}}
                                                 <div class="col-md text-center">
                                                     @php 
                                                         $totalA1 = count($mesesAssigArea[$i]);
@@ -433,7 +433,7 @@
                                                     @endif
                                                 </div>
                                             @elseif($i == 1 && $mesTotalAreasignados[$i]<=0)
-                                                {{-- ZZmesTotal{{$i}} < 0 & i=1 --}}
+                                                {{-- ZZmesTotal{{$i}} < 0 & i=1  --}}
                                                 
                                                 <div class="col-md text-center">
                                                     <a  href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i ])}}" class="btn btn-sm colorQA">
@@ -483,7 +483,7 @@
                                                     </a>
                                                 </div>
                                             @elseif($i != 1 && $mesTotalAreasignados[$i]<=0)
-                                                {{-- ZZmesTotal{{$i}} < 0 & i !=1 --}}
+                                                {{-- ZZmesTotal{{$i}} < 0 & i !=1  --}}
                                                 <div class="col-md text-center">
                                                     @if($dosisededeptocontra->mes_actual+1 == ($i) && count($mesesAssigArea[1]) != 0)
                                                         <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" class="btn colorQA btn-sm">
@@ -543,7 +543,7 @@
                                         @else
                                            {{--  ///////////// SI EXISTEN TRABAJADORES Y AREAS ASIGNADOS A UN DEPTO ////////////////// --}}
                                             @if($i == 1 && $mesTotalTrabjasignados[$i]>0)
-                                                {{-- XXmesTotal {{$i}} > 0 & i=1 --}}
+                                               {{--  XXmesTotal {{$i}} > 0 & i=1  --}}
                                                 <div class="col-md text-center">
                                                     <a onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" class="btn  btn-sm aling-middle">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -686,7 +686,7 @@
                                                     @endif
                                                 </div> 
                                             @elseif($i != 1 && $mesTotalTrabjasignados[$i]>0)
-                                                {{-- XXmesTotal{{$i}} > 0 & i != 1 --}}
+                                                {{--  XXmesTotal{{$i}} > 0 & i != 1  --}}
                                                 
                                                 <div class="col-md text-center">
                                                     @php 
@@ -847,7 +847,7 @@
                                                     @endif
                                                 </div>
                                             @elseif($i == 1 && $mesTotalTrabjasignados[$i]<=0)
-                                                {{-- XXmesTotal{{$i}} < 0 &  i = 1  --}}
+                                                  {{-- XXmesTotal{{$i}} < 0 &  i = 1  --}}  
                                                 <div class="col-md text-center">
                                                     <a  href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i ])}}" class="btn btn-sm colorQA">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -896,7 +896,7 @@
                                                     </a>
                                                 </div>
                                             @elseif($i != 1 && $mesTotalTrabjasignados[$i]<=0)
-                                                {{-- XXmesTotal{{$i}} < 0 & i !=1 --}}
+                                                {{--  XXmesTotal{{$i}} < 0 & i !=1   --}}
                                                 <div class="col-md text-center">
                                                     @if($dosisededeptocontra->mes_actual+1 == ($i) && count($mesesAssigTrabj[1]) != 0)
                                                         <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" class="btn colorQA btn-sm">

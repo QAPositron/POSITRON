@@ -5,8 +5,12 @@
     <div class="col-md"></div>
     <div class="col-md-15">
         <div class="card text-dark bg-light">
-            <h2 class="modal-title w-100 text-center">ASIGNACIÓN DE DOSÍMETROS DESPUÉS DE NOVEDAD</h2>
-            <h3 class="modal-title w-100 text-center" id="nueva_empresaModalLabel"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ), ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} </h3>
+            <br>
+            <h2 class="text-center">ASIGNACIÓN DOSÍMETROS</h2>
+            <h3 class="text-center" id="nueva_empresaModalLabel"> <br><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
+                ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} <br>
+                PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ) 
+            </h3>
             <form action="{{route('asignadosicontratomnNovedad.save', ['asigdosicont'=> $contdosisededepto->id_contdosisededepto, 'mesnumber'=>$mesnumber])}}" method="POST"  id="form-nueva-asignacion_mn" name="form-nueva-asignacion_mn" class="form-nueva-asignacion_mn m-4">
                 @csrf
                 <br>
@@ -23,12 +27,14 @@
                                         <th class="align-middle">TÓRAX</th>
                                         <th class="align-middle">CRISTALINO</th>
                                         <th class="align-middle">ANILLO</th>
-                                        <th class="align-middle">MUÑECA</th>
+                                        {{-- <th class="align-middle">MUÑECA</th> --}}
                                         <th class="align-middle">ÁREA</th>
                                         <th class="align-middle">CASO</th>
-                                        <th class="align-middle">CONTROL TÓRAX</th>
-                                        <th class="align-middle">CONTROL CRISTALINO</th>
-                                        <th class="align-middle">CONTROL ANILLO</th>
+                                        @if($mescontdosisededepto->controlTransT_unicoCont != 'TRUE' && $mescontdosisededepto->controlTransC_unicoCont != 'TRUE' && $mescontdosisededepto->controlTransA_unicoCont != 'TRUE')
+                                            <th class="align-middle">CONTROL TÓRAX</th>
+                                            <th class="align-middle">CONTROL CRISTALINO</th>
+                                            <th class="align-middle">CONTROL ANILLO</th>
+                                        @endif
                                         <th class="align-middle">TOTAL</th>
                                     </tr>
                                 </thead>
@@ -37,14 +43,39 @@
                                         <td class="text-center">{{$mescontdosisededepto->dosi_torax}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_cristalino}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td>
+                                        {{-- <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td> --}}
                                         <td class="text-center">{{$mescontdosisededepto->dosi_area}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_caso}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
+                                        @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransC_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_dedo + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_caso}}</td>
+                                        @else
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_control_cristalino}}</td>
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_control_dedo}}</td>
+                                            <td class="text-center">{{$mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_dedo + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_caso + $mescontdosisededepto->dosi_control_torax + $mescontdosisededepto->dosi_control_cristalino + $mescontdosisededepto->dosi_control_dedo}}</td>
+                                        @endif
+                                        {{-- <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
                                         <td class="text-center">{{$mescontdosisededepto->dosi_control_cristalino}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_dedo}}</td>
+                                        <td class="text-center">{{$mescontdosisededepto->dosi_control_dedo}}</td> --}}
                                     </tr>
                                 </tbody>
+                                @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransC_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                <tfoot>
+                                    <tr class="text-center table-active">
+                                        <th colspan='9'>DOSÍMETROS DE CONTROL TRANSPORTE</th>
+                                    </tr>
+                                    <tr class="text-center table-active">
+                                        <th  colspan='2' class="align-middle">TÓRAX</th>
+                                        <th  colspan='2' class="align-middle">CRISTALINO</th>
+                                        <th  colspan='2' class="align-middle">ANILLO</th>
+                                    </tr>
+                                    <tr class="text-center bg-light">
+                                        <td  colspan='2' >{{$mescontdosisededepto->controlTransT_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                        <td  colspan='2' >{{$mescontdosisededepto->controlTransC_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                        <td  colspan='2' >{{$mescontdosisededepto->controlTransA_unicoCont == 'TRUE' ? 1 : 0}}</td>   
+                                    </tr>
+                                </tfoot>
+                            @endif
                             </table>
                             
                         </div>
@@ -55,19 +86,26 @@
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->primer_dia_uso}}" @break @endforeach>
+                            <input type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" 
+                            @if(!empty($asignacionesMes))
+                                @foreach($asignacionesMes as $asigMes) value="{{$asigMes->primer_dia_uso}}" @break @endforeach
+                            @else
+                                @foreach($asignacionesAreaMes as $asigMes) value="{{$asigMes->primer_dia_uso}}" @break @endforeach
+                            @endif>
                             <label for="floatingInputGrid">PRIMER DÍA</label>
                         </div>
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="date" class="form-control " name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->ultimo_dia_uso}}" @break @endforeach>
+                            <input type="date" class="form-control " name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" 
+                            @if(!empty($asignacionesMes))
+                                @foreach($asignacionesMes as $asigMes) value="{{$asigMes->ultimo_dia_uso}}" @break @endforeach
+                            @else
+                                @foreach($asignacionesAreaMes as $asigMes) value="{{$asigMes->ultimo_dia_uso}}" @break @endforeach
+                            @endif>
                             <label for="floatingInputGrid">ULTIMO DÍA:</label>
                         </div>
                     </div>
-                </div> 
-                <br>   
-                <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
                             <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->fecha_dosim_enviado}}" @break @endforeach>
@@ -75,20 +113,8 @@
                             
                         </div>
                     </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->fecha_dosim_recibido}}" @break @endforeach>
-                            <label for="floatingInputGrid">FECHA RECIBIDO</label>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" @foreach($asignacionesMes as $asigMes) value="{{$asigMes->fecha_dosim_devuelto}}" @break @endforeach>
-                            <label for="floatingInputGrid">FECHA DEVUELTO</label>
-                        </div>
-                    </div>
                 </div> 
-                <br>
+                <br>   
                 <div class="row g-2 mx-3">
                     <div class="col-md">
                         <div class="form-floating">
@@ -104,7 +130,7 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <input type="text" class="form-control" name="ocupacion_asigdosim" id="ocupacion_asigdosim" value="{{$contdosisededepto->ocupacion}}" readonly>
+                            <input type="text" class="form-control" name="ocupacion_asigdosim" id="ocupacion_asigdosim" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}" readonly>
                             <label for="floatingInputGrid">OCUPACIÓN:</label>
                         </div>
                     </div>
@@ -119,97 +145,144 @@
                                     <th style='width: 16.40%'>UBICACIÓN</th>
                                     <th style='width: 16.40%'>DOSÍMETRO</th>
                                     <th style='width: 16.40%'>HOLDER</th>
-                                    <th style='width: 20.60%'>OCUPACIÓN</th>
                                 </thead>
                                 <tbody>
                                     <input hidden name="mesNumber" id="mesNumber" value="{{$mesnumber}}">
                                     <input type="number" name="id_departamento_asigdosim" id="id_departamento_asigdosim" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                     <input type="number" name="id_contrato_asigdosim_sede" id="id_contrato_asigdosim_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">
+                                    <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria}}">
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo CONTROL asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS(este se convierte en actual)/////// --}}
-
-                                    @foreach($dosicontrolmesact as $dosicontrolact)
+                                    @foreach($dosicontrolToraxmesact as $dosicontrolTact)
                                         <tr>
-                                            <input type="number" name="id_dosicontrolAsig[]" id="id_dosicontrolAsig" value="{{$dosicontrolact->id_dosicontrolcontdosisedes}}" hidden >
-                                            <td colspan='2' class='align-middle text-center'>CONTROL</td>
+                                            <input type="number" name="id_asigdosimControlTorax[]" id="id_asigdosimControlTorax" value="{{$dosicontrolTact->id_dosicontrolcontdosisedes}}" hidden >
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
                                             <td class='align-middle'>
-                                                <select class="form-select id_dosimetro_asigdosimControl"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" >
-                                                    <option value="@if($dosicontrolact->dosimetro_id != NULL){{$dosicontrolact->dosimetro_id}}@endif">@if($dosicontrolact->dosimetro_id == NULL) -- @else --{{$dosicontrolact->dosimetro->codigo_dosimeter}}-- @endif</option>
+                                                <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" >
+                                                    <option value="@if($dosicontrolTact->dosimetro_id != NULL){{$dosicontrolTact->dosimetro_id}}@endif">@if($dosicontrolTact->dosimetro_id == NULL) -- @else --{{$dosicontrolTact->dosimetro->codigo_dosimeter}}-- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
-                                            <td>
-                                                <select class="form-select ocupacion_asigdosimControl" name="ocupacion_asigdosimControl[]" id="ocupacion_asigdosimControl" style="text-transform:uppercase" >
-                                                    {{-- <option value="{{$dosicontrolact->dosimetro_id}}"> {{$dosicontrolact->dosimetro->codigo_dosimeter}}</option> --}}
-                                                    @if($dosicontrolact->ocupacion != NULL)    
-                                                        @if($dosicontrolact->ocupacion=='T')
-                                                            <option selected hidden value="T">--TELETERAPIA--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">--BRAQUITERAPIA--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='MN')
-                                                            <option selected hidden value="MN">--MEDICINA NUCLEAR--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='GM')
-                                                            <option selected hidden value="GM">--GAMAGRAFIA INDUSTRIAL--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='MF')
-                                                            <option selected hidden value="MF">--MEDIDORES FIJOS--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='IV')
-                                                            <option selected hidden value="IV">--INVESTIGACIÓN--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='DN')
-                                                            <option selected hidden value="DN">--DENSÍMETRO NUCLEAR--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='MM')
-                                                            <option selected hidden value="MM">--MEDIDORES MÓVILES--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='E')
-                                                            <option selected hidden value="E">--DOCENCIA--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='PR')
-                                                            <option selected hidden value="PR">--PERFILAJE Y REGISTRO--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='TR')
-                                                            <option selected hidden value="TR">--TRAZADORES--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='HD')
-                                                            <option selected hidden value="HD">--HEMODINAMIA--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='OD')
-                                                            <option selected hidden value="OD">--RAYOS X ODONTOLÓGICO--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='RX')
-                                                            <option selected hidden value="RX">--RADIODIAGNÓSTICO--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='FL')
-                                                            <option selected hidden value="FL">--FLUOROSCOPÍA--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='AM')
-                                                            <option selected hidden value="AM">--APLICACIONES MÉDICAS--</option>
-                                                            @elseif($dosicontrolact->ocupacion=='AI')
-                                                            <option selected hidden value="AI">--APLICACIONES INDUSTRIALES--</option>
-                                                        @endif
-                                                    @else  
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    @endif
+                                        </tr>
+                                    @endforeach
+                                    @foreach($dosicontrolCristalinomesact as $dosicontrolCact)
+                                        <tr>
+                                            <input type="number" name="id_asigdosimControlCristalino[]" id="id_asigdosimControlCristalino" value="{{$dosicontrolCact->id_dosicontrolcontdosisedes}}" hidden >
+                                            <td colspan='2' class='align-middle text-center'>CONTROL CRISTALINO</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_asigdosimControlCristalino"  name="id_dosimetro_asigdosimControlCristalino[]" id="id_dosimetro_asigdosimControlCristalino" >
+                                                    <option value="@if($dosicontrolCact->dosimetro_id != NULL){{$dosicontrolCact->dosimetro_id}}@endif">@if($dosicontrolCact->dosimetro_id == NULL) -- @else --{{$dosicontrolCact->dosimetro->codigo_dosimeter}}-- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiEzlib)
+                                                        <option value="{{$dosiEzlib->id_dosimetro}}">{{$dosiEzlib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_holder_asigdosimControlCristalino"  name="id_holder_asigdosimControlCristalino[]" id="id_holder_asigdosimControlCristalino" >
+                                                    <option value="@if($dosicontrolCact->holder_id != NULL){{$dosicontrolCact->holder_id}}@endif">@if($dosicontrolCact->holder_id == NULL) -- @else --{{$dosicontrolCact->holder->codigo_holder}}-- @endif</option>
+                                                    @foreach($holderLibresCristalino as $holLibC)
+                                                        <option value="{{$holLibC->id_holder}}">{{$holLibC->codigo_holder}}</option>
+                                                    @endforeach
                                                 </select>
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @foreach($dosicontrolDedomesact as $dosicontrolAact)
+                                        <tr>
+                                            <input type="number" name="id_asigdosimControlDedo[]" id="id_asigdosimControlDedo" value="{{$dosicontrolAact->id_dosicontrolcontdosisedes}}" hidden >
+                                            <td colspan='2' class='align-middle text-center'>CONTROL ANILLO</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_asigdosimControlDedo"  name="id_dosimetro_asigdosimControlDedo[]" id="id_dosimetro_asigdosimControlDedo" >
+                                                    <option value="@if($dosicontrolAact->dosimetro_id != NULL){{$dosicontrolAact->dosimetro_id}}@endif">@if($dosicontrolAact->dosimetro_id == NULL) -- @else --{{$dosicontrolAact->dosimetro->codigo_dosimeter}}-- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiEzlib)
+                                                        <option value="{{$dosiEzlib->id_dosimetro}}">{{$dosiEzlib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_holder_asigdosimControlDedo"  name="id_holder_asigdosimControlDedo[]" id="id_holder_asigdosimControlDedo" >
+                                                    <option value="@if($dosicontrolAact->holder_id != NULL){{$dosicontrolAact->holder_id}}@endif">@if($dosicontrolAact->holder_id == NULL) -- @else --{{$dosicontrolAact->holder->codigo_holder}}-- @endif</option>
+                                                    @foreach($holderLibresAnillo as $holLibA)
+                                                        <option value="{{$holLibA->id_holder}}">{{$holLibA->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE')
+                                        @foreach($dosicontrolToraxUnicomesact as $dosicontrolUnicoT)
+                                            <tr>
+                                                <input type="number" name="id_asigdosimControlUnicoT[]" id="id_asigdosimControlUnicoT" value="{{$dosicontrolUnicoT->id_dosicontrolcontdosisedes}}" hidden >
+                                                <td colspan='2' class='align-middle text-center'>CONTROL TRANS. T.</td>
+                                                <td class='align-middle'>
+                                                    <select class="form-select id_dosimetro_ControlToraxUnico"  name="id_dosimetro_ControlToraxUnico" id="id_dosimetro_ControlToraxUnico">
+                                                        <option value="@if($dosicontrolUnicoT->dosimetro_id != NULL){{$dosicontrolUnicoT->dosimetro_id}}@endif">@if($dosicontrolUnicoT->dosimetro_id == NULL) -- @else --{{$dosicontrolUnicoT->dosimetro->codigo_dosimeter}}-- @endif</option>
+                                                        @foreach($dosimLibresGeneral as $dosigenlib)
+                                                            <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle text-center'>N.A.</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                    @if($mescontdosisededepto->controlTransC_unicoCont == 'TRUE')
+                                        @foreach($dosicontrolCristalinoUnicomesact as $dosicontrolUnicoC)
+                                            <tr>
+                                                <input type="number" name="id_asigdosimControlUnicoC[]" id="id_asigdosimControlUnicoC" value="{{$dosicontrolUnicoC->id_dosicontrolcontdosisedes}}" hidden >
+                                                <td colspan='2' class='align-middle text-center'>CONTROL TRANS. C.</td>
+                                                <td class='align-middle'>
+                                                    <select class="form-select id_dosimetro_ControlCristalinoUnico"  name="id_dosimetro_ControlCristalinoUnico" id="id_dosimetro_ControlCristalinoUnico">
+                                                        <option value="@if($dosicontrolUnicoC->dosimetro_id != NULL){{$dosicontrolUnicoC->dosimetro_id}}@endif">@if($dosicontrolUnicoC->dosimetro_id == NULL) -- @else --{{$dosicontrolUnicoC->dosimetro->codigo_dosimeter}}-- @endif</option>
+                                                        @foreach($dosimLibresEzclip as $dosiEzlib)
+                                                            <option value="{{$dosiEzlib->id_dosimetro}}">{{$dosiEzlib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle'>
+                                                    <select class="form-select id_holder_ControlCristalinoUnico"  name="id_holder_ControlCristalinoUnico[]" id="id_holder_ControlCristalinoUnico">
+                                                        <option value="@if($dosicontrolUnicoC->holder_id != NULL){{$dosicontrolUnicoC->holder_id}}@endif">@if($dosicontrolUnicoC->holder_id == NULL) -- @else --{{$dosicontrolUnicoC->holder->codigo_holder}}-- @endif</option>
+                                                        @foreach($holderLibresAnillo as $holLibA)
+                                                            <option value="{{$holLibA->id_holder}}">{{$holLibA->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                    @if($mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                        @foreach($dosicontrolDedoUnicomesact as $dosicontrolUnicoA)
+                                            <tr>
+                                                <input type="number" name="id_asigdosimControlUnicoA[]" id="id_asigdosimControlUnicoA" value="{{$dosicontrolUnicoA->id_dosicontrolcontdosisedes}}" hidden >
+                                                <td colspan='2' class='align-middle text-center'>CONTROL TRANS. A.</td>
+                                                <td class='align-middle'>
+                                                    <select class="form-select id_dosimetro_ControlDedoUnico"  name="id_dosimetro_ControlDedoUnico" id="id_dosimetro_ControlDedoUnico">
+                                                        <option value="@if($dosicontrolUnicoA->dosimetro_id != NULL){{$dosicontrolUnicoA->dosimetro_id}}@endif">@if($dosicontrolUnicoA->dosimetro_id == NULL) -- @else --{{$dosicontrolUnicoA->dosimetro->codigo_dosimeter}}-- @endif</option>
+                                                        @foreach($dosimLibresEzclip as $dosiEzlib)
+                                                            <option value="{{$dosiEzlib->id_dosimetro}}">{{$dosiEzlib->codigo_dosimeter}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class='align-middle'>
+                                                    <select class="form-select id_holder_ControlDedoUnico"  name="id_holder_ControlDedoUnico[]" id="id_holder_ControlDedoUnico">
+                                                        <option value="@if($dosicontrolUnicoA->holder_id != NULL){{$dosicontrolUnicoA->holder_id}}@endif">@if($dosicontrolUnicoA->holder_id == NULL) -- @else --{{$dosicontrolUnicoA->holder->codigo_holder}}-- @endif</option>
+                                                        @foreach($holderLibresAnillo as $holLibA)
+                                                            <option value="{{$holLibA->id_holder}}">{{$holLibA->codigo_holder}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo AREA asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
                                     @foreach($dosiareamesact as $dosiareact)
                                         <tr>
                                             <td class='align-middle text-center'>
                                                 <input type="number" name="id_dosiareaAsig[]" id="id_dosiareaAsig" value="{{$dosiareact->id_dosiareacontdosisedes}}" hidden >
                                                 <select class="form-select id_area_asigdosimArea"  name="id_area_asigdosimArea[]" id="id_area_asigdosimArea{{$dosiareact->areadepartamentosede_id}}" disabled>
-                                                    <option value="{{$dosiareact->areadepartamentosede_id}}">--{{$dosiareact->areadepartamentosede->nombre_area}}--</option>
+                                                    <option value="{{$dosiareact->areadepartamentosede_id}}">{{$dosiareact->areadepartamentosede->nombre_area}}</option>
                                                     @foreach($areaSede as $area)
                                                         @if($area->id_areadepartamentosede != $dosiareact->areadepartamentosede_id)
                                                             <option  value ="{{$area->id_areadepartamentosede}}">{{$area->nombre_area}}</option>
@@ -221,72 +294,12 @@
                                             <td>
                                                 <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea">
                                                     <option value="@if($dosiareact->dosimetro_id != NULL){{$dosiareact->dosimetro_id}}@endif">@if($dosiareact->dosimetro_id == NULL)-- @else--{{$dosiareact->dosimetro->codigo_dosimeter}}--@endif</option>
-                                                    @foreach($dosimLibresAmbiental as $dosiamblib)
-                                                        <option value="{{$dosiamblib->id_dosimetro}}">{{$dosiamblib->codigo_dosimeter}}</option>
+                                                    @foreach($dosimLibresGeneral as $dosigenlib)
+                                                        <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A</td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select" name="ocupacion_asigdosimArea[]" id="ocupacion_asigdosimArea" style="text-transform:uppercase" @if($dosiareant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    @if($dosiareact->ocupacion != NULL)    
-                                                        @if($dosiareact->ocupacion=='T')
-                                                            <option selected hidden value="T">--TELETERAPIA--</option>
-                                                            @elseif($dosiareact->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">--BRAQUITERAPIA--</option>
-                                                            @elseif($dosiareact->ocupacion=='MN')
-                                                            <option selected hidden value="MN">--MEDICINA NUCLEAR--</option>
-                                                            @elseif($dosiareact->ocupacion=='GM')
-                                                            <option selected hidden value="GM">--GAMAGRAFIA INDUSTRIAL--</option>
-                                                            @elseif($dosiareact->ocupacion=='MF')
-                                                            <option selected hidden value="MF">--MEDIDORES FIJOS--</option>
-                                                            @elseif($dosiareact->ocupacion=='IV')
-                                                            <option selected hidden value="IV">--INVESTIGACIÓN--</option>
-                                                            @elseif($dosiareact->ocupacion=='DN')
-                                                            <option selected hidden value="DN">--DENSÍMETRO NUCLEAR--</option>
-                                                            @elseif($dosiareact->ocupacion=='MM')
-                                                            <option selected hidden value="MM"-->MEDIDORES MÓVILES--</option>
-                                                            @elseif($dosiareact->ocupacion=='E')
-                                                            <option selected hidden value="E">--DOCENCIA--</option>
-                                                            @elseif($dosiareact->ocupacion=='PR')
-                                                            <option selected hidden value="PR">--PERFILAJE Y REGISTRO--</option>
-                                                            @elseif($dosiareact->ocupacion=='TR')
-                                                            <option selected hidden value="TR">--TRAZADORES--</option>
-                                                            @elseif($dosiareact->ocupacion=='HD')
-                                                            <option selected hidden value="HD">--HEMODINAMIA--</option>
-                                                            @elseif($dosiareact->ocupacion=='OD')
-                                                            <option selected hidden value="OD">--RAYOS X ODONTOLÓGICO--</option>
-                                                            @elseif($dosiareact->ocupacion=='RX')
-                                                            <option selected hidden value="RX">--RADIODIAGNÓSTICO--</option>
-                                                            @elseif($dosiareact->ocupacion=='FL')
-                                                            <option selected hidden value="FL">--FLUOROSCOPÍA--</option>
-                                                            @elseif($dosiareact->ocupacion=='AM')
-                                                            <option selected hidden value="AM">--APLICACIONES MÉDICAS--</option>
-                                                            @elseif($dosiareact->ocupacion=='AI')
-                                                            <option selected hidden value="AI">--APLICACIONES INDUSTRIALES--</option>
-                                                        @endif
-                                                    @else
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    @endif
-                                                </select>
-                                            </td>
                                         </tr>
                                     @endforeach
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo CASO asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
@@ -309,66 +322,6 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A</td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select" name="ocupacion_asigdosimCaso[]" id="ocupacion_asigdosimCaso" style="text-transform:uppercase" >
-                                                    @if($dosicasoact->ocupacion != NULL)    
-                                                        @if($dosicasoact->ocupacion=='T')
-                                                            <option selected hidden value="T">--TELETERAPIA--</option>
-                                                            @elseif($dosicasoact->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">--BRAQUITERAPIA--</option>
-                                                            @elseif($dosicasoact->ocupacion=='MN')
-                                                            <option selected hidden value="MN">--MEDICINA NUCLEAR--</option>
-                                                            @elseif($dosicasoact->ocupacion=='GM')
-                                                            <option selected hidden value="GM">--GAMAGRAFIA INDUSTRIAL--</option>
-                                                            @elseif($dosicasoact->ocupacion=='MF')
-                                                            <option selected hidden value="MF">--MEDIDORES FIJOS--</option>
-                                                            @elseif($dosicasoact->ocupacion=='IV')
-                                                            <option selected hidden value="IV">--INVESTIGACIÓN--</option>
-                                                            @elseif($dosicasoact->ocupacion=='DN')
-                                                            <option selected hidden value="DN">--DENSÍMETRO NUCLEAR--</option>
-                                                            @elseif($dosicasoact->ocupacion=='MM')
-                                                            <option selected hidden value="MM">--MEDIDORES MÓVILES--</option>
-                                                            @elseif($dosicasoact->ocupacion=='E')
-                                                            <option selected hidden value="E">--DOCENCIA--</option>
-                                                            @elseif($dosicasoact->ocupacion=='PR')
-                                                            <option selected hidden value="PR">--PERFILAJE Y REGISTRO--</option>
-                                                            @elseif($dosicasoact->ocupacion=='TR')
-                                                            <option selected hidden value="TR">--TRAZADORES--</option>
-                                                            @elseif($dosicasoact->ocupacion=='HD')
-                                                            <option selected hidden value="HD">--HEMODINAMIA--</option>
-                                                            @elseif($dosicasoact->ocupacion=='OD')
-                                                            <option selected hidden value="OD">--RAYOS X ODONTOLÓGICO--</option>
-                                                            @elseif($dosicasoact->ocupacion=='RX')
-                                                            <option selected hidden value="RX">--RADIODIAGNÓSTICO--</option>
-                                                            @elseif($dosicasoact->ocupacion=='FL')
-                                                            <option selected hidden value="FL">--FLUOROSCOPÍA--</option>
-                                                            @elseif($dosicasoact->ocupacion=='AM')
-                                                            <option selected hidden value="AM">--APLICACIONES MÉDICAS--</option>
-                                                            @elseif($dosicasoact->ocupacion=='AI')
-                                                            <option selected hidden value="AI">--APLICACIONES INDUSTRIALES--</option>
-                                                        @endif
-                                                    @else
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    @endif
-                                                </select>
-                                            </td>
                                         </tr>   
                                     @endforeach
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo TORAX asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
@@ -391,67 +344,6 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>N.A</td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select" name="ocupacion_asigdosimTorax[]" id="ocupacion_asigdosimTorax" style="text-transform:uppercase">
-                                                    @if($dositoraxact->ocupacion != NULL)    
-                                                        @if($dositoraxact->ocupacion=='T')
-                                                            <option selected hidden value="T">--TELETERAPIA--</option>
-                                                            @elseif($dositoraxact->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ"-->BRAQUITERAPIA--</option>
-                                                            @elseif($dositoraxact->ocupacion=='MN')
-                                                            <option selected hidden value="MN">--MEDICINA NUCLEAR--</option>
-                                                            @elseif($dositoraxact->ocupacion=='GM')
-                                                            <option selected hidden value="GM">--GAMAGRAFIA INDUSTRIAL--</option>
-                                                            @elseif($dositoraxact->ocupacion=='MF')
-                                                            <option selected hidden value="MF">--MEDIDORES FIJOS--</option>
-                                                            @elseif($dositoraxact->ocupacion=='IV')
-                                                            <option selected hidden value="IV">--INVESTIGACIÓN--</option>
-                                                            @elseif($dositoraxact->ocupacion=='DN')
-                                                            <option selected hidden value="DN">--DENSÍMETRO NUCLEAR--</option>
-                                                            @elseif($dositoraxact->ocupacion=='MM')
-                                                            <option selected hidden value="MM">--MEDIDORES MÓVILES--</option>
-                                                            @elseif($dositoraxact->ocupacion=='E')
-                                                            <option selected hidden value="E">--DOCENCIA--</option>
-                                                            @elseif($dositoraxact->ocupacion=='PR')
-                                                            <option selected hidden value="PR">--PERFILAJE Y REGISTRO--</option>
-                                                            @elseif($dositoraxact->ocupacion=='TR')
-                                                            <option selected hidden value="TR">--TRAZADORES--</option>
-                                                            @elseif($dositoraxact->ocupacion=='HD')
-                                                            <option selected hidden value="HD">--HEMODINAMIA--</option>
-                                                            @elseif($dositoraxact->ocupacion=='OD')
-                                                            <option selected hidden value="OD">--RAYOS X ODONTOLÓGICO--</option>
-                                                            @elseif($dositoraxact->ocupacion=='RX')
-                                                            <option selected hidden value="RX">--RADIODIAGNÓSTICO--</option>
-                                                            @elseif($dositoraxact->ocupacion=='FL')
-                                                            <option selected hidden value="FL">--FLUOROSCOPÍA--</option>
-                                                            @elseif($dositoraxact->ocupacion=='AM')
-                                                            <option selected hidden value="AM">--APLICACIONES MÉDICAS--</option>
-                                                            @elseif($dositoraxact->ocupacion=='AI')
-                                                            <option selected hidden value="AI">--APLICACIONES INDUSTRIALES--</option>
-                                                        @endif
-                                                    @else
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    @endif
-                                                </select>
-                                            </td>
-                                           
                                         </tr>
                                     @endforeach
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo CRISTALINO asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
@@ -481,156 +373,9 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select" name="ocupacion_asigdosimCristalino[]" id="ocupacion_asigdosimCristalino">
-                                                    @if($dosicristalinoact->ocupacion != NULL)
-                                                        @if($dosicristalinoact->ocupacion=='T')
-                                                            <option selected hidden value="T">--TELETERAPIA--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">--BRAQUITERAPIA--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='MN')
-                                                            <option selected hidden value="MN">--MEDICINA NUCLEAR--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='GM')
-                                                            <option selected hidden value="GM">--GAMAGRAFIA INDUSTRIAL--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='MF')
-                                                            <option selected hidden value="MF">--MEDIDORES FIJOS--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='IV')
-                                                            <option selected hidden value="IV">--INVESTIGACIÓN--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='DN')
-                                                            <option selected hidden value="DN">--DENSÍMETRO NUCLEAR--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='MM')
-                                                            <option selected hidden value="MM">--MEDIDORES MÓVILES--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='E')
-                                                            <option selected hidden value="E">--DOCENCIA--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='PR')
-                                                            <option selected hidden value="PR">--PERFILAJE Y REGISTRO--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='TR')
-                                                            <option selected hidden value="TR">--TRAZADORES--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='HD')
-                                                            <option selected hidden value="HD">--HEMODINAMIA--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='OD')
-                                                            <option selected hidden value="OD">--RAYOS X ODONTOLÓGICO--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='RX')
-                                                            <option selected hidden value="RX">--RADIODIAGNÓSTICO--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='FL')
-                                                            <option selected hidden value="FL">--FLUOROSCOPÍA--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='AM')
-                                                            <option selected hidden value="AM">--APLICACIONES MÉDICAS--</option>
-                                                            @elseif($dosicristalinoact->ocupacion=='AI')
-                                                            <option selected hidden value="AI">--APLICACIONES INDUSTRIALES--</option>
-                                                        @endif
-                                                    @endif    
-                                                    <option value="">----</option>
-                                                    <option value="T"> TELETERAPIA</option>
-                                                    <option value="BQ">BRAQUITERAPIA</option>
-                                                    <option value="MN">MEDICINA NUCLEAR</option>
-                                                    <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                    <option value="MF">MEDIDORES FIJOS</option>
-                                                    <option value="IV">INVESTIGACIÓN</option>
-                                                    <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                    <option value="MM">MEDIDORES MÓVILES</option>
-                                                    <option value="E"> DOCENCIA</option>
-                                                    <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                    <option value="TR">TRAZADORES</option>
-                                                    <option value="HD">HEMODINAMIA</option>
-                                                    <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                    <option value="RX">RADIODIAGNÓSTICO</option>
-                                                    <option value="FL">FLUOROSCOPIA</option>
-                                                    <option value="AM">APLICACIONES MÉDICAS</option>
-                                                    <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                </select>
-                                            </td>
                                         </tr>
                                     @endforeach
-                                    {{--///Filas creadas segun la cantidad de dosimetros tipo MUÑECA asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
-                                    @foreach($dosimuñecamesact as $dosimuñecact)
-                                        <tr>
-                                            <td class='align-middle text-center'>
-                                                <input type="number" name="id_asigdosimMuneca[]" id="id_asigdosimMuneca" value="{{$dosimuñecact->id_trabajadordosimetro}}" hidden>
-                                                <select class="form-select"  name="id_trabajador_asigdosimMuneca[]" id="id_trabajador_asigdosimMuneca{{$dosimuñecact->persona_id}}" disabled>
-                                                    <option value="{{$dosimuñecact->persona_id}}"> {{$dosimuñecact->persona->primer_nombre_persona}} {{$dosimuñecact->persona->segundo_nombre_persona}} {{$dosimuñecact->persona->primer_apellido_persona}} {{$dosimuñecact->persona->segundo_apellido_persona}}</option>
-                                                    
-                                                </select>
-                                            </td>
-                                            <td class='align-middle text-center'>MUÑECA</td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select"  name="id_dosimetro_asigdosimMuneca[]" id="id_dosimetro_asigdosimMuneca">
-                                                    <option value="@if($dosimuñecact->dosimetro_id != NULL){{$dosimuñecact->dosimetro_id}}@endif">@if($dosimuñecact->dosimetro_id == NULL)--@else--{{$dosimuñecact->dosimetro->codigo_dosimeter}}--@endif</option>
-                                                    @foreach($dosimLibresEzclip as $dosiezcliplib)
-                                                        <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select"  name="id_holder_asigdosimMuneca[]" id="id_holder_asigdosimMuneca">
-                                                    <option value="@if($dosimuñecact->holder_id != NULL){{$dosimuñecact->holder_id}}@endif">@if($dosimuñecact->holder_id == NULL)--@else--{{$dosimuñecact->holder->codigo_holder}}--@endif</option>
-                                                    @foreach($holderLibresExtrem as $holibexm)
-                                                        <option value="{{$holibexm->id_holder}}">{{$holibexm->codigo_holder}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select" name="ocupacion_asigdosimMuneca[]" id="ocupacion_asigdosimMuneca"  style="text-transform:uppercase">
-                                                    @if($dosimuñecact->ocupacion != NULL)
-                                                        @if($dosimuñecact->ocupacion=='T')
-                                                            <option selected hidden value="T">--TELETERAPIA--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">--BRAQUITERAPIA--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='MN')
-                                                            <option selected hidden value="MN">--MEDICINA NUCLEAR--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='GM')
-                                                            <option selected hidden value="GM">--GAMAGRAFIA INDUSTRIAL--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='MF')
-                                                            <option selected hidden value="MF">--MEDIDORES FIJOS--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='IV')
-                                                            <option selected hidden value="IV">--INVESTIGACIÓN--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='DN')
-                                                            <option selected hidden value="DN">--DENSÍMETRO NUCLEAR--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='MM')
-                                                            <option selected hidden value="MM">--MEDIDORES MÓVILES--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='E')
-                                                            <option selected hidden value="E">--DOCENCIA--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='PR')
-                                                            <option selected hidden value="PR">--PERFILAJE Y REGISTRO--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='TR')
-                                                            <option selected hidden value="TR">--TRAZADORES--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='HD')
-                                                            <option selected hidden value="HD">--HEMODINAMIA--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='OD')
-                                                            <option selected hidden value="OD">--RAYOS X ODONTOLÓGICO--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='RX')
-                                                            <option selected hidden value="RX">--RADIODIAGNÓSTICO--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='FL')
-                                                            <option selected hidden value="FL">--FLUOROSCOPÍA--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='AM')
-                                                            <option selected hidden value="AM">--APLICACIONES MÉDICAS--</option>
-                                                            @elseif($dosimuñecact->ocupacion=='AI')
-                                                            <option selected hidden value="AI">--APLICACIONES INDUSTRIALES--</option>
-                                                        @endif
-                                                    @else
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    @endif
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo DEDO asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
                                     @foreach($dosidedomesact as $dosidedoact)
                                         <tr>
@@ -656,66 +401,6 @@
                                                     @foreach($holderLibresAnillo as $holibanillo)
                                                         <option value="{{$holibanillo->id_holder}}">{{$holibanillo->codigo_holder}}</option>
                                                     @endforeach
-                                                </select>
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select" name="ocupacion_asigdosimDedo[]" id="ocupacion_asigdosipDedo">
-                                                    @if($dosidedoact->ocupacion != NULL)
-                                                        @if($dosidedoact->ocupacion=='T')
-                                                            <option selected hidden value="T">--TELETERAPIA--</option>
-                                                            @elseif($dosidedoact->ocupacion=='BQ')
-                                                            <option selected hidden value="BQ">--BRAQUITERAPIA--</option>
-                                                            @elseif($dosidedoact->ocupacion=='MN')
-                                                            <option selected hidden value="MN">--MEDICINA NUCLEAR--</option>
-                                                            @elseif($dosidedoact->ocupacion=='GM')
-                                                            <option selected hidden value="GM">--GAMAGRAFIA INDUSTRIAL--</option>
-                                                            @elseif($dosidedoact->ocupacion=='MF')
-                                                            <option selected hidden value="MF">--MEDIDORES FIJOS--</option>
-                                                            @elseif($dosidedoact->ocupacion=='IV')
-                                                            <option selected hidden value="IV">--INVESTIGACIÓN--</option>
-                                                            @elseif($dosidedoact->ocupacion=='DN')
-                                                            <option selected hidden value="DN">--DENSÍMETRO NUCLEAR--</option>
-                                                            @elseif($dosidedoact->ocupacion=='MM')
-                                                            <option selected hidden value="MM">--MEDIDORES MÓVILES--</option>
-                                                            @elseif($dosidedoact->ocupacion=='E')
-                                                            <option selected hidden value="E">--DOCENCIA--</option>
-                                                            @elseif($dosidedoact->ocupacion=='PR')
-                                                            <option selected hidden value="PR">--PERFILAJE Y REGISTRO--</option>
-                                                            @elseif($dosidedoact->ocupacion=='TR')
-                                                            <option selected hidden value="TR">--TRAZADORES--</option>
-                                                            @elseif($dosidedoact->ocupacion=='HD')
-                                                            <option selected hidden value="HD">--HEMODINAMIA--</option>
-                                                            @elseif($dosidedoact->ocupacion=='OD')
-                                                            <option selected hidden value="OD">--RAYOS X ODONTOLÓGICO--</option>
-                                                            @elseif($dosidedoact->ocupacion=='RX')
-                                                            <option selected hidden value="RX">--RADIODIAGNÓSTICO--</option>
-                                                            @elseif($dosidedoact->ocupacion=='FL')
-                                                            <option selected hidden value="FL">--FLUOROSCOPÍA--</option>
-                                                            @elseif($dosidedoact->ocupacion=='AM')
-                                                            <option selected hidden value="AM">--APLICACIONES MÉDICAS--</option>
-                                                            @elseif($dosidedoact->ocupacion=='AI')
-                                                            <option selected hidden value="AI">--APLICACIONES INDUSTRIALES--</option>
-                                                        @endif
-                                                    @else
-                                                        <option value="">----</option>
-                                                        <option value="T"> TELETERAPIA</option>
-                                                        <option value="BQ">BRAQUITERAPIA</option>
-                                                        <option value="MN">MEDICINA NUCLEAR</option>
-                                                        <option value="GI">GAMMAGRAFÍA INDUSTRIAL</option>
-                                                        <option value="MF">MEDIDORES FIJOS</option>
-                                                        <option value="IV">INVESTIGACIÓN</option>
-                                                        <option value="DN">DENSÍMETRO NUCLEAR</option>
-                                                        <option value="MM">MEDIDORES MÓVILES</option>
-                                                        <option value="E"> DOCENCIA</option>
-                                                        <option value="PR">PERFILAJE Y REGISTRO</option>
-                                                        <option value="TR">TRAZADORES</option>
-                                                        <option value="HD">HEMODINAMIA</option>
-                                                        <option value="OD">RAYOS X ODONTOLÓGICO</option>
-                                                        <option value="RX">RADIODIAGNÓSTICO</option>
-                                                        <option value="FL">FLUOROSCOPIA</option>
-                                                        <option value="AM">APLICACIONES MÉDICAS</option>
-                                                        <option value="AI">APLICACIONES INDUSTRIALES</option>
-                                                    @endif
                                                 </select>
                                             </td>
                                         </tr>
@@ -773,19 +458,147 @@ crossorigin="anonymous">
 
 <script type="text/javascript">
     $(document).ready(function(){
-        // Creamos array con los meses del año
-        const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+         // Creamos array con los meses del año
+         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
         let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
-        
         console.log(fecha);
-        for($i=0; $i<=13; $i++){
-            var r = new Date(new Date(fecha).setMonth(fecha.getMonth()+$i));
-            var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
-            console.log(r + fechaesp + "ESTA ES LA I"+($i+1)); 
-            if("{{$mesnumber}}" == ($i+1)){
+        var numLec = '{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->numlecturas_año}}';
+        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
+            var xx = 1; 
+            for(var i=0; i<=(numLec-2); i++){
+                /* console.log("esta es la i="+i); */
+                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 1, 1);
+                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                /* console.log("r1" +r); */
+                var r2 = new Date(new Date(r).setMonth(r.getMonth()+1));
+                var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                /* console.log("r2 " +r2final); */
+                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                /* console.log(fechaesp1); */
+                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                /* console.log(fechaesp2); */
+                xx++;
+                /* console.log("XX"+xx); */
+                for(var x=2; x<=numLec; x++){
+                    /* console.log("ESTA ES LA X="+x); */
+                    if("{{$mesnumber}}" == xx){
+                        document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                        var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
+                        var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
+                        var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
+                        if(r1dia<10){
+                            r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
+                        }
+                        if(r1mes<10){
+                            r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
+                        }
+                        document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
+                        //////////
+                        var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
+                        var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
+                        var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
+                        if(r2dia<10){
+                            r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
+                        }
+                        if(r2mes<10){
+                            r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
+                        }
+                        document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
+                    }
+                }
+            }
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
+            var xx = 1;
+            for(var i=0; i<=(numLec+1); i= i+3){
+                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 3, 1);
+                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                console.log("ESTA ES LA I = "+i);
+                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                console.log("r1" +r);
+                var r2 = new Date(new Date(r).setMonth(r.getMonth()+3));
+                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                console.log("r2 " +r2final);
+                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                console.log(fechaesp1);
+
+                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                console.log(fechaesp2);
+                xx++;
+                console.log("XX"+xx);
                 
-                document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp;
-            } 
+                if("{{$mesnumber}}" == xx){
+                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                    var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
+                    var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
+                    var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
+                    if(r1dia<10){
+                        r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
+                    }
+                    if(r1mes<10){
+                        r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
+                    }
+                    document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
+                    //////////
+                    var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
+                    var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
+                    var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
+                    if(r2dia<10){
+                        r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
+                    }
+                    if(r2mes<10){
+                        r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
+                    }
+                    document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
+                }
+                
+            }
+        }else if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
+            var xx = 1;
+            for(var i=0; i<=(numLec+1); i= i+2){
+                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 2, 1);
+                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                console.log("ESTA ES LA I = "+i);
+                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                console.log("r1" +r);
+                var r2 = new Date(new Date(r).setMonth(r.getMonth()+2));
+                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                console.log("r2 " +r2final);
+                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                console.log(fechaesp1);
+
+                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                console.log(fechaesp2);
+                xx++;
+                console.log("XX"+xx);
+                
+                if("{{$mesnumber}}" == xx){
+                    document.getElementById('mes{{$mesnumber}}').innerHTML = fechaesp1+' - '+fechaesp2;
+                    var r1mes = r.getMonth()+1; //obteniendo mes del primer dia del periodo
+                    var r1dia = r.getDate(); //obteniendo dia del primer dia del periodo
+                    var r1ano = r.getFullYear(); //obteniendo año del primer dia del periodo
+                    if(r1dia<10){
+                        r1dia ='0'+r1dia; //agrega cero si el menor de 10 del primer dia del periodo
+                    }
+                    if(r1mes<10){
+                        r1mes='0'+r1mes //agrega cero si el menor de 10 del primer dia del periodo
+                    }
+                    document.getElementById("primerDia_asigdosim").value = r1ano+"-"+r1mes+"-"+r1dia;
+                    //////////
+                    var r2mes = r2final.getMonth()+1; //obteniendo mes del ultimo dia del periodo
+                    var r2dia = r2final.getDate(); //obteniendo dia del ultimo dia del periodo
+                    var r2ano = r2final.getFullYear(); //obteniendo año del ultimo dia del periodo
+                    if(r2dia<10){
+                        r2dia ='0'+r2dia; //agrega cero si el menor de 10 del ultimo dia del periodo
+                    }
+                    if(r2mes<10){
+                        r2mes='0'+r2mes //agrega cero si el menor de 10 del ultimo dia del periodo
+                    }
+                    document.getElementById("ultimoDia_asigdosim").value = r2ano+"-"+r2mes+"-"+r2dia;
+                }
+                
+            }
         }
             
     })
@@ -793,45 +606,6 @@ crossorigin="anonymous">
 </script>
 <script type="text/javascript">
    
-    function fechaultimodia(){
-        var fecha = document.getElementById("primerDia_asigdosim").value;
-        var fecha_inicio = new Date(fecha);
-        fecha_inicio.setMinutes(fecha_inicio.getMinutes() + fecha_inicio.getTimezoneOffset());
-        alert(fecha_inicio);
-        console.log("FECHA INICIO"+fecha_inicio);
-        if('{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}' == 'MENS'){
-            var fecha_final_año = fecha_inicio.getFullYear();
-            console.log(fecha_final_año);
-            var mm = fecha_inicio.getMonth() + 2;
-            var fecha_final_mes = (mm < 10 ? '0' : '')+mm;
-            if(fecha_final_mes == 13){
-                fecha_final_mes = '01' ;
-            }
-            console.log("MES "+fecha_final_mes);
-            var dd = fecha_inicio.getDate();
-            var fecha_final_dia = (dd < 10 ? '0' : '')+dd;
-            console.log("DIA" + fecha_final_dia);
-            var fecha_final = new Date(fecha_final_año+'-'+fecha_final_mes+'-'+fecha_final_dia);
-            console.log("ESTA ES LA FECHA FINAL" + fecha_final);
-
-            if(fecha_final_mes == 01){
-                var fechaFinaly = fecha_final.getFullYear() + 1;
-                console.log("AÑO"+fechaFinaly);
-            }else{
-                var fechaFinaly = fecha_final.getFullYear();
-            }
-            console.log(fechaFinaly);
-            var fechaFinalm = fecha_final.getMonth()+1;
-            var fechaFinalmm = (fechaFinalm < 10 ? '0' : '')+fechaFinalm;
-            console.log(fechaFinalmm);
-            var fechaFinald = fecha_final.getDate();
-            var fechaFinaldd = (fechaFinald < 10 ? '0' : '')+fechaFinald;
-            console.log(fechaFinaldd);
-            var fechaFinalymd = fechaFinaly+'-'+fechaFinalmm+'-'+fechaFinaldd;
-            console.log(fechaFinalymd);
-            document.getElementById("ultimoDia_asigdosim").value = fechaFinalymd;
-        }
-    };
     $(document).ready(function(){
         $('#form-nueva-asignacion_mn').submit(function(e){
             e.preventDefault();

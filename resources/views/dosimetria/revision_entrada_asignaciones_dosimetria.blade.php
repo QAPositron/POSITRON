@@ -1148,151 +1148,220 @@ crossorigin="anonymous">
         var obsdosi = 0;
         var obstrab = 0;
         var obsarea = 0;
-        if('{{$observacionesAsig}}'.length == 0){
-            console.log("ES IGUAL A CERO");
-            Swal.fire({
-                title: "LAS ASIGNACIONES NO TIENEN NINGUNA OBSERVACIÓN !!!",
-                text:"OPRIMA EL BOTÓN GUARDAR",
-                icon: 'warning',
-            });
-            
-        }else{
-            var arrayCONT = [];
-            @foreach($observacionesAsig as $obsAsig)
-                if('{{$obsAsig->dosicontrol_id}}' != ""){
-                    arrayCONT.push('{{$obsAsig->dosicontrol_id}}');
-                }
-            @endforeach
-            console.log("arrayCONT="+arrayCONT);
-            @foreach($dosicontrolasig as $dosicontasig)
-                console.log('{{$dosicontasig->id_dosicontrolcontdosisedes}}');
-                if(arrayCONT.includes('{{$dosicontasig->id_dosicontrolcontdosisedes}}')){
-                    console.log("está presente control");
-                }else{
-                    console.log("No encontrado control");
-                    obsdosi ++;
-                }
-            @endforeach 
-            var arrayTRAB = [];
-            @foreach($observacionesAsig as $obsAsig)
-                if('{{$obsAsig->trabajcontdosimetro_id}}' != ""){
-                    arrayTRAB.push('{{$obsAsig->trabajcontdosimetro_id}}');
-                }
-            @endforeach
-            console.log("arrayTRAB="+arrayTRAB);
-            @foreach($trabjasignados as $trabasig)
-                console.log('{{$trabasig->id_trabajadordosimetro}}');
-                if(arrayTRAB.includes('{{$trabasig->id_trabajadordosimetro}}')){
-                    console.log("está presente");
-                }else{
-                    console.log("No encontrado");
-                    obstrab ++;
-                }
-            @endforeach 
-            var arrayAREA = [];
-            @foreach($observacionesAsig as $obsAsig)
-                if('{{$obsAsig->dosiareacontdosimetro_id}}' != ""){
-                    arrayAREA.push('{{$obsAsig->dosiareacontdosimetro_id}}');
-                }
-            @endforeach
-            console.log("arrayAREA="+arrayAREA);
-            @foreach($areasignados as $area)
-                console.log('{{$area->id_dosiareacontdosisedes}}');
-                if(arrayAREA.includes('{{$area->id_dosiareacontdosisedes}}')){
-                    console.log("está presente");
-                }else{
-                    console.log("No encontrado");
-                    obsarea ++;
-                }
-            @endforeach
-        };
-        if(obsdosi != 0){
-            Swal.fire({
-                title: "ALGUNAS ASIGNACIONES DE DOSÍMETRO CONTROL NO TIENEN OBSERVACIÓN",
-                text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
-                icon: 'warning',
-            })
-        }else if(obstrab != 0){
-            Swal.fire({
-                title: "ALGUNAS ASIGNACIONES NO TIENEN OBSERVACIÓN",
-                text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
-                icon: 'warning',
-            })
-        }else if(obsarea != 0){
-            Swal.fire({
-                title: "ALGUNAS ASIGNACIONES DE DOSÍMETRO AMBIENTAL NO TIENEN OBSERVACIÓN",
-                text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
-                icon: 'warning',
-            })
-        };
-        var dosi = 0;
-        var trab = 0;
-        var area = 0;
-        if(obsdosi == 0 && obstrab == 0 && obsarea == 0){
-            @foreach($dosicontrolasig as $dosicont)
-                if('{{$dosicont->revision_salida}}' == 'NULL'){
-                    cont ++;
-                    console.log("dosicont"+cont);
-                }
-            @endforeach
-            @foreach($dosicontrolUnicoasig as $dosicontUnic)
-                if('{{$dosicontUnic->revision_salida}}' == 'NULL'){
-                    cont ++;
-                    console.log("dosicontUnic "+cont);
-                }
-            @endforeach
-            @foreach($trabjasignados as $trabj)
-                if('{{$trabj->revision_salida}}' == 'NULL'){
-                    trab ++;
-                    console.log("trabj "+trab);
-                }
-            @endforeach
-            @foreach($areasignados as $area)
-                if('{{$area->revision_salida}}' == 'NULL'){
-                    area ++;
-                    console.log("area "+area);
-                }
-            @endforeach
-            if(cont != 0 || trab != 0 || area != 0){
+        $.get('observacionesreventrada',{id : id, mes: mes, item: item})
+        .done(function( obsrevent ){
+            console.log("OBSERVACIONES");
+            console.log(obsrevent);
+            if(obsrevent.length == 0){
                 Swal.fire({
-                    title: "ALGUNAS ASIGNACIONES NO HAN SIDO REVISADAS !!!",
-                    text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
+                    title: "LAS ASIGNACIONES NO TIENEN NINGUNA OBSERVACIÓN !!!",
+                    text:"OPRIMA EL BOTÓN GUARDAR",
                     icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#1A9980',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'SI, SEGURO!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var host = window.location.host;
-                        var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
-                        window.open(path, '_blank');
-                    }
                 })
             }else{
-                if('{{$trabjEncargado}}'.length != 0){
-                    var host = window.location.host;
-                    var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
-                    window.open(path, '_blank');
-                }else{
-                    Swal.fire({
-                        title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
-                        text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#1A9980',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'SI, SEGURO!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            var host = window.location.host;
-                            var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
-                            window.open(path, '_blank');
+                var arrayCONT = [];
+                @foreach($observacionesAsig as $obsAsig)
+                    if('{{$obsAsig->dosicontrol_id}}' != ""){
+                        arrayCONT.push('{{$obsAsig->dosicontrol_id}}');
+                    }
+                @endforeach
+                console.log("arrayCONT="+arrayCONT);
+                @foreach($dosicontrolasig as $dosicontasig)
+                    console.log('{{$dosicontasig->id_dosicontrolcontdosisedes}}');
+                    if(arrayCONT.includes('{{$dosicontasig->id_dosicontrolcontdosisedes}}')){
+                        console.log("está presente control");
+                    }else{
+                        console.log("No encontrado control");
+                        obsdosi ++;
+                    }
+                @endforeach 
+                var arrayTRAB = [];
+                @foreach($observacionesAsig as $obsAsig)
+                    if('{{$obsAsig->trabajcontdosimetro_id}}' != ""){
+                        arrayTRAB.push('{{$obsAsig->trabajcontdosimetro_id}}');
+                    }
+                @endforeach
+                console.log("arrayTRAB="+arrayTRAB);
+                @foreach($trabjasignados as $trabasig)
+                    console.log('{{$trabasig->id_trabajadordosimetro}}');
+                    if(arrayTRAB.includes('{{$trabasig->id_trabajadordosimetro}}')){
+                        console.log("está presente");
+                    }else{
+                        console.log("No encontrado");
+                        obstrab ++;
+                    }
+                @endforeach 
+                var arrayAREA = [];
+                @foreach($observacionesAsig as $obsAsig)
+                    if('{{$obsAsig->dosiareacontdosimetro_id}}' != ""){
+                        arrayAREA.push('{{$obsAsig->dosiareacontdosimetro_id}}');
+                    }
+                @endforeach
+                console.log("arrayAREA="+arrayAREA);
+                @foreach($areasignados as $area)
+                    console.log('{{$area->id_dosiareacontdosisedes}}');
+                    if(arrayAREA.includes('{{$area->id_dosiareacontdosisedes}}')){
+                        console.log("está presente");
+                    }else{
+                        console.log("No encontrado");
+                        obsarea ++;
+                    }
+                @endforeach
+                
+            };
+            if(obsdosi != 0){
+                Swal.fire({
+                    title: "ALGUNAS ASIGNACIONES DE DOSÍMETRO CONTROL NO TIENEN OBSERVACIÓN",
+                    text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
+                    icon: 'warning',
+                })
+            }else if(obstrab != 0){
+                Swal.fire({
+                    title: "ALGUNAS ASIGNACIONES NO TIENEN OBSERVACIÓN",
+                    text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
+                    icon: 'warning',
+                })
+            }else if(obsarea != 0){
+                Swal.fire({
+                    title: "ALGUNAS ASIGNACIONES DE DOSÍMETRO AMBIENTAL NO TIENEN OBSERVACIÓN",
+                    text:"REVISELAS Y OPRIMA EL BOTÓN GUARDAR",
+                    icon: 'warning',
+                })
+            };
+            var dosi = 0;
+            var trab = 0;
+            var area = 0;
+            console.log("SON CERO "+obsdosi + obstrab + obsarea);
+            if(obsdosi == 0 && obstrab == 0 && obsarea == 0){
+                $.get('asignacionesTrab',{id : id, mes: mes, item: item})
+                .done(function(asignacionesTrab){
+                    console.log("ASIGNACIONES TRAB");
+                    console.log(asignacionesTrab);
+                    asignacionesTrab.forEach(trabj => {
+                        if(trabj.revision_entrada == null){
+                            console.log("hay trabj");
+                            trab ++;
                         }
-                    })
-                } 
+                    });
+                    console.log(trab);
+                    if(trab != 0){
+                        Swal.fire({
+                            title: "ALGUNOS DOSÍMETROS NO HAN SIDO REVISADOS !!!",
+                            text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#1A9980',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'SI, SEGURO!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                var host = window.location.host;
+                                var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                window.open(path, '_blank');
+                            }
+                        })
+                    
+                    }else{
+                        $.get('asignacionesCont', {id : id, mes: mes, item: item})
+                        .done(function(asignacionesCont){
+                            console.log("ASIGNACIONES CONTROL");
+                            console.log(asignacionesCont);
+                            asignacionesCont.forEach(dosicont => {
+                                if(dosicont.revision_entrada == null){
+                                    console.log("hay dosi");
+                                    dosi ++;
+                                }
+                            });
+                            console.log("dosi="+dosi);
+                            console.log("trab="+trab);
+                            
+                            if(dosi != 0){
+                                Swal.fire({
+                                    title: "ALGUNOS DOSÍMETROS DE CONTROL NO HAN SIDO REVISADOS !!!",
+                                    text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#1A9980',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'SI, SEGURO!'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        var host = window.location.host;
+                                        var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                        window.open(path, '_blank');
+                                    }
+                                })
+                            
+                            
+                            }else{
+                                
+                                $.get('asignacionesArea', {id : id, mes: mes, item: item})
+                                .done(function(asignacionesarea){
+                                 
+                                    console.log("ASIGNACIONES AREA");
+                                    console.log(asignacionesarea);
+                                    asignacionesarea.forEach(dosiarea => {
+                                        if(dosiarea.revision_entrada == null){
+                                            console.log("hay dosi area");
+                                            area ++;
+                                        }
+                                    });
+                                    console.log("dosi="+dosi);
+                                    console.log("trab="+trab);
+                                    console.log("area="+area);
+                                    if(area != 0){
+                                        Swal.fire({
+                                            title: "ALGUNOS DOSÍMETROS AMBIENTAL NO HAN SIDO REVISADOS !!!",
+                                            text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#1A9980',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'SI, SEGURO!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                var host = window.location.host;
+                                                var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                                window.open(path, '_blank');
+                                            }
+                                        })
+                                    }else{
+                                        $.get('trabjencargado', {id : id}, function(trabjencargado){
+                                            console.log(trabjencargado)
+                                            if(trabjencargado.length != 0){
+                                                var host = window.location.host;
+                                                var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                                window.open(path, '_blank');
+                                            }else{
+                                                Swal.fire({
+                                                    title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
+                                                    text:"DESEA GENERAR EL REPORTE DE ENTRADA??",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#1A9980',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: 'SI, SEGURO!'
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        var host = window.location.host;
+                                                        var path = "http://"+host+"/POSITRON/public/reporteRevisionEntrada/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                                        window.open(path, '_blank');
+                                                    }
+                                                })
+                                            } 
+                                        });
+                                    }
+                                });
+                            }
+                        })
+                    }
+                    
+                });
             }
-        }
+        });    
+
+
+        
     }
 </script>
 @endsection

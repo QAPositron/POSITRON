@@ -21,7 +21,7 @@ class CreateDosiareacontdosisedesTable extends Migration
             $table-> unsignedBigInteger('areadepartamentosede_id');
             $table-> foreign('areadepartamentosede_id')->references('id_areadepartamentosede')->on('areadepartamentosedes')->onDelete('cascade')->onUpdate('cascade');
 
-            $table-> unsignedBigInteger('dosimetro_id');
+            $table-> unsignedBigInteger('dosimetro_id')->nullable();
             $table-> foreign('dosimetro_id')->references('id_dosimetro')->on('dosimetros')->onDelete('cascade')->onUpdate('cascade');
 
             $table-> unsignedBigInteger('contratodosimetriasede_id');

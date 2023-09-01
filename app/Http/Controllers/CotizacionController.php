@@ -94,13 +94,16 @@ class CotizacionController extends Controller
             $cotiprod->costoAñoProd         = $request->input('costoAnoInt_producto'.$i);
             $cotiprod->save();
         }
-        for($i=0; $i< count($request->observaciones); $i++){
-            $cotiobs = new Cotizacionobservacion();
+        if(!empty($request->observaciones)){
 
-            $cotiobs->cotizacion_id        = $cotizacion->id_cotizacion;
-            $cotiobs->obs                  = mb_strtoupper($request->observaciones[$i]);
-
-            $cotiobs->save();
+            for($i=0; $i< count($request->observaciones); $i++){
+                $cotiobs = new Cotizacionobservacion();
+    
+                $cotiobs->cotizacion_id        = $cotizacion->id_cotizacion;
+                $cotiobs->obs                  = mb_strtoupper($request->observaciones[$i]);
+    
+                $cotiobs->save();
+            }
         }
         return redirect()->route('cotizaciones.search')->with('guardar', 'ok');
     }

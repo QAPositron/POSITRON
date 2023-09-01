@@ -363,7 +363,7 @@ class PersonaController extends Controller
             'telefono_persona'           => ['nullable', 'min:10', 'max:10'],
             
         ]);
-        if(!empty($request->rol_personas)){
+        /* if(!empty($request->rol_personas)){
             for($i=0; $i<count($request->rol_personas); $i++){
                 if( $request->rol_personas[$i] == 2){
                     $request->validate([
@@ -379,7 +379,7 @@ class PersonaController extends Controller
             $request->validate([
                 'rol_personas'               => ['required'],
             ]);
-        }
+        } */
         
         $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);
         $persona->segundo_nombre_persona    =  mb_strtoupper($request->segundo_nombre_persona);
@@ -401,11 +401,12 @@ class PersonaController extends Controller
                     $consulta = Persona::join('personasedes', 'personas.id_persona',  '=', 'personasedes.persona_id')
                     ->where('personas.lider_dosimetria', '=', 'TRUE')
                     ->where('personasedes.sede_id', '=', $personasede[$i]->sede_id)->get();
+                    return $consulta;
                     if(count($consulta) == 0){
                         $persona->lider_dosimetria          = $request->lider_dosimetria;
                         $persona->save();
                     }else{
-                        return redirect()->route('empresas.info', $request->id_empresa)->with('error', 'ok');
+                        return redirect()->route('personas.search')->with('error', 'ok');
                     }
                 }
             
@@ -414,7 +415,7 @@ class PersonaController extends Controller
                 $persona->save();
                 
             }
-        }elseif(count($request->id_sedes) != 0){
+        }/* elseif(count($request->id_sedes) != 0){
             if($request->lider_dosimetria == 'TRUE' && $persona->lider_dosimetria == NULL){
                 for($i=0; $i<count($request->id_sedes); $i++){
     
@@ -425,7 +426,7 @@ class PersonaController extends Controller
                         $persona->lider_dosimetria          = $request->lider_dosimetria;
                         $persona->save();
                     }else{
-                        return redirect()->route('empresas.info', $request->id_empresa)->with('error', 'ok');
+                        return redirect()->route('personas.search')->with('error', 'ok');
                     }
                 }
             
@@ -434,7 +435,7 @@ class PersonaController extends Controller
                 $persona->save();
                 
             }
-        }
+        } */
 
         /* if($request->lider_dosimetria == 'TRUE' && count($request->id_sedes) != 0){
             for($i=0; $i<count($request->id_sedes); $i++){

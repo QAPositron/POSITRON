@@ -701,61 +701,19 @@ crossorigin="anonymous">
         var cont = 0;
         var trab = 0;
         var area = 0;
-        
-        @foreach($dosicontrolasig as $dosicont)
-            if('{{$dosicont->revision_salida}}' == 'TRUE'){
-                cont ++;
-                console.log("dosicont"+cont);
-            }
-        @endforeach
-        @foreach($dosicontrolUnicoasig as $dosicontUnic)
-            if('{{$dosicontUnic->revision_salida}}' == 'TRUE'){
-                cont ++;
-                console.log("dosicontUnic "+cont);
-            }
-        @endforeach
-        @foreach($trabjasignados as $trabj)
-            if('{{$trabj->revision_salida}}' == 'TRUE'){
-                trab ++;
-                console.log("trabj "+trab);
-            }
-        @endforeach
-        var tamaREA  = '{{$dosicontrolUnicoasig}}'.length;
-        console.log("tamaño area"+ tamaREA);
-        @foreach($areadosiasig as $area)
-            console.log("areasTrue"+ '{{$area->revision_salida}}')
-            
-            
-            if('{{$area->revision_salida}}' == 'TRUE'){
-                area ++;
-                console.log("area "+area);
-            }
-        @endforeach
-
-        if( (cont != '{{$dosicontrolasig}}'.length || cont != '{{$dosicontrolUnicoasig}}'.length)  || trab != '{{$trabjasignados}}'.length || area != '{{$areadosiasig}}'.length){
-            Swal.fire({
-                title: "ALGUNAS ASIGNACIONES NO HAN SIDO REVISADAS !!!",
-                text:"DESEA GENERAR EL REPORTE DE SALIDA??",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#1A9980',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'SI, SEGURO!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var host = window.location.host;
-                    var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
-                    window.open(path, '_blank');
+        $.get('asignacionesTrab',{id : id, mes: mes, item:item}, function(asignacionesTrab){
+            console.log("ASIGNACIONES");
+            console.log(asignacionesTrab);
+            asignacionesTrab.forEach(trabj => {
+                if(trabj.revision_salida == null){
+                    console.log("hay trabj");
+                    trab ++;
                 }
-            })
-        }else{
-            if('{{$trabjEncargado}}'.length != 0){
-                var host = window.location.host;
-                var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
-                window.open(path, '_blank');
-            }else{
+            });
+            console.log("trab="+trab);
+            if(trab != 0){
                 Swal.fire({
-                    title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
+                    title: "ALGUNOS DOSÍMETROS NO HAN SIDO REVISADOS !!!",
                     text:"DESEA GENERAR EL REPORTE DE SALIDA??",
                     icon: 'warning',
                     showCancelButton: true,
@@ -764,17 +722,191 @@ crossorigin="anonymous">
                     confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var host = window.location.host;
+                        var host = window.location.host; 
                         var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
                         window.open(path, '_blank');
                     }
                 })
-            } 
-            
-            
-        }
-        
-        
+            }else{
+                @if(count($dosicontrolasig) != 0)
+                    $.get('asignacionesCont', {id : id, mes: mes, item: item}, function(asignacionesCont){
+                        console.log("ASIGNACIONES CONTROL");
+                        console.log(asignacionesCont);
+                        asignacionesCont.forEach(dosicont => {
+                            if(dosicont.revision_salida == null){
+                                console.log("hay dosi");
+                                cont ++;
+                            }
+                        });
+                        console.log("dosi="+cont);
+                        console.log("trab="+trab);
+                        if(cont != 0){
+                            Swal.fire({
+                                title: "ALGUNOS DOSÍMETROS DE CONTROL NO HAN SIDO REVISADOS !!!",
+                                text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#1A9980',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'SI, SEGURO!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    var host = window.location.host;
+                                    var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                    window.open(path, '_blank');
+                                }
+                            })
+                        }else{
+                            $.get('asignacionesArea', {id : id, mes: mes, item: item}, function(asignacionesarea){
+                                console.log("ASIGNACIONES AREA");
+                                console.log(asignacionesarea);
+                                asignacionesarea.forEach(dosiarea => {
+                                    if(dosiarea.revision_salida == null){
+                                        console.log("hay dosi area");
+                                        area ++;
+                                    }
+                                });
+                                console.log("cont="+cont);
+                                console.log("trab="+trab);
+                                console.log("area="+trab);
+                                if(area != 0){
+                                    Swal.fire({
+                                        title: "ALGUNOS DOSÍMETROS AMBIENTAL NO HAN SIDO REVISADOS !!!",
+                                        text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#1A9980',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'SI, SEGURO!'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            var host = window.location.host;
+                                            var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                            window.open(path, '_blank');
+                                        }
+                                    })
+                                }else{
+                                    $.get('trabjencargado', {id : id}, function(trabjencargado){
+                                        console.log(trabjencargado)
+                                        if(trabjencargado.length != 0){
+                                            var host = window.location.host;
+                                            var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                            window.open(path, '_blank');
+                                        }else{
+                                            Swal.fire({
+                                                title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
+                                                text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#1A9980',
+                                                cancelButtonColor: '#d33',
+                                                confirmButtonText: 'SI, SEGURO!'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    var host = window.location.host;
+                                                    var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                                    window.open(path, '_blank');
+                                                }
+                                            })
+                                        } 
+                                    });
+                                }
+                            });
+                        }
+                    });
+                @else
+                    $.get('asignacionesContUnic', {id : id, mes: mes, item: item}, function(asignacionesCont){
+                        console.log("ASIGNACIONES CONTROL UNICO");
+                        console.log(asignacionesCont);
+                        asignacionesCont.forEach(dosicont => {
+                            if(dosicont.revision_salida == null){
+                                console.log("hay dosi");
+                                cont ++;
+                            }
+                        });
+                        console.log("dosi="+cont);
+                        console.log("trab="+trab);
+                        if(cont != 0){
+                            Swal.fire({
+                                title: "ALGUNOS DOSÍMETROS DE CONTROL NO HAN SIDO REVISADOS !!!",
+                                text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#1A9980',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'SI, SEGURO!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    var host = window.location.host;
+                                    var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                    window.open(path, '_blank');
+                                }
+                            })
+                        }else{
+                            $.get('asignacionesArea', {id : id, mes: mes, item:item}, function(asignacionesarea){
+                                console.log("ASIGNACIONES AREA");
+                                console.log(asignacionesarea);
+                                asignacionesarea.forEach(dosiarea => {
+                                    if(dosiarea.revision_salida == null){
+                                        console.log("hay dosi area");
+                                        area ++;
+                                    }
+                                });
+                                console.log("dosi="+cont);
+                                console.log("trab="+trab);
+                                console.log("area="+area);
+                                if(area != 0){
+                                    Swal.fire({
+                                        title: "ALGUNOS DOSÍMETROS AMBIENTAL NO HAN SIDO REVISADOS !!!",
+                                        text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#1A9980',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'SI, SEGURO!'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            var host = window.location.host;
+                                            var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                            window.open(path, '_blank');
+                                        }
+                                    })
+                                }else{
+                                    $.get('trabjencargado', {id : id}, function(trabjencargado){
+                                        console.log(trabjencargado)
+                                        if(trabjencargado.length != 0){
+                                            var host = window.location.host;
+                                            var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                            window.open(path, '_blank');
+                                        }else{
+                                            Swal.fire({
+                                                title: "NO HAY UN LIDER O PERSONA ENCARGADA DE LA DOSIMETRÍA PARA ESTA SEDE!!!",
+                                                text:"DESEA GENERAR EL REPORTE DE SALIDA??",
+                                                icon: 'warning',
+                                                showCancelButton: true,
+                                                confirmButtonColor: '#1A9980',
+                                                cancelButtonColor: '#d33',
+                                                confirmButtonText: 'SI, SEGURO!'
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    var host = window.location.host;
+                                                    var path = "http://"+host+"/POSITRON/public/reporteRevisionSalida/"+empresa+"/"+id+"/"+mes+"/"+item+"/pdf";
+                                                    window.open(path, '_blank');
+                                                }
+                                            })
+                                        } 
+                                    });
+                                }
+                            });
+                        }
+                    });
+                @endif
+                    
+                
+            }
+
+        });
+
     }
 </script>
 @endsection
