@@ -179,7 +179,7 @@
                                         @endfor
                                     @endif
                                     {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL TORAX POR CONTRATO/////// --}}
-                                    @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE')
+                                    @if(!empty($dosicontrolToraxUnicomesant[0]) && $dosicontrolToraxUnicomesant[0]->controlTransT_unicoCont == 'TRUE')
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. T.</td>
                                             <td class='align-middle'>
@@ -244,7 +244,7 @@
                                         @endfor
                                     @endif
                                     {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL CRISTALINO POR CONTRATO/////// --}}
-                                    @if($mescontdosisededepto->controlTransC_unicoCont == 'TRUE')
+                                    @if(!empty($dosicontrolCristalinoUnicomesant[0]) && $dosicontrolCristalinoUnicomesant[0]->controlTransC_unicoCont == 'TRUE')
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. C.</td>
                                             <td class='align-middle'>
@@ -316,7 +316,7 @@
                                         @endfor
                                     @endif
                                     {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL ANILLO POR CONTRATO/////// --}}
-                                    @if($mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                    @if(!empty($dosicontrolDedoUnicomesant[0])&& $dosicontrolDedoUnicomesant[0]->controlTransA_unicoCont == 'TRUE')
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. A</td>
                                             <td class='align-middle'>

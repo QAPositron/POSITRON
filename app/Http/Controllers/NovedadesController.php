@@ -546,6 +546,7 @@ class NovedadesController extends Controller
                 }
             }
             $newMesescontdosisedeptos = new Mesescontdosisedeptos();
+            $newMesescontdosisedeptos->contdosisededepto_id     = $request->id_contdosisededepto;
             $newMesescontdosisedeptos->novcontdosisededepto_id  = $newNovcontdosisededepto->id_novcontdosisededepto;
             $newMesescontdosisedeptos->mes_asignacion           = $request->mestrabj_asig;
             $newMesescontdosisedeptos->dosi_control_torax       = $dosi_control_torax == null ? 0 : $dosi_control_torax;
