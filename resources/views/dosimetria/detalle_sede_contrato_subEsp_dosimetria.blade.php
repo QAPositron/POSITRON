@@ -81,22 +81,20 @@
                                 {{$novcontdosisededepto->mes_asignacion}}
                             </th>
                             <th class="align-middle">
-                                @if($novcontdosisededepto->mes_asignacion == 1)
+                                @if(!empty($trabjasigcontra))
                                     @php
                                         $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                                        $inicio = date($novcontdosisededepto->contratodosimetriasededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
-                                        $fin = date("t-m-Y",strtotime($inicio));
-                                        if($novcontdosisededepto->contratodosimetriasededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS'){
-                                            $fin_parcial = date("t-m-Y",strtotime($inicio));
-                                        }elseif($novcontdosisededepto->contratodosimetriasededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS'){
-                                            $fin_parcial = date("t-m-Y",strtotime($inicio."+ 1 month"));
-                                        }elseif($novcontdosisededepto->contratodosimetriasededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS'){
-                                            $fin_parcial = date("t-m-Y",strtotime($fin."+ 2 month"));
-                                        }
-                                        echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio)). " - ".date("d", strtotime($fin_parcial))." ".$meses[date("m", strtotime($fin_parcial))]." DE ".date("Y", strtotime($fin_parcial));
+                                        $inicio = date($trabjasigcontra[0]->primer_dia_uso);
+                                        $fin = date($trabjasigcontra[0]->ultimo_dia_uso);
+                                        echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio)). " - ".date("d", strtotime($fin))." ".$meses[date("m", strtotime($fin))]." DE ".date("Y", strtotime($fin));
                                     @endphp
-                                @else
-                                    <span id="mes{{$novcontdosisededepto->mes_asignacion}}"></span>
+                                @elseif(!empty($areasigcontra))
+                                    @php
+                                        $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                                        $inicio = date($areasigcontra[0]->primer_dia_uso);
+                                        $fin = date($areasigcontra[0]->ultimo_dia_uso);
+                                        echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio)). " - ".date("d", strtotime($fin))." ".$meses[date("m", strtotime($fin))]." DE ".date("Y", strtotime($fin));
+                                    @endphp
                                 @endif
                             </th>
                             <td class='text-center'>

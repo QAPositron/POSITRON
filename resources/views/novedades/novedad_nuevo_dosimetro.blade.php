@@ -613,7 +613,7 @@
                                 $('#mesacambiar').append("<option value='"+ siguientemes + "'>SIGUIENTE: " + siguientemes + " ("+ fechaesp1+' - '+fechaesp2 + ")" + "</option>");
                                 document.getElementById('trabjPeriodo2').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO "+siguientemes+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
                                 var diaP = r.getDate();
-                                var mesP = r.getMonth()+1;
+                                var mesP = r.getMonth();
                                 var añoP = r.getFullYear();
                                 var ddP = (diaP < 10 ? '0' : '')+diaP;
                                 var mmP = (mesP < 10 ? '0' : '')+mesP;
@@ -621,7 +621,7 @@
                                 document.getElementById("primerDia2_asigdosim").value = fechaP;
                                 document.getElementById("primerDia_asigdosim").value = fechaP;
                                 var diaF = r2final.getDate();
-                                var mesF = r2final.getMonth()+1;
+                                var mesF = r2final.getMonth();
                                 var añoF = r2final.getFullYear();
                                 var ddF = (diaF < 10 ? '0' : '')+diaF;
                                 var mmF = (mesF < 10 ? '0' : '')+mesF;
