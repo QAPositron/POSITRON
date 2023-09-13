@@ -48,11 +48,12 @@ class DosimetrosController extends Controller
         return redirect()->route('dosimetros.search')->with('guardar', 'ok');
     }
     public function search(){
-        $dosimetro = Dosimetro::where('estado_dosimetro','=','STOCK')
+        $dosimetros = Dosimetro::all();
+        /*$dosimetro = Dosimetro::where('estado_dosimetro','=','STOCK')
         ->orWhere('estado_dosimetro','=','PERDIDO')
         ->orWhere('estado_dosimetro','=','DAÑADO')
         ->get();
-        $dosimTrabj= Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
+         $dosimTrabj= Dosimetro::join('trabajadordosimetros','dosimetros.id_dosimetro','=','trabajadordosimetros.dosimetro_id')
         ->where('trabajadordosimetros.dosimetro_uso', 'TRUE')
         ->where(function($query) {
             $query->orWhere('dosimetros.estado_dosimetro', 'EN USO');
@@ -98,7 +99,7 @@ class DosimetrosController extends Controller
             $query->orWhere('dosimetros.estado_dosimetro', 'EN LECTURA');
         })->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.tecnologia_dosimetro', 'dosimetros.fecha_ingreso_servicio',
         'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 'dosicontrolcontdosisedes.contdosisededepto_id', 'dosicontrolcontdosisedes.dosimetro_uso', 'dosicontrolcontdosisedes.mes_asignacion')
-        ->get();
+        ->get(); */
 
         $holder = Holder::where('estado_holder','=','STOCK')->get();
         $holderTrabj = Holder::join('trabajadordosimetros','holders.id_holder','=','trabajadordosimetros.holder_id')
@@ -108,7 +109,7 @@ class DosimetrosController extends Controller
         ->select('holders.id_holder','holders.codigo_holder', 'holders.tipo_holder', 'holders.estado_holder', 'dosicontrolcontdosisedes.contdosisededepto_id', 'dosicontrolcontdosisedes.mes_asignacion')
         ->get();
 
-        return view('dosimetro.buscar_dosimetro', compact('dosimetro', 'dosimTrabj','dosimLecTrabj','dosimAreas','dosimLecAreas','dosimControl','dosimLecControl','holder', 'holderTrabj', 'holderControl'));
+        return view('dosimetro.buscar_dosimetro', compact('dosimetros','holder', 'holderTrabj', 'holderControl'));
     }
 
     public function edit(Dosimetro $dosimetro){

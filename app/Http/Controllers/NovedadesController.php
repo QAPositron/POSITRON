@@ -140,6 +140,7 @@ class NovedadesController extends Controller
         $mesactualcontratodosiasig = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
         ->join('dosimetriacontratos','contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
         ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $request->especialidad_id)
+        ->where('contratodosimetriasedes.id_contratodosimetriasede', '=', $request->contratodosimetriasede)
         ->get();
         return response()->json($mesactualcontratodosiasig);
     }
