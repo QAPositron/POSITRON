@@ -111,7 +111,7 @@
                     <div class="col-md">
                         <div class="form-floating text-wrap">
                             <input type="text" class="form-control @error('cedula_persona') is-invalid @enderror"  name="cedula_persona" id="cedula_persona" value="{{old('cedula_persona')}}" autofocus style="text-transform:uppercase;">
-                            <label for="floatingInputGrid">* N° DE IDENTIFICACIÓN:</label>
+                            <label for="floatingInputGrid">N° DE IDENTIFICACIÓN:</label>
                             @error('cedula_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>

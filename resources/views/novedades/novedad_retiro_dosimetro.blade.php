@@ -219,27 +219,6 @@
                                 </div>
                             </div>
                         </div>
-                       {{--  <div class="row g-2">
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
-                                    <label for="floatingInputGrid">FECHA ENVIO</label>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" name="fecha_recibido_dosim_asignado" id="fecha_recibido_dosim_asignado" >
-                                    <label for="floatingInputGrid">FECHA RECIBIDO</label>
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" name="fecha_devuelto_dosim_asignado" id="fecha_devuelto_dosim_asignado" >
-                                    <label for="floatingInputGrid">FECHA DEVUELTO</label>
-                                </div>
-                            </div>
-                        </div> --}}
                         <br>
                         <table  class="table table-bordered" id="tablaAsignacionDosimetrosmn">
                             <thead class="text-center">
@@ -273,6 +252,13 @@
                                 <button class="btn btn-circle colorQA" onclick="Generarnotas2()" type="button" id="notas" name="notas" role="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="col-md text-start">
+                                <button class="btn btn-circle btn-danger" onclick="eliminarNotas()" type="button" id="eliminarnotas" name="eliminarnotas" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                     </svg>
                                 </button>
                             </div>
@@ -351,6 +337,7 @@
             var check = 0;
             if($.trim(contrato_id) != ''){
                 $.get('sedescontDosi', {contrato_id: contrato_id}, function(sedes){
+                    console.log("sedes = ")
                     console.log(sedes);
                     $('#sedes_empresadosi').empty();
                     $('#especialidades_empresadosi').empty();
@@ -795,7 +782,7 @@
                                         </td>
                                        
                                         <td style='width: 100px' class='align-middle text-center'>
-                                            <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`);" ${disacont}>
+                                            <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`, '`+asignacionescontrolmesactual[i].ubicacion+`',);" ${disacont}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                 </svg>
@@ -823,7 +810,7 @@
                                 
                                 /* dosi_control += 1; */
                                 console.log("EL VALOR DEL DOSI CONTROL PARA EL MES ACTUAL");
-                                console.log(dosi_control);
+                                /* console.log(dosi_control); */
                             }; 
                             /* document.getElementById("dosi_control").value = dosi_control; */
                         }
@@ -871,7 +858,7 @@
                                     }
                                     var mestrabj_asig = document.getElementById("mesacambiar").value;
                                     var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
-                                    var id_contratodosimetriasede =  document.getElementById("sedes_empresadosi").value; 
+                                    var id_contratodosimetriasede =  document.getElementById("contratodosimetriasede").value; 
                                     document.getElementById("mes_asig_siguiente").value = mestrabj_asig;
                                     document.getElementById("contdosisededepto").value = id_contdosisededepto;
                                     document.getElementById("contratodosimetriasede").value = id_contratodosimetriasede;
@@ -899,7 +886,7 @@
                                             </select>
                                         </td>
                                         <td style='width: 100px' class='align-middle text-center'>
-                                            <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarEzclip(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`');" ${dis}>
+                                            <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminar(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`');" ${dis}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                 </svg>
@@ -1000,7 +987,7 @@
                                     var id_holder = '';
                                     var codigo_holder = '---';
                                 }
-                                var tr = `<tr id="`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`">
+                                var tr = `<tr id="`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`area">
                                     <td class='align-middle'>
                                         <input type="text" name="id_area_asigdosim[]" id="id_area_asigdosim`+asignacionesareamesactual[i].id_areadepartamentosede+`" class="form-control" value="`+asignacionesareamesactual[i].id_areadepartamentosede+`" hidden>
                                         <select class="form-select"  name="id_area_asigdosim[]" id="id_area_asigdosim`+asignacionesareamesactual[i].id_areadepartamentosede+`" disabled>
@@ -1017,7 +1004,7 @@
                                     </td>
                                     <td class='align-middle text-center'> N.A. </td>
                                     <td style='width: 100px' class='align-middle text-center'>
-                                        <button class="btn btn-danger cambiarBoton"  type="button"  ${dis}>
+                                        <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarArea(`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`, '`+asignacionesareamesactual[i].nombre_area+`');" ${dis}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                             </svg>
@@ -1047,9 +1034,9 @@
                                 </tr>`;
                                 $("#body_asignaciones").append(tr);
 
-                                d/* osi_area += 1; */
+                                /*dosi_area += 1; */
                                 console.log("EL VALOR DEL DOSI AREA PARA EL MES ACTUAL");
-                                console.log(dosi_area);
+                                /* console.log(dosi_area); */
                             }
                             /* document.getElementById("dosi_area").value = dosi_area; */
                         }
@@ -1061,38 +1048,46 @@
     function limpiar(){
         var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
         var mes = document.getElementById("mesacambiar").value;
-        var contratodosimetriasede_id  = document.getElementById("sedes_empresadosi").value;
-        
+        var contratodosimetriasede_id  = document.getElementById("contratodosimetriasede").value;
+        var contratodosimetria_id = document.getElementById("contratos_empresadosi").value;
         alert("ESTE ES EL MES"+mes+"ESTE ES EL ID DEL DEPTO"+contdosisededepto_id+"ESTE ES EL ID DE LA SEDE"+contratodosimetriasede_id);
-        $.get('limpiar', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: mes}, function(asignacioneslimpias){
-            console.log(asignacioneslimpias);
-            //se toman todos los elementos a los cuales se les va a cambiar la propiedad disbled, estos tienen la misma propiedad llamada 'cambiar'
-            var cambiarElement = document.querySelectorAll('.cambiar');
-            cambiarElement.forEach(function(element){
-                
-                element.disabled = false;
-                element.options.item(0).text = "---";
-                element.options.item(0).value = null;
-            });
-            var cambiarBoton = document.querySelectorAll('.cambiarBoton');
-            cambiarBoton.forEach(function(element){
-                element.disabled = false;
-            });
-
-        })
-        
-
-
-    }
-    
-    var dosiRetirado = [];
-    var dosiControlRetirado = '';
-    
-    function eliminarEzclip(ezclip, ubicacion, nombre){
-        console.log('SE SELECCIONO ESTA ASIGNACION'+ezclip +nombre);
         
         Swal.fire({
-            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO ' +ubicacion+ ' ??',
+            text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL PERÍODO ANTERIOR?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33    ',
+            confirmButtonText: 'SI, SEGURO!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.get('limpiar', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: mes, contratodosimetria_id: contratodosimetria_id}, function(asignacioneslimpias){
+                    console.log("LIMPIEZA DE DOSIMETROS CONTROL");
+                    console.log(asignacioneslimpias);
+                    //se toman todos los elementos a los cuales se les va a cambiar la propiedad disbled, estos tienen la misma propiedad llamada 'cambiar'
+                    var cambiarElement = document.querySelectorAll('.cambiar');
+                    cambiarElement.forEach(function(element){
+                        element.disabled = false;
+                        element.options.item(0).text = "---";
+                        element.options.item(0).value = null;
+                    });
+                    var cambiarBoton = document.querySelectorAll('.cambiarBoton');
+                    cambiarBoton.forEach(function(element){
+                        element.disabled = false;
+                    });
+                })
+            }
+        })
+    }
+    var dosiRetirado = [];
+    var dosiAreaRetirado = [];
+    var dosiControlRetirado = [];
+    
+    function eliminarArea(idarea, area){
+        console.log('SE SELECCIONO ESTA ASIGNACION'+idarea +area);
+        
+        Swal.fire({
+            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO AMBIENTAL ' +area+ ' ??',
            /*  text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO", */
             icon: 'warning',
             showCancelButton: true,
@@ -1101,16 +1096,16 @@
             confirmButtonText: 'SI, SEGURO!'
         }).then((result) => {
             if (result.isConfirmed) {
-                alert('SE SELECCIONO ESTA ASIGNACION'+ezclip +nombre);
-                const element = document.getElementById(ezclip);
-                dosiRetirado.push({nombre,ubicacion});
-                console.log(dosiRetirado);
+                alert('SE SELECCIONO ESTA ASIGNACION'+idarea +area);
+                const element = document.getElementById(idarea+'area');
+                dosiAreaRetirado.push({idarea,area});
+                console.log(dosiAreaRetirado);
                 element.remove();
                 
             }
         })
     }
-    function eliminarTorax(torax, ubicacion, nombre){
+    function eliminar(dosi, ubicacion, nombre){
         
         Swal.fire({
             title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO ' +ubicacion+ ' ??',
@@ -1122,8 +1117,8 @@
             confirmButtonText: 'SI, SEGURO!'
         }).then((result) => {
             if (result.isConfirmed) {
-                alert('SE SELECCIONO ESTA ASIGNACION'+ torax + nombre);
-                const element = document.getElementById(torax);
+                alert('SE SELECCIONO ESTA ASIGNACION'+ dosi + nombre);
+                const element = document.getElementById(dosi);
                 dosiRetirado.push({nombre,ubicacion});
                 console.log(dosiRetirado);
 
@@ -1132,11 +1127,10 @@
             }
         })
     }
-    
-    function eliminarControl(control){
+    function eliminarControl(control, ubicacion){
         
         Swal.fire({
-            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO CONTROL ??',
+            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO CONTROL ' +ubicacion+ ' ??',
             /* text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO", */
             icon: 'warning',
             showCancelButton: true,
@@ -1147,26 +1141,48 @@
             if (result.isConfirmed) {
                 alert('SE SELECCIONO ESTA ASIGNACION CONTROL'+control);
                 const element = document.getElementById(control+'control');
-                dosiControlRetirado = 'CONTROL';
+                dosiControlRetirado.push({control,ubicacion});
                 console.log(dosiControlRetirado);
                 element.remove();
             }
         })
     }
     function Generarnotas2(){
+        
         console.log('---------------------*****');
         console.log(dosiRetirado);
         console.log(dosiControlRetirado);
+        console.log(dosiAreaRetirado);
         console.log('---------------------*****');
         for(var x = 0; x < dosiRetirado.length; x++){
-            console.log("RETIRO DEL DOSIMETRO CON UBICACION: "+dosiRetirado[x].ubicacion+" PARA EL TRABAJADOR: "+dosiRetirado[x].nombre);
+            
+            console.log("RETIRO DEL DOSÍMETRO CON UBICACION: "+dosiRetirado[x].ubicacion+" PARA EL TRABAJADOR: "+dosiRetirado[x].nombre);
             let input = `<input type="text" name="inputnotas[]" id="inputnotas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CON UBICACIÓN `+dosiRetirado[x].ubicacion+` PARA EL TRABAJADOR: `+dosiRetirado[x].nombre+`" readonly>`;
             $('#textCard2').append(input);
         }
-        if(dosiControlRetirado == 'CONTROL'){
-
-            let input = `<input type="text" name="inputnotas[]" id="inputnotas" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CONTROL" readonly>`;
+        for(var x = 0; x < dosiControlRetirado.length; x++){
+            console.log("RETIRO DEL DOSÍMETRO: CONTROL "+dosiControlRetirado[x].ubicacion);
+            let input = `<input type="text" name="inputnotasControl[]" id="inputnotasControl`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CONTROL TRANSPORTE `+dosiControlRetirado[x].ubicacion+`" readonly>`;
             $('#textCard2').append(input);
+        }
+        for(var x = 0; x < dosiAreaRetirado.length; x++){
+            console.log("RETIRO DEL DOSÍMETRO AMBIENTAL DEL ÁREA: "+dosiAreaRetirado[x].area);
+            let input = `<input type="text" name="inputnotasAreas[]" id="inputnotasAreas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO AMBIENTAL PARA EL ÁREA '`+dosiAreaRetirado[x].area+`'" readonly>`;
+            $('#textCard2').append(input);
+        }
+    }
+    function eliminarNotas(){
+        for(var x = 0; x < dosiRetirado.length; x++){
+            var inputnota = document.getElementById('inputnotas'+x);
+            inputnota.remove();
+        }
+        for(var x = 0; x < dosiControlRetirado.length; x++){
+            var inputnotasControl = document.getElementById('inputnotasControl'+x);
+            inputnotasControl.remove();
+        }
+        for(var x = 0; x < dosiAreaRetirado.length; x++){
+            var inputnotasAreas = document.getElementById('inputnotasAreas'+x);
+            inputnotasAreas.remove();
         }
         
     }
@@ -1288,22 +1304,7 @@
             })
         });
 
-        $('#limpiar_asig').click(function(e){
-            e.preventDefault();
-            Swal.fire({
-                text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL PERÍODO ANTERIOR?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33    ',
-                confirmButtonText: 'SI, SEGURO!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    limpiar();
-                    
-                }
-            })
-        })
+        
     })
 </script>
 @endsection()
