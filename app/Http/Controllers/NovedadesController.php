@@ -179,17 +179,23 @@ class NovedadesController extends Controller
             $dosiasignadoscontrolmesactual = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
             ->leftjoin('holders', 'dosicontrolcontdosisedes.holder_id', '=', 'holders.id_holder')
             ->where('contratodosimetria_id', '=', $request->contratodosimetria_id)
-            ->where('mes_asignacion', '=', $request->mes)
+            ->where('mes_asignacion', '=', $request->mes+1)
             ->get();
-            return response()->json($dosiasignadoscontrolmesactual);
+            if(count($dosiasignadoscontrolmesactual) == 0){
+                $dosiasignadoscontrolmesactual = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                ->leftjoin('holders', 'dosicontrolcontdosisedes.holder_id', '=', 'holders.id_holder')
+                ->where('contratodosimetria_id', '=', $request->contratodosimetria_id)
+                ->where('mes_asignacion', '=', $request->mes)
+                ->get();
+            }
         }else{
             $dosiasignadoscontrolmesactual = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
             ->leftjoin('holders', 'dosicontrolcontdosisedes.holder_id', '=', 'holders.id_holder')
             ->where('contdosisededepto_id', '=', $request->contdosisededepto_id)
             ->where('mes_asignacion', '=', $request->mes)
             ->get();
-            return response()->json($dosiasignadoscontrolmesactual);
         }
+        return response()->json($dosiasignadoscontrolmesactual);
         
         
     }
@@ -618,7 +624,7 @@ class NovedadesController extends Controller
         /* return $request; */
     }
     public function savemesiguientecambiocantdosim(Request $request){
-        /*return $request;*/
+       /*  return $request; */
 
         $dosi_control_torax = 0;
         $dosi_control_cristalino = 0;
@@ -757,11 +763,11 @@ class NovedadesController extends Controller
                 $newasignacionAntiguaArea->energia                   = 'F';
                 $newasignacionAntiguaArea->save(); 
     
-                if( $request->id_dosimetro_asigdosim[$i] != null){
-                    $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_asigdosim[$i])
+                if($request->id_dosimetro_area_asigdosim[$i] != null){
+                    $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $request->id_dosimetro_area_asigdosim[$i])
                     ->update([
                         'estado_dosimetro' => 'EN USO',
-                        'uso_dosimetro' => $request->ubicacion_asigdosim[$i]  
+                        'uso_dosimetro' => 'AMBIENTAL'
                     ]);
                 }
                 $updateEstadoDosimasigmesig = Dosiareacontdosisede::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
@@ -1000,13 +1006,72 @@ class NovedadesController extends Controller
     
     public function clearAsignacionAnteriorMn(Request $request){
         $contdosisededepto = Contratodosimetriasededepto::find($request->contdosisededepto_id);
+        $dosiLimpios = [];
         if($contdosisededepto->controlTransT_unicoCont == 'TRUE' || $contdosisededepto->controlTransC_unicoCont == 'TRUE' || $contdosisededepto->controlTransA_unicoCont == 'TRUE'){
-            $cleardosicontrolasigmesant = Dosicontrolcontdosisede::where('contratodosimetria_id', '=', $request->contratodosimetria_id)
-            ->where('mes_asignacion', '=', ($request->mes)-1)
-            ->update([
-                'dosimetro_uso' => 'FALSE'
-            ]);
            
+            $verificarDosiControlUnicT = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
+            ->where('ubicacion', 'TORAX')
+            ->where('mes_asignacion', $request->mes)
+            ->get();
+            if($verificarDosiControlUnicT->isEmpty()){
+                $cleardosicontrolTunicoasigmesant = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
+                ->where('ubicacion', 'TORAX')
+                ->where('mes_asignacion', ($request->mes)-1)
+                ->where('controlTransT_unicoCont', 'TRUE')
+                ->update([
+                    'dosimetro_uso' => 'FALSE'
+                ]);
+                $cleardosicontrolTU = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
+                ->where('ubicacion', 'TORAX')
+                ->where('mes_asignacion', ($request->mes)-1)
+                ->where('controlTransT_unicoCont', 'TRUE')
+                ->get();
+                for($i= 0; $i<count($cleardosicontrolTU); $i++){
+                    array_push($dosiLimpios, array('controlTU'=> $cleardosicontrolTU[$i]->id_dosicontrolcontdosisedes, 'controlCU'=>'', 'controlAU'=>'', 'control'=>'' ,'trabajadorasig'=>'' ,'dosiareasig'=>''));
+                }
+            }
+            $verificarDosiControlUnicC = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
+            ->where('ubicacion', 'CRISTALINO')
+            ->where('mes_asignacion', $request->mes)
+            ->get();
+            if($verificarDosiControlUnicC->isEmpty()){
+                $cleardosicontrolCunicoasigmesant = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
+                ->where('ubicacion', 'CRISTALINO')
+                ->where('mes_asignacion', ($request->mes)-1)
+                ->where('controlTransC_unicoCont', 'TRUE')
+                ->update([
+                    'dosimetro_uso' => 'FALSE'
+                ]);
+                $cleardosicontrolCU = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
+                ->where('ubicacion', 'CRISTALINO')
+                ->where('mes_asignacion', ($request->mes)-1)
+                ->where('controlTransC_unicoCont', 'TRUE')
+                ->get();
+                for($i= 0; $i<count($cleardosicontrolCU); $i++){
+                    array_push($dosiLimpios, array('controlTU'=>'', 'controlCU'=> $cleardosicontrolCU[$i]->id_dosicontrolcontdosisedes, 'controlAU'=>'', 'control'=>'' ,'trabajadorasig'=>'' ,'dosiareasig'=>''));
+                }
+            }
+            $verificarDosiControlUnicA = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
+            ->where('ubicacion', 'ANILLO')
+            ->where('mes_asignacion', $request->mes)
+            ->get();
+            if($verificarDosiControlUnicA->isEmpty()){
+                $cleardosicontrolAunicoasigmesant = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
+                ->where('ubicacion', 'ANILLO')
+                ->where('mes_asignacion', ($request->mes)-1)
+                ->where('controlTransA_unicoCont', 'TRUE')
+                ->update([
+                    'dosimetro_uso' => 'FALSE'
+                ]);
+                $cleardosicontrolAU = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
+                ->where('ubicacion', 'ANILLO')
+                ->where('mes_asignacion', ($request->mes)-1)
+                ->where('controlTransA_unicoCont', 'TRUE')
+                ->get();
+                for($i= 0; $i<count($cleardosicontrolAU); $i++){
+                    array_push($dosiLimpios, array('controlTU'=>'', 'controlCU'=>'', 'controlAU'=> $cleardosicontrolAU[$i]->id_dosicontrolcontdosisedes, 'control'=>'' ,'trabajadorasig'=>'' ,'dosiareasig'=>''));
+                }
+            }
         }else{
             $cleardosicontrolasigmesant = Dosicontrolcontdosisede::where('contdosisededepto_id', $request->contdosisededepto_id)
             ->where('contratodosimetriasede_id', $request->contratodosimetriasede_id)
@@ -1014,6 +1079,13 @@ class NovedadesController extends Controller
             ->update([
                 'dosimetro_uso' => 'FALSE'
             ]);
+            $cleardosicontrol= Dosicontrolcontdosisede::where('contdosisededepto_id', $request->contdosisededepto_id)
+            ->where('contratodosimetriasede_id', $request->contratodosimetriasede_id)
+            ->where('mes_asignacion',($request->mes)-1)
+            ->get();
+            for($i= 0; $i<count($cleardosicontrol); $i++){
+                array_push($dosiLimpios, array('controlTU'=>'', 'controlCU'=>'', 'controlAU'=>'', 'control'=> $cleardosicontrol[$i]->id_dosicontrolcontdosisedes, 'trabajadorasig'=>'', 'dosiareasig'=>''));
+            }
         }
         $cleardositrabajasigmesant = Trabajadordosimetro::where('contdosisededepto_id', $request->contdosisededepto_id)
         ->where('contratodosimetriasede_id', $request->contratodosimetriasede_id)
@@ -1021,21 +1093,35 @@ class NovedadesController extends Controller
         ->update([
             'dosimetro_uso' => 'FALSE'
         ]);
-        $cleardositrabajasigmesant = Dosiareacontdosisede::where('contdosisededepto_id', $request->contdosisededepto_id)
+        $cleardositrabajasig = Trabajadordosimetro::where('contdosisededepto_id', $request->contdosisededepto_id)
+        ->where('contratodosimetriasede_id', $request->contratodosimetriasede_id)
+        ->where('mes_asignacion',($request->mes)-1)
+        ->get();
+        for($i= 0; $i<count($cleardositrabajasig); $i++){
+            array_push($dosiLimpios, array('controlTU'=>'', 'controlCU'=>'', 'controlAU'=>'', 'control'=>'', 'trabajadorasig'=> $cleardositrabajasig[$i]->id_trabajadordosimetro, 'dosiareasig'=>''));
+        }
+        $cleardosiareasigmesant = Dosiareacontdosisede::where('contdosisededepto_id', $request->contdosisededepto_id)
         ->where('contratodosimetriasede_id', $request->contratodosimetriasede_id)
         ->where('mes_asignacion',($request->mes)-1)
         ->update([
             'dosimetro_uso' => 'FALSE'
         ]);
-        $dosiasginadosmesactual = Trabajadordosimetro::join('personas', 'trabajadordosimetros.persona_id', '=', 'personas.id_persona')
+        $cleardosiareasig = Dosiareacontdosisede::where('contdosisededepto_id', $request->contdosisededepto_id)
+        ->where('contratodosimetriasede_id', $request->contratodosimetriasede_id)
+        ->where('mes_asignacion',($request->mes)-1)
+        ->get();
+        for($i= 0; $i<count($cleardosiareasig); $i++){
+            array_push($dosiLimpios, array('controlTU'=>'', 'controlCU'=>'', 'controlAU'=>'', 'control'=>'', 'trabajadorasig'=>'', 'dosiareasig'=> $cleardosiareasig[$i]->id_dosiareacontdosisedes));
+        }
+        
+        /*$dosiasginadosmesactual = Trabajadordosimetro::join('personas', 'trabajadordosimetros.persona_id', '=', 'personas.id_persona')
         ->join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
         ->leftjoin('holders', 'trabajadordosimetros.holder_id', '=', 'holders.id_holder')
         ->where('contratodosimetriasede_id', '=', $request->contratodosimetriasede_id)
         ->where('contdosisededepto_id', '=', $request->contdosisededepto_id)
         ->where('mes_asignacion', '=', ($request->mes)-1)
-        ->get();
-        return response()->json($dosiasginadosmesactual);
-        
+        ->get();*/
+        return response()->json($dosiLimpios);
     }
 
     public function reportePDFcambiodosim($deptodosi, $mesnumber){

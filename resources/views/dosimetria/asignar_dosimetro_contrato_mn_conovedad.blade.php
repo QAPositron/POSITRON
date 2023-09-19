@@ -6,7 +6,7 @@
     <div class="col-md-15">
         <div class="card text-dark bg-light">
             <br>
-            <h2 class="text-center">ASIGNACIÓN DOSÍMETROS</h2>
+            <h2 class="text-center">ASIGNACIÓN DOSÍMETROS CON NOVEDAD</h2>
             <h3 class="text-center" id="nueva_empresaModalLabel"> <br><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
                 ESP.: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}} <br>
                 PERÍODO {{$mesnumber}} ( <span id="mes{{$mesnumber}}"></span> ) 
@@ -211,70 +211,67 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE')
-                                        @foreach($dosicontrolToraxUnicomesact as $dosicontrolUnicoT)
-                                            <tr>
-                                                <input type="number" name="id_asigdosimControlUnicoT[]" id="id_asigdosimControlUnicoT" value="{{$dosicontrolUnicoT->id_dosicontrolcontdosisedes}}" hidden >
-                                                <td colspan='2' class='align-middle text-center'>CONTROL TRANS. T.</td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select id_dosimetro_ControlToraxUnico"  name="id_dosimetro_ControlToraxUnico" id="id_dosimetro_ControlToraxUnico">
-                                                        <option value="@if($dosicontrolUnicoT->dosimetro_id != NULL){{$dosicontrolUnicoT->dosimetro_id}}@endif">@if($dosicontrolUnicoT->dosimetro_id == NULL) -- @else --{{$dosicontrolUnicoT->dosimetro->codigo_dosimeter}}-- @endif</option>
-                                                        @foreach($dosimLibresGeneral as $dosigenlib)
-                                                            <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle text-center'>N.A.</td>
-                                            </tr>
-                                        @endforeach
+                                    
+                                    @if(!empty($dosicontrolToraxUnicomesact[0]) && $dosicontrolToraxUnicomesact[0]->controlTransT_unicoCont == 'TRUE')
+                                        <tr>
+                                            <input type="number" name="id_asigdosimControlUnicoT[]" id="id_asigdosimControlUnicoT" value="{{$dosicontrolToraxUnicomesact[0]->id_dosicontrolcontdosisedes}}" hidden >
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TRANS. T.</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_ControlToraxUnico"  name="id_dosimetro_ControlToraxUnico" id="id_dosimetro_ControlToraxUnico" @if($dosicontrolToraxUnicomesact[0]->dosimetro_uso != 'FALSE' && $dosicontrolToraxUnicomesact[0]->dosimetro_id != NULL){ disabled } @endif>
+                                                    <option value="@if($dosicontrolToraxUnicomesact[0]->dosimetro_id != NULL){{$dosicontrolToraxUnicomesact[0]->dosimetro_id}}@endif">@if($dosicontrolToraxUnicomesact[0]->dosimetro_id == NULL) -- @else --{{$dosicontrolToraxUnicomesact[0]->dosimetro->codigo_dosimeter}}-- @endif</option>
+                                                    @foreach($dosimLibresGeneral as $dosigenlib)
+                                                        <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle text-center'>N.A.</td>
+                                        </tr>
                                     @endif
-                                    @if($mescontdosisededepto->controlTransC_unicoCont == 'TRUE')
-                                        @foreach($dosicontrolCristalinoUnicomesact as $dosicontrolUnicoC)
-                                            <tr>
-                                                <input type="number" name="id_asigdosimControlUnicoC[]" id="id_asigdosimControlUnicoC" value="{{$dosicontrolUnicoC->id_dosicontrolcontdosisedes}}" hidden >
-                                                <td colspan='2' class='align-middle text-center'>CONTROL TRANS. C.</td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select id_dosimetro_ControlCristalinoUnico"  name="id_dosimetro_ControlCristalinoUnico" id="id_dosimetro_ControlCristalinoUnico">
-                                                        <option value="@if($dosicontrolUnicoC->dosimetro_id != NULL){{$dosicontrolUnicoC->dosimetro_id}}@endif">@if($dosicontrolUnicoC->dosimetro_id == NULL) -- @else --{{$dosicontrolUnicoC->dosimetro->codigo_dosimeter}}-- @endif</option>
-                                                        @foreach($dosimLibresEzclip as $dosiEzlib)
-                                                            <option value="{{$dosiEzlib->id_dosimetro}}">{{$dosiEzlib->codigo_dosimeter}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select id_holder_ControlCristalinoUnico"  name="id_holder_ControlCristalinoUnico[]" id="id_holder_ControlCristalinoUnico">
-                                                        <option value="@if($dosicontrolUnicoC->holder_id != NULL){{$dosicontrolUnicoC->holder_id}}@endif">@if($dosicontrolUnicoC->holder_id == NULL) -- @else --{{$dosicontrolUnicoC->holder->codigo_holder}}-- @endif</option>
-                                                        @foreach($holderLibresAnillo as $holLibA)
-                                                            <option value="{{$holLibA->id_holder}}">{{$holLibA->codigo_holder}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                    
+                                    @if(!empty($dosicontrolCristalinoUnicomesact[0]) && $dosicontrolCristalinoUnicomesact[0]->controlTransC_unicoCont == 'TRUE')
+                                        <tr>
+                                            <input type="number" name="id_asigdosimControlUnicoC[]" id="id_asigdosimControlUnicoC" value="{{$dosicontrolCristalinoUnicomesact[0]->id_dosicontrolcontdosisedes}}" hidden >
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TRANS. C.</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_ControlCristalinoUnico"  name="id_dosimetro_ControlCristalinoUnico" id="id_dosimetro_ControlCristalinoUnico"  @if($dosicontrolCristalinoUnicomesact[0]->dosimetro_uso != 'FALSE' && $dosicontrolCristalinoUnicomesact[0]->dosimetro_id != NULL) { disabled } @endif>
+                                                    <option value="@if($dosicontrolCristalinoUnicomesact[0]->dosimetro_id != NULL){{$dosicontrolCristalinoUnicomesact[0]->dosimetro_id}}@endif">@if($dosicontrolCristalinoUnicomesact[0]->dosimetro_id == NULL) -- @else --{{$dosicontrolCristalinoUnicomesact[0]->dosimetro->codigo_dosimeter}}-- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiEzlib)
+                                                        <option value="{{$dosiEzlib->id_dosimetro}}">{{$dosiEzlib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_holder_ControlCristalinoUnico"  name="id_holder_ControlCristalinoUnico[]" id="id_holder_ControlCristalinoUnico" @if($dosicontrolCristalinoUnicomesact[0]->dosimetro_uso != 'FALSE' && $dosicontrolCristalinoUnicomesact[0]->holder_id != NULL) { disabled } @endif>
+                                                    <option value="@if($dosicontrolCristalinoUnicomesact[0]->holder_id != NULL){{$dosicontrolCristalinoUnicomesact[0]->holder_id}}@endif">@if($dosicontrolCristalinoUnicomesact[0]->holder_id == NULL) -- @else --{{$dosicontrolCristalinoUnicomesact[0]->holder->codigo_holder}}-- @endif</option>
+                                                    @foreach($holderLibresAnillo as $holLibA)
+                                                        <option value="{{$holLibA->id_holder}}">{{$holLibA->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        </tr>
                                     @endif
-                                    @if($mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
-                                        @foreach($dosicontrolDedoUnicomesact as $dosicontrolUnicoA)
-                                            <tr>
-                                                <input type="number" name="id_asigdosimControlUnicoA[]" id="id_asigdosimControlUnicoA" value="{{$dosicontrolUnicoA->id_dosicontrolcontdosisedes}}" hidden >
-                                                <td colspan='2' class='align-middle text-center'>CONTROL TRANS. A.</td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select id_dosimetro_ControlDedoUnico"  name="id_dosimetro_ControlDedoUnico" id="id_dosimetro_ControlDedoUnico">
-                                                        <option value="@if($dosicontrolUnicoA->dosimetro_id != NULL){{$dosicontrolUnicoA->dosimetro_id}}@endif">@if($dosicontrolUnicoA->dosimetro_id == NULL) -- @else --{{$dosicontrolUnicoA->dosimetro->codigo_dosimeter}}-- @endif</option>
-                                                        @foreach($dosimLibresEzclip as $dosiEzlib)
-                                                            <option value="{{$dosiEzlib->id_dosimetro}}">{{$dosiEzlib->codigo_dosimeter}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td class='align-middle'>
-                                                    <select class="form-select id_holder_ControlDedoUnico"  name="id_holder_ControlDedoUnico[]" id="id_holder_ControlDedoUnico">
-                                                        <option value="@if($dosicontrolUnicoA->holder_id != NULL){{$dosicontrolUnicoA->holder_id}}@endif">@if($dosicontrolUnicoA->holder_id == NULL) -- @else --{{$dosicontrolUnicoA->holder->codigo_holder}}-- @endif</option>
-                                                        @foreach($holderLibresAnillo as $holLibA)
-                                                            <option value="{{$holLibA->id_holder}}">{{$holLibA->codigo_holder}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                    
+                                    @if(!empty($dosicontrolDedoUnicomesact[0]) && $dosicontrolDedoUnicomesact[0]->controlTransA_unicoCont == 'TRUE')
+                                        <tr>
+                                            <input type="number" name="id_asigdosimControlUnicoA[]" id="id_asigdosimControlUnicoA" value="{{$dosicontrolDedoUnicomesact[0]->id_dosicontrolcontdosisedes}}" hidden >
+                                            <td colspan='2' class='align-middle text-center'>CONTROL TRANS. A.</td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_dosimetro_ControlDedoUnico"  name="id_dosimetro_ControlDedoUnico" id="id_dosimetro_ControlDedoUnico" @if($dosicontrolDedoUnicomesact[0]->dosimetro_uso != 'FALSE' && $dosicontrolDedoUnicomesact[0]->dosimetro_id != NULL) { disabled }  @endif>
+                                                    <option value="@if($dosicontrolDedoUnicomesact[0]->dosimetro_id != NULL){{$dosicontrolDedoUnicomesact[0]->dosimetro_id}}@endif">@if($dosicontrolDedoUnicomesact[0]->dosimetro_id == NULL) -- @else --{{$dosicontrolDedoUnicomesact[0]->dosimetro->codigo_dosimeter}}-- @endif</option>
+                                                    @foreach($dosimLibresEzclip as $dosiEzlib)
+                                                        <option value="{{$dosiEzlib->id_dosimetro}}">{{$dosiEzlib->codigo_dosimeter}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_holder_ControlDedoUnico"  name="id_holder_ControlDedoUnico[]" id="id_holder_ControlDedoUnico" @if($dosicontrolDedoUnicomesact[0]->dosimetro_uso != 'FALSE' && $dosicontrolDedoUnicomesact[0]->holder_id != NULL) { disabled }  @endif>
+                                                    <option value="@if($dosicontrolDedoUnicomesact[0]->holder_id != NULL){{$dosicontrolDedoUnicomesact[0]->holder_id}}@endif">@if($dosicontrolDedoUnicomesact[0]->holder_id == NULL) -- @else --{{$dosicontrolDedoUnicomesact[0]->holder->codigo_holder}}-- @endif</option>
+                                                    @foreach($holderLibresAnillo as $holLibA)
+                                                        <option value="{{$holLibA->id_holder}}">{{$holLibA->codigo_holder}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        </tr>
                                     @endif
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo AREA asignados en UNA NOVEADAD DE NUEVOS DOSIMETROS PARA MES SIGUIENTE AL ACTUAL EN EL QUE FALTA ASOCIAR DOSIMETROS Y HOLDERS (este se convierte en actual)/////// --}}
                                     @foreach($dosiareamesact as $dosiareact)

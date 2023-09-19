@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md">
                     <div class="form-floating">
-                        <input type="number" hidden name="contratodosimetriasede" id="contratodosimetriasede" value="">
+                        <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value="">
                         <select class="form-select" name="sedes_empresadosi" id="sedes_empresadosi" value="" autofocus style="text-transform:uppercase">
 
                         </select>
@@ -120,7 +120,7 @@
                                         
                                         <input type="number" hidden name="mestrabj_asig" id="mestrabj_asig" value="">
                                         <input type="number" hidden name="id_contdosisededepto" id="id_contdosisededepto" value="">
-                                        <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value="">
+                                        {{-- <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value=""> --}}
                                         <input type="date" hidden name="primerDia_asigdosim" id="primerDia_asigdosim" value="">
                                         <input type="date" hidden name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" value="">
                                         <input type="date" hidden name="fecha_dosim_enviado" id="fecha_dosim_enviado" value="">
@@ -193,7 +193,7 @@
                         <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="2">
                         <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
                         <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
-                        <input type="number" hidden name="contratodosimetriasede" id="contratodosimetriasede" value="">
+                        <input type="number" hidden name="id_contdosisede" id="id_contdosisede" value="">
                         <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
                         <input type="text" hidden name="controlTransT_unicoCont2" id="controlTransT_unicoCont2" value="">
                         <input type="text" hidden name="controlTransC_unicoCont2" id="controlTransC_unicoCont2" value="">
@@ -344,7 +344,8 @@
                     $('#sedes_empresadosi').append("<option value=''>--SELECCIONE UNA SEDE DEL CONTRATO--</option>");
                     for(var i = 0; i < sedes.length; i++){
                         $('#sedes_empresadosi').append("<option value='"+ sedes[i].id_sede + "'>" + sedes[i].nombre_sede + "</option>");
-                        document.getElementById("contratodosimetriasede").value = sedes[i].id_contratodosimetriasede;
+                        document.getElementById("id_contdosisede").value = sedes[i].id_contratodosimetriasede;
+                        document.getElementById("id_contratodosimetriasede").value = sedes[i].id_contratodosimetriasede;
                     }
                 });
                 $.get('contdosisededepto', {contrato_id: contrato_id}, function(contratodosi){
@@ -362,7 +363,7 @@
         $('#sedes_empresadosi').on('change', function(){
             var sede_id = $(this).val();
             if($.trim(sede_id) != ''){
-                var contratodosimetriasede = document.getElementById("contratodosimetriasede").value;
+                var contratodosimetriasede = document.getElementById("id_contratodosimetriasede").value;
                 console.log("ID_CONTRATODOSIMETRIASEDE" +contratodosimetriasede);
                 $.get('especialidadescontDosi', {contratodosimetriasede_id: contratodosimetriasede}, function(especialidades){
                     console.log("ESTAS SON LAS ESPECIALIDADES");
@@ -400,7 +401,7 @@
         @endforeach
         $('#especialidades_empresadosi').on('change', function(){
             var especialidad_id = $(this).val();
-            var contratodosimetriasede = document.getElementById("contratodosimetriasede").value;
+            var contratodosimetriasede = document.getElementById("id_contratodosimetriasede").value;
             console.log("contdosisededepto= "+especialidad_id+" contratodosimetriasede= "+contratodosimetriasede);
             $.get('mesactualcontdosisededepto', {especialidad_id: especialidad_id, contratodosimetriasede: contratodosimetriasede}, function(mesactual_trabjasig){
                 console.log("ESTE ES EL MES ACTUAL**");
@@ -717,7 +718,7 @@
                     var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
                     console.log("**contdosisededepto_id " +contdosisededepto_id);
                     console.log("**mes actual "+consultaMesactual);
-                    var contratodosimetriasede_id  = document.getElementById("contratodosimetriasede").value;
+                    var contratodosimetriasede_id  = document.getElementById("id_contratodosimetriasede").value;
                     var contratodosimetria = document.getElementById("contratos_empresadosi").value;
 
                     $.get('dosiasginadoscontrolmesactual', {contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual, contratodosimetria_id: contratodosimetria}, function(asignacionescontrolmesactual){
@@ -766,15 +767,14 @@
                                             <input type="text" name="ubicacion_asigdosimControl[]" id="ubicacion_asigdosimControl" class="form-control text-center" value="`+ubicacion+`" readonly>
                                         </td>
                                         <td style='width: 190px' class='align-middle'>
-                                            
-                                            <select class="form-select cambiar text-center"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
+                                            <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
                                                 ${selectDosimetrosEzclip.innerHTML}
                                             </select>
                                         </td>
                                         <td style='width: 163px' class='align-middle text-center'>
-                                            <select class="form-select cambiar text-center"  name="id_holder_asigdosimControl[]" id="id_holder_asigdosimControl" ${disacont} >
+                                            <select class="form-select cambiar"  name="id_holder_asigdosimControl[]" id="id_holder_asigdosimControl" ${disacont} >
                                                 <option value="`+id_holder+`">`+codigo_holder+`</option>
                                                 <option value="NA">N.A.</option>
                                                 ${selectHolders.innerHTML}
@@ -858,10 +858,10 @@
                                     }
                                     var mestrabj_asig = document.getElementById("mesacambiar").value;
                                     var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
-                                    var id_contratodosimetriasede =  document.getElementById("contratodosimetriasede").value; 
+                                    var id_contratodosimetriasede =  document.getElementById("id_contratodosimetriasede").value; 
                                     document.getElementById("mes_asig_siguiente").value = mestrabj_asig;
                                     document.getElementById("contdosisededepto").value = id_contdosisededepto;
-                                    document.getElementById("contratodosimetriasede").value = id_contratodosimetriasede;
+                                    document.getElementById("id_contratodosimetriasede").value = id_contratodosimetriasede;
                                     
                                     var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
                                         <td class='align-middle text-center'>
@@ -873,14 +873,14 @@
                                         </td>
                                         <td class='align-middle text-center'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control text-center" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
                                         <td class='align-middle text-center'>
-                                            <select class="form-select cambiar text-center"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
+                                            <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
                                                 ${selectDosimetrosEzclip.innerHTML}
                                             </select>
                                         </td>
                                         <td class='align-middle text-center'>
-                                            <select class="form-select cambiar text-center"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
+                                            <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
                                                 <option value="`+id_holder+`">`+codigo_holder+`</option>
                                                 ${selectHolders.innerHTML}
                                             </select>
@@ -997,7 +997,7 @@
                                     </td>
                                     <td class='align-middle text-center'><input type="text" class="form-control text-center" value="ÁREA" readonly></td>
                                     <td class='align-middle text-center'>
-                                        <select class="form-select text-center cambiar"  name="id_dosimetro_area_asigdosim[]" id="id_dosimetro_area_asigdosim" ${dis}>
+                                        <select class="form-select cambiar"  name="id_dosimetro_area_asigdosim[]" id="id_dosimetro_area_asigdosim" ${dis}>
                                             <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                             ${selectDosimetros.innerHTML}
                                         </select>
@@ -1048,7 +1048,7 @@
     function limpiar(){
         var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
         var mes = document.getElementById("mesacambiar").value;
-        var contratodosimetriasede_id  = document.getElementById("contratodosimetriasede").value;
+        var contratodosimetriasede_id  = document.getElementById("id_contratodosimetriasede").value;
         var contratodosimetria_id = document.getElementById("contratos_empresadosi").value;
         alert("ESTE ES EL MES"+mes+"ESTE ES EL ID DEL DEPTO"+contdosisededepto_id+"ESTE ES EL ID DE LA SEDE"+contratodosimetriasede_id);
         
@@ -1222,70 +1222,196 @@
             }
             ////////////////////////////////////////////////////////////
             
-            ///////////////////////////////////////////////////////////////////////////
-            //////VALIDACIONES PARA LOS NUEVOS DOSIMETROS QUE DESEE AÑADIR//////////////
-            /* var trabajadoresNull = document.querySelectorAll('select[name="id_trabj_asigdosim_null[]"]');
-            var trabajadores = document.querySelectorAll('select[name="id_trabj_asigdosim[]"]');
-
-            console.log("ESTAS SON LOS TRABAJADORES");
-            console.log(trabajadores);
-            console.log(trabajadoresNull);
-            if(trabajadoresNull.length == 0 && trabajadores.length == 0){
-                return Swal.fire({
-                                    title:"NO PUEDE RETIRAR TODOS LOS DOSIMETROS, AL MENOS DEBE TENER UN DOSIMETRO DE TIPO TORAX O EZCLIP",
-                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+            var dosimetrosControlantg = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
+            console.log("ESTOS SON LOS DOSIMETROS CONTROL ANTIGUOS");
+            console.log(dosimetrosControlantg); 
+            if(dosimetrosControlantg.length != 0){
+                for(var i = 0; i < dosimetrosControlantg.length; i++) {
+                    var values = dosimetrosControlantg[i].value;
+                    console.log("control values="+values);
+                    for(var x = 0; x < dosimetrosControlantg.length; x++){
+                        var valuesX = dosimetrosControlantg[x].value;
+                        console.log("control valuesX="+valuesX);
+                        if(values == valuesX && i != x && values != '' && valuesX != ''){
+                            return Swal.fire({
+                                    title:"ALGUNOS DOSÍMETROS DE TIPO CONTROL SE ENCUENTRAN REPETIDOS",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                     icon: 'error'
-                                }).then(function() {
-                                    var host = window.location.host;
-                                    window.location = "http://"+host+"/POSITRON/public/novedades/retiroDosimetro";
                                 });
-            } */
-            /* for(var i = 0; i < trabajadoresNull.length; i++){
-                var valuesNull = trabajadoresNull[i].value;
-                for(var x = 0; x < trabajadores.length; x++) {
-                    var values = trabajadores[x].value;
-                    if(values == '' && valuesNull == ''){
+                        }
+                    }
+                };
+            };
+            var dosimetrosAreantg = document.querySelectorAll('select[name="id_dosimetro_area_asigdosim[]"]');
+            console.log("ESTOS SON LOS DOSIMETROS AREA ANTIGUOS");
+            console.log(dosimetrosAreantg); 
+            if(dosimetrosAreantg.length != 0){
+                for(var i = 0; i < dosimetrosAreantg.length; i++) {
+                    var values = dosimetrosAreantg[i].value;
+                    for(var x = 0; x < dosimetrosAreantg.length; x++){
+                        var valuesX = dosimetrosAreantg[x].value;
+                        if(values == valuesX && i != x){
+                            return Swal.fire({
+                                    title:"ALGUNOS DOSÍMETROS DE TIPO AMBIENTAL SE ENCUENTRAN REPETIDOS",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                    icon: 'error'
+                                });
+                        }
+                    }
+                };
+            };
+            var dosimetrosantg = document.querySelectorAll('select[name="id_dosimetro_asigdosim[]"]');
+            console.log("ESTOS SON LOS DOSIMETROS ANTIGUOS");
+            console.log(dosimetrosantg); 
+            if(dosimetrosantg.length != 0){
+                for(var i = 0; i < dosimetrosantg.length; i++) {
+                    var values = dosimetrosantg[i].value;
+                    for(var x = 0; x < dosimetrosantg.length; x++){
+                        var valuesX = dosimetrosantg[x].value;
+                        if(values == valuesX && i != x){
+                            return Swal.fire({
+                                    title:"ALGUNOS DOSÍMETROS SE ENCUENTRAN REPETIDOS",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                    icon: 'error'
+                                });
+                        }
+                    }
+                };
+            };
+            if(dosimetrosantg.length != 0 && dosimetrosAreantg.length != 0){
+                for(var i = 0; i < dosimetrosantg.length; i++) {
+                    var values = dosimetrosantg[i].value;
+                    for(var x = 0; x < dosimetrosAreantg.length; x++){
+                        var valuesX = dosimetrosAreantg[x].value;
+                        if(values == valuesX && values != '' && valuesX != ''){
+                            return Swal.fire({
+                                    title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                    icon: 'error'
+                                });
+                        }
+                    }
+                };
+            };
+            if(dosimetrosantg.length != 0 && dosimetrosControlantg.length != 0){
+                for(var i = 0; i < dosimetrosantg.length; i++) {
+                    var values = dosimetrosantg[i].value;
+                    for(var x = 0; x < dosimetrosControlantg.length; x++){
+                        var valuesX = dosimetrosControlantg[x].value;
+                        if(values == valuesX && values != '' && valuesX != ''){
+                            return Swal.fire({
+                                    title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                    icon: 'error'
+                                });
+                        }
+                    }
+                };
+            };
+            if(dosimetrosAreantg.length != 0 && dosimetrosControlantg.length != 0){
+                for(var i = 0; i < dosimetrosControlantg.length; i++) {
+                    var values = dosimetrosControlantg[i].value;
+                    console.log("dosimetros AREA values i"+i+"-"+values);
+                    for(var x = 0; x < dosimetrosAreantg.length; x++){
+                        var valuesX = dosimetrosAreantg[x].value;
+                        console.log("dosimetros CONTROL values x"+x+"-"+valuesX);
+                        if(values == valuesX && values != '' && valuesX != ''){
+                            return Swal.fire({
+                                    title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                    icon: 'error'
+                                });
+                        }
+                    }
+                };
+            };
+            var areasAntig = document.querySelectorAll('select[name="id_area_asigdosim[]"]');
+            console.log("ESTAS SON LAS AREAS ANTIGUAS");
+            console.log(areasAntig);
+            if(areasAntig.length != 0){
+                for(var i = 0; i < areasAntig.length; i++) {
+                    var values = areasAntig[i].value;
+                    if(values == ''){
                         return Swal.fire({
-                                    title:"NO PUEDE RETIRAR TODOS LOS DOSIMETROS, AL MENOS DEBE TENER UN DOSIMETRO DE TIPO TORAX O EZCLIP",
+                                    title:"FALTA SELECCIONAR ALGÚN ÁREA",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
                                     icon: 'error'
                                 });
                         
                     }
-                    
                 };
-            } */
-            
-
-           /*  var ubicacion = document.querySelectorAll('select[name="id_ubicacion_asig[]"]');
-            console.log("ESTAS SON LAS UBICACIONES");
-            console.log(ubicacion);
-            for(var i = 0; i < ubicacion.length; i++) {
-                var values = ubicacion[i].value;
-                if(values == ''){
-                   
-                    return Swal.fire({
-                                title:"FALTA SELECCIONAR ALGUNA UBICACIÓN",
-                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+            };
+            var holderControlAntg = document.querySelectorAll('select[name="id_holder_asigdosimControl[]"]');
+            console.log("ESTAS SON LOS HOLDERS CONTROL ANTIGUOS");
+            console.log(holderControlAntg); 
+            if(holderControlAntg.length != 0){
+                for(var i = 0; i < holderControlAntg.length; i++) {
+                    var values = holderControlAntg[i].value;
+                    console.log("values HOLDERi" +i+"-"+ values);
+                    for(var x = 0; x < holderControlAntg.length; x++){
+                        var valuesX = holderControlAntg[x].value;
+                        console.log("values HOLDERx" +x+"-"+valuesX);
+                        if(values == valuesX && i != x && values != '' && valuesX != ''){
+                            return Swal.fire({
+                                    title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                    icon: 'error'
+                                });
+                        }
+                    }
+                };
+            };
+            var holderAnt = document.querySelectorAll('select[name="id_holder_asigdosim[]"]');
+            console.log("ESTAS SON LOS HOLDERS ANTIGUOS");
+            console.log(holderAnt); 
+            if(holderAnt.length != 0){
+                for(var i = 0; i < holderAnt.length; i++) {
+                    var values = holderAnt[i].value;
+                    console.log("values HOLDERi" +i+"-"+ values);
+                    for(var x = 0; x < holderAnt.length; x++){
+                        var valuesX = holderAnt[x].value;
+                        console.log("values HOLDERx" +x+"-"+valuesX);
+                        if(values == valuesX && i != x){
+                            return Swal.fire({
+                                    title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                    text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                    icon: 'error'
+                                });
+                        }
+                    }
+                };
+            };
+            for(var i = 0; i < holderAnt.length; i++) {
+                var values = holderAnt[i].value;
+                for(var x = 0; x < holderControlAntg.length; x++){
+                    var valuesX = holderControlAntg[x].value;
+                    if(values == valuesX){
+                        return Swal.fire({
+                                title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });
+                    }
                 }
-            }; */
-            
+            };
             
             ///////////////////////VALIDACION PARA LAS OBSERVACIONES OBLIGATORIAS//////////
             var observaciones = document.querySelectorAll('input[name="inputnotas[]"]');
-            console.log("ESTAS SON LAS OBSERVACIONES" + observaciones);
-            if(observaciones.length == 0){
+            var observacionesAreas = document.querySelectorAll('input[name="inputnotasAreas[]"]');
+            var observacionesControl = document.querySelectorAll('input[name="inputnotasControl[]"]');
+            console.log("ESTAS SON LAS OBSERVACIONES");
+            console.log(observaciones);
+            if(observaciones.length == 0 && observacionesAreas.length == 0 && observacionesControl.length == 0){
                 return Swal.fire({
-                    title:"FALTA OPRIMIR EL BOTÓN PARA GENERAR LAS OBSERVACIONES DE LAS NOVEDADES ",
-                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
-                        icon: 'error'
-                });
+                                title:"FALTA OPRIMIR EL BOTÓN PARA GENERAR LAS OBSERVACIONES DE LAS NOVEDADES ",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
             };
+            
             ////////////////////////////////////////////////////////////////////////////////
             Swal.fire({
-                text: "DESEA GUARDAR ESTA ASIGNACIÓN??",
+                text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL PERIODO SIGUIENTE AL ACTUAL??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
