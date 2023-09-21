@@ -147,6 +147,7 @@
                                     <th style='width: 16.40%'>HOLDER</th>
                                 </thead>
                                 <tbody>
+                                    
                                     <input hidden name="mesNumber" id="mesNumber" value="{{$mesnumber}}">
                                     <input type="number" name="id_departamento_asigdosim" id="id_departamento_asigdosim" hidden value="{{$contdosisededepto->id_contdosisededepto}}">
                                     <input type="number" name="id_contrato_asigdosim_sede" id="id_contrato_asigdosim_sede" hidden value="{{$contdosisededepto->contratodosimetriasede_id}}">

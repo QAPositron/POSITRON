@@ -446,7 +446,7 @@
                         
                     }else if(mesactual_trabjasig[0].periodo_recambio == 'TRIMS'){
                         console.log("ENTRO AL PERIODO TRIMS");
-                        var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 3, 1);
+                        ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 3, 1);
                         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                         
                         r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
@@ -468,7 +468,7 @@
                         
                     }else if(mesactual_trabjasig[0].periodo_recambio == 'BIMS'){
                         console.log("ENTRO AL PERIODO BIMS");
-                        var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 2, 1);
+                        ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 2, 1);
                         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                         r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
                         console.log("r2 " +r2final);
@@ -694,6 +694,8 @@
                     if (mes > consultaMesactual){
                         Formulario2.style.display= "block";
                         if(mes == 2){
+                            console.log("*******");
+                            console.log("ULTIMODIAPM = "+ultimoDiaPM);
                             document.getElementById('trabjPeriodo2').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO "+mes+" <br> ( "+fecha2esp1+' - '+fecha2esp2+' )';
                             var diaP = ultimoDiaPM.getDate();
                             var mesP = ultimoDiaPM.getMonth()+1;
@@ -701,7 +703,7 @@
                             var ddP = (diaP < 10 ? '0' : '')+diaP;
                             var mmP = (mesP < 10 ? '0' : '')+mesP;
                             var fechaP = añoP+'-'+mmP+'-'+ddP;
-                            document.getElementById("primerDia2_asigdosim").value = fechaP;
+                            document.getElementById("primerDia_asigdosim2").value = fechaP;
                             var diaF = r2finalM2.getDate();
                             var mesF = r2finalM2.getMonth()+1;
                             var añoF = r2finalM2.getFullYear();
@@ -870,14 +872,14 @@
                                         </td>
                                         <td class='align-middle text-center'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control text-center" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
                                         <td class='align-middle text-center'>
-                                            <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim" ${dis} >
+                                            <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim`+asignacionesmesactual[i].id_trabajadordosimetro+`" ${dis} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
                                                 ${selectDosimetrosEzclip.innerHTML}
                                             </select>
                                         </td>
                                         <td class='align-middle text-center'>
-                                            <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim" ${dis} >
+                                            <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim`+asignacionesmesactual[i].id_trabajadordosimetro+`" ${dis} >
                                                 <option value="`+id_holder+`">`+codigo_holder+`</option>
                                                 ${selectHolders.innerHTML}
                                             </select>
@@ -994,7 +996,7 @@
                                     </td>
                                     <td class='align-middle text-center'><input type="text" class="form-control text-center" value="ÁREA" readonly></td>
                                     <td class='align-middle text-center'>
-                                        <select class="form-select cambiar"  name="id_dosimetro_area_asigdosim[]" id="id_dosimetro_area_asigdosim" ${dis}>
+                                        <select class="form-select cambiar"  name="id_dosimetro_area_asigdosim[]" id="id_dosimetro_area_asigdosim`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`" ${dis}>
                                             <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                             ${selectDosimetros.innerHTML}
                                         </select>
@@ -1059,16 +1061,43 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.get('limpiar', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: mes, contratodosimetria_id: contratodosimetria_id}, function(asignacioneslimpias){
-                    console.log("LIMPIEZA DE DOSIMETROS CONTROL");
+                    console.log("LIMPIEZA DE DOSIMETROS");
                     console.log(asignacioneslimpias);
                     //se toman todos los elementos a los cuales se les va a cambiar la propiedad disbled, estos tienen la misma propiedad llamada 'cambiar'
-                    var cambiarElement = document.querySelectorAll('.cambiar');
-                    cambiarElement.forEach(function(element){
-                        element.disabled = false;
-                        element.options.item(0).text = "---";
-                        element.options.item(0).value = null;
-                    });
+                    for($i=0; $i<asignacioneslimpias.length; $i++){
+                        if(asignacioneslimpias[$i].control != '' ){
+                            var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].control);
+                            var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].control);
+                            
+                        }else if(asignacioneslimpias[$i].controlAU != ''){
+                            var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlAU);
+                            var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlAU);
+                            
+                        }else if(asignacioneslimpias[$i].controlCU != ''){
+                            var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlCU);
+                            var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlCU);
+                            
+                        }else if(asignacioneslimpias[$i].controlTU != ''){
+                            var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlTU);
+                            var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlTU);
+                            
+                        }else if(asignacioneslimpias[$i].dosiareasig != ''){
+                            var elementDosi = document.getElementById("id_dosimetro_area_asigdosim"+asignacioneslimpias[$i].dosiareasig);
+                            
+                        }else if(asignacioneslimpias[$i].trabajadorasig != ''){
+                            var elementDosi = document.getElementById("id_dosimetro_asigdosim"+asignacioneslimpias[$i].trabajadorasig);
+                            var elementHol = document.getElementById("id_holder_asigdosim"+asignacioneslimpias[$i].trabajadorasig);
+                          
+                        }
+                        elementDosi.disabled = false;
+                        elementDosi.options.item(0).text = "---";
+                        elementDosi.options.item(0).value = '';
+                        elementHol.disabled = false;
+                        elementHol.options.item(0).text = "---";
+                        elementHol.options.item(0).value = '';
+                    };
                     var cambiarBoton = document.querySelectorAll('.cambiarBoton');
+                    console.log("botones ="+cambiarBoton);
                     cambiarBoton.forEach(function(element){
                         element.disabled = false;
                     });
@@ -1265,7 +1294,7 @@
                     var values = dosimetrosantg[i].value;
                     for(var x = 0; x < dosimetrosantg.length; x++){
                         var valuesX = dosimetrosantg[x].value;
-                        if(values == valuesX && i != x){
+                        if(values == valuesX && i != x && values != '' && valuesX != ''){
                             return Swal.fire({
                                     title:"ALGUNOS DOSÍMETROS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -1348,7 +1377,7 @@
                     for(var x = 0; x < holderControlAntg.length; x++){
                         var valuesX = holderControlAntg[x].value;
                         console.log("values HOLDERx" +x+"-"+valuesX);
-                        if(values == valuesX && i != x && values != '' && valuesX != ''){
+                        if(values == valuesX && i != x && values != '' && valuesX != ''  && values != 'NA' && valuesX != 'NA'){
                             return Swal.fire({
                                     title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -1368,7 +1397,7 @@
                     for(var x = 0; x < holderAnt.length; x++){
                         var valuesX = holderAnt[x].value;
                         console.log("values HOLDERx" +x+"-"+valuesX);
-                        if(values == valuesX && i != x){
+                        if(values == valuesX && i != x && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA' ){
                             return Swal.fire({
                                     title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -1382,7 +1411,7 @@
                 var values = holderAnt[i].value;
                 for(var x = 0; x < holderControlAntg.length; x++){
                     var valuesX = holderControlAntg[x].value;
-                    if(values == valuesX){
+                    if(values == valuesX && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA' ){
                         return Swal.fire({
                                 title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
