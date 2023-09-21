@@ -2958,7 +2958,7 @@ class DosimetriaController extends Controller
             ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
             ->join('empresas', 'dosimetriacontratos.empresa_id', '=', 'empresas.id_empresa')
             ->where('contratodosimetriasededeptos.id_contdosisededepto', '=', $id)
-            ->select('empresas.razon_social_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato','dosimetriacontratos.ocupacion', 'departamentos.nombre_departamento', 'empresas.tipo_identificacion_empresa','empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio')
+            ->select('empresas.razon_social_empresa','empresas.nombre_empresa', 'sedes.nombre_sede', 'dosimetriacontratos.codigo_contrato','dosimetriacontratos.ocupacion', 'departamentos.nombre_departamento', 'empresas.tipo_identificacion_empresa','empresas.num_iden_empresa', 'colmunicipios.nombre_municol', 'coldepartamentos.abreviatura_deptocol', 'dosimetriacontratos.periodo_recambio')
             ->get();
             $personaEncargada = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
             ->join('personasedes', 'contratodosimetriasedes.sede_id', '=', 'personasedes.sede_id')
@@ -3143,8 +3143,7 @@ class DosimetriaController extends Controller
      
         $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosicontrolasigUnico', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'personaEncargadaPerfiles', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaDocemesesAreasasig','SumatoriaFechaIngresomesestrabajadoresaisg', 'SumatoriaFechaIngresomesesAreasasig', 'mesescantdosi', 'mesnumber'));
         $pdf->setPaper('8.5x14', 'landscape');
-        date_default_timezone_set('America/Bogota');
-        return $pdf->stream("REPORTE_DOSIMETRIA".mb_substr($contratoDosi[0]->nombre_empresa, 0,6,"UTF-8")."_".mb_substr($contratoDosi[0]->nombre_sede, 0,6,"UTF-8")."_".mb_substr($contratoDosi[0]->nombre_departamento, 0,6,"UTF-8")."_".$contratoDosi[0]->periodo_recambio."_P".$mesnumber.".pdf");
+        return $pdf->stream("REPORTE_DOSIMETRIA_".$contratoDosi[0]->nombre_empresa."_".mb_substr($contratoDosi[0]->nombre_sede, 0,6,"UTF-8")."_".mb_substr($contratoDosi[0]->nombre_departamento, 0,6,"UTF-8")."_".$contratoDosi[0]->periodo_recambio."_P".$mesnumber.".pdf");
         /* for($i=0; $i<count($contratoDosi); $i++ ){
             
             $empresa = $contratoDosi[$i]->nombre_empresa;
@@ -3165,7 +3164,6 @@ class DosimetriaController extends Controller
             /* return $newDate;
         } */
         /* return $personaEncargada; */
-        
 
     }
     public function pdfEtiquetas($id, $mesnumber, $item){
