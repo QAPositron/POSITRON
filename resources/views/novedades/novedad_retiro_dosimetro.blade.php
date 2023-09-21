@@ -332,6 +332,13 @@
             }
         });
         var myFechaInicial;
+        var fechaesp1;
+        var fechaesp2;
+        var fecha2esp1;
+        var fecha2esp2;
+        var ultimoDiaPM;
+        var r2final;
+        var r2finalM2;
         $('#contratos_empresadosi').on('change', function(){
             var contrato_id = $(this).val();
             var check = 0;
@@ -417,94 +424,68 @@
                     console.log("ESTA EN MES 1**");
                     if(mesactual_trabjasig[0].periodo_recambio == 'MENS'){
                         console.log("ENTRO AL PERIODO MENS");
-                        var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 1, 1);
+                        ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 1, 1);
                         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                         
-                        var r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
+                        r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
                         console.log("r2 " +r2final);
-                        var fechaesp1 = myFechaInicial.getDate()+' '+meses[myFechaInicial.getMonth()] + ' DE ' + myFechaInicial.getUTCFullYear();
+                        fechaesp1 = myFechaInicial.getDate()+' '+meses[myFechaInicial.getMonth()] + ' DE ' + myFechaInicial.getUTCFullYear();
                         console.log(fechaesp1);
-
-                        var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                        fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
                         console.log(fechaesp2);
-                        $('#mesacambiar').append("<option value='1'> 1 - "+fechaesp1+' - '+fechaesp2+"  </option>");
-                        document.getElementById('trabjPeriodo').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO 1 <br> ( "+fechaesp1+' - '+fechaesp2+' )';
-                        /* document.getElementById('trabjPeriodo2').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO 1 <br> ( "+fechaesp1+' - '+fechaesp2+' )'; */
-                        var diaP = myFechaInicial.getDate();
-                        var mesP = myFechaInicial.getMonth()+1;
-                        var añoP = myFechaInicial.getFullYear();
-                        var ddP = (diaP < 10 ? '0' : '')+diaP;
-                        var mmP = (mesP < 10 ? '0' : '')+mesP;
-                        var fechaP = añoP+'-'+mmP+'-'+ddP;
-                        /* document.getElementById("primerDia2_asigdosim").value = fechaP; */
-                        document.getElementById("primerDia_asigdosim").value = fechaP;
-                        var diaF = r2final.getDate();
-                        var mesF = r2final.getMonth()+1;
-                        var añoF = r2final.getFullYear();
-                        var ddF = (diaF < 10 ? '0' : '')+diaF;
-                        var mmF = (mesF < 10 ? '0' : '')+mesF;
-                        /* document.getElementById("ultimoDia_asigdosim2").value = añoF+'-'+mmF+'-'+ddF; */
-                        document.getElementById("ultimoDia_asigdosim").value = añoF+'-'+mmF+'-'+ddF;
+
+                        fecha2esp1 = ultimoDiaPM.getDate()+' '+meses[ultimoDiaPM.getMonth()] + ' DE ' + ultimoDiaPM.getUTCFullYear();
+                        var ultimoDiaSM = new Date(ultimoDiaPM.getFullYear(), ultimoDiaPM.getMonth() + 1, 1);
+                        console.log("ULTIMO DIA SEGUNDO MES "+ultimoDiaSM);
+                        r2finalM2 = new Date(new Date(ultimoDiaSM).setDate(ultimoDiaSM.getDate()-1));
+                        console.log("r2M2 " +r2finalM2);
+                        fecha2esp2 = (r2finalM2.getDate()) +' '+ meses[r2finalM2.getMonth()] + ' DE ' + r2finalM2.getUTCFullYear();
+
+                        $('#mesacambiar').append("<option value='1'>ACTUAL: 1 - "+fechaesp1+' - '+fechaesp2+"  </option>");
+                        $('#mesacambiar').append("<option value='2'>SIGUIENTE: 2 - "+fecha2esp1+' - '+fecha2esp2+"  </option>");
+                        
                     }else if(mesactual_trabjasig[0].periodo_recambio == 'TRIMS'){
                         console.log("ENTRO AL PERIODO TRIMS");
                         var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 3, 1);
                         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                         
-                        var r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
+                        r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
                         console.log("r2 " +r2final);
-                        var fechaesp1 = myFechaInicial.getDate()+' '+meses[myFechaInicial.getMonth()] + ' DE ' + myFechaInicial.getUTCFullYear();
+                        fechaesp1 = myFechaInicial.getDate()+' '+meses[myFechaInicial.getMonth()] + ' DE ' + myFechaInicial.getUTCFullYear();
                         console.log(fechaesp1);
-
-                        var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                        fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
                         console.log(fechaesp2);
-                        $('#mesacambiar').append("<option value='1'> 1 - "+fechaesp1+' - '+fechaesp2+"  </option>");
-                        document.getElementById('trabjPeriodo').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO 1 <br> ( "+fechaesp1+' - '+fechaesp2+' )';
-                        /* document.getElementById('trabjPeriodo2').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO 1 <br> ( "+fechaesp1+' - '+fechaesp2+' )'; */
-                        var diaP = myFechaInicial.getDate();
-                        var mesP = myFechaInicial.getMonth()+1;
-                        var añoP = myFechaInicial.getFullYear();
-                        var ddP = (diaP < 10 ? '0' : '')+diaP;
-                        var mmP = (mesP < 10 ? '0' : '')+mesP;
-                        var fechaP = añoP+'-'+mmP+'-'+ddP;
-                        /* document.getElementById("primerDia2_asigdosim").value = fechaP; */
-                        document.getElementById("primerDia_asigdosim").value = fechaP;
-                        var diaF = r2final.getDate();
-                        var mesF = r2final.getMonth()+1;
-                        var añoF = r2final.getFullYear();
-                        var ddF = (diaF < 10 ? '0' : '')+diaF;
-                        var mmF = (mesF < 10 ? '0' : '')+mesF;
-                        /* document.getElementById("ultimoDia_asigdosim2").value = añoF+'-'+mmF+'-'+ddF; */
-                        document.getElementById("ultimoDia_asigdosim").value = añoF+'-'+mmF+'-'+ddF;
+
+                        fecha2esp1 = ultimoDiaPM.getDate()+' '+meses[ultimoDiaPM.getMonth()] + ' DE ' + ultimoDiaPM.getUTCFullYear();
+                        var ultimoDiaSM = new Date(ultimoDiaPM.getFullYear(), ultimoDiaPM.getMonth() + 3, 1);
+                        console.log("ULTIMO DIA SEGUNDO MES "+ultimoDiaSM);
+                        r2finalM2 = new Date(new Date(ultimoDiaSM).setDate(ultimoDiaSM.getDate()-1));
+                        console.log("r2M2 " +r2finalM2);
+                        fecha2esp2 = (r2finalM2.getDate()) +' '+ meses[r2finalM2.getMonth()] + ' DE ' + r2finalM2.getUTCFullYear();
+
+                        $('#mesacambiar').append("<option value='1'>ACTUAL: 1 - "+fechaesp1+' - '+fechaesp2+"  </option>");
+                        $('#mesacambiar').append("<option value='2'>SIGUIENTE: 2 - "+fecha2esp1+' - '+fecha2esp2+"  </option>");
+                        
                     }else if(mesactual_trabjasig[0].periodo_recambio == 'BIMS'){
                         console.log("ENTRO AL PERIODO BIMS");
                         var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 2, 1);
                         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
-                        
-                        var r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
+                        r2final = new Date(new Date(ultimoDiaPM).setDate(ultimoDiaPM.getDate()-1));
                         console.log("r2 " +r2final);
-                        var fechaesp1 = myFechaInicial.getDate()+' '+meses[myFechaInicial.getMonth()] + ' DE ' + myFechaInicial.getUTCFullYear();
+                        fechaesp1 = myFechaInicial.getDate()+' '+meses[myFechaInicial.getMonth()] + ' DE ' + myFechaInicial.getUTCFullYear();
                         console.log(fechaesp1);
-
-                        var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                        fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
                         console.log(fechaesp2);
-                        $('#mesacambiar').append("<option value='1'> 1 - "+fechaesp1+' - '+fechaesp2+"  </option>");
-                        document.getElementById('trabjPeriodo').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO 1 <br> ( "+fechaesp1+' - '+fechaesp2+' )';
-                        /* document.getElementById('trabjPeriodo2').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO 1 <br> ( "+fechaesp1+' - '+fechaesp2+' )'; */
-                        var diaP = myFechaInicial.getDate();
-                        var mesP = myFechaInicial.getMonth()+1;
-                        var añoP = myFechaInicial.getFullYear();
-                        var ddP = (diaP < 10 ? '0' : '')+diaP;
-                        var mmP = (mesP < 10 ? '0' : '')+mesP;
-                        var fechaP = añoP+'-'+mmP+'-'+ddP;
-                        /* document.getElementById("primerDia2_asigdosim").value = fechaP; */
-                        document.getElementById("primerDia_asigdosim").value = fechaP;
-                        var diaF = r2final.getDate();
-                        var mesF = r2final.getMonth()+1;
-                        var añoF = r2final.getFullYear();
-                        var ddF = (diaF < 10 ? '0' : '')+diaF;
-                        var mmF = (mesF < 10 ? '0' : '')+mesF;
-                       /*  document.getElementById("ultimoDia_asigdosim2").value = añoF+'-'+mmF+'-'+ddF; */
-                        document.getElementById("ultimoDia_asigdosim").value = añoF+'-'+mmF+'-'+ddF;
+                        
+                        fecha2esp1 = ultimoDiaPM.getDate()+' '+meses[ultimoDiaPM.getMonth()] + ' DE ' + ultimoDiaPM.getUTCFullYear();
+                        var ultimoDiaSM = new Date(ultimoDiaPM.getFullYear(), ultimoDiaPM.getMonth() + 2, 1);
+                        console.log("ULTIMO DIA SEGUNDO MES "+ultimoDiaSM);
+                        r2finalM2 = new Date(new Date(ultimoDiaSM).setDate(ultimoDiaSM.getDate()-1));
+                        console.log("r2M2 " +r2finalM2);
+                        fecha2esp2 = (r2finalM2.getDate()) +' '+ meses[r2finalM2.getMonth()] + ' DE ' + r2finalM2.getUTCFullYear();
+
+                        $('#mesacambiar').append("<option value='1'>ACTUAL: 1 - "+fechaesp1+' - '+fechaesp2+"  </option>");
+                        $('#mesacambiar').append("<option value='2'>SIGUIENTE: 2 - "+fecha2esp1+' - '+fecha2esp2+"  </option>");
                     } 
                 }else{
                     console.log("ESTA ES EL MES > 1***");
@@ -712,6 +693,22 @@
                     }else */ 
                     if (mes > consultaMesactual){
                         Formulario2.style.display= "block";
+                        if(mes == 2){
+                            document.getElementById('trabjPeriodo2').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO "+mes+" <br> ( "+fecha2esp1+' - '+fecha2esp2+' )';
+                            var diaP = ultimoDiaPM.getDate();
+                            var mesP = ultimoDiaPM.getMonth()+1;
+                            var añoP = ultimoDiaPM.getFullYear();
+                            var ddP = (diaP < 10 ? '0' : '')+diaP;
+                            var mmP = (mesP < 10 ? '0' : '')+mesP;
+                            var fechaP = añoP+'-'+mmP+'-'+ddP;
+                            document.getElementById("primerDia2_asigdosim").value = fechaP;
+                            var diaF = r2finalM2.getDate();
+                            var mesF = r2finalM2.getMonth()+1;
+                            var añoF = r2finalM2.getFullYear();
+                            var ddF = (diaF < 10 ? '0' : '')+diaF;
+                            var mmF = (mesF < 10 ? '0' : '')+mesF;
+                            document.getElementById("ultimoDia_asigdosim2").value = añoF+'-'+mmF+'-'+ddF;
+                        }
                     }else{
                         Formulario2.style.display= "none";
                     }
@@ -767,14 +764,14 @@
                                             <input type="text" name="ubicacion_asigdosimControl[]" id="ubicacion_asigdosimControl" class="form-control text-center" value="`+ubicacion+`" readonly>
                                         </td>
                                         <td style='width: 190px' class='align-middle'>
-                                            <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl" ${disacont} >
+                                            <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`" ${disacont} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
                                                 ${selectDosimetrosEzclip.innerHTML}
                                             </select>
                                         </td>
                                         <td style='width: 163px' class='align-middle text-center'>
-                                            <select class="form-select cambiar"  name="id_holder_asigdosimControl[]" id="id_holder_asigdosimControl" ${disacont} >
+                                            <select class="form-select cambiar"  name="id_holder_asigdosimControl[]" id="id_holder_asigdosimControl`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`" ${disacont} >
                                                 <option value="`+id_holder+`">`+codigo_holder+`</option>
                                                 <option value="NA">N.A.</option>
                                                 ${selectHolders.innerHTML}
