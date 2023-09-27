@@ -3202,10 +3202,9 @@ class DosimetriaController extends Controller
 
             $pdf = PDF::loadView('dosimetria.etiquetasPDF1_dosimetria', compact('contdosisededepto', 'trabajdosiasig', 'dosicontrolasig', 'dosicontrolUnicoasig', 'areadosiasig'));
         }
-        
         /* $pdf->setPaper('A4', 'portrait'); */
         $pdf->setPaper( array(0, 0, 144,66.04724), 'portrait'); 
-        return $pdf->stream();
+        return $pdf->stream("ETIQUETAS_".$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa."_".mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0,6,"UTF-8")."_".mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,6,"UTF-8")."_".$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio."_P".$mesnumber.".pdf");
     }
     public function revisionDosimetria($id, $mesnumber, $item){
         if($item == 0){

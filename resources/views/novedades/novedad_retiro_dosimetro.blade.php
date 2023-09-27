@@ -332,6 +332,7 @@
             }
         });
         var myFechaInicial;
+        var Arraysedes = [];
         var fechaesp1;
         var fechaesp2;
         var fecha2esp1;
@@ -351,8 +352,7 @@
                     $('#sedes_empresadosi').append("<option value=''>--SELECCIONE UNA SEDE DEL CONTRATO--</option>");
                     for(var i = 0; i < sedes.length; i++){
                         $('#sedes_empresadosi').append("<option value='"+ sedes[i].id_sede + "'>" + sedes[i].nombre_sede + "</option>");
-                        document.getElementById("id_contdosisede").value = sedes[i].id_contratodosimetriasede;
-                        document.getElementById("id_contratodosimetriasede").value = sedes[i].id_contratodosimetriasede;
+                        Arraysedes[i] = sedes[i];
                     }
                 });
                 $.get('contdosisededepto', {contrato_id: contrato_id}, function(contratodosi){
@@ -365,21 +365,29 @@
                     myFechaInicial.setMinutes(myFechaInicial.getMinutes() + myFechaInicial.getTimezoneOffset());
                     console.log("ESTA ES LA FECHA INICIAL" +myFechaInicial);
                 });
-            }
-        });
-        $('#sedes_empresadosi').on('change', function(){
-            var sede_id = $(this).val();
-            if($.trim(sede_id) != ''){
-                var contratodosimetriasede = document.getElementById("id_contratodosimetriasede").value;
-                console.log("ID_CONTRATODOSIMETRIASEDE" +contratodosimetriasede);
-                $.get('especialidadescontDosi', {contratodosimetriasede_id: contratodosimetriasede}, function(especialidades){
-                    console.log("ESTAS SON LAS ESPECIALIDADES");
-                    console.log(especialidades);
-                    $('#especialidades_empresadosi').empty();
-                    $('#especialidades_empresadosi').append("<option value=''>--SELECCIONE UNA ESPECIALIDAD DEL CONTRATO--</option>");
-                    $.each(especialidades, function(index, value){
-                        $('#especialidades_empresadosi').append("<option value='"+ index + "'>" + value + "</option>");
-                    })
+                $('#sedes_empresadosi').on('change', function(){
+                    var sede_id = $(this).val();
+                    if($.trim(sede_id) != ''){
+                        console.log("estas son las SEDES");
+                        console.log(Arraysedes);
+                        for(var i = 0; i < Arraysedes.length; i++){
+                            if(sede_id == Arraysedes[i].sede_id){
+                                document.getElementById("id_contdosisede").value = Arraysedes[i].id_contratodosimetriasede;
+                                document.getElementById("id_contratodosimetriasede").value = Arraysedes[i].id_contratodosimetriasede;
+                            }
+                        }
+                        var contratodosimetriasede = document.getElementById("id_contratodosimetriasede").value;
+                        console.log("ID_CONTRATODOSIMETRIASEDE" +contratodosimetriasede);
+                        $.get('especialidadescontDosi', {contratodosimetriasede_id: contratodosimetriasede}, function(especialidades){
+                            console.log("ESTAS SON LAS ESPECIALIDADES");
+                            console.log(especialidades);
+                            $('#especialidades_empresadosi').empty();
+                            $('#especialidades_empresadosi').append("<option value=''>--SELECCIONE UNA ESPECIALIDAD DEL CONTRATO--</option>");
+                            $.each(especialidades, function(index, value){
+                                $('#especialidades_empresadosi').append("<option value='"+ index + "'>" + value + "</option>");
+                            })
+                        });
+                    }
                 });
             }
         });
@@ -994,7 +1002,7 @@
                                             ${selectAreas.innerHTML}
                                         </select>
                                     </td>
-                                    <td class='align-middle text-center'><input type="text" class="form-control text-center" value="ÁREA" readonly></td>
+                                    <td class='align-middle text-center'><input type="text" class="form-control text-center" value="AMBIENTAL" readonly></td>
                                     <td class='align-middle text-center'>
                                         <select class="form-select cambiar"  name="id_dosimetro_area_asigdosim[]" id="id_dosimetro_area_asigdosim`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`" ${dis}>
                                             <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
@@ -1049,7 +1057,7 @@
         var mes = document.getElementById("mesacambiar").value;
         var contratodosimetriasede_id  = document.getElementById("id_contratodosimetriasede").value;
         var contratodosimetria_id = document.getElementById("contratos_empresadosi").value;
-        alert("ESTE ES EL MES"+mes+"ESTE ES EL ID DEL DEPTO"+contdosisededepto_id+"ESTE ES EL ID DE LA SEDE"+contratodosimetriasede_id);
+        /*alert("ESTE ES EL MES"+mes+"ESTE ES EL ID DEL DEPTO"+contdosisededepto_id+"ESTE ES EL ID DE LA SEDE"+contratodosimetriasede_id);*/
         
         Swal.fire({
             text: 'SEGURO QUE DESEA LIMPIAR LA INFORMACIÓN DE LAS ASIGNACIONES DEL PERÍODO ANTERIOR?',

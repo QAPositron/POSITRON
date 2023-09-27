@@ -177,7 +177,7 @@ class NovedadesController extends Controller
         
         if($contdosisededepto->controlTransT_unicoCont == 'TRUE' || $contdosisededepto->controlTransC_unicoCont == 'TRUE' || $contdosisededepto->controlTransA_unicoCont == 'TRUE'){
             $dosiasignadoscontrolmesactual = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
-            ->leftjoin('holders', 'dosicontrolcontdosisedes.holder_id', '=', 'holders.id_holder')
+            /* ->leftjoin('holders', 'dosicontrolcontdosisedes.holder_id', '=', 'holders.id_holder') */
             ->where('contratodosimetria_id', '=', $request->contratodosimetria_id)
             ->where('mes_asignacion', '=', $request->mes+1)
             ->get();
@@ -624,7 +624,7 @@ class NovedadesController extends Controller
         /* return $request; */
     }
     public function savemesiguientecambiocantdosim(Request $request){
-       /*  return $request; */
+       /* return $request; */
 
         $dosi_control_torax = 0;
         $dosi_control_cristalino = 0;

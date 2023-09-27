@@ -394,6 +394,7 @@
             }
         });
         var myFechaInicial;
+        var Arraysedes = [];
         var fechaesp1;
         var fechaesp2;
         var fecha2esp1;
@@ -414,7 +415,8 @@
                     $('#sedes_empresadosi').append("<option value=''>--SELECCIONE UNA SEDE DEL CONTRATO--</option>");
                     for(var i = 0; i < sedes.length; i++){
                         $('#sedes_empresadosi').append("<option value='"+ sedes[i].id_sede + "'>" + sedes[i].nombre_sede + "</option>");
-                        document.getElementById("contratodosimetriasede").value = sedes[i].id_contratodosimetriasede;
+                        Arraysedes[i] = sedes[i];
+            
                     }
                 });
                 $.get('contdosisededepto', {contrato_id: contrato_id}, function(contratodosi){
@@ -430,6 +432,13 @@
                 $('#sedes_empresadosi').on('change', function(sedes){
                     var sede_id = $(this).val();
                     if($.trim(sede_id) != ''){
+                        console.log("estas son las SEDES");
+                        console.log(Arraysedes);
+                        for(var i = 0; i < Arraysedes.length; i++){
+                            if(sede_id == Arraysedes[i].sede_id){
+                                document.getElementById("contratodosimetriasede").value = Arraysedes[i].id_contratodosimetriasede;
+                            }
+                        }
                         var contratodosimetriasede = document.getElementById("contratodosimetriasede").value;
                         console.log("ID_CONTRATODOSIMETRIASEDE" +contratodosimetriasede);
                         $.get('especialidadescontDosi', {contratodosimetriasede_id: contratodosimetriasede}, function(especialidades){
@@ -1130,7 +1139,7 @@
                                             ${selectAreas.innerHTML}
                                         </select>
                                     </td>
-                                    <td class='align-middle text-center'><input type="text" class="form-control" value="ÁREA" readonly></td>
+                                    <td class='align-middle text-center'><input type="text" class="form-control" value="AMBIENTAL" readonly></td>
                                     <td class='align-middle text-center'>
                                         <select class="form-select cambiar"  name="id_dosimetro_area_asigdosim[]" id="id_dosimetro_area_asigdosim`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`" ${dis}>
                                             <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
@@ -1155,7 +1164,7 @@
                                 
                                 var tr = `<tr>
                                     <td class='align-middle' style='width: 250px'>`+asignacionesareamesactual[i].nombre_area+`</td>
-                                    <td class='align-middle text-center'>ÁREA</td>
+                                    <td class='align-middle text-center'>AMBIENTAL</td>
                                     <td class='align-middle text-center'>`+asignacionesareamesactual[i].codigo_dosimeter+`</td>
                                     <td class='align-middle text-center'> N.A.</td>
                                     <td></td>
