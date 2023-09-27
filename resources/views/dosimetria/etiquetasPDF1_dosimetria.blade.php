@@ -534,7 +534,7 @@
                     
                     <div class="num_iden_cont_torax" > @if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}} @else NIT.{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}} @endif</div>
                     <div class="empresa_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 29, "UTF-8")}}</div>
-                    <div class="sede_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15, "UTF-8")}} - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,9,"UTF-8")}}.</div>
+                    <div class="sede_cont_torax" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0, 15, "UTF-8")}}. {{-- - ESP: {{mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,9,"UTF-8")}}. --}}</div>
                     
                     <div class="codigo_cont_torax" >No. {{$dosicontUnic->dosimetro->codigo_dosimeter}}</div>
                     @php
