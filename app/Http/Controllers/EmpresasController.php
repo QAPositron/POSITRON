@@ -54,7 +54,7 @@ class EmpresasController extends Controller
             'respoIva_empresa'    => ['required'],   
             'respoFiscal_empresa' => ['required'],
             'telefono_empresa'    => ['required', 'max:10', 'min:10'],
-            'correo_empresa'      => ['required', 'email',  Rule::unique('empresas', 'email_empresa')],
+            'correo_empresa'      => ['required', 'email'/* ,  Rule::unique('empresas', 'email_empresa') */],
             'direccion_empresa'   => ['required'],
             'pais_empresa'        => ['required'],
             'ciudad_empresa'      => ['required']
@@ -63,7 +63,7 @@ class EmpresasController extends Controller
             'cedula_Repr_empresa' => ['required'] */
             
         ]);
-        
+        //////se necesita implementar la tercerizacion de empresas para aplicar la validacion de correo unico////////
         $empresa = new Empresa();
 
         $empresa->razon_social_empresa              = mb_strtoupper($request->razonsocial_empresa);
@@ -135,7 +135,7 @@ class EmpresasController extends Controller
             'respoIva_empresa'    => ['required'],       
             'respoFiscal_empresa' => ['required'],   
             'telefono_empresa'    => ['required', 'max:10', 'min:10'],
-            'correo_empresa'      => ['required', 'email', Rule::unique('empresas', 'email_empresa')->ignore($empresa->id_empresa, 'id_empresa')],   
+            'correo_empresa'      => ['required', 'email'/*, Rule::unique('empresas', 'email_empresa')->ignore($empresa->id_empresa, 'id_empresa')*/],   
             'direccion_empresa'   => ['required'],   
             'pais_empresa'        => ['required'],   
             'ciudad_empresa'      => ['required'],   
@@ -144,7 +144,7 @@ class EmpresasController extends Controller
             'tipoIden_repreLegal' => ['required'],
             'cedula_Repr_empresa' => ['required']
         ]);
-        
+        //////se necesita implementar la tercerizacion de empresas para aplicar la validacion de correo unico////////
         $empresa->razon_social_empresa              = mb_strtoupper($request->razonsocial_empresa);
         $empresa->nombre_empresa                    = mb_strtoupper($request->nombre_empresa);
         $empresa->tipo_identificacion_empresa       = mb_strtoupper($request->tipoIden_empresa);
