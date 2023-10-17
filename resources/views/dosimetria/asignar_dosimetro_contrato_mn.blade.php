@@ -17,7 +17,7 @@
                 <br>
                 <div class="row g-2 mx-3">
                     <div class="col-md"></div>
-                    <div class="col-md-6">    
+                    <div class="col-md-8">    
                         <div class="table table-responsive">
                             <table class="table table-sm table-bordered">
                                 <thead class="table-active">
@@ -28,10 +28,9 @@
                                         <th class="align-middle">TÓRAX</th>
                                         <th class="align-middle">CRISTALINO</th>
                                         <th class="align-middle">ANILLO</th>
-                                        {{-- <th class="align-middle">MUÑECA</th> --}}
                                         <th class="align-middle">AMBIENTAL</th>
                                         <th class="align-middle">CASO</th>
-                                        @if($mescontdosisededepto->controlTransT_unicoCont != 'TRUE' && $mescontdosisededepto->controlTransC_unicoCont != 'TRUE' && $mescontdosisededepto->controlTransA_unicoCont != 'TRUE')
+                                        @if($contdosisededepto->controlTransT_unicoCont != 'TRUE' && $contdosisededepto->controlTransC_unicoCont != 'TRUE' && $contdosisededepto->controlTransA_unicoCont != 'TRUE')
                                             <th class="align-middle">CONTROL TÓRAX</th>
                                             <th class="align-middle">CONTROL CRISTALINO</th>
                                             <th class="align-middle">CONTROL ANILLO</th>
@@ -41,23 +40,22 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_torax}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_cristalino}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_dedo}}</td>
-                                        {{-- <td class="text-center">{{$mescontdosisededepto->dosi_muñeca}}</td> --}}
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_area}}</td>
-                                        <td class="text-center">{{$mescontdosisededepto->dosi_caso}}</td>
-                                        @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransC_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
-                                            <td class="text-center">{{$mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_dedo + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_caso}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_torax}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_cristalino}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_dedo}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_area}}</td>
+                                        <td class="text-center">{{$contdosisededepto->dosi_caso}}</td>
+                                        @if($contdosisededepto->controlTransT_unicoCont == 'TRUE' || $contdosisededepto->controlTransC_unicoCont == 'TRUE' || $contdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                            <td class="text-center">{{$contdosisededepto->dosi_torax + $contdosisededepto->dosi_cristalino + $contdosisededepto->dosi_dedo + $contdosisededepto->dosi_muñeca + $contdosisededepto->dosi_area + $contdosisededepto->dosi_caso}}</td>
                                         @else
-                                            <td class="text-center">{{$mescontdosisededepto->dosi_control_torax}}</td>
-                                            <td class="text-center">{{$mescontdosisededepto->dosi_control_cristalino}}</td>
-                                            <td class="text-center">{{$mescontdosisededepto->dosi_control_dedo}}</td>
-                                            <td class="text-center">{{$mescontdosisededepto->dosi_torax + $mescontdosisededepto->dosi_cristalino + $mescontdosisededepto->dosi_dedo + $mescontdosisededepto->dosi_muñeca + $mescontdosisededepto->dosi_area + $mescontdosisededepto->dosi_caso + $mescontdosisededepto->dosi_control_torax + $mescontdosisededepto->dosi_control_cristalino + $mescontdosisededepto->dosi_control_dedo}}</td>
+                                            <td class="text-center">{{$contdosisededepto->dosi_control_torax}}</td>
+                                            <td class="text-center">{{$contdosisededepto->dosi_control_cristalino}}</td>
+                                            <td class="text-center">{{$contdosisededepto->dosi_control_dedo}}</td>
+                                            <td class="text-center">{{$contdosisededepto->dosi_torax + $contdosisededepto->dosi_cristalino + $contdosisededepto->dosi_dedo + $contdosisededepto->dosi_muñeca + $contdosisededepto->dosi_area + $contdosisededepto->dosi_caso + $contdosisededepto->dosi_control_torax + $contdosisededepto->dosi_control_cristalino + $contdosisededepto->dosi_control_dedo}}</td>
                                         @endif
                                     </tr>
                                 </tbody>
-                                @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransC_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransA_unicoCont == 'TRUE')
+                                @if($contdosisededepto->controlTransT_unicoCont == 'TRUE' || $contdosisededepto->controlTransC_unicoCont == 'TRUE' || $contdosisededepto->controlTransA_unicoCont == 'TRUE')
                                     <tfoot>
                                         <tr class="text-center table-active">
                                             <th colspan='9'>DOSÍMETROS DE CONTROL TRANSPORTE</th>
@@ -68,9 +66,9 @@
                                             <th  colspan='2' class="align-middle">ANILLO</th>
                                         </tr>
                                         <tr class="text-center bg-light">
-                                            <td  colspan='2' >{{$mescontdosisededepto->controlTransT_unicoCont == 'TRUE' ? 1 : 0}}</td>
-                                            <td  colspan='2' >{{$mescontdosisededepto->controlTransC_unicoCont == 'TRUE' ? 1 : 0}}</td>
-                                            <td  colspan='2' >{{$mescontdosisededepto->controlTransA_unicoCont == 'TRUE' ? 1 : 0}}</td>   
+                                            <td  colspan='2' >{{$contdosisededepto->controlTransT_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                            <td  colspan='2' >{{$contdosisededepto->controlTransC_unicoCont == 'TRUE' ? 1 : 0}}</td>
+                                            <td  colspan='2' >{{$contdosisededepto->controlTransA_unicoCont == 'TRUE' ? 1 : 0}}</td>   
                                         </tr>
                                     </tfoot>
                                 @endif
@@ -161,10 +159,10 @@
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL TORAX asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
-                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                    {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_control_torax - count($dosicontrolToraxmesant)); $i++)
                                             <tr>
-                                                <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
+                                                <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX1</td>
                                                 <td class='align-middle'>
                                                     <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" autofocus aria-label="Floating label select example">
                                                         <option value="">--</option>
@@ -177,7 +175,7 @@
                                                 <td></td>
                                             </tr>
                                         @endfor
-                                    @endif
+                                    @endif --}}
                                     {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL TORAX POR CONTRATO/////// --}}
                                     @if(!empty($dosicontrolToraxUnicomesant[0]) && $dosicontrolToraxUnicomesant[0]->controlTransT_unicoCont == 'TRUE')
                                         <tr>
@@ -219,7 +217,7 @@
                                     @endforeach
 
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL CRISTALINO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
-                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                    {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_control_cristalino - count($dosicontrolCristalinomesant)); $i++)
                                             <tr>
                                                 <td colspan='2' class='align-middle text-center'>CONTROL CRISTALINO</td>
@@ -242,7 +240,7 @@
                                                 <td></td>
                                             </tr>
                                         @endfor
-                                    @endif
+                                    @endif --}}
                                     {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL CRISTALINO POR CONTRATO/////// --}}
                                     @if(!empty($dosicontrolCristalinoUnicomesant[0]) && $dosicontrolCristalinoUnicomesant[0]->controlTransC_unicoCont == 'TRUE')
                                         <tr>
@@ -291,7 +289,7 @@
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL ANILLO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
-                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                    {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_control_dedo - count($dosicontrolDedomesant)); $i++)
                                             <tr>
                                                 <td colspan='2' class='align-middle text-center'>CONTROL ANILLO</td>
@@ -314,7 +312,7 @@
                                                 <td></td>
                                             </tr>
                                         @endfor
-                                    @endif
+                                    @endif --}}
                                     {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL ANILLO POR CONTRATO/////// --}}
                                     @if(!empty($dosicontrolDedoUnicomesant[0])&& $dosicontrolDedoUnicomesant[0]->controlTransA_unicoCont == 'TRUE')
                                         <tr>
@@ -367,7 +365,7 @@
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo AREA asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
-                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                    {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_area - count($dosiareamesant)); $i++)
                                             <tr>
                                                 <td>
@@ -390,7 +388,7 @@
                                                 <td class="align-middle text-center">N.A</td>
                                             </tr>
                                         @endfor
-                                    @endif
+                                    @endif --}}
                                      {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  AREA/////// --}}
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo CASO asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dosicasomesant as $dosicasoant)
@@ -424,16 +422,16 @@
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CASO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
-                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                    {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_caso - count($dosicasomesant)); $i++)
                                             <tr>
                                                 <td>
                                                     <select class="form-select"  name="id_trabajador_asigdosimCaso[]" id="id_trabajador_asigdosimCaso" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
                                                         
-                                                        {{-- @foreach($trabajadoreSede as $trabsed)
+                                                        @foreach($trabajadoreSede as $trabsed)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
-                                                        @endforeach --}}
+                                                        @endforeach
                                                         @foreach($personaSede as $persed)
                                                             <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
@@ -451,7 +449,7 @@
                                                 <td class="align-middle text-center">N.A</td>
                                             </tr>
                                         @endfor
-                                    @endif
+                                    @endif --}}
                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CASO/////// --}}
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo  TORAX  asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dositoraxmesant as $dositoraxant)
@@ -486,15 +484,15 @@
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo TORAX asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
-                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                    {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_torax - count($dositoraxmesant)); $i++)
                                             <tr>
                                                 <td>
                                                     <select class="form-select"  name="id_trabajador_asigdosimTorax[]" id="id_trabajador_asigdosimTorax" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
-                                                        {{-- @foreach($trabajadoreSede as $trabsed)
+                                                        @foreach($trabajadoreSede as $trabsed)
                                                             <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
-                                                        @endforeach --}}
+                                                        @endforeach
                                                         @foreach($personaSede as $persed)
                                                             <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
@@ -513,7 +511,7 @@
                                                 
                                             </tr>
                                         @endfor
-                                    @endif
+                                    @endif --}}
                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  TORAX/////// --}}
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo  CRISTALINO asignados en EL MES ANTERIOR/////// --}}
                                     @foreach($dosicristalinomesant as $dosicristalinoant)
@@ -554,15 +552,12 @@
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CRISTALINO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
-                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                    {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_cristalino - count($dosicristalinomesant)); $i++)
                                             <tr>
                                                 <td>
                                                     <select class="form-select"  name="id_trabajador_asigdosimCristalino[]" id="id_trabajador_asigdosimCristalino" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
-                                                        {{-- @foreach($trabajadoreSede as $trabsed)
-                                                            <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
-                                                        @endforeach --}}
                                                         @foreach($personaSede as $persed)
                                                             <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
@@ -588,7 +583,7 @@
                                             </tr>
                                         @endfor
                                     
-                                    @endif
+                                    @endif --}}
                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo  CRISTALINO/////// --}}
                                     {{-- ///Filas creadas segun la cantidad de dosimetros tipo  MUÑECA asignados en EL MES ANTERIOR/////// --}}
                                     {{-- @foreach($dosimuñecamesant as $dosimuñecant)
@@ -701,15 +696,12 @@
                                         </tr>
                                     @endforeach
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo DEDO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
-                                    @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
+                                    {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_dedo - count($dosidedomesant)); $i++)
                                             <tr>
                                                 <td>
                                                     <select class="form-select"  name="id_trabajador_asigdosimDedo[]" id="id_trabajador_asigdosimDedo" autofocus aria-label="Floating label select example">
                                                         <option value="">----</option>
-                                                        {{-- @foreach($trabajadoreSede as $trabsed)
-                                                            <option value="{{$trabsed->trabajador->id_trabajador}}">{{$trabsed->trabajador->primer_nombre_trabajador}} {{$trabsed->trabajador->segundo_nombre_trabajador}} {{$trabsed->trabajador->primer_apellido_trabajador}} {{$trabsed->trabajador->segundo_apellido_trabajador}}</option>
-                                                        @endforeach --}}
                                                         @foreach($personaSede as $persed)
                                                             <option value="{{$persed->id_persona}}">{{$persed->primer_nombre_persona}} {{$persed->segundo_nombre_persona}} {{$persed->primer_apellido_persona}} {{$persed->segundo_apellido_persona}}</option>
                                                         @endforeach
@@ -734,7 +726,7 @@
                                                 </td>
                                             </tr>
                                         @endfor
-                                    @endif
+                                    @endif --}}
                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas para LA CANTIDAD DE DOSIMETROS tipo  DEDO/////// --}}
                                 </tbody>
                             </table>
@@ -764,7 +756,6 @@
                         </div>
                     </div>
             </form>
-               {{--  @if($mescontdosisededepto->controlTransT_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransC_unicoCont == 'TRUE' || $mescontdosisededepto->controlTransA_unicoCont == 'TRUE') --}}
                     <div class="col-md-2">
                         <div class="d-grid gap-2 text-center">
                             <a href="{{route('asignadosicontratomn.clear',['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $mesnumber] )}}" class="btn btn-primary limpiar_asig"  type="button" id="limpiar_asig" name="limpiar_asig" role="button">
@@ -774,31 +765,8 @@
                             </a>
                         </div>
                     </div>
-                    {{-- <div class="col">
-                        <div class="d-grid gap-2 text-center">
-                            <a href="" class="btn btn-info"  type="button"  role="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                </svg> <br> LIMPIAR ASIG. DE CONTROL TRANS.
-                            </a>
-                        </div>
-                    </div> --}}
                     <div class="col"></div>
-                {{-- @else
-                    <div class="col">
-                        <div class="d-grid gap-2 text-center">
-                            <a href="{{route('asignadosicontratomn.clear',['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $mesnumber] )}}" class="btn btn-primary limpiar_asig"  type="button" id="limpiar_asig" name="limpiar_asig" role="button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                </svg> <br> LIMPIAR ASIGNACIONES
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col"></div>
-                @endif --}}
                 </div>
-                
-            
         </div>
         <br>
     </div>

@@ -38,7 +38,7 @@
 <br>
 <br>
 <h3 class="text-center">
-    LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}} <br> 
+LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}} <br> 
     @if($dosicontasig->contratodosimetria_id != null) UNICO PARA EL CONTRATO <br>@endif
     DEL PERÍODO {{$dosicontasig->mes_asignacion}} (
     @if($dosicontasig->mes_asignacion == 1)
@@ -219,7 +219,7 @@
                                                             @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
                                                                 <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosicontasig->measurement_date}}" readonly>
                                                             @else
-                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}">
+                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date">
                                                             @endif
                                                             <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                         </div>
@@ -237,7 +237,7 @@
                                                             @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
                                                                 <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosicontasig->measurement_date}}" readonly>
                                                             @else
-                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}">
+                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date">
                                                             @endif
                                                             <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                         </div>
@@ -255,7 +255,7 @@
                                                             @if($dosicontasig->nota2 == 'TRUE'|| $dosicontasig->DNL == 'TRUE'|| $dosicontasig->EU == 'TRUE' || $dosicontasig->DSU =='TRUE' || $dosicontasig->DPL =='TRUE'|| $dosicontasig->measurement_date != '')
                                                                 <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosicontasig->measurement_date}}" readonly>
                                                             @else
-                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date" value="{{$dosicontasig->measurement_date}}">
+                                                                <input type="date" step="any" class="form-control" name="measurement_date"  id="measurement_date" >
                                                             @endif
                                                             <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                         </div>
@@ -516,20 +516,13 @@ crossorigin="anonymous">
                 }
                 
             }
-        }
-    })
-    $(document).ready(function(){
+        };
         $('#infoLectura a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')
-        })
-    })
-    $(document).ready(function(){
+        });
         $('#extraviado').on('click', function(){
-            var extraviado_id = $('#extraviado').prop("checked"); 
-            /* alert(extraviado_id); */
-            /* var extraviado_id = $(this).val(); */
-            
+            var extraviado_id = $('#extraviado').prop("checked");
             if($.trim(extraviado_id) != 'false'){
                 $('#nota1checked').prop("checked", false);
                 $('#nota5checked').prop("checked", true);
@@ -541,13 +534,9 @@ crossorigin="anonymous">
                 document.getElementById('hp10_calc_dose').disabled = false;
                 document.getElementById('measurement_date').disabled = false;
             }
-        })
-    })
-    $(document).ready(function(){
+        });
         $('#dnl_id').on('click', function(){
-            var dnl_id = $('#dnl_id').prop("checked"); 
-            /* alert(extraviado_id); */
-            /* var extraviado_id = $(this).val(); */
+            var dnl_id = $('#dnl_id').prop("checked");
             
             if($.trim(dnl_id) != 'false'){
                 
@@ -561,9 +550,7 @@ crossorigin="anonymous">
                 document.getElementById('measurement_date').disabled = false;
                 
             }
-        })
-    })
-    $(document).ready(function(){
+        });
         $('#eu_id').on('click', function(){
             var eu_id = $('#eu_id').prop("checked"); 
             
@@ -580,13 +567,9 @@ crossorigin="anonymous">
                 document.getElementById('measurement_date').disabled = false;
                 
             }
-        })
-    }) 
-    $(document).ready(function(){
+        });
         $('#dpl_id').on('click', function(){
             var dpl_id = $('#dpl_id').prop("checked"); 
-            /* alert(extraviado_id); */
-            /* var extraviado_id = $(this).val(); */
             
             if($.trim(dpl_id) != 'false'){
                 
@@ -600,13 +583,9 @@ crossorigin="anonymous">
                 document.getElementById('measurement_date').disabled = false;
                 
             }
-        })
-    }) 
-    $(document).ready(function(){
+        });
         $('#dsu_id').on('click', function(){
-            var dsu_id = $('#dsu_id').prop("checked"); 
-            /* alert(extraviado_id); */
-            /* var extraviado_id = $(this).val(); */
+            var dsu_id = $('#dsu_id').prop("checked");
             
             if($.trim(dsu_id) != 'false'){
                 
@@ -620,28 +599,22 @@ crossorigin="anonymous">
                 document.getElementById('measurement_date').disabled = false;
                 
             }
-        })
-    })
-    $(document).ready(function(){
+        });
         $('#hp10_calc_dose').on('keyup', function(){
             var hp10 = document.getElementById("hp10_calc_dose").value;
             var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
             
-        })
+        });
+        var fechaMeasurement = new Date(); //Fecha actual
+        var mes = fechaMeasurement.getMonth()+1; //obteniendo mes
+        var dia = fechaMeasurement.getDate(); //obteniendo dia
+        var ano = fechaMeasurement.getFullYear(); //obteniendo año
+        if(dia<10)
+            dia='0'+dia; //agrega cero si el menor de 10
+        if(mes<10)
+            mes='0'+mes //agrega cero si el menor de 10
+        document.getElementById('measurement_date').value=ano+"-"+mes+"-"+dia;
     })
-
 </script>
 
-<!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
-     $(document).ready(function(){
-        $('#form_save_lectura_dosim').submit(function(){
-            Swal.fire(
-                'LA LUECTUA HA SIDO GUARDADA CON EXITO',
-                'That thing is still around?',
-                'success'
-                )
-        })
-    }) 
-</script> -->
 @endsection

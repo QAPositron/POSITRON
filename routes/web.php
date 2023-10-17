@@ -289,9 +289,10 @@ Route::get('/novedades/areasespecialidadesempresa/', [NovedadesController::class
 Route::get('/novedades/dosimetros/', [NovedadesController::class, 'dosimetrosdisponibles']);
 
 Route::post('novedades/novedadesmesact', [NovedadesController::class, 'savecambiocantdosim'])->name('cambiocantdosim.save');
+Route::post('novedades/novedadesmesig', [NovedadesController::class, 'savemesiguientecambiocantdosim'])->name('cambiocantdosimesig.save');
+Route::post('novedades/novedadesmesactcambiotrab', [NovedadesController::class, 'savecambiotrabajadordosim'])->name('cambiotrabajadordosim.save');
 Route::get('novedades/{deptodosi}/{mesnumber}/reportePDFcambiodosim', [NovedadesController::class, 'reportePDFcambiodosim'])->name('reportePDFcambiodosim.pdf');
 
-Route::post('novedades/novedadesmesig', [NovedadesController::class, 'savemesiguientecambiocantdosim'])->name('cambiocantdosimesig.save');
 Route::get('novedades/limpiar/', [NovedadesController::class, 'clearAsignacionAnteriorMn']);
 
 Route::get('novedades/meseschangecontratoDosi', [NovedadesController::class, 'meseschangecontratoDosi']);

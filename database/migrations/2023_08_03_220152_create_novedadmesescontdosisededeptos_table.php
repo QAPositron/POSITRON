@@ -16,7 +16,7 @@ class CreateNovedadmesescontdosisededeptosTable extends Migration
         Schema::create('novedadmesescontdosisededeptos', function (Blueprint $table) {
             $table->bigincrements('id_novedadmesescontdosi')->unique();
 
-            $table-> unsignedBigInteger('mescontdosisededepto_id');
+            $table-> unsignedBigInteger('mescontdosisededepto_id')->nullable();
             $table-> foreign('mescontdosisededepto_id')->references('id_mescontdosisededepto')->on('mesescontdosisedeptos')->onDelete('cascade')->onUpdate('cascade');
 
             $table-> unsignedBigInteger('trabajadordosimetro_id')->nullable();

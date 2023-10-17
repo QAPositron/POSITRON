@@ -53,6 +53,13 @@ class DosimetriaController extends Controller
     public function createEmpresa(){
         $empresas = Empresa::all();
         $empresaDosi = ContratosDosimetriaEmpresa::all();
+        $contdosisededepto = ContratosDosimetriaEmpresa::join('dosimetriacontratos', 'contratos_dosimetria_empresas.empresa_id', '=', 'dosimetriacontratos.empresa_id')
+        ->join('contratodosimetriasedes', 'dosimetriacontratos.id_contratodosimetria', '=', 'contratodosimetriasedes.contratodosimetria_id')
+        ->join('contratodosimetriasededeptos', 'contratodosimetriasedes.id_contratodosimetriasede', '=', 'contratodosimetriasededeptos.contratodosimetriasede_id')
+        ->get();
+        $novedadescontdosisededepto = Novcontdosisededepto:: all();
+        /* return  $novedadescontdosisededepto; */
+        
         $dosimetriacontrato = Dosimetriacontrato::where('estado_contrato', '=', 'ACTIVO')->get();
         $dosimetrosUsados = Dosimetro::where('estado_dosimetro', '=', 'EN USO')->count();
         $dosimestrosLibres = Dosimetro::where('estado_dosimetro', '=', 'STOCK')->count();
@@ -148,7 +155,7 @@ class DosimetriaController extends Controller
         ->select('dosimetros.id_dosimetro','dosimetros.codigo_dosimeter', 'dosimetros.tipo_dosimetro', 'dosimetros.estado_dosimetro', 'dosimetros.uso_dosimetro', 
         'dosiareacontdosisedes.contdosisededepto_id', 'dosiareacontdosisedes.dosimetro_uso', 'dosiareacontdosisedes.mes_asignacion', 'empresas.id_empresa', 'empresas.nombre_empresa')
         ->get(); 
-        return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi', 'dosimetriacontrato', 'dosimetrosUsados', 'dosimestrosLibres', 'dosimetrosEnLectura', 'empresasDosimTrabjUSO', 'empresasDosimTrabjLECTURA', 'empresasDosimDosicontUSO', 'empresasDosimDosicontLECTURA', 'empresasDosimDosiareaUSO', 'empresasDosimDosiareaLECTURA'));
+        return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi', 'contdosisededepto','novedadescontdosisededepto', 'dosimetriacontrato', 'dosimetrosUsados', 'dosimestrosLibres', 'dosimetrosEnLectura', 'empresasDosimTrabjUSO', 'empresasDosimTrabjLECTURA', 'empresasDosimDosicontUSO', 'empresasDosimDosicontLECTURA', 'empresasDosimDosiareaUSO', 'empresasDosimDosiareaLECTURA'));
     }
     public function saveEmpresa(Request $request){
 
@@ -1318,6 +1325,7 @@ class DosimetriaController extends Controller
     }
     public function asignaDosiContratoMn($id, $mesnumber){
         $contdosisededepto = Contratodosimetriasededepto::find($id);
+        /* return $contdosisededepto; */
         $mescontdosisededepto = Mesescontdosisedeptos::where('contdosisededepto_id', '=', $id)->latest()->first();
         /* $trabajadoreSede = Trabajadorsede::where('sede_id', '=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
         ->get(); */
@@ -3076,7 +3084,7 @@ class DosimetriaController extends Controller
             $trabajdosiasig= Trabajadordosimetro::where('novcontdosisededepto_id', '=', $id)
             ->where('mes_asignacion', '=', $mesnumber)
             ->get();
-    
+            
             $fechainiciodositrabaj = array();
             for($i=0; $i<count($trabajdosiasig); $i++){
                 $fechainiciodositrabaj[]=Trabajadordosimetro::where('persona_id','=', $trabajdosiasig[$i]->persona_id)->first();
@@ -3138,6 +3146,32 @@ class DosimetriaController extends Controller
                 ->where('novcontdosisededepto_id', '=', $id)
                 ->where('mes_asignacion', '<=', $mesnumber)
                 ->get();
+            }
+            //////CAMBIO DE ESTADO EN LA SUBESPECIALIDAD POR NOVEDAD//////
+            $trabjT= count($trabajdosiasig);
+            $trabj = 0; 
+            for($i=0; $i<count($trabajdosiasig); $i++){
+                if($trabajdosiasig[$i]->measurement_date != NULL){
+                    $trabj ++;
+                }
+            }
+            $contT= count($dosicontrolasig);
+            $cont = 0;
+            for($i=0; $i<count($dosicontrolasig); $i++){
+                if($dosicontrolasig[$i]->measurement_date != NULL){
+                    $cont ++;
+                }
+            }
+            $areaT= count($dosiareasig);
+            $area = 0;
+            for($i=0; $i<count($dosiareasig); $i++){
+                if($dosiareasig[$i]->measurement_date != NULL){
+                    $area ++;
+                }
+            }
+            if($trabjT == $trabj && $contT == $cont && $areaT == $area){
+                $contdosisededepto->estado_nov = 'INACTIVO';
+                $contdosisededepto->save();
             }
         }
      

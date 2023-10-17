@@ -408,7 +408,7 @@
             var check = 0;
             if($.trim(contrato_id) != ''){
                 $.get('sedescontDosi', {contrato_id: contrato_id}, function(sedes){
-                    console.log("ESTAS SON LAS SEDES")
+                    console.log("ESTAS SON LAS SEDES");
                     console.log(sedes);
                     $('#sedes_empresadosi').empty();
                     $('#especialidades_empresadosi').empty();
@@ -2005,6 +2005,7 @@
                             });
                     
             };
+            ////////////////////////////////////////////////////////////////////////
             var subEspecialidad = document.getElementById("subEspecialidad").value;
             if(subEspecialidad != 'TRUE'){
                 var trabajadores = document.querySelectorAll('select[name="id_trabajador_asig[]"]');
@@ -2162,7 +2163,7 @@
                     console.log("values HOLDER" + values);
                     for(var x = 0; x < holder.length; x++){
                         var valuesX = holder[x].value;
-                        if(values == valuesX && i != x){
+                        if(values == valuesX && i != x && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA' ){
                             return Swal.fire({
                                     title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2179,7 +2180,7 @@
                     console.log("values HOLDER" + values);
                     for(var x = 0; x < holderControl.length; x++){
                         var valuesX = holderControl[x].value;
-                        if(values == valuesX && i != x){
+                        if(values == valuesX && i != x && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA' ){
                             return Swal.fire({
                                     title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2192,7 +2193,7 @@
                     var values = holder[i].value;
                     for(var x = 0; x < holderControl.length; x++){
                         var valuesX = holderControl[x].value;
-                        if(values == valuesX){
+                        if(values == valuesX && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA'){
                             return Swal.fire({
                                     title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2354,7 +2355,7 @@
                         for(var x = 0; x < holder.length; x++){
                             var valuesX = holder[x].value;
                             console.log("values HOLDERx" +x+"-"+valuesX);
-                            if(values == valuesX && i != x){
+                            if(values == valuesX && i != x && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA'){
                                 return Swal.fire({
                                         title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                         text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2374,7 +2375,7 @@
                         for(var x = 0; x < holderControl.length; x++){
                             var valuesX = holderControl[x].value;
                             console.log("values HOLDERx" +x+"-"+valuesX);
-                            if(values == valuesX && i != x && values != '' && valuesX != ''){
+                            if(values == valuesX && i != x && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA'){
                                 return Swal.fire({
                                         title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                         text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2388,7 +2389,7 @@
                     var values = holder[i].value;
                     for(var x = 0; x < holderControl.length; x++){
                         var valuesX = holderControl[x].value;
-                        if(values == valuesX){
+                        if(values == valuesX  && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA'){
                             return Swal.fire({
                                     title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2442,12 +2443,12 @@
                 confirmButtonText: 'SI, SEGURO!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
+                    /*var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
                     var mes = document.getElementById("mesacambiar").value;
                     var host = window.location.host;
                     var path = "http://"+host+"/POSITRON/public/novedades/"+contdosisededepto_id+"/"+mes+"/reportePDFcambiodosim";
                     
-                    window.open(path, '_blank');
+                    window.open(path, '_blank');*/
                     this.submit();
 
                 }
@@ -2621,7 +2622,7 @@
                     for(var x = 0; x < holder.length; x++){
                         var valuesX = holder[x].value;
                         console.log("values HOLDERx" +x+"-"+valuesX);
-                        if(values == valuesX && i != x){
+                        if(values == valuesX && i != x && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA'){
                             return Swal.fire({
                                     title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2641,7 +2642,7 @@
                     for(var x = 0; x < holderControl.length; x++){
                         var valuesX = holderControl[x].value;
                         console.log("values HOLDERx" +x+"-"+valuesX);
-                        if(values == valuesX && i != x && values != '' && valuesX != ''){
+                        if(values == valuesX && i != x && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA'){
                             return Swal.fire({
                                     title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2655,7 +2656,7 @@
                 var values = holder[i].value;
                 for(var x = 0; x < holderControl.length; x++){
                     var valuesX = holderControl[x].value;
-                    if(values == valuesX && values != '' && valuesX != ''){
+                    if(values == valuesX && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA'){
                         return Swal.fire({
                                 title:"ALGUNOS HOLDERS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2824,7 +2825,6 @@
                 for(var i = 0; i < holderAnt.length; i++) {
                     var values = holderAnt[i].value;
                     console.log("values HOLDERi" +i+"-"+ values);
-                    
                     for(var x = 0; x < holderAnt.length; x++){
                         var valuesX = holderAnt[x].value;
                         console.log("values HOLDERx" +x+"-"+valuesX);
@@ -2859,7 +2859,7 @@
                     var values = dosimetros[i].value;
                     for(var x = 0; x < dosimetrosantg.length; x++){
                         var valuesX = dosimetrosantg[x].value;
-                        if(values == valuesX && values != '' && valuesX != ''){
+                        if(values == valuesX && values != '' && valuesX != '' && values != 'NA' && valuesX != 'NA' ){
                             return Swal.fire({
                                     title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -2874,7 +2874,7 @@
                     var values = dosimetrosControl[i].value;
                     for(var x = 0; x < dosimetrosControlantg.length; x++){
                         var valuesX = dosimetrosControlantg[x].value;
-                        if(values == valuesX && values != '' && valuesX != ''){
+                        if(values == valuesX && values != '' && valuesX != '' ){
                             return Swal.fire({
                                     title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                     text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -3087,12 +3087,12 @@
                 confirmButtonText: 'SI, SEGURO!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
+                    /*var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
                     var mes = document.getElementById("mesacambiar").value;
                     var host = window.location.host;
                     var path = "http://"+host+"/POSITRON/public/novedades/"+contdosisededepto_id+"/"+mes+"/reportePDFcambiodosim";
                     
-                    window.open(path, '_blank');
+                    window.open(path, '_blank');*/
                     this.submit();
 
                 }

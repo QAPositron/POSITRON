@@ -176,7 +176,7 @@
         <div class="col"></div>
         <div class="col-12">
             <div class="table table-responsive p-4 ">
-                <table class="table table-bordered empresasdosi">
+                <table class="table table-bordered empresasdosi" data-order='[[ 1, "desc" ]]' data-page-length='25'>
                     <thead class="table-secondary">
                         <tr>
                             <th rowspan="2" class="align-middle text-center">EMPRESA</th>
@@ -198,6 +198,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        
                         @foreach($empresaDosi as $empdosi)
                             <tr>
                                 <td class="align-middle text-center"><a class="btn btn-outline-primary rounded-pill" href="{{route('contratosdosi.createlist', $empdosi->empresa_id)}}">{{strlen($empdosi->empresa->nombre_empresa) > 29 ? mb_substr($empdosi->empresa->nombre_empresa, 0, 29, "UTF-8")."..." : $empdosi->empresa->nombre_empresa}}</a></td>
@@ -211,18 +212,78 @@
                                         @endif
                                     @endforeach
                                 </td>
-                                {{-- <td class="align-middle text-center">{{$empdosi->empresa->tipo_identificacion_empresa}}</td>
-                                <td class="align-middle text-center">{{$empdosi->num_iden_empresa}} {{$empdosi->empresa->DV}}</td> --}}
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_torax}}</td>
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_cristalino}}</td>
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_dedo}}</td>
-                                {{-- <td class="align-middle text-center">{{$empdosi->numtotal_dosi_muñeca}}</td> --}}
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_ambiental}}</td>
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_caso}}</td>
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_torax}}</td>
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_cristalino}}</td>
-                                <td class="align-middle text-center">{{$empdosi->numtotal_dosi_control_dedo}}</td>
-                                <td class="align-middle text-center table-light" style='width: 1.60%'>{{$empdosi->numtotal_dosi_torax + $empdosi->numtotal_dosi_cristalino + $empdosi->numtotal_dosi_dedo + $empdosi->numtotal_dosi_caso + $empdosi->numtotal_dosi_ambiental + $empdosi->numtotal_dosi_control_torax + $empdosi->numtotal_dosi_control_cristalino + $empdosi->numtotal_dosi_control_dedo}}</td>
+                                @php
+                                    $empresa = 0;
+                                    $dositorax = 0;
+                                    $dosicristalino = 0;
+                                    $dosidedo = 0;
+                                    $dosiambiental = 0;
+                                    $dosicaso = 0;
+                                    $dosicontorax = 0;
+                                    $dosicontcrist = 0;
+                                    $dosicontanillo = 0;
+                                    $dositoraxNov = 0;
+                                    $dosicristalinoNov = 0;
+                                    $dosidedoNov = 0;
+                                    $dosiambientalNov = 0;
+                                    $dosicasoNov = 0;
+                                    $dosicontoraxNov = 0;
+                                    $dosicontcristNov = 0;
+                                    $dosicontanilloNov = 0;
+                                @endphp
+                                {{-- EMPRESA:{{$empdosi->empresa_id}} --}}
+                                @foreach($contdosisededepto as $dosicontdepto)
+                                    @if($dosicontdepto->empresa_id == $empdosi->empresa_id && $dosicontdepto->estado_contrato == 'ACTIVO')
+                                       {{--  DEPTO: {{$dosicontdepto->id_contdosisededepto}} --}}
+                                        @php
+                                            $dositorax = $dositorax + $dosicontdepto->dosi_torax;
+                                            $dosicristalino = $dosicristalino + $dosicontdepto->dosi_cristalino;
+                                            $dosidedo = $dosidedo + $dosicontdepto->dosi_dedo;
+                                            $dosiambiental = $dosiambiental + $dosicontdepto->dosi_area;
+                                            $dosicaso = $dosicaso + $dosicontdepto->dosi_caso;
+                                            if($dosicontdepto->controlTransT_unicoCont == 'TRUE'){
+                                                $dosicontorax = 1;
+                                            }else if($dosicontdepto->dosi_control_torax == 1){
+                                                $dosicontorax = 1;
+                                            }
+                                            if($dosicontdepto->controlTransC_unicoCont == 'TRUE'){
+                                                $dosicontcrist = 1;
+                                            }else if($dosicontdepto->dosi_control_cristalino == 1){
+                                                $dosicontcrist = 1;
+                                            }
+                                            if($dosicontdepto->controlTransA_unicoCont == 'TRUE'){
+                                                $dosicontanillo = 1;
+                                            }else if($dosicontdepto->dosi_control_dedo == 1){
+                                                $dosicontanillo = 1;
+                                            }
+                                        @endphp
+                                        @foreach($novedadescontdosisededepto as $novedadescontdosi)
+                                            @if($dosicontdepto->id_contdosisededepto == $novedadescontdosi->contdosisededepto_id && $novedadescontdosi->estado_nov == 'ACTIVO')
+                                               {{--  NOVEDAD-DEPTO: {{$novedadescontdosi->id_novcontdosisededepto}} --}}
+                                                @php
+                                                    $dositoraxNov = $dositoraxNov + $novedadescontdosi->dosi_torax;
+                                                    $dosicristalinoNov = $dosicristalinoNov + $novedadescontdosi->dosi_cristalino;
+                                                    $dosidedoNov = $dosidedoNov + $novedadescontdosi->dosi_dedo;
+                                                    $dosiambientalNov = $dosiambientalNov + $novedadescontdosi->dosi_area;
+                                                    $dosicasoNov = $dosicasoNov + $novedadescontdosi->dosi_caso;
+                                                    $dosicontoraxNov = $dosicontoraxNov + $novedadescontdosi->dosi_control_torax;
+                                                    $dosicontcristNov = $dosicontcristNov + $novedadescontdosi->dosi_control_cristalino;
+                                                    $dosicontanilloNov = $dosicontanilloNov + $novedadescontdosi->dosi_control_dedo;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+                                        {{-- PRIMER DEPTO torax: {{$dositorax}}-cristalino:{{$dosicristalino}}-dedo: {{$dosidedo}}-ambiental:{{$dosiambiental}}-caso:{{$dosicaso}} --}}
+                                    @endif
+                                @endforeach
+                                <td class="align-middle text-center">{{$dositorax + $dositoraxNov}}</td>
+                                <td class="align-middle text-center">{{$dosicristalino + $dosicristalinoNov}}</td>
+                                <td class="align-middle text-center">{{$dosidedo + $dosidedoNov}}</td>
+                                <td class="align-middle text-center">{{$dosiambiental + $dosiambientalNov}}</td>
+                                <td class="align-middle text-center">{{$dosicaso + $dosicasoNov}}</td>
+                                <td class="align-middle text-center">{{$dosicontorax + $dosicontoraxNov}}</td>
+                                <td class="align-middle text-center">{{$dosicontcrist + $dosicontcristNov}}</td>
+                                <td class="align-middle text-center">{{$dosicontanillo + $dosicontanilloNov}}</td>
+                                <td class="align-middle text-center">{{$dositorax + $dositoraxNov + $dosicristalino + $dosicristalinoNov + $dosidedo + $dosidedoNov + $dosiambiental + $dosiambientalNov + $dosicaso + $dosicasoNov + $dosicontorax + $dosicontoraxNov +  $dosicontcrist + $dosicontcristNov + $dosicontanillo + $dosicontanilloNov}}</td>
                             </tr>
                         @endforeach
                     </tbody>

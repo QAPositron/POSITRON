@@ -111,9 +111,11 @@
                                             $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
                                             $inicio = date($dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
                                             $fin = date("t-m-Y",strtotime($inicio));
-                                            $fin_parcial = date("t-m-Y",strtotime($inicio."+ 1 month"));
+                                            $date = new DateTime($fin);
+                                            /*$fin_parcial = date("t-m-Y",strtotime($inicio."+ 1 month"));*/
                                             /* $fin_total = date("j-m-Y",strtotime($fin_parcial."- 1 days"));  */
-                                            echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio)). " - ".date("d", strtotime($fin_parcial))." ".$meses[date("m", strtotime($fin_parcial))]." DE ".date("Y", strtotime($fin_parcial));
+                                            $findate = $date->modify('last day of +1 month');
+                                            echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio)). " - ".$findate->format('d')/* date("d", strtotime($fin_parcial)) */." ".$meses[$findate->format('m')/* date("m", strtotime($fin_parcial)) */]." DE ".$findate->format('Y')/*date("Y", strtotime($fin_parcial)) */;
                                         @endphp
                                     @else
                                         <span id="mes{{$i}}"></span>

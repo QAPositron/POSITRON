@@ -206,7 +206,7 @@
                                                     @if($dosiareasig->nota2 == 'TRUE'|| $dosiareasig->DNL == 'TRUE'|| $dosiareasig->EU == 'TRUE' || $dosiareasig->DSU =='TRUE' || $dosiareasig->DPL =='TRUE'|| $dosiareasig->measurement_date != '')
                                                         <input type="date" class="form-control" name="measurement_date"  id="measurement_date_readonly" value="{{$dosiareasig->measurement_date}}" readonly>
                                                     @else
-                                                        <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date" value="{{$dosiareasig->measurement_date}}">
+                                                        <input type="date" class="form-control @error('measurement_date') is-invalid @enderror" name="measurement_date"  id="measurement_date">
                                                     @endif
                                                     <label for="floatingInputGrid">MEASUREMENT DATE:</label>
                                                     @error('measurement_date') <span class="invalid-feedback">*{{ $message }}</span> @enderror
@@ -515,9 +515,7 @@ crossorigin="anonymous">
         $('#infoLectura a').on('click', function (e) {
             e.preventDefault()
             $(this).tab('show')
-        })
-    })
-    $(document).ready(function(){
+        });
         $('#extraviado').on('click', function(){
             var extraviado_id = $('#extraviado').prop("checked"); 
             /* alert(extraviado_id); */
@@ -539,9 +537,7 @@ crossorigin="anonymous">
                 document.getElementById('measurement_date').disabled = false;
                 
             }
-        })
-    })
-    $(document).ready(function(){
+        });
         $('#dnl_id').on('click', function(){
             var dnl_id = $('#dnl_id').prop("checked"); 
             /* alert(extraviado_id); */
@@ -563,9 +559,7 @@ crossorigin="anonymous">
                 document.getElementById('measurement_date').disabled = false;
                 
             }
-        })
-    })
-    $(document).ready(function(){
+        });
         $('#eu_id').on('click', function(){
             var eu_id = $('#eu_id').prop("checked"); 
             /* alert(extraviado_id); */
@@ -587,9 +581,7 @@ crossorigin="anonymous">
                 document.getElementById('measurement_date').disabled = false;
                 
             }
-        })
-    })
-    $(document).ready(function(){
+        });
         $('#dpl_id').on('click', function(){
             var dpl_id = $('#dpl_id').prop("checked"); 
             /* alert(extraviado_id); */
@@ -611,9 +603,7 @@ crossorigin="anonymous">
                 document.getElementById('measurement_date').disabled = false;
                 
             }
-        })
-    })
-    $(document).ready(function(){
+        });
         $('#dsu_id').on('click', function(){
             var dsu_id = $('#dsu_id').prop("checked"); 
             /* alert(extraviado_id); */
@@ -635,32 +625,25 @@ crossorigin="anonymous">
                 document.getElementById('measurement_date').disabled = false;
                 
             }
-        })
-    });
-    $(document).ready(function(){
+        });
         $('#nota3checked').on('click', function(){
             var nota3checked = $('#nota3checked').prop("checked"); 
             if($.trim(nota3checked) != 'false'){
                 $('#nota1checked').prop("checked", false);
             }
-        })
+        });
         $('#nota4checked').on('click', function(){
             var nota4checked = $('#nota4checked').prop("checked"); 
             if($.trim(nota4checked) != 'false'){
                 $('#nota1checked').prop("checked", false);
             }
-        })
+        });
         $('#nota5checked').on('click', function(){
             var nota5checked = $('#nota5checked').prop("checked"); 
             if($.trim(nota5checked) != 'false'){
                 $('#nota1checked').prop("checked", false);
             }
-        })
-    }) 
-
-
-    $(document).ready(function(){
-        
+        });
         $('#hp10_calc_dose').on('change', function(){
             var hp10 = document.getElementById("hp10_calc_dose").value;
            /*  alert("no hay dosimetro de control"+hp10) */
@@ -689,44 +672,49 @@ crossorigin="anonymous">
             }
         });
         $('#hp007_calc_dose').on('change', function(){
-                var hp007 = document.getElementById("hp007_calc_dose").value;
-                /* alert("no hay dosimetro de control"+hp007); */
-                if(hp007 >= 12){
-                    /* alert("es AMBIENTAL y se paso de la dosis roja"+hp007); */
-                    let Divhp007 = document.getElementById("hp007_calc_dose");
-                    Divhp007.classList.remove("dosisnaranja");
-                    Divhp007.classList.add("dosisroja");
-                    $('#nota1checked').prop("checked", false);
-                    $('#nota3checked').prop("checked", true);
-                    
-                }else if(hp007 >= 1.67 ){
-                   /*  alert("es AMBIENTAL y se paso de la dosis naranja"+hp007); */
-                    let Divhp007 = document.getElementById("hp007_calc_dose");
-                    Divhp007.classList.remove("dosisroja");
-                    Divhp007.classList.add("dosisnaranja");
-                    $('#nota1checked').prop("checked", false);
-                    $('#nota3checked').prop("checked", true);
-                }else{
-                    /* alert("es AMBIENTAL "+hp007); */
-                    let Divhp007 = document.getElementById("hp007_calc_dose");
-                    Divhp007.classList.remove("dosisroja");
-                    Divhp007.classList.remove("dosisnaranja");
-                    Divhp007.classList.add("form-control:focus");
-                    /* $('#nota1checked').prop("checked", true); */
-                    $('#nota3checked').prop("checked", false);
-                }
-               
-            })
-        
-    })
-    $(document).ready(function(){
-        
+            var hp007 = document.getElementById("hp007_calc_dose").value;
+            /* alert("no hay dosimetro de control"+hp007); */
+            if(hp007 >= 12){
+                /* alert("es AMBIENTAL y se paso de la dosis roja"+hp007); */
+                let Divhp007 = document.getElementById("hp007_calc_dose");
+                Divhp007.classList.remove("dosisnaranja");
+                Divhp007.classList.add("dosisroja");
+                $('#nota1checked').prop("checked", false);
+                $('#nota3checked').prop("checked", true);
+                
+            }else if(hp007 >= 1.67 ){
+                /*  alert("es AMBIENTAL y se paso de la dosis naranja"+hp007); */
+                let Divhp007 = document.getElementById("hp007_calc_dose");
+                Divhp007.classList.remove("dosisroja");
+                Divhp007.classList.add("dosisnaranja");
+                $('#nota1checked').prop("checked", false);
+                $('#nota3checked').prop("checked", true);
+            }else{
+                /* alert("es AMBIENTAL "+hp007); */
+                let Divhp007 = document.getElementById("hp007_calc_dose");
+                Divhp007.classList.remove("dosisroja");
+                Divhp007.classList.remove("dosisnaranja");
+                Divhp007.classList.add("form-control:focus");
+                /* $('#nota1checked').prop("checked", true); */
+                $('#nota3checked').prop("checked", false);
+            }
+            
+        });
         $('#hp10_calc_dose').on('keyup', function(){
             var hp10 = document.getElementById("hp10_calc_dose").value;
             var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
-        })
-        
+        });
+        var fechaMeasurement = new Date(); //Fecha actual
+        var mes = fechaMeasurement.getMonth()+1; //obteniendo mes
+        var dia = fechaMeasurement.getDate(); //obteniendo dia
+        var ano = fechaMeasurement.getFullYear(); //obteniendo año
+        if(dia<10)
+            dia='0'+dia; //agrega cero si el menor de 10
+        if(mes<10)
+            mes='0'+mes //agrega cero si el menor de 10
+        document.getElementById('measurement_date').value=ano+"-"+mes+"-"+dia;
     })
+    
 </script>
 
 
