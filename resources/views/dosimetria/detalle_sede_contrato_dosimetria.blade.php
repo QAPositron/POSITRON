@@ -3,20 +3,25 @@
 @section('contenido')
  
     <div class="row">
-        <div class="col-md">
+        <div class="col-md position-fixed">
             <a type="button" class="btn btn-circle colorQA" href="{{route('detallecontrato.create', $dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                 </svg>
             </a>
         </div>
-        <div class="col-md-11">
+    </div>
+    <a type="button" class="btn btn-circle colorQA ir-arriba">
+        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-up mt-1" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </a>
+    <div class="row">
+        <div class="col-md">
             <h2 class="text-center">DOSIMETRÍA DE</h2>
-            <h3 class="text-center"><i>{{$dosisededeptocontra->contratodosimetriasede->sede->empresa->nombre_empresa}} </i></h3>
-            <h3 class="text-center">SEDE:<i> {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i></h3> 
+            <h3 class="text-center"><i>{{$dosisededeptocontra->contratodosimetriasede->sede->empresa->nombre_empresa}}</i> - SEDE:<i> {{$dosisededeptocontra->contratodosimetriasede->sede->nombre_sede}}</i></h3>
             <h3 class="text-center">ESPECIALIDAD: <i>{{$dosisededeptocontra->departamentosede->departamento->nombre_departamento}}</i></h3>
         </div>
-        <div class="col-md"></div>
     </div>
     <br>
     <h4 class="text-center align-middle" id="id_contrato"> </h4>
@@ -88,13 +93,13 @@
     
     <div class="row">
         <div class="col"></div>
-        <div class="col-12">
+        <div class="col-11">
             <div class="table table-responsive p-4">
                 <table class="table table-bordered ">
                     <thead class="table-active">
                         <tr>
-                            <th class="text-center align-middle" style='width: 8.90%'>NÚMERO</th>
-                            <th class="text-center align-middle" style='width: 35%' >PERÍODOS</th>
+                            <th class="text-center align-middle" style='width: 5%'><b>#</b></th>
+                            <th class="text-center align-middle" style='width: 35.5%' >PERÍODOS</th>
                             <th class="text-center align-middle">ACCIONES</th>
                         </tr>
                     </thead>
@@ -1031,8 +1036,21 @@ crossorigin="anonymous">
                     document.getElementById('mes'+xx).innerHTML = fechaesp1+' - '+fechaesp2;
                 }
             }
-        }
+        };
         
+        $('.ir-arriba').click(function(){
+            $('body, html').animate({
+                scrollTop: '0px'
+            }, 300);
+        });
+
+        $(window).scroll(function(){
+            if( $(this).scrollTop() > 0 ){
+                $('.ir-arriba').slideDown(300);
+            } else {
+                $('.ir-arriba').slideUp(300);
+            }
+        });
          
     });
     function cambiaColor(){

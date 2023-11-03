@@ -126,6 +126,14 @@
       .td{
         word-break:break-all;
       }
+      .ir-arriba {
+        display:none;
+        font-size:20px;
+        cursor:pointer;
+        position: fixed;
+        bottom:20px;
+        right:20px;
+      }
     </style>
         
     @livewireStyles

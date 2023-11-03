@@ -11,7 +11,11 @@
     </div>
     <div class="col"></div>
 </div>
-
+<a type="button" class="btn btn-circle colorQA ir-arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-up mt-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+    </svg>
+</a>
     
 <div class="row pt-3" id ="salida"> 
     <h2 class="text-center">TODAS LAS EMPRESAS</h2>
@@ -61,6 +65,8 @@
         @endforeach
     </table>
 </div>
+<br>
+
 <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -113,7 +119,7 @@ crossorigin="anonymous">
                     this.submit();
                 }
             })
-        })
+        });
         $('#empresas').DataTable({
             language: {
                 "decimal": "",
@@ -135,6 +141,19 @@ crossorigin="anonymous">
                     "previous": "ANTERIOR"
                 }   
             },
+        });
+        $('.ir-arriba').click(function(){
+            $('body, html').animate({
+                scrollTop: '0px'
+            }, 300);
+        });
+
+        $(window).scroll(function(){
+            if( $(this).scrollTop() > 0 ){
+                $('.ir-arriba').slideDown(300);
+            } else {
+                $('.ir-arriba').slideUp(300);
+            }
         });
     })
 </script>

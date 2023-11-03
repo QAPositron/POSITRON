@@ -30,9 +30,9 @@ class Dosicontrolcontdosisede extends Model
     public function contratodosimetriasededepto(){
         return $this->belongsTo(Contratodosimetriasededepto::class, 'contdosisededepto_id','id_contdosisededepto');
     }
-     //relacion uno a uno con novedadmesescontdosisedepto
-    public function novedadmesescontdosi(){
-        return $this->hasOne(Novedadmesescontdosisededepto::class, 'dosicontrol_id', 'id_dosicontrolcontdosisedes');
+     //relacion uno a uno con cambionovedadmeses
+    public function cambionovedadmeses(){
+        return $this->hasOne(Cambiosnovedadmeses::class, 'dosicontrol_id', 'id_dosicontrolcontdosisedes');
     }
      //relacion uno a uno con obsreventradas
      public function obsreventradas(){

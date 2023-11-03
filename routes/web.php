@@ -280,6 +280,7 @@ Route::get('/novedades/especialidadescontDosi', [NovedadesController::class, 'es
 Route::get('/novedades/contdosisededepto/', [NovedadesController::class, 'contratodosi']);
 Route::get('/novedades/mesescontdosisededepto/', [NovedadesController::class, 'mesescontDosimetria']);
 Route::get('/novedades/mesactualcontdosisededepto/', [NovedadesController::class, 'mesactualcontDosimetria']);
+Route::get('/novedades/novedadactualcontdosisededepto/', [NovedadesController::class, 'novedadactualDosimetria']);
 
 Route::get('/novedades/dosiasginadosmesactual/', [NovedadesController::class, 'dosiasginadosmesactual']);
 Route::get('/novedades/dosiasginadoscontrolmesactual/', [NovedadesController::class, 'dosiasginadoscontrolmesactual']);
@@ -302,13 +303,14 @@ Route::get('novedades/search', [NovedadesController::class, 'search'])->name('no
 Route::get('/novedades/contratosDosim', [NovedadesController::class, 'contratosDosim']);
 Route::get('/novedades/sedesEspcontDosi', [NovedadesController::class, 'sedesEspcontDosim']);
 Route::get('/novedades/novedadesContDosim', [NovedadesController::class, 'novedadesContDosim']);
+Route::get('/novedades/cambiosnovedadesContDosim', [NovedadesController::class, 'cambiosnovedadesContDosim']);
 //////////////(se usaron las rutas para encontrar los contratos las sedes y las especialidades y el mes actual y las asignaciones de una empresa de dosimetria)/////////
 Route::get('novedades/crear', [NovedadesController::class, 'create'])->name('novedadesdosimetria.create');
 
 Route::get('novedades/nuevoDosimetro', [NovedadesController::class, 'nuevoDosimetro'])->name('novedadesdosimetria.nuevoDosimetro');
 Route::get('novedades/retiroDosimetro', [NovedadesController::class,  'retiroDosimetro'])->name('novedadesdosimetria.retiroDosimetro');
 Route::get('novedades/cambioTrabajador', [NovedadesController::class,  'cambioTrabajador'])->name('novedadesdosimetria.cambioTrabajador');
-Route::get('novedades/{nota}/{deptodosi}/detalleNovedad', [NovedadesController::class, 'detalleNovedad'])->name('novedadesdosimetria.detalleNovedad');
+Route::get('novedades/{id}/{deptodosi}/detalleNovedad', [NovedadesController::class, 'detalleNovedad'])->name('novedadesdosimetria.detalleNovedad');
 
 ////////////RUTAS PARA LOS PRODUCTOS DE LAS COTIZACIONES //////////////
 Route::get('productos/search', [ProductoController::class, 'search'])->name('productos.search');

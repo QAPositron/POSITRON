@@ -2,14 +2,21 @@
 @extends('layouts.plantillabase')
 @section('contenido')
 <div class="row">
-    <div class="col-md ">
+    <div class="col-md position-fixed"">
         <a type="button" class="btn btn-circle colorQA"  @if($item == 0) href="{{route('detallesedecont.create', $contdosisededepto->id_contdosisededepto)}}" @else href="{{route('detallesedecontsubEsp.create', $contdosisededepto->id_novcontdosisededepto)}}" @endif>
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg>
         </a>
     </div>
-    <div class="col-md-8 ">
+</div>
+<a type="button" class="btn btn-circle colorQA ir-arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-up mt-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+    </svg>
+</a>
+<div class="row">
+    <div class="col-md">
         <h2 class="text-center">REVISIÓN DE ENTRADA PARA DOSÍMETROS ASIGNADOS</h2>
         <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} - SEDE: {{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> <br>
             ESPECIALIDAD: {{$contdosisededepto->departamentosede->departamento->nombre_departamento}}
@@ -48,7 +55,6 @@
             @endif
         </h3>
     </div>
-    <div class="col-md "></div>
 </div>
 <br>
 <br>
@@ -731,7 +737,19 @@ crossorigin="anonymous">
                 });
             };
         @endforeach
-        
+        $('.ir-arriba').click(function(){
+            $('body, html').animate({
+                scrollTop: '0px'
+            }, 300);
+        });
+
+        $(window).scroll(function(){
+            if( $(this).scrollTop() > 0 ){
+                $('.ir-arriba').slideDown(300);
+            } else {
+                $('.ir-arriba').slideUp(300);
+            }
+        });  
     })
     
 </script>
@@ -1294,7 +1312,6 @@ crossorigin="anonymous">
                             
                             
                             }else{
-                                
                                 $.get('asignacionesArea', {id : id, mes: mes, item: item})
                                 .done(function(asignacionesarea){
                                  
@@ -1326,7 +1343,7 @@ crossorigin="anonymous">
                                             }
                                         })
                                     }else{
-                                        $.get('trabjencargado', {id : id}, function(trabjencargado){
+                                        $.get('trabjencargado', {id : id, mes: mes, item: item}, function(trabjencargado){
                                             console.log(trabjencargado)
                                             if(trabjencargado.length != 0){
                                                 var host = window.location.host;

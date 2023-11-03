@@ -15,18 +15,10 @@ class CreateNovedadmesescontdosisededeptosTable extends Migration
     {
         Schema::create('novedadmesescontdosisededeptos', function (Blueprint $table) {
             $table->bigincrements('id_novedadmesescontdosi')->unique();
+            $table->integer('codigo_novedad')->nullable();
 
             $table-> unsignedBigInteger('mescontdosisededepto_id')->nullable();
             $table-> foreign('mescontdosisededepto_id')->references('id_mescontdosisededepto')->on('mesescontdosisedeptos')->onDelete('cascade')->onUpdate('cascade');
-
-            $table-> unsignedBigInteger('trabajadordosimetro_id')->nullable();
-            $table-> foreign('trabajadordosimetro_id')->references('id_trabajadordosimetro')->on('trabajadordosimetros')->onDelete('cascade')->onUpdate('cascade');
-            
-            $table-> unsignedBigInteger('dosicontrol_id')->nullable();
-            $table-> foreign('dosicontrol_id')->references('id_dosicontrolcontdosisedes')->on('dosicontrolcontdosisedes')->onDelete('cascade')->onUpdate('cascade');
-            
-            $table-> unsignedBigInteger('dosiarea_id')->nullable();
-            $table-> foreign('dosiarea_id')->references('id_dosiareacontdosisedes')->on('dosiareacontdosisedes')->onDelete('cascade')->onUpdate('cascade');
             
             $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
@@ -35,8 +27,8 @@ class CreateNovedadmesescontdosisededeptosTable extends Migration
             $table-> foreign('novcontdosisededepto_id')->references('id_novcontdosisededepto')->on('novcontdosisededeptos')->onDelete('cascade')->onUpdate('cascade');
             
             $table->integer('mes_asignacion');
-            $table->integer('tipo_novedad');
-            $table->text('nota_cambiodosim')->nullable();
+            
+            
             
             $table->timestamps();
         });

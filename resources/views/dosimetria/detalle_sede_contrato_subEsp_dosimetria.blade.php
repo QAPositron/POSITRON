@@ -9,16 +9,21 @@
                 </svg>
             </a>
         </div>
-        <div class="col-md-9">
+    </div>
+    <a type="button" class="btn btn-circle colorQA ir-arriba">
+        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-up mt-1" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+        </svg>
+    </a>
+    <div class="row">
+        <div class="col-md">
             <h2 class="text-center">DOSIMETRÍA DE</h2>
-            <h3 class="text-center"><i>{{$novcontdosisededepto->contratodosimetriasededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} </i></h3>
-            <h3 class="text-center">SEDE:<i> {{$novcontdosisededepto->contratodosimetriasededepto->contratodosimetriasede->sede->nombre_sede}}</i></h3>
+            <h3 class="text-center"><i>{{$novcontdosisededepto->contratodosimetriasededepto->contratodosimetriasede->sede->empresa->nombre_empresa}} </i> - SEDE:<i> {{$novcontdosisededepto->contratodosimetriasededepto->contratodosimetriasede->sede->nombre_sede}}</i></h3>
             @php
                 $codigo = str_pad($novcontdosisededepto->id_novcontdosisededepto, 5, "0", STR_PAD_LEFT);
             @endphp
             <h3 class="text-center">SUB-ESPECIALIDAD: <i>NOV-{{$novcontdosisededepto->departamentosede->departamento->nombre_departamento}}-{{$codigo}}</i></h3>
         </div>
-        <div class="col-md"></div>
     </div>
     <br>
     <h4 class="text-center align-middle">CONTRATO No.{{$codigo}}</h4>

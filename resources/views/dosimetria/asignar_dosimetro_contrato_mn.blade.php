@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
+<a type="button" class="btn btn-circle colorQA ir-arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-up mt-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+    </svg>
+</a>
 <div class="row">
     <div class="col-md"></div>
     <div class="col-md-15">
@@ -959,11 +964,11 @@ crossorigin="anonymous">
             dosim_cristalino[i].setAttribute("id", "id_dosimetro_asigdosimCristalino"+[i]);
             $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%",});
         }
-        var dosim_muñeca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"');
+        /* var dosim_muñeca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"');
         for(var i = 0; i < dosim_muñeca.length; i++){
             dosim_muñeca[i].setAttribute("id", "id_dosimetro_asigdosimMuneca"+[i]);
             $('#id_dosimetro_asigdosimMuneca'+[i]).select2({width: "100%",});
-        }
+        } */
         var dosim_dedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"');
         for(var i = 0; i < dosim_dedo.length; i++){
             dosim_dedo[i].setAttribute("id", "id_dosimetro_asigdosimDedo"+[i]);
@@ -986,7 +991,7 @@ crossorigin="anonymous">
             $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%",});
         } 
         ///SELECT2 PAR LOS SELECT DE LAS OCUPACIONES/////
-        var ocu_area = document.querySelectorAll('select[name="ocupacion_asigdosimArea[]"');
+        /* var ocu_area = document.querySelectorAll('select[name="ocupacion_asigdosimArea[]"');
         for(var i = 0; i < ocu_area.length; i++){
             ocu_area[i].setAttribute("id", "ocupacion_asigdosimArea"+[i]);
             $('#ocupacion_asigdosimArea'+[i]).select2({width: "100%",});
@@ -1015,10 +1020,22 @@ crossorigin="anonymous">
         for(var i = 0; i < ocu_dedo.length; i++){
             ocu_dedo[i].setAttribute("id", "ocupacion_asigdosimDedo"+[i]);
             $('#ocupacion_asigdosimDedo'+[i]).select2({width: "100%",});
-        }
-//////////////////////////////
+        } */
+         //////////////////////////////
+        $('.ir-arriba').click(function(){
+            $('body, html').animate({
+                scrollTop: '0px'
+            }, 300);
+        });
 
-    })
+        $(window).scroll(function(){
+            if( $(this).scrollTop() > 0 ){
+                $('.ir-arriba').slideDown(300);
+            } else {
+                $('.ir-arriba').slideUp(300);
+            }
+        });
+    });
 
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   

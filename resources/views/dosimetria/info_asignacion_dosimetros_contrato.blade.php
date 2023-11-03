@@ -3,19 +3,25 @@
 @section('contenido')
 
 <div class="row">
-    <div class="col-md ">
+    <div class="col-md position-fixed">
         <a type="button" class="btn btn-circle colorQA"  @if($item == 0) href="{{route('detallesedecont.create', $contdosisededepto->id_contdosisededepto)}}" @else href="{{route('detallesedecontsubEsp.create', $contdosisededepto->id_novcontdosisededepto)}}" @endif>
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg>
         </a>
     </div>
-    <div class="col-md-9">
+</div>
+<a type="button" class="btn btn-circle colorQA ir-arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-up mt-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+    </svg>
+</a>
+<div class="row">
+    <div class="col-md">
         <h2 class="text-center">DOSIMETRÍA DE </h2>
         <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
         <h3 class="text-center">ESPECIALIDAD: <i>{{$contdosisededepto->departamentosede->departamento->nombre_departamento}}</i> </h3>
     </div>
-    <div class="col-md"></div>
 </div>
 <br>
 <h4 class="text-center" id="id_contrato"></h4>
@@ -64,6 +70,7 @@
     @method('put')
     <div class="row g-2 mx-3">
         @if(count($trabjasignados) != 0)
+            <div class="col-md-1"></div>
             <div class="col-md">
                 <div class="form-floating">
                     <input value="{{$trabjasignados[0]->fecha_dosim_enviado}}" type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
@@ -82,7 +89,9 @@
                     <label for="floatingInputGrid">FECHA DEVUELTO A QA POSITRON</label>
                 </div>
             </div>
+            <div class="col-md-1"></div>
         @else
+            <div class="col-md-1"></div>
             <div class="col-md">
                 <div class="form-floating">
                     <input value="{{$dosiareasignados[0]->fecha_dosim_enviado}}" type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
@@ -101,6 +110,7 @@
                     <label for="floatingInputGrid">FECHA DEVUELTO A QA POSITRON</label>
                 </div>
             </div>
+            <div class="col-md-1"></div>
         @endif
     </div>
     <br>
@@ -121,8 +131,7 @@
 <br>
 <br>
 <div class="row">
-    <div class="col-md bg-danger"></div>
-    <div class="col-md-12">
+    <div class="col-md m-4">
         <div class="table table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -135,7 +144,7 @@
                         <th colspan="2" class='align-middle' style='width: 4.90%'>Hp(10)</th>
                         <th colspan="2" class='align-middle' style='width: 4.90%'>Hp(3)</th>
                         <th colspan="2" class='align-middle' style='width: 4.90%'>Hp(0.07)</th>
-                        <th rowspan="2" class='align-middle' style='width: 4.90%'>NOTAS</th>
+                        <th rowspan="2" class='align-middle' style='width: 2.90%'>NOTAS</th>
                         <th rowspan="2" class='align-middle' style='width: 14.8%' >ACCIONES</th>
                     </tr>
                     <tr class="table-active text-center">
@@ -2343,8 +2352,6 @@
             </table>
         </div>
     </div>
-    <div class="col-md bg-secondary"></div>
-    
 </div>
 <br>
 <br>
@@ -2715,7 +2722,19 @@ crossorigin="anonymous">
             @endforeach
         }
         
-            
+        $('.ir-arriba').click(function(){
+            $('body, html').animate({
+                scrollTop: '0px'
+            }, 300);
+        });
+
+        $(window).scroll(function(){
+            if( $(this).scrollTop() > 0 ){
+                $('.ir-arriba').slideDown(300);
+            } else {
+                $('.ir-arriba').slideUp(300);
+            }
+        });  
         
         
         

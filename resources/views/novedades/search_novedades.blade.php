@@ -1,17 +1,7 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
-{{-- <div class="row">
-    <div class="col">
-        <a href="{{route('novedadesdosimetria.create')}}" class="btn colorQA ">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg mb-2" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-            </svg> CREAR NOVEDAD
-        </a>
-    </div>
-    <div class="col"></div>
-</div>
-<br> --}}
+
 <div class="row">
     <div class="col">
         <div class="dropdown">
@@ -19,7 +9,7 @@
               CREAR NOVEDAD
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="{{route('novedadesdosimetria.nuevoDosimetro')}}">NUEVO DOSíMETRO</a></li>
+              <li><a class="dropdown-item" href="{{route('novedadesdosimetria.nuevoDosimetro')}}">INGRESO DE DOSíMETRO</a></li>
               <li><a class="dropdown-item" href="{{route('novedadesdosimetria.retiroDosimetro')}}">RETIRO DE DOSíMETRO</a></li>
               <li><a class="dropdown-item" href="{{route('novedadesdosimetria.cambioTrabajador')}}">CAMBIO DE TRABAJADOR</a></li>
             </ul>
@@ -27,7 +17,11 @@
     </div>
     <div class="col"></div>
 </div>
-
+<a type="button" class="btn btn-circle colorQA ir-arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-up mt-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+    </svg>
+</a>
 <div class="row">
     <div class="col md"></div>
     <div class="col-md-6">
@@ -70,7 +64,7 @@
             <div class="row">
                 <div class="col-md"></div>
                 <div class="col-md-10">
-                    <h3 class="text-center" id="tituloEmpresa"></h3>
+                    <h2 class="text-center" id="tituloEmpresa"></h2>
                     <br>
                     <h4 class="text-center" id="tituloContrato"></h4>
                     <br>
@@ -95,6 +89,9 @@
     $(document).ready(function(){
         
         $('#empresaDosimetria').on('change', function(){
+            $('#tituloEmpresa').html("");
+            $('#tituloContrato').html("");
+            $('#Tablas').html("");
             var empresa_id = $(this).val();
             console.log(empresa_id);
             if($.trim(empresa_id) != ''){
@@ -114,6 +111,7 @@
             }
         });
         $('#contratos_empresadosi').on('change', function(){
+            $('#Tablas').html("");
             infoContrato.style.display= "none";
             var contrato_id = $(this).val();
             var check;
@@ -125,7 +123,7 @@
                     infoContrato.style.display= "block";
                     $.each(sedesEsp, function(index, value){
                         console.log("ESTE ES EL INDICE" +index);
-                        tituloEmpresa.innerHTML = "DOSIMETRÍA DE <i>"+value.nombre_empresa+"</i>";
+                        tituloEmpresa.innerHTML = "DOSIMETRÍA DE <br><i>"+value.nombre_empresa+"</i>";
                         var num = parseInt(value.codigo_contrato);
                         var n = num.toString().padStart(5,'0');
                         tituloContrato.innerHTML = "CONTRATO No."+n;
@@ -136,94 +134,89 @@
                             
                             console.log("ESTE ES EL CHECK DE SEDE" +check);
                         }
-                        if(value.nombre_departamento != chech && value.nombre_sede == check){
+                        if(value.id_contdosisededepto != chech && value.nombre_sede == check){
                             
-                            let myTable= "<table class='table  table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' style='width: 10.90%'>ESPECIALIDAD</th>";
-                            myTable+= "<th class='align-middle' style='width: 8.90%'>PERÍODO ACTUAL</th>";
-                            myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. TÓRAX</th>";
-                            myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CRISTALINO</th>";
-                            myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ANILLO</th>";
-                            myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. MUÑECA</th>";
-                            myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CONTROL</th>";
-                            myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. ÁREA</th>";
-                            myTable+="<th class='align-middle' style='width: 10.90%'>No. DOSÍM. CASO</th>";
+                            let myTable= "<table class='table   table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' colspan='4'>NOVEDADES - ESPECIALIDAD: "+value.nombre_departamento+"</th></tr>";
+                            myTable+= "<th class='align-middle' style='width: 8.90%'>PERÍODO</th>";
+                            myTable+="<th class='align-middle' style='width: 10.90%'>CODIGO</th>";
+                            myTable+="<th class='align-middle'>OBSERVACIÓN</th>";
+                            myTable+="<th class='align-middle' style='width: 12.90%'>ACCIONES</th>";
                             myTable+="</tr>";
                             myTable+="</thead>";
-                            myTable+="<tr><td class='text-center align-middle'>"+value.nombre_departamento+"</td>";
-                                chech = value.nombre_departamento;
-                            myTable+="<td class='text-center align-middle'>"+value.mes_actual+"</td>";
-                            myTable+="<td class='text-center align-middle'>"+value.dosi_torax+"</td>";
-                            myTable+="<td class='text-center align-middle'>"+value.dosi_cristalino+"</td>";
-                            myTable+="<td class='text-center align-middle'>"+value.dosi_dedo+"</td>";
-                            myTable+="<td class='text-center align-middle'>"+value.dosi_muñeca+"</td>";
-                            myTable+="<td class='text-center align-middle'>"+value.dosi_control+"</td>";
-                            myTable+="<td class='text-center align-middle'>"+value.dosi_area+"</td>";
-                            myTable+="<td class='text-center align-middle'>"+value.dosi_caso+"</td>";
-                            myTable+="</tr>";
-                            myTable+="<tr>";
-                            myTable+="<td class='text-center align-middle p-4' colspan='9'>";
-                                myTable+="<div id='detalleTabla"+value.id_contdosisededepto+"'></div>";
-                            myTable+="</td>";
-                            myTable+="</tr>";
-
+                            myTable+="<tbody id='tabla"+value.id_contdosisededepto+"'>";
+                            myTable+="</tbody>";
+                            
+                            chech = value.id_contdosisededepto;
+                            
                             $('#Tablas').append(myTable);
 
-                            
-                        } 
-                        $.get('novedadesContDosim', {contrato_id: value.id_contratodosimetria}, function(novedadesCont){
-                            console.log("ESTAS SON LAS NOVEDADES");
-                            console.log(novedadesCont);
-                            if(novedadesCont.length == 0){
-                                Table+="NO HAY NOVEDADES";
-                                $('#detalleTabla'+value.id_contdosisededepto).append(Table);
-
-                            }else{
-                                let Table= "<table class='table table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' colspan='4'>NOVEDADES</th></tr>";
-                                    Table+="<tr><th class='align-middle' style='width: 12.90%'>PERÍODO</th>";
-                                    Table+="<th class='align-middle' style='width: 12.90%'>FECHA</th>";
-                                    Table+="<th class='align-middle'>OBSERVACIÓN</th>";
-                                    Table+="<th class='align-middle' style='width: 12.90%'>ACCIONES</th>";
-                                    Table+="</tr>";
-                                    Table+="</thead>";
-                                    Table+="<tbody id='tablaNovedad"+value.departamentosede_id+"'>";
-                                    Table+="</tbody>";
-                                    $('#detalleTabla'+value.id_contdosisededepto).append(Table);
-                            }
-                            var id = [];
-                            var cheq;
-                            $.each(novedadesCont, function(index, value2){
-                                var fecha = new Date(value2.created_at);
-                                var dia = fecha.getDate();
-                                var mes = fecha.getMonth()+1;
-                                var año = fecha.getFullYear();
-                                id.push(value2.id_novedadmesescontdosi);
-                                
-                                
-                                if(value.id_contdosisededepto == value2.contdosisededepto_id && value.departamentosede_id == value2.departamentosede_id && value2.nota_cambiodosim != cheq){
-                                    var tr = `<tr><td class="text-center align-middle">`+value2.mes_asignacion+`</td>
-                                        <td class="text-center align-middle">`+dia+`-`+mes+`-`+año+`</td>
-                                        <td class="text-center align-middle">`+value2.nota_cambiodosim+`</td>
-                                        <td class="text-center align-middle">
-                                            <button class="btn btn-primary"  type="button" onclick="detalle('`+value2.nota_cambiodosim+`', `+value2.contdosisededepto_id+`);">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-info-lg pb-1" viewBox="0 0 16 16">
-                                                    <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704l1.323-6.208Zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0Z"/>
-                                                </svg>
-                                            </button>
-                                        </td>
+                            $.get('novedadesContDosim', {contdosisededepto_id: value.id_contdosisededepto}, function(novedadesCont){
+                                console.log("ESTAS SON LAS NOVEDADES");
+                                console.log(novedadesCont);
+                                var id = [];
+                                var cheq;
+                                var periodo;
+                                if(novedadesCont.length == 0){
+                                    console.log("ES VACIO");
+                                    var tr = `<tr><td class="text-center align-middle" colspan='4'>"NO HAY NOVEDADES"</td>
                                     </tr>`;
-                                    cheq = value2.nota_cambiodosim;
-                                    $('#tablaNovedad'+value2.departamentosede_id).append(tr);
+                                    $('#tabla'+value.id_contdosisededepto).append(tr);
+                                }else{
+                                    $.each(novedadesCont, function(index, value2){
+                                        var arrayCambios =[];
+                                        
+                                        var num = parseInt(value2.codigo_novedad);
+                                        var n = num.toString().padStart(5,'0');
+                                        console.log("ESTE ES EL CODIGO" +n);
+                                        var tr = `<tr><td class="text-center align-middle">`+value2.mes_asignacion+`</td>
+                                            <td class="text-center align-middle">`+n+`</td>
+                                            <td class=" align-middle" id='obs`+value2.id_novedadmesescontdosi+`'></td>
+                                            <td class="text-center align-middle">
+                                                <button class="btn btn-primary"  type="button" onclick="detalle('`+value2.id_novedadmesescontdosi+`', `+value2.contdosisededepto_id+`);">
+                                                    Detalle
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right mb-1" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>`;
+
+                                        $('#tabla'+value2.contdosisededepto_id).append(tr);
+                                        
+                                        $.get('cambiosnovedadesContDosim', {novedad: value2.id_novedadmesescontdosi}, function(cambiosNov){
+                                            console.log("cambios novedad");
+                                            console.log(cambiosNov);
+                                            $.each(cambiosNov, function(index, value3){
+                                                console.log(value3.nota_cambiodosim);
+                                                var td = value3.nota_cambiodosim+`<br>`;
+                                                console.log(td);
+                                                $('#obs'+value3.novedadmesescontdosidepto_id).append(td);
+                                                /* arrayCambios.push(value3.nota_cambiodosim)
+                                                document.getElementById("obs"+value3.novedadmesescontdosidepto_id).innerHTML = value3.nota_cambiodosim; */
+                                            })
+                                        })
+                                    })
                                 }
-                                
-                            }) 
-    
-                        })
+                            })
+                        } 
                     })
                     
                 });
             }
-        })
+        });
+        $('.ir-arriba').click(function(){
+            $('body, html').animate({
+                scrollTop: '0px'
+            }, 300);
+        });
 
+        $(window).scroll(function(){
+            if( $(this).scrollTop() > 0 ){
+                $('.ir-arriba').slideDown(300);
+            } else {
+                $('.ir-arriba').slideUp(300);
+            }
+        });
     })
 </script>
 <script
@@ -233,9 +226,9 @@
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
-    function detalle(nota, deptodosi){
+    function detalle(id, deptodosi){
         var host = window.location.host;
-        var path = "http://"+host+"/POSITRON/public/novedades/"+nota+"/"+deptodosi+"/detalleNovedad";
+        var path = "http://"+host+"/POSITRON/public/novedades/"+id+"/"+deptodosi+"/detalleNovedad";
         
         window.open(path, '_self');
     }

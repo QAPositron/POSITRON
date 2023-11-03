@@ -1,36 +1,34 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase') 
 @section('contenido')
+<div class="row">
+    <div class="col-md position-fixed">
+        <a type="button" class="btn btn-circle colorQA" href="{{route('asignadosicontrato.info', ['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $dosicontasig->mes_asignacion, 'item'=>$item])}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+        </a>
+    </div>
+</div>   
+<a type="button" class="btn btn-circle colorQA ir-arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-up mt-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+    </svg>
+</a>
 @if($dosicontasig->controlTransT_unicoCont == 'TRUE' || $dosicontasig->controlTransC_unicoCont == 'TRUE' || $dosicontasig->controlTransA_unicoCont == 'TRUE')
     <div class="row">
         <div class="col-md">
-            <a type="button" class="btn btn-circle colorQA" href="{{route('asignadosicontrato.info', ['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $dosicontasig->mes_asignacion, 'item'=>$item])}}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                </svg>
-            </a>
-        </div>
-        <div class="col-md-9">
             <h2 class="text-center">DOSIMETRÍA DE </h2> 
             <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
         </div>
-        <div class="col-md"></div>
     </div>
 @else
     <div class="row">
         <div class="col-md">
-            <a type="button" class="btn btn-circle colorQA" href="{{route('asignadosicontrato.info', ['asigdosicont' => $dosicontasig->contdosisededepto_id, 'mesnumber' => $dosicontasig->mes_asignacion, 'item'=>$item ])}}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                </svg>
-            </a>
-        </div>
-        <div class="col-md-9">
             <h2 class="text-center">DOSIMETRÍA DE </h2> 
             <h3 class="text-center"><i>{{$dosicontasig->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$dosicontasig->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
             <h4 class="text-center">ESPECIALIDAD: {{$dosicontasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}</h4>    
         </div>
-        <div class="col-md"></div>
     </div>
 @endif
 <br>
@@ -605,15 +603,32 @@ crossorigin="anonymous">
             var hp3 = document.getElementById("hp3_calc_dose").value = hp10;
             
         });
-        var fechaMeasurement = new Date(); //Fecha actual
-        var mes = fechaMeasurement.getMonth()+1; //obteniendo mes
-        var dia = fechaMeasurement.getDate(); //obteniendo dia
-        var ano = fechaMeasurement.getFullYear(); //obteniendo año
-        if(dia<10)
-            dia='0'+dia; //agrega cero si el menor de 10
-        if(mes<10)
-            mes='0'+mes //agrega cero si el menor de 10
-        document.getElementById('measurement_date').value=ano+"-"+mes+"-"+dia;
+        var measurement = document.getElementById('measurement_date');
+        if(measurement != null){
+            var fechaMeasurement = new Date(); //Fecha actual
+            var mes = fechaMeasurement.getMonth()+1; //obteniendo mes
+            var dia = fechaMeasurement.getDate(); //obteniendo dia
+            var ano = fechaMeasurement.getFullYear(); //obteniendo año
+            if(dia<10)
+                dia='0'+dia; //agrega cero si el menor de 10
+            if(mes<10)
+                mes='0'+mes //agrega cero si el menor de 10
+            measurement.value=ano+"-"+mes+"-"+dia;
+        }
+
+        $('.ir-arriba').click(function(){
+            $('body, html').animate({
+                scrollTop: '0px'
+            }, 300);
+        });
+
+        $(window).scroll(function(){
+            if( $(this).scrollTop() > 0 ){
+                $('.ir-arriba').slideDown(300);
+            } else {
+                $('.ir-arriba').slideUp(300);
+            }
+        });
     })
 </script>
 

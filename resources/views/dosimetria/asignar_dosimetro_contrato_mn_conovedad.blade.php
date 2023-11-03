@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
+<a type="button" class="btn btn-circle colorQA ir-arriba">
+    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-up mt-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+    </svg>
+</a>
 <div class="row">
     <div class="col-md"></div>
     <div class="col-md-15">
@@ -289,7 +294,7 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>ÁREA</td>
-                                            <td>
+                                            <td class='align-middle'>
                                                 <select class="form-select id_dosimetro_asigdosimArea"  name="id_dosimetro_asigdosimArea[]" id="id_dosimetro_asigdosimArea">
                                                     <option value="@if($dosiareact->dosimetro_id != NULL){{$dosiareact->dosimetro_id}}@endif">@if($dosiareact->dosimetro_id == NULL)-- @else--{{$dosiareact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -311,7 +316,7 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>CASO</td>
-                                            <td class='align-middle text-center'>
+                                            <td class='align-middle'>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCaso[]" id="id_dosimetro_asigdosimCaso">
                                                     <option value="@if($dosicasoact->dosimetro_id != NULL){{$dosicasoact->dosimetro_id}} @endif">@if($dosicasoact->dosimetro_id == NULL) -- @else--{{$dosicasoact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -333,7 +338,7 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>TÓRAX</td>
-                                            <td class='align-middle text-center'>
+                                            <td class='align-middle'>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimTorax[]" id="id_dosimetro_asigdosimTorax" >
                                                     <option value="@if($dositoraxact->dosimetro_id != NULL){{$dositoraxact->dosimetro_id}} @endif">@if($dositoraxact->dosimetro_id == NULL)--@else --{{$dositoraxact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
@@ -355,7 +360,7 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>CRISTALINO</td>
-                                            <td class='align-middle text-center'>
+                                            <td class='align-middle'>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimCristalino[]" id="id_dosimetro_asigdosimCristalino">
                                                     <option value="@if($dosicristalinoact->dosimetro_id != NULL){{$dosicristalinoact->dosimetro_id}}@endif">@if($dosicristalinoact->dosimetro_id == NULL)--@else--{{$dosicristalinoact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -363,7 +368,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle text-center'>
+                                            <td class='align-middle'>
                                                 <select class="form-select"  name="id_holder_asigdosimCristalino[]" id="id_holder_asigdosimCristalino" >
                                                     <option value="@if($dosicristalinoact->holder_id != NULL){{$dosicristalinoact->holder_id}}@endif">@if($dosicristalinoact->holder_id == NULL)--@else--{{$dosicristalinoact->holder->codigo_holder}}--@endif</option>
                                                     @foreach($holderLibresCristalino as $holibcris)
@@ -385,7 +390,7 @@
                                                 </select>
                                             </td>
                                             <td class='align-middle text-center'>ANILLO</td>
-                                            <td class='align-middle text-center'>
+                                            <td class='align-middle'>
                                                 <select class="form-select"  name="id_dosimetro_asigdosimDedo[]" id="id_dosimetro_asigdosimDedo"  >
                                                     <option value="@if($dosidedoact->dosimetro_id != NULL){{$dosidedoact->dosimetro_id}}@endif">@if($dosidedoact->dosimetro_id == NULL)-- @else--{{$dosidedoact->dosimetro->codigo_dosimeter}}--@endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
@@ -393,7 +398,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle text-center'>
+                                            <td class='align-middle'>
                                                 <select class="form-select"  name="id_holder_asigdosimDedo[]" id="id_holder_asigdosimDedo">
                                                     <option value="@if($dosidedoact->holder_id != NULL){{$dosidedoact->holder_id}}@endif">@if($dosidedoact->holder_id == NULL )--@else--{{$dosidedoact->holder->codigo_holder}}--@endif</option>
                                                     @foreach($holderLibresAnillo as $holibanillo)
@@ -457,7 +462,7 @@ crossorigin="anonymous">
 <script type="text/javascript">
     $(document).ready(function(){
          // Creamos array con los meses del año
-         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+        const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
         let fecha = new Date("{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio}}, 00:00:00");
         console.log(fecha);
         var numLec = '{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->numlecturas_año}}';
@@ -597,9 +602,79 @@ crossorigin="anonymous">
                 }
                 
             }
+        };
+
+        $('.ir-arriba').click(function(){
+            $('body, html').animate({
+                scrollTop: '0px'
+            }, 300);
+        });
+    
+        $(window).scroll(function(){
+            if( $(this).scrollTop() > 0 ){
+                $('.ir-arriba').slideDown(300);
+            } else {
+                $('.ir-arriba').slideUp(300);
+            }
+        });
+
+        $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",});
+        $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%",});
+        $('#id_holder_asigdosimControlCristalino').select2({width: "100%",});
+        $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%",});
+        $('#id_holder_asigdosimControlDedo').select2({width: "100%",});
+
+        $('#id_dosimetro_ControlToraxUnico').select2({width: "100%",});
+        $('#id_dosimetro_ControlCristalinoUnico').select2({width: "100%",});
+        $('#id_holder_ControlCristalinoUnico').select2({width: "100%",});
+        $('#id_dosimetro_ControlDedoUnico').select2({width: "100%",});
+        $('#id_holder_ControlDedoUnico').select2({width: "100%",});
+
+        ///////SELECT2 PARA LOS SELECTS DE DOSIMETROS //////
+        
+        var dosim_area = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
+        for(var i = 0; i < dosim_area.length; i++){
+            dosim_area[i].setAttribute("id", "id_dosimetro_asigdosimArea"+[i]);
+            $('#id_dosimetro_asigdosimArea'+[i]).select2({width: "100%",});
         }
-            
-    })
+        var dosim_caso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
+        for(var i = 0; i < dosim_caso.length; i++){
+            dosim_caso[i].setAttribute("id", "id_dosimetro_asigdosimCaso"+[i]);
+            $('#id_dosimetro_asigdosimCaso'+[i]).select2({width: "100%",});
+        }
+        var dosim_torax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
+        for(var i = 0; i < dosim_torax.length; i++){
+            dosim_torax[i].setAttribute("id", "id_dosimetro_asigdosimTorax"+[i]);
+            $('#id_dosimetro_asigdosimTorax'+[i]).select2({width: "100%",});
+        }
+        var dosim_cristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
+        for(var i = 0; i < dosim_cristalino.length; i++){
+            dosim_cristalino[i].setAttribute("id", "id_dosimetro_asigdosimCristalino"+[i]);
+            $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%",});
+        }
+        var dosim_dedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"');
+        for(var i = 0; i < dosim_dedo.length; i++){
+            dosim_dedo[i].setAttribute("id", "id_dosimetro_asigdosimDedo"+[i]);
+            $('#id_dosimetro_asigdosimDedo'+[i]).select2({width: "100%",});
+        }
+
+        //////SELECT2 PARA LOS SELECTS DE LOS HOLDERS /////
+        var holder_cristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"');
+        for(var i = 0; i < holder_cristalino.length; i++){
+            holder_cristalino[i].setAttribute("id", "id_holder_asigdosimCristalino"+[i]);
+            $('#id_holder_asigdosimCristalino'+[i]).select2({width: "100%",});
+        }
+        /* var holder_muñeca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"');
+        for(var i = 0; i < holder_muñeca.length; i++){
+            holder_muñeca[i].setAttribute("id", "id_holder_asigdosimMuneca"+[i]);
+            $('#id_holder_asigdosimMuneca'+[i]).select2({width: "100%",});
+        } */
+        var holder_dedo = document.querySelectorAll('select[name="id_holder_asigdosimDedo[]"');
+        for(var i = 0; i < holder_dedo.length; i++){
+            holder_dedo[i].setAttribute("id", "id_holder_asigdosimDedo"+[i]);
+            $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%",});
+        }   
+    });
 
 </script>
 <script type="text/javascript">

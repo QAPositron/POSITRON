@@ -39,6 +39,7 @@
        /*  background: blue; */
         width: 142px;
         text-align:right;
+        white-space: nowrap;
     }
     .empresa_cont_torax{
         position: absolute;
@@ -174,6 +175,7 @@
         /* background:yellow; */
         width: 165px;
         text-align:right; 
+        white-space: nowrap;
     }
     .empresa_torax{
         position: absolute; 
