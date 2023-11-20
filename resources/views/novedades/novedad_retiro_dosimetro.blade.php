@@ -18,7 +18,7 @@
 </div>
 <br>
 <div class="row">
-    <div class="col md"></div>
+    <div class="col-md"></div>
     <div class="col-md-10">
         <div class="card text-dark bg-light">
             <br>
@@ -97,220 +97,242 @@
             <br>
             <h3 class="text-center" id="trabjPeriodo"></h3>
             <h4 class="text-center" id="codigoNov"></h4>
-            <div>
 
-                <div class="table table-responsive text-center px-4">
+            
+            <div class="table table-responsive text-center px-4">
+
+                <form id="form_cambio_cantdosim" name="form_cambio_cantdosim" action="{{route('cambiocantdosim.save')}}" method="POST">
+                    @csrf
+                    <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="2">
+                    <input type="number" hidden name="mestrabj_asig" id="mestrabj_asig" value="">
+                    <input type="number" hidden name="id_contdosisededepto" id="id_contdosisededepto" value="">
+                    <input type="number" hidden name="id_novedad" id="id_novedad" value="">
+                    <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value="">
+                    
+                    <input type="number" hidden name="dosi_control_torax" id="dosi_control_torax" value="">
+                    <input type="number" hidden name="dosi_control_cristalino" id="dosi_control_cristalino" value="">
+                    <input type="number" hidden name="dosi_control_dedo" id="dosi_control_dedo" value="">
+                    <input type="number" hidden name="dosi_torax" id="dosi_torax" value="">
+                    <input type="number" hidden name="dosi_area" id="dosi_area" value="">
+                    <input type="number" hidden name="dosi_caso" id="dosi_caso" value="">
+                    <input type="number" hidden name="dosi_cristalino" id="dosi_cristalino" value="">
+                    <input type="number" hidden name="dosi_dedo" id="dosi_dedo" value="">
+                    <input type="text" hidden name="controlTransT_unicoCont" id="controlTransT_unicoCont" value="">
+                    <input type="text" hidden name="controlTransC_unicoCont" id="controlTransC_unicoCont" value="">
+                    <input type="text" hidden name="controlTransA_unicoCont" id="controlTransA_unicoCont" value="">
+                    <input type="number" hidden name="id_departamentosede" id="id_departamentosede" value="">
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" name="primerDia_asigdosim" id="primerDia_asigdosim" onchange="fechaUltimoDia();" >
+                                <label for="floatingInputGrid">PRIMER DÍA</label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" >
+                                <label for="floatingInputGrid">ÚLTIMO DÍA:</label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" name="fecha_envio_dosim_asignado1" id="fecha_envio_dosim_asignado1" >
+                                <label for="floatingInputGrid">FECHA ENVIO</label>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <br>
                     <table  class="table table-bordered" id="tablaAsignacionDosimetrosmn">
                         <thead class="text-center">
                             <th style='width: 200px'>TRABAJADOR / ÁREA</th>
                             <th style='width: 100px'>UBICACIÓN</th>
                             <th style='width: 100px'>DOSÍMETRO</th>
                             <th style='width: 100px'>HOLDER</th>
-                            <th style='width: 100px'>OCUPACIÓN</th>
                             <th style='width: 100px'>ACCIONES</th>
-
+    
                         </thead>
                         <tbody id="body_asignaciones">
-                           
-                            <tr>
-                                <div class="table table-responsive text-center">
-                                    <table class="table table-bordered" id="tabla_auxiliar">
-                                        <tbody id="tr_control">
-                                                
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="table table-responsive text-center px-4">
+                            <table class="table table-bordered" id="tabla_adicional">
+                                <tbody id="tr_newAsignacion">
 
-                                    <form id="form_cambio_cantdosim" name="form_cambio_cantdosim" action="{{route('cambiocantdosim.save')}}" method="POST">
-                                        @csrf
-                                        
-                                        <input type="number" hidden name="mestrabj_asig" id="mestrabj_asig" value="">
-                                        <input type="number" hidden name="id_contdosisededepto" id="id_contdosisededepto" value="">
-                                        <input type="number" hidden name="id_novedad" id="id_novedad" value="">
-                                        {{-- <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value=""> --}}
-                                        <input type="date" hidden name="primerDia_asigdosim" id="primerDia_asigdosim" value="">
-                                        <input type="date" hidden name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" value="">
-                                        <input type="date" hidden name="fecha_dosim_enviado" id="fecha_dosim_enviado" value="">
-                                        <input type="number" hidden name="dosi_control_torax" id="dosi_control_torax" value="">
-                                        <input type="number" hidden name="dosi_control_cristalino" id="dosi_control_cristalino" value="">
-                                        <input type="number" hidden name="dosi_control_dedo" id="dosi_control_dedo" value="">
-                                        <input type="number" hidden name="dosi_torax" id="dosi_torax" value="">
-                                        <input type="number" hidden name="dosi_area" id="dosi_area" value="">
-                                        <input type="number" hidden name="dosi_caso" id="dosi_caso" value="">
-                                        <input type="number" hidden name="dosi_cristalino" id="dosi_cristalino" value="">
-                                        <input type="number" hidden name="dosi_dedo" id="dosi_dedo" value="">
-                                        <input type="text" hidden name="controlTransT_unicoCont" id="controlTransT_unicoCont" value="">
-                                        <input type="text" hidden name="controlTransC_unicoCont" id="controlTransC_unicoCont" value="">
-                                        <input type="text" hidden name="controlTransA_unicoCont" id="controlTransA_unicoCont" value="">
-                                        <input type="number" hidden name="id_departamentosede" id="id_departamentosede" value="">
-
-                                        <table class="table table-bordered" id="tabla_adicional">
-                                            <tbody id="tr_newAsignacion">
-
-                                            </tbody>
-                                        </table>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col"></div>
-                                            <div class="col-6">
-                                                <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
-                                                <textarea class="form-control" name="nota_cambio_dosimetros1" id="nota_cambio_dosimetros1" rows="3" autofocus style="text-transform:uppercase"></textarea>
-                                            </div>
-                                            <div class="col"></div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col"></div>
-                                            <div class="col">
-                                                <div class="d-grid gap-2 col-6 mx-auto">
-                                                    <button id="assignBtn1" class="btn colorQA" type="submit" disabled>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
-                                                            <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
-                                                        </svg> <br> GUARDAR ASIGNACIÓN
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="d-grip gap-2 col-6 mx-auto">
-                                                    <a href="" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                                                        </svg> 
-                                                        <br> CANCELAR ASIGNACIÓN
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col"></div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </tr>
+                                </tbody>
+                            </table>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-        <div class="card text-dark bg-light" id='Formulario2' style="display: none; position: relative;">
-            <br>
-            <h3 class="text-center" id="trabjPeriodo2"></h3>
-            <div >
-                <div class="table table-responsive text-center px-4">
-                    <form id="form_cambio_cantdosim2" name="form_cambio_cantdosim2" action="{{route('cambiocantdosimesig.save')}}" method="POST">
-                        @csrf
-                        <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="2">
-                        <input type="number" hidden name="id_novedad_sig" id="id_novedad_sig" value="">
-                        <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
-                        <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
-                        <input type="number" hidden name="id_contdosisede" id="id_contdosisede" value="">
-                        <input type="number" hidden name="dosimRetiradosControl[]" id="dosimRetiradosControl" value="">
-                        <input type="number" hidden name="dosimRetiradosArea[]" id="dosimRetiradosArea" value="">
-                        <input type="number" hidden name="dosimRetirados[]" id="dosimRetirados" value="">
-                        <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
-                        <input type="text" hidden name="controlTransT_unicoCont2" id="controlTransT_unicoCont2" value="">
-                        <input type="text" hidden name="controlTransC_unicoCont2" id="controlTransC_unicoCont2" value="">
-                        <input type="text" hidden name="controlTransA_unicoCont2" id="controlTransA_unicoCont2" value="">
-                        <div class="row g-2">
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" name="primerDia_asigdosim2" id="primerDia_asigdosim2" onchange="fechaUltimoDia();" >
-                                    <label for="floatingInputGrid">PRIMER DÍA</label>
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" name="ultimoDia_asigdosim2" id="ultimoDia_asigdosim2" >
-                                    <label for="floatingInputGrid">ÚLTIMO DÍA:</label>
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
-                                    <label for="floatingInputGrid">FECHA ENVIO</label>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col-10">
+                            <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
+                            <div class="card">
+                                <div class="card-body" id="textCard">
                                     
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <table  class="table table-bordered" id="tablaAsignacionDosimetrosmn">
-                            <thead class="text-center">
-                                <th style='width: 200px'>TRABAJADOR / ÁREA</th>
-                                <th style='width: 120px'>UBICACIÓN</th>
-                                <th style='width: 100px'>DOSÍMETRO</th>
-                                <th style='width: 100px'>HOLDER</th>
-                                <th style='width: 100px'>ACCIONES</th>
-
-                            </thead>
-                            <tbody id="body_asignaciones2">
-                                
-                                <table class="table" id="tabla_adicional2">
-                                    <tbody id="tr_newAsignacion2">
-
-                                    </tbody>
-                                </table>
-                            </tbody>
-                        </table>
-                        <div class="row">
-                            <div class="col"></div>
-                            <div class="col-10">
-                                <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
-                                <div class="card">
-                                    <div class="card-body" id="textCard2">
-                                      
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md text-start">
-                                <button class="btn btn-circle colorQA" onclick="Generarnotas2()" type="button" id="notas" name="notas" role="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="col-md text-start">
-                                <button class="btn btn-circle btn-danger" onclick="eliminarNotas()" type="button" id="eliminarnotas" name="eliminarnotas" role="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                                    </svg>
+                        <div class="col-md text-start">
+                            <button class="btn btn-circle colorQA" onclick="Generarnotas()" type="button" id="notas" name="notas" role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col-md text-start">
+                            <button class="btn btn-circle btn-danger" onclick="eliminarNotas()" type="button" id="eliminarnotas" name="eliminarnotas" role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button id="assignBtn1" class="btn colorQA" type="submit" disabled>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                                        <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                                    </svg> <br> GUARDAR ASIGNACIÓN
                                 </button>
                             </div>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col"></div>
-                            <div class="col">
-                                <div class="d-grid gap-2 col-6 mx-auto">
-                                    <button id="assignBtn2" class="btn colorQA" type="submit" disabled>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
-                                            <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
-                                        </svg> <br> GUARDAR ASIGNACIÓN
-                                    </button>
-                                </div>
+                        <div class="col">
+                            <div class="d-grip gap-2 col-6 mx-auto">
+                                <a href="" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                    </svg> 
+                                    <br> CANCELAR ASIGNACIÓN
+                                </a>
                             </div>
-                            <div class="col">
-                                <div class="d-grip gap-2 col-6 mx-auto">
-                                    <a href="" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                                        </svg> 
-                                        <br> CANCELAR ASIGNACIÓN
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="d-grid gap-2 col-6 mx-auto">
-                                    <button onclick="limpiar()"class="btn btn-primary"  type="button" id="limpiar_asig" name="limpiar_asig" role="button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                        </svg> <br> LIMPIAR ASIGNACIONES
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col"></div>
                         </div>
-                    </form>
-                </div>
+                        <div class="col"></div>
+                    </div>
+                </form>
             </div>
+            
+        </div>
+        <div class="card text-dark bg-light" id='Formulario2' style="display: none; position: relative;">
+            <br>
+            <h3 class="text-center" id="trabjPeriodo2"></h3>
+            
+            <div class="table table-responsive text-center px-4">
+                <form id="form_cambio_cantdosim2" name="form_cambio_cantdosim2" action="{{route('cambiocantdosimesig.save')}}" method="POST">
+                    @csrf
+                    <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="2">
+                    <input type="number" hidden name="id_novedad_sig" id="id_novedad_sig" value="">
+                    <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
+                    <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
+                    <input type="number" hidden name="id_contdosisede" id="id_contdosisede" value="">
+                    <input type="number" hidden name="dosimRetiradosControl[]" id="dosimRetiradosControl" value="">
+                    <input type="number" hidden name="dosimRetiradosArea[]" id="dosimRetiradosArea" value="">
+                    <input type="number" hidden name="dosimRetirados[]" id="dosimRetirados" value="">
+                    <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
+                    <input type="text" hidden name="controlTransT_unicoCont2" id="controlTransT_unicoCont2" value="">
+                    <input type="text" hidden name="controlTransC_unicoCont2" id="controlTransC_unicoCont2" value="">
+                    <input type="text" hidden name="controlTransA_unicoCont2" id="controlTransA_unicoCont2" value="">
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" name="primerDia_asigdosim2" id="primerDia_asigdosim2" onchange="fechaUltimoDia();" >
+                                <label for="floatingInputGrid">PRIMER DÍA</label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" name="ultimoDia_asigdosim2" id="ultimoDia_asigdosim2" >
+                                <label for="floatingInputGrid">ÚLTIMO DÍA:</label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" name="fecha_envio_dosim_asignado" id="fecha_envio_dosim_asignado" >
+                                <label for="floatingInputGrid">FECHA ENVIO</label>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <table  class="table table-bordered" id="tablaAsignacionDosimetrosmn">
+                        <thead class="text-center">
+                            <th style='width: 200px'>TRABAJADOR / ÁREA</th>
+                            <th style='width: 120px'>UBICACIÓN</th>
+                            <th style='width: 100px'>DOSÍMETRO</th>
+                            <th style='width: 100px'>HOLDER</th>
+                            <th style='width: 100px'>ACCIONES</th>
+
+                        </thead>
+                        <tbody id="body_asignaciones2">
+                            
+                            <table class="table" id="tabla_adicional2">
+                                <tbody id="tr_newAsignacion2">
+
+                                </tbody>
+                            </table>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col-10">
+                            <label for="floatingInputGrid"><b>NOTAS Y OBSERVACIONES:</b></label>
+                            <div class="card">
+                                <div class="card-body" id="textCard2">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md text-start">
+                            <button class="btn btn-circle colorQA" onclick="Generarnotas2()" type="button" id="notas" name="notas" role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col-md text-start">
+                            <button class="btn btn-circle btn-danger" onclick="eliminarNotas()" type="button" id="eliminarnotas" name="eliminarnotas" role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button id="assignBtn2" class="btn colorQA" type="submit" disabled>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                                        <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                                    </svg> <br> GUARDAR ASIGNACIÓN
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-grip gap-2 col-6 mx-auto">
+                                <a href="" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                    </svg> 
+                                    <br> CANCELAR ASIGNACIÓN
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button onclick="limpiar()"class="btn btn-primary"  type="button" id="limpiar_asig" name="limpiar_asig" role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                    </svg> <br> LIMPIAR ASIGNACIONES
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </form>
+            </div>
+            
         </div>
     </div>
     <div class="col-md"></div>
@@ -536,7 +558,7 @@
                             /* console.log("ESTA ES LA X="+x); */
                             if(value == xx){
                                 console.log("MES ACTUAL IGUAL A XX");
-                                document.getElementById('trabjPeriodo').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
+                                document.getElementById('trabjPeriodo').innerHTML = "RETIRO DE DOSÍMETROS <br>TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
                                 $('#mesacambiar').append("<option value='"+ value + "'>ACTUAL: " + value + " ("+ fechaesp1+' - '+fechaesp2 + ")" + "</option>");
                                 var diaP = r.getDate();
                                 var mesP = r.getMonth()+1;
@@ -594,7 +616,7 @@
                             console.log("XX"+xx);
                         
                             if(value == xx){
-                                document.getElementById('trabjPeriodo').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
+                                document.getElementById('trabjPeriodo').innerHTML = "RETIRO DE DOSÍMETROS <br>TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
                                 /* document.getElementById('trabjPeriodo2').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )'; */
                                 $('#mesacambiar').append("<option value='"+ value + "'>ACTUAL: " + value + " ("+ fechaesp1+' - '+fechaesp2 + ")" + "</option>");
                                 var diaP = r.getDate();
@@ -649,7 +671,7 @@
                             console.log("periodo XX"+xx);
                             if(value == xx){
                                 console.log("MES ACTUAL IGUAL A XX");
-                                document.getElementById('trabjPeriodo').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
+                                document.getElementById('trabjPeriodo').innerHTML = "RETIRO DE DOSÍMETROS <br>TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )';
                                 /* document.getElementById('trabjPeriodo2').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO "+value+"<br> ( "+fechaesp1+' - '+fechaesp2+' )'; */
                                 $('#mesacambiar').append("<option value='"+ value + "'>ACTUAL: " + value + " ("+ fechaesp1+' - '+fechaesp2 + ")" + "</option>");
                                 var diaP = r.getDate();
@@ -700,7 +722,6 @@
                     var dosi_area = 0;
                     var dosi_caso = 0;
                     var dosi_cristalino = 0;
-                    var dosi_muñeca = 0;
                     var dosi_dedo = 0;
 
                     console.log("ESTE ES EL MES SELECCIONADO" +mes);
@@ -708,15 +729,34 @@
                     var consultaMesactual = mesactual_trabjasig[0].mes_actual;
                     console.log("LA CONSULTA"+consultaMesactual);
 
-                    /* if(mes == consultaMesactual){
+                    if(mes == consultaMesactual){
                         Formulario1.style.display= "block";
-                    }else */ 
-                    if (mes > consultaMesactual){
+                        $('#body_asignaciones').html("");
+                        if(mes == 1){
+                            document.getElementById('trabjPeriodo').innerHTML = "TRABAJADORES ASIGNADOS AL PERÍODO "+mes+" <br> ( "+fechaesp1+' - '+fechaesp2+' )';
+                            var diaP = myFechaInicial.getDate();
+                            var mesP = myFechaInicial.getMonth()+1;
+                            var añoP = myFechaInicial.getFullYear();
+                            var ddP = (diaP < 10 ? '0' : '')+diaP;
+                            var mmP = (mesP < 10 ? '0' : '')+mesP;
+                            var fechaP = añoP+'-'+mmP+'-'+ddP;
+                            console.log("PRIMER DIA FECHA = "+fechaP);
+                            document.getElementById("primerDia_asigdosim").value = fechaP;
+                            var diaF = r2final.getDate();
+                            var mesF = r2final.getMonth()+1;
+                            var añoF = r2final.getFullYear();
+                            var ddF = (diaF < 10 ? '0' : '')+diaF;
+                            var mmF = (mesF < 10 ? '0' : '')+mesF;
+                            console.log("ULTIMO DIA FECHA = "+añoF+'-'+mmF+'-'+ddF);
+                            document.getElementById("ultimoDia_asigdosim").value = añoF+'-'+mmF+'-'+ddF;
+                        }
+                    }else if (mes > consultaMesactual){
                         Formulario2.style.display= "block";
+                        $('#body_asignaciones2').html("");
                         if(mes == 2){
                             console.log("*******");
                             console.log("ULTIMODIAPM = "+ultimoDiaPM);
-                            document.getElementById('trabjPeriodo2').innerHTML = "ASIGNACIÓN DE DOSÍMETROS Y<br>TRABAJADORES ASIGNADOS AL PERÍODO "+mes+" <br> ( "+fecha2esp1+' - '+fecha2esp2+' )';
+                            document.getElementById('trabjPeriodo2').innerHTML = "TRABAJADORES ASIGNADOS AL PERÍODO "+mes+" <br> ( "+fecha2esp1+' - '+fecha2esp2+' )';
                             var diaP = ultimoDiaPM.getDate();
                             var mesP = ultimoDiaPM.getMonth()+1;
                             var añoP = ultimoDiaPM.getFullYear();
@@ -750,7 +790,13 @@
                             var n = num.toString().padStart(5,'0');
                             console.log("ESTE ES EL CODIGO" +n);
                             $('#novedad').append("<option value='"+num+"' selected> ACTUAL: P 1 - " +n+ "</option>");
-                            document.getElementById('id_novedad_sig').value = num; 
+                            if(mes > consultaMesactual){
+                                 //////////////// PARA CUANDO SELECCIONA EL MES SIGUIENTE AL ACTUAL DEL CONTRATO //////////////////
+                                document.getElementById('id_novedad_sig').value = num; 
+                            }else{
+                                //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO //////////
+                                document.getElementById('id_novedad').value = num; 
+                            }
                         }else{
                             console.log("entro al else");
                             $('#novedad').append("<option value=''>---SELECCIONE---</option>");
@@ -804,7 +850,7 @@
                     $.get('dosiasginadoscontrolmesactual', {contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual, contratodosimetria_id: contratodosimetria}, function(asignacionescontrolmesactual){
                         console.log("ASIGNACIONES CONTROL DEL MES ACTUAL");
                         console.log(asignacionescontrolmesactual);
-                        $('#tr_control').html("");
+                        /* $('#tr_control').html(""); */
                         if(mes > consultaMesactual){
                             //////////////// PARA CUANDO SELECCIONA EL MES SIGUIENTE AL ACTUAL DEL CONTRATO ///////////////////////
                             /* alert("CNTROL PARA EL MES SIGUEINTE AL ACTUAL"); */
@@ -842,7 +888,7 @@
                                 document.getElementById("id_contratodosimetria").value = contratodosimetria;
                                 console.log("//CODIGO DEL DOSIMETRO MES SIGUIENTE" +codigo_dosimeter);
                                 var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`control">
-                                        <td style='width: 75px' class='align-middle text-center'>CONTROL TRANS.</td>
+                                        <td style='width: 75px' class='align-middle '>CONTROL TRANS.</td>
                                         <td style='width: 75px' class='align-middle'>
                                             <input type="text" name="ubicacion_asigdosimControl[]" id="ubicacion_asigdosimControl" class="form-control text-center" value="`+ubicacion+`" readonly>
                                         </td>
@@ -873,32 +919,78 @@
                             } 
                         }else{
                             //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
-                            $('#body_asignaciones2').html("");
+                            /* $('#body_asignaciones2').html(""); */
                             /* alert("CNTROL PARA EL MES ACTUAL"); */
                             for(var i=0; i<asignacionescontrolmesactual.length; i++){
-                                
-                                var tr = `<tr>
-                                        <td colspan='2' class='align-middle text-center'>CONTROL</td>
-                                        <td style='width: 208px'class='align-middle text-center'>`
-                                            +asignacionescontrolmesactual[i].codigo_dosimeter+
-                                        `</td>
-                                        <td style='width: 208px' class='align-middle text-center'>NA</td>
-                                        <td style='width: 208px' class='align-middle text-center'>`+asignacionescontrolmesactual[i].ocupacion+`</td>
-                                            
-                                    </tr>`;
-                                $("#tr_control").append(tr);
-                                
-                                /* dosi_control += 1; */
+                                if(asignacionescontrolmesactual[i].controlTransT_unicoCont == 'TRUE'){
+                                    document.getElementById("controlTransT_unicoCont").value = "TRUE";
+                                }
+                                if(asignacionescontrolmesactual[i].controlTransC_unicoCont == 'TRUE'){
+                                    document.getElementById("controlTransC_unicoCont").value = "TRUE";
+                                }
+                                if(asignacionescontrolmesactual[i].controlTransA_unicoCont == 'TRUE'){
+                                    document.getElementById("controlTransA_unicoCont").value = "TRUE";
+                                }
+                                if(asignacionescontrolmesactual[i].codigo_holder != null){
+                                    var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`control">
+                                            <td class='align-middle'>CONTROL TRANS.</td>
+                                            <td style='width: 75px' class='align-middle text-center'>
+                                                `+asignacionescontrolmesactual[i].ubicacion+`
+                                            </td>
+                                            <td style='width: 208px'class='align-middle text-center'>`
+                                                +asignacionescontrolmesactual[i].codigo_dosimeter+
+                                            `</td>
+                                            <td style='width: 208px' class='align-middle text-center'>`
+                                                +asignacionescontrolmesactual[i].codigo_holder+
+                                            `</td>
+                                            <td style='width: 100px' class='align-middle text-center'>
+                                                <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`, '`+asignacionescontrolmesactual[i].ubicacion+`',);" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>`;
+                                    $("#body_asignaciones").append(tr);
+                                }else{
+                                    var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`control">
+                                            <td class='align-middle'>CONTROL TRANS.</td>
+                                            <td style='width: 75px' class='align-middle text-center'>
+                                                `+asignacionescontrolmesactual[i].ubicacion+`
+                                            </td>
+                                            <td style='width: 208px'class='align-middle text-center'>`
+                                                +asignacionescontrolmesactual[i].codigo_dosimeter+
+                                            `</td>
+                                            <td style='width: 208px' class='align-middle text-center'>N.A.</td>
+                                            <td style='width: 100px' class='align-middle text-center'>
+                                                <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`, '`+asignacionescontrolmesactual[i].ubicacion+`',);" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>`;
+                                    $("#body_asignaciones").append(tr);
+                                }
+                                if(asignacionescontrolmesactual[i].ubicacion == 'TORAX'){
+                                    dosi_control_torax += 1;
+                                }else if(asignacionescontrolmesactual[i].ubicacion == 'CRISTALINO'){
+                                    dosi_control_cristalino += 1;
+                                }else if(asignacionescontrolmesactual[i].ubicacion == 'ANILLO'){
+                                    dosi_control_dedo += 1;
+                                }
                                 console.log("EL VALOR DEL DOSI CONTROL PARA EL MES ACTUAL");
                                 /* console.log(dosi_control); */
                             }; 
-                            /* document.getElementById("dosi_control").value = dosi_control; */
+                            document.getElementById("dosi_control_torax").value = dosi_control_torax;
+                            document.getElementById("dosi_control_cristalino").value = dosi_control_cristalino;
+                            document.getElementById("dosi_control_dedo").value = dosi_control_dedo;
                         }
                     });
                     $.get('dosiasginadosmesactual', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual}, function(asignacionesmesactual){
                         console.log("ASIGNACIONES DEL MES ACTUAL");
                         console.log(asignacionesmesactual);
-                        $('#body_asignaciones').html("");
+                        /* $('#body_asignaciones').html(""); */
                         var sede = document.getElementById("sedes_empresadosi");
                         var id_sede = sede.options[sede.selectedIndex].text;
                         console.log("SEDE:" +id_sede);
@@ -917,7 +1009,7 @@
                             console.log(selectTrabajadores.innerHTML);  
                                                 
                             if(mes > consultaMesactual){
-                                /* alert("ASIGNACIONES PARA EL MES SIGUIENTE AL ACTUAL"); */
+                                 //////////////// PARA CUANDO SELECCIONA EL MES SIGUIENTE AL ACTUAL DEL CONTRATO ///////////////////////
                                 for(var i=0; i<asignacionesmesactual.length; i++){
                                     if(asignacionesmesactual[i].dosimetro_uso != 'FALSE'){
                                         var dis = 'disabled';
@@ -944,7 +1036,7 @@
                                     document.getElementById("id_contratodosimetriasede").value = id_contratodosimetriasede;
                                     
                                     var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
-                                        <td class='align-middle text-center'>
+                                        <td class='align-middle'>
                                             <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim_mesdesp`+asignacionesmesactual[i].id_persona+`" class="form-control id_trabj_asigdosim" value="`+asignacionesmesactual[i].id_persona+`" hidden>
                                             <select class="form-select"  name="id_trabj_asigdosim[]" id="id_trabj_asigdosim`+asignacionesmesactual[i].id_persona+`" disabled>
                                                 <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
@@ -977,56 +1069,63 @@
                                 }
 
                             }else{
-                                $('#body_asignaciones2').html("");
-                                /* alert("ASIGNACIONES PARA EL MES ACTUAL"); */
+                                //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
+                                /* $('#body_asignaciones2').html(""); */
                                 for(var i=0; i<asignacionesmesactual.length; i++){
-                                    var fechaEnviado = asignacionesmesactual[i].fecha_dosim_enviado;
-                                    document.getElementById("fecha_dosim_enviado").value = fechaEnviado;
-                                    var primerDiaUso = asignacionesmesactual[i].primer_dia_uso;
-                                    document.getElementById("primerDia_asigdosim").value = primerDiaUso;
-                                    var ultimoDiaUso = asignacionesmesactual[i].ultimo_dia_uso;
-                                    document.getElementById("ultimoDia_asigdosim").value = ultimoDiaUso;
+
+                                    var mestrabj_asig = document.getElementById("mesacambiar").value;
+                                    var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
+                                    var id_contratodosimetriasede =  document.getElementById("id_contratodosimetriasede").value; 
+                                    document.getElementById("mestrabj_asig").value = mestrabj_asig;
+                                    document.getElementById("id_contdosisededepto").value = id_contdosisededepto;
+                                    document.getElementById("id_contratodosimetriasede").value = id_contratodosimetriasede;
 
                                     if(asignacionesmesactual[i].codigo_holder != null){
 
-                                        var tr = `<tr>
+                                        var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
                                             <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].codigo_holder+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].ocupacion+`</td>
-                                            
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].ubicacion+`</td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_holder+`</td>
+                                            <td style='width: 100px' class='align-middle text-center'>
+                                                <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminar(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`');">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </button>
+                                            </td>
                                         </tr>`;
                                         $("#body_asignaciones").append(tr);
                                     }else{
-                                        var tr = `<tr>
+                                        var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
                                             <td class='align-middle'>`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].ubicacion+`</td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
-                                            <td class='align-middle'> NA </td>
-                                            <td class='align-middle'>`+asignacionesmesactual[i].ocupacion+`</td>
-                                            
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].ubicacion+`</td>
+                                            <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
+                                            <td class='align-middle text-center'> N.A. </td>
+                                            <td style='width: 100px' class='align-middle text-center'>
+                                                <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminar(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`');">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </button>
+                                            </td>                                            
                                         </tr>`;
                                         $("#body_asignaciones").append(tr);
                                         
                                     }
-                                   /*  if(asignacionesmesactual[i].ubicacion == 'TORAX'){
+                                    if(asignacionesmesactual[i].ubicacion == 'TORAX'){
                                         dosi_torax += 1;
                                     }else if(asignacionesmesactual[i].ubicacion == 'CRISTALINO'){
                                         dosi_cristalino += 1;
-                                    }else if(asignacionesmesactual[i].ubicacion == 'MUÑECA'){
-                                        dosi_muñeca += 1 ;
+                                    }else if(asignacionesmesactual[i].ubicacion == 'CASO'){
+                                        dosi_caso += 1 ;
                                     }else if(asignacionesmesactual[i].ubicacion == 'ANILLO'){
                                         dosi_dedo += 1;
-                                    } */
-                                    
-                                    /* document.getElementById("dosi_control").value = dosi_control; */
-                                    
-                                    /* document.getElementById("dosi_torax").value = dosi_torax;
+                                    }
+                                    document.getElementById("dosi_torax").value = dosi_torax;
                                     document.getElementById("dosi_cristalino").value = dosi_cristalino;
-                                    document.getElementById("dosi_muñeca").value = dosi_muñeca;
-                                    document.getElementById("dosi_dedo").value = dosi_dedo; */
-
+                                    document.getElementById("dosi_dedo").value = dosi_dedo;
+                                    document.getElementById("dosi_caso").value = dosi_caso;
                                 }
                             }
                         });
@@ -1034,7 +1133,7 @@
                     $.get('dosiareasginadosmesactual', {contratodosimetriasede_id: contratodosimetriasede_id, contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual}, function(asignacionesareamesactual){
                         console.log("ASIGNACIONES AREA DEL MES ACTUAL");
                         console.log(asignacionesareamesactual);
-                        $('#body_asignaciones').html("");
+                        /* $('#body_asignaciones').html(""); */
                         var contdosisededepto_id= document.getElementById("especialidades_empresadosi").value;
                         var sede = document.getElementById("sedes_empresadosi");
                         var sede_id = sede.value;
@@ -1105,27 +1204,33 @@
                         }else{
                              /* alert("ASIGNACIONES PARA EL MES ACTUAL"); */
                             for(var i=0; i<asignacionesareamesactual.length; i++){
-                                /* var fechaEnviado = asignacionesareamesactual[i].fecha_dosim_enviado;
-                                document.getElementById("fecha_dosim_enviado").value = fechaEnviado;
-                                var primerDiaUso = asignacionesareamesactual[i].primer_dia_uso;
-                                document.getElementById("primerDia_asigdosim").value = primerDiaUso;
-                                var ultimoDiaUso = asignacionesareamesactual[i].ultimo_dia_uso;
-                                document.getElementById("ultimoDia_asigdosim").value = ultimoDiaUso; */
-                                
-                                var tr = `<tr>
-                                    <td class='align-middle' style='width: 250px'>`+asignacionesareamesactual[i].nombre_area+`</td>
+                                var mestrabj_asig = document.getElementById("mesacambiar").value;
+                                var id_contdosisededepto = document.getElementById("especialidades_empresadosi").value; 
+                                var id_contratodosimetriasede =  document.getElementById("id_contratodosimetriasede").value; 
+                                document.getElementById("mes_asig_siguiente").value = mestrabj_asig;
+                                document.getElementById("contdosisededepto").value = id_contdosisededepto;
+                                document.getElementById("id_contratodosimetriasede").value = id_contratodosimetriasede;
+
+                                var tr = `<tr id="`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`area">
+                                    <td class='align-middle'>`+asignacionesareamesactual[i].nombre_area+`</td>
                                     <td class='align-middle text-center'>ÁREA</td>
                                     <td class='align-middle text-center'>`+asignacionesareamesactual[i].codigo_dosimeter+`</td>
                                     <td class='align-middle text-center'> N.A.</td>
-                                    <td></td>
+                                    <td style='width: 100px' class='align-middle text-center'>
+                                        <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarArea(`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`, '`+asignacionesareamesactual[i].nombre_area+`');">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                            </svg>
+                                        </button>
+                                    </td>
                                 </tr>`;
                                 $("#body_asignaciones").append(tr);
 
-                                /*dosi_area += 1; */
+                                dosi_area += 1;
                                 console.log("EL VALOR DEL DOSI AREA PARA EL MES ACTUAL");
                                 /* console.log(dosi_area); */
                             }
-                            /* document.getElementById("dosi_area").value = dosi_area; */
+                            document.getElementById("dosi_area").value = dosi_area;
                         }
                     })
                 })
@@ -1220,7 +1325,7 @@
         })
     }
     function eliminar(dosi, ubicacion, nombre){
-        
+        console.log("ELIMINAR TRABJ =" +dosi+" "+ubicacion+" "+nombre);
         Swal.fire({
             title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO ' +ubicacion+ ' ??',
             /* text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO", */
@@ -1296,20 +1401,62 @@
             $('#assignBtn2').removeAttr("disabled");
         }
     }
-    function eliminarNotas(){
+    function Generarnotas(){
+        
+        console.log('---------------------*****');
+        console.log(dosiRetirado);
+        console.log(dosiControlRetirado);
+        console.log(dosiAreaRetirado);
+        console.log('---------------------*****');
+        
         for(var x = 0; x < dosiRetirado.length; x++){
+            console.log("RETIRO DEL DOSÍMETRO CON UBICACION: "+dosiRetirado[x].ubicacion+" PARA EL TRABAJADOR: "+dosiRetirado[x].nombre);
+            let input = `<input type="text" name="inputnotas[]" id="inputnotas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CON UBICACIÓN `+dosiRetirado[x].ubicacion+` PARA EL TRABAJADOR: `+dosiRetirado[x].nombre+`" readonly>`;
+            $('#textCard').append(input);
+            let inputretirado = `<input type="number" hidden name="dosimRetirados1[]" id="dosimRetirados1" value="`+dosiRetirado[x].dosi+`">`;
+            $('#form_cambio_cantdosim').append(inputretirado);
+            console.log("dosimretirado= "+dosiRetirado[x].dosi);
+        }
+        for(var x = 0; x < dosiControlRetirado.length; x++){
+            console.log("RETIRO DEL DOSÍMETRO: CONTROL "+dosiControlRetirado[x].ubicacion);
+            let input = `<input type="text" name="inputnotasControl[]" id="inputnotasControl`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CONTROL TRANSPORTE `+dosiControlRetirado[x].ubicacion+`" readonly>`;
+            $('#textCard').append(input);
+            let inputretiradoControl = `input type="number" hidden name="dosimRetiradosControl1[]" id="dosimRetiradosControl1" value="`+dosiControlRetirado[x].control+`">`;
+            $('#form_cambio_cantdosim').append(inputretiradoControl);
+        }
+        for(var x = 0; x < dosiAreaRetirado.length; x++){
+            console.log("RETIRO DEL DOSÍMETRO AMBIENTAL DEL ÁREA: "+dosiAreaRetirado[x].area);
+            let input = `<input type="text" name="inputnotasAreas[]" id="inputnotasAreas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO AMBIENTAL PARA EL ÁREA '`+dosiAreaRetirado[x].area+`'" readonly>`;
+            $('#textCard').append(input);
+            let inputretiradoArea = `<input type="number" hidden name="dosimRetiradosArea1[]" id="dosimRetiradosArea1" value="`+dosiAreaRetirado[x].idarea+`">`;
+            $('#form_cambio_cantdosim').append(inputretiradoArea);
+        }
+        var inputnotas = document.querySelectorAll('input[name="inputnotas[]"]');
+        var inputControl = document.querySelectorAll('input[name="inputnotasControl[]"]')
+        var inputAreas = document.querySelectorAll('input[name="inputnotasAreas[]"]');
+        if(inputAreas.length != 0 || inputnotas.length != 0 || inputControl.length != 0){
+            $('#assignBtn1').removeAttr("disabled");
+        }
+    }
+    function eliminarNotas(){
+        var dosimRetirados = document.querySelectorAll('input[name="inputnotas[]"]');
+        for(var x = 0; x < dosimRetirados.length; x++){
             var inputnota = document.getElementById('inputnotas'+x);
             inputnota.remove();
         }
-        for(var x = 0; x < dosiControlRetirado.length; x++){
+        var dosimControlRetirados = document.querySelectorAll('input[name="inputnotasControl[]"]');
+        for(var x = 0; x < dosimControlRetirados.length; x++){
             var inputnotasControl = document.getElementById('inputnotasControl'+x);
             inputnotasControl.remove();
         }
-        for(var x = 0; x < dosiAreaRetirado.length; x++){
+        var dosimAreaRetirados = document.querySelectorAll('input[name="inputnotasAreas[]"]');
+        for(var x = 0; x < dosimAreaRetirados.length; x++){
             var inputnotasAreas = document.getElementById('inputnotasAreas'+x);
+            console.log(inputnotasAreas);
             inputnotasAreas.remove();
         }
         $( "#assignBtn2" ).prop( "disabled", true );
+        $( "#assignBtn1" ).prop( "disabled", true );
     }
 </script>
 @if(session('guardar')== 'ok')
@@ -1325,7 +1472,54 @@
 <script type="text/javascript">
     $(document).ready(function(){
         
+        $('#form_cambio_cantdosim').submit(function(e, mes){
+            e.preventDefault();
+            var dosimetrosRetirados = document.querySelectorAll('input[name="dosimRetirados1[]"]');
+            var dosimetrosAreaRetirados = document.querySelectorAll('input[name="dosimRetiradosArea1[]"]');
+            var dosimtorax = document.getElementById("dosi_torax").value;
+            var dosimarea = document.getElementById("dosi_area").value;
+            var dosimcaso = document.getElementById("dosi_caso").value;
+            var dosimCristalino = document.getElementById("dosi_cristalino").value;
+            var dosimdedo = document.getElementById("dosi_dedo").value;
+            console.log("dosimetros retirados= "+dosimetrosRetirados.length);
+            var suma =  parseInt(dosimtorax) + parseInt(dosimcaso) + parseInt(dosimCristalino) + parseInt(dosimdedo);
+            console.log("dosimetros= "+suma);
+            console.log("dosimtorax"+dosimtorax)
+            console.log("dosimarea="+dosimarea);
+            console.log("dosimcaso="+dosimcaso);
+            console.log("dosimcristalino="+dosimCristalino);
+            console.log("dosimdedo="+dosimdedo);
+            console.log("dosimetros Area retirados="+dosimetrosAreaRetirados.length);
 
+            if(dosimetrosRetirados.length == suma && dosimetrosAreaRetirados.length == dosimarea.length ){
+                return Swal.fire({
+                                title:"NO PUEDE ELIMINAR TODOS LOS DOSÍMETROS ",
+                                text: "VERIFIQUE QUE AL MENOS EXISTA UN DOSÍMETRO DISTINTO AL DOSÍMETRO CONTROL ",
+                                icon: 'error'
+                            }).then(function () {
+                                location.reload();
+                            });
+            }
+            ////////////////////////////////////////////////////////////////////////////////
+            Swal.fire({
+                text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL PERIODO SIGUIENTE AL ACTUAL??",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    /* var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
+                    var mes = document.getElementById("mesacambiar").value;
+                    var host = window.location.host;
+                    var path = "http://"+host+"/POSITRON/public/novedades/"+contdosisededepto_id+"/"+mes+"/reportePDFcambiodosim";
+                    
+                    window.open(path, '_blank'); */
+                    this.submit();
+                }
+            })
+        }) 
         $('#form_cambio_cantdosim2').submit(function(e, mes){
             e.preventDefault();
             ////////VALIDACIONES PARA LAS FECHAS  DE INICIO Y FIN DEL PERIODO/////////////////
@@ -1346,7 +1540,18 @@
                             });
             }
             ////////////////////////////////////////////////////////////
+            var dosimetrosAreantg = document.querySelectorAll('select[name="id_dosimetro_area_asigdosim[]"]');
+            var dosimetrosantg = document.querySelectorAll('select[name="id_dosimetro_asigdosim[]"]');
             
+            if(dosimetrosAreantg.length == 0 && dosimetrosantg.length == 0){
+                return Swal.fire({
+                                title:"NO PUEDE ELIMINAR TODOS LOS DOSÍMETROS ",
+                                text: "VERIFIQUE QUE AL MENOS EXISTA UN DOSÍMETRO DISTINTO AL DOSÍMETRO CONTROL ",
+                                icon: 'error'
+                            }).then(function () {
+                                location.reload();
+                            });
+            }
             var dosimetrosControlantg = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
             console.log("ESTOS SON LOS DOSIMETROS CONTROL ANTIGUOS");
             console.log(dosimetrosControlantg); 

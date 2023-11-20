@@ -18,7 +18,7 @@
 </div>
 <br>
 <div class="row">
-    <div class="col md"></div>
+    <div class="col-md"></div>
     <div class="col-md-10">
         <div class="card text-dark bg-light">
             <br>
@@ -67,12 +67,19 @@
             </div>
             <div class="row p-3">
                 <div class="col-md"></div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-floating">
                         <select class="form-select" name="mesacambiar" id="mesacambiar" value="" autofocus style="text-transform:uppercase">
                             <option value="">--SELECCIONE--</option>
                         </select>
                         <label for="floatingInputGrid">PERÍODO A MODIFICAR:</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <select class="form-select" name="novedad" id="novedad" value="" autofocus style="text-transform:uppercase">
+                        </select>
+                        <label for="floatingInputGrid">NOVEDAD:</label>
                     </div>
                 </div>
                 <div class="col-md"></div>
@@ -96,6 +103,7 @@
 
                         <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="3">
                         <input type="number" hidden name="mestrabj" id="mestrabj" value="">
+                        <input type="number" hidden name="id_novedad" id="id_novedad" value="">
                         <input type="number" hidden name="id_contdosisededepto" id="id_contdosisededepto" value="">
                         <input type="number" hidden name="id_contdosimetriasede" id="id_contdosimetriasede" value="">
                         <input type="text" hidden name="controlTransT_unicoCont" id="controlTransT_unicoCont" value="">
@@ -204,6 +212,7 @@
                         @csrf
                         <input type="number" hidden name="tipo_novedad" id="tipo_novedad" value="3">
                         <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
+                        <input type="number" hidden name="id_novedad_sig" id="id_novedad_sig" value="">
                         <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
                         <input type="number" hidden name="id_contdosisede" id="id_contdosisede" value="">
                         <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
@@ -757,6 +766,74 @@
                     console.log("**mes actual "+consultaMesactual);
                     var contratodosimetriasede_id  = document.getElementById("id_contratodosimetriasede").value;
                     var contratodosimetria = document.getElementById("contratos_empresadosi").value;
+                    $.get('novedadactualcontdosisededepto', {contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual}, function(novedadactual){
+                        console.log("/*/*/NOVEDAD DEL MES ACTUAL");
+                        console.log(novedadactual);
+                        console.log(Object.keys(novedadactual).length);
+                        console.log(Object.values(novedadactual));
+                        if(Object.keys(novedadactual).length  === 0){
+                            console.log("entro al if")
+                            var num = 1;
+                            var n = num.toString().padStart(5,'0');
+                            console.log("ESTE ES EL CODIGO" +n);
+                            $('#novedad').append("<option value='"+num+"' selected> ACTUAL: P 1 - " +n+ "</option>");
+                            if(mes > consultaMesactual){
+                                 //////////////// PARA CUANDO SELECCIONA EL MES SIGUIENTE AL ACTUAL DEL CONTRATO //////////////////
+                                document.getElementById('id_novedad_sig').value = num; 
+                            }else{
+                                //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO //////////
+                                document.getElementById('id_novedad').value = num; 
+                            }
+                        }else{
+                            console.log("entro al else");
+                            $('#novedad').append("<option value=''>---SELECCIONE---</option>");
+                            var idNov ;
+                            console.log(novedadactual);
+                            console.log(novedadactual.length);
+                            for(var i=1; i<novedadactual.length; i++){
+                                if(idNov != novedadactual[i].id_novedadmesescontdosi){
+                                    console.log("es la i");
+                                    console.log(novedadactual[i]);
+                                    var num = parseInt(novedadactual[i].codigo_novedad);
+                                    var n = num.toString().padStart(5,'0');
+                                    console.log("ESTE ES EL CODIGO" +n);
+                                    idNov = novedadactual[i].id_novedadmesescontdosi;
+                                    $('#novedad').append("<option value='"+novedadactual[i].id_novedadmesescontdosi+"'> ACTUAL: P "+novedadactual[i].mes_asignacion+" - " +n+ "</option>");
+                                }
+                            }
+                            console.log(typeof novedadactual);
+                            
+                            if(novedadactual.codigo_novedad != undefined){
+                                console.log("es Array solo"),
+                                console.log(novedadactual.codigo_novedad);
+                                var num = parseInt(novedadactual.codigo_novedad)+1;
+                                var n = num.toString().padStart(5,'0');
+                                console.log("ESTE ES EL CODIGO" +n);
+                                $('#novedad').append("<option value='"+num+"'> SIGUIENTE:  " +n+ "</option>");
+
+                            }else{
+                                console.log("es Array de Arrays"),
+                                console.log(novedadactual[0].codigo_novedad);
+                                var num = parseInt(novedadactual[0].codigo_novedad)+1;
+                                var n = num.toString().padStart(5,'0');
+                                console.log("ESTE ES EL CODIGO" +n);
+                                $('#novedad').append("<option value='"+num+"'> SIGUIENTE:  " +n+ "</option>");
+                            }
+                        }
+                    })
+                    $('#novedad').on('change', function(){
+                        if(mes > consultaMesactual){
+                            //////////////// PARA CUANDO SELECCIONA EL MES SIGUIENTE AL ACTUAL DEL CONTRATO ///////////////////////
+                            var novedad = document.getElementById('novedad').value;
+                            console.log("codigo de la novedad = "+novedad);
+                            document.getElementById('id_novedad_sig').value = novedad;
+                        }else{
+                            //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
+                            var novedad = document.getElementById('novedad').value;
+                            console.log("codigo de la novedad = "+novedad);
+                            document.getElementById('id_novedad').value = novedad;
+                        }
+                    });
                     $.get('dosiasginadoscontrolmesactual', {contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual, contratodosimetria_id: contratodosimetria}, function(asignacionescontrolmesactual){
                         console.log("ASIGNACIONES CONTROL DEL MES ACTUAL");
                         console.log(asignacionescontrolmesactual);

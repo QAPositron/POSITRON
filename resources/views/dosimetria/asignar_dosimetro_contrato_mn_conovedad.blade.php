@@ -742,8 +742,8 @@ crossorigin="anonymous">
                             });
                     
                 };
-                for(var x = 0; x < dosimControlTorax.length; x++){
-                    var valuesX = dosimControlTorax[x].value;
+                for(var x = 0; x < dosimControlCristalino.length; x++){
+                    var valuesX = dosimControlCristalino[x].value;
                     if(values == valuesX && i != x){
                         return Swal.fire({
                                 title:"ALGUNOS DOSÍMETROS CONTROL CRISTALINO SELECCIONADOS SE ENCUENTRAN REPETIDOS",
