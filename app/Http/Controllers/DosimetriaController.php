@@ -2560,7 +2560,6 @@ class DosimetriaController extends Controller
                 ->where('mes_asignacion', $mesnumber)
                 ->count(); */
         }
-        
         return view('dosimetria.info_asignacion_dosimetros_contrato', compact('mesnumber','contdosisededepto', 'dosiareasignados', 'trabjasignados', 'observacionesDelMes', 'dosicontrolToraxasig', 'dosicontrolCristalinoasig', 'dosicontrolDedoasig',  'dosicontrolUnicoToraxasig', 'dosicontrolUnicoCristasig', 'dosicontrolUnicoAnilloasig', 'item'));
     }
 
@@ -2784,9 +2783,11 @@ class DosimetriaController extends Controller
             ]);
         }
 
-        
-
-        return redirect()->route('asignadosicontrato.info', ["asigdosicont" => $request->id_contratodosimetriasededepto, "mesnumber" => $request->mes_asignacion, "item"=>$item])->with('actualizar', 'ok'); 
+        if($item == 0){
+            return redirect()->route('asignadosicontrato.info',["asigdosicont" =>$request->id_contratodosimetriasededepto, "mesnumber" =>$request->mes_asignacion, "item"=>$item])->with('actualizar', 'ok');
+        }else{
+            return redirect()->route('asignadosicontrato.info',["asigdosicont" =>$request->id_novedadcontratodosimetriasededepto, "mesnumber" =>$request->mes_asignacion, "item"=>$item])->with('actualizar', 'ok');
+        }
         /* return $request; */
     }
     //// EDITAR DOSIMETROS SIN DOSIMETRO DE CONTROL////
@@ -2803,15 +2804,19 @@ class DosimetriaController extends Controller
     }
     ////LECTURA DE DOSIMETROS CONTROL////
     public function lecturadosicontrol($id, $id_contdosisededepto, $item){
-       
-        $contdosisededepto = Contratodosimetriasededepto::find($id_contdosisededepto);
+        if($item == 0){
+            $contdosisededepto = Contratodosimetriasededepto::find($id_contdosisededepto);
+        }else if($item == 1){
+            $contdosisededepto = Novcontdosisededepto::find($id_contdosisededepto);
+        }
         $dosicontasig = Dosicontrolcontdosisede::find($id);
+       
         return view('dosimetria.lectura_dosimetro_control_contrato', compact('dosicontasig', 'contdosisededepto', 'item'));
 
     }
     ////GUARDAR LECTURA DE DOSIMETROS CONTROL ////
     public function savelecturadosicontrol(Request $request, $id, $item){
-      
+        
         $dosicontasig = Dosicontrolcontdosisede::find($id);
 
         if(($request->nota2 == 'TRUE' && $request->nota5 == 'TRUE') || $request->dnl == ''|| $request->eu == '' || $request->dsu =='' || $request->dpl ==''){
@@ -2824,7 +2829,6 @@ class DosimetriaController extends Controller
                 'verification_required_before'  => 'required', */
             ]);
         }   
-        
 
         $dosicontasig->zero_level_date                     = $request->zeroLevel_date;
         $dosicontasig->measurement_date                    = $request->measurement_date;
@@ -2867,14 +2871,21 @@ class DosimetriaController extends Controller
                 'estado_holder' => 'STOCK',
             ]);
         }
-        return redirect()->route('asignadosicontrato.info',["asigdosicont" =>$request->id_contratodosimetriasededepto, "mesnumber" =>$request->mes_asignacion, "item"=>$item])->with('actualizar', 'ok');
+        if($item == 0){
+            return redirect()->route('asignadosicontrato.info',["asigdosicont" =>$request->id_contratodosimetriasededepto, "mesnumber" =>$request->mes_asignacion, "item"=>$item])->with('actualizar', 'ok');
+        }else{
+            return redirect()->route('asignadosicontrato.info',["asigdosicont" =>$request->id_novedadcontratodosimetriasededepto, "mesnumber" =>$request->mes_asignacion, "item"=>$item])->with('actualizar', 'ok');
+        }
         
     }
     ///EDITAR DOSIMETROS DE CONTROL///
     public function editlecturadosicontrol($id, $id_contdosisededepto, $item){
-        $contdosisededepto = Contratodosimetriasededepto::find($id_contdosisededepto);
-        $dosicontasig = Dosicontrolcontdosisede::find($id);
-        /* return $contdosisededepto; */    
+        if($item == 0){
+            $contdosisededepto = Contratodosimetriasededepto::find($id_contdosisededepto);
+        }else if($item == 1){
+            $contdosisededepto = Novcontdosisededepto::find($id_contdosisededepto);
+        }
+        $dosicontasig = Dosicontrolcontdosisede::find($id);   
         return view('dosimetria.lectura_dosimetro_control_edit', compact('dosicontasig', 'contdosisededepto', 'item'));
     }
     //// LECTURA DOSIMETROS AREA/////
@@ -2945,7 +2956,11 @@ class DosimetriaController extends Controller
             'estado_dosimetro' => 'STOCK',
             'uso_dosimetro'    => ''
         ]);
-        return redirect()->route('asignadosicontrato.info',["asigdosicont" => $request->id_contratodosimetriasededepto, "mesnumber" => $request->mes_asignacion, "item"=>$item])->with('actualizar', 'ok');
+        if($item == 0){
+            return redirect()->route('asignadosicontrato.info',["asigdosicont" =>$request->id_contratodosimetriasededepto, "mesnumber" =>$request->mes_asignacion, "item"=>$item])->with('actualizar', 'ok');
+        }else{
+            return redirect()->route('asignadosicontrato.info',["asigdosicont" =>$request->id_novedadcontratodosimetriasededepto, "mesnumber" =>$request->mes_asignacion, "item"=>$item])->with('actualizar', 'ok');
+        }
         /* return $request; */
     }
     /////EDITAR LECTURA DOSIMETROS AREA /////

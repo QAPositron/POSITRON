@@ -382,10 +382,10 @@ class NovedadesController extends Controller
                         'estado_holder' => 'EN USO'
                     ]);
                     $updateEstadoDosimControlmesig = Dosicontrolcontdosisede::join('dosimetros', 'dosimetro_id', '=', 'id_dosimetro')
-                        ->where('contdosisededepto_id', $request->id_contdosisededepto)
-                        ->where('mes_asignacion', ($request->mestrabj_asig)-1)
-                        ->update([
-                            'estado_dosimetro' => 'EN LECTURA',
+                    ->where('contdosisededepto_id', $request->id_contdosisededepto)
+                    ->where('mes_asignacion', ($request->mestrabj_asig)-1)
+                    ->update([
+                        'estado_dosimetro' => 'EN LECTURA',
                     ]); 
                     if($request->id_ubicacion_control_asig[$i] == 'ANILLO'){
                         $dosi_control_dedo += 1 ;

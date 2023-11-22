@@ -3,7 +3,7 @@
 @section('contenido') 
 <div class="row">
     <div class="col-md position-fixed">
-        <a type="button" class="btn btn-circle colorQA" href="{{route('asignadosicontrato.info', ['asigdosicont' => $trabjasig->contdosisededepto_id, 'mesnumber' => $trabjasig->mes_asignacion, 'item'=>$item])}}">
+        <a type="button" class="btn btn-circle colorQA"  @if($item == 0) href="{{route('asignadosicontrato.info', ['asigdosicont' => $trabjasig->contdosisededepto_id, 'mesnumber' => $trabjasig->mes_asignacion, 'item'=>$item])}}" @else href="{{route('asignadosicontrato.info', ['asigdosicont' =>$trabjasig->novcontdosisededepto_id, 'mesnumber' => $trabjasig->mes_asignacion, 'item'=>$item])}}" @endif>    
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left mt-1" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
             </svg>
@@ -187,7 +187,7 @@
                                             @method('put')
                                             <input type="NUMBER" id="mes_asignacion" name="mes_asignacion" value="{{$trabjasig->mes_asignacion}}" hidden>
                                             <input type="NUMBER" id="id_contratodosimetriasededepto" name="id_contratodosimetriasededepto" value="{{$trabjasig->contdosisededepto_id}}" hidden>
-
+                                            <input type="NUMBER" id="id_novedadcontratodosimetriasededepto" name="id_novedadcontratodosimetriasededepto" value="{{$trabjasig->novcontdosisededepto_id}}" hidden>
                                             <div class="row g-2">
                                                 <div class="col-md-3 mx-4">
                                                     @if($trabjasig->ubicacion == 'TORAX' || $trabjasig->ubicacion == 'CASO')

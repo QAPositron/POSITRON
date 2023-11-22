@@ -20,7 +20,14 @@
     <div class="col-md">
         <h2 class="text-center">DOSIMETRÍA DE </h2>
         <h3 class="text-center"><i>{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}</i>- SEDE: <i>{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}</i> </h3>
-        <h3 class="text-center">ESPECIALIDAD: <i>{{$contdosisededepto->departamentosede->departamento->nombre_departamento}}</i> </h3>
+        @if($item == 0)
+            <h3 class="text-center">ESPECIALIDAD: <i>{{$contdosisededepto->departamentosede->departamento->nombre_departamento}}</i> </h3>
+        @else
+            @php
+                $codigo = str_pad($contdosisededepto->id_novcontdosisededepto, 5, "0", STR_PAD_LEFT);
+            @endphp
+            <h3 class="text-center">SUB-ESPECIALIDAD: <i>NOV-{{$contdosisededepto->departamentosede->departamento->nombre_departamento}}-{{$codigo}}</i></h3>
+        @endif
     </div>
 </div>
 <br>
