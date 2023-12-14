@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 @extends('layouts.plantillabase')
 @section('contenido')
 <a type="button" class="btn btn-circle colorQA ir-arriba">
@@ -149,12 +149,13 @@
                                     <input type="number" name="id_contrato_asigdosim" id="id_contrato_asigdosim" hidden value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria}}">
                                     
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo CONTROL TORAX asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
-                                    @foreach($dosicontrolToraxmesant as $dosicontrolToraxant)
+                                    @if(count($dosicontrolToraxmesant) != 0)
+                                    {{-- @foreach($dosicontrolToraxmesant as $dosicontrolToraxant) --}}
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
                                             <td class='align-middle'>
-                                                <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" @if($dosicontrolToraxant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    <option value="@if($dosicontrolToraxant->dosimetro_uso != 'FALSE') {{$dosicontrolToraxant->dosimetro_id}} @endif"> @if($dosicontrolToraxant->dosimetro_uso != 'FALSE') {{$dosicontrolToraxant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                <select class="form-select id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" @if($dosicontrolToraxmesant[0]->dosimetro_uso != 'FALSE')  disabled @endif>
+                                                    <option value="@if($dosicontrolToraxmesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolToraxmesant[0]->dosimetro_id}} @endif"> @if($dosicontrolToraxmesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolToraxmesant[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
                                                     @endforeach
@@ -162,7 +163,8 @@
                                             </td>
                                             <td class='align-middle text-center'>N.A.</td>
                                         </tr>
-                                    @endforeach
+                                    {{-- @endforeach --}}
+                                    @endif
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL TORAX asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
                                     {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_control_torax - count($dosicontrolToraxmesant)); $i++)
@@ -181,12 +183,13 @@
                                             </tr>
                                         @endfor
                                     @endif --}}
-                                    {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL TORAX POR CONTRATO/////// --}}
-                                    @if(!empty($dosicontrolToraxUnicomesant[0]) && $dosicontrolToraxUnicomesant[0]->controlTransT_unicoCont == 'TRUE')
+                                    {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL TORAX POR CONTRATO/////// --}} 
+                                    @if(!empty($dosicontrolToraxUnicomesant[0]) && $contdosisededepto->controlTransT_unicoCont == 'TRUE')
+                                        
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. T.</td>
                                             <td class='align-middle'>
-                                                <select class="form-select id_dosimetro_ControlToraxUnico"  name="id_dosimetro_ControlToraxUnico" id="id_dosimetro_ControlToraxUnico" @if($dosicontrolToraxUnicomesant[0]->dosimetro_uso != 'FALSE'){ disabled } @elseif(!isset($dosicontrolToraxUnicomesact[0])) @else{ disabled } @endif>
+                                                <select class="form-select id_dosimetro_ControlToraxUnico"  name="id_dosimetro_ControlToraxUnico" id="id_dosimetro_ControlToraxUnico" @if($dosicontrolToraxUnicomesant[0]->dosimetro_uso != 'FALSE') disabled  @elseif(!isset($dosicontrolToraxUnicomesact[0])) @else disabled @endif>
                                                     <option @if($dosicontrolToraxUnicomesant[0]->dosimetro_uso != 'FALSE') value="{{$dosicontrolToraxUnicomesant[0]->dosimetro_id}}" @elseif(!isset($dosicontrolToraxUnicomesact[0])) value="" @else value="{{$dosicontrolToraxUnicomesact[0]->dosimetro_id}}" @endif> @if($dosicontrolToraxUnicomesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolToraxUnicomesant[0]->dosimetro->codigo_dosimeter}} @elseif(!isset($dosicontrolToraxUnicomesact[0])) ---- @else {{$dosicontrolToraxUnicomesact[0]->dosimetro->codigo_dosimeter}}@endif</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
@@ -199,28 +202,29 @@
                                     {{-- ///FIN DE LA CREACION DE LAS Filas creadas PARA LA CANTIDAD DE DOSIMETROS tipo  CONTROL TORAX/////// --}}
 
                                     {{--///Filas creadas segun la cantidad de dosimetros tipo CONTROL CRISTALINO asignados en EL MES ANTERIOR QUE CAMBIA SI SE MODIFICAN LAS CANTIDADES EN EL MODULO DE NOVEDADES/////// --}}
-                                    @foreach($dosicontrolCristalinomesant as $dosicontrolCristalinoant)
+                                    @if(count($dosicontrolCristalinomesant) != 0)
+                                    {{-- @foreach($dosicontrolCristalinomesant as $dosicontrolCristalinoant) --}}
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL CRISTALINO</td>
                                             <td class='align-middle'>
-                                                <select class="form-select id_dosimetro_asigdosimControlCristalino"  name="id_dosimetro_asigdosimControlCristalino[]" id="id_dosimetro_asigdosimControlCristalino" @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    <option value="@if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') {{$dosicontrolCristalinoant->dosimetro_id}} @endif"> @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') {{$dosicontrolCristalinoant->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
+                                                <select class="form-select id_dosimetro_asigdosimControlCristalino"  name="id_dosimetro_asigdosimControlCristalino[]" id="id_dosimetro_asigdosimControlCristalino" @if($dosicontrolCristalinomesant[0]->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if($dosicontrolCristalinomesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolCristalinomesant[0]->dosimetro_id}} @endif"> @if($dosicontrolCristalinomesant[0]->dosimetro_uso != 'FALSE') {{$dosicontrolCristalinomesant[0]->dosimetro->codigo_dosimeter}} @else ---- @endif</option>
                                                     @foreach($dosimLibresEzclip as $dosiezcliplib)
                                                         <option value="{{$dosiezcliplib->id_dosimetro}}">{{$dosiezcliplib->codigo_dosimeter}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td class='align-middle text-center'>
-                                                <select class="form-select id_holder_asigdosimControlCristalino[]"  name="id_holder_asigdosimControlCristalino[]" id="id_holder_asigdosimControlCristalino" @if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE') { disabled } @endif>
-                                                    <option value="@if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE'){{$dosicontrolCristalinoant->holder_id}}@endif">@if($dosicontrolCristalinoant->dosimetro_uso != 'FALSE'){{$dosicontrolCristalinoant->holder->codigo_holder}}@else ---- @endif</option>
+                                            <td class='align-middle'>
+                                                <select class="form-select id_holder_asigdosimControlCristalino[]"  name="id_holder_asigdosimControlCristalino[]" id="id_holder_asigdosimControlCristalino" @if($dosicontrolCristalinomesant[0]->dosimetro_uso != 'FALSE') { disabled } @endif>
+                                                    <option value="@if($dosicontrolCristalinomesant[0]->dosimetro_uso != 'FALSE'){{$dosicontrolCristalinomesant[0]->holder_id}}@endif">@if($dosicontrolCristalinomesant[0]->dosimetro_uso != 'FALSE'){{$dosicontrolCristalinomesant[0]->holder->codigo_holder}}@else ---- @endif</option>
                                                     @foreach($holderLibresCristalino as $holibcris)
                                                         <option value="{{$holibcris->id_holder}}">{{$holibcris->codigo_holder}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
                                         </tr>
-                                    @endforeach
-
+                                    {{-- @endforeach --}}
+                                    @endif
                                     {{-- ///Filas creadas SI LA CANTIDAD DE DOSIMETROS tipo CONTROL CRISTALINO asignados ES MODIFICADA EN EL MES ACTUAL/////// --}}
                                     {{-- @if($mescontdosisededepto->mes_asignacion == $mesnumber || $mescontdosisededepto->mes_asignacion <= $mesnumber)
                                         @for($i=1; $i<=($mescontdosisededepto->dosi_control_cristalino - count($dosicontrolCristalinomesant)); $i++)
@@ -247,7 +251,7 @@
                                         @endfor
                                     @endif --}}
                                     {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL CRISTALINO POR CONTRATO/////// --}}
-                                    @if(!empty($dosicontrolCristalinoUnicomesant[0]) && $dosicontrolCristalinoUnicomesant[0]->controlTransC_unicoCont == 'TRUE')
+                                    @if(!empty($dosicontrolCristalinoUnicomesant[0]) && $contdosisededepto->controlTransC_unicoCont == 'TRUE')
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. C.</td>
                                             <td class='align-middle'>
@@ -319,7 +323,7 @@
                                         @endfor
                                     @endif --}}
                                     {{-- ///Filas creadas SI EXISTE SOLO UN DOSIMETRO DE CONTROL ANILLO POR CONTRATO/////// --}}
-                                    @if(!empty($dosicontrolDedoUnicomesant[0])&& $dosicontrolDedoUnicomesant[0]->controlTransA_unicoCont == 'TRUE')
+                                    @if(!empty($dosicontrolDedoUnicomesant[0])&& $contdosisededepto->controlTransA_unicoCont == 'TRUE')
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. A</td>
                                             <td class='align-middle'>
@@ -787,6 +791,9 @@ crossorigin="anonymous">
 </script>
 
 <script type="text/javascript">
+    $(document).on('select2:open', () => {
+        document.querySelector('.select2-search__field').focus();
+    });
     $(document).ready(function(){
         // Creamos array con los meses del año
         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
@@ -930,39 +937,67 @@ crossorigin="anonymous">
                 
             }
         }
-        $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",});
-        $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%",});
-        $('#id_holder_asigdosimControlCristalino').select2({width: "100%",});
-        $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%",});
-        $('#id_holder_asigdosimControlDedo').select2({width: "100%",});
-
-        $('#id_dosimetro_ControlToraxUnico').select2({width: "100%",});
-        $('#id_dosimetro_ControlCristalinoUnico').select2({width: "100%",});
-        $('#id_holder_ControlCristalinoUnico').select2({width: "100%",});
-        $('#id_dosimetro_ControlDedoUnico').select2({width: "100%",});
-        $('#id_holder_ControlDedoUnico').select2({width: "100%",});
+        if($('#id_dosimetro_asigdosimControlTorax').is(':disabled') != true){
+            $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_asigdosimControlCristalino').is(':disabled') != true){
+            $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_holder_asigdosimControlCristalino').is(':disabled') != true){
+            $('#id_holder_asigdosimControlCristalino').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_asigdosimControlDedo').is(':disabled') != true){
+            $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_holder_asigdosimControlDedo').is(':disabled') != true){
+            $('#id_holder_asigdosimControlDedo').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_ControlToraxUnico').is(':disabled') != true){
+            $('#id_dosimetro_ControlToraxUnico').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_ControlCristalinoUnico').is(':disabled') != true){
+            $('#id_dosimetro_ControlCristalinoUnico').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_holder_ControlCristalinoUnico').is(':disabled') != true){
+            $('#id_holder_ControlCristalinoUnico').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_ControlDedoUnico').is(':disabled') != true){
+            $('#id_dosimetro_ControlDedoUnico').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_holder_ControlDedoUnico').is(':disabled') != true){
+            $('#id_holder_ControlDedoUnico').select2({width: "100%", theme: "classic"});
+        }
         
         ///////SELECT2 PARA LOS SELECTS DE DOSIMETROS //////
         
-         var dosim_area = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
+        var dosim_area = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
         for(var i = 0; i < dosim_area.length; i++){
             dosim_area[i].setAttribute("id", "id_dosimetro_asigdosimArea"+[i]);
-            $('#id_dosimetro_asigdosimArea'+[i]).select2({width: "100%",});
+            if($('#id_dosimetro_asigdosimArea'+[i]).is(':disabled') != true){
+                $('#id_dosimetro_asigdosimArea'+[i]).select2({width: "100%", theme: "classic"}) ;
+            }
         }
+        console.log("cantidad de dosimetros area = "+dosim_area.length);
         var dosim_caso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
         for(var i = 0; i < dosim_caso.length; i++){
             dosim_caso[i].setAttribute("id", "id_dosimetro_asigdosimCaso"+[i]);
-            $('#id_dosimetro_asigdosimCaso'+[i]).select2({width: "100%",});
+            if($('#id_dosimetro_asigdosimCaso'+[i]).is(':disabled') != true){
+                $('#id_dosimetro_asigdosimCaso'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
         var dosim_torax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
         for(var i = 0; i < dosim_torax.length; i++){
             dosim_torax[i].setAttribute("id", "id_dosimetro_asigdosimTorax"+[i]);
-            $('#id_dosimetro_asigdosimTorax'+[i]).select2({width: "100%",});
+            if($('#id_dosimetro_asigdosimTorax'+[i]).is(':disabled') != true){
+                $('#id_dosimetro_asigdosimTorax'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
         var dosim_cristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
         for(var i = 0; i < dosim_cristalino.length; i++){
             dosim_cristalino[i].setAttribute("id", "id_dosimetro_asigdosimCristalino"+[i]);
-            $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%",});
+            if($('#id_dosimetro_asigdosimCristalino'+[i]).is(':disabled') != true){
+                $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
         /* var dosim_muñeca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"');
         for(var i = 0; i < dosim_muñeca.length; i++){
@@ -972,56 +1007,34 @@ crossorigin="anonymous">
         var dosim_dedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"');
         for(var i = 0; i < dosim_dedo.length; i++){
             dosim_dedo[i].setAttribute("id", "id_dosimetro_asigdosimDedo"+[i]);
-            $('#id_dosimetro_asigdosimDedo'+[i]).select2({width: "100%",});
+            if($('#id_dosimetro_asigdosimDedo'+[i]).is(':disabled') != true){
+                $('#id_dosimetro_asigdosimDedo'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
            //////SELECT2 PARA LOS SELECTS DE LOS HOLDERS /////
         var holder_cristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"');
         for(var i = 0; i < holder_cristalino.length; i++){
             holder_cristalino[i].setAttribute("id", "id_holder_asigdosimCristalino"+[i]);
-            $('#id_holder_asigdosimCristalino'+[i]).select2({width: "100%",});
+            if($('#id_holder_asigdosimCristalino'+[i]).is(':disabled') != true){
+                $('#id_holder_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
-        var holder_muñeca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"');
+        /* var holder_muñeca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"');
         for(var i = 0; i < holder_muñeca.length; i++){
             holder_muñeca[i].setAttribute("id", "id_holder_asigdosimMuneca"+[i]);
-            $('#id_holder_asigdosimMuneca'+[i]).select2({width: "100%",});
-        }
+            if($('#id_holder_asigdosimMuneca'+[i]).is(':disabled') != true){
+                $('#id_holder_asigdosimMuneca'+[i]).select2({width: "100%",});
+            }
+        } */
         var holder_dedo = document.querySelectorAll('select[name="id_holder_asigdosimDedo[]"');
         for(var i = 0; i < holder_dedo.length; i++){
             holder_dedo[i].setAttribute("id", "id_holder_asigdosimDedo"+[i]);
-            $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%",});
+            if($('#id_holder_asigdosimDedo'+[i]).is(':disabled') != true){
+                $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%", theme: "classic"});
+            }
         } 
-        ///SELECT2 PAR LOS SELECT DE LAS OCUPACIONES/////
-        /* var ocu_area = document.querySelectorAll('select[name="ocupacion_asigdosimArea[]"');
-        for(var i = 0; i < ocu_area.length; i++){
-            ocu_area[i].setAttribute("id", "ocupacion_asigdosimArea"+[i]);
-            $('#ocupacion_asigdosimArea'+[i]).select2({width: "100%",});
-        }
-        var ocu_caso = document.querySelectorAll('select[name="ocupacion_asigdosimCaso[]"');
-        for(var i = 0; i < ocu_caso.length; i++){
-            ocu_caso[i].setAttribute("id", "ocupacion_asigdosimCaso"+[i]);
-            $('#ocupacion_asigdosimCaso'+[i]).select2({width: "100%",});
-        }
-        var ocu_torax = document.querySelectorAll('select[name="ocupacion_asigdosimTorax[]"');
-        for(var i = 0; i < ocu_torax.length; i++){
-            ocu_torax[i].setAttribute("id", "ocupacion_asigdosimTorax"+[i]);
-            $('#ocupacion_asigdosimTorax'+[i]).select2({width: "100%",});
-        }
-        var ocu_cristalino = document.querySelectorAll('select[name="ocupacion_asigdosimCristalino[]"');
-        for(var i = 0; i < ocu_cristalino.length; i++){
-            ocu_cristalino[i].setAttribute("id", "ocupacion_asigdosimCristalino"+[i]);
-            $('#ocupacion_asigdosimCristalino'+[i]).select2({width: "100%",});
-        }
-        var ocu_muñeca = document.querySelectorAll('select[name="ocupacion_asigdosimMuneca[]"');
-        for(var i = 0; i < ocu_muñeca.length; i++){
-            ocu_muñeca[i].setAttribute("id", "ocupacion_asigdosimMuneca"+[i]);
-            $('#ocupacion_asigdosimMuneca'+[i]).select2({width: "100%",});
-        }
-        var ocu_dedo = document.querySelectorAll('select[name="ocupacion_asigdosimDedo[]"');
-        for(var i = 0; i < ocu_dedo.length; i++){
-            ocu_dedo[i].setAttribute("id", "ocupacion_asigdosimDedo"+[i]);
-            $('#ocupacion_asigdosimDedo'+[i]).select2({width: "100%",});
-        } */
-         //////////////////////////////
+        
+        //////////////////////////////
         $('.ir-arriba').click(function(){
             $('body, html').animate({
                 scrollTop: '0px'
@@ -1035,6 +1048,18 @@ crossorigin="anonymous">
                 $('.ir-arriba').slideUp(300);
             }
         });
+        var ControlTorax = document.getElementById("id_dosimetro_asigdosimControlTorax");
+        var ControlCristalino = document.getElementById("id_dosimetro_asigdosimControlCristalino");
+        var ControlDedo = document.getElementById("id_dosimetro_asigdosimControlDedo");
+        var ControlToraxUnico = document.getElementById("id_dosimetro_ControlToraxUnico");
+        var ControlCristalinoUnico = document.getElementById("id_dosimetro_ControlCristalinoUnico");
+        var ControlDedoUnico = document.getElementById("id_dosimetro_ControlDedoUnico");
+        if(dosim_area.length == 0 && dosim_caso.length == 0 && dosim_torax.length == 0 && dosim_cristalino.length == 0 && dosim_dedo.length == 0 && ControlTorax == null && ControlCristalino == null && ControlDedo == null && ControlToraxUnico == null & ControlCristalinoUnico == null && ControlDedoUnico == null){
+            return Swal.fire({
+                    title:"DIRÍJASE A LAS NOVEDADES PARA INGRESAR NUEVOS DOSÍMETROS",
+                    icon: 'warning'
+                });
+        }
     });
 
 </script>
@@ -1066,6 +1091,7 @@ crossorigin="anonymous">
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = "{{route('asignadosicontratomn.clear',['asigdosicont' => $contdosisededepto->id_contdosisededepto, 'mesnumber' => $mesnumber] )}}";
+                    /* $('#assignBtn').removeAttr("disabled"); */
                 }
             })
         })

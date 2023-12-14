@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\App;
 use Barryvdh\DomPDF\Facade as PDF;
 use Exception; 
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Constraint\Count;
 
 class DosimetriaController extends Controller
 {
@@ -158,23 +159,27 @@ class DosimetriaController extends Controller
         return view('dosimetria.crear_empresas_dosimetria', compact('empresas', 'empresaDosi', 'contdosisededepto','novedadescontdosisededepto', 'dosimetriacontrato', 'dosimetrosUsados', 'dosimestrosLibres', 'dosimetrosEnLectura', 'empresasDosimTrabjUSO', 'empresasDosimTrabjLECTURA', 'empresasDosimDosicontUSO', 'empresasDosimDosicontLECTURA', 'empresasDosimDosiareaUSO', 'empresasDosimDosiareaLECTURA'));
     }
     public function saveEmpresa(Request $request){
-
-         $request->validate([
-            'id_empresa'      => 'required',
+        
+        $request->validate([
+            'id_empresa'      => 'required|unique:App\Models\ContratosDosimetriaEmpresa,empresa_id,',
         ]);
         $empresaDosi = new ContratosDosimetriaEmpresa();
 
-        $empresaDosi->empresa_id                   = $request->id_empresa;
-        $empresaDosi->numtotal_dosi_torax          = 0;
-        $empresaDosi->numtotal_dosi_cristalino     = 0;
-        $empresaDosi->numtotal_dosi_dedo           = 0;
-        $empresaDosi->numtotal_dosi_muñeca         = 0;
-        $empresaDosi->numtotal_dosi_control        = 0;
-        $empresaDosi->numtotal_dosi_ambiental      = 0;
-        $empresaDosi->numtotal_dosi_caso           = 0;
-
+        $empresaDosi->empresa_id                       = $request->id_empresa;
+        $empresaDosi->nombre_empresa                   = $empresaDosi->empresa->nombre_empresa;
+        $empresaDosi->num_iden_empresa                 = $empresaDosi->empresa->num_iden_empresa;
+        $empresaDosi->numtotal_dosi_torax              = 0;
+        $empresaDosi->numtotal_dosi_cristalino         = 0;
+        $empresaDosi->numtotal_dosi_dedo               = 0;
+        $empresaDosi->numtotal_dosi_muñeca             = 0;
+        $empresaDosi->numtotal_dosi_control_torax      = 0;
+        $empresaDosi->numtotal_dosi_control_cristalino = 0;
+        $empresaDosi->numtotal_dosi_control_dedo       = 0;
+        $empresaDosi->numtotal_dosi_ambiental          = 0;
+        $empresaDosi->numtotal_dosi_caso               = 0;
+        
         $empresaDosi->save();
-        return redirect()->route('empresasdosi.create'); 
+        return redirect()->route('empresasdosi.create')->with('crear', 'ok'); 
     }
 /* -----------------------ANALIZAR ESTA FUNCION -------------------- */
     public function createlistContrato($id){
@@ -671,7 +676,7 @@ class DosimetriaController extends Controller
             array_push($mesesAssigArea, $$mes);
             
         }
-        
+        /* return $mesesAssigArea; */
         $periodo = $dosisededeptocontra->contratodosimetriasede->dosimetriacontrato->periodo_recambio;
         if($periodo == 'TRIMS'){
             return view('dosimetria.detalle_sede_contrato_trimestral_dosimetria', compact('dosisededeptocontra', 'trabjasigcontra', 'areasigcontra', 'mesTotalTrabjasignados','mesTotalAreasignados', 'mescontdosisededepto', 'mesesAssigTrabj', 'mesesAssigArea'));
@@ -1360,12 +1365,12 @@ class DosimetriaController extends Controller
         
         $dosicontrolToraxmesant = Dosicontrolcontdosisede::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', $mesnumber-1)
-        ->where('novcontdosisededepto_id', NULL)
+        /* ->where('novcontdosisededepto_id', NULL) */
         ->where('ubicacion', 'TORAX')
         ->get();
         $dosicontrolCristalinomesant = Dosicontrolcontdosisede::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', $mesnumber-1)
-        ->where('novcontdosisededepto_id', NULL)
+        /* ->where('novcontdosisededepto_id', NULL) */
         ->where('ubicacion', 'CRISTALINO')
         ->get();
         $dosicontrolDedomesant = Dosicontrolcontdosisede::where('contdosisededepto_id', $id)
@@ -1386,14 +1391,16 @@ class DosimetriaController extends Controller
         ->where('ubicacion', 'TORAX')
         ->where('controlTransT_unicoCont', 'TRUE')
         ->get();
+        
         $dosicontrolCristalinoUnicomesact = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
         ->where('mes_asignacion', $mesnumber)
         ->where('ubicacion', 'CRISTALINO')
         ->where('controlTransC_unicoCont', 'TRUE')
         ->get();
+       
         $dosicontrolCristalinoUnicomesant = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
         ->where('mes_asignacion', $mesnumber-1)
-        ->where('ubicacion', 'CRISTALINO')
+        ->where('ubicacion', 'CRISTALINO') 
         ->where('controlTransC_unicoCont', 'TRUE')
         ->get();
         $dosicontrolDedoUnicomesact = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
@@ -3535,7 +3542,7 @@ class DosimetriaController extends Controller
         
         $pdf->setPaper('A4', 'portrait');
         date_default_timezone_set('America/Bogota');
-        return $pdf->stream("RSD_OSL_QA_".mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0,6,"UTF-8")."_".mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,6,"UTF-8")."_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
+        return $pdf->stream("RSD_OSL_QA_".mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0,15,"UTF-8")."_".mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0,10,"UTF-8")."_".mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,6,"UTF-8")."_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
     }
     public function pdfReporteRevisionEntrada($empresa, $deptodosi, $mesnumber, $item){
         if($item == 0){
@@ -3618,7 +3625,7 @@ class DosimetriaController extends Controller
         }
         $pdf->setPaper('A4', 'portrait');
         date_default_timezone_set('America/Bogota');
-        return $pdf->stream("RED_OSL_QA_".mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0,6,"UTF-8")."_".mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,6,"UTF-8")."_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
+        return $pdf->stream("RED_OSL_QA_".mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0,15,"UTF-8")."_".mb_substr($contdosisededepto->contratodosimetriasede->sede->nombre_sede, 0,10,"UTF-8")."_".mb_substr($contdosisededepto->departamentosede->departamento->nombre_departamento, 0,6,"UTF-8")."_".date("Y").date("m").date("d").date("H").date("i").date("s").".pdf");
         
     }
     public function revisionDosimetriaEntrada($id, $mesnumber, $item){

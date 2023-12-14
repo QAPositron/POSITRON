@@ -4,16 +4,15 @@
         <div class="modal-body">
             <div class="col-md">
                 <label class="text-center">AL SELECCIONAR UNA EMPRESA Y GUARDAR SE PODRAN CREAR CONTRATOS EN ELLA</label>
-                <BR></BR>
+                <br>
                 <div class="form-floating">
-                    <select wire:model="empresa" class="form-select @error('empresa') is-invalid @enderror" name="id_empresa" id="id_empresa">
+                    <select wire:model="empresa" class="form-select" name="id_empresa" id="id_empresa">
                         <option value="">--SELECCIONE--</option>
                         @foreach($empresas as $emp)
                             <option value ="{{$emp->id_empresa}}">{{$emp->nombre_empresa}}</option>
                         @endforeach
                     </select>
-                    <label for="floatingSelectGrid">EMPRESA:</label>
-                    @error('empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                    
                 </div>
                 
             </div>

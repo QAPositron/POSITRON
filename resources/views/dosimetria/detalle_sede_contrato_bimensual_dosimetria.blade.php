@@ -130,10 +130,10 @@
                                     <div class="row align-items-center">
                                         
                                         {{-- /////////SI SOLO EXISTEN AREAS ASIGNADAS A UN DEPTO///////// --}}
-                                        @if($dosisededeptocontra->dosi_torax == 0 && $dosisededeptocontra->dosi_cristalino == 0 && $dosisededeptocontra->dosi_muñeca == 0 && $dosisededeptocontra->dosi_dedo == 0 && $dosisededeptocontra->dosi_caso == 0)
+                                        @if($dosisededeptocontra->dosi_torax == 0 && $dosisededeptocontra->dosi_cristalino == 0 && $dosisededeptocontra->dosi_muñeca == 0 && $dosisededeptocontra->dosi_dedo == 0 && $dosisededeptocontra->dosi_caso == 0 && $dosisededeptocontra->dosi_area != 0)
                                            {{--  {{$mesTotalAreasignados[$i]}} --}}
                                             @if($i == 1 && $mesTotalAreasignados[$i]>0)
-                                               {{--  ZZ mesTotal {{$i}} > 0 & i=1 --}}
+                                                {{-- ZZ mesTotal {{$i}} > 0 & i=1 --}}
                                                 <div class="col-md text-center">
                                                     <a onclick="return false"  style="background-color: #a0aec0" href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" class="btn  btn-sm aling-middle">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -438,7 +438,6 @@
                                                 </div>
                                             @elseif($i == 1 && $mesTotalAreasignados[$i]<=0)
                                                 {{-- ZZmesTotal{{$i}} < 0 & i=1 --}}
-                                                
                                                 <div class="col-md text-center">
                                                     <a  href="{{route('asignadosicontratom1.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i ])}}" class="btn btn-sm colorQA">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -489,7 +488,13 @@
                                             @elseif($i != 1 && $mesTotalAreasignados[$i]<=0)
                                                 {{-- ZZmesTotal{{$i}} < 0 & i !=1 --}}
                                                 <div class="col-md text-center">
-                                                    @if($dosisededeptocontra->mes_actual+1 == ($i) && count($mesesAssigArea[1]) != 0)
+                                                    @if($dosisededeptocontra->mes_actual+1 == ($i) && count($mesesAssigArea[$i-1]) != 0)
+                                                        <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" class="btn colorQA btn-sm">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+                                                            </svg> <br> ASIGNAR
+                                                        </a>
+                                                    @elseif($dosisededeptocontra->mes_actual == ($i) && count($mesesAssigArea[$i-1]) == 0)
                                                         <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" class="btn colorQA btn-sm">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
@@ -691,7 +696,6 @@
                                                 </div> 
                                             @elseif($i != 1 && $mesTotalTrabjasignados[$i]>0)
                                                 {{-- XXmesTotal{{$i}} > 0 & i != 1 --}}
-                                                
                                                 <div class="col-md text-center">
                                                     @php 
                                                         $totalT1 = count($mesesAssigTrabj[$i]);
@@ -902,7 +906,13 @@
                                             @elseif($i != 1 && $mesTotalTrabjasignados[$i]<=0)
                                                 {{-- XXmesTotal{{$i}} < 0 & i !=1 --}}
                                                 <div class="col-md text-center">
-                                                    @if($dosisededeptocontra->mes_actual+1 == ($i) && count($mesesAssigTrabj[1]) != 0)
+                                                    @if($dosisededeptocontra->mes_actual+1 == ($i) && count($mesesAssigTrabj[$i-1]) != 0)
+                                                        <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" class="btn colorQA btn-sm">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+                                                            </svg> <br> ASIGNAR
+                                                        </a>
+                                                    @elseif($dosisededeptocontra->mes_actual == ($i) && count($mesesAssigTrabj[$i-1]) == 0)
                                                         <a  href="{{route('asignadosicontratomn.create', ['asigdosicont' => $dosisededeptocontra->id_contdosisededepto, 'mesnumber' => $i])}}" class="btn colorQA btn-sm">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                                                 <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>

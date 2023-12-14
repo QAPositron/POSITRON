@@ -263,7 +263,7 @@
                                         <tr>
                                             <td colspan='2' class='align-middle text-center'>CONTROL TÓRAX</td>
                                             <td>
-                                                <select class="form-control id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax" autofocus aria-label="Floating label select example">
+                                                <select class="form-control id_dosimetro_asigdosimControlTorax"  name="id_dosimetro_asigdosimControlTorax[]" id="id_dosimetro_asigdosimControlTorax"  aria-label="Floating label select example">
                                                     <option value="">----</option>
                                                     @foreach($dosimLibresGeneral as $dosigenlib)
                                                         <option value="{{$dosigenlib->id_dosimetro}}">{{$dosigenlib->codigo_dosimeter}}</option>
@@ -543,97 +543,101 @@
 </script>
 
 <script type="text/javascript">
+    $(document).on('select2:open', () => {
+        document.querySelector('.select2-search__field').focus();
+    });
     $(document).ready(function() {
         //select2 para dosimetros de tipo control////
-        $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",});
-        $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%",});
-        $('#id_holder_asigdosimControlCristalino').select2({width: "100%",});
-        $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%",});
-        $('#id_holder_asigdosimControlDedo').select2({width: "100%",});
+        
+        $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%",theme: "classic"});
+        $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%", theme: "classic"});
+        $('#id_holder_asigdosimControlCristalino').select2({width: "100%", theme: "classic"});
+        $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%", theme: "classic"});
+        $('#id_holder_asigdosimControlDedo').select2({width: "100%", theme: "classic"});
 
-        $('#id_dosimetro_ControlToraxUnico').select2({width: "100%",});
-        $('#id_dosimetro_ControlCristalinoUnico').select2({width: "100%",});
-        $('#id_holder_ControlCristalinoUnico').select2({width: "100%",});
-        $('#id_dosimetro_ControlDedoUnico').select2({width: "100%",});
-        $('#id_holder_ControlDedoUnico').select2({width: "100%",});
+        $('#id_dosimetro_ControlToraxUnico').select2({width: "100%", theme: "classic"});
+        $('#id_dosimetro_ControlCristalinoUnico').select2({width: "100%", theme: "classic"});
+        $('#id_holder_ControlCristalinoUnico').select2({width: "100%", theme: "classic"});
+        $('#id_dosimetro_ControlDedoUnico').select2({width: "100%", theme: "classic"});
+        $('#id_holder_ControlDedoUnico').select2({width: "100%", theme: "classic"});
         /////SELECT2 PARA LOS SELECTS DE TRABAJADORES//////// 
         var trabj_torax = document.querySelectorAll('select[name="id_trabajador_asigdosimTorax[]"]');
         for(var i = 0; i < trabj_torax.length; i++){
             trabj_torax[i].setAttribute("id", "id_trabajador_asigdosimTorax"+[i]);
-            $('#id_trabajador_asigdosimTorax'+[i]).select2({width: "100%",});
+            $('#id_trabajador_asigdosimTorax'+[i]).select2({width: "100%", theme: "classic"});
         }
         var nombres_area = document.querySelectorAll('select[name="id_area_asigdosimArea[]"]');
         for(var i = 0; i < nombres_area.length; i++){
             nombres_area[i].setAttribute("id", "id_area_asigdosimArea"+[i]);
-            $('#id_area_asigdosimArea'+[i]).select2({width: "100%",});
+            $('#id_area_asigdosimArea'+[i]).select2({width: "100%", theme: "classic"});
         }
         var trabj_caso = document.querySelectorAll('select[name="id_trabajador_asigdosimCaso[]"]');
         for(var i = 0; i < trabj_caso.length; i++){
             trabj_caso[i].setAttribute("id", "id_trabajador_asigdosimCaso"+[i]);
-            $('#id_trabajador_asigdosimCaso'+[i]).select2({width: "100%",});
+            $('#id_trabajador_asigdosimCaso'+[i]).select2({width: "100%", theme: "classic"});
         }
         var trabj_cristalino = document.querySelectorAll('select[name="id_trabajador_asigdosimCristalino[]"]');
         for(var i = 0; i < trabj_cristalino.length; i++){
             trabj_cristalino[i].setAttribute("id", "id_trabajador_asigdosimCristalino"+[i]);
-            $('#id_trabajador_asigdosimCristalino'+[i]).select2({width: "100%",});
+            $('#id_trabajador_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
         }
         var trabj_muñenca = document.querySelectorAll('select[name="id_trabajador_asigdosimMuneca[]"]');
         for(var i = 0; i < trabj_muñenca.length; i++){
             trabj_muñenca[i].setAttribute("id", "id_trabajador_asigdosimMuneca"+[i]);
-            $('#id_trabajador_asigdosimMuneca'+[i]).select2({width: "100%",});
+            $('#id_trabajador_asigdosimMuneca'+[i]).select2({width: "100%", theme: "classic"});
         }
         var trabj_dedo = document.querySelectorAll('select[name="id_trabajador_asigdosimDedo[]"]');
         for(var i = 0; i < trabj_dedo.length; i++){
             trabj_dedo[i].setAttribute("id", "id_trabajador_asigdosimDedo"+[i]);
-            $('#id_trabajador_asigdosimDedo'+[i]).select2({width: "100%",});
+            $('#id_trabajador_asigdosimDedo'+[i]).select2({width: "100%", theme: "classic"});
         }
         ///////SELECT2 PARA LOS SELECTS DE DOSIMETROS //////
         
         var dosim_area = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
         for(var i = 0; i < dosim_area.length; i++){
             dosim_area[i].setAttribute("id", "id_dosimetro_asigdosimArea"+[i]);
-            $('#id_dosimetro_asigdosimArea'+[i]).select2({width: "100%",});
+            $('#id_dosimetro_asigdosimArea'+[i]).select2({width: "100%", theme: "classic"});
         }
         var dosim_caso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
         for(var i = 0; i < dosim_caso.length; i++){
             dosim_caso[i].setAttribute("id", "id_dosimetro_asigdosimCaso"+[i]);
-            $('#id_dosimetro_asigdosimCaso'+[i]).select2({width: "100%",});
+            $('#id_dosimetro_asigdosimCaso'+[i]).select2({width: "100%", theme: "classic"});
         }
         var dosim_torax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
         for(var i = 0; i < dosim_torax.length; i++){
             dosim_torax[i].setAttribute("id", "id_dosimetro_asigdosimTorax"+[i]);
-            $('#id_dosimetro_asigdosimTorax'+[i]).select2({width: "100%",});
+            $('#id_dosimetro_asigdosimTorax'+[i]).select2({width: "100%", theme: "classic"});
         }
         var dosim_cristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
         for(var i = 0; i < dosim_cristalino.length; i++){
             dosim_cristalino[i].setAttribute("id", "id_dosimetro_asigdosimCristalino"+[i]);
-            $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%",});
+            $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
         }
         var dosim_muñeca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"');
         for(var i = 0; i < dosim_muñeca.length; i++){
             dosim_muñeca[i].setAttribute("id", "id_dosimetro_asigdosimMuneca"+[i]);
-            $('#id_dosimetro_asigdosimMuneca'+[i]).select2({width: "100%",});
+            $('#id_dosimetro_asigdosimMuneca'+[i]).select2({width: "100%", theme: "classic"});
         }
         var dosim_dedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"');
         for(var i = 0; i < dosim_dedo.length; i++){
             dosim_dedo[i].setAttribute("id", "id_dosimetro_asigdosimDedo"+[i]);
-            $('#id_dosimetro_asigdosimDedo'+[i]).select2({width: "100%",});
+            $('#id_dosimetro_asigdosimDedo'+[i]).select2({width: "100%", theme: "classic"});
         }
         //////SELECT2 PARA LOS SELECTS DE LOS HOLDERS /////
         var holder_cristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"');
         for(var i = 0; i < holder_cristalino.length; i++){
             holder_cristalino[i].setAttribute("id", "id_holder_asigdosimCristalino"+[i]);
-            $('#id_holder_asigdosimCristalino'+[i]).select2({width: "100%",});
+            $('#id_holder_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
         }
         var holder_muñeca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"');
         for(var i = 0; i < holder_muñeca.length; i++){
             holder_muñeca[i].setAttribute("id", "id_holder_asigdosimMuneca"+[i]);
-            $('#id_holder_asigdosimMuneca'+[i]).select2({width: "100%",});
+            $('#id_holder_asigdosimMuneca'+[i]).select2({width: "100%", theme: "classic"});
         }
         var holder_dedo = document.querySelectorAll('select[name="id_holder_asigdosimDedo[]"');
         for(var i = 0; i < holder_dedo.length; i++){
             holder_dedo[i].setAttribute("id", "id_holder_asigdosimDedo"+[i]);
-            $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%",});
+            $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%", theme: "classic"});
         };
         $('.ir-arriba').click(function(){
             $('body, html').animate({
@@ -887,7 +891,7 @@
                     
                 }
             }
-            var trabjMuneca = document.querySelectorAll('select[name="id_trabajador_asigdosimMuneca[]"]');
+            /* var trabjMuneca = document.querySelectorAll('select[name="id_trabajador_asigdosimMuneca[]"]');
             console.log("ESTAS SON LOS TRABAJADORES DOSIM MUÑENA");
             console.log(trabjMuneca);
             for(var i = 0; i < trabjMuneca.length; i++){
@@ -901,7 +905,7 @@
                     
                 }
             }
-            
+             */
             var nombreArea = document.querySelectorAll('select[name="id_area_asigdosimArea[]"]');
             console.log("ESTAS SON LAS AREA DOSIM ARAEA");
             console.log(nombreArea);
@@ -969,7 +973,18 @@
                             });
                     }   
                 }
-                
+                for(var x = 0; x < dosimControlTorax.length; x++){
+                    var valuesX = dosimControlTorax[x].value;
+                    console.log("***SON LOS DOSIMTORAX CONTROL");
+                    console.log(valuesX);
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN ÁREA SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE TÓRAX",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
+                }
             };
             var dosimCaso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
             console.log("ESTAS SON LOS DOSIMETROS CASO");
@@ -1009,6 +1024,18 @@
                     if(values == valuesX ){
                         return Swal.fire({
                                 title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CASO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE UBICACION ÁREA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
+                                icon: 'error'
+                            });
+                    }   
+                }
+                for(var x = 0; x < dosimControlTorax.length; x++){
+                    var valuesX = dosimControlTorax[x].value;
+                    console.log("***SON LOS DOSIMTORAX CONTROL");
+                    console.log(valuesX);
+                    if(values == valuesX ){
+                        return Swal.fire({
+                                title:"ALGUNOS DOSÍMETROS DE UBICACIÓN CASO SELECCIONADOS SE ENCUENTRAN REPETIDOS CON LOS DOSÍMETROS DE CONTROL TRANSPORTE TÓRAX",
                                 text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
                                 icon: 'error'
                             });

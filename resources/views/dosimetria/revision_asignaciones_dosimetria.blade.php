@@ -144,7 +144,7 @@
             </svg>
         </a>
         <br>
-        CERTIFICADO
+        REPORTE
     </div>
 </div>
 <br>

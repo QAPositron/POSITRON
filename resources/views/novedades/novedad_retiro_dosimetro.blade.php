@@ -107,8 +107,8 @@
                     <input type="number" hidden name="mestrabj_asig" id="mestrabj_asig" value="">
                     <input type="number" hidden name="id_contdosisededepto" id="id_contdosisededepto" value="">
                     <input type="number" hidden name="id_novedad" id="id_novedad" value="">
+                    <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
                     <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value="">
-                    
                     <input type="number" hidden name="dosi_control_torax" id="dosi_control_torax" value="">
                     <input type="number" hidden name="dosi_control_cristalino" id="dosi_control_cristalino" value="">
                     <input type="number" hidden name="dosi_control_dedo" id="dosi_control_dedo" value="">
@@ -120,6 +120,7 @@
                     <input type="text" hidden name="controlTransT_unicoCont" id="controlTransT_unicoCont" value="">
                     <input type="text" hidden name="controlTransC_unicoCont" id="controlTransC_unicoCont" value="">
                     <input type="text" hidden name="controlTransA_unicoCont" id="controlTransA_unicoCont" value="">
+                    <input type="text" hidden name="periodoVacio" id="periodoVacio" value="">
                     <input type="number" hidden name="id_departamentosede" id="id_departamentosede" value="">
                     <div class="row g-2">
                         <div class="col-md">
@@ -225,13 +226,14 @@
                     <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
                     <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
                     <input type="number" hidden name="id_contdosisede" id="id_contdosisede" value="">
-                    <input type="number" hidden name="dosimRetiradosControl[]" id="dosimRetiradosControl" value="">
+                    {{-- <input type="number" hidden name="dosimRetiradosControl[]" id="dosimRetiradosControl" value="">
                     <input type="number" hidden name="dosimRetiradosArea[]" id="dosimRetiradosArea" value="">
-                    <input type="number" hidden name="dosimRetirados[]" id="dosimRetirados" value="">
-                    <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
+                    <input type="number" hidden name="dosimRetirados[]" id="dosimRetirados" value=""> --}}
+                    <input type="number" hidden name="id_contratodosimetria2" id="id_contratodosimetria2" value="">
                     <input type="text" hidden name="controlTransT_unicoCont2" id="controlTransT_unicoCont2" value="">
                     <input type="text" hidden name="controlTransC_unicoCont2" id="controlTransC_unicoCont2" value="">
                     <input type="text" hidden name="controlTransA_unicoCont2" id="controlTransA_unicoCont2" value="">
+                    <input type="text" hidden name="periodoVacio2" id="periodoVacio2" value="">
                     <div class="row g-2">
                         <div class="col-md">
                             <div class="form-floating">
@@ -885,7 +887,7 @@
                                     document.getElementById("controlTransA_unicoCont2").value = "TRUE";
                                 }
                                 var contratodosimetria = document.getElementById("contratos_empresadosi").value;
-                                document.getElementById("id_contratodosimetria").value = contratodosimetria;
+                                document.getElementById("id_contratodosimetria2").value = contratodosimetria;
                                 console.log("//CODIGO DEL DOSIMETRO MES SIGUIENTE" +codigo_dosimeter);
                                 var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`control">
                                         <td style='width: 75px' class='align-middle '>CONTROL TRANS.</td>
@@ -908,7 +910,7 @@
                                         </td>
                                        
                                         <td style='width: 100px' class='align-middle text-center'>
-                                            <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`, '`+asignacionescontrolmesactual[i].ubicacion+`',);" ${disacont}>
+                                            <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`, '`+asignacionescontrolmesactual[i].ubicacion+`',`+asignacionescontrolmesactual[i].codigo_dosimeter+`);" ${disacont}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                 </svg>
@@ -921,6 +923,8 @@
                             //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
                             /* $('#body_asignaciones2').html(""); */
                             /* alert("CNTROL PARA EL MES ACTUAL"); */
+                            var contratodosimetria = document.getElementById("contratos_empresadosi").value;
+                            document.getElementById("id_contratodosimetria").value = contratodosimetria;
                             for(var i=0; i<asignacionescontrolmesactual.length; i++){
                                 if(asignacionescontrolmesactual[i].controlTransT_unicoCont == 'TRUE'){
                                     document.getElementById("controlTransT_unicoCont").value = "TRUE";
@@ -944,7 +948,7 @@
                                                 +asignacionescontrolmesactual[i].codigo_holder+
                                             `</td>
                                             <td style='width: 100px' class='align-middle text-center'>
-                                                <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`, '`+asignacionescontrolmesactual[i].ubicacion+`',);" >
+                                                <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`, '`+asignacionescontrolmesactual[i].ubicacion+`', `+asignacionescontrolmesactual[i].codigo_dosimeter+`, '');" >
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                     </svg>
@@ -963,7 +967,7 @@
                                             `</td>
                                             <td style='width: 208px' class='align-middle text-center'>N.A.</td>
                                             <td style='width: 100px' class='align-middle text-center'>
-                                                <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`, '`+asignacionescontrolmesactual[i].ubicacion+`',);" >
+                                                <button  class="btn btn-danger cambiarBoton"  type="button" onclick="eliminarControl(`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`, '`+asignacionescontrolmesactual[i].ubicacion+`', `+asignacionescontrolmesactual[i].codigo_dosimeter+`);" >
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                     </svg>
@@ -972,11 +976,11 @@
                                         </tr>`;
                                     $("#body_asignaciones").append(tr);
                                 }
-                                if(asignacionescontrolmesactual[i].ubicacion == 'TORAX'){
+                                if(asignacionescontrolmesactual[i].ubicacion == 'TORAX' && asignacionescontrolmesactual[i].controlTransT_unicoCont != 'TRUE'){
                                     dosi_control_torax += 1;
-                                }else if(asignacionescontrolmesactual[i].ubicacion == 'CRISTALINO'){
+                                }else if(asignacionescontrolmesactual[i].ubicacion == 'CRISTALINO' && asignacionescontrolmesactual[i].controlTransC_unicoCont != 'TRUE'){
                                     dosi_control_cristalino += 1;
-                                }else if(asignacionescontrolmesactual[i].ubicacion == 'ANILLO'){
+                                }else if(asignacionescontrolmesactual[i].ubicacion == 'ANILLO' && asignacionescontrolmesactual[i].controlTransA_unicoCont != 'TRUE'){
                                     dosi_control_dedo += 1;
                                 }
                                 console.log("EL VALOR DEL DOSI CONTROL PARA EL MES ACTUAL");
@@ -1058,7 +1062,7 @@
                                             </select>
                                         </td>
                                         <td style='width: 100px' class='align-middle text-center'>
-                                            <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminar(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`');" ${dis}>
+                                            <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminar(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`', `+asignacionesmesactual[i].codigo_dosimeter+`);" ${dis}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                 </svg>
@@ -1088,7 +1092,7 @@
                                             <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
                                             <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_holder+`</td>
                                             <td style='width: 100px' class='align-middle text-center'>
-                                                <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminar(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`');">
+                                                <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminar(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`', `+asignacionesmesactual[i].codigo_dosimeter+`);">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                     </svg>
@@ -1103,7 +1107,7 @@
                                             <td class='align-middle text-center'>`+asignacionesmesactual[i].codigo_dosimeter+`</td>
                                             <td class='align-middle text-center'> N.A. </td>
                                             <td style='width: 100px' class='align-middle text-center'>
-                                                <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminar(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`');">
+                                                <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminar(`+asignacionesmesactual[i].id_trabajadordosimetro+`, '`+asignacionesmesactual[i].ubicacion+`', '`+asignacionesmesactual[i].primer_nombre_persona+' '+asignacionesmesactual[i].primer_apellido_persona+' '+asignacionesmesactual[i].segundo_apellido_persona+`', `+asignacionesmesactual[i].codigo_dosimeter+`);">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                                     </svg>
@@ -1190,7 +1194,7 @@
                                     </td>
                                     <td class='align-middle text-center'> N.A. </td>
                                     <td style='width: 100px' class='align-middle text-center'>
-                                        <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarArea(`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`, '`+asignacionesareamesactual[i].nombre_area+`');" ${dis}>
+                                        <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarArea(`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`, '`+asignacionesareamesactual[i].nombre_area+`', `+asignacionesareamesactual[i].codigo_dosimeter+`);" ${dis}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                             </svg>
@@ -1217,7 +1221,7 @@
                                     <td class='align-middle text-center'>`+asignacionesareamesactual[i].codigo_dosimeter+`</td>
                                     <td class='align-middle text-center'> N.A.</td>
                                     <td style='width: 100px' class='align-middle text-center'>
-                                        <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarArea(`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`, '`+asignacionesareamesactual[i].nombre_area+`');">
+                                        <button class="btn btn-danger cambiarBoton"  type="button"  onclick="eliminarArea(`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`, '`+asignacionesareamesactual[i].nombre_area+`', `+asignacionesareamesactual[i].codigo_dosimeter+`);">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                             </svg>
@@ -1302,12 +1306,12 @@
     var dosiAreaRetirado = [];
     var dosiControlRetirado = [];
     
-    function eliminarArea(idarea, area){
+    function eliminarArea(idarea, area, codigo){
         console.log('SE SELECCIONO ESTA ASIGNACION'+idarea +area);
         
         Swal.fire({
-            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO AMBIENTAL ' +area+ ' ??',
-           /*  text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO", */
+            title: 'DESEA RETIRAR ESTA ASIGNACIÓN',
+            html: 'CORRESPONDIENTE AL <b> DOSÍMETRO AMBIENTAL ' +area+ '</b> ??',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#1A9980',
@@ -1317,18 +1321,17 @@
             if (result.isConfirmed) {
                 /* alert('SE SELECCIONO ESTA ASIGNACION'+idarea +area); */
                 const element = document.getElementById(idarea+'area');
-                dosiAreaRetirado.push({idarea,area});
+                dosiAreaRetirado.push({idarea,area,codigo});
                 
                 element.remove();
-                
             }
         })
     }
-    function eliminar(dosi, ubicacion, nombre){
+    function eliminar(dosi, ubicacion, nombre, codigo){
         console.log("ELIMINAR TRABJ =" +dosi+" "+ubicacion+" "+nombre);
         Swal.fire({
-            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO ' +ubicacion+ ' ??',
-            /* text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO", */
+            title: 'DESEA RETIRAR ESTA ASIGNACIÓN ',
+            html: 'CORRESPONDIENTE AL <b> DOSÍMETRO ' +ubicacion+ '</b> ??',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#1A9980',
@@ -1338,7 +1341,7 @@
             if (result.isConfirmed) {
                 /* alert('SE SELECCIONO ESTA ASIGNACION'+ dosi + nombre); */
                 const element = document.getElementById(dosi);
-                dosiRetirado.push({dosi,nombre,ubicacion});
+                dosiRetirado.push({dosi,nombre,ubicacion, codigo});
                 console.log(dosiRetirado);
                 
                 element.remove();
@@ -1346,53 +1349,115 @@
             }
         })
     }
-    function eliminarControl(control, ubicacion){
-        
-        Swal.fire({
-            title: 'DESEA ELIMINAR ESTA ASIGNACIÓN CORRESPONDIENTE AL DOSÍMETRO CONTROL ' +ubicacion+ ' ??',
-            /* text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO", */
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#1A9980',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI, SEGURO!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                /* alert('SE SELECCIONO ESTA ASIGNACION CONTROL'+control); */
-                const element = document.getElementById(control+'control');
-                dosiControlRetirado.push({control,ubicacion});
-                console.log(dosiControlRetirado);
-                
-                element.remove();
-            }
-        })
+    function eliminarControl(control, ubicacion, codigo){
+        var controlunicoT = document.getElementById("controlTransT_unicoCont").value;
+        var controlunicoC = document.getElementById("controlTransC_unicoCont").value;
+        var controlunicoA = document.getElementById("controlTransA_unicoCont").value;
+        if((controlunicoT == 'TRUE' && ubicacion == 'TORAX') || (controlunicoC == 'TRUE' && ubicacion == 'CRISTALINO') || (controlunicoA == 'TRUE' && ubicacion == 'ANILLO')){
+            Swal.fire({
+                title: 'DESEA RETIRAR ESTA ASIGNACIÓN',
+                html: 'CORRESPONDIENTE AL <b> DOSÍMETRO CONTROL TRANSPORTE ' +ubicacion+ ' UNICO PARA EL CONTRATO</b> ??',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1A9980',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    /* alert('SE SELECCIONO ESTA ASIGNACION CONTROL'+control); */
+                    const element = document.getElementById(control+'control');
+                    dosiControlRetirado.push({control,ubicacion,codigo});
+                    console.log(dosiControlRetirado);
+                    
+                    element.remove();
+                }
+            })
+        }else{
+            Swal.fire({
+                title: 'DESEA RETIRAR ESTA ASIGNACIÓN ',
+                html: 'CORRESPONDIENTE AL <b> DOSÍMETRO CONTROL ' +ubicacion+ '</b> ??',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1A9980',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI, SEGURO!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    /* alert('SE SELECCIONO ESTA ASIGNACION CONTROL'+control); */
+                    const element = document.getElementById(control+'control');
+                    dosiControlRetirado.push({control,ubicacion,codigo});
+                    console.log(dosiControlRetirado);
+                    
+                    element.remove();
+                }
+            })
+        }
     }
-    function Generarnotas2(){
+    async function Generarnotas2(){
         
         console.log('---------------------*****');
         console.log(dosiRetirado);
         console.log(dosiControlRetirado);
         console.log(dosiAreaRetirado);
         console.log('---------------------*****');
+        var controlunicoT = document.getElementById("controlTransT_unicoCont2").value;
+        var controlunicoC = document.getElementById("controlTransC_unicoCont2").value;
+        var controlunicoA = document.getElementById("controlTransA_unicoCont2").value;
+        var swal ;
+        for(var x = 0; x < dosiControlRetirado.length; x++){
+            console.log("RETIRO DEL DOSÍMETRO: CONTROL "+dosiControlRetirado[x].ubicacion);
+            if((controlunicoT == 'TRUE' && dosiControlRetirado[x].ubicacion == 'TORAX') || (controlunicoC == 'TRUE' && dosiControlRetirado[x].ubicacion == 'CRISTALINO') || (controlunicoA == 'TRUE' && dosiControlRetirado[x].ubicacion == 'ANILLO')){
+                swal = await Swal.fire({
+                        icon: 'warning',
+                        title: 'RETIRARÁ UN DOSÍMETRO DE CONTROL '+dosiControlRetirado[x].ubicacion+' "UNICO" PARA EL CONTRATO?',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'SI, SEGURO!'
+                        }).then((result) => {
+                        if(result.isConfirmed) {
+                            
+                            if(controlunicoT == 'TRUE' && dosiControlRetirado[x].ubicacion == 'TORAX'){
+                                document.getElementById("controlTransT_unicoCont2").value = null;
+                                console.log("si es unico torax");
+                            }else if(controlunicoC == 'TRUE' && dosiControlRetirado[x].ubicacion == 'CRISTALINO'){
+                                document.getElementById("controlTransC_unicoCont2").value = null;
+                                console.log("si es unico cristalino");
+                            }else if(controlunicoA == 'TRUE' && dosiControlRetirado[x].ubicacion == 'ANILLO'){
+                                document.getElementById("controlTransA_unicoCont2").value = null;
+                                console.log("si es unico anillo");
+                            }
+
+                            let input = `<input type="text" name="inputnotasControl[]" id="inputnotasControl`+x+`" class="form-control inputnotasControl" value="RETIRO DEL DOSÍMETRO CONTROL TRANSPORTE `+dosiControlRetirado[x].ubicacion+` CON CÓDIGO: `+dosiControlRetirado[x].codigo+` UNICO PARA EL CONTRATO" readonly>`;
+                            $('#textCard2').append(input);
+                            let inputretiradoControl = `<input type="number" hidden name="dosimRetiradosControl[]" id="dosimRetiradosControl" value="`+dosiControlRetirado[x].control+`">`;
+                            $('#form_cambio_cantdosim2').append(inputretiradoControl);
+                        }
+                    })
+            }else{
+                let input = `<input type="text" name="inputnotasControl[]" id="inputnotasControl`+x+`" class="form-control inputnotasControl" value="RETIRO DEL DOSÍMETRO CONTROL TRANSPORTE `+dosiControlRetirado[x].ubicacion+` CON CÓDIGO: `+dosiControlRetirado[x].codigo+`" readonly>`;
+                $('#textCard2').append(input);
+                let inputretiradoControl = `<input type="number" hidden name="dosimRetiradosControl[]" id="dosimRetiradosControl" value="`+dosiControlRetirado[x].control+`">`;
+                $('#form_cambio_cantdosim2').append(inputretiradoControl);
+            }
+
+        }
         for(var x = 0; x < dosiRetirado.length; x++){
             
             console.log("RETIRO DEL DOSÍMETRO CON UBICACION: "+dosiRetirado[x].ubicacion+" PARA EL TRABAJADOR: "+dosiRetirado[x].nombre);
-            let input = `<input type="text" name="inputnotas[]" id="inputnotas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CON UBICACIÓN `+dosiRetirado[x].ubicacion+` PARA EL TRABAJADOR: `+dosiRetirado[x].nombre+`" readonly>`;
+            let input = `<input type="text" name="inputnotas[]" id="inputnotas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO PARA EL TRABAJADOR: `+dosiRetirado[x].nombre+` CON CÓDIGO: `+dosiRetirado[x].codigo+` Y CON UBICACIÓN `+dosiRetirado[x].ubicacion+` " readonly>`;
             $('#textCard2').append(input);
-            document.getElementById('dosimRetirados').value = dosiRetirado[x].dosi;
-        }
-        for(var x = 0; x < dosiControlRetirado.length; x++){
-            console.log("RETIRO DEL DOSÍMETRO: CONTROL "+dosiControlRetirado[x].ubicacion);
-            let input = `<input type="text" name="inputnotasControl[]" id="inputnotasControl`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CONTROL TRANSPORTE `+dosiControlRetirado[x].ubicacion+`" readonly>`;
-            $('#textCard2').append(input);
-            document.getElementById('dosimRetiradosControl').value = dosiControlRetirado[x].control;
-
+            let inputretirado = `<input type="number" hidden name="dosimRetirados[]" id="dosimRetirados" value="`+dosiRetirado[x].dosi+`">`;
+            $('#form_cambio_cantdosim2').append(inputretirado);
+            console.log("dosimretirado= "+dosiRetirado[x].dosi);
         }
         for(var x = 0; x < dosiAreaRetirado.length; x++){
+            
             console.log("RETIRO DEL DOSÍMETRO AMBIENTAL DEL ÁREA: "+dosiAreaRetirado[x].area);
-            let input = `<input type="text" name="inputnotasAreas[]" id="inputnotasAreas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO AMBIENTAL PARA EL ÁREA '`+dosiAreaRetirado[x].area+`'" readonly>`;
+            let input = `<input type="text" name="inputnotasAreas[]" id="inputnotasAreas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO AMBIENTAL PARA EL ÁREA '`+dosiAreaRetirado[x].area+`' CON CÓDIGO: '`+dosiAreaRetirado[x].codigo+`'" readonly>`;
             $('#textCard2').append(input);
-            document.getElementById('dosimRetiradosArea').value = dosiAreaRetirado[x].idarea;
+            let inputretiradoArea = `<input type="number" hidden name="dosimRetiradosArea[]" id="dosimRetiradosArea" value="`+dosiAreaRetirado[x].idarea+`">`;
+            $('#form_cambio_cantdosim2').append(inputretiradoArea);
         }
         var inputnotas = document.querySelectorAll('input[name="inputnotas[]"]');
         var inputControl = document.querySelectorAll('input[name="inputnotasControl[]"]')
@@ -1401,43 +1466,89 @@
             $('#assignBtn2').removeAttr("disabled");
         }
     }
-    function Generarnotas(){
+    async function Generarnotas(){
         
         console.log('---------------------*****');
         console.log(dosiRetirado);
         console.log(dosiControlRetirado);
         console.log(dosiAreaRetirado);
         console.log('---------------------*****');
+        var controlunicoT = document.getElementById("controlTransT_unicoCont").value;
+        var controlunicoC = document.getElementById("controlTransC_unicoCont").value;
+        var controlunicoA = document.getElementById("controlTransA_unicoCont").value;
+        var swal ;
+        for(var x = 0; x < dosiControlRetirado.length; x++){
+            console.log("RETIRO DEL DOSÍMETRO: CONTROL "+dosiControlRetirado[x].ubicacion);
+            
+            if((controlunicoT == 'TRUE' && dosiControlRetirado[x].ubicacion == 'TORAX') || (controlunicoC == 'TRUE' && dosiControlRetirado[x].ubicacion == 'CRISTALINO') || (controlunicoA == 'TRUE' && dosiControlRetirado[x].ubicacion == 'ANILLO')){
+                swal = await Swal.fire({
+                        icon: 'warning',
+                        title: 'RETIRARÁ UN DOSÍMETRO DE CONTROL '+dosiControlRetirado[x].ubicacion+' "UNICO" PARA EL CONTRATO?',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'SI, SEGURO!'
+                        }).then((result) => {
+                        if(result.isConfirmed) {
+                            
+                            if(controlunicoT == 'TRUE' && dosiControlRetirado[x].ubicacion == 'TORAX'){
+                                document.getElementById("controlTransT_unicoCont").value = null;
+                                console.log("si es unico torax");
+                            }else if(controlunicoC == 'TRUE' && dosiControlRetirado[x].ubicacion == 'CRISTALINO'){
+                                document.getElementById("controlTransC_unicoCont").value = null;
+                                console.log("si es unico cristalino");
+                            }else if(controlunicoA == 'TRUE' && dosiControlRetirado[x].ubicacion == 'ANILLO'){
+                                document.getElementById("controlTransA_unicoCont").value = null;
+                                console.log("si es unico anillo");
+                            }
+
+                            let input = `<input type="text" name="inputnotasControl[]" id="inputnotasControl`+x+`" class="form-control inputnotasControl" value="RETIRO DEL DOSÍMETRO CONTROL TRANSPORTE `+dosiControlRetirado[x].ubicacion+` CON CÓDIGO: `+dosiControlRetirado[x].codigo+` UNICO PARA EL CONTRATO" readonly>`;
+                            $('#textCard').append(input);
+                            let inputretiradoControl = `<input type="number" hidden name="dosimRetiradosControl1[]" id="dosimRetiradosControl1" value="`+dosiControlRetirado[x].control+`">`;
+                            $('#form_cambio_cantdosim').append(inputretiradoControl);
+                        }
+                    })
+            }else{
+                let input = `<input type="text" name="inputnotasControl[]" id="inputnotasControl`+x+`" class="form-control inputnotasControl" value="RETIRO DEL DOSÍMETRO CONTROL TRANSPORTE `+dosiControlRetirado[x].ubicacion+` CON CÓDIGO: `+dosiControlRetirado[x].codigo+`" readonly>`;
+                $('#textCard').append(input);
+                let inputretiradoControl = `<input type="number" hidden name="dosimRetiradosControl1[]" id="dosimRetiradosControl1" value="`+dosiControlRetirado[x].control+`">`;
+                $('#form_cambio_cantdosim').append(inputretiradoControl);
+            }
+        }
         
         for(var x = 0; x < dosiRetirado.length; x++){
             console.log("RETIRO DEL DOSÍMETRO CON UBICACION: "+dosiRetirado[x].ubicacion+" PARA EL TRABAJADOR: "+dosiRetirado[x].nombre);
-            let input = `<input type="text" name="inputnotas[]" id="inputnotas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CON UBICACIÓN `+dosiRetirado[x].ubicacion+` PARA EL TRABAJADOR: `+dosiRetirado[x].nombre+`" readonly>`;
+            let input = `<input type="text" name="inputnotas[]" id="inputnotas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO PARA EL TRABAJADOR: `+dosiRetirado[x].nombre+` CON CÓDIGO: `+dosiRetirado[x].codigo+` Y CON UBICACIÓN `+dosiRetirado[x].ubicacion+` " readonly>`;
             $('#textCard').append(input);
             let inputretirado = `<input type="number" hidden name="dosimRetirados1[]" id="dosimRetirados1" value="`+dosiRetirado[x].dosi+`">`;
             $('#form_cambio_cantdosim').append(inputretirado);
             console.log("dosimretirado= "+dosiRetirado[x].dosi);
         }
-        for(var x = 0; x < dosiControlRetirado.length; x++){
-            console.log("RETIRO DEL DOSÍMETRO: CONTROL "+dosiControlRetirado[x].ubicacion);
-            let input = `<input type="text" name="inputnotasControl[]" id="inputnotasControl`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO CONTROL TRANSPORTE `+dosiControlRetirado[x].ubicacion+`" readonly>`;
-            $('#textCard').append(input);
-            let inputretiradoControl = `input type="number" hidden name="dosimRetiradosControl1[]" id="dosimRetiradosControl1" value="`+dosiControlRetirado[x].control+`">`;
-            $('#form_cambio_cantdosim').append(inputretiradoControl);
-        }
+        
         for(var x = 0; x < dosiAreaRetirado.length; x++){
             console.log("RETIRO DEL DOSÍMETRO AMBIENTAL DEL ÁREA: "+dosiAreaRetirado[x].area);
-            let input = `<input type="text" name="inputnotasAreas[]" id="inputnotasAreas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO AMBIENTAL PARA EL ÁREA '`+dosiAreaRetirado[x].area+`'" readonly>`;
+            let input = `<input type="text" name="inputnotasAreas[]" id="inputnotasAreas`+x+`" class="form-control inputs" value="RETIRO DEL DOSÍMETRO AMBIENTAL PARA EL ÁREA '`+dosiAreaRetirado[x].area+`' CON CÓDIGO: '`+dosiAreaRetirado[x].codigo+`'" readonly>`;
             $('#textCard').append(input);
             let inputretiradoArea = `<input type="number" hidden name="dosimRetiradosArea1[]" id="dosimRetiradosArea1" value="`+dosiAreaRetirado[x].idarea+`">`;
             $('#form_cambio_cantdosim').append(inputretiradoArea);
         }
+        var inputnotasControl = document.querySelectorAll('input[name="inputnotasControl[]"]');
+        console.log("input notas control = ");
+        console.log(inputnotasControl);
+        console.log(inputnotasControl.length);
+        console.log(inputnotasControl[0]);
         var inputnotas = document.querySelectorAll('input[name="inputnotas[]"]');
-        var inputControl = document.querySelectorAll('input[name="inputnotasControl[]"]')
+        console.log("input notas = ");
+        console.log(inputnotas);
+        console.log(inputnotas.length);
         var inputAreas = document.querySelectorAll('input[name="inputnotasAreas[]"]');
-        if(inputAreas.length != 0 || inputnotas.length != 0 || inputControl.length != 0){
+
+        if(inputAreas.length != 0 || inputnotas.length != 0 || inputnotasControl.length != 0){
+            console.log("ENTRO AL IF PARA QUITAR DISABLED");
             $('#assignBtn1').removeAttr("disabled");
         }
     }
+
     function eliminarNotas(){
         var dosimRetirados = document.querySelectorAll('input[name="inputnotas[]"]');
         for(var x = 0; x < dosimRetirados.length; x++){
@@ -1472,37 +1583,92 @@
 <script type="text/javascript">
     $(document).ready(function(){
         
-        $('#form_cambio_cantdosim').submit(function(e, mes){
+        $('#form_cambio_cantdosim').submit( function(e){
             e.preventDefault();
             var dosimetrosRetirados = document.querySelectorAll('input[name="dosimRetirados1[]"]');
             var dosimetrosAreaRetirados = document.querySelectorAll('input[name="dosimRetiradosArea1[]"]');
+            var dosimetrosControlRetirados = document.querySelectorAll('input[name="dosimRetiradosControl1[]"]');
             var dosimtorax = document.getElementById("dosi_torax").value;
             var dosimarea = document.getElementById("dosi_area").value;
             var dosimcaso = document.getElementById("dosi_caso").value;
             var dosimCristalino = document.getElementById("dosi_cristalino").value;
             var dosimdedo = document.getElementById("dosi_dedo").value;
+
             console.log("dosimetros retirados= "+dosimetrosRetirados.length);
+            console.log("dosimetros area retirados= "+dosimetrosAreaRetirados.length);
+            console.log("dosimetros retirados control= "+dosimetrosControlRetirados.length);
             var suma =  parseInt(dosimtorax) + parseInt(dosimcaso) + parseInt(dosimCristalino) + parseInt(dosimdedo);
-            console.log("dosimetros= "+suma);
+            
+            var dosimControltorax = document.getElementById("dosi_control_torax").value;
+            var dosimControlcristalino = document.getElementById("dosi_control_cristalino").value;
+            var dosimControldedo = document.getElementById("dosi_control_dedo").value;
+            var sumaControles = parseInt(dosimControltorax) + parseInt(dosimControlcristalino) + parseInt(dosimControldedo);
+            console.log("dosimetros SUMA CONTROLES = "+sumaControles);
+            var dosimControlUnicoT =  document.getElementById("controlTransT_unicoCont").value;
+            var dosimControlUnicoC =  document.getElementById("controlTransC_unicoCont").value;
+            var dosimControlUnicoD =  document.getElementById("controlTransA_unicoCont").value;
+            var esp = document.getElementById("especialidades_empresadosi");
+            var espText = esp.options[esp.selectedIndex].text;
+            var mes = document.getElementById("mestrabj_asig").value;
+            console.log("ESPECIALIDAD= "+espText);
+            console.log("dosimetros SUMA= "+suma);
             console.log("dosimtorax"+dosimtorax)
             console.log("dosimarea="+dosimarea);
             console.log("dosimcaso="+dosimcaso);
             console.log("dosimcristalino="+dosimCristalino);
             console.log("dosimdedo="+dosimdedo);
-            console.log("dosimetros Area retirados="+dosimetrosAreaRetirados.length);
-
-            if(dosimetrosRetirados.length == suma && dosimetrosAreaRetirados.length == dosimarea.length ){
+            console.log("dosimetro control torax ="+dosimControltorax);
+            console.log("dosimetro control cristalino ="+dosimControlcristalino);
+            console.log("dosimetro control dedo = "+dosimControldedo);
+            console.log("dosimetro control torax UNICO= "+dosimControlUnicoT);
+            console.log("dosimetro control cristalino UNICO = "+dosimControlUnicoC);
+            console.log("dosimetro control dedo UNICO = "+dosimControlUnicoD);
+            console.log("//////");
+            console.log("dosimetros retirados= "+dosimetrosRetirados.length+ " y dosimetros SUMA= "+suma);
+            console.log("dosimetros area retirados= "+dosimetrosAreaRetirados.length+ " y dosimarea="+dosimarea);
+            console.log("dosimetros retirados control= "+dosimetrosControlRetirados.length+" y dosimetros SUMA CONTROLES = "+sumaControles);
+            
+            if(dosimetrosRetirados.length == suma &&  dosimetrosAreaRetirados.length == dosimarea && dosimetrosControlRetirados.length == sumaControles && sumaControles != 0){
+                console.log("ENTRO AL PRIMER IF, CON DOSIMETROS CONTROL POR ESPECIALIDAD ");
+                var periodoVacio = document.getElementById("periodoVacio").value = 'TRUE';
+                console.log("periodo vacio = "+periodoVacio);
                 return Swal.fire({
-                                title:"NO PUEDE ELIMINAR TODOS LOS DOSÍMETROS ",
-                                text: "VERIFIQUE QUE AL MENOS EXISTA UN DOSÍMETRO DISTINTO AL DOSÍMETRO CONTROL ",
-                                icon: 'error'
-                            }).then(function () {
-                                location.reload();
+                                title:"DESEA ELIMINAR TODOS LOS DOSÍMETROS QUE SE ENCUENTRAN ASIGNADOS A LA ESPECIALIDAD '"+espText+"' EN EL PERIODO "+mes,
+                                text: "NO PODRÁ HACER NINGÚN PROCESO EN EL PERIODO",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'SI, SEGURO!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.submit();
+                                }
                             });
+            }else if(dosimetrosRetirados.length == suma && dosimetrosAreaRetirados.length == dosimarea){
+                console.log("ENTRO AL SEGUNDO IF, SIN DOSIMETROS CONTROL ");
+                var periodoVacio = document.getElementById("periodoVacio").value = 'TRUE';
+                console.log("periodo vacio = "+periodoVacio);
+                return Swal.fire({
+                                title:"DESEA ELIMINAR TODOS LOS DOSÍMETROS QUE SE ENCUENTRAN ASIGNADOS A LA ESPECIALIDAD '"+espText+"' EN EL PERIODO "+mes,
+                                text: "NO PODRÁ HACER NINGÚN PROCESO EN EL PERIODO",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'SI, SEGURO!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.submit();
+                                }
+                            });
+            }else if(dosimetrosRetirados.length == suma && dosimetrosAreaRetirados.length == dosimarea && dosimControlUnicoT == null && dosimControlUnicoC == null && dosimControlUnicoD == null && sumaControles == 0){
+                console.log("ENTRO AL SEGUNDO IF, CON DOSIMETROS CONTORL POR CONTRATO");
             }
+
             ////////////////////////////////////////////////////////////////////////////////
             Swal.fire({
-                text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL PERIODO SIGUIENTE AL ACTUAL??",
+                text: "DESEA GUARDAR ESTA ASIGNACIÓN PARA EL PERIODO ACTUAL??",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -1510,18 +1676,118 @@
                 confirmButtonText: 'SI, SEGURO!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    /* var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
-                    var mes = document.getElementById("mesacambiar").value;
-                    var host = window.location.host;
-                    var path = "http://"+host+"/POSITRON/public/novedades/"+contdosisededepto_id+"/"+mes+"/reportePDFcambiodosim";
                     
-                    window.open(path, '_blank'); */
                     this.submit();
                 }
             })
-        }) 
+        });
         $('#form_cambio_cantdosim2').submit(function(e, mes){
             e.preventDefault();
+            var dosimetrosControlantg = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
+            var dosimetrosAreantg = document.querySelectorAll('select[name="id_dosimetro_area_asigdosim[]"]');
+            var dosimetrosantg = document.querySelectorAll('select[name="id_dosimetro_asigdosim[]"]');
+            var esp = document.getElementById("especialidades_empresadosi");
+            var espText = esp.options[esp.selectedIndex].text;
+            var mes = document.getElementById("mes_asig_siguiente").value;
+            console.log("ESPECIALIDAD= "+espText);
+            if(dosimetrosControlantg.length == 0 && dosimetrosAreantg.length == 0 && dosimetrosantg.length == 0){
+                var periodoVacio2 = document.getElementById("periodoVacio2").value = 'TRUE';
+                console.log("periodo vacio = "+periodoVacio2);
+                return Swal.fire({
+                                title:"DESEA ELIMINAR TODOS LOS DOSÍMETROS QUE SE ENCUENTRAN ASIGNADOS A LA ESPECIALIDAD '"+espText+"' EN EL PERIODO "+mes,
+                                text: "NO PODRÁ HACER NINGÚN PROCESO EN EL PERIODO",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'SI, SEGURO!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.submit();
+                                }
+                            });
+            }
+            /* var dosimetrosRetirados = document.querySelectorAll('input[name="dosimRetirados[]"]');
+            var dosimetrosAreaRetirados = document.querySelectorAll('input[name="dosimRetiradosArea[]"]');
+            var dosimetrosControlRetirados = document.querySelectorAll('input[name="dosimRetiradosControl[]"]'); */
+
+            /* var dosimtorax = document.getElementById("dosi_torax").value;
+            var dosimarea = document.getElementById("dosi_area").value;
+            var dosimcaso = document.getElementById("dosi_caso").value;
+            var dosimCristalino = document.getElementById("dosi_cristalino").value;
+            var dosimdedo = document.getElementById("dosi_dedo").value; 
+
+            console.log("dosimetros retirados= "+dosimetrosRetirados.length);
+            console.log("dosimetros area retirados= "+dosimetrosAreaRetirados.length);
+            console.log("dosimetros retirados control= "+dosimetrosControlRetirados.length);
+            var suma =  parseInt(dosimtorax) + parseInt(dosimcaso) + parseInt(dosimCristalino) + parseInt(dosimdedo);*/
+            
+            /* var dosimControltorax = document.getElementById("dosi_control_torax").value;
+            var dosimControlcristalino = document.getElementById("dosi_control_cristalino").value;
+            var dosimControldedo = document.getElementById("dosi_control_dedo").value;
+            var sumaControles = parseInt(dosimControltorax) + parseInt(dosimControlcristalino) + parseInt(dosimControldedo);
+            console.log("dosimetros SUMA CONTROLES = "+sumaControles); */
+            /* var dosimControlUnicoT =  document.getElementById("controlTransT_unicoCont").value;
+            var dosimControlUnicoC =  document.getElementById("controlTransC_unicoCont").value;
+            var dosimControlUnicoD =  document.getElementById("controlTransA_unicoCont").value;
+            var esp = document.getElementById("especialidades_empresadosi");
+            var espText = esp.options[esp.selectedIndex].text;
+            var mes = document.getElementById("mestrabj_asig").value;
+            console.log("ESPECIALIDAD= "+espText);
+            console.log("dosimetros SUMA= "+suma);
+            console.log("dosimtorax"+dosimtorax)
+            console.log("dosimarea="+dosimarea);
+            console.log("dosimcaso="+dosimcaso);
+            console.log("dosimcristalino="+dosimCristalino);
+            console.log("dosimdedo="+dosimdedo);
+            console.log("dosimetro control torax ="+dosimControltorax);
+            console.log("dosimetro control cristalino ="+dosimControlcristalino);
+            console.log("dosimetro control dedo = "+dosimControldedo);
+            console.log("dosimetro control torax UNICO= "+dosimControlUnicoT);
+            console.log("dosimetro control cristalino UNICO = "+dosimControlUnicoC);
+            console.log("dosimetro control dedo UNICO = "+dosimControlUnicoD);
+            console.log("//////");
+            console.log("dosimetros retirados= "+dosimetrosRetirados.length+ " y dosimetros SUMA= "+suma);
+            console.log("dosimetros area retirados= "+dosimetrosAreaRetirados.length+ " y dosimarea="+dosimarea);
+            console.log("dosimetros retirados control= "+dosimetrosControlRetirados.length+" y dosimetros SUMA CONTROLES = "+sumaControles);
+            
+            if(dosimetrosRetirados.length == suma &&  dosimetrosAreaRetirados.length == dosimarea && dosimetrosControlRetirados.length == sumaControles && sumaControles != 0){
+                console.log("ENTRO AL PRIMER IF, CON DOSIMETROS CONTROL POR ESPECIALIDAD ");
+                var periodoVacio = document.getElementById("periodoVacio").value = 'TRUE';
+                console.log("periodo vacio = "+periodoVacio);
+                return Swal.fire({
+                                title:"DESEA ELIMINAR TODOS LOS DOSÍMETROS QUE SE ENCUENTRAN ASIGNADOS A LA ESPECIALIDAD '"+espText+"' EN EL PERIODO "+mes,
+                                text: "NO PODRÁ HACER NINGÚN PROCESO EN EL PERIODO",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'SI, SEGURO!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.submit();
+                                }
+                            });
+            }else if(dosimetrosRetirados.length == suma && dosimetrosAreaRetirados.length == dosimarea){
+                console.log("ENTRO AL SEGUNDO IF, SIN DOSIMETROS CONTROL ");
+                var periodoVacio = document.getElementById("periodoVacio").value = 'TRUE';
+                console.log("periodo vacio = "+periodoVacio);
+                return Swal.fire({
+                                title:"DESEA ELIMINAR TODOS LOS DOSÍMETROS QUE SE ENCUENTRAN ASIGNADOS A LA ESPECIALIDAD '"+espText+"' EN EL PERIODO "+mes,
+                                text: "NO PODRÁ HACER NINGÚN PROCESO EN EL PERIODO",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'SI, SEGURO!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.submit();
+                                }
+                            });
+            }else if(dosimetrosRetirados.length == suma && dosimetrosAreaRetirados.length == dosimarea && dosimControlUnicoT == null && dosimControlUnicoC == null && dosimControlUnicoD == null && sumaControles == 0){
+                console.log("ENTRO AL SEGUNDO IF, CON DOSIMETROS CONTORL POR CONTRATO");
+            } */
             ////////VALIDACIONES PARA LAS FECHAS  DE INICIO Y FIN DEL PERIODO/////////////////
             var primerdiaFecha = document.getElementById("primerDia_asigdosim2").value;
             if(primerdiaFecha == ''){
@@ -1540,7 +1806,7 @@
                             });
             }
             ////////////////////////////////////////////////////////////
-            var dosimetrosAreantg = document.querySelectorAll('select[name="id_dosimetro_area_asigdosim[]"]');
+           /*  var dosimetrosAreantg = document.querySelectorAll('select[name="id_dosimetro_area_asigdosim[]"]');
             var dosimetrosantg = document.querySelectorAll('select[name="id_dosimetro_asigdosim[]"]');
             
             if(dosimetrosAreantg.length == 0 && dosimetrosantg.length == 0){
@@ -1551,7 +1817,7 @@
                             }).then(function () {
                                 location.reload();
                             });
-            }
+            } */
             var dosimetrosControlantg = document.querySelectorAll('select[name="id_dosimetro_asigdosimControl[]"]');
             console.log("ESTOS SON LOS DOSIMETROS CONTROL ANTIGUOS");
             console.log(dosimetrosControlantg); 

@@ -232,7 +232,7 @@
                                 <td class='text-center'>
                                     <div class="row px-2 align-items-center">
                                         <div class="col-md text-center p-0 m-0">
-                                            <a href="{{route('lecturadosiarea.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                            <a href="{{route('lecturadosiarea.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                 <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -332,7 +332,7 @@
                                     <td class='text-center'>
                                         <div class="row px-2  align-items-center">
                                             <div class="col-md p-0 m-0">
-                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                     <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -430,7 +430,7 @@
                                     <td class='text-center'>
                                         <div class="row px-2  align-items-center">
                                             <div class="col-md p-0 m-0">
-                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item] )}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item] )}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                     <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -526,9 +526,9 @@
                                     <div class="row px-2 align-items-center">
                                         <div class="col-md m-0 p-0">
                                             @if($item == 0)
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniT->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @else
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniT->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @endif
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -636,7 +636,7 @@
                                     <td class='text-center'>
                                         <div class="row px-2 align-items-center">
                                             <div class="col-md p-0 m-0">
-                                                <a href="{{route('lecturadosiareacontrl.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosiareacontrl.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                     <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -745,7 +745,7 @@
                                         <td class='text-center '>
                                             <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -853,7 +853,7 @@
                                         <td class='text-center '>
                                             <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -952,9 +952,9 @@
                                     <div class="row px-2 align-items-center">
                                         <div class="col-md m-0 p-0">
                                             @if($item == 0)
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @else
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @endif
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -1062,7 +1062,7 @@
                                     <td class='text-center'>
                                         <div class="row px-2 align-items-center">
                                             <div class="col-md p-0 m-0">
-                                                <a href="{{route('lecturadosiareacontrl.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosiareacontrl.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                     <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -1171,7 +1171,7 @@
                                         <td class='text-center '>
                                             <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -1279,7 +1279,7 @@
                                         <td class='text-center '>
                                             <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -1384,7 +1384,7 @@
                                     <td class='text-center'>
                                         <div class="row px-2 align-items-center">
                                             <div class="col-md p-0 m-0">
-                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                     <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -1481,9 +1481,9 @@
                                     <div class="row px-2  align-items-center">
                                         <div class="col-md m-0 p-0">
                                             @if($item == 0)
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @else
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @endif
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -1591,7 +1591,7 @@
                                         <td class='text-center '>
                                             <div class="row px-2  align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -1690,9 +1690,9 @@
                                     <div class="row px-2  align-items-center">
                                         <div class="col-md m-0 p-0">
                                             @if($item == 0)
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @else
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @endif
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -1800,7 +1800,7 @@
                                         <td class='text-center '>
                                             <div class="row px-2  align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -1905,7 +1905,7 @@
                                     <td class='text-center'>
                                         <div class="row px-2 align-items-center">
                                             <div class="col-md text-center p-0 m-0">
-                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                     <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -2002,9 +2002,9 @@
                                     <div class="row px-2  align-items-center">
                                         <div class="col-md m-0 p-0">
                                             @if($item == 0)
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @else
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @endif
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -2113,7 +2113,7 @@
                                         <td class='text-center '>
                                             <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniDedo->id_dosicontrolcontdosisedes])}}" class="btn colorQA btn-sm">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniDedo->id_dosicontrolcontdosisedes])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -2211,9 +2211,9 @@
                                     <div class="row px-2  align-items-center">
                                         <div class="col-md m-0 p-0">
                                             @if($item == 0)
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @else
-                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm">
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                             @endif
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -2322,7 +2322,7 @@
                                         <td class='text-center '>
                                             <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontDedoasig->id_dosicontrolcontdosisedes])}}" class="btn colorQA btn-sm">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontDedoasig->id_dosicontrolcontdosisedes])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
