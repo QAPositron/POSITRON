@@ -824,10 +824,9 @@ class NovedadesController extends Controller
         }
         
         ////GUARDAR SI HAY UN CONTROL EN UNA ASIGNACION ANTIGUA///////
-        if(!empty($request->ubicacion_asigdosimControl)){
+        if(!empty($request->ubicacion_asigdosimControl) && empty($request->checkDelete)){
             
             for($i=0; $i<count($request->id_dosimetro_asigdosimControl); $i++){
-
                 $newasignacionAntiguaControl = new Dosicontrolcontdosisede();
 
                 $newasignacionAntiguaControl->dosimetro_id                  = $request->id_dosimetro_asigdosimControl[$i] == 'null' ? NULL : $request->id_dosimetro_asigdosimControl[$i];
@@ -837,7 +836,7 @@ class NovedadesController extends Controller
                     $newasignacionAntiguaControl->holder_id                 = $request->id_holder_asigdosimControl[$i];
                 }
                 if($request->controlTransT_unicoCont2 == 'TRUE' || $request->controlTransC_unicoCont2 == 'TRUE' || $request->controlTransA_unicoCont2 == 'TRUE'){
-                    $newasignacionAntiguaControl->contratodosimetria_id     = $request->id_contratodosimetria;
+                    $newasignacionAntiguaControl->contratodosimetria_id     = $request->id_contratodosimetria2;
                     $newasignacionAntiguaControl->controlTransT_unicoCont   = $request->controlTransT_unicoCont2;
                     $newasignacionAntiguaControl->controlTransC_unicoCont   = $request->controlTransC_unicoCont2;
                     $newasignacionAntiguaControl->controlTransA_unicoCont   = $request->controlTransA_unicoCont2;
@@ -978,18 +977,6 @@ class NovedadesController extends Controller
                         $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotasControl[$i];
                         $cambioNovedadDosimetria->save();
 
-                        /* $retiroDosiControl = Dosicontrolcontdosisede::find($request->dosiRetiradosControl[$i]);
-                        
-                        $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $retiroDosiControl->dosimetro_id)
-                        ->update([
-                            'estado_dosimetro' => 'STOCK',
-                            'uso_dosimetro' => ''
-                        ]);
-                        $updateHolders = Holder::where('id_holder', '=', $retiroDosiControl->holder_id)
-                        ->update([
-                            'estado_holder' => 'STOCK'
-                        ]);
-                        $retiroDosiControl->delete(); */
                     }
                 }
             }
@@ -1004,14 +991,6 @@ class NovedadesController extends Controller
                         $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotasAreas[$i];
                         $cambioNovedadDosimetria->save();  
 
-                        /* $retiroDosiArea = Dosiareacontdosisede::find($request->dosimRetiradosArea[$i]);
-                        
-                        $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $retiroDosiArea->dosimetro_id)
-                        ->update([
-                            'estado_dosimetro' => 'STOCK',
-                            'uso_dosimetro' => ''
-                        ]);
-                        $retiroDosiArea->delete(); */
                     }
                 }
             }
@@ -1027,18 +1006,6 @@ class NovedadesController extends Controller
                         $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotas[$i];
                         $cambioNovedadDosimetria->save();
 
-                        /* $retiroDosiTrabj = Trabajadordosimetro::find($request->dosimRetirados[$i]); */
-                        
-                        /* $updateDosimetros = Dosimetro::where('id_dosimetro', '=', $retiroDosiTrabj->dosimetro_id)
-                        ->update([
-                            'estado_dosimetro' => 'STOCK',
-                            'uso_dosimetro' => ''
-                        ]);
-                        $updateHolders = Holder::where('id_holder', '=', $retiroDosiTrabj->holder_id)
-                        ->update([
-                            'estado_holder' => 'STOCK'
-                        ]); */
-                        /* $retiroDosiTrabj->delete(); */
                     }
                 }
             }

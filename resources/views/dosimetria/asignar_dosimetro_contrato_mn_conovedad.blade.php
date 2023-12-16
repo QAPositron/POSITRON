@@ -218,7 +218,7 @@
                                         </tr>
                                     @endforeach
                                     
-                                    @if(!empty($dosicontrolToraxUnicomesact[0]) && $dosicontrolToraxUnicomesact[0]->controlTransT_unicoCont == 'TRUE')
+                                    @if(!empty($dosicontrolToraxUnicomesact[0]) && $contdosisededepto->controlTransT_unicoCont == 'TRUE')
                                         <tr>
                                             <input type="number" name="id_asigdosimControlUnicoT[]" id="id_asigdosimControlUnicoT" value="{{$dosicontrolToraxUnicomesact[0]->id_dosicontrolcontdosisedes}}" hidden >
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. T.</td>
@@ -234,7 +234,7 @@
                                         </tr>
                                     @endif
                                     
-                                    @if(!empty($dosicontrolCristalinoUnicomesact[0]) && $dosicontrolCristalinoUnicomesact[0]->controlTransC_unicoCont == 'TRUE')
+                                    @if(!empty($dosicontrolCristalinoUnicomesact[0]) && $contdosisededepto->controlTransC_unicoCont == 'TRUE')
                                         <tr>
                                             <input type="number" name="id_asigdosimControlUnicoC[]" id="id_asigdosimControlUnicoC" value="{{$dosicontrolCristalinoUnicomesact[0]->id_dosicontrolcontdosisedes}}" hidden >
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. C.</td>
@@ -257,7 +257,7 @@
                                         </tr>
                                     @endif
                                     
-                                    @if(!empty($dosicontrolDedoUnicomesact[0]) && $dosicontrolDedoUnicomesact[0]->controlTransA_unicoCont == 'TRUE')
+                                    @if(!empty($dosicontrolDedoUnicomesact[0]) && $contdosisededepto->controlTransA_unicoCont == 'TRUE')
                                         <tr>
                                             <input type="number" name="id_asigdosimControlUnicoA[]" id="id_asigdosimControlUnicoA" value="{{$dosicontrolDedoUnicomesact[0]->id_dosicontrolcontdosisedes}}" hidden >
                                             <td colspan='2' class='align-middle text-center'>CONTROL TRANS. A.</td>

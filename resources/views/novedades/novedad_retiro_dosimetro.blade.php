@@ -161,6 +161,7 @@
                             </table>
                         </tbody>
                     </table>
+                    
                     <div class="row">
                         <div class="col"></div>
                         <div class="col-10">
@@ -196,7 +197,7 @@
                                         <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
                                     </svg> <br> GUARDAR ASIGNACIÓN
                                 </button>
-                            </div>
+                            </div> 
                         </div>
                         <div class="col">
                             <div class="d-grip gap-2 col-6 mx-auto">
@@ -274,6 +275,19 @@
                             </table>
                         </tbody>
                     </table>
+                    <div class="row">
+                        <div class="col-md"></div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="TRUE" id="checkDelete" name="checkDelete">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    ELIMINAR TODOS LOS DOSÍMETROS EXCEPTO LOS DOSÍMETROS DE CONTROL ÚNICOS PARA EL CONTRATO
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md"></div>
+                    </div>
+                    <br>
                     <div class="row">
                         <div class="col"></div>
                         <div class="col-10">
