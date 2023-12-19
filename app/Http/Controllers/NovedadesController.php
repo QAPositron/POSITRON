@@ -1221,7 +1221,7 @@ class NovedadesController extends Controller
             ]);
         }
         
-        if($request->periodoVacio2 == 'TRUE'){
+        if($request->periodoVacio2 == 'TRUE' || $request->checkDelete == 'TRUE'){
             $updatecontratoDosisedepto = Contratodosimetriasededepto::where('id_contdosisededepto', $request->contdosisededepto)
             ->update([
                 'mes_actual'               => $request->mes_asig_siguiente + 1,
