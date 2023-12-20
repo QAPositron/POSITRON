@@ -1895,40 +1895,49 @@
                     @endif
                 @endforeach
             @endif
+            @php
+                $limites = 0;
+                $control = 0;
+                $contaminado = 0;
+            @endphp
             @if(!empty($trabajdosiasig))
                 @foreach($trabajdosiasig as $dositrabj)
-                    @if($dositrabj->nota3 == 'TRUE')
+                    @if($dositrabj->nota3 == 'TRUE' && $limites == 0)
                         - Se recomienda revisar el límite de las dosis permitidas.
                         <br>
+                        @php $limites == 1; @endphp
                     @endif
                     @if($dositrabj->nota5 == 'TRUE')
-                        - Control no utilizado en la evaluación.
-                        <br>
+                        @php $control += 1; @endphp
                     @endif
-                    @if($dositrabj->nota6 == 'TRUE')
+                    @if($dositrabj->nota6 == 'TRUE' && $contaminado == 0)
                         - Dosímetro contaminado con material radioactivo, se recomienda hacer investigación.
                         <br>
+                        @php $contaminado += 1; @endphp
                     @endif
-                    @break
+
                 @endforeach
             @else
                 @foreach($dosiareasig as $dosiarea)
-                    @if($dosiarea->nota3 == 'TRUE')
+                    @if($dosiarea->nota3 == 'TRUE' && $limites == 0)
                         - Se recomienda revisar el límite de las dosis permitidas.
                         <br>
+                        @php $limites == 1; @endphp
                     @endif
                     @if($dosiarea->nota5 == 'TRUE')
-                        - Control no utilizado en la evaluación.
-                        <br>
+                        @php $control += 1; @endphp
                     @endif
-                    @if($dosiarea->nota6 == 'TRUE')
+                    @if($dosiarea->nota6 == 'TRUE' && $contaminado == 0)
                         - Dosímetro contaminado con material radioactivo, se recomienda hacer investigación.
                         <br>
+                        @php $contaminado += 1; @endphp
                     @endif
-                    @break
                 @endforeach
             @endif
-           
+            @if($control == count($trabajdosiasig) || $control == count($dosiareasig))
+                - Control no utilizado en la evaluación.
+                <br>
+            @endif
     </p>
 
 
