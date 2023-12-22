@@ -401,7 +401,7 @@ class PersonaController extends Controller
                     $consulta = Persona::join('personasedes', 'personas.id_persona',  '=', 'personasedes.persona_id')
                     ->where('personas.lider_dosimetria', '=', 'TRUE')
                     ->where('personasedes.sede_id', '=', $personasede[$i]->sede_id)->get();
-                    return $consulta;
+                    
                     if(count($consulta) == 0){
                         $persona->lider_dosimetria          = $request->lider_dosimetria;
                         $persona->save();

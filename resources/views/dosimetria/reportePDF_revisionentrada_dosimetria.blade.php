@@ -266,12 +266,14 @@
                             @if($dosicontrolUnicoasig->isEmpty())
                                 @foreach($dosicontrolasig as $dosicont)
                                     <tr @foreach($observacionesAsig as $obs)
-                                            @if($dosicont->id_dosicontrolcontdosisedes == $obs->dosicontrol_id && ($obs->observacion_id == 2 || $obs->observacion_id == 3 || $obs->observacion_id == 4 || $obs->observacion_id == 5 || $obs->observacion_id == 6 || $obs->observacion_id == 7 || $obs->observacion_id == 8 || $obs->observacion_id == 9))
-                                                style="color: red; background-color: #EEEDEC;"
+                                        @if($dosicont->id_dosicontrolcontdosisedes == $obs->dosicontrol_id)
+                                            @if($obs->observacion_id == 2 || $obs->observacion_id == 3 || $obs->observacion_id == 4 || $obs->observacion_id == 5 || $obs->observacion_id == 6 || $obs->observacion_id == 7 || $obs->observacion_id == 8 || $obs->observacion_id == 9)
+                                                style="color:red; background-color: #EEEDEC;"
                                             @else
                                                 style="background-color: #EEEDEC;"
                                             @endif
-                                        @endforeach>
+                                        @endif
+                                    @endforeach>
                                         <td>Control @if($dosicont->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($dosicont->ubicacion))}} @endif</td>
                                         <td style="text-align:center;">{{$dosicont->dosimetro->codigo_dosimeter}}</td>
                                         <td style="text-align:center;">
@@ -297,9 +299,14 @@
                                 @endforeach
                             @else
                                 @foreach($dosicontrolUnicoasig as $dosicontUniasig)
+                                
                                     <tr @foreach($observacionesAsig as $obs)
-                                        @if($dosicontUniasig->id_dosicontrolcontdosisedes == $obs->dosicontrol_id && ($obs->observacion_id == 2 || $obs->observacion_id == 3 || $obs->observacion_id == 4 || $obs->observacion_id == 5 || $obs->observacion_id == 6 || $obs->observacion_id == 7 || $obs->observacion_id == 8 || $obs->observacion_id == 9))
-                                            style="color: red; background-color: #EEEDEC;"
+                                        @if($dosicontUniasig->id_dosicontrolcontdosisedes == $obs->dosicontrol_id)
+                                            @if($obs->observacion_id == 2 || $obs->observacion_id == 3 || $obs->observacion_id == 4 || $obs->observacion_id == 5 || $obs->observacion_id == 6 || $obs->observacion_id == 7 || $obs->observacion_id == 8 || $obs->observacion_id == 9)
+                                                style="color:red; background-color: #EEEDEC;"
+                                            @else
+                                                style="background-color: #EEEDEC;"
+                                            @endif
                                         @else
                                             style="background-color: #EEEDEC;"
                                         @endif
