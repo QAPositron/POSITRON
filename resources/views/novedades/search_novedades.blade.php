@@ -33,22 +33,22 @@
             <div class="row p-4">
                 <div class="col-md"></div>
                 <div class="col-md-5">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">EMPRESA:</label>
                         <select class="form-select" name="empresaDosimetria" id="empresaDosimetria" autofocus style="text-transform:uppercase">
                             <option value="">--SELECCIONE--</option>
                             @foreach($empresasDosi as $empdosi)
                                 <option value="{{$empdosi->empresa_id}}">{{$empdosi->nombre_empresa}}</option>
                             @endforeach
                         </select>
-                        <label for="floatingInputGrid">EMPRESA:</label>
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">CONTRATOS:</label>
                         <select class="form-select" name="contratos_empresadosi" id="contratos_empresadosi" value="" autofocus style="text-transform:uppercase">
                             <option value="">--SELECCIONE--</option>
                         </select>
-                        <label for="floatingInputGrid">CONTRATOS:</label>
                     </div>
                 </div>
                 <div class="col-md"></div>
@@ -87,6 +87,11 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        $(document).on('select2:open', () => {
+            document.querySelector('.select2-search__field').focus();
+        });
+        $('#empresaDosimetria').select2({width: "100%", theme: "classic"});
+        $('#contratos_empresadosi').select2({width: "100%", theme: "classic"});
         
         $('#empresaDosimetria').on('change', function(){
             $('#tituloEmpresa').html("");

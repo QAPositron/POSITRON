@@ -56,8 +56,7 @@ class FormCrearEmpresaDosimetria extends Component
 
         $empresaDosi->save();
 
-        redirect()->route('empresasdosi.create');
-        $this->emit('alert', 'LA EMPRESA SE GUARDÓ EN DOSIMETRÍA EXITOSAMENTE!!');
+        redirect()->route('empresasdosi.create')->with('crear', 'ok');
 
         return $this->reset(['empresa', 'numtotal_dosi_torax', 'numtotal_dosi_cristalino', 'numtotal_dosi_dedo', 'numtotal_dosi_muñeca', 'numtotal_dosi_control_torax', 'numtotal_dosi_control_cristalino', 'numtotal_dosi_control_dedo', 'numtotal_dosi_ambiental', 'numtotal_dosi_caso']);
     }

@@ -25,42 +25,42 @@
             <label class="px-4">SELECCIONE LA INFORMACIÓN DEL CONTRATO DE DOSIMETRÍA: </label>
             <div class="row p-4">
                 <div class="col-md">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">EMPRESA:</label>
                         <select class="form-select" name="empresaDosimetria" id="empresaDosimetria" value="" autofocus style="text-transform:uppercase;">
                             <option value="">--SELECCIONE--</option>
                             @foreach($empresasDosi as $empdosi)
                                 <option value="{{$empdosi->empresa_id}}">{{$empdosi->nombre_empresa}}</option>
                             @endforeach
                         </select>
-                        <label for="floatingInputGrid">EMPRESA:</label>
                         
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">CONTRATOS:</label>
                         <select class="form-select" name="contratos_empresadosi" id="contratos_empresadosi" value="" autofocus style="text-transform:uppercase">
 
                         </select>
-                        <label for="floatingInputGrid">CONTRATOS:</label>
                        
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">SEDES:</label>
                         <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value="">
                         <select class="form-select" name="sedes_empresadosi" id="sedes_empresadosi" value="" autofocus style="text-transform:uppercase">
 
                         </select>
-                        <label for="floatingInputGrid">SEDES:</label>
                         
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">ESPECIALIDADES:</label>
                         <select class="form-select" name="especialidades_empresadosi" id="especialidades_empresadosi" value="" autofocus style="text-transform:uppercase">
 
                         </select>
-                        <label for="floatingInputGrid">ESPECIALIDADES:</label>
                         
                     </div>
                 </div>
@@ -68,18 +68,18 @@
             <div class="row p-3">
                 <div class="col-md"></div>
                 <div class="col-md-6">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">PERÍODO A MODIFICAR:</label>
                         <select class="form-select" name="mesacambiar" id="mesacambiar" value="" autofocus style="text-transform:uppercase">
                             <option value="">--SELECCIONE--</option>
                         </select>
-                        <label for="floatingInputGrid">PERÍODO A MODIFICAR:</label>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">NOVEDAD:</label>
                         <select class="form-select" name="novedad" id="novedad" value="" autofocus style="text-transform:uppercase">
                         </select>
-                        <label for="floatingInputGrid">NOVEDAD:</label>
                     </div>
                 </div>
                 <div class="col-md"></div>
@@ -334,6 +334,14 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        $(document).on('select2:open', () => {
+            document.querySelector('.select2-search__field').focus();
+        });
+        $('#empresaDosimetria').select2({width: "100%", theme: "classic"});
+        $('#contratos_empresadosi').select2({width: "100%", theme: "classic"});
+        $('#sedes_empresadosi').select2({width: "100%", theme: "classic"});
+        $('#especialidades_empresadosi').select2({width: "100%", theme: "classic"});
+
         $('#empresaDosimetria').on('change', function(){
             var empresa_id = $(this).val();
             console.log(empresa_id);

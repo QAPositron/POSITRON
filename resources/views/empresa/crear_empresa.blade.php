@@ -290,9 +290,13 @@
 </script>
 @endif
 <script type="text/javascript">
+    
+    $(document).on('select2:open', () => {
+        document.querySelector('.select2-container--open .select2-search__field').focus();
+    });
     $(document).ready(function() {
-        $('#departamento_empresa').select2();
-        $('#ciudad_empresa').select2();
+        $('#departamento_empresa').select2({width: "100%", theme: "classic"});
+        $('#ciudad_empresa').select2({width: "100%", theme: "classic"});
         $('#especialidades').select2({
             placeholder:"SELECCIONE LAS ESPECIALIDADES",
             tags: true,
@@ -302,6 +306,7 @@
 </script>
 
 <script type="text/javascript">
+    
     $(document).ready(function() {
         var olddepto = '{{old('departamento_empresa')}}';
         var oldciudad = '{{old('ciudad_empresa')}}';
@@ -333,7 +338,7 @@
             
             var padre = document.getElementById("spinner_municipio");
             var hijo = document.getElementById("spinner");
-            /* alert(departamento_id); */
+            
             if($.trim(departamento_id) != ''){
                 $.get('empresasdeptomuni', {departamento_id: departamento_id}, function(municipios){
                     console.log(municipios);

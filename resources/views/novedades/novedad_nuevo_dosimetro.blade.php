@@ -26,58 +26,57 @@
             <label class="px-4">SELECCIONE LA INFORMACIÓN DEL CONTRATO DE DOSIMETRÍA: </label>
             <div class="row p-4">
                 <div class="col-md">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">EMPRESA:</label>
                         <select class="form-select" name="empresaDosimetria" id="empresaDosimetria" value="" autofocus style="text-transform:uppercase;">
                             <option value="">--SELECCIONE--</option>
                             @foreach($empresasDosi as $empdosi)
                                 <option value="{{$empdosi->empresa_id}}">{{$empdosi->nombre_empresa}}</option>
                             @endforeach
                         </select>
-                        <label for="floatingInputGrid">EMPRESA:</label>
-                        
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">CONTRATOS:</label>
                         <select class="form-select" name="contratos_empresadosi" id="contratos_empresadosi" value="" autofocus style="text-transform:uppercase">
 
                         </select>
-                        <label for="floatingInputGrid">CONTRATOS:</label>
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">SEDES:</label>
                         <input type="number" hidden name="contratodosimetriasede" id="contratodosimetriasede" value="">
                         <select class="form-select" name="sedes_empresadosi" id="sedes_empresadosi" value="" autofocus style="text-transform:uppercase">
 
                         </select>
-                        <label for="floatingInputGrid">SEDES:</label>
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">ESPECIALIDADES:</label>
                         <select class="form-select" name="especialidades_empresadosi" id="especialidades_empresadosi" value="" autofocus style="text-transform:uppercase">
 
                         </select>
-                        <label for="floatingInputGrid">ESPECIALIDADES:</label>
                     </div>
                 </div>
             </div>
             <div class="row p-3">
                 <div class="col-md"></div>
                 <div class="col-md-6">
-                    <div class="form-floating">
-                        <select class="form-select" name="mesacambiar" id="mesacambiar" value="" autofocus style="text-transform:uppercase">
-                            <option value="">--SELECCIONE--</option>
-                        </select>
+                    <div class="form-group">
                         <label for="floatingInputGrid">PERÍODO A MODIFICAR:</label>
+                        <select class="form-select" name="mesacambiar" id="mesacambiar" value="" autofocus style="text-transform:uppercase">
+                            
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-floating">
+                    <div class="form-group">
+                        <label for="floatingInputGrid">NOVEDAD:</label>
                         <select class="form-select" name="novedad" id="novedad" value="" autofocus style="text-transform:uppercase">
                         </select>
-                        <label for="floatingInputGrid">NOVEDAD:</label>
                     </div>
                 </div>
                 <div class="col-md"></div>
@@ -310,6 +309,7 @@
                                 <th style='width: 120px'>UBICACIÓN</th>
                                 <th style='width: 100px'>DOSÍMETRO</th>
                                 <th style='width: 100px'>HOLDER</th>
+                                <th style='width: 100px'>ACCIONES</th>
                             </thead>
                             <tbody id="body_asignaciones2">
                                 
@@ -396,6 +396,15 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        $(document).on('select2:open', () => {
+            document.querySelector('.select2-search__field').focus();
+        });
+        $('#empresaDosimetria').select2({width: "100%", theme: "classic"});
+        $('#contratos_empresadosi').select2({width: "100%", theme: "classic"});
+        $('#sedes_empresadosi').select2({width: "100%", theme: "classic"});
+        $('#especialidades_empresadosi').select2({width: "100%", theme: "classic"});
+        
+        
         $('#empresaDosimetria').on('change', function(){
             var empresa_id = $(this).val();
             console.log(empresa_id);
@@ -904,7 +913,7 @@
                         $('#tr_control').html("");
                         if(mes > consultaMesactual){
                             //////////////// PARA CUANDO SELECCIONA EL MES SIGUIENTE AL ACTUAL DEL CONTRATO ///////////////////////
-                           /*  alert("CNTROL PARA EL MES SIGUEINTE AL ACTUAL"); */
+                            alert("CNTROL PARA EL MES SIGUEINTE AL ACTUAL");
                             for(var i=0; i<asignacionescontrolmesactual.length; i++){
                                 if(asignacionescontrolmesactual[i].dosimetro_uso != 'FALSE'){
                                     var disacont = 'disabled';
@@ -944,23 +953,29 @@
                                         <td style='width: 75px' class='align-middle'>
                                             <input type="text" name="ubicacion_asigdosimControl[]" id="ubicacion_asigdosimControl" class="form-control" value="`+ubicacion+`" readonly>
                                         </td>
-                                        <td style='width: 190px' class='align-middle'>
-                                            
-                                            <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`" ${disacont} >
+                                        <td style='width: 190px' class='align-middle text-center'>
+                                                <select class="form-select cambiar text-center"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`" ${disacont} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
                                                 ${selectDosimetrosEzclip.innerHTML}
                                             </select>
                                         </td>
                                         <td style='width: 163px' class='align-middle text-center'>
-                                            <select class="form-select cambiar"  name="id_holder_asigdosimControl[]" id="id_holder_asigdosimControl`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`" ${disacont} >
+                                            <select class="form-select cambiar text-center"  name="id_holder_asigdosimControl[]" id="id_holder_asigdosimControl`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`" ${disacont} >
                                                 <option value="`+id_holder+`">`+codigo_holder+`</option>
                                                 <option value="NA">N.A.</option>
                                                 ${selectHolders.innerHTML}
                                             </select>
                                         </td>
+                                        <td class="text-center align-middle" style='width: 190px'></td>
                                     </tr>`;
                                 $("#body_asignaciones2").append(tr);
+                                /* if($('#id_dosimetro_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).is(':disabled') != true){
+                                    $('#id_dosimetro_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
+                                }
+                                if($('#id_holder_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).is(':disabled') != true){
+                                    $('#id_holder_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
+                                } */
                             } 
                         }else{
                             //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
@@ -1105,7 +1120,7 @@
                                     }
                                     
                                     var tr = `<tr id="`+asignacionesmesactual[i].id_trabajadordosimetro+`">
-                                        <td class='align-middle'>
+                                        <td class='align-middle' style='width: 75px'>
                                             <input type="text" name="id_trabj_asigdosim[]" id="id_trabj_asigdosim_mesdesp`+asignacionesmesactual[i].id_persona+`" class="form-control id_trabj_asigdosim" value="`+asignacionesmesactual[i].id_persona+`" hidden>
                                             <select class="form-select"  name="id_trabj_asigdosim[]" id="id_trabj_asigdosim`+asignacionesmesactual[i].id_persona+`" disabled>
                                                 <option value="`+asignacionesmesactual[i].id_persona+`">`+asignacionesmesactual[i].primer_nombre_persona+` `+asignacionesmesactual[i].primer_apellido_persona+` `+asignacionesmesactual[i].segundo_apellido_persona+` `+`</option>
@@ -1113,24 +1128,30 @@
                                             </select>
                                         </td>
                                         <td class='align-middle'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
-                                        <td class='align-middle'>
-                                            <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim`+asignacionesmesactual[i].id_trabajadordosimetro+`" ${dis} >
+                                        <td class='align-middle text-center'>
+                                            <select class="form-select cambiar text-center"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim`+asignacionesmesactual[i].id_trabajadordosimetro+`" ${dis} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
                                                 ${selectDosimetrosEzclip.innerHTML}
                                             </select>
                                         </td>
-                                        <td class='align-middle'>
-                                            <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim`+asignacionesmesactual[i].id_trabajadordosimetro+`" ${dis} >
+                                        <td class='align-middle text-center'>
+                                            <select class="form-select cambiar text-center"  name="id_holder_asigdosim[]" id="id_holder_asigdosim`+asignacionesmesactual[i].id_trabajadordosimetro+`" ${dis} >
                                                 <option value="`+id_holder+`">`+codigo_holder+`</option>
                                                 <option value="NA">N.A.</option>
                                                 ${selectHolders.innerHTML}
                                             </select>
                                         </td>
-                                        
+                                        <td></td>
                                     </tr>`;
                                     $("#body_asignaciones2").append(tr);
-                                    
+
+                                    /* if($('#id_dosimetro_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).is(':disabled') != true){
+                                        $('#id_dosimetro_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
+                                    }
+                                    if($('#id_holder_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).is(':disabled') != true){
+                                        $('#id_holder_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});    
+                                    } */
                                 }
                             }else{
                                 $('#body_asignaciones2').html("");
@@ -1224,7 +1245,7 @@
                                     var codigo_holder = '---';
                                 }
                                 var tr = `<tr id="`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`area">
-                                    <td class='align-middle'>
+                                    <td class='align-middle' style='width: 75px'>
                                         <input type="text" name="id_area_asigdosim[]" id="id_area_asigdosim`+asignacionesareamesactual[i].id_areadepartamentosede+`" class="form-control" value="`+asignacionesareamesactual[i].id_areadepartamentosede+`" hidden>
                                         <select class="form-select"  name="id_area_asigdosim[]" id="id_area_asigdosim`+asignacionesareamesactual[i].id_areadepartamentosede+`" disabled>
                                             <option value="`+asignacionesareamesactual[i].id_areadepartamentosede+`">`+asignacionesareamesactual[i].nombre_area+`</option>
@@ -1233,16 +1254,19 @@
                                     </td>
                                     <td class='align-middle text-center'><input type="text" class="form-control" value="AMBIENTAL" readonly></td>
                                     <td class='align-middle text-center'>
-                                        <select class="form-select cambiar"  name="id_dosimetro_area_asigdosim[]" id="id_dosimetro_area_asigdosim`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`" ${dis}>
+                                        <select class="form-select cambiar text-center"  name="id_dosimetro_area_asigdosim[]" id="id_dosimetro_area_asigdosim`+asignacionesareamesactual[i].id_dosiareacontdosisedes+`" ${dis}>
                                             <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                             ${selectDosimetros.innerHTML}
                                         </select>
                                     </td>
                                     <td class='align-middle text-center'> N.A. </td>
+                                    <td></td>
                                 </tr>`;
 
                                 $("#body_asignaciones2").append(tr);
-
+                                /* if($('#id_dosimetro_area_asigdosim'+asignacionesareamesactual[i].id_dosiareacontdosisedes).is(':disabled') != true){
+                                    $('#id_dosimetro_area_asigdosim'+asignacionesareamesactual[i].id_dosiareacontdosisedes).select2({width: "100%", theme: "classic"});
+                                } */
                             }
                         }else{
                              /* alert("ASIGNACIONES PARA EL MES ACTUAL"); */
@@ -1272,9 +1296,16 @@
                     })
                 });
             })
-        });
-
+        });  
+        
     });
+    var control = 0;
+    var torax = 0;
+    var caso = 0;
+    var area = 0;
+    var cristalino = 0;
+    var anillo = 0;
+
     function agregarFila(num){
         console.log("NUMERO SELECCIONADO" +num);
         var mes = document.getElementById("mesacambiar").value;
@@ -1368,30 +1399,30 @@
                         console.log("numero= "+num);
                         if(num == 0){
                             document.getElementById("tr_newAsignacion2").insertRow(-1).innerHTML += 
-                                `<td style="width: 21.30%" class='align-middle'>CONTROL TRANS.</td>
-                                <td class='align-middle text-center'style="width: 14.50%">
-                                    <select class="form-select" name="id_ubicacion_control_asig[]" id="id_ubicacion_control_asig" style="text-transform:uppercase">
+                                `<td style="width: 28%" class='align-middle'>CONTROL TRANS.</td>
+                                <td class='align-middle text-center' style="width: 14.50%">
+                                    <select class="form-select" name="id_ubicacion_control_asig[]" id="id_ubicacion_control_asig`+control+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         <option value="TORAX">TÓRAX</option>
                                         <option value="CRISTALINO">CRISTALINO</option>
                                         <option value="ANILLO">ANILLO</option>
                                     </select>
                                 </td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_control_asig[]" id="id_dosimetro_control_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 15.0%">
+                                    <select class="form-select"  name="id_dosimetro_control_asig[]" id="id_dosimetro_control_asig`+control+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetrosEzclip.innerHTML}
                                         ${selectDosimetros.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_control_asig[]" id="id_holder_control_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 14.10%">
+                                    <select class="form-select"  name="id_holder_control_asig[]" id="id_holder_control_asig`+control+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         <option value="NA">N.A</option>
                                         ${selectHolders.innerHTML}
                                     </select>
                                 </td>
-                                <td class="text-center" style="width: 5.80%">
+                                <td class="text-center" style="width: 12.80%">
                                     <button id="" class="btn btn-sm btn-danger"  type="button" onclick="eliminarFilaform2(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1399,27 +1430,24 @@
                                     </button>
                                 </td>
                             `;
+                            control++;
                         }else if(num == 1){
                             document.getElementById("tr_newAsignacion2").insertRow(-1).innerHTML += 
-                                `<td style="width: 21.30%">
-                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                `<td class='align-middle' style="width: 31%">
+                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asigT`+torax+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectTrabajadores.innerHTML}
                                     </select>
                                 </td>
                                 <td class='align-middle text-center'style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="TORAX" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 15.0%">
+                                    <select class="form-select text-center"  name="id_dosimetro_asig[]" id="id_dosimetro_asigT`+torax+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetros.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
-                                        <option value="NA" selected>N.A</option>
-                                    </select>
-                                </td>
-                                <td class="text-center" style="width: 5.80%">
+                                <td class='align-middle text-center' style="width: 14.20%"><input type="text" name="id_holder_asig[]" id="id_holder_asig" class="form-control text-center" value="NA" readonly></td>
+                                <td class="text-center" style="width: 12.80%">
                                     <button id="" class="btn btn-sm btn-danger"  type="button" onclick="eliminarFilaform2(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1427,28 +1455,24 @@
                                     </button>
                                 </td>
                             `;
-
+                            torax++;
                         }else if(num == 2){
                             document.getElementById("tr_newAsignacion2").insertRow(-1).innerHTML += 
-                                `<td style="width: 21.30%">
-                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                `<td class='align-middle' style="width: 21.30%">
+                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asigCaso`+caso+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectTrabajadores.innerHTML}
                                     </select>
                                 </td>
                                 <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="CASO" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 15.0%">
+                                    <select class="form-select text-center" name="id_dosimetro_asig[]" id="id_dosimetro_asigCaso`+caso+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetros.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
-                                        <option value="NA" selected>N.A</option>
-                                    </select>
-                                </td>
-                                <td class="text-center" style="width: 5.80%">
+                                <td class='align-middle text-center' style="width: 14.20%"><input type="text" name="id_holder_asig[]" id="id_holder_asig" class="form-control text-center" value="NA" readonly></td>
+                                <td class="text-center" style="width: 12.80%">
                                     <button id="" class="btn btn-sm btn-danger"  type="button" onclick="eliminarFilaform2(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1456,17 +1480,18 @@
                                     </button>
                                 </td>
                             `;
+                            caso++;
                         }else if(num == 3){
                             document.getElementById("tr_newAsignacion2").insertRow(-1).innerHTML += 
-                                `<td style="width: 21.30%">
-                                    <select class="form-select id_area_asig" name="id_area_asig[]"  id="id_area_asig" style="text-transform:uppercase">
+                                `<td class='align-middle' style="width: 21.30%">
+                                    <select class="form-select id_area_asig" name="id_area_asig[]"  id="id_area_asig`+area+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectAreas.innerHTML} 
                                     </select>
                                 </td>
                                 <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_area_asig[]" id="id_ubicacion_asig" class="form-control" value="AMBIENTAL" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_area_asig[]" id="id_dosimetro_area_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 15.0%">
+                                    <select class="form-select text-center"  name="id_dosimetro_area_asig[]" id="id_dosimetro_area_asig`+area+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetros.innerHTML}
                                     </select>
@@ -1480,23 +1505,24 @@
                                     </button>
                                 </td>
                             `;
+                            area++;
                         }else if(num == 4){
                             document.getElementById("tr_newAsignacion2").insertRow(-1).innerHTML += 
-                                `<td style="width: 21.30%">
-                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                `<td class='align-middle' style="width: 21.30%">
+                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asigCris`+cristalino+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectTrabajadores.innerHTML}
                                     </select>
                                 </td>
                                 <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="CRISTALINO" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center'style="width: 15.0%">
+                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asigCris`+cristalino+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetrosEzclip.innerHTML}
                                     </select>
                                 </td>
-                                <td style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 14.20%">
+                                    <select class="form-select text-center"  name="id_holder_asig[]" id="id_holder_asigCris`+cristalino+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         <option value="NA">N.A</option>
                                         ${selectHolders.innerHTML}
@@ -1510,29 +1536,30 @@
                                     </button>
                                 </td>
                             `;
+                            cristalino++;
                         }else if(num == 5){
                             document.getElementById("tr_newAsignacion2").insertRow(-1).innerHTML += 
-                                `<td style="width: 21.30%">
-                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                `<td class='align-middle' style="width: 31%">
+                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asigA`+anillo+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectTrabajadores.innerHTML}
                                     </select>
                                 </td>
                                 <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="ANILLO" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 15.0%">
+                                    <select class="form-select text-center"  name="id_dosimetro_asig[]" id="id_dosimetro_asigA`+anillo+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetrosEzclip.innerHTML}
                                     </select>
                                 </td>
-                                <td style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 14.20%">
+                                    <select class="form-select text-center"  name="id_holder_asig[]" id="id_holder_asigA`+anillo+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         <option value="NA">N.A</option>
                                         ${selectHolders.innerHTML}
                                     </select>
                                 </td>
-                                <td class="text-center" style="width: 5.80%">
+                                <td class="text-center" style="width: 12.80%">
                                     <button id="" class="btn btn-danger"  type="button" onclick="eliminarFilaform2(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1540,8 +1567,9 @@
                                     </button>
                                 </td>
                             `;
+                            anillo++;
                         }
-                       
+                        
                     }else{
                         /* alert("si entrO, es el MES actual"); */
                         
@@ -1554,30 +1582,30 @@
                         document.getElementById("id_contratodosimetriasede").value = id_contratodosimetriasede;
                         if(num == 0){
                             document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
-                                `<td style="width: 26.30%" class='align-middle'>CONTROL TRANS.</td>
-                                <td class='align-middle text-center'style="width: 14.50%">
-                                    <select class="form-select" name="id_ubicacion_control_asig[]" id="id_ubicacion_control_asig" style="text-transform:uppercase">
+                                `<td style="width: 31%" class='align-middle'>CONTROL TRANS.</td>
+                                <td class='align-middle text-center' style="width: 14.50%">
+                                    <select class="form-select" name="id_ubicacion_control_asig[]" id="id_ubicacion_control_asig`+control+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         <option value="TORAX">TÓRAX</option>
                                         <option value="CRISTALINO">CRISTALINO</option>
                                         <option value="ANILLO">ANILLO</option>
                                     </select>
                                 </td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_control_asig[]" id="id_dosimetro_control_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 15.0%">
+                                    <select class="form-select"  name="id_dosimetro_control_asig[]" id="id_dosimetro_control_asig`+control+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetrosEzclip.innerHTML}
                                         ${selectDosimetros.innerHTML}
                                     </select>
                                 </td>
                                 <td class='align-middle text-center' style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_control_asig[]" id="id_holder_control_asig" style="text-transform:uppercase">
+                                    <select class="form-select"  name="id_holder_control_asig[]" id="id_holder_control_asig`+control+`" style="text-transform:uppercase">
                                         <option value="">----</option>
-                                        <option value="NA">N.A</option>
+                                        <option value="NA">NA</option>
                                         ${selectHolders.innerHTML}
                                     </select>
                                 </td>
-                                <td class="text-center" style="width: 12.40%">
+                                <td class="text-center" style="width: 13.80%">
                                     <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1585,27 +1613,24 @@
                                     </button>
                                 </td>
                             `;
+                            control++;
                         }else if(num == 1){
                             document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
-                                `<td style="width: 32.30%">
-                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                `<td style="width: 31%" class='align-middle text-center'>
+                                    <select class="form-select id_trabajador_asig " name="id_trabajador_asig[]"  id="id_trabajador_asigT`+torax+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectTrabajadores.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center'style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="TORAX" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center'style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control text-center" value="TORAX" readonly></td> 
+                                <td style="width: 15.0%" class='align-middle text-center'>
+                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asigT`+torax+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetros.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
-                                        <option value="NA" selected>N.A</option>
-                                    </select>
-                                </td>
-                                <td class="text-center" style="width: 15.80%">
+                                <td class='align-middle text-center' style="width: 14.20%"><input type="text" name="id_holder_asig[]" id="id_holder_asig" class="form-control text-center" value="NA" readonly></td>
+                                <td class="text-center" style="width: 13.80%">
                                     <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1613,28 +1638,24 @@
                                     </button>
                                 </td>
                             `;
-
+                            torax++;
                         }else if(num == 2){
                             document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
-                                `<td style="width: 32.30%">
-                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                `<td style="width: 31%" class='align-middle text-center'>
+                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asigCaso`+caso+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectTrabajadores.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="CASO" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control text-center" value="CASO" readonly></td> 
+                                <td style="width: 15.0%" class='align-middle text-center'>
+                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asigCaso`+caso+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetros.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
-                                        <option value="NA" selected>N.A</option>
-                                    </select>
-                                </td>
-                                <td class="text-center" style="width: 15.80%">
+                                <td class='align-middle text-center' style="width: 14.20%"><input type="text" name="id_holder_asig[]" id="id_holder_asig" class="form-control text-center" value="NA" readonly></td>
+                                <td class="text-center" style="width: 13.80%">
                                     <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1642,23 +1663,24 @@
                                     </button>
                                 </td>
                             `;
+                            caso++;
                         }else if(num == 3){
                             document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
-                                `<td style="width: 32.30%">
-                                    <select class="form-select id_area_asig" name="id_area_asig[]"  id="id_area_asig" style="text-transform:uppercase">
+                                `<td style="width: 31%" class='align-middle text-center'>
+                                    <select class="form-select id_area_asig" name="id_area_asig[]"  id="id_area_asig`+area+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectAreas.innerHTML} 
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_area_asig[]" id="id_ubicacion_asig" class="form-control" value="AMBIENTAL" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_area_asig[]" id="id_dosimetro_area_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_area_asig[]" id="id_ubicacion_asig" class="form-control text-center" value="AMBIENTAL" readonly></td> 
+                                <td style="width: 15.0%" class='align-middle text-center'>
+                                    <select class="form-select"  name="id_dosimetro_area_asig[]" id="id_dosimetro_area_asig`+area+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetros.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.20%">N.A.</td>
-                                <td class="text-center" style="width: 15.80%">
+                                <td class='align-middle text-center' style="width: 14.20%">NA</td>
+                                <td class="text-center" style="width: 13.80%">
                                     <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1666,29 +1688,30 @@
                                     </button>
                                 </td>
                             `;
+                            area++;
                         }else if(num == 4){
                             document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
-                                `<td style="width: 32.30%">
-                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                `<td style="width: 31%" class='align-middle text-center'>
+                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asigCris`+cristalino+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectTrabajadores.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="CRISTALINO" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control text-center" value="CRISTALINO" readonly></td> 
+                                <td style="width: 15.0%" class='align-middle text-center'>
+                                    <select class="form-select dosimCrisasig`+cristalino+`"  name="id_dosimetro_asig[]" id="id_dosimetro_asigCris`+cristalino+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetrosEzclip.innerHTML}
                                     </select>
                                 </td>
-                                <td style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                <td style="width: 14.20%" class='align-middle text-center'>
+                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asigCris`+cristalino+`" style="text-transform:uppercase">
                                         <option value="">----</option>
-                                        <option value="NA">N.A</option>
+                                        <option value="NA">NA</option>
                                         ${selectHolders.innerHTML}
                                     </select>
                                 </td>
-                                <td class="text-center" style="width: 15.80%">
+                                <td class="text-center" style="width: 13.80%">
                                     <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1696,29 +1719,30 @@
                                     </button>
                                 </td>
                             `;
+                            cristalino++;
                         }else if(num == 5){
                             document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
-                                `<td style="width: 32.30%">
-                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asig" style="text-transform:uppercase">
+                                `<td style="width: 31%" class='align-middle text-center'>
+                                    <select class="form-select id_trabajador_asig" name="id_trabajador_asig[]"  id="id_trabajador_asigA`+anillo+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectTrabajadores.innerHTML}
                                     </select>
                                 </td>
-                                <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control" value="ANILLO" readonly></td> 
-                                <td style="width: 15.0%">
-                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asig" style="text-transform:uppercase">
+                                <td class='align-middle text-center' style="width: 14.50%"><input type="text" name="id_ubicacion_asig[]" id="id_ubicacion_asig" class="form-control text-center" value="ANILLO" readonly></td> 
+                                <td style="width: 15.0%" class='align-middle text-center'>
+                                    <select class="form-select"  name="id_dosimetro_asig[]" id="id_dosimetro_asigA`+anillo+`" style="text-transform:uppercase">
                                         <option value="">----</option>
                                         ${selectDosimetrosEzclip.innerHTML}
                                     </select>
                                 </td>
-                                <td style="width: 14.20%">
-                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asig" style="text-transform:uppercase">
+                                <td style="width: 14.20%" class='align-middle text-center'>
+                                    <select class="form-select"  name="id_holder_asig[]" id="id_holder_asigA`+anillo+`" style="text-transform:uppercase">
                                         <option value="">----</option>
-                                        <option value="NA">N.A</option>
+                                        <option value="NA">NA</option>
                                         ${selectHolders.innerHTML}
                                     </select>
                                 </td>
-                                <td class="text-center" style="width: 15.80%">
+                                <td class="text-center" style="width: 13.80%">
                                     <button id="" class="btn btn-danger"  type="button" onclick="eliminarFila(this)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -1726,9 +1750,37 @@
                                     </button>
                                 </td>
                             `;
+                            anillo++;
                         }
                     }
-                
+                    for(var i = 0; i < control; i++){
+                        $('#id_ubicacion_control_asig'+[i]).select2({width: "100%", theme: "classic"});
+                        $('#id_dosimetro_control_asig'+[i]).select2({width: "100%", theme: "classic"});
+                        $('#id_holder_control_asig'+[i]).select2({width: "100%", theme: "classic"});
+                    } 
+                    console.log("variable de TORAX = "+torax);
+                    for(var i = 0; i < torax; i++){
+                        $('#id_trabajador_asigT'+[i]).select2({width: "100%", theme: "classic"});
+                        $('#id_dosimetro_asigT'+[i]).select2({width: "100%", theme: "classic"});
+                    }
+                    for(var i = 0; i < caso; i++){
+                        $('#id_trabajador_asigCaso'+[i]).select2({width: "100%", theme: "classic"});
+                        $('#id_dosimetro_asigCaso'+[i]).select2({width: "100%", theme: "classic"});
+                    }
+                    for(var i = 0; i < area; i++){
+                        $('#id_area_asig'+[i]).select2({width: "100%", theme: "classic"});
+                        $('#id_dosimetro_area_asig'+[i]).select2({width: "100%", theme: "classic"});
+                    }
+                    for(var i = 0; i < cristalino; i++){
+                        $('#id_trabajador_asigCris'+[i]).select2({width: "100%", theme: "classic"});
+                        $('#id_dosimetro_asigCris'+[i]).select2({width: "100%", theme: "classic"});
+                        $('#id_holder_asigCris'+[i]).select2({width: "100%", theme: "classic"});
+                    }
+                    for(var i = 0; i < anillo; i++){
+                        $('#id_trabajador_asigA'+[i]).select2({width: "100%", theme: "classic"});
+                        $('#id_dosimetro_asigA'+[i]).select2({width: "100%", theme: "classic"});
+                        $('#id_holder_asigA'+[i]).select2({width: "100%", theme: "classic"});
+                    }
                 })
                 $(".inputs").remove();
             });
@@ -1957,26 +2009,32 @@
                         if(asignacioneslimpias[$i].control != '' ){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].control);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].control);
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
                             
                         }else if(asignacioneslimpias[$i].controlAU != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlAU);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlAU);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].controlCU != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlCU);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlCU);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].controlTU != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlTU);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlTU);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].dosiareasig != ''){
                             var elementDosi = document.getElementById("id_dosimetro_area_asigdosim"+asignacioneslimpias[$i].dosiareasig);
-                            
+                            $('#id_dosimetro_area_asigdosim'+asignacioneslimpias[$i].dosiareasig).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].trabajadorasig != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosim"+asignacioneslimpias[$i].trabajadorasig);
                             var elementHol = document.getElementById("id_holder_asigdosim"+asignacioneslimpias[$i].trabajadorasig);
-                          
+                            $('#id_dosimetro_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
                         }
                         elementDosi.disabled = false;
                         elementDosi.options.item(0).text = "---";
@@ -1984,6 +2042,31 @@
                         elementHol.disabled = false;
                         elementHol.options.item(0).text = "---";
                         elementHol.options.item(0).value = '';
+                        if(asignacioneslimpias[$i].control != '' ){
+                           
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
+                            
+                        }else if(asignacioneslimpias[$i].controlAU != ''){
+                           
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].controlCU != ''){
+                           
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].controlTU != ''){
+                           
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].dosiareasig != ''){
+                            
+                            $('#id_dosimetro_area_asigdosim'+asignacioneslimpias[$i].dosiareasig).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].trabajadorasig != ''){
+                            
+                            $('#id_dosimetro_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
+                        }
                     }
                    
                     
@@ -2068,30 +2151,30 @@
         console.log(selectHolders.innerHTML);
         
         document.getElementById("tabla_adicional").insertRow(-1).innerHTML += 
-            `<td style="width: 26.30%" class='align-middle'>CONTROL TRANS.</td>
-            <td class='align-middle text-center'style="width: 14.50%">
-                <select class="form-select" name="id_ubicacion_control_asig[]" id="id_ubicacion_control_asig" style="text-transform:uppercase">
+            `<td style="width: 31%" class='align-middle'>CONTROL TRANS.</td>
+            <td class='align-middle text-center' style="width: 14.50%">
+                <select class="form-select" name="id_ubicacion_control_asig[]" id="id_ubicacion_control_asig`+control+`" style="text-transform:uppercase">
                     <option value="">----</option>
                     <option value="TORAX">TÓRAX</option>
                     <option value="CRISTALINO">CRISTALINO</option>
                     <option value="ANILLO">ANILLO</option>
                 </select>
             </td> 
-            <td style="width: 15.0%">
-                <select class="form-select"  name="id_dosimetro_control_asig[]" id="id_dosimetro_control_asig" style="text-transform:uppercase">
+            <td class='align-middle text-center' style="width: 15.0%">
+                <select class="form-select"  name="id_dosimetro_control_asig[]" id="id_dosimetro_control_asig`+control+`" style="text-transform:uppercase">
                     <option value="">----</option>
                     ${selectDosimetrosEzclip.innerHTML}
                     ${selectDosimetros.innerHTML}
                 </select>
             </td>
             <td class='align-middle text-center' style="width: 14.20%">
-                <select class="form-select"  name="id_holder_control_asig[]" id="id_holder_control_asig" style="text-transform:uppercase">
+                <select class="form-select"  name="id_holder_control_asig[]" id="id_holder_control_asig`+control+`" style="text-transform:uppercase">
                     <option value="">----</option>
                     <option value="NA">N.A</option>
                     ${selectHolders.innerHTML}
                 </select>
             </td>
-            <td class="text-center" style="width: 12.40%">
+            <td class="text-center" style="width: 13.80%">
                 <button class="btn btn-sm"  type="button" style="background-color: #a0aec0" onclick="return false"">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -2099,6 +2182,7 @@
                 </button>
             </td>
         `;
+        control++;
         document.getElementById('dosi_control_torax').value = 0;
         document.getElementById('dosi_control_cristalino').value = 0;
         document.getElementById('dosi_control_dedo').value = 0;
@@ -2112,7 +2196,13 @@
         document.getElementById('controlTransA_unicoCont').value = null;
         document.getElementById('subEspecialidad').value = 'TRUE';
 
+        for(var i = 0; i < control; i++){
+            $('#id_ubicacion_control_asig'+[i]).select2({width: "100%", theme: "classic"});
+            $('#id_dosimetro_control_asig'+[i]).select2({width: "100%", theme: "classic"});
+            $('#id_holder_control_asig'+[i]).select2({width: "100%", theme: "classic"});
+        } 
     }
+
 </script>
 @if(session('guardar')== 'ok')
     <script>

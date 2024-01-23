@@ -51,7 +51,7 @@ LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}} <br>
         @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS')
             @php  
                 $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                $inicio = date($dosicontasig->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
+                $inicio = $contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio;
                 $fecha1 = date("t-m-Y",strtotime($inicio));
                 $fecha2= date("t-m-Y",strtotime($fecha1."+ 2 month"));
                 echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio))." - ".date("j", strtotime($fecha2))." ".$meses[date("m", strtotime($fecha2))]." DE ".date("Y", strtotime($fecha2))

@@ -27,27 +27,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{route('empresasdosi.save')}}" method="POST"  id="form_crear_empresadosi" name="form_crear_empresadosi" class="form_crear_empresadosi">
-                                @csrf 
-                                <label class="text-center">AL SELECCIONAR UNA EMPRESA Y GUARDAR SE PODRAN CREAR CONTRATOS EN ELLA</label>
-                                    <div class="col-md text-center">
-                                        <br>
-                                        <select class="form-select" name="id_empresa" id="id_empresa">
-                                            <option value="">--SELECCIONE--</option>
-                                            @foreach($empresas as $emp)
-                                                <option value ="{{$emp->id_empresa}}">{{$emp->nombre_empresa}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    
-                                    <br>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">CANCELAR</button>
-                                    <button type="submit" class="btn colorQA"  data-bs-dismiss="modal" >GUARDAR</button>
-                                </div>
-                            </form>
+                            @livewire('form-crear-empresa-dosimetria', ['empresas' => $empresas])
                         </div>
-                       {{--  @livewire('form-crear-empresa-dosimetria', ['empresas' => $empresas]) --}}
                     </div> 
                 </div>
             </div>
@@ -189,8 +170,6 @@
                                 <div class="col"></div>
                             </div>
                         </div>
-
-                        {{-- @livewire('form-crear-empresa-dosimetria', ['empresas' => $empresas]) --}}
 
                     </div> 
                 </div>
@@ -387,8 +366,6 @@
                 $('.ir-arriba').slideUp(300);
             }
         });
-
-        $('#id_empresa').select2({width: "80%", theme: "classic", dropdownParent: $("#nueva_empresaModal")});
     })
 </script>
 

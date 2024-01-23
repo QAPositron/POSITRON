@@ -176,7 +176,7 @@ class DosimetriaController extends Controller
         $empresaDosi->numtotal_dosi_control_cristalino = 0;
         $empresaDosi->numtotal_dosi_control_dedo       = 0;
         $empresaDosi->numtotal_dosi_ambiental          = 0;
-        $empresaDosi->numtotal_dosi_caso               = 0;
+        $empresaDosi->numtotal_dosi_caso               = 0; 
         
         $empresaDosi->save();
         return redirect()->route('empresasdosi.create')->with('crear', 'ok'); 
@@ -3038,9 +3038,9 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($trabajdosiasig); $i++){
     
                 $SumatoriaDocemesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
-                ->where('contdosisededepto_id', '=', $id)
+                /*->where('contdosisededepto_id', '=', $id)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('mes_asignacion', '<=', $mesnumber)*/
                 ->latest()
                 ->take(12)
                 ->get();
@@ -3049,8 +3049,8 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($dosiareasig); $i++){
     
                 $SumatoriaDocemesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
-                ->where('contdosisededepto_id', '=', $id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                /* ->where('contdosisededepto_id', '=', $id)
+                ->where('mes_asignacion', '<=', $mesnumber)*/
                 ->latest()
                 ->take(12)
                 ->get();
@@ -3060,17 +3060,17 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($trabajdosiasig); $i++){
     
                 $SumatoriaFechaIngresomesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
-                ->where('contdosisededepto_id', '=', $id)
+                /* ->where('contdosisededepto_id', '=', $id)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('mes_asignacion', '<=', $mesnumber) */
                 ->get();
             }
             $SumatoriaFechaIngresomesesAreasasig = array();
             for($i=0; $i<count($dosiareasig); $i++){
     
                 $SumatoriaFechaIngresomesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
-                ->where('contdosisededepto_id', '=', $id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                /* ->where('contdosisededepto_id', '=', $id)
+                ->where('mes_asignacion', '<=', $mesnumber) */
                 ->get();
             }
 
@@ -3133,9 +3133,9 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($trabajdosiasig); $i++){
     
                 $SumatoriaDocemesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
-                ->where('novcontdosisededepto_id', '=', $id)
+                /* ->where('novcontdosisededepto_id', '=', $id)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('mes_asignacion', '<=', $mesnumber) */
                 ->latest()
                 ->take(12)
                 ->get();
@@ -3144,28 +3144,28 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($dosiareasig); $i++){
     
                 $SumatoriaDocemesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
-                ->where('novcontdosisededepto_id', '=', $id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                /* ->where('novcontdosisededepto_id', '=', $id)
+                ->where('mes_asignacion', '<=', $mesnumber) */
                 ->latest()
                 ->take(12)
                 ->get();
             }
-       
+            
             $SumatoriaFechaIngresomesestrabajadoresaisg = array();
             for($i=0; $i<count($trabajdosiasig); $i++){
     
                 $SumatoriaFechaIngresomesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
-                ->where('novcontdosisededepto_id', '=', $id)
+                /* ->where('novcontdosisededepto_id', '=', $id)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('mes_asignacion', '<=', $mesnumber) */
                 ->get();
             }
             $SumatoriaFechaIngresomesesAreasasig = array();
             for($i=0; $i<count($dosiareasig); $i++){
     
                 $SumatoriaFechaIngresomesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
-                ->where('novcontdosisededepto_id', '=', $id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                /* ->where('novcontdosisededepto_id', '=', $id)
+                ->where('mes_asignacion', '<=', $mesnumber) */
                 ->get();
             }
             //////CAMBIO DE ESTADO EN LA SUBESPECIALIDAD POR NOVEDAD//////

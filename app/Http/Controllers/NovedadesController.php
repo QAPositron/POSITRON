@@ -240,7 +240,7 @@ class NovedadesController extends Controller
         ->get();
         return response()->json($areasEspecialidades);
     }
-   
+
     public function savecambiocantdosim(Request $request){
 
         /* return $request; */

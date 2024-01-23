@@ -148,9 +148,12 @@
             });
         </script>
         <script type="text/javascript">
+            $(document).on('select2:open', () => {
+                document.querySelector('.select2-container--open .select2-search__field').focus();
+            });
             $(document).ready(function() {
-                $('#departamento_sede').select2();
-                $('#municipio_sede').select2();
+                $('#departamento_sede').select2({width: "100%", theme: "classic"});
+                $('#municipio_sede').select2({width: "100%", theme: "classic"});
             });
         </script>
         <script type="text/javascript">
