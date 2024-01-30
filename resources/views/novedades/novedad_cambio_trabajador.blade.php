@@ -350,7 +350,7 @@
                     console.log("ESTOS SON LOS CONTRATOS");
                     console.log(contratos);
                     $('#contratos_empresadosi').empty();
-                    $('#contratos_empresadosi').append("<option value=''>--SELECCIONE UN CONTRATO--</option>");
+                    $('#contratos_empresadosi').append("<option value=''>--SELECCIONE--</option>");
                     $.each(contratos, function(index, value){
                         console.log("id_contratodosimetria" +value.id_contratodosimetria);
                         var num = parseInt(value.codigo_contrato);
@@ -379,7 +379,7 @@
                     console.log(sedes);
                     $('#sedes_empresadosi').empty();
                     $('#especialidades_empresadosi').empty();
-                    $('#sedes_empresadosi').append("<option value=''>--SELECCIONE UNA SEDE DEL CONTRATO--</option>");
+                    $('#sedes_empresadosi').append("<option value=''>--SELECCIONE--</option>");
                     for(var i = 0; i < sedes.length; i++){
                         $('#sedes_empresadosi').append("<option value='"+ sedes[i].id_sede + "'>" + sedes[i].nombre_sede + "</option>");
                         Arraysedes[i] = sedes[i];
@@ -413,7 +413,7 @@
                             console.log("ESTAS SON LAS ESPECIALIDADES");
                             console.log(especialidades);
                             $('#especialidades_empresadosi').empty();
-                            $('#especialidades_empresadosi').append("<option value=''>--SELECCIONE UNA ESPECIALIDAD DEL CONTRATO--</option>");
+                            $('#especialidades_empresadosi').append("<option value=''>--SELECCIONE--</option>");
                             $.each(especialidades, function(index, value){
                                 $('#especialidades_empresadosi').append("<option value='"+ index + "'>" + value + "</option>");
                             })
@@ -905,6 +905,8 @@
                                         </td>
                                     </tr>`;
                                 $("#body_asignaciones2").append(tr);
+                                $('#id_dosimetro_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
+                                $('#id_holder_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
                             } 
                         }else{
                             //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
@@ -1026,7 +1028,8 @@
                                         </td>
                                     </tr>`;
                                     $("#body_asignaciones2").append(tr);
-                                    
+                                    $('#id_dosimetro_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
+                                    $('#id_holder_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
                                 }
 
                             }else{
@@ -1146,6 +1149,7 @@
                                         </td>
                                     </tr>`;
                                     $("#body_asignaciones2").append(tr);
+                                    $('#id_dosimetro_area_asigdosim'+asignacionesareamesactual[i].id_dosiareacontdosisedes).select2({width: "100%", theme: "classic"});
                                     /* for(var x=0; x<asignacionesareamesactual.length; x++){
                                         console.log("REPETIDOS");
                                         console.log($("#id_area_asigdosim"+asignacionesareamesactual[i].id_dosiareacontdosisedes+" option[value="+asignacionesareamesactual[x].id_areadepartamentosede+"]"));
@@ -1290,6 +1294,8 @@
                 var input = `<input type="text" name="id_trabj_asigdosim_act[]" id="id_trabj_asigdosim_act" class="form-control" value="`+idAsig+`" hidden>`;
                 $("#tdchange").append(input);
             }
+
+            $('#id_trabj_asigdosim'+idAsig).select2({width: "100%", theme: "classic"});
         })
         
     }

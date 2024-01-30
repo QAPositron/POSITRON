@@ -159,17 +159,68 @@
                 </td>
                 <td style="border:0.1px solid black; text-align: right;">Fecha del reporte</td>
                 <td style="width: 94px; border:0.1px solid black; color:#2646FA;" align="center">
+                    @php
+                        $fechaReporte = 0;
+                        $fechas = array();
+                    @endphp
                     @if($trabajdosiasig->isEmpty())
+                        @foreach($dosiareasig as $dosiarea)
+                            @if($dosiarea->measurement_date != NULL)
+                                @php
+                                    array_push($fechas, $dosiarea->measurement_date);
+                                @endphp
+                            @endif
+                        @endforeach
                         @php
-                            $datefix = date('d-m-Y',strtotime($dosiareasig[0]->measurement_date));
+                            function fechaMasRepetida($arrayFechas) {
+                                // Convertir las fechas a formato Y-m-d para asegurar la consistencia
+                                $arrayFechas = array_map(function($fecha) {
+                                    return date('Y-m-d', strtotime($fecha));
+                                }, $arrayFechas);
+
+                                // Contar la frecuencia de cada fecha en el array
+                                $frecuencias = array_count_values($arrayFechas);
+
+                                // Encontrar la fecha con la frecuencia máxima
+                                $fechaMasRepetida = array_search(max($frecuencias), $frecuencias);
+
+                                return $fechaMasRepetida;
+                            }
+                            if(count($fechas) != 0){
+                                $resultado = fechaMasRepetida($fechas);
+                                $fechaReporte = $resultado;
+                            }
                         @endphp
-                        {{$datefix}}
-                    @elseif($dosiareasig->isEmpty())
+                    @else
+                        @foreach($trabajdosiasig as $dositrabj)
+                            @if($dositrabj->measurement_date != NULL)
+                                @php
+                                    array_push($fechas, $dositrabj->measurement_date);
+                                @endphp
+                            @endif
+                        @endforeach
                         @php
-                            $datefix = date('d-m-Y',strtotime($trabajdosiasig[0]->measurement_date));
+                            function fechaMasRepetida($arrayFechas) {
+                                // Convertir las fechas a formato Y-m-d para asegurar la consistencia
+                                $arrayFechas = array_map(function($fecha) {
+                                    return date('Y-m-d', strtotime($fecha));
+                                }, $arrayFechas);
+
+                                // Contar la frecuencia de cada fecha en el array
+                                $frecuencias = array_count_values($arrayFechas);
+
+                                // Encontrar la fecha con la frecuencia máxima
+                                $fechaMasRepetida = array_search(max($frecuencias), $frecuencias);
+
+                                return $fechaMasRepetida;
+                            }
+                            if(count($fechas) != 0){
+                                $resultado = fechaMasRepetida($fechas);
+                                $fechaReporte = $resultado;
+                            }
                         @endphp
-                        {{$datefix}}
                     @endif
+                    {{date('d-m-Y',strtotime($fechaReporte))}}
                 </td>
             </tr>
             <tr>
@@ -362,7 +413,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_calc_dose > 0  && $sumadocemeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_calc_dose >= 0  && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_calc_dose;
                                             @endphp
@@ -377,7 +428,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_calc_dose > 0 && $sumadocemeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_calc_dose >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_calc_dose;
                                             @endphp
@@ -393,7 +444,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_calc_dose > 0 && $sumadocemeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_calc_dose >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_calc_dose;
                                             @endphp
@@ -410,7 +461,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_calc_dose > 0 && $sumaFImeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_calc_dose >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_calc_dose;
                                             @endphp
@@ -425,7 +476,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_calc_dose > 0 && $sumaFImeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_calc_dose >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_calc_dose;
                                             @endphp
@@ -440,7 +491,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_calc_dose > 0 && $sumaFImeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_calc_dose >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_calc_dose;
                                             @endphp
@@ -575,7 +626,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_calc_dose > 0 && $sumadocemeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion  && $sumadocemeses[$i]->Hp10_calc_dose >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte )
                                             @php
                                                 $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_calc_dose;
                                             @endphp
@@ -594,7 +645,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_calc_dose > 0 && $sumadocemeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_calc_dose >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_calc_dose;
                                             @endphp
@@ -613,7 +664,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_calc_dose > 0 && $sumadocemeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_calc_dose >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp3calcdose += $sumadocemeses[$i]->Hp3_calc_dose;
                                             @endphp
@@ -621,11 +672,7 @@
                                     @endfor
                                 @endforeach
                                 {{$sumaHp3calcdose}}
-                                {{-- @if($dositrabj->ubicacion == 'TORAX' || $dositrabj->ubicacion == 'CASO' || $dositrabj->ubicacion == 'ANILLO')
-                                    {{'NA'}}
-                                @else
-                                    {{$sumaHp3calcdose}}
-                                @endif --}}
+                            
                             </td>
         
                             <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
@@ -635,8 +682,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_calc_dose > 0 && $sumaFImeses[$i]->measurement_date <= $dositrabj->measurement_date)
-                                            
+                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_calc_dose >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_calc_dose;
                                             @endphp
@@ -655,7 +701,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_calc_dose > 0 && $sumaFImeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_calc_dose >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_calc_dose;
                                             @endphp
@@ -674,7 +720,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_calc_dose > 0 && $sumaFImeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_calc_dose >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp3calcdose += $sumaFImeses[$i]->Hp3_calc_dose;
                                             @endphp
@@ -905,14 +951,13 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
                                             @endphp
                                         @endif
                                     @endfor
                                 @endforeach
-                                
                                 {{$sumaHp10calcdose}}
                             </td>
                             <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
@@ -921,7 +966,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_dif_dosicont;
                                             @endphp
@@ -936,14 +981,13 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
                                             @endphp
                                         @endif
                                     @endfor
                                 @endforeach
-                                
                                 {{$sumaHp10calcdose}}
                             </td>
         
@@ -954,8 +998,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dosiarea->measurement_date)
-                                            
+                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
                                             @endphp
@@ -970,7 +1013,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_dif_dosicont;
                                             @endphp
@@ -985,8 +1028,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dosiarea->measurement_date)
-                                            
+                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
                                             @endphp
@@ -1122,8 +1164,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dositrabj->measurement_date)
-                                            
+                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
                                             @endphp
@@ -1142,7 +1183,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_dif_dosicont;
                                             @endphp
@@ -1161,7 +1202,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp3calcdose += $sumadocemeses[$i]->Hp3_dif_dosicont;
                                             @endphp
@@ -1182,8 +1223,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dositrabj->measurement_date)
-                                            
+                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte) 
                                             @php
                                                 $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
                                             @endphp
@@ -1202,7 +1242,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_dif_dosicont;
                                             @endphp
@@ -1221,7 +1261,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp3calcdose += $sumaFImeses[$i]->Hp3_dif_dosicont;
                                             @endphp
@@ -1454,14 +1494,13 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
                                             @endphp
                                         @endif
                                     @endfor
                                 @endforeach
-                                
                                 {{$sumaHp10calcdose}}
                             </td>
                             <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black;" align="center">
@@ -1470,7 +1509,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp007_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_dif_dosicont;
                                             @endphp
@@ -1485,7 +1524,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesesAreasasig as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumadocemeses[$i]->areadepartamentosede_id && $sumadocemeses[$i]->Hp10_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
                                             @endphp
@@ -1495,7 +1534,6 @@
                                 
                                 {{$sumaHp10calcdose}}
                             </td>
-        
                             <!-- //////////DOSIS ACUMULADA DESDE INGRESO AL SERVICIO//////// -->
                             <td style="padding-top:5px; padding-bottom:5px; border:0.1px solid black; border-left:1px solid black;" align="center">
                                 @php
@@ -1503,7 +1541,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
                                             @endphp
@@ -1518,7 +1556,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp007_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_dif_dosicont;
                                             @endphp
@@ -1533,7 +1571,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesesAreasasig as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dosiarea->measurement_date)
+                                        @if($dosiarea->areadepartamentosede_id == $sumaFImeses[$i]->areadepartamentosede_id && $sumaFImeses[$i]->Hp10_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
                                             @endphp
@@ -1669,8 +1707,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dositrabj->measurement_date)
-                                            
+                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp10_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp10calcdose += $sumadocemeses[$i]->Hp10_dif_dosicont;
                                             @endphp
@@ -1689,7 +1726,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp007_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp007calcdose += $sumadocemeses[$i]->Hp007_dif_dosicont;
                                             @endphp
@@ -1708,7 +1745,7 @@
                                 @endphp
                                 @foreach($SumatoriaDocemesestrabajadoresaisg as $sumadocemeses)
                                     @for($i=0; $i< count($sumadocemeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_dif_dosicont > 0 && $sumadocemeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumadocemeses[$i]->persona_id && $dositrabj->ubicacion == $sumadocemeses[$i]->ubicacion && $sumadocemeses[$i]->Hp3_dif_dosicont >= 0 && $sumadocemeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaHp3calcdose += $sumadocemeses[$i]->Hp3_dif_dosicont;
                                             @endphp
@@ -1729,8 +1766,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dositrabj->measurement_date)
-                                            
+                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp10_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp10calcdose += $sumaFImeses[$i]->Hp10_dif_dosicont;
                                             @endphp
@@ -1749,13 +1785,13 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp007_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp007calcdose += $sumaFImeses[$i]->Hp007_dif_dosicont;
                                             @endphp
                                         @endif
                                     @endfor
-                                @endforeach
+                                @endforeach 
                                 @if($dositrabj->ubicacion == 'CRISTALINO') 
                                     {{'NA'}} 
                                 @else
@@ -1768,7 +1804,7 @@
                                 @endphp
                                 @foreach($SumatoriaFechaIngresomesestrabajadoresaisg as $sumaFImeses)
                                     @for($i=0; $i< count($sumaFImeses); $i++)
-                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_dif_dosicont > 0 && $sumaFImeses[$i]->measurement_date <= $dositrabj->measurement_date)
+                                        @if($dositrabj->persona->id_persona == $sumaFImeses[$i]->persona_id && $dositrabj->ubicacion == $sumaFImeses[$i]->ubicacion && $sumaFImeses[$i]->Hp3_dif_dosicont >= 0 && $sumaFImeses[$i]->measurement_date <= $fechaReporte)
                                             @php
                                                 $sumaFIHp3calcdose += $sumaFImeses[$i]->Hp3_dif_dosicont;
                                             @endphp

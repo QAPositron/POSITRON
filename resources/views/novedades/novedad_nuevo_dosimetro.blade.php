@@ -413,7 +413,7 @@
                     console.log("ESTOS SON LOS CONTRATOS");
                     console.log(contratos);
                     $('#contratos_empresadosi').empty();
-                    $('#contratos_empresadosi').append("<option value=''>--SELECCIONE UN CONTRATO--</option>");
+                    $('#contratos_empresadosi').append("<option value=''>--SELECCIONE--</option>");
                     $.each(contratos, function(index, value){
                         console.log("id_contratodosimetria" +value.id_contratodosimetria);
                         var num = parseInt(value.codigo_contrato);
@@ -443,7 +443,7 @@
                     console.log(sedes);
                     $('#sedes_empresadosi').empty();
                     $('#especialidades_empresadosi').empty();
-                    $('#sedes_empresadosi').append("<option value=''>--SELECCIONE UNA SEDE DEL CONTRATO--</option>");
+                    $('#sedes_empresadosi').append("<option value=''>--SELECCIONE--</option>");
                     for(var i = 0; i < sedes.length; i++){
                         $('#sedes_empresadosi').append("<option value='"+ sedes[i].id_sede + "'>" + sedes[i].nombre_sede + "</option>");
                         Arraysedes[i] = sedes[i];
@@ -476,7 +476,7 @@
                             console.log("ESTAS SON LAS ESPECIALIDADES");
                             console.log(especialidades);
                             $('#especialidades_empresadosi').empty();
-                            $('#especialidades_empresadosi').append("<option value=''>--SELECCIONE UNA ESPECIALIDAD DEL CONTRATO--</option>");
+                            $('#especialidades_empresadosi').append("<option value=''>--SELECCIONE--</option>");
                             $.each(especialidades, function(index, value){
                                 $('#especialidades_empresadosi').append("<option value='"+ index + "'>" + value + "</option>");
                             }) 

@@ -142,7 +142,7 @@
             <br>
             <p style="position:relative; text-align:justify;">La empresa cuenta con un programa de aseguramiento de la calidad del laboratorio de dosimetría personal (LDP). Por lo tanto, deseamos informarles que hemos llevado a cabo la revisión de los dosímetros enviados por ustedes a nuestro laboratorio. En este proceso, se garantiza que se cumplirán los siguientes criterios: <b>i)</b> la cantidad de dosímetros es la correcta; <b>ii)</b> la integridad de los holders y dosímetros está asegurada; <b>iii)</b> no haya contaminación de materiales radiactivos; <b>iv)</b> se ha verificado que el código del dosímetro y la información de la etiqueta están asociados para el período asignado.</p>
             <br>
-            <p style="position:relative; text-align:justify;">A continuación se listan los dosímetros revisados y sus observaciones:</p>
+            <p style="position:relative; text-align:justify;">A continuación se listan los dosímetros asignados y sus observaciones:</p>
             <br>        
             <table style="position:relative; margin: 0 auto; border-collapse:collapse; font-size:9px; width: 100%" cellpadding="4">
                 <thead>
@@ -300,15 +300,13 @@
                             @else
                                 @foreach($dosicontrolUnicoasig as $dosicontUniasig)
                                 
-                                    <tr @foreach($observacionesAsig as $obs)
-                                        @if($dosicontUniasig->id_dosicontrolcontdosisedes == $obs->dosicontrol_id)
-                                            @if($obs->observacion_id == 2 || $obs->observacion_id == 3 || $obs->observacion_id == 4 || $obs->observacion_id == 5 || $obs->observacion_id == 6 || $obs->observacion_id == 7 || $obs->observacion_id == 8 || $obs->observacion_id == 9)
+                                    <tr @foreach($observacionesAsigContUni as $obsAsigContUni)
+                                        @if($dosicontUniasig->id_dosicontrolcontdosisedes == $obsAsigContUni->dosicontrol_id)
+                                            @if($obsAsigContUni->observacion_id == 2 || $obsAsigContUni->observacion_id == 3 || $obsAsigContUni->observacion_id == 4 || $obsAsigContUni->observacion_id == 5 || $obsAsigContUni->observacion_id == 6 || $obsAsigContUni->observacion_id == 7 || $obsAsigContUni->observacion_id == 8 || $obsAsigContUni->observacion_id == 9)
                                                 style="color:red; background-color: #EEEDEC;"
                                             @else
                                                 style="background-color: #EEEDEC;"
                                             @endif
-                                        @else
-                                            style="background-color: #EEEDEC;"
                                         @endif
                                     @endforeach>
                                         <td>Control @if($dosicontUniasig->ubicacion == 'TORAX') Tórax @else {{ucwords(strtolower($dosicontUniasig->ubicacion))}} @endif</td>
@@ -398,7 +396,7 @@
                 </tbody>
             </table>
             <br>
-            <p style="position:relative; text-align:justify;"><b>Convenciones de las observaciones: </b>1) Buen Estado Físico, 2) Dosímetro contaminado<sup>2</sup>, 3) Dosímetro faltante, 4) Dosímetro dañado, 5) Dosímetro húmedo, 6) Dosímetro entregado en otro periodo, 7) Dosímetro de otra sede, 8) Holder dañado, 9) Otra adicional, 10) Holder sucio.</p>
+            <p style="position:relative; text-align:justify;"><b>Convenciones de las observaciones: </b>1) Buen Estado Físico, 2) Dosímetro contaminado<sup>2</sup>, 3) Dosímetro extraviado, 4) Dosímetro dañado, 5) Dosímetro húmedo, 6) Dosímetro entregado en otro periodo, 7) Dosímetro de otra sede, 8) Holder dañado, 9) Otra adicional, 10) Holder sucio.</p>
             <br>
             <p style="position:relative; text-align:justify;"><b>Observaciones Adicionales:</b></p>
             @foreach($observacionesAsig as $obsAsig)

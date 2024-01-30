@@ -24,7 +24,8 @@ class ObservacionesSeeder extends Seeder
             ['obs' => 'DOSÍMETRO DE OTRO PERIODO'],
             ['obs' => 'DOSÍMETRO DE OTRA SEDE'],
             ['obs' => 'HOLDER DAÑADO'],
-            ['obs' => 'OTRA ADICIONAL']
+            ['obs' => 'OTRA ADICIONAL'],
+            ['obs' => 'HOLDER SUCIO']
         ];
         Observacion::insert($obs);
     }
