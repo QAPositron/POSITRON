@@ -1500,7 +1500,6 @@ class DosimetriaController extends Controller
         ->where('controlTransA_unicoCont', NULL)
         ->where('ubicacion', 'ANILLO')
         ->get();
-
         /////DOSIMETROS DE CONTROL TRANSPORTE UNICO POR CONTRATO/////
         $dosicontrolToraxUnicomesact =  Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
         ->where('mes_asignacion', $mesnumber)

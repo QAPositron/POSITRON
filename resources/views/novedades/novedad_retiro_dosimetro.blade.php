@@ -228,9 +228,6 @@
                     <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
                     <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
                     <input type="number" hidden name="id_contdosisede" id="id_contdosisede" value="">
-                    {{-- <input type="number" hidden name="dosimRetiradosControl[]" id="dosimRetiradosControl" value="">
-                    <input type="number" hidden name="dosimRetiradosArea[]" id="dosimRetiradosArea" value="">
-                    <input type="number" hidden name="dosimRetirados[]" id="dosimRetirados" value=""> --}}
                     <input type="number" hidden name="id_contratodosimetria2" id="id_contratodosimetria2" value="">
                     <input type="text" hidden name="controlTransT_unicoCont2" id="controlTransT_unicoCont2" value="">
                     <input type="text" hidden name="controlTransC_unicoCont2" id="controlTransC_unicoCont2" value="">
@@ -917,7 +914,7 @@
                                         <td style='width: 75px' class='align-middle'>
                                             <input type="text" name="ubicacion_asigdosimControl[]" id="ubicacion_asigdosimControl" class="form-control text-center" value="`+ubicacion+`" readonly>
                                         </td>
-                                        <td style='width: 190px' class='align-middle'>
+                                        <td style='width: 190px' class='align-middle text-center'>
                                             <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`" ${disacont} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
@@ -941,6 +938,10 @@
                                         </td>
                                     </tr>`;
                                 $("#body_asignaciones2").append(tr);
+                                if(typeof(disacont) == 'undefined'){
+                                    $('#id_dosimetro_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
+                                    $('#id_holder_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
+                                }
                             } 
                         }else{
                             //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
@@ -1093,8 +1094,11 @@
                                         </td>
                                     </tr>`;
                                     $("#body_asignaciones2").append(tr);
+                                    if(typeof(dis) == 'undefined'){
+                                        $('#id_dosimetro_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
+                                        $('#id_holder_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
+                                    }
                                 }
-
                             }else{
                                 //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
                                 /* $('#body_asignaciones2').html(""); */
@@ -1226,7 +1230,9 @@
                                 </tr>`;
 
                                 $("#body_asignaciones2").append(tr);
-
+                                if(typeof(dis) == 'undefined'){
+                                    $('#id_dosimetro_area_asigdosim'+asignacionesareamesactual[i].id_dosiareacontdosisedes).select2({width: "100%", theme: "classic"});
+                                }
                             }
                         }else{
                              /* alert("ASIGNACIONES PARA EL MES ACTUAL"); */
@@ -1288,33 +1294,58 @@
                         if(asignacioneslimpias[$i].control != '' ){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].control);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].control);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].controlAU != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlAU);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlAU);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].controlCU != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlCU);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlCU);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].controlTU != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlTU);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlTU);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].dosiareasig != ''){
                             var elementDosi = document.getElementById("id_dosimetro_area_asigdosim"+asignacioneslimpias[$i].dosiareasig);
-                            
+                            $('#id_dosimetro_area_asigdosim'+asignacioneslimpias[$i].dosiareasig).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].trabajadorasig != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosim"+asignacioneslimpias[$i].trabajadorasig);
                             var elementHol = document.getElementById("id_holder_asigdosim"+asignacioneslimpias[$i].trabajadorasig);
-                          
+                            $('#id_dosimetro_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
                         }
                         elementDosi.disabled = false;
                         elementDosi.options.item(0).text = "---";
                         elementDosi.options.item(0).value = '';
-                        elementHol.disabled = false;
-                        elementHol.options.item(0).text = "---";
-                        elementHol.options.item(0).value = '';
+                        if(elementHol != undefined){
+                            elementHol.disabled = false;
+                            elementHol.options.item(0).text = "---";
+                            elementHol.options.item(0).value = '';
+                        }
+                        if(asignacioneslimpias[$i].control != '' ){
+                           $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
+                           $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].controlAU != ''){
+                           $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
+                           $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].controlCU != ''){
+                           $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
+                           $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].controlTU != ''){
+                           $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
+                           $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].dosiareasig != ''){
+                           $('#id_dosimetro_area_asigdosim'+asignacioneslimpias[$i].dosiareasig).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].trabajadorasig != ''){
+                           $('#id_dosimetro_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
+                           $('#id_holder_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
+                        }
                     };
                     var cambiarBoton = document.querySelectorAll('.cambiarBoton');
                     console.log("botones ="+cambiarBoton);

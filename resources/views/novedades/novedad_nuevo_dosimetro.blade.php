@@ -913,7 +913,7 @@
                         $('#tr_control').html("");
                         if(mes > consultaMesactual){
                             //////////////// PARA CUANDO SELECCIONA EL MES SIGUIENTE AL ACTUAL DEL CONTRATO ///////////////////////
-                            alert("CNTROL PARA EL MES SIGUEINTE AL ACTUAL");
+                            /* alert("CNTROL PARA EL MES SIGUEINTE AL ACTUAL"); */
                             for(var i=0; i<asignacionescontrolmesactual.length; i++){
                                 if(asignacionescontrolmesactual[i].dosimetro_uso != 'FALSE'){
                                     var disacont = 'disabled';
@@ -970,10 +970,8 @@
                                         <td class="text-center align-middle" style='width: 190px'></td>
                                     </tr>`;
                                 $("#body_asignaciones2").append(tr);
-                                /* if($('#id_dosimetro_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).is(':disabled') != true){
+                                /* if(disacont !== undefined){
                                     $('#id_dosimetro_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
-                                }
-                                if($('#id_holder_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).is(':disabled') != true){
                                     $('#id_holder_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
                                 } */
                             } 
@@ -1145,13 +1143,11 @@
                                         <td></td>
                                     </tr>`;
                                     $("#body_asignaciones2").append(tr);
-
-                                    /* if($('#id_dosimetro_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).is(':disabled') != true){
+                                    /* if(dis != undefined){
                                         $('#id_dosimetro_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
-                                    }
-                                    if($('#id_holder_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).is(':disabled') != true){
-                                        $('#id_holder_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});    
+                                        $('#id_holder_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
                                     } */
+
                                 }
                             }else{
                                 $('#body_asignaciones2').html("");
@@ -1262,9 +1258,9 @@
                                     <td class='align-middle text-center'> N.A. </td>
                                     <td></td>
                                 </tr>`;
-
                                 $("#body_asignaciones2").append(tr);
-                                /* if($('#id_dosimetro_area_asigdosim'+asignacionesareamesactual[i].id_dosiareacontdosisedes).is(':disabled') != true){
+
+                                /* if(dis != undefined){
                                     $('#id_dosimetro_area_asigdosim'+asignacionesareamesactual[i].id_dosiareacontdosisedes).select2({width: "100%", theme: "classic"});
                                 } */
                             }
@@ -2068,11 +2064,8 @@
                             $('#id_holder_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
                         }
                     }
-                   
-                    
                     var boton = document.getElementById('agregar2');
                     boton.disabled = false;
-
                 })
                 
             }

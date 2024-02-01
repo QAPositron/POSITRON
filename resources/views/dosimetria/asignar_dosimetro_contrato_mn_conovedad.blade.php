@@ -417,7 +417,7 @@
                     <div class="col"></div>
                     <div class="col">
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <button id="assignBtn" class="btn colorQA"  type="submit" disabled>
+                            <button id="assignBtn" class="btn colorQA"  type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
                                     <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
                                 </svg> <br> GUARDAR ASIGNACIÓN
@@ -620,25 +620,45 @@ crossorigin="anonymous">
                 $('.ir-arriba').slideUp(300);
             }
         });
-
-        $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%", theme: "classic"});
-        $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%", theme: "classic"});
-        $('#id_holder_asigdosimControlCristalino').select2({width: "100%", theme: "classic"});
-        $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%", theme: "classic"});
-        $('#id_holder_asigdosimControlDedo').select2({width: "100%", theme: "classic"});
-
-        $('#id_dosimetro_ControlToraxUnico').select2({width: "100%", theme: "classic"});
-        $('#id_dosimetro_ControlCristalinoUnico').select2({width: "100%", theme: "classic"});
-        $('#id_holder_ControlCristalinoUnico').select2({width: "100%", theme: "classic"});
-        $('#id_dosimetro_ControlDedoUnico').select2({width: "100%", theme: "classic"});
-        $('#id_holder_ControlDedoUnico').select2({width: "100%", theme: "classic"});
+        if($('#id_dosimetro_asigdosimControlTorax').is(':disabled') != true){
+            $('#id_dosimetro_asigdosimControlTorax').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_asigdosimControlCristalino').is(':disabled') != true){
+            $('#id_dosimetro_asigdosimControlCristalino').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_holder_asigdosimControlCristalino').is(':disabled') != true){
+            $('#id_holder_asigdosimControlCristalino').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_asigdosimControlDedo').is(':disabled') != true){
+            $('#id_dosimetro_asigdosimControlDedo').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_holder_asigdosimControlDedo').is(':disabled') != true){
+            $('#id_holder_asigdosimControlDedo').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_ControlToraxUnico').is(':disabled') != true){
+            $('#id_dosimetro_ControlToraxUnico').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_ControlCristalinoUnico').is(':disabled') != true){
+            $('#id_dosimetro_ControlCristalinoUnico').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_holder_ControlCristalinoUnico').is(':disabled') != true){
+            $('#id_holder_ControlCristalinoUnico').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_dosimetro_ControlDedoUnico').is(':disabled') != true){
+            $('#id_dosimetro_ControlDedoUnico').select2({width: "100%", theme: "classic"});
+        }
+        if($('#id_holder_ControlDedoUnico').is(':disabled') != true){
+            $('#id_holder_ControlDedoUnico').select2({width: "100%", theme: "classic"});
+        }
 
         ///////SELECT2 PARA LOS SELECTS DE DOSIMETROS //////
         
         var dosim_area = document.querySelectorAll('select[name="id_dosimetro_asigdosimArea[]"]');
         for(var i = 0; i < dosim_area.length; i++){
             dosim_area[i].setAttribute("id", "id_dosimetro_asigdosimArea"+[i]);
-            $('#id_dosimetro_asigdosimArea'+[i]).select2({width: "100%", theme: "classic"});
+            if($('#id_dosimetro_asigdosimArea'+[i]).is(':disabled') != true){
+                $('#id_dosimetro_asigdosimArea'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
         var dosim_caso = document.querySelectorAll('select[name="id_dosimetro_asigdosimCaso[]"]');
         for(var i = 0; i < dosim_caso.length; i++){
@@ -648,24 +668,32 @@ crossorigin="anonymous">
         var dosim_torax = document.querySelectorAll('select[name="id_dosimetro_asigdosimTorax[]"]');
         for(var i = 0; i < dosim_torax.length; i++){
             dosim_torax[i].setAttribute("id", "id_dosimetro_asigdosimTorax"+[i]);
-            $('#id_dosimetro_asigdosimTorax'+[i]).select2({width: "100%", theme: "classic"});
+            if($('#id_dosimetro_asigdosimTorax'+[i]).is(':disabled') != true){
+                $('#id_dosimetro_asigdosimTorax'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
         var dosim_cristalino = document.querySelectorAll('select[name="id_dosimetro_asigdosimCristalino[]"]');
         for(var i = 0; i < dosim_cristalino.length; i++){
             dosim_cristalino[i].setAttribute("id", "id_dosimetro_asigdosimCristalino"+[i]);
-            $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
+            if($('#id_dosimetro_asigdosimCristalino'+[i]).is(':disabled') != true){
+                $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
         var dosim_dedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"');
         for(var i = 0; i < dosim_dedo.length; i++){
             dosim_dedo[i].setAttribute("id", "id_dosimetro_asigdosimDedo"+[i]);
-            $('#id_dosimetro_asigdosimDedo'+[i]).select2({width: "100%", theme: "classic"});
+            if($('#id_dosimetro_asigdosimDedo'+[i]).is(':disabled') != true){
+                $('#id_dosimetro_asigdosimDedo'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
 
         //////SELECT2 PARA LOS SELECTS DE LOS HOLDERS /////
         var holder_cristalino = document.querySelectorAll('select[name="id_holder_asigdosimCristalino[]"');
         for(var i = 0; i < holder_cristalino.length; i++){
             holder_cristalino[i].setAttribute("id", "id_holder_asigdosimCristalino"+[i]);
-            $('#id_holder_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
+            if($('#id_holder_asigdosimCristalino'+[i]).is(':disabled') != true){
+                $('#id_holder_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }
         /* var holder_muñeca = document.querySelectorAll('select[name="id_holder_asigdosimMuneca[]"');
         for(var i = 0; i < holder_muñeca.length; i++){
@@ -675,7 +703,9 @@ crossorigin="anonymous">
         var holder_dedo = document.querySelectorAll('select[name="id_holder_asigdosimDedo[]"');
         for(var i = 0; i < holder_dedo.length; i++){
             holder_dedo[i].setAttribute("id", "id_holder_asigdosimDedo"+[i]);
-            $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%", theme: "classic"});
+            if($('#id_holder_asigdosimDedo'+[i]).is(':disabled') != true){
+                $('#id_holder_asigdosimDedo'+[i]).select2({width: "100%", theme: "classic"});
+            }
         }   
     });
 

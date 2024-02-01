@@ -824,7 +824,7 @@ class NovedadesController extends Controller
         }
         
         ////GUARDAR SI HAY UN CONTROL EN UNA ASIGNACION ANTIGUA///////
-        if(!empty($request->ubicacion_asigdosimControl) && empty($request->checkDelete)){
+        if(!empty($request->id_dosimetro_asigdosimControl) && empty($request->checkDelete)){
             
             for($i=0; $i<count($request->id_dosimetro_asigdosimControl); $i++){
                 $newasignacionAntiguaControl = new Dosicontrolcontdosisede();
@@ -836,7 +836,7 @@ class NovedadesController extends Controller
                     $newasignacionAntiguaControl->holder_id                 = $request->id_holder_asigdosimControl[$i];
                 }
                 if($request->controlTransT_unicoCont2 == 'TRUE' || $request->controlTransC_unicoCont2 == 'TRUE' || $request->controlTransA_unicoCont2 == 'TRUE'){
-                    $newasignacionAntiguaControl->contratodosimetria_id     = $request->id_contratodosimetria2;
+                    $newasignacionAntiguaControl->contratodosimetria_id     = $request->id_contratodosimetria;
                     $newasignacionAntiguaControl->controlTransT_unicoCont   = $request->controlTransT_unicoCont2;
                     $newasignacionAntiguaControl->controlTransC_unicoCont   = $request->controlTransC_unicoCont2;
                     $newasignacionAntiguaControl->controlTransA_unicoCont   = $request->controlTransA_unicoCont2;

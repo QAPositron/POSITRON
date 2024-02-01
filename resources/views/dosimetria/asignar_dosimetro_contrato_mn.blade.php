@@ -1044,11 +1044,6 @@ crossorigin="anonymous">
                 $('#id_dosimetro_asigdosimCristalino'+[i]).select2({width: "100%", theme: "classic"});
             }
         }
-        /* var dosim_muñeca = document.querySelectorAll('select[name="id_dosimetro_asigdosimMuneca[]"');
-        for(var i = 0; i < dosim_muñeca.length; i++){
-            dosim_muñeca[i].setAttribute("id", "id_dosimetro_asigdosimMuneca"+[i]);
-            $('#id_dosimetro_asigdosimMuneca'+[i]).select2({width: "100%",});
-        } */
         var dosim_dedo = document.querySelectorAll('select[name="id_dosimetro_asigdosimDedo[]"');
         for(var i = 0; i < dosim_dedo.length; i++){
             dosim_dedo[i].setAttribute("id", "id_dosimetro_asigdosimDedo"+[i]);
