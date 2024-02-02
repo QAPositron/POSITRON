@@ -20,6 +20,9 @@ class CreateNovedadmesescontdosisededeptosTable extends Migration
             $table-> unsignedBigInteger('mescontdosisededepto_id')->nullable();
             $table-> foreign('mescontdosisededepto_id')->references('id_mescontdosisededepto')->on('mesescontdosisedeptos')->onDelete('cascade')->onUpdate('cascade');
             
+            $table-> unsignedBigInteger('contratodosimetria_id');
+            $table-> foreign('contratodosimetria_id')->references('id_contratodosimetria')->on('dosimetriacontratos')->onDelete('cascade')->onUpdate('cascade');
+            
             $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
             $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
             

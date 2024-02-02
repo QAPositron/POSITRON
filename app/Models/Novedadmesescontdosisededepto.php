@@ -15,6 +15,11 @@ class Novedadmesescontdosisededepto extends Model
         /* return $this->belongsTo('App\Models\Empresa'); */
         return $this->belongsTo(Mesescontdosisedeptos::class, 'mescontdosisededepto_id', 'id_mescontdosisededepto');
     }
+    //Relacion uno a muchos (inversa) con dosimetria contrato
+    public function dosimetriacontrato(){
+        /* return $this->belongsTo('App\Models\Empresa'); */
+        return $this->belongsTo(Dosimetriacontrato::class, 'contratodosimetria_id', 'id_contratodosimetria');
+    }
      //Relacion uno a muchos (inversa) con contratodosimetriasededepto
     public function contratodosimetriasededepto(){
         return $this->belongsTo(Contratodosimetriasededepto::class, 'contdosisededepto_id', 'id_contdosisededepto');

@@ -1525,8 +1525,11 @@ class NovedadesController extends Controller
         return response()->json($sedesEspDosi);
     }
     public function novedadesContDosim(Request $request){
-        $novedadesCont = Novedadmesescontdosisededepto::where('contdosisededepto_id', '=', $request->contdosisededepto_id)
-        ->get();
+        $novedadesCont = Novedadmesescontdosisededepto::join('contratodosimetriasededeptos', 'novedadmesescontdosisededeptos.contdosisededepto_id', '=', 'contratodosimetriasededeptos.id_contdosisededepto')
+        ->join('contratodosimetriasedes', 'contratodosimetriasededeptos.contratodosimetriasede_id', '=', 'contratodosimetriasedes.id_contratodosimetriasede')
+        ->join('dosimetriacontratos', 'contratodosimetriasedes.contratodosimetria_id', '=', 'dosimetriacontratos.id_contratodosimetria')
+        ->where('contdosisededepto_id', '=', $request->contdosisededepto_id)
+        ->get(); 
         
         return response()->json($novedadesCont);
     }
