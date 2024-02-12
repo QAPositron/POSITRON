@@ -228,7 +228,7 @@
                     <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
                     <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
                     <input type="number" hidden name="id_contdosisede" id="id_contdosisede" value="">
-                    <input type="number" hidden name="id_contratodosimetria2" id="id_contratodosimetria2" value="">
+                    <input type="number" hidden name="contratodosimetria" id="contratodosimetria" value="">
                     <input type="text" hidden name="controlTransT_unicoCont2" id="controlTransT_unicoCont2" value="">
                     <input type="text" hidden name="controlTransC_unicoCont2" id="controlTransC_unicoCont2" value="">
                     <input type="text" hidden name="controlTransA_unicoCont2" id="controlTransA_unicoCont2" value="">
@@ -379,6 +379,7 @@
                     $('#contratos_empresadosi').append("<option value=''>--SELECCIONE--</option>");
                     $.each(contratos, function(index, value){
                         console.log("id_contratodosimetria" +value.id_contratodosimetria);
+                        document.getElementById('contratodosimetria').value = value.id_contratodosimetria;
                         var num = parseInt(value.codigo_contrato);
                         var n = num.toString().padStart(5,'0');
                         console.log("ESTE ES EL CODIGO" +n);
@@ -906,8 +907,8 @@
                                 if(asignacionescontrolmesactual[i].controlTransA_unicoCont == 'TRUE'){
                                     document.getElementById("controlTransA_unicoCont2").value = "TRUE";
                                 }
-                                var contratodosimetria = document.getElementById("contratos_empresadosi").value;
-                                document.getElementById("id_contratodosimetria2").value = contratodosimetria;
+                                /* var contratodosimetria = document.getElementById("contratos_empresadosi").value;
+                                document.getElementById("id_contratodosimetria").value = contratodosimetria; */
                                 console.log("//CODIGO DEL DOSIMETRO MES SIGUIENTE" +codigo_dosimeter);
                                 var tr = `<tr id="`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`control">
                                         <td style='width: 75px' class='align-middle '>CONTROL TRANS.</td>

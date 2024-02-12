@@ -106,6 +106,7 @@
                         <input type="number" hidden name="id_novedad" id="id_novedad" value="">
                         <input type="number" hidden name="id_contdosisededepto" id="id_contdosisededepto" value="">
                         <input type="number" hidden name="id_contdosimetriasede" id="id_contdosimetriasede" value="">
+                        <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
                         <input type="text" hidden name="controlTransT_unicoCont" id="controlTransT_unicoCont" value="">
                         <input type="text" hidden name="controlTransC_unicoCont" id="controlTransC_unicoCont" value="">
                         <input type="text" hidden name="controlTransA_unicoCont" id="controlTransA_unicoCont" value="">
@@ -215,7 +216,7 @@
                         <input type="number" hidden name="id_novedad_sig" id="id_novedad_sig" value="">
                         <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
                         <input type="number" hidden name="id_contdosisede" id="id_contdosisede" value="">
-                        <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
+                        <input type="number" hidden name="contratodosimetria" id="contratodosimetria" value="">
                         <input type="text" hidden name="controlTransT_unicoCont2" id="controlTransT_unicoCont2" value="">
                         <input type="text" hidden name="controlTransC_unicoCont2" id="controlTransC_unicoCont2" value="">
                         <input type="text" hidden name="controlTransA_unicoCont2" id="controlTransA_unicoCont2" value="">
@@ -353,6 +354,8 @@
                     $('#contratos_empresadosi').append("<option value=''>--SELECCIONE--</option>");
                     $.each(contratos, function(index, value){
                         console.log("id_contratodosimetria" +value.id_contratodosimetria);
+                        document.getElementById('id_contratodosimetria').value = value.id_contratodosimetria;
+                        document.getElementById('contratodosimetria').value = value.id_contratodosimetria;
                         var num = parseInt(value.codigo_contrato);
                         var n = num.toString().padStart(5,'0');
                         console.log("ESTE ES EL CODIGO" +n);
@@ -886,7 +889,7 @@
                                         <td style='width: 75px' class='align-middle'>
                                             <input type="text" name="ubicacion_asigdosimControl[]" id="ubicacion_asigdosimControl" class="form-control text-center" value="`+ubicacion+`" readonly>
                                         </td>
-                                        <td style='width: 190px' class='align-middle'>
+                                        <td style='width: 190px' class='align-middle text-center'>
                                             <select class="form-select cambiar"  name="id_dosimetro_asigdosimControl[]" id="id_dosimetro_asigdosimControl`+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes+`" ${disacont} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
@@ -905,8 +908,8 @@
                                         </td>
                                     </tr>`;
                                 $("#body_asignaciones2").append(tr);
-                                $('#id_dosimetro_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
-                                $('#id_holder_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
+                               /*  $('#id_dosimetro_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"});
+                                $('#id_holder_asigdosimControl'+asignacionescontrolmesactual[i].id_dosicontrolcontdosisedes).select2({width: "100%", theme: "classic"}); */
                             } 
                         }else{
                             //////////////// PARA CUANDO SELECCIONA EL MES ACTUAL DEL CONTRATO ///////////////////////
@@ -1005,14 +1008,14 @@
                                             </select>
                                         </td>
                                         <td class='align-middle text-center'><input type="text" name="ubicacion_asigdosim[]" id="ubicacion_asigdosim" class="form-control text-center" value="`+asignacionesmesactual[i].ubicacion+`" readonly></td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>
                                             <select class="form-select cambiar"  name="id_dosimetro_asigdosim[]" id="id_dosimetro_asigdosim`+asignacionesmesactual[i].id_trabajadordosimetro+`" ${dis} >
                                                 <option value="`+id_dosimetro+`">`+codigo_dosimeter+`</option>
                                                 ${selectDosimetros.innerHTML}
                                                 ${selectDosimetrosEzclip.innerHTML}
                                             </select>
                                         </td>
-                                        <td class='align-middle'>
+                                        <td class='align-middle text-center'>
                                             <select class="form-select cambiar"  name="id_holder_asigdosim[]" id="id_holder_asigdosim`+asignacionesmesactual[i].id_trabajadordosimetro+`" ${dis} >
                                                 <option value="`+id_holder+`">`+codigo_holder+`</option>
                                                 ${selectHolders.innerHTML}
@@ -1028,8 +1031,8 @@
                                         </td>
                                     </tr>`;
                                     $("#body_asignaciones2").append(tr);
-                                    $('#id_dosimetro_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
-                                    $('#id_holder_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
+                                    /* $('#id_dosimetro_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"});
+                                    $('#id_holder_asigdosim'+asignacionesmesactual[i].id_trabajadordosimetro).select2({width: "100%", theme: "classic"}); */
                                 }
 
                             }else{
@@ -1149,7 +1152,7 @@
                                         </td>
                                     </tr>`;
                                     $("#body_asignaciones2").append(tr);
-                                    $('#id_dosimetro_area_asigdosim'+asignacionesareamesactual[i].id_dosiareacontdosisedes).select2({width: "100%", theme: "classic"});
+                                    /* $('#id_dosimetro_area_asigdosim'+asignacionesareamesactual[i].id_dosiareacontdosisedes).select2({width: "100%", theme: "classic"}); */
                                     /* for(var x=0; x<asignacionesareamesactual.length; x++){
                                         console.log("REPETIDOS");
                                         console.log($("#id_area_asigdosim"+asignacionesareamesactual[i].id_dosiareacontdosisedes+" option[value="+asignacionesareamesactual[x].id_areadepartamentosede+"]"));
@@ -1221,26 +1224,31 @@
                         if(asignacioneslimpias[$i].control != '' ){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].control);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].control);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].controlAU != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlAU);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlAU);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].controlCU != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlCU);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlCU);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].controlTU != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosimControl"+asignacioneslimpias[$i].controlTU);
                             var elementHol = document.getElementById("id_holder_asigdosimControl"+asignacioneslimpias[$i].controlTU);
-                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].dosiareasig != ''){
                             var elementDosi = document.getElementById("id_dosimetro_area_asigdosim"+asignacioneslimpias[$i].dosiareasig);
-                            
+                            $('#id_dosimetro_area_asigdosim'+asignacioneslimpias[$i].dosiareasig).select2({width: "100%", theme: "classic"});
                         }else if(asignacioneslimpias[$i].trabajadorasig != ''){
                             var elementDosi = document.getElementById("id_dosimetro_asigdosim"+asignacioneslimpias[$i].trabajadorasig);
                             var elementHol = document.getElementById("id_holder_asigdosim"+asignacioneslimpias[$i].trabajadorasig);
-                          
+                            $('#id_dosimetro_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
                         }
                         elementDosi.disabled = false;
                         elementDosi.options.item(0).text = "---";
@@ -1248,6 +1256,31 @@
                         elementHol.disabled = false;
                         elementHol.options.item(0).text = "---";
                         elementHol.options.item(0).value = '';
+                        if(asignacioneslimpias[$i].control != '' ){
+                           
+                           $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
+                           $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].control).select2({width: "100%", theme: "classic"});
+                           
+                        }else if(asignacioneslimpias[$i].controlAU != ''){
+                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlAU).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].controlCU != ''){
+                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlCU).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].controlTU != ''){
+                            
+                            $('#id_dosimetro_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosimControl'+asignacioneslimpias[$i].controlTU).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].dosiareasig != ''){
+                            
+                            $('#id_dosimetro_area_asigdosim'+asignacioneslimpias[$i].dosiareasig).select2({width: "100%", theme: "classic"});
+                        }else if(asignacioneslimpias[$i].trabajadorasig != ''){
+                            
+                            $('#id_dosimetro_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
+                            $('#id_holder_asigdosim'+asignacioneslimpias[$i].trabajadorasig).select2({width: "100%", theme: "classic"});
+                        }
                     };
                     var cambiarBoton = document.querySelectorAll('.cambiarBoton');
                     console.log("botones ="+cambiarBoton);

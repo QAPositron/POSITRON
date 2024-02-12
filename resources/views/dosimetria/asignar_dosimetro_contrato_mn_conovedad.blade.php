@@ -217,7 +217,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    
+                                     
                                     @if(!empty($dosicontrolToraxUnicomesact[0]) && $contdosisededepto->controlTransT_unicoCont == 'TRUE')
                                         <tr>
                                             <input type="number" name="id_asigdosimControlUnicoT[]" id="id_asigdosimControlUnicoT" value="{{$dosicontrolToraxUnicomesact[0]->id_dosicontrolcontdosisedes}}" hidden >

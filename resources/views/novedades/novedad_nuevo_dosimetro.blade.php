@@ -144,9 +144,8 @@
                                     <input type="number" hidden name="mestrabj_asig" id="mestrabj_asig" value="">
                                     <input type="number" hidden name="id_contdosisededepto" id="id_contdosisededepto" value="">
                                     <input type="number" hidden name="id_contratodosimetriasede" id="id_contratodosimetriasede" value="">
+                                    <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
                                     <input type="number" hidden name="id_novedad" id="id_novedad" value="">
-                                    {{-- <input type="date" hidden name="primerDia_asigdosim" id="primerDia_asigdosim" value="">
-                                    <input type="date" hidden name="ultimoDia_asigdosim" id="ultimoDia_asigdosim" value=""> --}}
                                     <input type="date" hidden name="fecha_dosim_enviado" id="fecha_dosim_enviado" value="">
                                     <input type="number" hidden name="dosi_control_torax" id="dosi_control_torax" value="">
                                     <input type="number" hidden name="dosi_control_cristalino" id="dosi_control_cristalino" value="">
@@ -278,7 +277,7 @@
                         <input type="number" hidden name="mes_asig_siguiente" id="mes_asig_siguiente" value="">
                         <input type="number" hidden name="contdosisededepto" id="contdosisededepto" value="">
                         <input type="number" hidden name="id_contdosisede" id="id_contdosisede" value="">
-                        <input type="number" hidden name="id_contratodosimetria" id="id_contratodosimetria" value="">
+                        <input type="number" hidden name="contratodosimetria" id="contratodosimetria" value="">
                         <input type="text" hidden name="controlTransT_unicoCont2" id="controlTransT_unicoCont2" value="">
                         <input type="text" hidden name="controlTransC_unicoCont2" id="controlTransC_unicoCont2" value="">
                         <input type="text" hidden name="controlTransA_unicoCont2" id="controlTransA_unicoCont2" value="">
@@ -416,6 +415,8 @@
                     $('#contratos_empresadosi').append("<option value=''>--SELECCIONE--</option>");
                     $.each(contratos, function(index, value){
                         console.log("id_contratodosimetria" +value.id_contratodosimetria);
+                        document.getElementById('id_contratodosimetria').value = value.id_contratodosimetria;
+                        document.getElementById('contratodosimetria').value = value.id_contratodosimetria;
                         var num = parseInt(value.codigo_contrato);
                         var n = num.toString().padStart(5,'0');
                         console.log("ESTE ES EL CODIGO" +n);

@@ -86,7 +86,9 @@ class NovedadesController extends Controller
     public function detalleNovedad($id, $deptodosi){
         $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
         $novedad = Novedadmesescontdosisededepto::find($id); 
-        return view('novedades.detalle_novedad', compact('novedad', 'contdosisededepto'));
+        $cambiosNovedad =  Cambiosnovedadmeses::where('novedadmesescontdosidepto_id', '=', $id)
+        ->get();
+        return view('novedades.detalle_novedad', compact('novedad', 'contdosisededepto', 'cambiosNovedad'));
     }
     public function contratoDosimetria(Request $request){
         $contratosDosi = Dosimetriacontrato::where('empresa_id', '=', $request->empresa_id)->get();
@@ -262,6 +264,7 @@ class NovedadesController extends Controller
             if(empty($newNovedadmesescontdosisededepto)){
                 $newNovedad = new Novedadmesescontdosisededepto();
                 $newNovedad->codigo_novedad           = $request->id_novedad;
+                $newNovedad->contratodosimetria_id    = $request->id_contratodosimetria;
                 $newNovedad->contdosisededepto_id     = $request->id_contdosisededepto;
                 $newNovedad->mes_asignacion           = $request->mestrabj_asig;
                 $newNovedad->save();
@@ -818,6 +821,7 @@ class NovedadesController extends Controller
         if(empty($newNovedadmesescontdosisededepto)){
             $newNovedad = new Novedadmesescontdosisededepto();
             $newNovedad->codigo_novedad           = $request->id_novedad_sig;
+            $newNovedad->contratodosimetria_id    = $request->contratodosimetria;
             $newNovedad->contdosisededepto_id     = $request->contdosisededepto;
             $newNovedad->mes_asignacion           = $request->mes_asig_siguiente;
             $newNovedad->save();
@@ -836,7 +840,7 @@ class NovedadesController extends Controller
                     $newasignacionAntiguaControl->holder_id                 = $request->id_holder_asigdosimControl[$i];
                 }
                 if($request->controlTransT_unicoCont2 == 'TRUE' || $request->controlTransC_unicoCont2 == 'TRUE' || $request->controlTransA_unicoCont2 == 'TRUE'){
-                    $newasignacionAntiguaControl->contratodosimetria_id     = $request->id_contratodosimetria;
+                    $newasignacionAntiguaControl->contratodosimetria_id     = $request->contratodosimetria;
                     $newasignacionAntiguaControl->controlTransT_unicoCont   = $request->controlTransT_unicoCont2;
                     $newasignacionAntiguaControl->controlTransC_unicoCont   = $request->controlTransC_unicoCont2;
                     $newasignacionAntiguaControl->controlTransA_unicoCont   = $request->controlTransA_unicoCont2;
@@ -1257,26 +1261,26 @@ class NovedadesController extends Controller
 
         }
         $ControlesUnicoContrato = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasede_id', '=', 'id_contratodosimetriasede')
-        ->where('contratodosimetria_id', '=', $request->id_contratodosimetria2)
+        ->where('contratodosimetria_id', '=', $request->contratodosimetria)
         ->get();
         for($i= 0; $i<count($ControlesUnicoContrato); $i++){
             if($ControlesUnicoContrato[$i]->controlTransT_unicoCont != $request->controlTransT_unicoCont2){
                 $updateControlUnicoContrato = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasede_id', '=', 'id_contratodosimetriasede')
-                ->where('contratodosimetria_id', '=', $request->id_contratodosimetria2)
+                ->where('contratodosimetria_id', '=', $request->contratodosimetria)
                 ->update([
                     'contratodosimetriasededeptos.controlTransT_unicoCont'  => $request->controlTransT_unicoCont2,
                 ]);
             }
             if($ControlesUnicoContrato[$i]->controlTransC_unicoCont != $request->controlTransC_unicoCont2){
                 $updateControlUnicoContrato = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasede_id', '=', 'id_contratodosimetriasede')
-                ->where('contratodosimetria_id', '=', $request->id_contratodosimetria2)
+                ->where('contratodosimetria_id', '=', $request->contratodosimetria)
                 ->update([
                     'contratodosimetriasededeptos.controlTransC_unicoCont'  => $request->controlTransC_unicoCont2,
                 ]);
             }
             if($ControlesUnicoContrato[$i]->controlTransA_unicoCont != $request->controlTransA_unicoCont2){
                 $updateControlUnicoContrato = Contratodosimetriasededepto::join('contratodosimetriasedes', 'contratodosimetriasede_id', '=', 'id_contratodosimetriasede')
-                ->where('contratodosimetria_id', '=', $request->id_contratodosimetria2)
+                ->where('contratodosimetria_id', '=', $request->contratodosimetria)
                 ->update([
                     'contratodosimetriasededeptos.controlTransA_unicoCont'  => $request->controlTransA_unicoCont2,
                 ]);
@@ -1294,6 +1298,7 @@ class NovedadesController extends Controller
         if(empty($newNovedadmesescontdosisededepto)){
             $newNovedad = new Novedadmesescontdosisededepto();
             $newNovedad->codigo_novedad           = $request->id_novedad;
+            $newNovedad->contratodosimetria_id    = $request->id_contratodosimetria;
             $newNovedad->contdosisededepto_id     = $request->id_contdosisededepto;
             $newNovedad->mes_asignacion           = $request->mestrabj;
             $newNovedad->save();
