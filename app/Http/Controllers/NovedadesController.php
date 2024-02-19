@@ -1489,17 +1489,21 @@ class NovedadesController extends Controller
         return response()->json($dosiLimpios);
     }
 
-    public function reportePDFcambiodosim($deptodosi, $mesnumber){
+    public function reportePDFnovedad($novedades, $contrato){
+        $nov = explode(',', $novedades);
+        $novedadmeses = Novedadmesescontdosisededepto::whereIn('id_novedadmesescontdosi', $nov)->get();
+        $cambiosNovedad = array();
+        foreach($novedadmeses as $novedad){
+            $cambio = Cambiosnovedadmeses:: where('novedadmesescontdosidepto_id', $novedad->id_novedadmesescontdosi)->get();
+            array_push($cambiosNovedad, $cambio);
+        }
+        $contrato = Dosimetriacontrato::find($contrato);
+        /* $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
+            ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
+            ->where('personas.lider_dosimetria', '=', 'TRUE')
+            ->get(); */
         
-        $dosicontrolasig = Dosicontrolcontdosisede::where('contdosisededepto_id', '=', $deptodosi)
-        ->where('mes_asignacion', '=', $mesnumber)
-        ->get();
-        $trabjasignados = Trabajadordosimetro::where('contdosisededepto_id', '=', $deptodosi)
-        ->where('mes_asignacion', '=', $mesnumber)
-        ->get();
-        $contdosisededepto = Contratodosimetriasededepto::find($deptodosi);
-
-        $pdf =  PDF::loadView('novedades.reportePDF_novedad_cambiodosim', compact('deptodosi', 'mesnumber', 'dosicontrolasig', 'trabjasignados', 'contdosisededepto'));
+        $pdf =  PDF::loadView('novedades.reportePDF_novedad', compact('novedadmeses', 'cambiosNovedad', 'contrato'));
         $pdf->setPaper('A4', 'portrait');
         
         return $pdf->stream();

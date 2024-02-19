@@ -292,7 +292,7 @@ Route::get('/novedades/dosimetros/', [NovedadesController::class, 'dosimetrosdis
 Route::post('novedades/novedadesmesact', [NovedadesController::class, 'savecambiocantdosim'])->name('cambiocantdosim.save');
 Route::post('novedades/novedadesmesig', [NovedadesController::class, 'savemesiguientecambiocantdosim'])->name('cambiocantdosimesig.save');
 Route::post('novedades/novedadesmesactcambiotrab', [NovedadesController::class, 'savecambiotrabajadordosim'])->name('cambiotrabajadordosim.save');
-Route::get('novedades/{deptodosi}/{mesnumber}/reportePDFcambiodosim', [NovedadesController::class, 'reportePDFcambiodosim'])->name('reportePDFcambiodosim.pdf');
+/* Route::get('novedades/{deptodosi}/{mesnumber}/reportePDFcambiodosim', [NovedadesController::class, 'reportePDFcambiodosim'])->name('reportePDFcambiodosim.pdf'); */
 
 Route::get('novedades/limpiar/', [NovedadesController::class, 'clearAsignacionAnteriorMn']);
 
@@ -311,6 +311,7 @@ Route::get('novedades/nuevoDosimetro', [NovedadesController::class, 'nuevoDosime
 Route::get('novedades/retiroDosimetro', [NovedadesController::class,  'retiroDosimetro'])->name('novedadesdosimetria.retiroDosimetro');
 Route::get('novedades/cambioTrabajador', [NovedadesController::class,  'cambioTrabajador'])->name('novedadesdosimetria.cambioTrabajador');
 Route::get('novedades/{id}/{deptodosi}/detalleNovedad', [NovedadesController::class, 'detalleNovedad'])->name('novedadesdosimetria.detalleNovedad');
+Route::get('/reporteNov/{novedades}/{contrato}/pdf', [NovedadesController::class, 'reportePDFnovedad'])->name('reporteNovedad.pdf');
 
 ////////////RUTAS PARA LOS PRODUCTOS DE LAS COTIZACIONES //////////////
 Route::get('productos/search', [ProductoController::class, 'search'])->name('productos.search');

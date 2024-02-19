@@ -21,7 +21,8 @@ class Dosimetriacontrato extends Model
         return $this->hasMany(Novedadmesescontdosisededepto::class, 'id_novedadmesescontdosi');
     }
      //Relacion uno a muchos (inversa) con empresa
-    public function empresa(){
+     public function empresa(){
+        /* return $this->belongsTo('App\Models\Empresa'); */
         return $this->belongsTo(Empresa::class, 'empresa_id', 'id_empresa');
     }
     //relacion uno a muchos con contrato dosimetria sede

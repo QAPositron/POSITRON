@@ -29,21 +29,24 @@
     </div>
 </div>
 <br>
+@php
+    $ing = 0;
+    $ret = 0;
+    $cam = 0;
+@endphp
 @foreach($cambiosNovedad as $cambios)
-    @php
-        $ingreso = 0;
-        $retiro = 0;
-        $cambio = 0;
-        if($cambios->tipo_novedad == 1){
-            $ingreso ++;
-        }elseif($cambios->tipo_novedad == 2){
-            $retiro ++;
-        }elseif($cambios->tipo_novedad == 3){
-            $cambio ++;
-        }
-    @endphp
+    @if($cambios->tipo_novedad == 1)
+       @php $ing ++; @endphp
+    @endif
+    @if($cambios->tipo_novedad == 2)
+        @php $ret ++; @endphp
+    @endif
+    @if($cambios->tipo_novedad == 3)
+        @php $cam ++; @endphp
+    @endif
 @endforeach
-@if($ingreso != 0)
+
+@if($ing != 0) 
     <div class="row">
         <div class="col-md"></div>
         <div class="col-md-12">
@@ -51,13 +54,13 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr class="table-active text-center">
-                            <th class='align-middle'>FECHA REALIZADA</th>
-                            <th class='align-middle'>PERÍODO ASIGNACIÓN</th>
+                            <th class='align-middle'>FECHA</th>
+                            <th class='align-middle'>PERÍODO</th>
                             <th class='align-middle'>TRABAJADOR / ÁREA</th>
                             <th class='align-middle'>UBICACIÓN</th>
                             <th class='align-middle'>DOSÍMETRO</th>
                             <th class='align-middle'>HOLDER</th>
-                            <th class='align-middle' style='width: 15.90%'>OBSERVACIÓN</th>
+                            <th class='align-middle' style='width: 25.90%'>OBSERVACIÓN</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,15 +80,15 @@
                                         <td class='align-middle text-center'>{{$cambios->trabajadordosimetro->dosimetro->codigo_dosimeter}} </td>
                                         <td class='align-middle text-center'>{{$cambios->trabajadordosimetro->holder->codigo_holder}}</td>
                                     @elseif($cambios->dosiarea_id != null)
-                                        <td class='align-middle text-center'>{{$novedad->dosiareacontdosisedes->areadepartamentosede->nombre_area}}</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosiareacontdosisedes->ubicacion}}</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosiareacontdosisedes->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosiareacontdosisedes->areadepartamentosede->nombre_area}}</td>
+                                        <td class='align-middle text-center'>AMBIENTAL</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosiareacontdosisedes->dosimetro->codigo_dosimeter}}</td>
                                         <td class='align-middle text-center'>N.A.</td>
                                     @elseif($cambios->dosicontrol_id != null)
                                         <td class='align-middle text-center'>"CONTROL TRANSPORTE"</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosicontrolcontdosisedes->ubicacion}}</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosicontrolcontdosisedes->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosicontrolcontdosisedes->holder->codigo_holder}}</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosicontrolcontdosisedes->ubicacion}}</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosicontrolcontdosisedes->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosicontrolcontdosisedes->holder->codigo_holder}}</td>
                                     @endif
                                     <td class='align-middle text-center'>{{$cambios->nota_cambiodosim}}</td>
                                 </tr>
@@ -98,16 +101,17 @@
         <div class="col-md"></div>
     </div>
     <br>
-@elseif($retiro != 0)
+@endif
+@if($ret != 0)
     <div class="row">
         <div class="col-md"></div>
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="table table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr class="table-active text-center">
-                            <th class='align-middle'>FECHA REALIZADA</th>
-                            <th class='align-middle'>PERÍODO ASIGNACIÓN</th>
+                            <th class='align-middle' style='width: 9.50%'>FECHA</th>
+                            <th class='align-middle' style='width: 18.50%'>PERÍODO</th>
                             <th class='align-middle'>OBSERVACIÓN</th>
                         </tr>
                     </thead>
@@ -133,7 +137,8 @@
         <div class="col-md"></div>
     </div>
     <br>
-@elseif($cambio != 0)
+@endif
+@if($cam != 0)
     <div class="row">
         <div class="col-md"></div>
         <div class="col-md-12">
@@ -141,13 +146,13 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr class="table-active text-center">
-                            <th class='align-middle'>FECHA REALIZADA</th>
-                            <th class='align-middle'>PERÍODO ASIGNACIÓN</th>
+                            <th class='align-middle'>FECHA</th>
+                            <th class='align-middle'>PERÍODO</th>
                             <th class='align-middle'>TRABAJADOR / ÁREA</th>
                             <th class='align-middle'>UBICACIÓN</th>
                             <th class='align-middle'>DOSÍMETRO</th>
                             <th class='align-middle'>HOLDER</th>
-                            <th class='align-middle' style='width: 15.90%'>OBSERVACIÓN</th>
+                            <th class='align-middle' style='width: 25.90%'>OBSERVACIÓN</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,15 +172,15 @@
                                         <td class='align-middle text-center'>{{$cambios->trabajadordosimetro->dosimetro->codigo_dosimeter}} </td>
                                         <td class='align-middle text-center'>{{$cambios->trabajadordosimetro->holder->codigo_holder}}</td>
                                     @elseif($cambios->dosiarea_id != null)
-                                        <td class='align-middle text-center'>{{$novedad->dosiareacontdosisedes->areadepartamentosede->nombre_area}}</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosiareacontdosisedes->ubicacion}}</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosiareacontdosisedes->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosiareacontdosisedes->areadepartamentosede->nombre_area}}</td>
+                                        <td class='align-middle text-center'>AMBIENTAL</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosiareacontdosisedes->dosimetro->codigo_dosimeter}}</td>
                                         <td class='align-middle text-center'>N.A.</td>
                                     @elseif($cambios->dosicontrol_id != null)
                                         <td class='align-middle text-center'>"CONTROL TRANSPORTE"</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosicontrolcontdosisedes->ubicacion}}</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosicontrolcontdosisedes->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle text-center'>{{$novedad->dosicontrolcontdosisedes->holder->codigo_holder}}</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosicontrolcontdosisedes->ubicacion}}</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosicontrolcontdosisedes->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle text-center'>{{$cambios->dosicontrolcontdosisedes->holder->codigo_holder}}</td>
                                     @endif
                                     <td class='align-middle text-center'>{{$cambios->nota_cambiodosim}}</td>
                                 </tr>
@@ -238,18 +243,24 @@ crossorigin="anonymous">
                 console.log("XX ="+xx);
                 if('{{$novedad->mes_asignacion}}' == 1){
                     console.log("entro al mes 1 = ");
-                    periodo.value = '{{$novedad->mes_asignacion}}'+" - "+fechaF.getDate()+' '+meses[fechaF.getMonth()] + ' DE ' + fechaF.getUTCFullYear()+" al <br>"+ultimoDiaPMF.getDate()+' '+meses[ultimoDiaPMF.getMonth()] + ' DE ' + ultimoDiaPMF.getUTCFullYear();
-                    
-                    var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
-                    fila.innerHTML = periodo;
+                    periodo = '{{$novedad->mes_asignacion}}'+" - "+fechaF.getDate()+' '+meses[fechaF.getMonth()] + ' DE ' + fechaF.getUTCFullYear()+" al <br>"+ultimoDiaPMF.getDate()+' '+meses[ultimoDiaPMF.getMonth()] + ' DE ' + ultimoDiaPMF.getUTCFullYear();
+                    console.log(periodo);
+                    @foreach($cambiosNovedad as $cambios)
+                        console.log("id="+"{{$cambios->id_cambionovedadmeses}}");
+                        var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
+                        fila.innerHTML = periodo;
+                    @endforeach
+                   
                 }else if('{{$novedad->mes_asignacion}}' == xx){
                     console.log("entro al mes xx = ");
                     periodo.value = '{{$novedad->mes_asignacion}}'+" - "+fechaesp1+" al <br>"+fechaesp2;
                     console.log("periodo = "+periodo);
-                    var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
-                    fila.innerHTML = periodo;
+                    @foreach($cambiosNovedad as $cambios)
+                        console.log("id="+"{{$cambios->id_cambionovedadmeses}}");
+                        var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
+                        fila.innerHTML = periodo;
+                    @endforeach
                 }
-                
             }
         }else if('{{$novedad->dosimetriacontrato->periodo_recambio}}' == 'TRIMS'){
             var xx = 1;
@@ -272,22 +283,25 @@ crossorigin="anonymous">
                 console.log(fechaesp2);
                 xx++;
                 console.log("XX ="+xx);
-                array.forEach(element => {
-                    
-                });
+                
                 if('{{$novedad->mes_asignacion}}' == 1){
                     console.log("entro al mes 1 = ");
                     periodo = '{{$novedad->mes_asignacion}}'+" - "+fechaF.getDate()+' '+meses[fechaF.getMonth()] + ' DE ' + fechaF.getUTCFullYear()+" al <br>"+ultimoDiaPMF.getDate()+' '+meses[ultimoDiaPMF.getMonth()] + ' DE ' + ultimoDiaPMF.getUTCFullYear();
                     console.log(periodo);
-                    console.log("id="+"{{$cambios->id_cambionovedadmeses}}");
-                    var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
-                    fila.innerHTML = periodo;
+                    @foreach($cambiosNovedad as $cambios)
+                        console.log("id="+"{{$cambios->id_cambionovedadmeses}}");
+                        var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
+                        fila.innerHTML = periodo;
+                    @endforeach
                 }else if('{{$novedad->mes_asignacion}}' == xx){
                     console.log("entro al mes xx = ");
                     periodo = '{{$novedad->mes_asignacion}}'+" - "+fechaesp1+" al <br>"+fechaesp2;
                     console.log("periodo = "+periodo);
-                    var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
-                    fila.innerHTML = periodo;
+                    @foreach($cambiosNovedad as $cambios)
+                        console.log("id="+"{{$cambios->id_cambionovedadmeses}}");
+                        var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
+                        fila.innerHTML = periodo;
+                    @endforeach
                 }
             }
         }else if('{{$novedad->dosimetriacontrato->periodo_recambio}}' == 'BIMS'){
@@ -314,14 +328,20 @@ crossorigin="anonymous">
                 if('{{$novedad->mes_asignacion}}' == 1){
                     console.log("entro al mes 1 = ");
                     periodo = '{{$novedad->mes_asignacion}}'+" - "+fechaF.getDate()+' '+meses[fechaF.getMonth()] + ' DE ' + fechaF.getUTCFullYear()+" al <br>"+ultimoDiaPMF.getDate()+' '+meses[ultimoDiaPMF.getMonth()] + ' DE ' + ultimoDiaPMF.getUTCFullYear();
-                    var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
-                    fila.innerHTML = periodo;
+                    @foreach($cambiosNovedad as $cambios)
+                        console.log("id="+"{{$cambios->id_cambionovedadmeses}}");
+                        var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
+                        fila.innerHTML = periodo;
+                    @endforeach
                 }else if('{{$novedad->mes_asignacion}}' == xx){
                     console.log("entro al mes xx = ");
                     periodo = '{{$novedad->mes_asignacion}}'+" - "+fechaesp1+" al <br>"+fechaesp2;
                     console.log("periodo = "+periodo);
-                    var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
-                    fila.innerHTML = periodo;
+                    @foreach($cambiosNovedad as $cambios)
+                        console.log("id="+"{{$cambios->id_cambionovedadmeses}}");
+                        var fila = document.getElementById("{{$cambios->id_cambionovedadmeses}}");
+                        fila.innerHTML = periodo;
+                    @endforeach
                 }
             } 
         }

@@ -33,3 +33,4 @@ class Novedadmesescontdosisededepto extends Model
         return $this->hasMany(Cambiosnovedadmeses::class, 'id_cambionovedadmeses');
     }
 }
+
