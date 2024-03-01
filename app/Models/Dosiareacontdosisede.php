@@ -29,6 +29,10 @@ class Dosiareacontdosisede extends Model
     public function cambionovedadmeses(){
         return $this->hasOne(Cambiosnovedadmeses::class, 'dosiarea_id', 'id_dosiareacontdosisedes');
     }
+     //relacion uno a uno con cambionovedadmeses
+    public function cambionovedadmesesAnt(){
+        return $this->hasOne(Cambiosnovedadmeses::class, 'dosiarea_ant_id', 'id_dosiareacontdosisedes');
+    }
     //relacion uno a uno con obsreventradas
     public function obsreventradas(){
         return $this->hasOne(Obsreventrada::class, 'dosiareacontdosimetro_id', 'id_dosiareacontdosisedes');

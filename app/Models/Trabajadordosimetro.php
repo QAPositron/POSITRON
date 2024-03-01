@@ -38,6 +38,10 @@ class Trabajadordosimetro extends Model
     public function cambionovedadmeses(){
         return $this->hasOne(Cambiosnovedadmeses::class, 'trabajadordosimetro_id', 'id_trabajadordosimetro');
     }
+    //relacion uno a uno con cambionovedadmeses
+    public function cambionovedadmesesAnt(){
+        return $this->hasOne(Cambiosnovedadmeses::class, 'trabajadordosimetro_ant_id', 'id_trabajadordosimetro');
+    }
     //relacion uno a uno con obsreventradas
     public function obsreventradas(){
         return $this->hasOne(Obsreventrada::class, 'trabajcontdosimetro_id', 'id_trabajadordosimetro');

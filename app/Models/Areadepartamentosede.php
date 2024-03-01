@@ -17,5 +17,9 @@ class Areadepartamentosede extends Model
     public function dosiareacontdosisede(){
         return $this->hasMany(Dosiareacontdosisede::class, 'id_dosiareacontdosisedes');
     }
+    //relacion uno a uno con cambionovedadmeses
+    public function cambionovedadmeses(){
+        return $this->hasOne(Cambiosnovedadmeses::class, 'areadepartamentosede_id', 'id_areadepartamentosede');
+    }
 
 }

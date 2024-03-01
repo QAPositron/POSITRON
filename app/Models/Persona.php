@@ -29,7 +29,10 @@ class Persona extends Model
     public function temptrabajdosimrev(){
         return $this->hasMany(Temptrabajdosimrev::class, 'id_temptrabajdosimrev');
     }
-    
+    //relacion uno a uno con cambionovedadmeses
+    public function cambionovedadmeses(){
+        return $this->hasOne(Cambiosnovedadmeses::class, 'persona_id', 'id_persona');
+    }
     public function temptrabajdosimentradarev(){
         return $this->hasMany(Temptrabajdosimentradarev::class, 'id_temptrabajdosimentradarev');
     }

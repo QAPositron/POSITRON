@@ -524,6 +524,7 @@
                 $('#mesacambiar').append("<option value=''>--</option>");
                 const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
                 var numLec = mesactual_trabjasig[0].numlecturas_año;
+                console.log("numero de lecturas= "+numLec);
                 if(mesAct == '1'){
                     console.log("ESTA EN MES 1**");
                     if(mesactual_trabjasig[0].periodo_recambio == 'MENS'){
@@ -663,7 +664,7 @@
                         var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 3, 1);
                         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                         var xx = 1;
-                        for(var i=0; i<=(numLec+1); i= i+3){
+                        for(var i=0; i<=(numLec+2); i= i+3){
                             console.log("ESTA ES LA I = "+i);
                             var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
                             console.log("r1" +r);
@@ -718,7 +719,7 @@
                         var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 2, 1);
                         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                         var xx = 1;
-                        for(var i=0; i<=(numLec+1); i= i+2){
+                        for(var i=0; i<=(numLec+2); i= i+2){
                             console.log("ESTA ES LA I = "+i);
                             var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
                             console.log("r1" +r);
@@ -968,7 +969,7 @@
                                                 ${selectHolders.innerHTML}
                                             </select>
                                         </td>
-                                        <td class="text-center align-middle" style='width: 190px'></td>
+                                        <td class="text-center align-middle" style='width: 90px'></td>
                                     </tr>`;
                                 $("#body_asignaciones2").append(tr);
                                 /* if(disacont !== undefined){
@@ -1141,7 +1142,7 @@
                                                 ${selectHolders.innerHTML}
                                             </select>
                                         </td>
-                                        <td></td>
+                                        <td style='width: 90px'></td>
                                     </tr>`;
                                     $("#body_asignaciones2").append(tr);
                                     /* if(dis != undefined){
@@ -1257,7 +1258,7 @@
                                         </select>
                                     </td>
                                     <td class='align-middle text-center'> N.A. </td>
-                                    <td></td>
+                                    <td style='width: 90px'></td>
                                 </tr>`;
                                 $("#body_asignaciones2").append(tr);
 

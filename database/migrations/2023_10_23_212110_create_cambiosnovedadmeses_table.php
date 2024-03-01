@@ -21,14 +21,31 @@ class CreateCambiosnovedadmesesTable extends Migration
 
             $table-> unsignedBigInteger('trabajadordosimetro_id')->nullable();
             $table-> foreign('trabajadordosimetro_id')->references('id_trabajadordosimetro')->on('trabajadordosimetros')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('trabajadordosimetro_ant_id')->nullable();
+            $table-> foreign('trabajadordosimetro_ant_id')->references('id_trabajadordosimetro')->on('trabajadordosimetros')->onDelete('cascade')->onUpdate('cascade');
             
+            $table-> unsignedBigInteger('persona_id')->nullable();
+            $table-> foreign('persona_id')->references('id_persona')->on('personas')->onDelete('cascade')->onUpdate('cascade');
+
             $table-> unsignedBigInteger('dosicontrol_id')->nullable();
             $table-> foreign('dosicontrol_id')->references('id_dosicontrolcontdosisedes')->on('dosicontrolcontdosisedes')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('dosicontrol_ant_id')->nullable();
+            $table-> foreign('dosicontrol_ant_id')->references('id_dosicontrolcontdosisedes')->on('dosicontrolcontdosisedes')->onDelete('cascade')->onUpdate('cascade');
             
             $table-> unsignedBigInteger('dosiarea_id')->nullable();
             $table-> foreign('dosiarea_id')->references('id_dosiareacontdosisedes')->on('dosiareacontdosisedes')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->integer('tipo_novedad');
+            $table-> unsignedBigInteger('dosiarea_ant_id')->nullable();
+            $table-> foreign('dosiarea_ant_id')->references('id_dosiareacontdosisedes')->on('dosiareacontdosisedes')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('areadepartamentosede_id')->nullable();
+            $table-> foreign('areadepartamentosede_id')->references('id_areadepartamentosede')->on('areadepartamentosedes')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table->string('ubicacion', 50)->nullable();
+            $table->integer('mes_asignacion')->nullable();;
+            $table->integer('tipo_novedad')->nullable();;
             $table->text('nota_cambiodosim')->nullable();
 
             $table->timestamps();

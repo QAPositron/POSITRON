@@ -601,7 +601,7 @@
                         var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 3, 1);
                         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                         var xx = 1;
-                        for(var i=0; i<=(numLec+1); i= i+3){
+                        for(var i=0; i<=(numLec+2); i= i+3){
                             console.log("ESTA ES LA I = "+i);
                             var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
                             console.log("r1" +r);
@@ -656,7 +656,7 @@
                         var ultimoDiaPM = new Date(myFechaInicial.getFullYear(), myFechaInicial.getMonth() + 2, 1);
                         console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
                         var xx = 1;
-                        for(var i=0; i<=(numLec+1); i= i+2){
+                        for(var i=0; i<=(numLec+2); i= i+2){
                             console.log("ESTA ES LA I = "+i);
                             var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
                             console.log("r1" +r);
@@ -1297,9 +1297,14 @@
     var areaCambiado = [];
     var asigTrabj = [];
     var asigArea = [];
+    var idAsigANT = [];
+    var idAsigANTarea = [];
     function changueTrabajador(id, idAsig, primerNom, primerApe, segundoApe, ubicacion, mes){
         console.log("SE SELECCIONO EL BOTON");
-        console.log("ID ASIGNACION ENVIADO"+idAsig);
+        console.log("ID ASIGNACION CAMBIADA"+idAsig);
+        idAsigANT.push(idAsig);
+        console.log("ID trabajador nuevo ="+id);
+        console.log("MES= "+mes)
         Swal.fire({
             title: 'DESEA CAMBIAR EL TRABAJADOR "'+primerNom+' '+primerApe+' '+segundoApe+'" ASIGNADO A UN DOSÍMETRO TIPO "'+ubicacion+'"?',
             text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL TRABAJADOR NUEVO",
@@ -1312,28 +1317,40 @@
             if (result.isConfirmed && mes == 1) {
                 $("#id_trabj_asigdosim"+idAsig).attr("disabled", false);
                 document.getElementById("id_trabj_asigdosim_mesdesp"+id).remove();
+                var elSelect = document.getElementById("id_trabj_asigdosim"+idAsig);
+                elSelect.options.item(0).text = "---";
+                elSelect.options.item(0).value = '';
                 var nombre = primerNom+' '+primerApe+' '+segundoApe;
                 console.log("ESTE ES EL NOMBRE "+nombre);
                 trajCambiado.push({nombre,ubicacion,idAsig});
                 $("#notas2").attr("disabled", false);
-                console.log(trajCambiado); 
+                var inputasigAnt = `<input type="text" name="id_trabj_asigdosim_ant[]" id="id_trabj_asigdosim_ant" class="form-control" value="`+idAsig+`" hidden>`;
+                $("#tdchange").append(inputasigAnt);
+                console.log(trajCambiado);
             }else if(result.isConfirmed && mes == 0){
                 $("#id_trabj_asigdosim"+idAsig).attr("disabled", false);
+                var elSelect = document.getElementById("id_trabj_asigdosim"+idAsig);
+                elSelect.options.item(0).text = "---";
+                elSelect.options.item(0).value = '';
                 var nombre = primerNom+' '+primerApe+' '+segundoApe;
                 console.log("ESTE ES EL NOMBRE "+nombre);
                 trajCambiado.push({nombre,ubicacion,idAsig});
                 $("#notas1").attr("disabled", false);
                 console.log(trajCambiado); 
-                var input = `<input type="text" name="id_trabj_asigdosim_act[]" id="id_trabj_asigdosim_act" class="form-control" value="`+idAsig+`" hidden>`;
-                $("#tdchange").append(input);
+                var inputasigAnt = `<input type="text" name="id_trabj_asigdosim_ant[]" id="id_trabj_asigdosim_ant" class="form-control" value="`+idAsig+`" hidden>`;
+                $("#tdchange").append(inputasigAnt);
+                console.log(trajCambiado);
             }
 
             $('#id_trabj_asigdosim'+idAsig).select2({width: "100%", theme: "classic"});
+            
         })
         
     }
+
     function changueArea(id, idAsig, nombreArea, mes){
         console.log("id Area ="+id+" nombreArea= "+nombreArea);
+        idAsigANTarea.push(idAsig);
         Swal.fire({
             title: 'DESEA CAMBIAR EL ÁREA "'+nombreArea+'" ASIGNADA A UN DOSÍMETRO TIPO "AMBIENTAL"?',
             text: "EL CAMPO A CAMBIAR SE HABILITARÁ, SELECCIONE EL ÁREA NUEVA",
@@ -1346,24 +1363,33 @@
             if (result.isConfirmed && mes == 1) {
                 $("#id_area_asigdosim"+idAsig).attr("disabled", false);
                 document.getElementById("id_area_asigdosim_mesdesp"+id).remove();
+                var elSelect = document.getElementById("id_area_asigdosim"+idAsig);
+                elSelect.options.item(0).text = "---";
+                elSelect.options.item(0).value = '';
                 console.log("ESTE ES EL NOMBRE "+nombreArea);
                 areaCambiado.push({nombreArea,idAsig});
                 $("#notas2").attr("disabled", false);
+                var inputasigAnt = `<input type="text" name="id_area_asigdosim_ant[]" id="id_area_asigdosim_ant" class="form-control" value="`+idAsig+`" hidden>`;
+                $("#tdchagearea").append(inputasigAnt);
                 console.log(areaCambiado); 
             }else if(result.isConfirmed && mes == 0){
                 $("#id_area_asigdosim"+idAsig).attr("disabled", false);
                 console.log("ESTE ES EL NOMBRE "+nombreArea);
+                var elSelect = document.getElementById("id_area_asigdosim"+idAsig);
+                elSelect.options.item(0).text = "---";
+                elSelect.options.item(0).value = '';
                 areaCambiado.push({nombreArea,idAsig});
                 $("#notas1").attr("disabled", false);
                 console.log(areaCambiado);
-                var input = `<input type="text" name="id_area_asigdosim_act[]" id="id_area_asigdosim_act" class="form-control" value="`+idAsig+`" hidden>`;
-                $("#tdchagearea").append(input);
+                var inputasigAnt = `<input type="text" name="id_area_asigdosim_ant[]" id="id_area_asigdosim_ant" class="form-control" value="`+idAsig+`" hidden>`;
+                $("#tdchagearea").append(inputasigAnt);
                 asigArea.push(idAsig);
                 document.getElementById('id_area_asigdosim_act').value = asigArea;
             }
+            $("#id_area_asigdosim"+idAsig).select2({width: "100%", theme: "classic"});
         })
     }
-    
+   
     function Generarnotas(mes){
         console.log("MES"+mes);
         console.log('---------------------*****');
@@ -1455,6 +1481,20 @@
         
         $('#form_cambio_cantdosim2').submit(function(e, mes){
             e.preventDefault();
+            for(var i = 0; i < idAsigANT.length; i++) {
+                var select = document.getElementById("id_trabj_asigdosim"+idAsigANT[i]);
+                var selectedOption = select.options[select.selectedIndex];
+                console.log("Option selected: " + selectedOption.value);
+                var inputnewPerson = `<input type="text" name="id_trabj_new[]" id="id_trabj_new" class="form-control" value="`+selectedOption.value+`" hidden>`;
+                $("#tdchange").append(inputnewPerson);
+            }
+            for(var i = 0; i < idAsigANTarea.length; i++){
+                var select = document.getElementById("id_area_asigdosim"+idAsigANTarea[i]);
+                var selectedOption = select.options[select.selectedIndex];
+                console.log("Option selected: " + selectedOption.value);
+                var inputnewPerson = `<input type="text" name="id_area_new[]" id="id_area_new" class="form-control" value="`+selectedOption.value+`" hidden>`;
+                $("#tdchagearea").append(inputnewPerson);
+            }
             ////////VALIDACIONES PARA LAS FECHAS  DE INICIO Y FIN DEL PERIODO/////////////////
             var primerdiaFecha = document.getElementById("primerDia_asigdosim2").value;
             if(primerdiaFecha == ''){

@@ -31,8 +31,6 @@ class CreateNovedadmesescontdosisededeptosTable extends Migration
             
             $table->integer('mes_asignacion');
             
-            
-            
             $table->timestamps();
         });
     }

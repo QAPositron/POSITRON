@@ -11,7 +11,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="{{route('novedadesdosimetria.nuevoDosimetro')}}">INGRESO DE DOSíMETRO</a></li>
               <li><a class="dropdown-item" href="{{route('novedadesdosimetria.retiroDosimetro')}}">RETIRO DE DOSíMETRO</a></li>
-              <li><a class="dropdown-item" href="{{route('novedadesdosimetria.cambioTrabajador')}}">CAMBIO DE TRABAJADOR</a></li>
+              <li><a class="dropdown-item" href="{{route('novedadesdosimetria.cambioTrabajador')}}">CAMBIO DE TRABAJADOR/ÁREA</a></li>
             </ul>
         </div>
     </div>
@@ -315,7 +315,7 @@
                                             console.log(cambiosNov);
                                             $.each(cambiosNov, function(index, value3){
                                                 console.log(value3.nota_cambiodosim);
-                                                var td = value3.nota_cambiodosim+`<br>`;
+                                                var td ='- '+value3.nota_cambiodosim+'.'+`<br>`;
                                                 console.log(td);
                                                 $('#obs'+value3.novedadmesescontdosidepto_id).append(td);
                                                 /* arrayCambios.push(value3.nota_cambiodosim)

@@ -88,6 +88,7 @@ class NovedadesController extends Controller
         $novedad = Novedadmesescontdosisededepto::find($id); 
         $cambiosNovedad =  Cambiosnovedadmeses::where('novedadmesescontdosidepto_id', '=', $id)
         ->get();
+       
         return view('novedades.detalle_novedad', compact('novedad', 'contdosisededepto', 'cambiosNovedad'));
     }
     public function contratoDosimetria(Request $request){
@@ -269,19 +270,24 @@ class NovedadesController extends Controller
                 $newNovedad->mes_asignacion           = $request->mestrabj_asig;
                 $newNovedad->save();
             } 
+            ////////retiro de dosimetros para el mes actual//// que se guarda el id de la persona pero se pierde la info del dosimetro y el holder asignado///////
             if(!empty($request->tipo_novedad == 2)){
                 if(!empty($request->dosimRetiradosControl1)){
                     for($i= 0; $i<count($request->dosimRetiradosControl1); $i++){
                         
                         if($request->dosimRetiradosControl1[$i] != null){
+                            $retiroDosiControl = Dosicontrolcontdosisede::find($request->dosimRetiradosControl1[$i]); 
+                            
                             $cambioNovedadDosimetria = new Cambiosnovedadmeses();
                             $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
-                            /* $cambioNovedadDosimetria->dosicontrol_id               = $request->dosiRetiradosControl1[$i];     */
+                            $cambioNovedadDosimetria->persona_id                   = $retiroDosiControl->persona_id;
                             $cambioNovedadDosimetria->tipo_novedad                 = $request->tipo_novedad;
+                            $cambioNovedadDosimetria->ubicacion                    = $retiroDosiControl->ubicacion;
+                            $cambioNovedadDosimetria->mes_asignacion               = $request->mestrabj_asig;
                             $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotasControl[$i];
                             $cambioNovedadDosimetria->save();
     
-                            $retiroDosiControl = Dosicontrolcontdosisede::find($request->dosimRetiradosControl1[$i]);    
+                               
                             if($retiroDosiControl->ubicacion == 'TORAX' && $dosi_control_torax != 0){
                                 $dosi_control_torax -= 1;
                             }elseif($retiroDosiControl->ubicacion == 'CRISTALINO' && $dosi_control_cristalino != 0){
@@ -305,15 +311,17 @@ class NovedadesController extends Controller
                 if(!empty($request->dosimRetiradosArea1)){
                     for($i= 0; $i<count($request->dosimRetiradosArea1); $i++){
                         if($request->dosimRetiradosArea1[$i] != null){
+                            $retiroDosiArea = Dosiareacontdosisede::find($request->dosimRetiradosArea1[$i]);
+
                             $cambioNovedadDosimetria = new Cambiosnovedadmeses();
             
                             $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
-                            /* $cambioNovedadDosimetria->dosiarea_id                  = $request->dosimRetiradosArea1[$i]; */
+                            $cambioNovedadDosimetria->areadepartamentosede_id      = $retiroDosiArea->areadepartamentosede_id;
                             $cambioNovedadDosimetria->tipo_novedad                 = $request->tipo_novedad;
+                            $cambioNovedadDosimetria->mes_asignacion               = $request->mestrabj_asig;
                             $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotasAreas[$i];
                             $cambioNovedadDosimetria->save();  
     
-                            $retiroDosiArea = Dosiareacontdosisede::find($request->dosimRetiradosArea1[$i]);
                             if($dosi_area != 0){
                                 $dosi_area -= 1;
                             }
@@ -330,14 +338,17 @@ class NovedadesController extends Controller
                 if(!empty($request->dosimRetirados1)){
                     for($i= 0; $i<count($request->dosimRetirados1); $i++){
                         if($request->dosimRetirados1[$i] != null){
+                            $retiroDosiTrabj = Trabajadordosimetro::find($request->dosimRetirados1[$i]);
+
                             $cambioNovedadDosimetria = new Cambiosnovedadmeses();
                             $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
-                            /*  $cambioNovedadDosimetria->trabajadordosimetro_id       = $request->dosimRetirados1[$i]; */
+                            $cambioNovedadDosimetria->persona_id                   = $retiroDosiTrabj->persona_id;
                             $cambioNovedadDosimetria->tipo_novedad                 = $request->tipo_novedad;
+                            $cambioNovedadDosimetria->ubicacion                    = $retiroDosiTrabj->ubicacion;
+                            $cambioNovedadDosimetria->mes_asignacion               = $request->mestrabj_asig;
                             $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotas[$i];
                             $cambioNovedadDosimetria->save();
-    
-                            $retiroDosiTrabj = Trabajadordosimetro::find($request->dosimRetirados1[$i]);
+
                             if($retiroDosiTrabj->ubicacion == 'TORAX' && $dosi_torax != 0){
                                 $dosi_torax -= 1;
                             }elseif($retiroDosiTrabj->ubicacion == 'CASO' && $dosi_caso != 0){
@@ -617,6 +628,7 @@ class NovedadesController extends Controller
             if(empty($newNovedadmesescontdosisededepto)){
                 $newNovedad = new Novedadmesescontdosisededepto();
                 $newNovedad->codigo_novedad           = $request->id_novedad;
+                $newNovedad->contratodosimetria_id    = $request->id_contratodosimetria;
                 $newNovedad->novcontdosisededepto_id  = $newNovcontdosisededepto->id_novcontdosisededepto;
                 $newNovedad->mes_asignacion           = $request->mestrabj_asig;
                 $newNovedad->save();
@@ -932,6 +944,8 @@ class NovedadesController extends Controller
                 }elseif($request->ubicacion_asigdosim[$i] == 'CRISTALINO'){
                     $dosi_cristalino += 1 ;
                 }
+                
+               
             }  
         }
         ////GUARDAR SI ES UN DOSIMETRO AREA DE UNA ASIGNACION ANTIGUA///
@@ -967,7 +981,53 @@ class NovedadesController extends Controller
                 $dosi_area += 1;
             }  
         }
+        if($request->tipo_novedad == 3){
+            if(!empty($request->id_trabj_asigdosim_ant)){
+                for($i=0; $i<count($request->id_trabj_asigdosim_ant); $i++){
+                    for($x=0; $x<count($request->id_trabj_new); $x++){
+                        if($i == $x){
+                            $trabjasignacionAnterior = Trabajadordosimetro::find($request->id_trabj_asigdosim_ant[$i]);
+                            $trabjasignacionActual = Trabajadordosimetro::where('persona_id', '=', $request->id_trabj_new[$x])
+                            ->where('mes_asignacion', '=', $request->mes_asig_siguiente)
+                            ->where('contdosisededepto_id', '=', $request->contdosisededepto)
+                            ->where('ubicacion', '=', $trabjasignacionAnterior->ubicacion)
+                            ->get();
 
+                            $cambioNovedadDosimetria = new Cambiosnovedadmeses();
+            
+                            $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
+                            $cambioNovedadDosimetria->trabajadordosimetro_id       = $trabjasignacionActual[0]->id_trabajadordosimetro;
+                            $cambioNovedadDosimetria->trabajadordosimetro_ant_id   = $trabjasignacionAnterior->id_trabajadordosimetro;
+                            $cambioNovedadDosimetria->tipo_novedad                 = $request->tipo_novedad;
+                            $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotas[$i];
+                            $cambioNovedadDosimetria->save();
+                        }
+                    }
+                }
+            }
+            if(!empty($request->id_area_asigdosim_ant)){
+                for($i=0; $i<count($request->id_area_asigdosim_ant); $i++){
+                    for($x=0; $x<count($request->id_area_new); $x++){
+                        if($i == $x){
+                            $dosiareasignacionAnterior = Dosiareacontdosisede::find($request->id_area_asigdosim_ant[$i]);
+                            $dosiareasignacionActual = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $request->id_area_new[$x])
+                            ->where('mes_asignacion', '=', $request->mes_asig_siguiente)
+                            ->where('contdosisededepto_id', '=', $request->contdosisededepto)
+                            ->get();
+
+                            $cambioNovedadDosimetria = new Cambiosnovedadmeses();
+        
+                            $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
+                            $cambioNovedadDosimetria->dosiarea_id                  = $dosiareasignacionActual[0]->id_dosiareacontdosisedes;
+                            $cambioNovedadDosimetria->dosiarea_ant_id              = $dosiareasignacionAnterior->id_dosiareacontdosisedes;
+                            $cambioNovedadDosimetria->tipo_novedad                 = $request->tipo_novedad;
+                            $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotasAreas[$i];
+                            $cambioNovedadDosimetria->save();
+                        }
+                    }
+                }
+            }
+        }
         ///////SI LA NOVEDAD ES DE TIPO 2 ES DECIR UN RETIRO DE DOSIMETRO SOLO SE GUARDA cambio por cambio segun el tamaño de los arrays/////
         if($request->tipo_novedad == 2){
             if(!empty($request->dosimRetiradosControl)){
@@ -976,7 +1036,7 @@ class NovedadesController extends Controller
                         $cambioNovedadDosimetria = new Cambiosnovedadmeses();
         
                         $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
-                        /* $cambioNovedadDosimetria->dosicontrol_id               = $request->dosiRetiradosControl[$i]; */    
+                        $cambioNovedadDosimetria->dosicontrol_ant_id           = $request->dosiRetiradosControl[$i]; 
                         $cambioNovedadDosimetria->tipo_novedad                 = $request->tipo_novedad;
                         $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotasControl[$i];
                         $cambioNovedadDosimetria->save();
@@ -990,7 +1050,7 @@ class NovedadesController extends Controller
                         $cambioNovedadDosimetria = new Cambiosnovedadmeses();
         
                         $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
-                        /* $cambioNovedadDosimetria->dosiarea_id                  = $request->dosimRetiradosArea[$i]; */
+                        $cambioNovedadDosimetria->dosiarea_ant_id              = $request->dosimRetiradosArea[$i];
                         $cambioNovedadDosimetria->tipo_novedad                 = $request->tipo_novedad;
                         $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotasAreas[$i];
                         $cambioNovedadDosimetria->save();  
@@ -1005,7 +1065,7 @@ class NovedadesController extends Controller
                         $cambioNovedadDosimetria = new Cambiosnovedadmeses();
         
                         $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
-                        /* $cambioNovedadDosimetria->trabajadordosimetro_id       = $request->dosimRetirados[$i]; */
+                        $cambioNovedadDosimetria->trabajadordosimetro_ant_id   = $request->dosimRetirados[$i];
                         $cambioNovedadDosimetria->tipo_novedad                 = $request->tipo_novedad;
                         $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotas[$i];
                         $cambioNovedadDosimetria->save();
@@ -1015,6 +1075,7 @@ class NovedadesController extends Controller
             }
            
         }
+
         ////////GUARDAR ASIGNACION NUEVA TIPO CONTROL Y GUARDAR EL CAMBIO DE LA NOVEDAD TIPO 1////
         if(!empty($request->id_ubicacion_control_asig)){
             for($i=0; $i<count($request->id_ubicacion_control_asig); $i++){
@@ -1291,9 +1352,8 @@ class NovedadesController extends Controller
         
     }
     public function savecambiotrabajadordosim(Request $request){
-        /* return $request; */
-        $num_dosi = [];
-        $num_dosi_area = [];
+        
+        
         $newNovedadmesescontdosisededepto = Novedadmesescontdosisededepto::find($request->id_novedad);
         if(empty($newNovedadmesescontdosisededepto)){
             $newNovedad = new Novedadmesescontdosisededepto();
@@ -1310,11 +1370,7 @@ class NovedadesController extends Controller
                 $trabjasignacion->persona_id = $request->id_trabj_asigdosim[$i];
                 $trabjasignacion->revision_salida = NULL;
                 $trabjasignacion->save();
-                /* for($x=0; $x<count($request->inputnotas); $x++){
-                    if($i==$x){
-                        array_push($num_dosi, array('id'=> $trabjasignacion->id_trabajadordosimetro, 'nota'=> $request->inputnotas[$x]));
-                    }
-                } */
+                
                 $cambioNovedadDosimetria = new Cambiosnovedadmeses();
 
                 $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
@@ -1323,19 +1379,7 @@ class NovedadesController extends Controller
                 $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotas[$i];
                 $cambioNovedadDosimetria->save();
             }
-            /* foreach ($num_dosi as $dosi) {
-                $newNovedadmesescontdosisededepto = new Novedadmesescontdosisededepto();
-                
-                $newNovedadmesescontdosisededepto->trabajadordosimetro_id   = $dosi['id'];
-                $newNovedadmesescontdosisededepto->contdosisededepto_id     = $request->id_contdosisededepto;
-                $newNovedadmesescontdosisededepto->mes_asignacion           = $request->mestrabj;
-                $newNovedadmesescontdosisededepto->tipo_novedad             = $request->tipo_novedad;
-                $newNovedadmesescontdosisededepto->nota_cambiodosim         = mb_strtoupper($dosi['nota']);
-                
-                $newNovedadmesescontdosisededepto->save();
-            } */
         }
-       
         if(!empty($request->id_area_asigdosim_act)){
             for($i=0; $i<count($request->id_area_asigdosim_act); $i++){
                 $dosiareasignacion = Dosiareacontdosisede::find($request->id_area_asigdosim_act[$i]);
@@ -1343,11 +1387,7 @@ class NovedadesController extends Controller
                 $dosiareasignacion->areadepartamentosede_id = $request->id_area_asigdosim[$i];
                 $dosiareasignacion->revision_salida = NULL;
                 $dosiareasignacion->save();
-                /* for($x=0; $x<count($request->inputnotasAreas); $x++){
-                    if($i==$x){
-                        array_push($num_dosi_area, array('id'=> $dosiareasignacion->id_dosiareacontdosisedes, 'nota'=> $request->inputnotasAreas[$x]));
-                    }
-                } */
+               
                 $cambioNovedadDosimetria = new Cambiosnovedadmeses();
 
                 $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
@@ -1356,16 +1396,7 @@ class NovedadesController extends Controller
                 $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotasAreas[$i];
                 $cambioNovedadDosimetria->save();
             }
-            /* foreach ($num_dosi_area as $dosiArea) {
-                $newNovedadmesescontdosisededepto = new Novedadmesescontdosisededepto();
-                    
-                $newNovedadmesescontdosisededepto->dosiarea_id              = $dosiArea['id'];
-                $newNovedadmesescontdosisededepto->contdosisededepto_id     = $request->id_contdosisededepto;
-                $newNovedadmesescontdosisededepto->mes_asignacion           = $request->mestrabj;
-                $newNovedadmesescontdosisededepto->tipo_novedad             = $request->tipo_novedad;
-                $newNovedadmesescontdosisededepto->nota_cambiodosim         = mb_strtoupper($dosiArea['nota']);
-                $newNovedadmesescontdosisededepto->save();
-            } */
+            
         }
         return back()->with('guardar', 'ok');
     }
@@ -1490,19 +1521,20 @@ class NovedadesController extends Controller
     }
 
     public function reportePDFnovedad($novedades, $contrato){
+       
         $nov = explode(',', $novedades);
         $novedadmeses = Novedadmesescontdosisededepto::whereIn('id_novedadmesescontdosi', $nov)->get();
-        $cambiosNovedad = array();
+        $novedades = array();
         foreach($novedadmeses as $novedad){
-            $cambio = Cambiosnovedadmeses:: where('novedadmesescontdosidepto_id', $novedad->id_novedadmesescontdosi)->get();
-            array_push($cambiosNovedad, $cambio);
+            array_push($novedades, $novedad->id_novedadmesescontdosi);
         }
+        $cambiosNovedad = Cambiosnovedadmeses:: whereIn('novedadmesescontdosidepto_id', $novedades)->get();
         $contrato = Dosimetriacontrato::find($contrato);
         /* $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
             ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
             ->where('personas.lider_dosimetria', '=', 'TRUE')
             ->get(); */
-        
+        /* return $cambiosNovedad; */
         $pdf =  PDF::loadView('novedades.reportePDF_novedad', compact('novedadmeses', 'cambiosNovedad', 'contrato'));
         $pdf->setPaper('A4', 'portrait');
         

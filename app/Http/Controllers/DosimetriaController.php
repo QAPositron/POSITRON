@@ -3037,7 +3037,7 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($trabajdosiasig); $i++){
     
                 $SumatoriaDocemesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('measurement_date', '!=', NULL)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
                 /*->where('contdosisededepto_id', '=', $id)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
@@ -3050,8 +3050,9 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($dosiareasig); $i++){
     
                 $SumatoriaDocemesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
-                ->where('mes_asignacion', '<=', $mesnumber)
-                /* ->where('contdosisededepto_id', '=', $id)
+                ->where('measurement_date', '!=', NULL)
+                /*->where('mes_asignacion', '<=', $mesnumber)
+                ->where('contdosisededepto_id', '=', $id)
                 ->where('mes_asignacion', '<=', $mesnumber)*/
                 ->latest()
                 ->take(12)
@@ -3062,7 +3063,7 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($trabajdosiasig); $i++){
     
                 $SumatoriaFechaIngresomesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('measurement_date', '!=', NULL)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
                 /* ->where('contdosisededepto_id', '=', $id)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
@@ -3073,7 +3074,7 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($dosiareasig); $i++){
     
                 $SumatoriaFechaIngresomesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('measurement_date', '!=', NULL)
                 /* ->where('contdosisededepto_id', '=', $id)
                 ->where('mes_asignacion', '<=', $mesnumber) */
                 ->get();
@@ -3138,7 +3139,7 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($trabajdosiasig); $i++){
     
                 $SumatoriaDocemesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('measurement_date', '!=', NULL)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
                 /* ->where('novcontdosisededepto_id', '=', $id)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
@@ -3151,8 +3152,9 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($dosiareasig); $i++){
     
                 $SumatoriaDocemesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
-                ->where('mes_asignacion', '<=', $mesnumber)
-                /* ->where('novcontdosisededepto_id', '=', $id)
+                ->where('measurement_date', '!=', NULL)
+                /*->where('mes_asignacion', '<=', $mesnumber)
+                ->where('novcontdosisededepto_id', '=', $id)
                 ->where('mes_asignacion', '<=', $mesnumber) */
                 ->latest()
                 ->take(12)
@@ -3163,7 +3165,7 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($trabajdosiasig); $i++){
     
                 $SumatoriaFechaIngresomesestrabajadoresaisg[] = Trabajadordosimetro::where('persona_id', '=', $trabajdosiasig[$i]->persona_id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('measurement_date', '!=', NULL)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
                 /* ->where('novcontdosisededepto_id', '=', $id)
                 ->where('ubicacion', '=', $trabajdosiasig[$i]->ubicacion)
@@ -3174,7 +3176,7 @@ class DosimetriaController extends Controller
             for($i=0; $i<count($dosiareasig); $i++){
     
                 $SumatoriaFechaIngresomesesAreasasig[] = Dosiareacontdosisede::where('areadepartamentosede_id', '=', $dosiareasig[$i]->areadepartamentosede_id)
-                ->where('mes_asignacion', '<=', $mesnumber)
+                ->where('measurement_date', '!=', NULL)
                 /* ->where('novcontdosisededepto_id', '=', $id)
                 ->where('mes_asignacion', '<=', $mesnumber) */
                 ->get();

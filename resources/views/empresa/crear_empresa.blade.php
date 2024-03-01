@@ -220,7 +220,7 @@
                     <div class="row">
                         <div class="col-md">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="TRUE" id="checkSede">
+                                <input class="form-check-input" type="checkbox" value="TRUE" id="checkSede" name="checkSede" @if (old('checkSede') == "TRUE") {{ 'checked' }} @endif>
                                 <label class="form-check-label" for="flexCheckDefault">
                                 SEDE PRINCIPAL (MISMA INFORMACIÓN)
                                 </label>
@@ -234,7 +234,7 @@
                         <div class="col-10">
                             <label for="">*ESPECIALIDADES:</label>
                             <div class="form-floating">
-                                <select class="form-select @error('especialidades') is-invalid @enderror" id="especialidades" name="especialidades[]" autofocus aria-label="Floating label select example" multiple="true" disabled>
+                                <select class="form-select @error('especialidades') is-invalid @enderror" id="especialidades" name="especialidades[]" autofocus aria-label="Floating label select example" multiple="true">
                                     @foreach($especialidades as $dep)
                                         <option value="{{$dep->id_departamento}}" {{ in_array($dep->id_departamento, (array) old('especialidades', [])) ? "selected" : "" }}>{{$dep->nombre_departamento}}</option>
                                     @endforeach
