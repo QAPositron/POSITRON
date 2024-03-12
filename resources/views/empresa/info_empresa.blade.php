@@ -456,7 +456,6 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                 <div class="col"></div> 
                             </div>
                         </div>
-                        
                         <!-- //////////////////// PESTAÑA DE TRABAJADORES //////////////// el ID para crear estos trabajadores de dosimetria es 1 -->
                         <div class="tab-pane" id="trabajador" role="tabpanel" aria-labelledby="trabajador-tab">
                             <div class="row">
@@ -475,90 +474,118 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                 $check = 'inicial';
                                 $cheq = 'inicial';
                             @endphp 
-                            @foreach($trabajadorDosim as $trabDosim)
-                                @php
-                                    if($trabDosim->nombre_sede != $check){
-                                        echo "<table class='table table-hover table-bordered trabajadores'>";
-                                            echo "<h4 class='card-title text-center'>{$trabDosim->nombre_sede}</h4>";  
-                                            $check = strval($trabDosim->nombre_sede);
-                                            echo "<thead class='table-active text-center'>";    
-                                                echo "<th class='align-middle text-center'>TRABAJADOR</th>";
-                                                echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
-                                                echo "<th class='align-middle text-center' >No. IDEN.</th>";    
-                                                echo "<th class='align-middle text-center' style='width: 30px'>GÉNERO</th>";
-                                                echo "<th class='align-middle text-center' style='width: 150px'>EMAIL</th>";
-                                                echo "<th class='align-middle text-center'>TELEFONO</th>";
-                                                echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
-                                                echo "<th class='align-middle text-center'>ROL</th>";
-                                               
-                                                echo "<th class='align-middle'>ACCIONES</th>";
-                                            echo "</thead>";
-                                    }
-                                @endphp
-                                {{-- @if($trabDosim->cedula_persona != $cheq) --}}
-                                    <tr>
-
-                                        <td class="align-middle">{{$trabDosim->primer_nombre_persona}} {{$trabDosim->segundo_nombre_persona}} {{$trabDosim->primer_apellido_persona}} {{$trabDosim->segundo_apellido_persona}}</td>
-                                        <td class="align-middle">{{$trabDosim->tipo_iden_persona}}</td>
-                                        <td class="align-middle">{{$trabDosim->cedula_persona}}</td>
-                                        @php 
-                                            $cheq = $trabDosim->cedula_persona;
-                                        @endphp    
-                                        <td class="align-middle text-center">{{$trabDosim->genero_persona == 'FEMENINO' ? 'F' : 'M'}}</td>
-                                        <td class="align-middle" style="word-break:break-all;">{{$trabDosim->correo_persona}}</td>
-                                        <td class="align-middle">{{$trabDosim->telefono_persona}}</td>
-                                        <td class="align-middle text-center">
-                                            @foreach($personasperfiles as $personperf)
-                                                @if($trabDosim->id_persona == $personperf->persona_id)
-                                                    {{$personperf->perfiles->nombre_perfil}} <br>
-                                                @endif
-                                            @endforeach
-                                            @if($trabDosim->lider_ava == 'TRUE')
-                                                <B>(LIDER A. VIRTUAL)</B>
-                                                <br>
-                                            @endif
-                                            @if($trabDosim->lider_dosimetria == 'TRUE')
-                                                <B>(LIDER DOSIMETRÍA)</B>
-                                            @endif
-                                            @if($trabDosim->lider_controlescalidad == 'TRUE')
-                                                <B>(LIDER C. CALIDAD)</B>
-                                            @endif
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            @foreach($personasroles as $personrol)
-                                                @if($trabDosim->id_persona == $personrol->persona_id)
-                                                    {{$personrol->roles->nombre_rol}} <br>
-                                                @endif
-                                            @endforeach
-                                        </td>
-                                        <td class="text-center align-middle">
-                                            <div class="row align-items-center">
-                                                <div class="col">
-                                                    <a href="{{route('personas.edit', ['persona'=>$trabDosim->id_persona, 'trabestucont'=> 1, 'empresa'=>$empresa->id_empresa])}}" class="btn colorQA">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
-                                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                        </svg>
-                                                    </a>
+                            <div class="row">
+                                <div class="col-12">
+                                    @foreach($trabajadorDosim as $trabDosim)
+                                        @php
+                                            if($trabDosim->nombre_sede != $check){
+                                                echo "<table class='table table-hover table-bordered trabajadores'>";
+                                                    echo "<h4 class='card-title text-center'>{$trabDosim->nombre_sede}</h4>";  
+                                                    $check = strval($trabDosim->nombre_sede);
+                                                    echo "<thead class='table-active text-center'>";    
+                                                        echo "<th class='align-middle text-center'>TRABAJADOR</th>";
+                                                        echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
+                                                        echo "<th class='align-middle text-center' >No. IDEN.</th>";
+                                                        echo "<th class='align-middle text-center' style='width: 30px'>GÉNERO</th>";
+                                                        echo "<th class='align-middle text-center' style='width: 150px'>EMAIL</th>";
+                                                        echo "<th class='align-middle text-center'>TELEFONO</th>";
+                                                        echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
+                                                        echo "<th class='align-middle text-center'>ROL</th>";
+                                                        echo "<th class='align-middle text-center'>ESTADO</th>";
+                                                        echo "<th class='align-middle' style='width: 90px'>ACCIONES</th>";
+                                                    echo "</thead>";
+                                            }
+                                        @endphp
+                                        {{-- @if($trabDosim->cedula_persona != $cheq) --}}
+                                        <tr>
+                                            <td class="align-middle">{{$trabDosim->primer_nombre_persona}} {{$trabDosim->segundo_nombre_persona}} {{$trabDosim->primer_apellido_persona}} {{$trabDosim->segundo_apellido_persona}}{{--<a href="#ModalPersona" data-bs-toggle="modal"  style="text-decoration: none;" class="text-primary" --}}</td>
+                                            {{--<div class="modal fade" id="ModalPersona" tabindex="-1" role="dialog" aria-labelledby="personaModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg" >
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title w-100 text-center" id="personModalLabel">TRABAJADOR DOSIMETRÍA</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                             <table class='table table-hover table-bordered'>
+                                                                <thead class='table-active text-center'>
+                                                                    <th class='align-middle text-center'>TRABAJADOR</th>
+                                                                    <th class='align-middle text-center' >No. IDEN.</th>
+                                                                    <th class='align-middle text-center'>TIPO IDEN.</th>
+                                                                    <th class='align-middle text-center' style='width: 150px'>EMAIL</th>
+                                                                    <th class='align-middle text-center' style='width: 30px'>GÉNERO</th>
+                                                                    <th class='align-middle text-center'>TELEFONO</th>
+                                                                    <th class='align-middle text-center'>PERFIL LABORAL</th>
+                                                                    <th class='align-middle text-center'>ROL</th>
+                                                                    <th class='align-middle text-center'>ESTADO</th>
+                                                                </thead>
+                                                            </table> 
+                                                        </div>
+                                                    </div> 
                                                 </div>
-                                                <div class="col">
-                                                    <form class="form_eliminar_persona mb-1" id="form_eliminar_persona" name="form_eliminar_persona" action=" {{route('personas.destroy', $trabDosim->id_persona)}}" method="POST">
-                                                        @csrf  
-                                                        @method('delete')
-                                                        <button class="btn btn-danger"  type="submit">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </div>--}}
+                                            <td class="align-middle text-center">{{$trabDosim->tipo_iden_persona == 'CÉDULA DE CIUDADANIA' ? 'CC.' : $trabDosim->tipo_iden_persona}}</td>
+                                            <td class="align-middle text-center">{{$trabDosim->cedula_persona}}</td>
+                                            @php 
+                                                $cheq = $trabDosim->cedula_persona;
+                                            @endphp    
+                                            <td class="align-middle text-center">{{$trabDosim->genero_persona == 'FEMENINO' ? 'F' : 'M'}}</td>
+                                            <td class="align-middle" style="word-break:break-all;">{{$trabDosim->correo_persona}}</td>
+                                            <td class="align-middle text-center">{{$trabDosim->telefono_persona}}</td>
+                                            <td class="align-middle text-center">
+                                                @foreach($personasperfiles as $personperf)
+                                                    @if($trabDosim->id_persona == $personperf->persona_id)
+                                                        {{$personperf->perfiles->nombre_perfil}} <br>
+                                                    @endif
+                                                @endforeach
+                                                @if($trabDosim->lider_ava == 'TRUE')
+                                                    <B>(LIDER A. VIRTUAL)</B>
+                                                    <br>
+                                                @endif
+                                                @if($trabDosim->lider_dosimetria == 'TRUE')
+                                                    <B>(LIDER DOSIMETRÍA)</B>
+                                                @endif
+                                                @if($trabDosim->lider_controlescalidad == 'TRUE')
+                                                    <B>(LIDER C. CALIDAD)</B>
+                                                @endif
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                @foreach($personasroles as $personrol)
+                                                    @if($trabDosim->id_persona == $personrol->persona_id)
+                                                        {{$personrol->roles->nombre_rol}} <br>
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td class="align-middle text-center">{{$trabDosim->estado_persona}}</td>
+                                            <td class="text-center align-middle">
+                                                <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <a href="{{route('personas.edit', ['persona'=>$trabDosim->id_persona, 'trabestucont'=> 1, 'empresa'=>$empresa->id_empresa])}}" class="btn colorQA">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                             </svg>
-                                                        </button>
-                                                    </form>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <form class="form_eliminar_persona mb-1" id="form_eliminar_persona" name="form_eliminar_persona" action=" {{route('personas.destroy', $trabDosim->id_persona)}}" method="POST">
+                                                            @csrf  
+                                                            @method('delete')
+                                                            <button class="btn btn-danger"  type="submit">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                {{-- @endif --}}
-                            @endforeach
-                            </table>
-                           
+                                            </td>
+                                        </tr>
+                                        {{-- @endif --}}
+                                    @endforeach
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <!-- //////////////////// PESTAÑA DE ESTUDIANTE A. VIRTUAL //////////////// el ID para crear estos estudiantes de a.vitual es 2 -->
                         <div class="tab-pane" id="estudiante" role="tabpanel" aria-labelledby="estudiante-tab">

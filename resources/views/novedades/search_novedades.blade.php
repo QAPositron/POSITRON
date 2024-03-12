@@ -389,7 +389,7 @@
         console.log(contrato);
         if(novedades != null){
             var host = window.location.host; 
-            var path = "http://"+host+"/POSITRON/public/reporteNov/"+novedades+"/"+contrato+"/pdf";
+            var path = "http://"+host+"/POSITRON/public/reporteNov/"+novedades+"/"+contrato+"/"+0+"/pdf";
             window.open(path, '_blank');
         }
     }

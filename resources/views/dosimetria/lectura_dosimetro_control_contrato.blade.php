@@ -33,42 +33,7 @@
 @endif
 <br>
     <h4 class="text-center" id="id_contrato"></h4>
-<br>
-<br>
-<h3 class="text-center">
-LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}} <br> 
-    @if($dosicontasig->contratodosimetria_id != null) UNICO PARA EL CONTRATO <br>@endif
-    DEL PERÍODO {{$dosicontasig->mes_asignacion}} (
-    @if($dosicontasig->mes_asignacion == 1)
-        @if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS')
-            @php
-                $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                $inicio = $contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio;
-                $fin = date("t-m-Y",strtotime($inicio));
-                echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio))." - ".date("t", strtotime($fin))." ".$meses[date("m", strtotime($fin))]." DE ".date("Y", strtotime($fin));
-                /* echo $meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ; */
-            @endphp
-        @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS')
-            @php  
-                $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                $inicio = $contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio;
-                $fecha1 = date("t-m-Y",strtotime($inicio));
-                $fecha2= date("t-m-Y",strtotime($fecha1."+ 2 month"));
-                echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio))." - ".date("j", strtotime($fecha2))." ".$meses[date("m", strtotime($fecha2))]." DE ".date("Y", strtotime($fecha2))
-            @endphp
-        @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS')
-            @php  
-                $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
-                $fecha1 = date($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
-                $fecha2_total = date("t-m-Y",strtotime($fecha1."+ 1 month"));
-                echo date("j", strtotime($fecha1))." ".$meses[date("m", strtotime($fecha1))]." DE ".date("Y", strtotime($fecha1))." - ".date("j", strtotime($fecha2_total))." ".$meses[date("m", strtotime($fecha2_total))]." DE ".date("Y", strtotime($fecha2_total))
-            @endphp
-        @endif
-    @else
-        <span id="mes{{$dosicontasig->mes_asignacion}}"></span>
-    @endif
-    )
-</h3>
+
 <br>
 <div class="row">
         <div class="col"></div>
@@ -76,101 +41,59 @@ LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}} <br>
             <div class="card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="infoLectura" role="tablist">
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="#lectura" role="tab" aria-controls="lectura" aria-selected="true" >LECTURA</a>
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#infoempresa" role="tab" aria-controls="infoempresa" aria-selected="true">INFO EMPRESA</a>
+                            <a class="nav-link " href="#infoempresa" role="tab" aria-controls="infoempresa" aria-selected="false">INFO EMPRESA</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"  href="#infocontrato" role="tab" aria-controls="infocontrato" aria-selected="false">INFO CONTRATO</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#lectura" role="tab" aria-controls="lectura" aria-selected="false">LECTURA</a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content mt-3">
-                        <!-- //////////////////// PESTAÑA DE INFO EMPRESA //////////////// -->
-                        <div class="tab-pane active" id="infoempresa" role="tabpanel">
-                            <h4 class="card-title text-center pt-3">INFORMACIÓN DE LA EMPRESA</h4>
-                            <BR>
-                            <Label class="mx-5">LA SIGUIENTE ES INFORMACIÓN DE LA EMPRESA QUE FUE RELACIONA AL DOSÍMETRO DE TIPO CONTROL EN EL PROCESO DE ASIGNACIÓN:</Label>
-                            <BR>
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col-md m-4">
-                                    <label for="floatingInputGrid"> <b>EMPRESA:</b> </label>
-                                    <input type="text"  class="form-control text-center" name="empresaLectDosimControl" id="empresaLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}" readonly>
-                                    <br>
-                                    
-                                </div>
-                                <div class="col-md m-4">
-                                    <label for="floatingInputGrid"> <b>NÚM. IDEN.:</b> </label>
-                                    <input type="text" class="form-control text-center" name="numIdenEmpresaLectDosimControl" id="numIdenEmpresaLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}" readonly>
-                                    <br>
-                                   
-                                </div>
-                                <div class="col-md m-4">
-                                    <label for="floatingInputGrid"> <b>SEDE:</b> </label>
-                                    <input type="text"  class="form-control text-center" name="sedeLectDosimControl" id="sedeLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}" readonly>
-                                    <br>
-                                </div>
-                                @if($dosicontasig->contratodosimetria_id == null)
-                                    <div class="col-md m-4">
-                                        <label for="floatingInputGrid"> <b>ESPECIALIDAD:</b> </label>
-                                        <input type="text"  class="form-control text-center" name="deptoLectDosimControl" id="deptoLectDosimControl" value="{{$dosicontasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}" readonly>
-                                        <br>
-                                    </div>
-                                @endif
-                                <div class="col-md"></div>
-                            </div>
-                            <br>
-                            
-                        </div>
-                        <!-- //////////////////// PESTAÑA DE INFO CONTRATO //////////////// -->
-                        <div class="tab-pane" id="infocontrato" role="tabpanel" aria-labelledby="infocontrato-tab">
-                            <h4 class="card-title text-center pt-3">INFORMACIÓN DEL CONTRATO</h4>
-                            <BR></BR>
-                            <Label class="mx-5">LA SIGUIENTE ES INFORMACIÓN DEL CONTRATO QUE ES RELACIONADO AL DOSÍMETRO EN EL PROCESO DE ASIGNACIÓN:</Label>
-                            <BR></BR>
-                            <div class="row">
-                                <div class="col m-4"></div>
-                                <div class="col m-4">
-                                    <label for="floatingInputGrid"> <b>COD. DOSÍMETRO:</b> </label>
-                                    <input type="text"  class="form-control" name="codDosimLectDosimControl" id="codDosimLectDosimControl" value="{{$dosicontasig->dosimetro->codigo_dosimeter}}" readonly>
-                                    <br>
-                                    <label for="floatingInputGrid"> <b>PRIMER DÍA USO:</b> </label>
-                                    <input type="text" class="form-control" name="primDiaUsoLectDosimControl" id="primDiaUsoLectDosimControl" value="{{$dosicontasig->primer_dia_uso}}" readonly>
-                                    <br>
-                                    <label for="floatingInputGrid"> <b>OCUPACIÓN:</b> </label>
-                                    <input type="text"  class="form-control" name="ocupLectDosimControl" id="ocupLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}" readonly>
-                                </div>
-                                <div class="col m-4">
-                                    <label for="floatingInputGrid"> <b>TIPO DOSÍMETRO:</b></label>
-                                    <input type="text"  class="form-control" name="tipoDoimLectDosimControl" id="tipoDosimLectDosimControl" value="{{$dosicontasig->dosimetro->tipo_dosimetro}}" readonly>
-                                    <br>
-                                    <label for="floatingInputGrid"> <b>ULTIMO DÍA USO:</b> </label>
-                                    <input type="text"  class="form-control" name="ultDiaUsobLectDosimControl" id="ultDiaUsobLectDosimControl" value="{{$dosicontasig->ultimo_dia_uso}}" readonly>
-                                    <br>
-                                    <label for="floatingInputGrid"> <b>ENERGÍA:</b> </label>
-                                    <input type="text"  class="form-control" name="energiaLectDosimControl" id="energiaLectDosimControl" value="{{$dosicontasig->energia}}" readonly>
-                                </div>
-                                <div class="col-3 m-4">
-                                    <label for="floatingInputGrid"> <b>FECHA INGRESO AL SERVICIO:</b> </label>
-                                    <input type="text"  class="form-control" name="FIngServLectDosimControl" id="FIngServLectDosimControl" value="{{$dosicontasig->dosimetro->fecha_ingreso_servicio}}" readonly>
-                                    <br>
-                                    <label for="floatingInputGrid"> <b>PERIODO DE RECAMBIO:</b> </label>
-                                    <input type="text"  class="form-control" name="pRecamLectDosimControl" id="pRecamLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}" readonly>
-                                    <br>
-                                </div>
-                                <div class="col"></div>
-                            </div>
-                            <br>
-                        </div>
                         <!-- //////////////////// PESTAÑA DE LECTURA//////////////// -->
-                        <div class="tab-pane" id="lectura" role="tabpanel" aria-labelledby="lectura-tab">
+                        <div class="tab-pane active" id="lectura" role="tabpanel" aria-labelledby="lectura-tab">
+                            <br>
                             {{-- <h4 class="card-title text-center pt-3">LECTURA DEL DOSÍMETRO TIPO {{$dosicontasig->dosimetro->tipo_dosimetro}} </h4> --}}
-                            <h4 class="card-title text-center pt-5">CÓDIGO DEL DOSÍMETRO: {{$dosicontasig->dosimetro->codigo_dosimeter}}</h4>
-                            <BR></BR>
+                            <h3 class="text-center">
+                                LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}} <br> 
+                                @if($dosicontasig->contratodosimetria_id != null) UNICO PARA EL CONTRATO <br>@endif
+                                DEL PERÍODO {{$dosicontasig->mes_asignacion}} (
+                                @if($dosicontasig->mes_asignacion == 1)
+                                    @if($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'MENS')
+                                        @php
+                                            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                                            $inicio = $contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio;
+                                            $fin = date("t-m-Y",strtotime($inicio));
+                                            echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio))." - ".date("t", strtotime($fin))." ".$meses[date("m", strtotime($fin))]." DE ".date("Y", strtotime($fin));
+                                            /* echo $meses[date("m", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio))]." DE ".date("Y", strtotime($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio)) ; */
+                                        @endphp
+                                    @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'TRIMS')
+                                        @php  
+                                            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                                            $inicio = $contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio;
+                                            $fecha1 = date("t-m-Y",strtotime($inicio));
+                                            $fecha2= date("t-m-Y",strtotime($fecha1."+ 2 month"));
+                                            echo date("j", strtotime($inicio))." ".$meses[date("m", strtotime($inicio))]." DE ".date("Y", strtotime($inicio))." - ".date("j", strtotime($fecha2))." ".$meses[date("m", strtotime($fecha2))]." DE ".date("Y", strtotime($fecha2))
+                                        @endphp
+                                    @elseif($contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio == 'BIMS')
+                                        @php  
+                                            $meses = ["01"=>'ENERO', "02"=>'FEBRERO', "03"=>'MARZO', "04"=>'ABRIL', "05"=>'MAYO', "06"=>'JUNIO', "07"=>'JULIO', "08"=>'AGOSTO', "09"=>'SEPTIEMBRE', "10"=>'OCTUBRE', "11"=>'NOVIEMBRE', "12"=>'DICIEMBRE'];
+                                            $fecha1 = date($contdosisededepto->contratodosimetriasede->dosimetriacontrato->fecha_inicio);
+                                            $fecha2_total = date("t-m-Y",strtotime($fecha1."+ 1 month"));
+                                            echo date("j", strtotime($fecha1))." ".$meses[date("m", strtotime($fecha1))]." DE ".date("Y", strtotime($fecha1))." - ".date("j", strtotime($fecha2_total))." ".$meses[date("m", strtotime($fecha2_total))]." DE ".date("Y", strtotime($fecha2_total))
+                                        @endphp
+                                    @endif
+                                @else
+                                    <span id="mes{{$dosicontasig->mes_asignacion}}"></span>
+                                @endif
+                                )
+                            </h3>
+                            <h4 class="card-title text-center">CÓDIGO DEL DOSÍMETRO: {{$dosicontasig->dosimetro->codigo_dosimeter}}</h4>
+                            <br>
                             <Label class="px-5">INGRESE LA INFORMACIÓN DE LA LECTURA DEL DOSÍMETRO ASIGNADO:</Label>
                             <BR></BR>
                             <div class="row">
@@ -411,6 +334,84 @@ LECTURA DE DOSÍMETRO TIPO CONTROL {{$dosicontasig->ubicacion}} <br>
                                 <div class="col"></div>
                             </div> 
                         </div>
+                        <!-- //////////////////// PESTAÑA DE INFO EMPRESA //////////////// -->
+                        <div class="tab-pane" id="infoempresa" role="tabpanel">
+                            <h4 class="card-title text-center pt-3">INFORMACIÓN DE LA EMPRESA</h4>
+                            <BR>
+                            <Label class="mx-5">LA SIGUIENTE ES INFORMACIÓN DE LA EMPRESA QUE FUE RELACIONA AL DOSÍMETRO DE TIPO CONTROL EN EL PROCESO DE ASIGNACIÓN:</Label>
+                            <BR>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-md m-4">
+                                    <label for="floatingInputGrid"> <b>EMPRESA:</b> </label>
+                                    <input type="text"  class="form-control text-center" name="empresaLectDosimControl" id="empresaLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa}}" readonly>
+                                    <br>
+                                    
+                                </div>
+                                <div class="col-md m-4">
+                                    <label for="floatingInputGrid"> <b>NÚM. IDEN.:</b> </label>
+                                    <input type="text" class="form-control text-center" name="numIdenEmpresaLectDosimControl" id="numIdenEmpresaLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}" readonly>
+                                    <br>
+                                   
+                                </div>
+                                <div class="col-md m-4">
+                                    <label for="floatingInputGrid"> <b>SEDE:</b> </label>
+                                    <input type="text"  class="form-control text-center" name="sedeLectDosimControl" id="sedeLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->sede->nombre_sede}}" readonly>
+                                    <br>
+                                </div>
+                                @if($dosicontasig->contratodosimetria_id == null)
+                                    <div class="col-md m-4">
+                                        <label for="floatingInputGrid"> <b>ESPECIALIDAD:</b> </label>
+                                        <input type="text"  class="form-control text-center" name="deptoLectDosimControl" id="deptoLectDosimControl" value="{{$dosicontasig->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}" readonly>
+                                        <br>
+                                    </div>
+                                @endif
+                                <div class="col-md"></div>
+                            </div>
+                            <br>
+                            
+                        </div>
+                        <!-- //////////////////// PESTAÑA DE INFO CONTRATO //////////////// -->
+                        <div class="tab-pane" id="infocontrato" role="tabpanel" aria-labelledby="infocontrato-tab">
+                            <h4 class="card-title text-center pt-3">INFORMACIÓN DEL CONTRATO</h4>
+                            <BR></BR>
+                            <Label class="mx-5">LA SIGUIENTE ES INFORMACIÓN DEL CONTRATO QUE ES RELACIONADO AL DOSÍMETRO EN EL PROCESO DE ASIGNACIÓN:</Label>
+                            <BR></BR>
+                            <div class="row">
+                                <div class="col m-4"></div>
+                                <div class="col m-4">
+                                    <label for="floatingInputGrid"> <b>COD. DOSÍMETRO:</b> </label>
+                                    <input type="text"  class="form-control" name="codDosimLectDosimControl" id="codDosimLectDosimControl" value="{{$dosicontasig->dosimetro->codigo_dosimeter}}" readonly>
+                                    <br>
+                                    <label for="floatingInputGrid"> <b>PRIMER DÍA USO:</b> </label>
+                                    <input type="text" class="form-control" name="primDiaUsoLectDosimControl" id="primDiaUsoLectDosimControl" value="{{$dosicontasig->primer_dia_uso}}" readonly>
+                                    <br>
+                                    <label for="floatingInputGrid"> <b>OCUPACIÓN:</b> </label>
+                                    <input type="text"  class="form-control" name="ocupLectDosimControl" id="ocupLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->ocupacion}}" readonly>
+                                </div>
+                                <div class="col m-4">
+                                    <label for="floatingInputGrid"> <b>TIPO DOSÍMETRO:</b></label>
+                                    <input type="text"  class="form-control" name="tipoDoimLectDosimControl" id="tipoDosimLectDosimControl" value="{{$dosicontasig->dosimetro->tipo_dosimetro}}" readonly>
+                                    <br>
+                                    <label for="floatingInputGrid"> <b>ULTIMO DÍA USO:</b> </label>
+                                    <input type="text"  class="form-control" name="ultDiaUsobLectDosimControl" id="ultDiaUsobLectDosimControl" value="{{$dosicontasig->ultimo_dia_uso}}" readonly>
+                                    <br>
+                                    <label for="floatingInputGrid"> <b>ENERGÍA:</b> </label>
+                                    <input type="text"  class="form-control" name="energiaLectDosimControl" id="energiaLectDosimControl" value="{{$dosicontasig->energia}}" readonly>
+                                </div>
+                                <div class="col-3 m-4">
+                                    <label for="floatingInputGrid"> <b>FECHA INGRESO AL SERVICIO:</b> </label>
+                                    <input type="text"  class="form-control" name="FIngServLectDosimControl" id="FIngServLectDosimControl" value="{{$dosicontasig->dosimetro->fecha_ingreso_servicio}}" readonly>
+                                    <br>
+                                    <label for="floatingInputGrid"> <b>PERIODO DE RECAMBIO:</b> </label>
+                                    <input type="text"  class="form-control" name="pRecamLectDosimControl" id="pRecamLectDosimControl" value="{{$contdosisededepto->contratodosimetriasede->dosimetriacontrato->periodo_recambio}}" readonly>
+                                    <br>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                            <br>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -65,6 +65,7 @@ class PersonaController extends Controller
             'primer_apellido_persona'    => ['required'],
             'tipoIden_persona'           => ['required'],    
             'genero_persona'             => ['required'],
+            'estado_persona'             => ['required'],
             'correo_persona'             => ['nullable', 'email', Rule::unique('personas', 'correo_persona')],
             'telefono_persona'           => ['nullable', 'min:10', 'max:10'],
             /* 'lider_dosiemtria'           => [Rule::unique('personas', 'lider_dosimetria')->where(fn ($query) => $query->where('personasedes', 'sede_id'))], */
@@ -98,6 +99,7 @@ class PersonaController extends Controller
         $persona->cedula_persona            = $request->cedula_persona;
         $persona->correo_persona            =  mb_strtoupper($request->correo_persona);
         $persona->telefono_persona          = $request->telefono_persona;
+        $persona->estado_persona            = $request->estado_persona;
         $persona->lider_ava                 = $request->lider_ava;
         $persona->lider_controlescalidad    = $request->lider_contcal;
 
@@ -206,13 +208,14 @@ class PersonaController extends Controller
         return view('persona.crear_persona_trabajador_empresa', compact('empresa', 'id', 'perfiles', 'roles', 'sedes'));
     }
     public function savePersonasEmpresa(Request $request){
-       /*  return $request; */
+        /* return $request; */
         $request->validate([
             /* 'rol_personas'               => ['required'], */
             'primer_nombre_persona'      => ['required'],
             'primer_apellido_persona'    => ['required'],
             'tipoIden_persona'           => ['required'],
             'genero_persona'             => ['required'],
+            'estado_persona'             => ['required'],
             'correo_persona'             => ['nullable', 'email', Rule::unique('personas', 'correo_persona')],
             'telefono_persona'           => ['nullable','min:10', 'max:10'],
             'id_sedes'                   => ['required']
@@ -245,6 +248,7 @@ class PersonaController extends Controller
         $persona->cedula_persona            = $request->cedula_persona;
         $persona->correo_persona            =  mb_strtoupper($request->correo_persona);
         $persona->telefono_persona          = $request->telefono_persona;
+        $persona->estado_persona            = $request->estado_persona;
         $persona->lider_ava                 = $request->lider_ava;
         $persona->lider_controlescalidad    = $request->lider_contcal;
         
@@ -359,6 +363,7 @@ class PersonaController extends Controller
             'primer_apellido_persona'    => ['required'],
             'tipoIden_persona'           => ['required'],
             'genero_persona'             => ['required'],
+            'estado_persona'             => ['required'],
             'correo_persona'             => ['nullable', 'email', Rule::unique('personas', 'correo_persona')->ignore($persona->id_persona, 'id_persona')],
             'telefono_persona'           => ['nullable', 'min:10', 'max:10'],
             
@@ -390,6 +395,7 @@ class PersonaController extends Controller
         $persona->cedula_persona            = $request->cedula_persona;
         $persona->correo_persona            =  mb_strtoupper($request->correo_persona);
         $persona->telefono_persona          = $request->telefono_persona;
+        $persona->estado_persona            = $request->estado_persona;
         $persona->lider_ava                 = $request->lider_ava;
         $persona->lider_controlescalidad    = $request->lider_contcal;
        

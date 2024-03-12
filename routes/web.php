@@ -311,7 +311,8 @@ Route::get('novedades/nuevoDosimetro', [NovedadesController::class, 'nuevoDosime
 Route::get('novedades/retiroDosimetro', [NovedadesController::class,  'retiroDosimetro'])->name('novedadesdosimetria.retiroDosimetro');
 Route::get('novedades/cambioTrabajador', [NovedadesController::class,  'cambioTrabajador'])->name('novedadesdosimetria.cambioTrabajador');
 Route::get('novedades/{id}/{deptodosi}/detalleNovedad', [NovedadesController::class, 'detalleNovedad'])->name('novedadesdosimetria.detalleNovedad');
-Route::get('/reporteNov/{novedades}/{contrato}/pdf', [NovedadesController::class, 'reportePDFnovedad'])->name('reporteNovedad.pdf');
+///////item 0 para historico de novedades y item 1 para reporte particular///////
+Route::get('/reporteNov/{novedades}/{contrato}/{item}/pdf', [NovedadesController::class, 'reportePDFnovedad'])->name('reporteNovedad.pdf');
 
 ////////////RUTAS PARA LOS PRODUCTOS DE LAS COTIZACIONES //////////////
 Route::get('productos/search', [ProductoController::class, 'search'])->name('productos.search');

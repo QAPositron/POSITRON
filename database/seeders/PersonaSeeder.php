@@ -26,6 +26,7 @@ class PersonaSeeder extends Seeder
             'cedula_persona' => '60254072',
             'correo_persona' => 'G@GMAIL.COM',
             'telefono_persona'=>'1234567899',
+            'estado_persona' =>'ACTIVO',
             'lider_ava' => '',
             'lider_dosimetria'=> '',
             'lider_controlescalidad'=> ''
@@ -41,6 +42,7 @@ class PersonaSeeder extends Seeder
             'cedula_persona' => '1098799000',
             'correo_persona' => 'y@GMAIL.COM',
             'telefono_persona'=>'1234567899',
+            'estado_persona' =>'ACTIVO',
             'lider_ava' => '',
             'lider_dosimetria'=> '',
             'lider_controlescalidad'=> ''

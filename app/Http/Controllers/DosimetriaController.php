@@ -3058,7 +3058,7 @@ class DosimetriaController extends Controller
                 ->take(12)
                 ->get();
             }
-       
+            /* return $SumatoriaDocemesesAreasasig; */
             $SumatoriaFechaIngresomesestrabajadoresaisg = array();
             for($i=0; $i<count($trabajdosiasig); $i++){
     
@@ -3209,7 +3209,7 @@ class DosimetriaController extends Controller
             }
         }
      
-        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosicontrolasigUnico', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'personaEncargadaPerfiles', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaDocemesesAreasasig','SumatoriaFechaIngresomesestrabajadoresaisg', 'SumatoriaFechaIngresomesesAreasasig', 'mesescantdosi', 'mesnumber'));
+        $pdf = PDF::loadView('dosimetria.reportePDF_dosimetria', compact('trabajdosiasig', 'dosicontrolasig', 'dosicontrolasigUnico', 'dosiareasig', 'contratoDosi', 'personaEncargada', 'personaEncargadaPerfiles', 'fechainiciodositrabaj', 'SumatoriaDocemesestrabajadoresaisg', 'SumatoriaDocemesesAreasasig','SumatoriaFechaIngresomesestrabajadoresaisg', 'SumatoriaFechaIngresomesesAreasasig', 'mesescantdosi', 'mesnumber', 'contdosisededepto'));
         $pdf->setPaper('8.5x14', 'landscape');
         return $pdf->stream("REPORTE_DOSIMETRIA_".$contratoDosi[0]->nombre_empresa."_".mb_substr($contratoDosi[0]->nombre_sede, 0,6,"UTF-8")."_".mb_substr($contratoDosi[0]->nombre_departamento, 0,6,"UTF-8")."_".$contratoDosi[0]->periodo_recambio."_P".$mesnumber.".pdf");
         /* for($i=0; $i<count($contratoDosi); $i++ ){
@@ -3778,16 +3778,14 @@ class DosimetriaController extends Controller
                             ->where('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes[$i])
                             ->update([
                                 'dosicontrolcontdosisedes.nota2'            => 'TRUE',
-                                'dosimetros.estado_dosimetro'               => 'PERDIDO',
-                                'dosimetros.uso_dosimetro'                  => ''
+                                'dosimetros.estado_dosimetro'               => 'PERDIDO'
                             ]);
                             
                         }else if($request->input('observacion_asig_dosicont'.$request->id_dosicontrolcontdosisedes[$i])[$x] == 4){
                             $updatedosicontrol = Dosicontrolcontdosisede::where('id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes[$i])
                             ->update([
                                 'dosicontrolcontdosisedes.DNL'              => 'TRUE',
-                                'dosimetros.estado_dosimetro'               => 'DAÑADO',
-                                'dosimetros.uso_dosimetro'                  => ''
+                                'dosimetros.estado_dosimetro'               => 'DAÑADO'
                             ]);
                         }
                     }
@@ -3814,8 +3812,7 @@ class DosimetriaController extends Controller
                                     ->where('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes[$i])
                                     ->update([
                                         'dosicontrolcontdosisedes.nota2'            => 'TRUE',
-                                        'dosimetros.estado_dosimetro'               => 'PERDIDO',
-                                        'dosimetros.uso_dosimetro'                  => ''
+                                        'dosimetros.estado_dosimetro'               => 'PERDIDO'
                                     ]);
                                     
                                 }else if($request->input('observacion_asig_dosicontTransUnic'.$request->id_dosicontrolcontdosisedes[$i])[$x] == 4){
@@ -3823,8 +3820,7 @@ class DosimetriaController extends Controller
                                     ->where('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes[$i])
                                     ->update([
                                         'dosicontrolcontdosisedes.DNL'              => 'TRUE',
-                                        'dosimetros.estado_dosimetro'               => 'DAÑADO',
-                                        'dosimetros.uso_dosimetro'                  => ''
+                                        'dosimetros.estado_dosimetro'               => 'DAÑADO'
                                     ]);
                                 }
                             }
@@ -3843,8 +3839,7 @@ class DosimetriaController extends Controller
                                 ->where('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes[$i])
                                 ->update([
                                     'dosicontrolcontdosisedes.nota2'            => 'TRUE',
-                                    'dosimetros.estado_dosimetro'               => 'PERDIDO',
-                                    'dosimetros.uso_dosimetro'                  => ''
+                                    'dosimetros.estado_dosimetro'               => 'PERDIDO'
                                 ]);
                                 
                             }else if($request->input('observacion_asig_dosicontTransUnic'.$request->id_dosicontrolcontdosisedes[$i])[$x] == 4){
@@ -3852,8 +3847,7 @@ class DosimetriaController extends Controller
                                 ->where('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', '=', $request->id_dosicontrolcontdosisedes[$i])
                                 ->update([
                                     'dosicontrolcontdosisedes.DNL'              => 'TRUE',
-                                    'dosimetros.estado_dosimetro'               => 'DAÑADO',
-                                    'dosimetros.uso_dosimetro'                  => ''
+                                    'dosimetros.estado_dosimetro'               => 'DAÑADO'
                                 ]);
                             }  
                         }
@@ -3880,16 +3874,14 @@ class DosimetriaController extends Controller
                             ->where('trabajadordosimetros.id_trabajadordosimetro', '=', $request->id_trabajadordosimetro[$i])
                             ->update([
                                 'trabajadordosimetros.nota2'            => 'TRUE',
-                                'dosimetros.estado_dosimetro'           => 'PERDIDO',
-                                'dosimetros.uso_dosimetro'              => ''
+                                'dosimetros.estado_dosimetro'           => 'PERDIDO'
                             ]);
                         }else if($request->input('observacion_asig'.$request->id_trabajadordosimetro[$i])[$x] == 4){
                             $updatetrabajadordosim = Trabajadordosimetro::join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
                             ->where('trabajadordosimetros.id_trabajadordosimetro', '=', $request->id_trabajadordosimetro[$i])
                             ->update([
                                 'trabajadordosimetros.DNL'              => 'TRUE',
-                                'dosimetros.estado_dosimetro'           => 'DAÑADO',
-                                'dosimetros.uso_dosimetro'              => ''
+                                'dosimetros.estado_dosimetro'           => 'DAÑADO'
                             ]);
                         }
                     }
@@ -3915,8 +3907,7 @@ class DosimetriaController extends Controller
                             ->where('dosiareacontdosisedes.id_dosiareacontdosisedes', '=', $request->id_dosiareacontdosisedes[$i])
                             ->update([
                                 'dosiareacontdosisedes.nota2'            => 'TRUE',
-                                'dosimetros.estado_dosimetro'            => 'PERDIDO',
-                                'dosimetros.uso_dosimetro'               => ''
+                                'dosimetros.estado_dosimetro'            => 'PERDIDO'
                             ]);
 
                         }else if($request->input('observacion_asig_dosiarea'.$request->id_dosiareacontdosisedes[$i])[$x] == 4){
@@ -3924,8 +3915,7 @@ class DosimetriaController extends Controller
                             ->where('dosiareacontdosisedes.id_dosiareacontdosisedes', '=', $request->id_dosiareacontdosisedes[$i])
                             ->update([
                                 'dosiareacontdosisedes.DNL'              => 'TRUE',
-                                'dosimetros.estado_dosimetro'            => 'DAÑADO',
-                                'dosimetros.uso_dosimetro'               => ''
+                                'dosimetros.estado_dosimetro'            => 'DAÑADO'
                             ]);
                         }
                     }
@@ -3945,6 +3935,56 @@ class DosimetriaController extends Controller
     }
     public function observacionesremove(Request $request){
         $removeObs = Obsreventrada::find($request->id);
+
+        if($removeObs->trabajcontdosimetro_id != null){
+            if($removeObs->observacion_id == 3){
+                $updatetrabajadordosim = Trabajadordosimetro::join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                ->where('trabajadordosimetros.id_trabajadordosimetro', '=', $removeObs->trabajcontdosimetro_id)
+                ->update([
+                    'trabajadordosimetros.nota2'            => NULL,
+                    'dosimetros.estado_dosimetro'           => 'EN LECTURA'
+                ]);
+            }else if($removeObs->observacion_id == 4){
+                $updatetrabajadordosim = Trabajadordosimetro::join('dosimetros', 'trabajadordosimetros.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                ->where('trabajadordosimetros.id_trabajadordosimetro', '=', $removeObs->trabajcontdosimetro_id)
+                ->update([
+                    'trabajadordosimetros.DNL'              => NULL,
+                    'dosimetros.estado_dosimetro'           => 'EN LECTURA'
+                ]);
+            }
+        }else if($removeObs->dosicontrol_id != null){
+            if($removeObs->observacion_id == 3){
+                $updatedosicontrol = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                ->where('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', '=', $removeObs->dosicontrol_id)
+                ->update([
+                    'dosicontrolcontdosisedes.nota2'            => NULL,
+                    'dosimetros.estado_dosimetro'               => 'EN LECTURA'
+                ]);
+            }else if($removeObs->observacion_id == 4){
+                $updatedosicontrol = Dosicontrolcontdosisede::join('dosimetros', 'dosicontrolcontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                ->where('dosicontrolcontdosisedes.id_dosicontrolcontdosisedes', '=', $removeObs->dosicontrol_id)
+                ->update([
+                    'dosicontrolcontdosisedes.DNL'              => NULL,
+                    'dosimetros.estado_dosimetro'               => 'EN LECTURA'
+                ]);
+            }
+        }else if($removeObs->dosiareacontdosimetro_id != null){
+            if($removeObs->observacion_id == 3){
+                $updateareadosi = Dosiareacontdosisede::join('dosimetros', 'dosiareacontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                ->where('dosiareacontdosisedes.id_dosiareacontdosisedes', '=', $removeObs->dosiareacontdosimetro_id)
+                ->update([
+                    'dosiareacontdosisedes.nota2'            => NULL,
+                    'dosimetros.estado_dosimetro'            => 'EN LECTURA'
+                ]);
+            }else if($removeObs->observacion_id == 4){
+                $updateareadosi = Dosiareacontdosisede::join('dosimetros', 'dosiareacontdosisedes.dosimetro_id', '=', 'dosimetros.id_dosimetro')
+                ->where('dosiareacontdosisedes.id_dosiareacontdosisedes', '=', $removeObs->dosiareacontdosimetro_id)
+                ->update([
+                    'dosiareacontdosisedes.DNL'              => NULL,
+                    'dosimetros.estado_dosimetro'            => 'EN LECTURA'
+                ]);
+            }
+        }
         $removeObs->delete();
         return  response()->json(["mensaje"=>"borrado"]);
     }

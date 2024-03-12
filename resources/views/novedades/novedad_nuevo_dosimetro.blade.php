@@ -2512,7 +2512,7 @@
                         for(var x = 0; x < dosimetros.length; x++){
                             var valuesX = dosimetros[x].value;
                             console.log("dosimetros values x " +valuesX);
-                            if(values == valuesX && i != x){
+                            if(values == valuesX && i != x values != '' && valuesX != ''){
                                 return Swal.fire({
                                         title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                         text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",

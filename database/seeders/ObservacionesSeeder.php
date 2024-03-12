@@ -21,7 +21,7 @@ class ObservacionesSeeder extends Seeder
             ['obs' => 'DOSÍMETRO FALTANTE'],
             ['obs' => 'DOSÍMETRO DAÑADO'],
             ['obs' => 'DOSÍMETRO HUMEDO'],
-            ['obs' => 'DOSÍMETRO DE OTRO PERIODO'],
+            ['obs' => 'DOSÍMETRO ENTREGADO EN OTRO PERIODO'],
             ['obs' => 'DOSÍMETRO DE OTRA SEDE'],
             ['obs' => 'HOLDER DAÑADO'],
             ['obs' => 'OTRA ADICIONAL'],

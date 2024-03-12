@@ -159,7 +159,16 @@
                             @error('telefono_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="col-md"></div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <select class="form-select @error('estado_persona') is-invalid @enderror" name="estado_persona" id="estado_persona_select"  autofocus>
+                                <option value="ACTIVO" selected>ACTIVO</option>
+                                <option value="INACTIVO">INACTIVO</option>
+                            </select>
+                            <label for="floatingInputGrid">ESTADO:</label>
+                            @error('estado_persona')<span class="invalid-feedback">*{{$message}}</span> @enderror
+                        </div>
+                    </div>
                 </div>
                 <BR>
                 <label for="">SELECCIONE SI DESEA RELACIONAR ESTE CONTACTO A UNA EMPRESA Y SUS SEDES</label>

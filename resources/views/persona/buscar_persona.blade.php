@@ -30,13 +30,14 @@
                 <th class="align-middle text-center" >EMPRESA - SEDE RELACIONADAS</th>
                 <th class="align-middle text-center" >PERFIL LABORAL</th>
                 <th class="align-middle text-center" >ROLES</th>
+                <th class="align-middle text-center">ESTADO</th>
                 <th class="align-middle text-center"  style='width: 10.20%'>ACCIONES</th>
             </thead>
             @foreach($persona as $person)
                 <tr>
                     
                     <td class="align-middle">{{$person->primer_nombre_persona}} {{$person->segundo_nombre_persona}} {{$person->primer_apellido_persona}} {{$person->segundo_apellido_persona}}</td>
-                    <td class="align-middle text-center">{{$person->tipo_iden_persona}}</td>
+                    <td class="align-middle text-center">{{$person->tipo_iden_persona == 'CÉDULA DE CIUDADANIA' ? 'CC.' : $person->tipo_iden_persona}}</td>
                     <td class="text-center align-middle">{{$person->cedula_persona}}</td>
                     <td class="align-middle text-center">{{$person->genero_persona == 'FEMENINO' ? 'FEM' : 'MASC'}}</td>
                     <td class="align-middle text-center" style="word-break:break-all;">{{$person->correo_persona}}</td>
@@ -72,8 +73,8 @@
                                 {{$personrol->roles->nombre_rol}}
                             @endif
                         @endforeach
-                        
                     </td>
+                    <td class="align-middle text-center">{{$person->estado_persona}}</td>
                     <td class="align-middle text-center">
                         <div class="row align-items-center">
                             <div class="col">
@@ -97,7 +98,6 @@
                             </div>
                         </div>
                     </td>
-                    
                 </tr>
             @endforeach
         </table>
