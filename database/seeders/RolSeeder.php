@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Roles;
 use Illuminate\Database\Seeder;
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RolSeeder extends Seeder
 {
@@ -14,14 +16,13 @@ class RolSeeder extends Seeder
      */
     public function run()
     {
-        //
-        $roles = [
-            ['nombre_rol' => 'ESTUDIANTE'],
-            ['nombre_rol' => 'CONTACTO'],
-            ['nombre_rol' => 'TOE'],
-            ['nombre_rol' => 'OPR'],
-            ['nombre_rol' => 'PUBLICO'],
-        ];
-        Roles::insert($roles);
+        $role1 = Role::create(['name' => 'superAdmin']);
+        $role2 = Role::create(['name' => 'Admin']);
+        $role3 = Role::create(['name' => 'liderDosim']);
+
+        Permission::create(['name' =>'liderdosim.home'])->assignRole($role3);
+        //// para asignar un rol este permiso pero si se quiere asignar mas de un rol se usa ->syncRoles([])
+
+        
     }
 }

@@ -10,10 +10,14 @@ class Persona extends Model
     use HasFactory;
     protected $primaryKey = 'id_persona';
 
-    public function personasroles(){
+   /*  public function personasroles(){
         return $this->hasMany(Personasroles::class, 'id_personarol');
+    } */
+    //relacion uno a uno con users
+    public function users(){
+        return $this->hasOne(User::class, 'persona_id', 'id_persona');
     }
-    
+
     public function personasperfiles(){
         return $this->hasMany(Personasperfiles::class, 'id_personaperfil');
     }
