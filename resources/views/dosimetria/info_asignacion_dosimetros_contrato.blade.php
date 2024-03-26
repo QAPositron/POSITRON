@@ -149,29 +149,29 @@
 <br>
 <br>
 <div class="row">
-    <div class="col-md m-4">
+    <div class="col"></div>
+    <div class="col-md-12">
         <div class="table table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr class="table-active text-center">
-                        <th rowspan="2" class='align-middle' style='width: 11.0%'>TRABAJADOR/ÁREA</th>
-                        {{-- <th rowspan="2" class='align-middle' style='width: 4.90%'>N. IDEN.</th> --}}
-                        <th rowspan="2" class='align-middle' style='width: 7.90%'>DOSÍM.</th>
-                        <th rowspan="2" class='align-middle' style='width: 4.90%'>HOLDER</th>
-                        <th rowspan="2" class='align-middle' style='width: 4.90%'>UBI.</th>
-                        <th colspan="2" class='align-middle' style='width: 4.90%'>Hp(10)</th>
-                        <th colspan="2" class='align-middle' style='width: 4.90%'>Hp(3)</th>
-                        <th colspan="2" class='align-middle' style='width: 4.90%'>Hp(0.07)</th>
-                        <th rowspan="2" class='align-middle' style='width: 2.90%'>NOTAS</th>
-                        <th rowspan="2" class='align-middle' style='width: 14.8%' >ACCIONES</th>
+            <table class="table table-bordered table-hover">
+                <thead class="align-middle">
+                    <tr>
+                        <th scope="col" rowspan="2" class='text-center table-active' style='width: 11.0%'>TRABAJADOR/ÁREA</th>
+                        <th scope="col" rowspan="2" class='text-center table-active' style='width: 7.90%'>DOSÍM.</th>
+                        <th scope="col" rowspan="2" class='text-center table-active' style='width: 4.90%'>HOLDER</th>
+                        <th scope="col" rowspan="2" class='text-center table-active' style='width: 4.90%'>UBI.</th>
+                        <th scope="col" colspan="2" class='text-center table-active' style='width: 4.90%'>Hp(10)</th>
+                        <th scope="col" colspan="2" class='text-center table-active' style='width: 4.90%'>Hp(3)</th>
+                        <th scope="col" colspan="2" class='text-center table-active' style='width: 4.90%'>Hp(0.07)</th>
+                        <th scope="col" rowspan="2" class='text-center table-active' style='width: 2.90%'>NOTAS</th>
+                        <th scope="col" rowspan="2" class='text-center table-active' style='width: 14.8%' >ACCIONES</th>
                     </tr>
-                    <tr class="table-active text-center">
-                        <th class='align-middle' style='width: 3.90%'>MED.</th>
-                        <th class='align-middle' style='width: 3.90%'>LEC.</th>
-                        <th class='align-middle' style='width: 3.90%'>MED.</th>
-                        <th class='align-middle' style='width: 3.90%'>LEC.</th>
-                        <th class='align-middle' style='width: 3.90%'>MED.</th>
-                        <th class='align-middle' style='width: 3.90%'>LEC.</th>
+                    <tr>
+                        <th scope="col"  class='text-center table-active' style='width: 3.90%'>MED.</th>
+                        <th scope="col"  class='text-center table-active' style='width: 3.90%'>LEC.</th>
+                        <th scope="col"  class='text-center table-active' style='width: 3.90%'>MED.</th>
+                        <th scope="col"  class='text-center table-active' style='width: 3.90%'>LEC.</th>
+                        <th scope="col"  class='text-center table-active' style='width: 3.90%'>MED.</th>
+                        <th scope="col"  class='text-center table-active' style='width: 3.90%'>LEC.</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2370,6 +2370,7 @@
             </table>
         </div>
     </div>
+    <div class="col"></div>
 </div>
 <br>
 <br>

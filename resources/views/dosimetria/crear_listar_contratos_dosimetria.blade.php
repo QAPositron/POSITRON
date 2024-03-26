@@ -26,24 +26,24 @@
 <br>
 <div class="row">
     <div class="col"></div>
-    <div class="col-9">
+    <div class="col-10">
         {{-- <h3 class="text-center">LISTADO DE CONTRATOS</h3> --}}
         <div class="table table-responsive p-4 ">
             <table class="table table-bordered contratosdosi">
-                <thead class ="table-active text-center">
+                <thead class ="table-active align-middle">
                     <tr>
-                        <th>No. CONTRATO</th>
-                        <th style='width: 20.60%'>FECHA INICIO</th>
-                        <th style='width: 20.60%'>FECHA FINALIZACIÓN</th>
-                        <th style='width: 15.60%'>P. RECAMBIO</th>
-                        <th style='width: 15.60%'>ESTADO</th>
-                        <th style='width: 30.60%'>ACCIONES</th>
+                        <th class="text-center">No. CONTRATO</th>
+                        <th class="text-center" style='width: 20.60%'>FECHA INICIO</th>
+                        <th class="text-center" style='width: 20.60%'>FECHA FINALIZACIÓN</th>
+                        <th class="text-center" style='width: 15.60%'>P. RECAMBIO</th>
+                        <th class="text-center" style='width: 15.60%'>ESTADO</th>
+                        <th class="text-center" style='width: 22%'>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($dosimetriacontrato as $dosicont)
                         <tr>
-                            <td class="align-middle" id='{{$dosicont->id_contratodosimetria}}'></td>
+                            <td class="align-middle text-center" id='{{$dosicont->id_contratodosimetria}}'></td>
                             <td class="align-middle text-center">{{$dosicont->fecha_inicio}}</td>
                             <td class="align-middle text-center">{{$dosicont->fecha_finalizacion}}</td>
                             <td class="align-middle text-center">{{$dosicont->periodo_recambio}}</td>

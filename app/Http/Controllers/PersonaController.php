@@ -10,6 +10,7 @@ use App\Models\Personasperfiles;
 use App\Models\Personasroles;
 use App\Models\Roles;
 use App\Models\Sede; 
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
@@ -32,7 +33,7 @@ class PersonaController extends Controller
         ->join('personasperfiles', 'personas.id_persona', '=', 'personasperfiles.persona_id')
         ->join('perfiles', 'personasperfiles.perfil_id', '=', 'perfiles.id_perfil')
         ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
-        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->join('roles', 'personasroles.role_id', '=', 'roles.id')
         ->select("*")
         ->get();
         $personasedes = Personasedes::all();
@@ -45,7 +46,7 @@ class PersonaController extends Controller
     public function create(){
         $empresas = Empresa::all();
         $perfiles = Perfiles::all();
-        $roles    = Roles::all();
+        $roles    = Role::all();
         return view('persona.crear_persona', compact('empresas', 'perfiles', 'roles'));
     }
     public function selectsedes(Request $request){
@@ -131,7 +132,7 @@ class PersonaController extends Controller
 
                     $personasRoles = new Personasroles();
                     $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = 2;
+                    $personasRoles->role_id      = 2;
             
                     $personasRoles->save();
                 }else{
@@ -144,19 +145,19 @@ class PersonaController extends Controller
             }
         }
         $personaContacto = Personasroles::where('persona_id', '=', $persona->id_persona)
-        ->where('rol_id', '=', 2)->get();
+        ->where('role_id', '=', 2)->get();
 
         if($persona->lider_dosimetria == TRUE && count($personaContacto) == 0){
             
             $personasRoles = new Personasroles();
             $personasRoles->persona_id  = $persona->id_persona;
-            $personasRoles->rol_id      = 2;
+            $personasRoles->role_id      = 2;
             $personasRoles->save();
             for($i=0; $i<count($request->rol_personas); $i++){
                 if( $request->rol_personas[$i] != 2){
                     $personasRoles = new Personasroles();
                     $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = $request->rol_personas[$i];
+                    $personasRoles->role_id      = $request->rol_personas[$i];
             
                     $personasRoles->save();
                 }
@@ -170,7 +171,7 @@ class PersonaController extends Controller
                     
                     $personasRoles = new Personasroles();
                     $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = $request->rol_personas[$i];
+                    $personasRoles->role_id      = $request->rol_personas[$i];
             
                     $personasRoles->save();
                 }
@@ -202,7 +203,7 @@ class PersonaController extends Controller
     }
     public function createTrabEstuContEmp(Empresa $empresa, $id){
         $perfiles = Perfiles::all();
-        $roles    = Roles::all();
+        $roles    = Role::all();
         $sedes = Sede::where('empresas_id', '=', $empresa->id_empresa)->get();
         
         return view('persona.crear_persona_trabajador_empresa', compact('empresa', 'id', 'perfiles', 'roles', 'sedes'));
@@ -280,7 +281,7 @@ class PersonaController extends Controller
 
                     $personasRoles = new Personasroles();
                     $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = 2;
+                    $personasRoles->role_id      = 2;
             
                     $personasRoles->save();
                 }else{
@@ -298,13 +299,13 @@ class PersonaController extends Controller
         if($persona->lider_dosimetria == TRUE && count($personaContacto) == 0){
             $personasRoles = new Personasroles();
             $personasRoles->persona_id  = $persona->id_persona;
-            $personasRoles->rol_id      = 2;
+            $personasRoles->role_id      = 2;
             $personasRoles->save();
             for($i=0; $i<count($request->rol_personas); $i++){
                 if( $request->rol_personas[$i] != 2){
                     $personasRoles = new Personasroles();
                     $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = $request->rol_personas[$i];
+                    $personasRoles->role_id      = $request->rol_personas[$i];
             
                     $personasRoles->save();
                 }
@@ -317,7 +318,7 @@ class PersonaController extends Controller
                 }else{
                     $personasRoles = new Personasroles();
                     $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = $request->rol_personas[$i];
+                    $personasRoles->role_id      = $request->rol_personas[$i];
             
                     $personasRoles->save();
                 }
@@ -347,7 +348,7 @@ class PersonaController extends Controller
         ->get();
         $empresas = Empresa::all();
         $perfiles = Perfiles::all();
-        $roles    = Roles::all();
+        $roles    = Role::all();
         if($empresa != 0){
             $empresa = Empresa::find($empresa);
         }
@@ -474,11 +475,11 @@ class PersonaController extends Controller
                         $personasPerfiles->perfil_id  = $request->perfil_personas[$i];
                         $personasPerfiles->save();
                         $personaContacto = Personasroles::where('persona_id', '=', $persona->id_persona)
-                        ->where('rol_id', '=', 2)->get();
+                        ->where('role_id', '=', 2)->get();
                         if(count($personaContacto)== 0){
                             $personasRoles = new Personasroles();
                             $personasRoles->persona_id  = $persona->id_persona;
-                            $personasRoles->rol_id      = 2;
+                            $personasRoles->role_id      = 2;
                             $personasRoles->save();
                         }
                     }else{
@@ -491,19 +492,19 @@ class PersonaController extends Controller
             }
         }
         $personaContacto = Personasroles::where('persona_id', '=', $persona->id_persona)
-        ->where('rol_id', '=', 2)->get();
+        ->where('role_id', '=', 2)->get();
 
         if($persona->lider_dosimetria == TRUE && count($personaContacto) == 0){
             $personasRoles = new Personasroles();
             $personasRoles->persona_id  = $persona->id_persona;
-            $personasRoles->rol_id      = 2;
+            $personasRoles->role_id      = 2;
             $personasRoles->save();
             if(!empty($request->rol_personas)){
                 for($i=0; $i<count($request->rol_personas); $i++){
                     if( $request->rol_personas[$i] != 2){
                         $personasRoles = new Personasroles();
                         $personasRoles->persona_id  = $persona->id_persona;
-                        $personasRoles->rol_id      = $request->rol_personas[$i];
+                        $personasRoles->role_id      = $request->rol_personas[$i];
                 
                         $personasRoles->save();
                     }
@@ -512,13 +513,13 @@ class PersonaController extends Controller
         }elseif(!empty($request->rol_personas)){
             for($i=0; $i<count($request->rol_personas); $i++){
                 $personaRoles = Personasroles::where('persona_id', '=', $persona->id_persona)
-                ->where('rol_id', '=', $request->rol_personas[$i])->get();
+                ->where('role_id', '=', $request->rol_personas[$i])->get();
                 if( $request->rol_personas[$i] == 2 && count($personaRoles) != 0 && count($personaContacto) != 0){
                     
                 }else{
                     $personasRoles = new Personasroles();
                     $personasRoles->persona_id  = $persona->id_persona;
-                    $personasRoles->rol_id      = $request->rol_personas[$i];
+                    $personasRoles->role_id      = $request->rol_personas[$i];
                     $personasRoles->save();
 
                 }

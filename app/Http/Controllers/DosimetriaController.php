@@ -822,12 +822,12 @@ class DosimetriaController extends Controller
         
         $personaSede = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
         ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
-        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->join('roles', 'personasroles.role_id', '=', 'roles.id')
         ->where('personasedes.sede_id','=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
         ->where(function($query) {
-            $query->orWhere('roles.nombre_rol', 'TOE')
-                  ->orWhere('roles.nombre_rol', 'OPR')
-                  ->orWhere('roles.nombre_rol', 'PUBLICO');
+            $query->orWhere('roles.name', 'TOE')
+                  ->orWhere('roles.name', 'OPR')
+                  ->orWhere('roles.name', 'PUBLICO');
         })->get();
         $dosimLibresGeneral = Dosimetro::where('estado_dosimetro', 'STOCK')
         ->where('tipo_dosimetro', 'GENERAL')
@@ -1237,12 +1237,12 @@ class DosimetriaController extends Controller
         ->get(); */
         $personaSede = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
         ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
-        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->join('roles', 'personasroles.role_id', '=', 'roles.id')
         ->where('personasedes.sede_id','=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
         ->where(function($query) {
-            $query->orWhere('roles.nombre_rol', 'TOE')
-                  ->orWhere('roles.nombre_rol', 'OPR')
-                  ->orWhere('roles.nombre_rol', 'PUBLICO');
+            $query->orWhere('roles.name', 'TOE')
+                  ->orWhere('roles.name', 'OPR')
+                  ->orWhere('roles.name', 'PUBLICO');
         })->get();
         $dosimLibresGeneral = Dosimetro::where('estado_dosimetro', 'STOCK')
         ->where('tipo_dosimetro', 'GENERAL')
@@ -1359,12 +1359,12 @@ class DosimetriaController extends Controller
         ->get();
         $personaSede = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
         ->join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
-        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->join('roles', 'personasroles.role_id', '=', 'roles.id')
         ->where('personasedes.sede_id','=', $contdosisededepto->contratodosimetriasede->sede->id_sede)
         ->where(function($query) {
-            $query->orWhere('roles.nombre_rol', 'TOE')
-                  ->orWhere('roles.nombre_rol', 'OPR')
-                  ->orWhere('roles.nombre_rol', 'PUBLICO');
+            $query->orWhere('roles.name', 'TOE')
+                  ->orWhere('roles.name', 'OPR')
+                  ->orWhere('roles.name', 'PUBLICO');
         })->get();
         $dosimLibresGeneral = Dosimetro::where('estado_dosimetro', 'STOCK')
         ->where('tipo_dosimetro', 'GENERAL')
@@ -2948,6 +2948,7 @@ class DosimetriaController extends Controller
                 ->take(12)
                 ->get();
             }
+            /* return $SumatoriaDocemesestrabajadoresaisg; */
             $SumatoriaDocemesesAreasasig = array();
             for($i=0; $i<count($dosiareasig); $i++){
     

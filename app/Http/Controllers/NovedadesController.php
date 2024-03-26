@@ -223,14 +223,14 @@ class NovedadesController extends Controller
     public function trabajadoresempresa(Request $request){
         /* return $request; */
         $trabajadores = Persona::join('personasroles', 'personas.id_persona', '=', 'personasroles.persona_id')
-        ->join('roles', 'personasroles.rol_id', '=', 'roles.id_rol')
+        ->join('roles', 'personasroles.role_id', '=', 'roles.id')
         ->join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
         ->join('sedes', 'personasedes.sede_id', 'sedes.id_sede')
         ->where('sedes.nombre_sede', '=', $request->id_sede)
         ->where(function($query) {
-            $query->orWhere('roles.nombre_rol', 'TOE')
-                  ->orWhere('roles.nombre_rol', 'OPR')
-                  ->orWhere('roles.nombre_rol', 'PUBLICO');
+            $query->orWhere('roles.name', 'TOE')
+                  ->orWhere('roles.name', 'OPR')
+                  ->orWhere('roles.name', 'PUBLICO');
         })->get();
        
         return response()->json($trabajadores);
@@ -1376,9 +1376,10 @@ class NovedadesController extends Controller
             $newNovedad->mes_asignacion           = $request->mestrabj;
             $newNovedad->save();
         }
-        if(!empty($request->id_trabj_asigdosim_act)){
-            for($i=0; $i<count($request->id_trabj_asigdosim_act); $i++){
-                $trabjasignacion = Trabajadordosimetro::find($request->id_trabj_asigdosim_act[$i]);
+        if(!empty($request->id_trabj_asigdosim_ant)){
+
+            for($i=0; $i<count($request->id_trabj_asigdosim_ant); $i++){
+                $trabjasignacion = Trabajadordosimetro::find($request->id_trabj_asigdosim_ant[$i]);
 
                 $trabjasignacion->persona_id = $request->id_trabj_asigdosim[$i];
                 $trabjasignacion->revision_salida = NULL;
@@ -1394,9 +1395,9 @@ class NovedadesController extends Controller
                 $cambioNovedadDosimetria->save();
             }
         }
-        if(!empty($request->id_area_asigdosim_act)){
-            for($i=0; $i<count($request->id_area_asigdosim_act); $i++){
-                $dosiareasignacion = Dosiareacontdosisede::find($request->id_area_asigdosim_act[$i]);
+        if(!empty($request->id_area_asigdosim_ant)){
+            for($i=0; $i<count($request->id_area_asigdosim_ant); $i++){
+                $dosiareasignacion = Dosiareacontdosisede::find($request->id_area_asigdosim_ant[$i]);
 
                 $dosiareasignacion->areadepartamentosede_id = $request->id_area_asigdosim[$i];
                 $dosiareasignacion->revision_salida = NULL;

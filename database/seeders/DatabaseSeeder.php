@@ -33,14 +33,14 @@ class DatabaseSeeder extends Seeder
         $this->call(PerfilSeeder::class);
         $this->call(PersonaSeeder::class);
         $this->call(PersonasedesSeeder::class);
-        /* $this->call(PersonasrolesSeeder::class); */
+        
         $this->call(ObservacionesSeeder::class);
 
 
-        $this->call(RolSeeder::class);
+        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
 
-
+        $this->call(PersonarolesSeeder::class);
 
     }
 }
