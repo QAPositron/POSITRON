@@ -12,6 +12,7 @@ use App\Http\Controllers\DosimetrosController;
 use App\Http\Controllers\EmpresasController;
 use App\Http\Controllers\HolderController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LiderdosimrolController;
 use App\Http\Controllers\MesescontdosisedeptosController;
 use App\Http\Controllers\NovedadesController;
 use App\Http\Controllers\PerfilesController;
@@ -335,4 +336,8 @@ Route::delete('cotizaciones/{cotizacion}', [CotizacionController::class, 'destro
 Route::get('cotizaciones/{cotizacion}/info', [CotizacionController::class, 'info'])->name('cotizaciones.info');
 
 
+
+
+/////////////////RUTAS PERMITIDAS PARA EL ROL DE LIDER DE DOSIMETRIA//////////////////// 
+Route::get('/liderdosim', [LiderdosimrolController::class, 'index'])->name('liderdosim.home'); 
 

@@ -18,13 +18,13 @@ class PersonasrolesSeeder extends Seeder
         Personasroles::insert([
 
             'persona_id' => '1',
-            'rol_id' => '3',
+            'role_id' => '3',
             
         ]);
         Personasroles::insert([
 
             'persona_id' => '2',
-            'rol_id' => '3',
+            'role_id' => '3',
             
         ]);
     }

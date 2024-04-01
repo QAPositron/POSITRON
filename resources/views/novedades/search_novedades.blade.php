@@ -356,6 +356,7 @@
 <script type="text/javascript">
 
     function detalle(id, deptodosi){
+        
         var host = window.location.host;
         var path = "http://"+host+"/POSITRON/public/novedades/"+id+"/"+deptodosi+"/detalleNovedad";
         

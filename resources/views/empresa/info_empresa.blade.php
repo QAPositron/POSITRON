@@ -475,11 +475,12 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                 $cheq = 'inicial';
                             @endphp 
                             <div class="row">
+                                <div class="col"></div>
                                 <div class="col-12">
                                     @foreach($trabajadorDosim as $trabDosim)
                                         @php
                                             if($trabDosim->nombre_sede != $check){
-                                                echo "<table class='table table-hover table-bordered trabajadores'>";
+                                                echo "<table class='table table-hover table-bordered trabajadores' style='width:100%'>";
                                                     echo "<h4 class='card-title text-center'>{$trabDosim->nombre_sede}</h4>";  
                                                     $check = strval($trabDosim->nombre_sede);
                                                     echo "<thead class='table-active text-center'>";    
@@ -552,7 +553,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             <td class="align-middle text-center">
                                                 @foreach($personasroles as $personrol)
                                                     @if($trabDosim->id_persona == $personrol->persona_id)
-                                                        {{$personrol->roles->nombre_rol}} <br>
+                                                        {{$personrol->roles->name}} <br>
                                                     @endif
                                                 @endforeach
                                             </td>
@@ -585,6 +586,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                     @endforeach
                                     </table>
                                 </div>
+                                <div class="col"></div>
                             </div>
                         </div>
                         <!-- //////////////////// PESTAÑA DE ESTUDIANTE A. VIRTUAL //////////////// el ID para crear estos estudiantes de a.vitual es 2 -->
@@ -604,83 +606,89 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                             @php
                                 $check = 'inicial';
                             @endphp 
-                            @foreach($estudianteAva as $estuAva)
-                                @php
-                                    if($estuAva->nombre_sede != $check){
-                                        echo "<table class='table table-hover table-bordered estudiantes'>";
-                                            echo "<h4 class='card-title text-center'>{$estuAva->nombre_sede}</h4>";  
-                                            $check = strval($estuAva->nombre_sede);
-                                            echo "<thead class='table-active text-center'>";    
-                                                echo "<th class='align-middle text-center'>TRABAJADOR</th>";
-                                                echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
-                                                echo "<th class='align-middle text-center'>No. IDEN.</th>";    
-                                                echo "<th class='align-middle text-center'>GÉNERO</th>";
-                                                echo "<th class='align-middle text-center'>EMAIL</th>";
-                                                echo "<th class='align-middle text-center'>TELEFONO</th>";
-                                                echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
-                                                echo "<th class='align-middle text-center'>ROL</th>";
-                                            
-                                                echo "<th class='align-middle text-center' style='width: 14.60%'>ACCIONES</th>";
-                                            echo "</thead>";
-                                    }
-                                @endphp
-                                <tr>
-                                    <td class="align-middle">{{$estuAva->primer_nombre_persona}} {{$estuAva->segundo_nombre_persona}} {{$estuAva->primer_apellido_persona}} {{$estuAva->segundo_apellido_persona}}</td>
-                                    <td class="align-middle">{{$estuAva->tipo_iden_persona}}</td>
-                                    <td class="align-middle">{{$estuAva->cedula_persona}}</td>
-                                    <td class="align-middle text-center">{{$estuAva->genero_persona == 'FEMENINO' ? 'F' : 'M'}}</td>
-                                    <td class="align-middle" style="word-break:break-all;">{{$estuAva->correo_persona}}</td>
-                                    <td class="align-middle">{{$estuAva->telefono_persona}}</td>
-                                    <td class="align-middle text-center">
-                                        @foreach($personasperfiles as $personperf)
-                                            @if($estuAva->id_persona == $personperf->persona_id)
-                                                {{$personperf->perfiles->nombre_perfil}} <br>
-                                            @endif
-                                        @endforeach
-                                        @if($estuAva->lider_ava == 'TRUE')
-                                            <B>(LIDER A. VIRTUAL)</B>
-                                            <br>
-                                        @endif
-                                        @if($estuAva->lider_dosimetria == 'TRUE')
-                                            <B>(LIDER DOSIMETRÍA)</B>
-                                        @endif
-                                        @if($estuAva->lider_controlescalidad == 'TRUE')
-                                            <B>(LIDER C. CALIDAD)</B>
-                                        @endif
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        @foreach($personasroles as $personrol)
-                                            @if($estuAva->id_persona == $personrol->persona_id)
-                                                {{$personrol->roles->nombre_rol}} <br>
-                                            @endif
-                                        @endforeach
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <a href="{{route('personas.edit', ['persona'=>$estuAva->id_persona, 'trabestucont'=> 2, 'empresa'=>$empresa->id_empresa])}}" class="btn colorQA">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
-                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <form class="form_eliminar_persona mb-1" id="form_eliminar_persona" name="form_eliminar_persona" action="{{--  {{route('personas.destroy', $trabDosim->id_persona)}} --}}" method="POST" class="mb-1">
-                                                    @csrf  
-                                                    @method('delete')
-                                                    <button class="btn btn-danger"  type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </table>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-12">
+                                    @foreach($estudianteAva as $estuAva)
+                                        @php
+                                            if($estuAva->nombre_sede != $check){
+                                                echo "<table class='table table-hover table-bordered estudiantes'>";
+                                                    echo "<h4 class='card-title text-center'>{$estuAva->nombre_sede}</h4>";  
+                                                    $check = strval($estuAva->nombre_sede);
+                                                    echo "<thead class='table-active text-center'>";    
+                                                        echo "<th class='align-middle text-center'>TRABAJADOR</th>";
+                                                        echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
+                                                        echo "<th class='align-middle text-center'>No. IDEN.</th>";    
+                                                        echo "<th class='align-middle text-center'>GÉNERO</th>";
+                                                        echo "<th class='align-middle text-center'>EMAIL</th>";
+                                                        echo "<th class='align-middle text-center'>TELEFONO</th>";
+                                                        echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
+                                                        echo "<th class='align-middle text-center'>ROL</th>";
+                                                    
+                                                        echo "<th class='align-middle text-center' style='width: 14.60%'>ACCIONES</th>";
+                                                    echo "</thead>";
+                                            }
+                                        @endphp
+                                        <tr>
+                                            <td class="align-middle">{{$estuAva->primer_nombre_persona}} {{$estuAva->segundo_nombre_persona}} {{$estuAva->primer_apellido_persona}} {{$estuAva->segundo_apellido_persona}}</td>
+                                            <td class="align-middle">{{$estuAva->tipo_iden_persona}}</td>
+                                            <td class="align-middle">{{$estuAva->cedula_persona}}</td>
+                                            <td class="align-middle text-center">{{$estuAva->genero_persona == 'FEMENINO' ? 'F' : 'M'}}</td>
+                                            <td class="align-middle" style="word-break:break-all;">{{$estuAva->correo_persona}}</td>
+                                            <td class="align-middle">{{$estuAva->telefono_persona}}</td>
+                                            <td class="align-middle text-center">
+                                                @foreach($personasperfiles as $personperf)
+                                                    @if($estuAva->id_persona == $personperf->persona_id)
+                                                        {{$personperf->perfiles->nombre_perfil}} <br>
+                                                    @endif
+                                                @endforeach
+                                                @if($estuAva->lider_ava == 'TRUE')
+                                                    <B>(LIDER A. VIRTUAL)</B>
+                                                    <br>
+                                                @endif
+                                                @if($estuAva->lider_dosimetria == 'TRUE')
+                                                    <B>(LIDER DOSIMETRÍA)</B>
+                                                @endif
+                                                @if($estuAva->lider_controlescalidad == 'TRUE')
+                                                    <B>(LIDER C. CALIDAD)</B>
+                                                @endif
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                @foreach($personasroles as $personrol)
+                                                    @if($estuAva->id_persona == $personrol->persona_id)
+                                                        {{$personrol->roles->nombre_rol}} <br>
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <a href="{{route('personas.edit', ['persona'=>$estuAva->id_persona, 'trabestucont'=> 2, 'empresa'=>$empresa->id_empresa])}}" class="btn colorQA">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                            </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <form class="form_eliminar_persona mb-1" id="form_eliminar_persona" name="form_eliminar_persona" action="{{--  {{route('personas.destroy', $trabDosim->id_persona)}} --}}" method="POST" class="mb-1">
+                                                            @csrf  
+                                                            @method('delete')
+                                                            <button class="btn btn-danger"  type="submit">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </table>
+                                </div>
+                                <div class="col"></div>
+                            </div>
                         </div>
                         <!-- //////////////////// PESTAÑA DE CONTACTOS //////////////// -->
                         <div class="tab-pane" id="contacto" role="tabpanel" aria-labelledby="contacto-tab">
@@ -699,83 +707,88 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                             @php
                                 $check2 = 'inicial';
                             @endphp 
-                            @foreach($contacto as $cont)
-                                @php
-                                    if($cont->nombre_sede != $check2 ){
-                                        echo "<table class='table table-hover table-bordered contactos'>";
-                                            echo "<h4 class='card-title text-center pt-3'>{$cont->nombre_sede}</h4>";
-                                            $check2 = strval($cont->nombre_sede);
-                                            echo "<thead class='table-active text-center'>";    
-                                                echo "<th class='align-middle text-center'>CONTACTO</th>";
-                                                echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
-                                                echo "<th class='align-middle text-center'>No. IDEN</th>";    
-                                                echo "<th class='align-middle text-center'>GÉNERO</th>";
-                                                echo "<th class='align-middle text-center'>EMAIL</th>";
-                                                echo "<th class='align-middle text-center'>TELEFONO</th>";
-                                                echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
-                                                echo "<th class='align-middle text-center'>ROL</th>";
-                                                echo "<th class='align-middle text-center'>ACCIONES</th>";
-                                            echo "</thead>";
-                                    }
-                                @endphp
-                                <tr>
-                                    <td class="align-middle">{{$cont->primer_nombre_persona}} {{$cont->segundo_nombre_persona}} {{$cont->primer_apellido_persona}} {{$cont->segundo_apellido_persona}}</td>
-                                    <td class="align-middle">{{$cont->tipo_iden_persona}}</td>
-                                    <td class="align-middle text-center">{{$cont->cedula_persona}}</td>
-                                    <td class="align-middle text-center">{{$cont->genero_persona == 'FEMENINO' ? 'F' : 'M'}}</td>
-                                    <td class="align-middle" style="word-break:break-all;">{{$cont->correo_persona}}</td>
-                                    <td class="align-middle text-center">{{$cont->telefono_persona}}</td>
-                                    <td class="align-middle text-center">
-                                        @foreach($personasperfiles as $personperf)
-                                            @if($cont->id_persona == $personperf->persona_id)
-                                                {{$personperf->perfiles->nombre_perfil}} <br>
-                                            @endif
-                                        @endforeach
-                                        @if($cont->lider_ava == 'TRUE')
-                                            <B>(LIDER A. VIRTUAL)</B>
-                                            <br>
-                                        @endif
-                                        @if($cont->lider_dosimetria == 'TRUE')
-                                            <B>(LIDER DOSIMETRÍA)</B>
-                                        @endif
-                                        @if($cont->lider_controlescalidad == 'TRUE')
-                                            <B>(LIDER C. CALIDAD)</B>
-                                        @endif
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        @foreach($personasroles as $personrol)
-                                            @if($cont->id_persona == $personrol->persona_id)
-                                                {{$personrol->roles->nombre_rol}} <br>
-                                            @endif
-                                        @endforeach
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <a href="{{route('personas.edit', ['persona'=>$cont->id_persona, 'trabestucont'=> 3, 'empresa'=>$empresa->id_empresa])}}" class="btn colorQA">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
-                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                            <div class="col">
-                                                <form id="form_eliminar_contacto" name="form_eliminar_contacto" action="{{route('personas.destroy', $cont)}}" method="POST" class="mb-1">
-                                                    @csrf  
-                                                    @method('delete')
-                                                    <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </div>
-                            @endforeach
-                            </table>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-12">
+                                    @foreach($contacto as $cont)
+                                        @php
+                                            if($cont->nombre_sede != $check2 ){
+                                                echo "<table class='table table-hover table-bordered contactos'>";
+                                                    echo "<h4 class='card-title text-center pt-3'>{$cont->nombre_sede}</h4>";
+                                                    $check2 = strval($cont->nombre_sede);
+                                                    echo "<thead class='table-active text-center'>";    
+                                                        echo "<th class='align-middle text-center'>CONTACTO</th>";
+                                                        echo "<th class='align-middle text-center'>TIPO IDEN.</th>";
+                                                        echo "<th class='align-middle text-center'>No. IDEN</th>";    
+                                                        echo "<th class='align-middle text-center'>GÉNERO</th>";
+                                                        echo "<th class='align-middle text-center'>EMAIL</th>";
+                                                        echo "<th class='align-middle text-center'>TELEFONO</th>";
+                                                        echo "<th class='align-middle text-center'>PERFIL LABORAL</th>";
+                                                        echo "<th class='align-middle text-center'>ROL</th>";
+                                                        echo "<th class='align-middle text-center'>ACCIONES</th>";
+                                                    echo "</thead>";
+                                            }
+                                        @endphp
+                                        <tr>
+                                            <td class="align-middle">{{$cont->primer_nombre_persona}} {{$cont->segundo_nombre_persona}} {{$cont->primer_apellido_persona}} {{$cont->segundo_apellido_persona}}</td>
+                                            <td class="align-middle">{{$cont->tipo_iden_persona}}</td>
+                                            <td class="align-middle text-center">{{$cont->cedula_persona}}</td>
+                                            <td class="align-middle text-center">{{$cont->genero_persona == 'FEMENINO' ? 'F' : 'M'}}</td>
+                                            <td class="align-middle" style="word-break:break-all;">{{$cont->correo_persona}}</td>
+                                            <td class="align-middle text-center">{{$cont->telefono_persona}}</td>
+                                            <td class="align-middle text-center">
+                                                @foreach($personasperfiles as $personperf)
+                                                    @if($cont->id_persona == $personperf->persona_id)
+                                                        {{$personperf->perfiles->nombre_perfil}} <br>
+                                                    @endif
+                                                @endforeach
+                                                @if($cont->lider_ava == 'TRUE')
+                                                    <B>(LIDER A. VIRTUAL)</B>
+                                                    <br>
+                                                @endif
+                                                @if($cont->lider_dosimetria == 'TRUE')
+                                                    <B>(LIDER DOSIMETRÍA)</B>
+                                                @endif
+                                                @if($cont->lider_controlescalidad == 'TRUE')
+                                                    <B>(LIDER C. CALIDAD)</B>
+                                                @endif
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                @foreach($personasroles as $personrol)
+                                                    @if($cont->id_persona == $personrol->persona_id)
+                                                        {{$personrol->roles->nombre_rol}} <br>
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <a href="{{route('personas.edit', ['persona'=>$cont->id_persona, 'trabestucont'=> 3, 'empresa'=>$empresa->id_empresa])}}" class="btn colorQA">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-pencil-fill mb-1" viewBox="0 0 16 16">
+                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                            </svg>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <form id="form_eliminar_contacto" name="form_eliminar_contacto" action="{{route('personas.destroy', $cont)}}" method="POST" class="mb-1">
+                                                            @csrf  
+                                                            @method('delete')
+                                                            <button class="btn btn-danger" onclick="Eliminar(evt);" type="submit">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </table>
+                                </div>
+                                <div class="col"></div>  
+                            </div> 
                         </div>
                     </div>
                 </div>

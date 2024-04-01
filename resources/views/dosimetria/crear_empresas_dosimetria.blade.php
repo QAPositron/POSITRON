@@ -181,9 +181,9 @@
     <div class="row">               
         <div class="col"></div>
         <div class="col-12">
-            <div class="table table-responsive p-4 ">
-                <table class="table table-bordered empresasdosi" data-order='[[ 1, "desc" ]]' data-page-length='25'>
-                    <thead class="table-secondary">
+            <div class="table table-responsive p-4">
+                <table class="table table-bordered empresasdosi" data-order='[[ 1, "desc" ]]' data-page-length='25' style="width:100%">
+                    <thead class="table-active align-middle">
                         <tr>
                             <th rowspan="2" class="align-middle text-center">EMPRESA</th>
                             <th rowspan="2"class="align-middle text-center">CONTRATOS ACT.</th>
