@@ -612,7 +612,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                     @foreach($estudianteAva as $estuAva)
                                         @php
                                             if($estuAva->nombre_sede != $check){
-                                                echo "<table class='table table-hover table-bordered estudiantes'>";
+                                                echo "<table class='table table-hover table-bordered estudiantes' style='width:100%'>";
                                                     echo "<h4 class='card-title text-center'>{$estuAva->nombre_sede}</h4>";  
                                                     $check = strval($estuAva->nombre_sede);
                                                     echo "<thead class='table-active text-center'>";    
@@ -656,7 +656,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             <td class="align-middle text-center">
                                                 @foreach($personasroles as $personrol)
                                                     @if($estuAva->id_persona == $personrol->persona_id)
-                                                        {{$personrol->roles->nombre_rol}} <br>
+                                                        {{$personrol->roles->name}} <br>
                                                     @endif
                                                 @endforeach
                                             </td>
@@ -713,7 +713,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                     @foreach($contacto as $cont)
                                         @php
                                             if($cont->nombre_sede != $check2 ){
-                                                echo "<table class='table table-hover table-bordered contactos'>";
+                                                echo "<table class='table table-hover table-bordered contactos' style='width:100%'>";
                                                     echo "<h4 class='card-title text-center pt-3'>{$cont->nombre_sede}</h4>";
                                                     $check2 = strval($cont->nombre_sede);
                                                     echo "<thead class='table-active text-center'>";    
@@ -756,7 +756,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             <td class="align-middle text-center">
                                                 @foreach($personasroles as $personrol)
                                                     @if($cont->id_persona == $personrol->persona_id)
-                                                        {{$personrol->roles->nombre_rol}} <br>
+                                                        {{$personrol->roles->name}} <br>
                                                     @endif
                                                 @endforeach
                                             </td>
@@ -787,8 +787,8 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                     @endforeach
                                     </table>
                                 </div>
-                                <div class="col"></div>  
-                            </div> 
+                                <div class="col"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

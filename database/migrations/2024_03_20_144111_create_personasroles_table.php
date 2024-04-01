@@ -13,6 +13,7 @@ class CreatePersonasrolesTable extends Migration
      */
     public function up()
     {
+       
         Schema::create('personasroles', function (Blueprint $table) {
             $table->bigIncrements('id_personarol');
 

@@ -37,7 +37,7 @@
                         <th class="text-center" style='width: 20.60%'>FECHA FINALIZACIÓN</th>
                         <th class="text-center" style='width: 15.60%'>P. RECAMBIO</th>
                         <th class="text-center" style='width: 15.60%'>ESTADO</th>
-                        <th class="text-center" style='width: 30.60%'>ACCIONES</th>
+                        <th class="text-center" style='width: 22%'>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>

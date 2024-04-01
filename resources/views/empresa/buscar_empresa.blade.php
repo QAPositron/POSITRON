@@ -70,6 +70,7 @@
             </tbody>
         </table>
     </div>
+    
 </div>
 <br>
 
@@ -149,7 +150,7 @@ crossorigin="anonymous">
                 }   
             },
         });
-
+        
         $('.ir-arriba').click(function(){
             $('body, html').animate({
                 scrollTop: '0px'

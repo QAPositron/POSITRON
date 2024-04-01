@@ -2948,6 +2948,7 @@ class DosimetriaController extends Controller
                 ->take(12)
                 ->get();
             }
+            /* return $SumatoriaDocemesestrabajadoresaisg; */
             $SumatoriaDocemesesAreasasig = array();
             for($i=0; $i<count($dosiareasig); $i++){
     

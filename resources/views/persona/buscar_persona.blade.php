@@ -2,43 +2,42 @@
 @extends('layouts.app')
 @extends('layouts.plantillabase')
 @section('contenido')
-    <div class="row">
-        <div class="col-md"></div>
-        <div class="col-md-11">
-            <h2 class="text-center">TODAS LAS PERSONAS</h2>
-        </div>
-        <div class="col-md"></div>
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md-11">
+        <h2 class="text-center">TODAS LAS PERSONAS</h2>
     </div>
-    <div class="row">
-        <div class="col">
-            <a href="{{route('personas.create')}}" class="btn colorQA btn-sm m-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg> CREAR PERSONA
-            </a>
-        </div>
-        <div class="col"></div>
+    <div class="col-md"></div>
+</div>
+<div class="row">
+    <div class="col">
+        <a href="{{route('personas.create')}}" class="btn colorQA btn-sm m-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg> CREAR PERSONA
+        </a>
     </div>
-    <br>
+    <div class="col"></div>
+</div>
+<br>
     {{-- @livewire('search-personas-component') --}}
     <div class="row" id ="salida">
         <div class="col"></div>
         <div class="col-12">
             <div class="table table-responsive">
-                <table class="table table-hover table-bordered" id="personas">
+                <table class="table table-hover table-bordered" id="personas" style="width:100%">
                     <thead class='table-active text-center'>
-                        
                         <th class="align-middle text-center">PERSONA</th>
                         <th class="align-middle text-center" >TIPO IDEN.</th>
                         <th class="align-middle text-center" >No. IDEN.</th>
                         <th class="align-middle text-center" >GÉNERO</th>
-                        <th class="align-middle text-center" style='width: 12.60%'>EMAIL</th>
+                        <th class="align-middle text-center" >EMAIL</th>
                         <th class="align-middle text-center" >TELEFONO</th>
                         <th class="align-middle text-center" >EMPRESA - SEDE RELACIONADAS</th>
                         <th class="align-middle text-center" >PERFIL LABORAL</th>
                         <th class="align-middle text-center" >ROLES</th>
                         <th class="align-middle text-center">ESTADO</th>
-                        <th class="align-middle text-center"  style='width: 10.20%'>ACCIONES</th>
+                        <th class="align-middle text-center">ACCIONES</th>
                     </thead>
                     <tbody>
                         @foreach($persona as $person)
@@ -78,7 +77,7 @@
                                 <td class="align-middle text-center">
                                     @foreach($personasroles as $personrol)
                                         @if($person->id_persona == $personrol->persona_id)
-                                            {{$personrol->roles->nombre_rol}}
+                                            {{$personrol->roles->name}}
                                         @endif
                                     @endforeach
                                 </td>
