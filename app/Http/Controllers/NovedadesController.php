@@ -1044,7 +1044,7 @@ class NovedadesController extends Controller
                         $cambioNovedadDosimetria = new Cambiosnovedadmeses();
         
                         $cambioNovedadDosimetria->novedadmesescontdosidepto_id = empty($newNovedadmesescontdosisededepto) ? $newNovedad->id_novedadmesescontdosi : $newNovedadmesescontdosisededepto->id_novedadmesescontdosi;
-                        $cambioNovedadDosimetria->dosicontrol_ant_id           = $request->dosiRetiradosControl[$i]; 
+                        $cambioNovedadDosimetria->dosicontrol_ant_id           = $request->dosimRetiradosControl[$i]; 
                         $cambioNovedadDosimetria->mes_asignacion               = $request->mes_asig_siguiente;
                         $cambioNovedadDosimetria->tipo_novedad                 = $request->tipo_novedad;
                         $cambioNovedadDosimetria->nota_cambiodosim             = $request->inputnotasControl[$i];

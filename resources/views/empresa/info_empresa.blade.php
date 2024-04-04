@@ -817,7 +817,7 @@ crossorigin="anonymous">
     <script>
         Swal.fire(
         'ERROR!',
-        'NO SE HA PODIDO GUARDAR, PORQUE YA EXISTE LIDER DE DOSIMETRIA!!',
+        'NO SE HA PODIDO GUARDAR el ROL, PORQUE YA EXISTE LÍDER DE DOSIMETRÍA PARA ESA SEDE!!',
         'error'
         )
     </script>

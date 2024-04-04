@@ -19,7 +19,9 @@ class UserSeeder extends Seeder
             'name' => 'GLADYS Florez Rodriguez',
             'email' => 'G@GMAIL.COM',
             'password' =>bcrypt('123456789')
-        ])->assignRole('liderDosim');
+        ])->assignRole('LÍDER DE DOSIMETRÍA');
+
+        
         User::factory(9)->create();
     }
 }

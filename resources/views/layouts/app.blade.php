@@ -65,7 +65,7 @@
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(26, 153, 128, 1);
       }
       .form-check-input:checked{
-        background: #1A9980;
+        background-color: #1A9980;
         border-color: white;
       }
       

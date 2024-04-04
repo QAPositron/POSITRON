@@ -339,5 +339,5 @@ Route::get('cotizaciones/{cotizacion}/info', [CotizacionController::class, 'info
 
 
 /////////////////RUTAS PERMITIDAS PARA EL ROL DE LIDER DE DOSIMETRIA//////////////////// 
-Route::get('/liderdosim', [LiderdosimrolController::class, 'index'])->name('liderdosim.home'); 
+Route::get('/liderdosim', [LiderdosimrolController::class, 'index'])->middleware('can:liderdosim.home')->name('liderdosim.home'); 
 

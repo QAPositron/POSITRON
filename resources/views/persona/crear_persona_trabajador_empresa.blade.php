@@ -18,7 +18,8 @@
                 @csrf
                 <div class="row g-2">
                     <label class="text-secondary">' * ' campo obligatorio</label>
-                    <div class="col-md-5">
+                    <div class="col-md"></div>
+                    <div class="col-md">
                         <label for="">PERFIL LABORAL:</label>
                         <div class="form-floating">
                             <select class="form-select @error('perfil_personas') is-invalid @enderror" name="perfil_personas[]" id="perfil_personas" autofocus aria-label="Floating label select example"  multiple="true" >
@@ -30,14 +31,16 @@
                             @error('perfil_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="col-md d-flex align-items-center ">
-                        <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_perfilModal" >
+                    <div class="col-md-1">
+                        <button type="button" class="btn colorQA btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#nueva_perfilModal" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
                         </button>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md"></div>
+                    {{-- /////////////// AHORA LOS ROLES SON FIJOS Y SON CREADOS Y RELACIONADOS CON SPATIE DE LARAVEL//////////////////// --}}
+                    {{-- <div class="col-md-6">
                         <label for="">*ROL:</label>
                         <div class="form-floating">
                             <select class="form-select @error('rol_personas') is-invalid @enderror" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
@@ -54,7 +57,7 @@
                             </select>
                             @error('rol_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- /////////TEMPORALMENTE DESHABILITADO POR INDECISION////////////// AHORA SOLO HAY 4 ROLES FIJOS////// --}}
                     {{-- <div class="col-md d-flex align-items-center">
                         <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_rolModal" >
@@ -116,7 +119,7 @@
                                 <option value="CÉDULA DE EXTRANJERÍA" @if (old('tipoIden_persona') == "CÉDULA DE EXTRANJERÍA") {{ 'selected' }} @endif>CÉDULA DE EXTRANJERÍA</option>
                                 <option value="PASAPORTE"  @if (old('tipoIden_persona') == "PASAPORTE") {{ 'selected' }} @endif>PASAPORTE</option>
                             </select>
-                            <label for="floatingInputGrid">* TIPO DE IDENTIFICACIÓN:</label>
+                            <label for="floatingInputGrid">TIPO DE IDENTIFICACIÓN:</label>
                             @error('tipoIden_persona') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -200,30 +203,63 @@
                 </div>
                 <br>
                 <BR>
-                <label for="">A CONTINUACIÓN, SELECCIONE SI ESTE CONTACTO ES EL LÍDER O ENCARGADO DE LOS SERVICIOS:</label>
+                <label for="">A CONTINUACIÓN, SELECCIONE LOS ROLES QUE ASUMIRÁ ESTA PERSONA:</label>
                 
                 <div class="row g-2">
                     <div class="col-md"></div>
-                    <div class="col-md text-center">
+                    <div class="col-md">
                         <br>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_contcal" name="lider_contcal" @if(old('lider_contcal') == 'TRUE') checked="checked" @endif>
+                        @foreach($roles as $rol)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    {{$rol->name}}
+                                </label>
+                                
+                            </div>
+                        @endforeach
+                        {{-- <div class="form-check">
+                            <input class="form-check-input " type="checkbox" value="TRUE" id="admin" name="admin" @if(old('admin') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
-                                CONTROLES DE CALIDAD
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava" @if(old('lider_ava') == 'TRUE') checked="checked" @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                AULA VIRTUAL
+                                ADMINISTRADOR
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria" @if(old('lider_dosimetria') == 'TRUE') checked="checked" @endif>
                             <label class="form-check-label" for="defaultCheck1">
-                                DOSIMETRÍA
+                                LÍDER DE DOSIMETRÍA
                             </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="toe" name="toe" @if(old('toe') == 'TRUE') checked="checked" @endif>
+                            <label class="form-check-label" for="defaultCheck1">
+                                TOE
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="opr" name="opr" @if(old('opr') == 'TRUE') checked="checked" @endif>
+                            <label class="form-check-label" for="defaultCheck1">
+                                OPR
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="estudiante" name="estudiante" @if(old('estudiante') == 'TRUE') checked="checked" @endif>
+                            <label class="form-check-label" for="defaultCheck1">
+                                ESTUDIANTE
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="contacto" name="contacto" @if(old('contacto') == 'TRUE') checked="checked" @endif>
+                            <label class="form-check-label" for="defaultCheck1">
+                                CONTACTO
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="TRUE" id="publico" name="publico" @if(old('publico') == 'TRUE') checked="checked" @endif>
+                            <label class="form-check-label" for="defaultCheck1">
+                                PUBLICO
+                            </label>
+                        </div> --}}
                     </div>
                     <div class="col-md"></div>
                 </div>
@@ -387,6 +423,23 @@ crossorigin="anonymous">
     $(document).ready(function(){
         $('#form_create_contacto').submit(function(e){
             e.preventDefault();
+            var superAdmin = document.getElementById("SUPER-ADMINISTRADOR").checked;
+            var admin = document.getElementById("ADMINISTRADOR").checked;
+            var liderdosim = document.getElementById("LÍDER DE DOSIMETRÍA").checked;
+            var toe = document.getElementById("TOE").checked;
+            var opr = document.getElementById("OPR").checked;
+            var estudiante = document.getElementById("ESTUDIANTE").checked;
+            var contacto = document.getElementById("CONTACTO").checked;
+            var publico = document.getElementById("PUBLICO").checked;
+
+            if(superAdmin == false && admin == false && liderdosim == false && toe == false && opr == false && estudiante == false && contacto == false && publico == false){
+                console.log("entro al if");
+                return Swal.fire({
+                                title:"FALTA SELECCIONAR AL MENOS UN ROL PARA LA PERSONA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+            }
             Swal.fire({
                 text: "DESEA GUARDAR ESTA PERSONA??",
                 icon: 'warning',

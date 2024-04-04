@@ -23,7 +23,16 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-
+    /* /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+    
+    public function showRegistrationForm()
+    {
+        $personas = Persona::all();
+        return view('auth.register',compact('personas'));
+    } */
     /**
      * Where to redirect users after registration.
      *
