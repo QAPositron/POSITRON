@@ -6,18 +6,21 @@
     <div class="col-8">
         <div class="card text-dark bg-light ">
             <br>
-            @if($id == 1)
+            @if($id == 0)
+                <h3 class="text-center mt-3">CREAR PERSONA</h3>
+            @elseif($id == 1)
                 <h3 class="text-center mt-3">CREAR TRABAJADOR DE DOSIMETRÍA PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
             @elseif($id == 2)
                 <h3 class="text-center mt-3">CREAR ESTUDIANTE DE A. VIRTUAL PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
             @elseif($id== 3)
                 <h3 class="text-center mt-3">CREAR CONTACTO PARA LA EMPRESA <br> <i>{{$empresa->nombre_empresa}}</i></h3>
             @endif
-            <br>
+            
             <form class="m-4" id="form_create_contacto" name="form_create_contacto" action="{{route('personasEmpresa.save')}}" method="POST">
                 @csrf
                 <div class="row g-2">
                     <label class="text-secondary">' * ' campo obligatorio</label>
+                    <input type="text" class="form-control" name="id" id="id" value="{{$id}}" hidden>
                     <div class="col-md"></div>
                     <div class="col-md">
                         <label for="">PERFIL LABORAL:</label>
@@ -177,30 +180,72 @@
                 <label for="">SELECCIONE SI DESEA RELACIONAR ESTE CONTACTO A UNA EMPRESA Y SUS SEDES</label>
                 <br>
                 <br>
-                <div class="row g-2">
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" name="empresa_persona" id="empresa_persona" value="{{$empresa->nombre_empresa}}" readonly>
-                            <input type="number" class="form-control @error('id_empresa') is-invalid @enderror" name="id_empresa" id="id_empresa" value="{{$empresa->id_empresa}}"  hidden>
-                            <label for="floatingSelectGrid">* EMPRESA:</label>
-                            @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                @if($id == 0)
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <select  class="form-select @error('id_empresa') is-invalid @enderror" name="id_empresas" id="id_empresas">
+                                    <option value="">--SELECCIONE--</option>
+                                    @foreach($empresas as $emp)
+                                        <option value ="{{ $emp->id_empresa }}" @if (old('id_empresas') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option>
+                                    @endforeach 
+                                </select>
+                                <label for="floatingSelectGrid">EMPRESA:</label>
+                                @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center">
+                            <button type="button" class="btn colorQA"  id="agregar" name="agregar">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col-md">
+                            <label for="floatingSelectGrid">SEDE:</label>
+                            <div class="spinner_sede text-center" id="spinner_sede">
+    
+                            </div>
+                            <div class="form-floating" id="sede_empresa" name="sede_empresa">
+                                <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
+                                    
+                                </select>
+                                @error('sede_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md">
-                        
-                        <label for="floatingSelectGrid">* SEDE:</label>
-                        
-                        <div class="form-floating" id="sede_empresa" name="sede_empresa">
-                            <select class="form-select @error('id_sedes') is-invalid @enderror" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
-                                <option value="">--SELECCIONE--</option>
-                                @foreach($sedes as $sede)
-                                    <option value ="{{ $sede->id_sede }}" {{ in_array($sede->id_sede, (array) old('id_sedes', [])) ? "selected" : "" }}>{{$sede->nombre_sede}}</option>
-                                @endforeach 
-                            </select>
-                            @error('id_sedes') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                    <br>
+                    <div id="otraEmpresa">
+    
+                    </div>
+                    
+                @else
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="empresa_persona" id="empresa_persona" value="{{$empresa->nombre_empresa}}" readonly>
+                                <input type="number" class="form-control @error('id_empresa') is-invalid @enderror" name="id_empresa" id="id_empresa" value="{{$empresa->id_empresa}}"  hidden>
+                                <label for="floatingSelectGrid">* EMPRESA:</label>
+                                @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
                         </div>
+                        <div class="col-md">
+                            
+                            <label for="floatingSelectGrid">* SEDE:</label>
+                            
+                            <div class="form-floating" id="sede_empresa" name="sede_empresa">
+                                <select class="form-select @error('id_sedes') is-invalid @enderror" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
+                                    <option value="">--SELECCIONE--</option>
+                                    @foreach($sedes as $sede)
+                                        <option value ="{{ $sede->id_sede }}" {{ in_array($sede->id_sede, (array) old('id_sedes', [])) ? "selected" : "" }}>{{$sede->nombre_sede}}</option>
+                                    @endforeach 
+                                </select>
+                                @error('id_sedes') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div> 
                     </div> 
-                </div>
+                @endif
+                
                 <br>
                 <BR>
                 <label for="">A CONTINUACIÓN, SELECCIONE LOS ROLES QUE ASUMIRÁ ESTA PERSONA:</label>
@@ -211,55 +256,13 @@
                         <br>
                         @foreach($roles as $rol)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]">
+                                <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif>
                                 <label class="form-check-label" for="defaultCheck1">
                                     {{$rol->name}}
                                 </label>
                                 
                             </div>
                         @endforeach
-                        {{-- <div class="form-check">
-                            <input class="form-check-input " type="checkbox" value="TRUE" id="admin" name="admin" @if(old('admin') == 'TRUE') checked="checked" @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                ADMINISTRADOR
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria" @if(old('lider_dosimetria') == 'TRUE') checked="checked" @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                LÍDER DE DOSIMETRÍA
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="toe" name="toe" @if(old('toe') == 'TRUE') checked="checked" @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                TOE
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="opr" name="opr" @if(old('opr') == 'TRUE') checked="checked" @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                OPR
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="estudiante" name="estudiante" @if(old('estudiante') == 'TRUE') checked="checked" @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                ESTUDIANTE
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="contacto" name="contacto" @if(old('contacto') == 'TRUE') checked="checked" @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                CONTACTO
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="publico" name="publico" @if(old('publico') == 'TRUE') checked="checked" @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                PUBLICO
-                            </label>
-                        </div> --}}
                     </div>
                     <div class="col-md"></div>
                 </div>
@@ -270,9 +273,15 @@
                     <div class="col d-grid gap-2">
                         <input class="btn colorQA" type="submit" id="boton-guardar" name="boton-guardar" value="GUARDAR">
                     </div>
-                    <div class="col d-grid gap-2">
-                        <a href="{{route('empresas.info', $empresa->id_empresa)}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
-                    </div>
+                    @if($id == 0)
+                        <div class="col d-grid gap-2">
+                            <a href="{{route('personas.search')}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                        </div>
+                    @else
+                        <div class="col d-grid gap-2">
+                            <a href="{{route('empresas.info', $empresa->id_empresa)}}" class="btn btn-danger " type="button" id="cancelar" name="cancelar" role="button">CANCELAR</a>
+                        </div>
+                    @endif
                     <div class="col"></div>
                 </div>
             </form>
@@ -322,6 +331,80 @@ crossorigin="anonymous">
     </script>
 @endif
 <script type="text/javascript">
+if('{{$id}}' == 0){
+    $(document).ready(function(){
+        var i = 1;
+        $("#agregar").click(function(){
+
+            $("#otraEmpresa").append(
+                '<div class="row g-2" id="row'+i+'">'
+                    +'<div class="col-md">'
+                        +'<div class="form-floating">'
+                            +'<select class="form-select" name="id_empresas_add[]" id="id_empresas'+i+'">'
+                                +'<option value="">--SELECCIONE--</option>'
+                                +'@foreach($empresas as $emp)'
+                                    +'<option value ="{{ $emp->id_empresa }}">{{$emp->nombre_empresa}}</option>'
+                                +'@endforeach'
+                            +'</select>'
+                            +'<label for="floatingSelectGrid">EMPRESA:</label>'
+                            
+                        +'</div>'
+                    +'</div>'
+                    +'<div class="col-md-1 d-flex align-items-center">'    
+                        +'<button id="remove'+i+'" class="btn btn-danger"  type="button">'
+                            +'<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">'
+                                +'<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'
+                            +'</svg>'
+                        +'</button>'
+                    +'</div>'
+                    +'<div class="col-md">'
+                        +'<label for="floatingSelectGrid">SEDE:</label>'
+                        +'<div class="spinner_sede text-center" id="spinner_sede'+i+'"></div>'
+                        +'<div class="form-floating" id="sede_empresa'+i+'" name="sede_empresa">'
+                            +'<select class="form-select" id="id_sedes'+i+'" name="id_sedes_add[]" autofocus aria-label="Floating label select example"  multiple="true">'
+                                
+                            +'</select>'
+                        +'</div>'
+                    +'</div>'
+                    
+                +'</div>'
+                +'<br>'
+            );
+            
+            $('#id_empresas'+i).on('change', function(){
+                
+                $('#sede_empresa'+(i-1)).fadeOut();
+                $('#spinner_sede'+(i-1)).html('<div class="spinner-border text-secondary" id="spinner'+(i-1)+'" role="status"></div>');
+                var empresa_id = $(this).val();
+                var padre = document.getElementById("spinner_sede"+(i-1));
+                var hijo = document.getElementById("spinner"+(i-1));
+                if($.trim(empresa_id) != ''){
+                    $.get('selectsedes',{empresa_id : empresa_id}, function(sedes){
+                        console.log(sedes);
+                        var remove = padre.removeChild(hijo);
+                        $('#sede_empresa'+(i-1)).fadeIn();
+                        $('#id_sedes'+(i-1)).empty();
+                        $('#id_sedes'+(i-1)).append("<option value=''>--SELECCIONE UNA SEDE--</option>");
+                        $.each(sedes, function(index, value){
+                            $('#id_sedes'+(i-1)).append("<option value='"+ index + "'>" + value + "</option>");
+                        })
+                    });
+                }
+                
+            });
+            $('#remove'+i).click(function(){
+                $('#row'+(i-1)).remove();
+                
+            })
+            $('#id_sedes'+i).select2({
+                placeholder:"SELECCIONE LAS SEDES",
+                tags: true,
+                tokenSeparators: ['/',',',',',','," "]
+            });
+            i++;
+        }); 
+    });
+}
     $(document).ready(function(){
         $('#form_crear_perfil').submit(function(e){
             e.preventDefault();
@@ -374,6 +457,7 @@ crossorigin="anonymous">
                 });
             }
         })   */     
+
         $('#id_empresas').on('change', function(){
             $('#sede_empresa').fadeOut();
             $('#spinner_sede').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');

@@ -103,12 +103,12 @@ Route::post('perfiles', [PerfilesController::class, 'save'])->name('perfiles.sav
 /////////RUTAS PARA EL CRUD DE PERSONAS//////
 Route::get('personas/search', [PersonaController::class, 'search'])->name('personas.search');
 Route::get('personas/create', [PersonaController::class, 'create'])->name('personas.create');
-Route::get('personas/selectsedes', [PersonaController::class, 'selectsedes']);
+/* Route::get('personas/selectsedes', [PersonaController::class, 'selectsedes']); */
 Route::post('personas', [PersonaController::class, 'save'])->name('personas.save');
 Route::get('personas/{empresa}/{trabestucont}/create',[PersonaController::class, 'createTrabEstuContEmp'])->name('personasEmpresa.create');
 Route::post('personasEmpresa', [PersonaController::class, 'savePersonasEmpresa'])->name('personasEmpresa.save');
 Route::get('personas/{persona}/{trabestucont}/{empresa}/edit', [PersonaController::class, 'edit'])->name('personas.edit');
-Route::get('/personas/{persona}/{trabestucont}/{empresa}/selectsed', [PersonaController::class, 'selectsedes']);
+Route::get('/personas/{empresa}/{trabestucont}/selectsedes', [PersonaController::class, 'selectsedes']);
 Route::put('personas/{persona}', [PersonaController::class, 'update'])->name('personas.update');
 Route::delete('personas/{persona}', [PersonaController::class, 'destroy'])->name('personas.destroy');
 

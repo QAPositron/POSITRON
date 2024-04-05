@@ -690,7 +690,7 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                 <div class="col"></div>
                             </div>
                         </div>
-                        <!-- //////////////////// PESTAÑA DE CONTACTOS //////////////// -->
+                        <!-- //////////////////// PESTAÑA DE CONTACTOS //////////////// el ID para crear contactos es 3-->
                         <div class="tab-pane" id="contacto" role="tabpanel" aria-labelledby="contacto-tab">
                             <div class="row">
                                 <div class="col">

@@ -202,15 +202,21 @@ class PersonaController extends Controller
         
         return redirect()->route('personas.search')->with('guardar', 'ok');
     }
-    public function createTrabEstuContEmp(Empresa $empresa, $id){
+    public function createTrabEstuContEmp($idemp, $id){
         $perfiles = Perfiles::all();
         $roles    = Role::all();
-        $sedes = Sede::where('empresas_id', '=', $empresa->id_empresa)->get();
-        
-        return view('persona.crear_persona_trabajador_empresa', compact('empresa', 'id', 'perfiles', 'roles', 'sedes'));
+        $empresas = Empresa::all();
+        if($id == 0){
+            return view('persona.crear_persona_trabajador_empresa', compact('empresas', 'id', 'perfiles', 'roles'));
+        }else{
+            $empresa = Empresa::find($idemp);
+            $sedes = Sede::where('empresas_id', '=', $empresa->id_empresa)->get();
+            return view('persona.crear_persona_trabajador_empresa', compact('empresa', 'id', 'perfiles', 'roles', 'sedes'));
+        }
     }
     public function savePersonasEmpresa(Request $request){
-        return $request;
+        /* return $request; */
+        
         $request->validate([
             /* 'rol_personas'               => ['required'], */
             'primer_nombre_persona'      => ['required'],
@@ -231,7 +237,14 @@ class PersonaController extends Controller
                 'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],    
             ]);
         }
-       
+        foreach($request->roles as $rol){
+            if($rol == 3){
+                $request->validate([
+                    'correo_persona'             => ['required', 'email', Rule::unique('personas', 'correo_persona')],
+                    'cedula_persona'             => ['required', Rule::unique('personas', 'cedula_persona')],    
+                ]);
+            }
+        }
         $persona = new Persona();
 
         $persona->primer_nombre_persona     =  mb_strtoupper($request->primer_nombre_persona);
@@ -258,12 +271,13 @@ class PersonaController extends Controller
                         
                         $usuario = new User();
 
-                        /* $usuario->persona_id =
-                        $usuario->name
-                        $usuario->email
-                        $usuario->email_verified_at
-                        $usuario->create_at
-                        $usuario->update_at */
+                        $usuario->persona_id    = $persona->id_persona;
+                        $usuario->name          = $persona->primer_nombre_persona." ".$persona->segundo_nombre_persona." ".$persona->primer_apellido_persona." ".$persona->segundo_apellido_persona;
+                        $usuario->email         = $persona->correo_persona;
+                        $usuario->password      = bcrypt('{{$persona->cedula_persona}}');
+                        /* $usuario->created_at     = time();
+                        $usuario->updated_at     = time(); */
+                        $usuario->save();
 
                     }else{
                         return redirect()->route('empresas.info', $request->id_empresa)->with('error', 'ok');
@@ -273,6 +287,9 @@ class PersonaController extends Controller
                 $persona->save();
             }   
         }
+        ////GUARDAR LOS ROLES SELECCIONADOS/////
+        $usuario->roles()->sync($request->roles);
+        /////////////////////////////////////////
 
         if(!empty($request->perfil_personas)){
             for($i=0; $i<count($request->perfil_personas); $i++){
@@ -297,17 +314,24 @@ class PersonaController extends Controller
                 }
             }
         }
+        foreach($request->roles as $rol){
+            $personasRoles = new Personasroles();
+            $personasRoles->persona_id  = $persona->id_persona;
+            $personasRoles->role_id     = $rol;
+            $personasRoles->created_at   = time();
+            $personasRoles->updated_at   = time();
+    
+            $personasRoles->save();
+        }
         $personaContacto = Personasroles::where('persona_id', '=', $persona->id_persona)
         ->where('role_id', '=', 5)->get();
-
         if($persona->lider_dosimetria == TRUE && count($personaContacto) == 0){
             $personasRoles = new Personasroles();
             $personasRoles->persona_id  = $persona->id_persona;
             $personasRoles->role_id      = 5;
             $personasRoles->save();
         
-        }
-        /* elseif(!empty($request->rol_personas)){
+        }/* elseif(!empty($request->rol_personas)){
             for($i=0; $i<count($request->rol_personas); $i++){
                 if( $request->rol_personas[$i] == 2 && count($personaContacto) != 0){
                     
@@ -331,8 +355,12 @@ class PersonaController extends Controller
                 $personaSedes->save();
             }
         }
-       
-        return redirect()->route('empresas.info', $request->id_empresa)->with('guardar', 'ok');
+
+        if($request->id == '0'){
+            return redirect()->route('personas.search')->with('guardar', 'ok');
+        }else{
+            return redirect()->route('empresas.info', $request->id_empresa)->with('guardar', 'ok');
+        }
     }
     public function edit(Persona $persona, $id, $empresa){
         /* return $persona; */
