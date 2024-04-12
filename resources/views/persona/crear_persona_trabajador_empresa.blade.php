@@ -42,7 +42,8 @@
                         </button>
                     </div>
                     <div class="col-md"></div>
-                    {{-- /////////////// AHORA LOS ROLES SON FIJOS Y SON CREADOS Y RELACIONADOS CON SPATIE DE LARAVEL//////////////////// --}}
+                    {{-- /////////////// AHORA LOS ROLES SON FIJOS Y SON CREADOS Y RELACIONADOS CON SPATIE DE LARAVEL(LIDER DE DOSIMETRIA, ADMIN Y SUPERADMIN) LOS DEMAS ROLES SE RELACIONAN NORMAL CON PERSONAS-ROLES//////////////////// --}}
+
                     {{-- <div class="col-md-6">
                         <label for="">*ROL:</label>
                         <div class="form-floating">
@@ -255,13 +256,35 @@
                     <div class="col-md">
                         <br>
                         @foreach($roles as $rol)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif>
-                                <label class="form-check-label" for="defaultCheck1">
-                                    {{$rol->name}}
-                                </label>
-                                
-                            </div>
+                            @if($id == 1 && $rol->id == 6)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                </div>
+                            @elseif($id == 2 && $rol->id == 4)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                </div>
+                            @elseif($id == 3 && $rol->id == 5)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                </div>
+                            @else
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                     <div class="col-md"></div>
@@ -331,80 +354,8 @@ crossorigin="anonymous">
     </script>
 @endif
 <script type="text/javascript">
-if('{{$id}}' == 0){
-    $(document).ready(function(){
-        var i = 1;
-        $("#agregar").click(function(){
-
-            $("#otraEmpresa").append(
-                '<div class="row g-2" id="row'+i+'">'
-                    +'<div class="col-md">'
-                        +'<div class="form-floating">'
-                            +'<select class="form-select" name="id_empresas_add[]" id="id_empresas'+i+'">'
-                                +'<option value="">--SELECCIONE--</option>'
-                                +'@foreach($empresas as $emp)'
-                                    +'<option value ="{{ $emp->id_empresa }}">{{$emp->nombre_empresa}}</option>'
-                                +'@endforeach'
-                            +'</select>'
-                            +'<label for="floatingSelectGrid">EMPRESA:</label>'
-                            
-                        +'</div>'
-                    +'</div>'
-                    +'<div class="col-md-1 d-flex align-items-center">'    
-                        +'<button id="remove'+i+'" class="btn btn-danger"  type="button">'
-                            +'<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">'
-                                +'<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'
-                            +'</svg>'
-                        +'</button>'
-                    +'</div>'
-                    +'<div class="col-md">'
-                        +'<label for="floatingSelectGrid">SEDE:</label>'
-                        +'<div class="spinner_sede text-center" id="spinner_sede'+i+'"></div>'
-                        +'<div class="form-floating" id="sede_empresa'+i+'" name="sede_empresa">'
-                            +'<select class="form-select" id="id_sedes'+i+'" name="id_sedes_add[]" autofocus aria-label="Floating label select example"  multiple="true">'
-                                
-                            +'</select>'
-                        +'</div>'
-                    +'</div>'
-                    
-                +'</div>'
-                +'<br>'
-            );
-            
-            $('#id_empresas'+i).on('change', function(){
-                
-                $('#sede_empresa'+(i-1)).fadeOut();
-                $('#spinner_sede'+(i-1)).html('<div class="spinner-border text-secondary" id="spinner'+(i-1)+'" role="status"></div>');
-                var empresa_id = $(this).val();
-                var padre = document.getElementById("spinner_sede"+(i-1));
-                var hijo = document.getElementById("spinner"+(i-1));
-                if($.trim(empresa_id) != ''){
-                    $.get('selectsedes',{empresa_id : empresa_id}, function(sedes){
-                        console.log(sedes);
-                        var remove = padre.removeChild(hijo);
-                        $('#sede_empresa'+(i-1)).fadeIn();
-                        $('#id_sedes'+(i-1)).empty();
-                        $('#id_sedes'+(i-1)).append("<option value=''>--SELECCIONE UNA SEDE--</option>");
-                        $.each(sedes, function(index, value){
-                            $('#id_sedes'+(i-1)).append("<option value='"+ index + "'>" + value + "</option>");
-                        })
-                    });
-                }
-                
-            });
-            $('#remove'+i).click(function(){
-                $('#row'+(i-1)).remove();
-                
-            })
-            $('#id_sedes'+i).select2({
-                placeholder:"SELECCIONE LAS SEDES",
-                tags: true,
-                tokenSeparators: ['/',',',',',','," "]
-            });
-            i++;
-        }); 
-    });
-}
+    
+    
     $(document).ready(function(){
         $('#form_crear_perfil').submit(function(e){
             e.preventDefault();
@@ -443,6 +394,7 @@ if('{{$id}}' == 0){
     });
     
     $(document).ready(function(){
+        
         /* $('#lider_dosimetria').on('change', function(){
             var values="2";
             var lider = document.getElementById("lider_dosimetria").value;
@@ -457,7 +409,83 @@ if('{{$id}}' == 0){
                 });
             }
         })   */     
+        if('{{$id}}' == 0){
+            console.log("entro al cero");
+            var i = 1;
+            $("#agregar").click(function(){
 
+                $("#otraEmpresa").append(
+                    '<div class="row g-2" id="row'+i+'">'
+                        +'<div class="col-md">'
+                            +'<div class="form-floating">'
+                                +'<select class="form-select" name="id_empresas_add[]" id="id_empresas'+i+'">'
+                                    +'<option value="">--SELECCIONE--</option>'
+                                    +'@foreach($empresas as $emp)'
+                                        +'<option value ="{{ $emp->id_empresa }}">{{$emp->nombre_empresa}}</option>'
+                                    +'@endforeach'
+                                +'</select>'
+                                +'<label for="floatingSelectGrid">EMPRESA:</label>'
+                                
+                            +'</div>'
+                        +'</div>'
+                        +'<div class="col-md-1 d-flex align-items-center">'    
+                            +'<button id="remove'+i+'" class="btn btn-danger"  type="button">'
+                                +'<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">'
+                                    +'<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'
+                                +'</svg>'
+                            +'</button>'
+                        +'</div>'
+                        +'<div class="col-md">'
+                            +'<label for="floatingSelectGrid">SEDE:</label>'
+                            +'<div class="spinner_sede text-center" id="spinner_sede'+i+'"></div>'
+                            +'<div class="form-floating" id="sede_empresa'+i+'" name="sede_empresa">'
+                                +'<select class="form-select" id="id_sedes'+i+'" name="id_sedes_add[]" autofocus aria-label="Floating label select example"  multiple="true">'
+                                    
+                                +'</select>'
+                            +'</div>'
+                        +'</div>'
+                        
+                    +'</div>'
+                    +'<br>'
+                );
+                
+                $('#id_empresas'+i).on('change', function(){
+                    
+                    $('#sede_empresa'+(i-1)).fadeOut();
+                    $('#spinner_sede'+(i-1)).html('<div class="spinner-border text-secondary" id="spinner'+(i-1)+'" role="status"></div>');
+                    var empresa_id = $(this).val();
+                    var padre = document.getElementById("spinner_sede"+(i-1));
+                    var hijo = document.getElementById("spinner"+(i-1));
+                    if($.trim(empresa_id) != ''){
+                        $.get('selectsedes',{empresa_id : empresa_id}, function(sedes){
+                            console.log(sedes);
+                            var remove = padre.removeChild(hijo);
+                            $('#sede_empresa'+(i-1)).fadeIn();
+                            $('#id_sedes'+(i-1)).empty();
+                            $('#id_sedes'+(i-1)).append("<option value=''>--SELECCIONE UNA SEDE--</option>");
+                            $.each(sedes, function(index, value){
+                                $('#id_sedes'+(i-1)).append("<option value='"+ index + "'>" + value + "</option>");
+                            })
+                        });
+                    }
+                    
+                });
+                $('#remove'+i).click(function(){
+                    $('#row'+(i-1)).remove();
+                    
+                })
+                $('#id_sedes'+i).select2({
+                    placeholder:"SELECCIONE LAS SEDES",
+                    tags: true,
+                    tokenSeparators: ['/',',',',',','," "]
+                });
+                i++;
+            }); 
+            
+
+        }else{
+            console.log("no entro al cero");
+        }
         $('#id_empresas').on('change', function(){
             $('#sede_empresa').fadeOut();
             $('#spinner_sede').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');

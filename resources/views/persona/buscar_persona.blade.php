@@ -61,25 +61,18 @@
                                 <td class="align-middle text-center">
                                     @foreach($personasperfiles as $personperf)
                                         @if($person->id_persona == $personperf->persona_id)
-                                            {{$personperf->perfiles->nombre_perfil}}
+                                            {{$personperf->perfiles->nombre_perfil}}<br>
                                         @endif
                                     @endforeach
-                                    <br>
-                                    @if($person->lider_ava == 'TRUE')
-                                        <B>(LIDER A. VIRTUAL)</B>
-                                    <br>
-                                    @endif
-                                    @if($person->lider_dosimetria == 'TRUE')
-                                        <B>(LIDER DOSIMETRÍA)</B>
-                                    @endif
-                                    @if($person->lider_controlescalidad == 'TRUE')
-                                        <B>(LIDER C. CALIDAD)</B>
-                                    @endif
                                 </td>
                                 <td class="align-middle text-center">
                                     @foreach($personasroles as $personrol)
                                         @if($person->id_persona == $personrol->persona_id)
-                                            {{$personrol->roles->name}}
+                                            @if ($personrol->role_id == 3)
+                                                <b>{{$personrol->roles->name}} <br></b>
+                                            @else
+                                                {{$personrol->roles->name}} <br>
+                                            @endif
                                         @endif
                                     @endforeach
                                 </td>
@@ -148,7 +141,15 @@
             )
         </script>
     @endif
-
+    @if(session('actualizar')== 'ok')
+        <script>
+            Swal.fire(
+            'ACTUALIZADA!',
+            'SE HA ACTUALIZADO CON ÉXITO.',
+            'success'
+            )
+        </script>
+    @endif
     <script type="text/javascript">
             
         $(document).ready(function(){

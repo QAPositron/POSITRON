@@ -539,21 +539,15 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                                         {{$personperf->perfiles->nombre_perfil}} <br>
                                                     @endif
                                                 @endforeach
-                                                @if($trabDosim->lider_ava == 'TRUE')
-                                                    <B>(LIDER A. VIRTUAL)</B>
-                                                    <br>
-                                                @endif
-                                                @if($trabDosim->lider_dosimetria == 'TRUE')
-                                                    <B>(LIDER DOSIMETRÍA)</B>
-                                                @endif
-                                                @if($trabDosim->lider_controlescalidad == 'TRUE')
-                                                    <B>(LIDER C. CALIDAD)</B>
-                                                @endif
                                             </td>
                                             <td class="align-middle text-center">
                                                 @foreach($personasroles as $personrol)
                                                     @if($trabDosim->id_persona == $personrol->persona_id)
-                                                        {{$personrol->roles->name}} <br>
+                                                        @if($personrol->role_id == 3)
+                                                            <b>{{$personrol->roles->name}} <br></b>
+                                                        @else
+                                                            {{$personrol->roles->name}} <br>
+                                                        @endif
                                                     @endif
                                                 @endforeach
                                             </td>
@@ -642,21 +636,15 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                                         {{$personperf->perfiles->nombre_perfil}} <br>
                                                     @endif
                                                 @endforeach
-                                                @if($estuAva->lider_ava == 'TRUE')
-                                                    <B>(LIDER A. VIRTUAL)</B>
-                                                    <br>
-                                                @endif
-                                                @if($estuAva->lider_dosimetria == 'TRUE')
-                                                    <B>(LIDER DOSIMETRÍA)</B>
-                                                @endif
-                                                @if($estuAva->lider_controlescalidad == 'TRUE')
-                                                    <B>(LIDER C. CALIDAD)</B>
-                                                @endif
                                             </td>
                                             <td class="align-middle text-center">
                                                 @foreach($personasroles as $personrol)
                                                     @if($estuAva->id_persona == $personrol->persona_id)
-                                                        {{$personrol->roles->name}} <br>
+                                                        @if($personrol->role_id == 3)
+                                                            <b>{{$personrol->roles->name}} <br></b>
+                                                        @else
+                                                            {{$personrol->roles->name}} <br>
+                                                        @endif
                                                     @endif
                                                 @endforeach
                                             </td>
@@ -742,21 +730,15 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                                         {{$personperf->perfiles->nombre_perfil}} <br>
                                                     @endif
                                                 @endforeach
-                                                @if($cont->lider_ava == 'TRUE')
-                                                    <B>(LIDER A. VIRTUAL)</B>
-                                                    <br>
-                                                @endif
-                                                @if($cont->lider_dosimetria == 'TRUE')
-                                                    <B>(LIDER DOSIMETRÍA)</B>
-                                                @endif
-                                                @if($cont->lider_controlescalidad == 'TRUE')
-                                                    <B>(LIDER C. CALIDAD)</B>
-                                                @endif
                                             </td>
                                             <td class="align-middle text-center">
                                                 @foreach($personasroles as $personrol)
                                                     @if($cont->id_persona == $personrol->persona_id)
-                                                        {{$personrol->roles->name}} <br>
+                                                        @if($personrol->role_id == 3)
+                                                            <b>{{$personrol->roles->name}} <br></b>
+                                                        @else
+                                                            {{$personrol->roles->name}} <br>
+                                                        @endif
                                                     @endif
                                                 @endforeach
                                             </td>

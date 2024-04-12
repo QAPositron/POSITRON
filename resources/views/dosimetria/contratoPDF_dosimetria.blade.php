@@ -167,12 +167,11 @@
                 <br>
                 <br>
                 En señal de conformidad con el texto de este contrato, las partes lo suscriben en dos (2) ejemplares originales de igual valor y contenido para cada una de ellas, 
-                hoy @php echo date("d") @endphp del mes de 
+                el día {{date("j", strtotime($cont->fecha_inicio))}} del mes de 
                 @php 
-                $meses = ["01"=>'enero', "02"=>'febrero', "03"=>'marzo', "04"=>'abril', "05"=>'mayo', "06"=>'junio', "07"=>'julio', "08"=>'agosto', "09"=>'septiembre', "10"=>'obtubre', "11"=>'noviembre', "12"=>'diciembre'];
-                echo $meses[date("m")];
+                    $meses = ["01"=>'enero', "02"=>'febrero', "03"=>'marzo', "04"=>'abril', "05"=>'mayo', "06"=>'junio', "07"=>'julio', "08"=>'agosto', "09"=>'septiembre', "10"=>'obtubre', "11"=>'noviembre', "12"=>'diciembre'];
                 @endphp
-                de @php echo date("Y") @endphp, en la ciudad de Bucaramanga. <br>
+                {{$meses[date("m", strtotime($cont->fecha_inicio))]}} de {{date("Y", strtotime($cont->fecha_inicio))}}, en la ciudad de Bucaramanga. <br>
                 <br>
                 Dirección para Notificaciones: <br>
                 <br>

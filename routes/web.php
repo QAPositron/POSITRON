@@ -20,6 +20,7 @@ use App\Http\Controllers\PerfilespersonasController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\PersonasedesController;
 use App\Http\Controllers\PersonasperfilesController;
+use App\Http\Controllers\PersonasrolesController;
 /* use App\Http\Controllers\PersonasrolesController; */
 use App\Http\Controllers\ProductoController;
 /* use App\Http\Controllers\RolesController; */
@@ -103,17 +104,18 @@ Route::post('perfiles', [PerfilesController::class, 'save'])->name('perfiles.sav
 /////////RUTAS PARA EL CRUD DE PERSONAS//////
 Route::get('personas/search', [PersonaController::class, 'search'])->name('personas.search');
 Route::get('personas/create', [PersonaController::class, 'create'])->name('personas.create');
-/* Route::get('personas/selectsedes', [PersonaController::class, 'selectsedes']); */
+Route::get('personas/selectsedes', [PersonaController::class, 'selectsedes']); 
 Route::post('personas', [PersonaController::class, 'save'])->name('personas.save');
 Route::get('personas/{empresa}/{trabestucont}/create',[PersonaController::class, 'createTrabEstuContEmp'])->name('personasEmpresa.create');
 Route::post('personasEmpresa', [PersonaController::class, 'savePersonasEmpresa'])->name('personasEmpresa.save');
 Route::get('personas/{persona}/{trabestucont}/{empresa}/edit', [PersonaController::class, 'edit'])->name('personas.edit');
 Route::get('/personas/{empresa}/{trabestucont}/selectsedes', [PersonaController::class, 'selectsedes']);
+Route::get('/personas/{persona}/{empresa}/{trabestucont}/selectsedes', [PersonaController::class, 'selectsedes']);
 Route::put('personas/{persona}', [PersonaController::class, 'update'])->name('personas.update');
 Route::delete('personas/{persona}', [PersonaController::class, 'destroy'])->name('personas.destroy');
 
 Route::delete('personasperfil/{personaperfil}', [PersonasperfilesController::class, 'destroy'])->name('personaperfil.destroy');
-/* Route::delete('personasrol/{personarol}', [PersonasrolesController::class, 'destroy'])->name('personarol.destroy'); */
+Route::delete('personasrol/{personarol}', [PersonasrolesController::class, 'destroy'])->name('personarol.destroy');
 Route::delete('personasede/{personasede}', [PersonasedesController::class, 'destroy'])->name('personasede.destroy');
 /////////RUTAS PARA EL CRUD DE DOSIMETROS///////
 Route::get('dosimetros/search', [DosimetrosController::class, 'search'])->name('dosimetros.search');

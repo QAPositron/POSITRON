@@ -29,19 +29,19 @@
                     @else
                         @forEach($personasperfil as $personperf)
                             <div class="row">
-                                <div class="col-md"></div>
+                                <div class="col-md "></div>
                                 <div class="col-md-8">
                                     <div class="form-floating text-wrap">
                                         <input type="text" class="form-control"  name="id_perfil" id="id_perfil"  value="{{$personperf->perfiles->nombre_perfil}}" autofocus style="text-transform:uppercase;" disabled>
-                                        <label for="floatingSelectGrid">PERFIL LABORAL:</label>
+                                        <label for="floatingInputDisabled">PERFIL LABORAL:</label>
                                     </div>
                                 </div>
-                                <div class="col-md d-flex align-items-center">
+                                <div class="col-md d-flex">
                                     <form class="form_eliminar_personaperfil" id="form_eliminar_personaperfil" name="form_eliminar_personaperfil" action="{{route('personaperfil.destroy', $personperf->id_personaperfil)}}" method="POST">
                                         @csrf  
                                         @method('delete')
-                                        <button class="btn btn-danger"  type="submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <button class="btn btn-danger btn-lg mt-2"  type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                             </svg>
@@ -63,16 +63,16 @@
                                 <div class="col-md"></div>
                                 <div class="col-md-8">
                                     <div class="form-floating text-wrap">
-                                        <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->nombre_rol}}" autofocus style="text-transform:uppercase;" disabled>
+                                        <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->name}}" autofocus style="text-transform:uppercase;" disabled>
                                         <label for="floatingSelectGrid">ROL:</label>
                                     </div>
                                 </div>
-                                <div class="col-md d-flex align-items-center">
+                                <div class="col-md d-flex">
                                     <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
                                         @csrf  
                                         @method('delete')
-                                        <button class="btn btn-danger"  type="submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <button class="btn btn-danger btn-lg mt-2"  type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                             </svg>
@@ -100,40 +100,36 @@
                                     <div class="form-floating text-wrap">
                                         <input type="text" class="form-control"  name="empresasedes" id="empresasedes"  value="{{$personsede->sede->empresa->nombre_empresa}} - {{$personsede->sede->nombre_sede}}" autofocus style="text-transform:uppercase;" disabled>
                                         <label for="floatingSelectGrid">EMPRESA - SEDE:</label>
-                                        
                                     </div>
                                 </div>
-                                <div class="col-md d-flex align-items-center">
-                                    
+                                <div class="col-md d-flex ">
                                     <form class="form_eliminar_personasede" id="form_eliminar_personasede" name="form_eliminar_personasede" action="{{route('personasede.destroy', $personsede->id_personasede)}}" method="POST">
                                         @csrf  
                                         @method('delete')
-                                        <button class="btn btn-danger"  type="submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <button class="btn btn-danger btn-lg mt-2"  type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                             </svg>
                                         </button>
                                     </form>
-                                    
                                 </div>
                             </div>
                             <br>
                         @endforeach
                     </div>
-                    
                 @endif
             </div>
-            
             <form class="m-4" id='form_edit_persona' name='form_edit_persona' action="{{route('personas.update', $persona)}}" method="POST">
                 @csrf
                 @method('put') 
-
-                <label for="">SELECCIONE SI DESEA AÑADIR OTRO PERFIL LABORAL O ROL PARA ESTA PERSONA:</label>
+                <label for="">SELECCIONE SI DESEA AÑADIR OTRO PERFIL LABORAL:</label>
                 <br>
                 <br>
                 <div class="row g-2">
-                    <div class="col-md-5">
+                    <label class="text-secondary">' * ' campo obligatorio</label>
+                    <div class="col-md"></div>
+                    <div class="col-md">
                         <label for="">PERFIL LABORAL:</label>
                         <div class="form-floating">
                             <select class="form-select  @error('perfil_personas') is-invalid @enderror" name="perfil_personas[]" id="perfil_personas" autofocus aria-label="Floating label select example"  multiple="true" >
@@ -144,14 +140,17 @@
                             @error('perfil_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="col-md d-flex align-items-center">
-                        <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_perfilModal" >
+                    <div class="col-md-1">
+                        <button type="button" class="btn colorQA btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#nueva_perfilModal" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                             </svg>
                         </button>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md"></div>
+                    {{-- /////////////// AHORA LOS ROLES SON FIJOS Y SON CREADOS Y RELACIONADOS CON SPATIE DE LARAVEL(LIDER DE DOSIMETRIA, ADMIN Y SUPERADMIN) LOS DEMAS ROLES SE RELACIONAN NORMAL CON PERSONAS-ROLES//////////////////// --}}
+
+                    {{--  <div class="col-md-6">
                         <label for="">ROL:</label>
                         <div class="form-floating">
                             <select class="form-select  @error('rol_personas') is-invalid @enderror" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true">
@@ -161,7 +160,7 @@
                             </select>
                             @error('rol_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- /////////TEMPORALMENTE DESHABILITADO POR INDECISION////////////// AHORA SOLO HAY 4 ROLES FIJOS////// --}}
                     {{-- <div class="col-md d-flex align-items-center">
                         <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_rolModal" >
@@ -276,11 +275,50 @@
                     </div>
                 </div>
                 <br> 
+                
                 <div class="row g-2">
+                    
                     <label for="">SELECCIONE SI DESEA RELACIONAR ESTE CONTACTO A UNA EMPRESA Y SUS SEDES:</label>
                     <br>
                     <br>
                     <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <select  class="form-select @error('id_empresa') is-invalid @enderror" name="id_empresas" id="id_empresas">
+                                    <option value="">--SELECCIONE--</option>
+                                    @foreach($empresas as $emp)
+                                        <option value ="{{ $emp->id_empresa }}" @if (old('id_empresas') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option>
+                                    @endforeach 
+                                </select>
+                                <label for="floatingSelectGrid">EMPRESA:</label>
+                                @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center">
+                            <button type="button" class="btn colorQA"  id="agregar" name="agregar">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col-md">
+                            <label for="floatingSelectGrid">SEDE:</label>
+                            <div class="spinner_sede text-center" id="spinner_sede">
+    
+                            </div>
+                            <div class="form-floating" id="sede_empresa" name="sede_empresa">
+                                <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
+                                    
+                                </select>
+                                @error('sede_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="otraEmpresa">
+    
+                    </div>
+                    {{-- <div class="row g-2">
                         <div class="col-md">
                             <div class="form-floating">
                                 <select  class="form-select @error('id_empresa') is-invalid @enderror" name="id_empresas" id="id_empresas">
@@ -306,40 +344,37 @@
                             </div>
                         </div>
                         
-                    </div>
+                    </div> --}}
                 
                     <br>
                 </div>
-                {{-- @if(count($personasede)== 0) --}}
-                    
-                    
-                
                 <br>
-                        
+                <label for="">A CONTINUACIÓN, SELECCIONE LOS ROLES QUE ASUMIRÁ ESTA PERSONA:</label>
                 
-                <br>
-                <label for="">A CONTINUACIÓN, MODIFIQUE SI ESTE CONTACTO ES EL LÍDER O ENCARGADO DE LOS SERVICIOS O SI NO HAY CAMBIOS NO SELECCIONE:</label>
                 <div class="row g-2">
                     <div class="col-md"></div>
-                    <div class="col-md text-center">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_contcal" name="lider_contcal" @if($persona->lider_controlescalidad == 'TRUE' || old('lider_contcal') == 'TRUE') checked @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                CONTROLES DE CALIDAD
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input " type="checkbox" value="TRUE" id="lider_ava" name="lider_ava" @if($persona->lider_ava == 'TRUE' || old('lider_ava') == 'TRUE') checked @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                AULA VIRTUAL
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="TRUE" id="lider_dosimetria" name="lider_dosimetria" @if($persona->lider_dosimetria == 'TRUE' || old('lider_dosimetria') == 'TRUE') checked @endif>
-                            <label class="form-check-label" for="defaultCheck1">
-                                DOSIMETRÍA
-                            </label>
-                        </div>
+                    <div class="col-md">
+                        <br>
+                        @php $checkrol = 0; @endphp
+                        @php $checkpersonrol = 0; @endphp
+
+                        @foreach($roles as $rol)
+                            
+                            <div class="form-check">
+                                @if ($personasrol->contains('role_id', $rol->id))
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked disabled>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                @else
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                @endif
+                            </div> 
+                            
+                        @endforeach
                     </div>
                     <div class="col-md"></div>
                 </div>
@@ -475,7 +510,7 @@ crossorigin="anonymous">
             var padre = document.getElementById("spinner_sede");
             var hijo = document.getElementById("spinner");
             if($.trim(empresa_id) != ''){
-                $.get('selectsed',{empresa_id : empresa_id}, function(sedes){
+                $.get('selectsedes',{empresa_id : empresa_id}, function(sedes){
                     console.log(sedes);
                     var remove = padre.removeChild(hijo);
                     $('#sede_empresa').fadeIn();
@@ -487,6 +522,76 @@ crossorigin="anonymous">
                 });
             }
 
+        });
+        var i = 1;
+        $("#agregar").click(function(){
+
+            $("#otraEmpresa").append(
+                '<div class="row g-2" id="row'+i+'">'
+                    +'<div class="col-md">'
+                        +'<div class="form-floating">'
+                            +'<select class="form-select" name="id_empresas_add[]" id="id_empresas'+i+'">'
+                                +'<option value="">--SELECCIONE--</option>'
+                                +'@foreach($empresas as $emp)'
+                                    +'<option value ="{{ $emp->id_empresa }}">{{$emp->nombre_empresa}}</option>'
+                                +'@endforeach'
+                            +'</select>'
+                            +'<label for="floatingSelectGrid">EMPRESA:</label>'
+                            
+                        +'</div>'
+                    +'</div>'
+                    +'<div class="col-md-1 d-flex align-items-center">'    
+                        +'<button id="remove'+i+'" class="btn btn-danger"  type="button">'
+                            +'<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">'
+                                +'<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'
+                            +'</svg>'
+                        +'</button>'
+                    +'</div>'
+                    +'<div class="col-md">'
+                        +'<label for="floatingSelectGrid">SEDE:</label>'
+                        +'<div class="spinner_sede text-center" id="spinner_sede'+i+'"></div>'
+                        +'<div class="form-floating" id="sede_empresa'+i+'" name="sede_empresa">'
+                            +'<select class="form-select" id="id_sedes'+i+'" name="id_sedes_add[]" autofocus aria-label="Floating label select example"  multiple="true">'
+                                
+                            +'</select>'
+                        +'</div>'
+                    +'</div>'
+                    
+                +'</div>'
+                +'<br>'
+            );
+            
+            $('#id_empresas'+i).on('change', function(){
+                
+                $('#sede_empresa'+(i-1)).fadeOut();
+                $('#spinner_sede'+(i-1)).html('<div class="spinner-border text-secondary" id="spinner'+(i-1)+'" role="status"></div>');
+                var empresa_id = $(this).val();
+                var padre = document.getElementById("spinner_sede"+(i-1));
+                var hijo = document.getElementById("spinner"+(i-1));
+                if($.trim(empresa_id) != ''){
+                    $.get('selectsedes',{empresa_id : empresa_id}, function(sedes){
+                        console.log(sedes);
+                        var remove = padre.removeChild(hijo);
+                        $('#sede_empresa'+(i-1)).fadeIn();
+                        $('#id_sedes'+(i-1)).empty();
+                        $('#id_sedes'+(i-1)).append("<option value=''>--SELECCIONE UNA SEDE--</option>");
+                        $.each(sedes, function(index, value){
+                            $('#id_sedes'+(i-1)).append("<option value='"+ index + "'>" + value + "</option>");
+                        })
+                    });
+                }
+                
+            });
+            $('#remove'+i).click(function(){
+                $('#row'+(i-1)).remove();
+                
+            })
+            $('#id_sedes'+i).select2({
+                placeholder:"SELECCIONE LAS SEDES",
+                tags: true,
+                tokenSeparators: ['/',',',',',','," "]
+            });
+            i++;
         });
         $('.form_eliminar_personaperfil').submit(function(e){
             e.preventDefault();

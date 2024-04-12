@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        /* User::create([
             'persona_id' => '1',
             'name' => 'GLADYS Florez Rodriguez',
             'email' => 'G@GMAIL.COM',
@@ -22,6 +22,6 @@ class UserSeeder extends Seeder
         ])->assignRole('LÍDER DE DOSIMETRÍA');
 
         
-        User::factory(9)->create();
+        User::factory(9)->create(); */
     }
 }
