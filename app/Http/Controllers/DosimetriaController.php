@@ -3198,7 +3198,7 @@ class DosimetriaController extends Controller
             ->get();
             $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
             ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
-            ->where('personas.lider_dosimetria', '=', 'TRUE')
+            ->where('personasedes.lider_dosimetria', '=', 'TRUE')
             ->get();
         }else if($item == 1){
             $contdosisededepto = Novcontdosisededepto::find($id);
@@ -3217,7 +3217,7 @@ class DosimetriaController extends Controller
             ->get();
             $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
             ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
-            ->where('personas.lider_dosimetria', '=', 'TRUE')
+            ->where('personasedes.lider_dosimetria', '=', 'TRUE')
             ->get();
         }
         return view('dosimetria.revision_asignaciones_dosimetria', compact('trabjasignados','dosicontrolasig', 'dosicontrolUnicoasig', 'contdosisededepto', 'mesnumber', 'areadosiasig', 'trabjEncargado', 'item'));
@@ -3367,13 +3367,13 @@ class DosimetriaController extends Controller
             $contdosisededepto = Contratodosimetriasededepto::find($request->id);
             $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
             ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
-            ->where('personas.lider_dosimetria', '=', 'TRUE')
+            ->where('personasedes.lider_dosimetria', '=', 'TRUE')
             ->get();
         }else{
             $contdosisededepto = Novcontdosisededepto::find($request->id);
             $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
             ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
-            ->where('personas.lider_dosimetria', '=', 'TRUE')
+            ->where('personasedes.lider_dosimetria', '=', 'TRUE')
             ->get();
         }
         return response()->json($trabjEncargado);
@@ -3404,7 +3404,7 @@ class DosimetriaController extends Controller
             ->get();
             $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
             ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
-            ->where('personas.lider_dosimetria', '=', 'TRUE')
+            ->where('personasedes.lider_dosimetria', '=', 'TRUE')
             ->get();
             
             //PARA LA REVISION GENERAL///
@@ -3439,7 +3439,7 @@ class DosimetriaController extends Controller
             ->get();
             $trabjEncargado = Persona::join('personasedes', 'personas.id_persona', '=', 'personasedes.persona_id')
             ->where('personasedes.sede_id', '=', $contdosisededepto->contratodosimetriasede->sede_id)
-            ->where('personas.lider_dosimetria', '=', 'TRUE')
+            ->where('personasedes.lider_dosimetria', '=', 'TRUE')
             ->get();
             $empresainfo= ContratosDosimetriaEmpresa::where('empresa_id', '=', $empresa)
             ->get();

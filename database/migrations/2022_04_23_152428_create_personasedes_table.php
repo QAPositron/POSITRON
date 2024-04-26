@@ -20,8 +20,9 @@ class CreatePersonasedesTable extends Migration
             $table-> foreign('persona_id')->references('id_persona')->on('personas')->onDelete('cascade')->onUpdate('cascade');
 
             $table-> unsignedBigInteger('sede_id');
-            $table-> foreign('sede_id')->references('id_sede')->on('sedes')->onDelete('cascade')->onUpdate('cascade');            
-            
+            $table-> foreign('sede_id')->references('id_sede')->on('sedes')->onDelete('cascade')->onUpdate('cascade');
+                        
+            $table->string('lider_dosimetria', 50)->nullable();
             $table->timestamps();
         });
     }

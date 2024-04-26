@@ -178,7 +178,48 @@
                     </div>
                 </div>
                 <BR>
-                <label for="">SELECCIONE SI DESEA RELACIONAR ESTE CONTACTO A UNA EMPRESA Y SUS SEDES</label>
+                <label for="">SELECCIONE LOS ROLES QUE ASUMIRÁ ESTA PERSONA:</label>
+                
+                <div class="row g-2">
+                    <div class="col-md"></div>
+                    <div class="col-md">
+                        <br>
+                        @foreach($roles as $rol)
+                            @if($id == 1 && $rol->id == 6)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                </div>
+                            @elseif($id == 2 && $rol->id == 4)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                </div>
+                            @elseif($id == 3 && $rol->id == 5)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                </div>
+                            @else
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        {{$rol->name}}
+                                    </label>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="col-md"></div>
+                </div>
+                <br>
+                <label for="">A CONTINUACIÓN, SELECCIONE UNA EMPRESA Y SUS SEDES PARA RELACIONAR ESTA PERSONA:</label>
                 <br>
                 <br>
                 @if($id == 0)
@@ -219,7 +260,6 @@
                     <div id="otraEmpresa">
     
                     </div>
-                    
                 @else
                     <div class="row g-2">
                         <div class="col-md">
@@ -231,11 +271,9 @@
                             </div>
                         </div>
                         <div class="col-md">
-                            
                             <label for="floatingSelectGrid">* SEDE:</label>
-                            
                             <div class="form-floating" id="sede_empresa" name="sede_empresa">
-                                <select class="form-select @error('id_sedes') is-invalid @enderror" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
+                                <select class="form-select @error('id_sedes') is-invalid @enderror" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true" {{-- onchange="changeSede();" --}}>
                                     <option value="">--SELECCIONE--</option>
                                     @foreach($sedes as $sede)
                                         <option value ="{{ $sede->id_sede }}" {{ in_array($sede->id_sede, (array) old('id_sedes', [])) ? "selected" : "" }}>{{$sede->nombre_sede}}</option>
@@ -246,49 +284,8 @@
                         </div> 
                     </div> 
                 @endif
-                
                 <br>
-                <BR>
-                <label for="">A CONTINUACIÓN, SELECCIONE LOS ROLES QUE ASUMIRÁ ESTA PERSONA:</label>
-                
-                <div class="row g-2">
-                    <div class="col-md"></div>
-                    <div class="col-md">
-                        <br>
-                        @foreach($roles as $rol)
-                            @if($id == 1 && $rol->id == 6)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        {{$rol->name}}
-                                    </label>
-                                </div>
-                            @elseif($id == 2 && $rol->id == 4)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        {{$rol->name}}
-                                    </label>
-                                </div>
-                            @elseif($id == 3 && $rol->id == 5)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        {{$rol->name}}
-                                    </label>
-                                </div>
-                            @else
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif>
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        {{$rol->name}}
-                                    </label>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-                    <div class="col-md"></div>
-                </div>
+                <br>
                 <br>
                 <!---------BOTON------------->
                 <div class="row">
@@ -354,8 +351,6 @@ crossorigin="anonymous">
     </script>
 @endif
 <script type="text/javascript">
-    
-    
     $(document).ready(function(){
         $('#form_crear_perfil').submit(function(e){
             e.preventDefault();
@@ -393,22 +388,7 @@ crossorigin="anonymous">
         })
     });
     
-    $(document).ready(function(){
-        
-        /* $('#lider_dosimetria').on('change', function(){
-            var values="2";
-            var lider = document.getElementById("lider_dosimetria").value;
-            if(lider == 'TRUE'){
-                console.log("ESTE ES EL LIDER DE DOSIMETRIA" +lider)
-                var v = $("#rol_personas").val();
-                v.push('2');
-                console.log(v);
-                 
-                $.each(v.split(","), function(i,e){
-                    $(".rol_personas option[value='" + e + "']").prop("selected", true);
-                });
-            }
-        })   */     
+    $(document).ready(function(){    
         if('{{$id}}' == 0){
             console.log("entro al cero");
             var i = 1;
@@ -479,6 +459,34 @@ crossorigin="anonymous">
                     tags: true,
                     tokenSeparators: ['/',',',',',','," "]
                 });
+                /////// se verifica si ya existe lider de dosimetria en las sedes seleccionadas para que sea unico por sede//////
+                let $sedesadd = $('#id_sedes'+i);
+                console.log($sedesadd);
+                let selectedsadd = [];
+                $('#id_sedes'+i).change(function(){
+                    console.log("HUBO CAMBIO");
+                    $sedesadd.children(':selected').each((idx, el) => {
+                        selectedsadd.push(el.value);
+                    });
+                    console.log(selectedsadd);
+
+                    selectedsadd.forEach(element => {
+                        $.get('personsedes',{sede_id : element}, function(personsedes){
+                            console.log(personsedes);
+                            personsedes.forEach(element => {
+                                if(element.lider_dosimetria == 'TRUE'){
+                                    console.log("TIENE LIDER DOSIMETRIA la sede="+element.sede_id);
+                                    return Swal.fire({
+                                        title:"LA SEDE '"+element.nombre_sede+"' YA TIENE UN LIDER DE DOSIMETRIA",
+                                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                        icon: 'error'
+                                    });
+                                }
+                            })
+                        })
+                    })
+                });
+
                 i++;
             }); 
             
@@ -533,17 +541,46 @@ crossorigin="anonymous">
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
+        /////// se verifica si ya existe lider de dosimetria en las sedes seleccionadas para que sea unico por sede//////
+        let $sedes = $('#id_sedes');
+        let selecteds = [];
+        // Buscamos los option seleccionados
+        
+        $('#id_sedes').change(function(){
+            console.log("HUBO CAMBIO");
+            $sedes.children(':selected').each((idx, el) => {
+                selecteds.push(el.value);
+            });
+            console.log(selecteds);
+
+            selecteds.forEach(element => {
+                $.get('personsedes',{sede_id : element}, function(personsedes){
+                    console.log(personsedes);
+                    personsedes.forEach(element => {
+                        if(element.lider_dosimetria == 'TRUE'){
+                            console.log("TIENE LIDER DOSIMETRIA la sede="+element.sede_id);
+                            return Swal.fire({
+                                title:"LA SEDE '"+element.nombre_sede+"' YA TIENE UN LIDER DE DOSIMETRIA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                        }
+                    })
+                })
+            })
+        });
+        
         $('#form_create_contacto').submit(function(e){
             e.preventDefault();
             var superAdmin = document.getElementById("SUPER-ADMINISTRADOR").checked;
             var admin = document.getElementById("ADMINISTRADOR").checked;
-            var liderdosim = document.getElementById("LÍDER DE DOSIMETRÍA").checked;
+            var liderdosim = document.getElementById("LIDER DE DOSIMETRIA").checked;
             var toe = document.getElementById("TOE").checked;
             var opr = document.getElementById("OPR").checked;
             var estudiante = document.getElementById("ESTUDIANTE").checked;
             var contacto = document.getElementById("CONTACTO").checked;
             var publico = document.getElementById("PUBLICO").checked;
-
+            
             if(superAdmin == false && admin == false && liderdosim == false && toe == false && opr == false && estudiante == false && contacto == false && publico == false){
                 console.log("entro al if");
                 return Swal.fire({

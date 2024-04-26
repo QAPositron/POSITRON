@@ -110,6 +110,7 @@ Route::get('personas/{empresa}/{trabestucont}/create',[PersonaController::class,
 Route::post('personasEmpresa', [PersonaController::class, 'savePersonasEmpresa'])->name('personasEmpresa.save');
 Route::get('personas/{persona}/{trabestucont}/{empresa}/edit', [PersonaController::class, 'edit'])->name('personas.edit');
 Route::get('/personas/{empresa}/{trabestucont}/selectsedes', [PersonaController::class, 'selectsedes']);
+Route::get('/personas/{empresa}/{trabestucont}/personsedes', [PersonaController::class, 'personasedes']);
 Route::get('/personas/{persona}/{empresa}/{trabestucont}/selectsedes', [PersonaController::class, 'selectsedes']);
 Route::put('personas/{persona}', [PersonaController::class, 'update'])->name('personas.update');
 Route::delete('personas/{persona}', [PersonaController::class, 'destroy'])->name('personas.destroy');
@@ -341,5 +342,6 @@ Route::get('cotizaciones/{cotizacion}/info', [CotizacionController::class, 'info
 
 
 /////////////////RUTAS PERMITIDAS PARA EL ROL DE LIDER DE DOSIMETRIA//////////////////// 
-Route::get('/liderdosim', [LiderdosimrolController::class, 'index'])->middleware('can:liderdosim.home')->name('liderdosim.home'); 
+Route::get('/dosimetria', [LiderdosimrolController::class, 'index'])->middleware('can:liderdosim.home')->name('liderdosim.home'); 
+Route::get('/dosimetria/sedes', [LiderdosimrolController::class, 'sedes'])->middleware('can:liderdosim.home')->name('liderdosim.sedes'); 
 

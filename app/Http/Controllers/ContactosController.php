@@ -74,8 +74,7 @@ class ContactosController extends Controller
         $contacto->correo_contacto              = strtoupper($request->correo_contacto);
         $contacto->telefono_contacto            = $request->telefono_contacto;
         $contacto->profesion_contacto           = strtoupper($request->profesion_contacto);
-        $contacto->lider_ava                    = $request->lider_ava;
-        $contacto->lider_dosimetria             = $request->lider_dosimetria;
+       
         
         $contacto->save();
 
@@ -133,8 +132,6 @@ class ContactosController extends Controller
         $contacto->correo_contacto              = strtoupper($request->correo_contacto);
         $contacto->telefono_contacto            = strtoupper($request->telefono_contacto);
         $contacto->profesion_contacto           = strtoupper($request->profesion_contacto);
-        $contacto->lider_ava                    = strtoupper($request->lider_ava);
-        $contacto->lider_dosimetria             = strtoupper($request->lider_dosimetria);
         
         $contacto->save();
         

@@ -128,6 +128,7 @@
                 <br>
                 <div class="row g-2">
                     <label class="text-secondary">' * ' campo obligatorio</label>
+                    <input type="text" class="form-control" name="id" id="id" value="{{$id}}" hidden>
                     <div class="col-md"></div>
                     <div class="col-md">
                         <label for="">PERFIL LABORAL:</label>
@@ -274,83 +275,8 @@
                         </div>
                     </div>
                 </div>
-                <br> 
-                
-                <div class="row g-2">
-                    
-                    <label for="">SELECCIONE SI DESEA RELACIONAR ESTE CONTACTO A UNA EMPRESA Y SUS SEDES:</label>
-                    <br>
-                    <br>
-                    <div class="row g-2">
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <select  class="form-select @error('id_empresa') is-invalid @enderror" name="id_empresas" id="id_empresas">
-                                    <option value="">--SELECCIONE--</option>
-                                    @foreach($empresas as $emp)
-                                        <option value ="{{ $emp->id_empresa }}" @if (old('id_empresas') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option>
-                                    @endforeach 
-                                </select>
-                                <label for="floatingSelectGrid">EMPRESA:</label>
-                                @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-1 d-flex align-items-center">
-                            <button type="button" class="btn colorQA"  id="agregar" name="agregar">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="col-md">
-                            <label for="floatingSelectGrid">SEDE:</label>
-                            <div class="spinner_sede text-center" id="spinner_sede">
-    
-                            </div>
-                            <div class="form-floating" id="sede_empresa" name="sede_empresa">
-                                <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
-                                    
-                                </select>
-                                @error('sede_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="otraEmpresa">
-    
-                    </div>
-                    {{-- <div class="row g-2">
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <select  class="form-select @error('id_empresa') is-invalid @enderror" name="id_empresas" id="id_empresas">
-                                    <option value="">--SELECCIONE--</option>
-                                    @foreach($empresas as $emp)
-                                        <option value ="{{ $emp->id_empresa }}" @if (old('id_empresa') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option>
-                                    @endforeach
-                                </select>
-                                <label for="floatingSelectGrid">EMPRESA:</label>
-                                @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md" >
-                            <label for="floatingSelectGrid">SEDE:</label>
-                            <div class="spinner_sede text-center" id="spinner_sede">
-    
-                            </div>
-                            <div class="form-floating" id="sede_empresa" name="sede_empresa">
-                                <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
-                                    
-                                </select>
-                                
-                            </div>
-                        </div>
-                        
-                    </div> --}}
-                
-                    <br>
-                </div>
                 <br>
-                <label for="">A CONTINUACIÓN, SELECCIONE LOS ROLES QUE ASUMIRÁ ESTA PERSONA:</label>
-                
+                <label for="">SELECCIONE LOS ROLES QUE ASUMIRÁ ESTA PERSONA:</label>
                 <div class="row g-2">
                     <div class="col-md"></div>
                     <div class="col-md">
@@ -378,6 +304,77 @@
                     </div>
                     <div class="col-md"></div>
                 </div>
+                <br> 
+                <div class="row g-2">
+                    <label for="">A CONTINUACIÓN, SELECCIONE UNA EMPRESA Y SUS SEDES PARA RELACIONAR ESTA PERSONA:</label>
+                    <br>
+                    <br>
+                    @if($id == 0)
+                        <div class="row g-2">
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <select  class="form-select @error('id_empresa') is-invalid @enderror" name="id_empresas" id="id_empresas">
+                                        <option value="">--SELECCIONE--</option>
+                                        @foreach($empresas as $emp)
+                                            <option value ="{{ $emp->id_empresa }}" @if (old('id_empresas') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option>
+                                        @endforeach 
+                                    </select>
+                                    <label for="floatingSelectGrid">EMPRESA:</label>
+                                    @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-1 d-flex align-items-center">
+                                <button type="button" class="btn colorQA"  id="agregar" name="agregar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="col-md">
+                                <label for="floatingSelectGrid">SEDE:</label>
+                                <div class="spinner_sede text-center" id="spinner_sede">
+        
+                                </div>
+                                <div class="form-floating" id="sede_empresa" name="sede_empresa">
+                                    <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
+                                        
+                                    </select>
+                                    @error('sede_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="otraEmpresa">
+        
+                        </div>
+                    @else
+                        <div class="row g-2">
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" name="empresa_persona" id="empresa_persona" value="{{$empresa->nombre_empresa}}" readonly>
+                                    <input type="number" class="form-control @error('id_empresa') is-invalid @enderror" name="id_empresa" id="id_empresa" value="{{$empresa->id_empresa}}"  hidden>
+                                    <label for="floatingSelectGrid">* EMPRESA:</label>
+                                    @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <label for="floatingSelectGrid">* SEDE:</label>
+                                <div class="form-floating" id="sede_empresa" name="sede_empresa">
+                                    <select class="form-select @error('id_sedes') is-invalid @enderror" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true" {{-- onchange="changeSede();" --}}>
+                                        <option value="">--SELECCIONE--</option>
+                                        @foreach($sedes as $sede)
+                                            <option value ="{{ $sede->id_sede }}" {{ in_array($sede->id_sede, (array) old('id_sedes', [])) ? "selected" : "" }}>{{$sede->nombre_sede}}</option>
+                                        @endforeach 
+                                    </select>
+                                    @error('id_sedes') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                                </div>
+                            </div> 
+                        </div>
+                    @endif
+                
+                    <br>
+                </div>
+                
                 <br>
                 <!---------BOTON------------->
                 <div class="row">

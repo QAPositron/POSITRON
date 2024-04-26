@@ -40,4 +40,5 @@ class Persona extends Model
     public function temptrabajdosimentradarev(){
         return $this->hasMany(Temptrabajdosimentradarev::class, 'id_temptrabajdosimentradarev');
     }
+    
 }

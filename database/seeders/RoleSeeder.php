@@ -17,14 +17,16 @@ class RoleSeeder extends Seeder
     {
         $role1 = Role::create(['name' => 'SUPER-ADMINISTRADOR']);
         $role2 = Role::create(['name' => 'ADMINISTRADOR']);
-        $role3 = Role::create(['name' => 'LÍDER DE DOSIMETRÍA']);
+        $role3 = Role::create(['name' => 'LIDER DE DOSIMETRIA']);
         $role4 = Role::create(['name' => 'ESTUDIANTE']);
         $role5 = Role::create(['name' => 'CONTACTO']);
         $role6 = Role::create(['name' => 'TOE']);
         $role7 = Role::create(['name' => 'OPR']);
         $role8 = Role::create(['name' => 'PUBLICO']);
         
+        Permission::create(['name' =>'admin.home'])->syncRoles([$role1, $role2]);
         Permission::create(['name' =>'liderdosim.home'])->assignRole($role3);
+
         //// para asignar un rol este permiso pero si se quiere asignar mas de un rol se usa ->syncRoles([])
 
         
