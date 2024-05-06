@@ -285,6 +285,11 @@
                     </div> 
                 @endif
                 <br>
+                <div id="liderdosimsedes" hidden>
+                    <label for=""><b>SELECCIONE PARA QUE SEDES ESTA PERSONA SERÁ LIDER DE DOSIMETRÍA:</b></label>
+                    <br>
+                    <br>
+                </div>
                 <br>
                 <br>
                 <!---------BOTON------------->
@@ -589,6 +594,50 @@ crossorigin="anonymous">
                                 icon: 'error'
                             });
             }
+            var y = 0;
+            var x = 0;
+           
+            console.log("SEDES");
+           
+            var liderdosimsed = document.querySelectorAll('input[name="liderdosimsedes[]"]');
+            console.log(liderdosimsed);
+            var arrayidsedes = $('#id_sedes option:selected').toArray();
+            console.log(arrayidsedes);
+            console.log("cantidad"+arrayidsedes.length);
+            if(liderdosim == true && arrayidsedes.length > 1 && liderdosimsed.length == 0){
+                console.log("es mayor a 1");
+                document.getElementById('liderdosimsedes').removeAttribute("hidden");
+                
+                arrayidsedes.forEach(element => {
+                    console.log(element.value);
+                    $("#liderdosimsedes").append(
+                        '<div class="row">'
+                            +'<div class="col-md"></div>'
+                            +'<div class="col-md">'
+                                +'<div class="form-check">'
+                                    +'<input class="form-check-input" type="checkbox" value="'+element.value+'" name="liderdosimsedes[]" id="liderdosimsedes'+element.value+'">'
+                                    +'<label class="form-check-label" for="defaultCheck1">'
+                                        +element.text
+                                    +'</label>'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="col-md"></div>'
+                        +'</div>'
+                    );
+                });
+                return Swal.fire(
+                    'VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA',
+                    'SELECCIONE LAS SEDES PARA RELACIONAR AL LÍDER DE DOSIMETRÍA, DE LO CONTRARIO SOLO SERÁ UNA PERSONA RELACIONADA A DICHA SEDE CON ROLES DISTINTOS A LIDER DE DOSIMETRÍA!',
+                    'question'
+                )
+            }else{
+                console.log("es menor a 1");
+            }
+            
+            var arrayidsedesadd =  document.querySelectorAll('select[name="id_sedes_add[]"');
+            console.log("SEDES ADD");
+            console.log(arrayidsedesadd.length);
+            
             Swal.fire({
                 text: "DESEA GUARDAR ESTA PERSONA??",
                 icon: 'warning',

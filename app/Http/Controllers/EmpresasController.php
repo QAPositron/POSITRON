@@ -32,8 +32,7 @@ class EmpresasController extends Controller
         /* return $departamentoscol; */
     }
 
-    public function selectmunicipios(Request $request)
-    {
+    public function selectmunicipios(Request $request){
         $municipios = Colmunicipio::where('departamentocol_id', '=', $request->departamento_id)->get();
         foreach($municipios as $muni){
             $municipiosArray[$muni->id_municipiocol] = $muni->nombre_municol;

@@ -543,9 +543,9 @@ que son las distintas especialidades que tiene la empresa como odontologia, onco
                                             <td class="align-middle text-center">
                                                 @foreach($personasroles as $personrol)
                                                     @if($trabDosim->id_persona == $personrol->persona_id)
-                                                        @if($personrol->role_id == 3)
+                                                        @if($personrol->role_id == 3 && $trabDosim->lider_dosimetria == 'TRUE')
                                                             <b>{{$personrol->roles->name}} <br></b>
-                                                        @else
+                                                        @elseif($personrol->role_id != 3)
                                                             {{$personrol->roles->name}} <br>
                                                         @endif
                                                     @endif

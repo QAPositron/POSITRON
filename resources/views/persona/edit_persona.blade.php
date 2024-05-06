@@ -58,29 +58,57 @@
                     @if(count($personasrol)== 0)
                         <b><label for="">NO HAY ROLES RELACIONADOS </label></b>
                     @else
-                        @forEach($personasrol as $personrol)
-                            <div class="row">
-                                <div class="col-md"></div>
-                                <div class="col-md-8">
-                                    <div class="form-floating text-wrap">
-                                        <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->name}}" autofocus style="text-transform:uppercase;" disabled>
-                                        <label for="floatingSelectGrid">ROL:</label>
+                        @foreach($personasrol as $personrol)
+                            @if(!empty($user) && $personrol->role_id == 3 )
+                                @foreach ($personasede as $personsed)
+                                    
+                                    <div class="row">
+                                        <div class="col-md"></div>
+                                        <div class="col-md-8">
+                                            <div class="form-floating text-wrap">
+                                                <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->name}} - " autofocus style="text-transform:uppercase;" disabled>
+                                                <label for="floatingSelectGrid">ROL:</label>
+                                            </div>
+                                        </div>https://www.youtube.com/watch?v=8SyD8-xtG3Q
+                                        <div class="col-md d-flex">
+                                            <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
+                                                @csrf  
+                                                @method('delete')
+                                                <button class="btn btn-danger btn-lg mt-2"  type="submit" data-bs-toggle="popover" data-bs-content="SE ELIMINARÁ EL USUARIO PARA INGRESAR A LA PALTAFORMA DE DOSÍMETRIA">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md"></div>
                                     </div>
+                                @endforeach
+                            @else
+                                <div class="row">
+                                    <div class="col-md"></div>
+                                    <div class="col-md-8">
+                                        <div class="form-floating text-wrap">
+                                            <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->name}}" autofocus style="text-transform:uppercase;" disabled>
+                                            <label for="floatingSelectGrid">ROL:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md d-flex">
+                                        <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
+                                            @csrf  
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-lg mt-2"  type="submit" data-bs-toggle="popover" data-bs-content="SE ELIMINARÁ EL USUARIO PARA INGRESAR A LA PALTAFORMA DE DOSÍMETRIA">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md"></div>
                                 </div>
-                                <div class="col-md d-flex">
-                                    <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
-                                        @csrf  
-                                        @method('delete')
-                                        <button class="btn btn-danger btn-lg mt-2"  type="submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                            </svg>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div class="col-md"></div>
-                            </div>
+                            @endif
                             <br>
                         @endforeach
                     @endif
@@ -478,6 +506,9 @@ crossorigin="anonymous">
     </script>
 @endif
 <script type="text/javascript">
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
     $(document).ready(() => {
 
         $('#rol_personas').select2({
@@ -496,6 +527,7 @@ crossorigin="anonymous">
             tags: true,
             tokenSeparators: ['/',',',',',','," "]
         });
+        
     });
 
 

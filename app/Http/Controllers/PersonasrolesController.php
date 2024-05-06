@@ -20,7 +20,7 @@ class PersonasrolesController extends Controller
             $user = User::where('persona_id', '=', $personarol->persona_id)->get();
             $usuario = User::find($user[0]->id);
             $usuario->delete();
-            $persona = Persona::where('id_persona', '=', $personarol->persona_id)
+            $personasede = Persona::where('id_persona', '=', $personarol->persona_id)
             ->update(['lider_dosimetria' => NULL ]);
         }
         $personarol->delete();
