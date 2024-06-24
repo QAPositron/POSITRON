@@ -99,7 +99,7 @@
         /* background: yellow; */
         width: 70px;
     }
-    .empresa_cont_cristalino, .empresa_cont_anillo{
+    .empresa_cont_cristalino{
         position: absolute; 
         top: 8px;
         left: 4px;
@@ -109,7 +109,17 @@
         width: 90px;
         /* text-align:right;  */
     }
-    .num_iden_cont_cristalino, .num_iden_cont_anillo{
+    .empresa_cont_anillo{
+        position: absolute; 
+        top: 7px;
+        left: 5.5px;
+        font-size: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: yellow; */
+        width: 90px;
+        /* text-align:right;  */
+    }
+    .num_iden_cont_cristalino{
         position: absolute; 
         top: 22px;
         left: 4px;
@@ -119,7 +129,17 @@
         width: 36px;
         /* text-align:right;  */
     }
-    .codigo_cont_cristalino, .codigo_cont_anillo{
+    .num_iden_cont_anillo{
+        position: absolute; 
+        top: 18px;
+        left: 5.5px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: orange; */
+        width: 36px;
+        /* text-align:right;  */
+    }
+    .codigo_cont_cristalino{
         position: absolute; 
         top: 26.5px;
         left: 4px;
@@ -129,7 +149,17 @@
         width: 36px;
         /* text-align:right;  */
     }
-    .codigo_hol_cont_cristalino, .codigo_hol_cont_anillo{
+    .codigo_cont_anillo{
+        position: absolute; 
+        top: 18.5px;
+        left: 5.5px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 36px;
+        /* text-align:right;  */
+    }
+    .codigo_hol_cont_cristalino{
         position: absolute; 
         top: 31px;
         left: 4px;
@@ -139,7 +169,17 @@
         width: 36px;
         /* text-align:right;  */
     }
-    .primerdia_cont_cristalino, .primerdia_cont_anillo{
+    .codigo_hol_cont_anillo{
+        position: absolute; 
+        top: 23px;
+        left: 5.5px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 36px;
+        /* text-align:right;  */
+    }
+    .primerdia_cont_cristalino{
         position: absolute; 
         top: 12px;
         left:128px;
@@ -149,7 +189,17 @@
         width: 35px;
         /* text-align:left; */
     }
-    .ultimodia_cont_cristalino, .ultimodia_cont_anillo{
+    .primerdia_cont_anillo{
+        position: absolute; 
+        top: 9px;
+        left: 120px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 35px;
+        /* text-align:left; */
+    }
+    .ultimodia_cont_cristalino{
         position: absolute; 
         top: 17px;
         left:128px;
@@ -159,13 +209,30 @@
         width: 35px;
         /* text-align:left; */
     }
-    .codigobar_cont_cristalino, .codigobar_cont_anillo{
+    .ultimodia_cont_anillo{
+        position: absolute; 
+        top: 14px;
+        left: 120px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 35px;
+        /* text-align:left; */
+    }
+    .codigobar_cont_cristalino, {
         position: absolute; 
         top: 24px;
         left: 101.5px; 
         /* background: orange; */
         width: 65px;
-   }
+    }
+    .codigobar_cont_anillo{
+        position: absolute; 
+        top: 20px;
+        left: 97px; 
+       /*  background: orange; */
+        width: 65px;
+    }
     .nombre_torax{
         position: absolute; 
         top:5px;
@@ -251,7 +318,7 @@
         max-height: 43px;
         margin: 0 auto;
     }
-    .empresa_cristalino, .empresa_anillo{
+    .empresa_cristalino{
         position: absolute; 
         top:8px;
         left:4px;
@@ -261,7 +328,17 @@
         width: 90px;
         /* text-align:right;  */
     }
-    .nombre_cristalino, .nombre_anillo{
+    .empresa_anillo{
+        position: absolute; 
+        top:7px;
+        left:4px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: yellow; */
+        width: 90px;
+        /* text-align:right;  */
+    }
+    .nombre_cristalino{
         position: absolute; 
         top: 15px;
         left: 4px;
@@ -271,7 +348,17 @@
         width: 70px;
         /* text-align:right;  */
     }
-    .cedula_cristalino, .cedula_anillo{
+    .nombre_anillo{
+        position: absolute; 
+        top: 11px;
+        left: 4px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 70px;
+        /* text-align:right;  */
+    }
+    .cedula_cristalino, {
         position: absolute; 
         top: 21px;
         left: 4px;
@@ -281,7 +368,17 @@
         width: 36px;
         /* text-align:right;  */
     }
-    .codigo_cristalino, .codigo_anillo{
+    .cedula_anillo{
+        position: absolute; 
+        top: 15px;
+        left: 4px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: orange; */
+        width: 36px;
+        /* text-align:right;  */
+    }
+    .codigo_cristalino{
         position: absolute; 
         top: 26px;
         left: 4px;
@@ -291,7 +388,17 @@
         width: 36px;
         /* text-align:right;  */
     }
-    .codigo_hol_cristalino, .codigo_hol_anillo{
+    .codigo_anillo{
+        position: absolute; 
+        top: 19px;
+        left: 4px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 36px;
+        /* text-align:right;  */
+    }
+    .codigo_hol_cristalino{
         position: absolute; 
         top: 31px;
         left: 4px;
@@ -301,7 +408,17 @@
         width: 36px;
         /* text-align:right;  */
     }
-    .primerdia_cristalino, .primerdia_anillo{
+    .codigo_hol_anillo{
+        position: absolute; 
+        top: 23px;
+        left: 4px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 36px;
+        /* text-align:right;  */
+    }
+    .primerdia_cristalino{
         position: absolute; 
         top: 11px;
         left:128px;
@@ -311,7 +428,27 @@
         width: 35px;
         /* text-align:left; */
     }
-    .ultimodia_cristalino, .ultimodia_anillo{
+    .primerdia_anillo{
+        position: absolute; 
+        top: 9px;
+        left:120px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: blue; */
+        width: 35px;
+        /* text-align:left; */
+    }
+    .ultimodia_anillo{
+        position: absolute; 
+        top: 14px;
+        left:120px;
+        font-size: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        /* background: red; */
+        width: 35px;
+        /* text-align:left; */
+    }
+    .ultimodia_cristalino {
         position: absolute; 
         top: 17px;
         left:128px;
@@ -321,13 +458,20 @@
         width: 35px;
         /* text-align:left; */
     }
-   .codigobar_cristalino, .codigobar_anillo{
+   .codigobar_cristalino{
         position: absolute; 
         top: 24px;
         left: 101.5px; 
         /* background: orange; */
         width: 65px;
-   }
+    }
+    .codigobar_anillo{
+        position: absolute; 
+        top: 20px;
+        left: 97px; 
+        /* background: orange; */
+        width: 65px;
+    }
 </style>
 <body>
     {{-- /////DOSIMETROS TORAX, AREA, CASO, ANILLO, CRISTALINO SIN DOSIMETRO DE CONTROL/////// --}}
@@ -717,9 +861,10 @@
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
                     
                     <div class="empresa_cont_anillo" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 27, "UTF-8")}}</div>
-                    <div class="num_iden_cont_anillo">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}  @else NIT. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}}@endif</div>
+                    {{-- <div class="num_iden_cont_anillo">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}  @else NIT. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}}@endif</div> --}}
                     
-                    <div class="codigo_cont_anillo" >No. {{$dosicontUnic->dosimetro->codigo_dosimeter}}</div>
+                    <div class="codigo_cont_anillo" >No.Dosí. {{$dosicontUnic->dosimetro->codigo_dosimeter}}</div>
+                    <div class="codigo_hol_cont_anillo">No.Hol. {{$dosicontUnic->holder->codigo_holder}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($dosicontUnic->primer_dia_uso));
                         $datefix2 = date('d/m/Y',strtotime($dosicontUnic->ultimo_dia_uso));
@@ -728,7 +873,7 @@
                     <div class="ultimodia_cont_anillo" >{{$datefix2}}</div>
                     <div class="codigobar_cont_anillo">
                         @php
-                            echo DNS1D::getBarcodeHTML($dosicontUnic->dosimetro->codigo_dosimeter, 'C128',0.9,10);
+                            echo DNS1D::getBarcodeHTML($dosicontUnic->dosimetro->codigo_dosimeter, 'C128',0.75,6.8);
                         @endphp
                     </div>
                 </div>
@@ -802,7 +947,8 @@
                    
                     <div class="nombre_anillo" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_anillo">CC. {{$trab->persona->cedula_persona}}</div>
-                    <div class="codigo_anillo" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
+                    <div class="codigo_anillo" >No.Dosí. {{$trab->dosimetro->codigo_dosimeter}}</div>
+                    <div class="codigo_hol_anillo">No.Hol. {{$trab->holder->codigo_holder}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
                         $datefix2 = date('d/m/Y',strtotime($trab->ultimo_dia_uso));
@@ -811,7 +957,7 @@
                     <div class="ultimodia_anillo" >{{$datefix2}}</div>
                     <div class="codigobar_anillo">
                         @php
-                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.9,10);
+                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.75,6.8);
                         @endphp
                     </div>
                 </div>
@@ -1030,9 +1176,9 @@
                     {{-- //////// TEXTO PARA EL DOSIMETRO CONTROL ANILLO ////////// --}}
                     
                     <div class="empresa_cont_anillo" >{{mb_substr($contdosisededepto->contratodosimetriasede->sede->empresa->nombre_empresa, 0, 27, "UTF-8")}}</div>
-                    <div class="num_iden_cont_anillo">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}  @else NIT. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}}@endif</div>
-                    
-                    <div class="codigo_cont_anillo" >No. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
+                    {{-- <div class="num_iden_cont_anillo">@if($contdosisededepto->contratodosimetriasede->sede->empresa->tipo_identificacion_empresa == 'CÉDULA DE CIUDADANIA') CC. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}  @else NIT. {{$contdosisededepto->contratodosimetriasede->sede->empresa->num_iden_empresa}}-{{$contdosisededepto->contratodosimetriasede->sede->empresa->DV}}@endif</div> --}}
+                    <div class="codigo_cont_anillo" >No.Dosí. {{$dosicont->dosimetro->codigo_dosimeter}}</div>
+                    <div class="codigo_hol_cont_anillo">No.Hol. {{$trab->holder->codigo_holder}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($dosicont->primer_dia_uso));
                         $datefix2 = date('d/m/Y',strtotime($dosicont->ultimo_dia_uso));
@@ -1041,7 +1187,7 @@
                     <div class="ultimodia_cont_anillo" >{{$datefix2}}</div>
                     <div class="codigobar_cont_anillo">
                         @php
-                            echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.9,10);
+                            echo DNS1D::getBarcodeHTML($dosicont->dosimetro->codigo_dosimeter, 'C128',0.75,6.8);
                         @endphp
                     </div>
                 </div>
@@ -1115,7 +1261,8 @@
                     
                     <div class="nombre_anillo" > <b>{{$trab->persona->primer_apellido_persona}} {{mb_substr($trab->persona->segundo_apellido_persona, 0,1,"UTF-8")}}, {{$trab->persona->primer_nombre_persona}} {{mb_substr($trab->persona->segundo_nombre_persona, 0,1,"UTF-8")}}</b> </div>
                     <div class="cedula_anillo">CC. {{$trab->persona->cedula_persona}}</div>
-                    <div class="codigo_anillo" >No. {{$trab->dosimetro->codigo_dosimeter}}</div>
+                    <div class="codigo_anillo" >No.Dosí. {{$trab->dosimetro->codigo_dosimeter}}</div>
+                    <div class="codigo_hol_anillo">No.Hol. {{$trab->holder->codigo_holder}}</div>
                     @php
                         $datefix1 = date('d/m/Y',strtotime($trab->primer_dia_uso));
                         $datefix2 = date('d/m/Y',strtotime($trab->ultimo_dia_uso));
@@ -1124,7 +1271,7 @@
                     <div class="ultimodia_anillo" >{{$datefix2}}</div>
                     <div class="codigobar_anillo">
                         @php
-                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.9,10);
+                            echo DNS1D::getBarcodeHTML($trab->dosimetro->codigo_dosimeter, 'C128',0.75,6.8);
                         @endphp
                     </div>
                 </div>

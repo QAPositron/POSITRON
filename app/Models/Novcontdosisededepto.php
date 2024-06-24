@@ -23,7 +23,7 @@ class Novcontdosisededepto extends Model
         return $this->belongsTo(Departamentosede::class, 'departamentosede_id', 'id_departamentosede');
     }
     //relacion uno a muchos con la tabla novedadmesescontdosisedepto
-    public function novedadmesescontdosisededepto(){
+    public function novedadmesescontdosidepto(){
         return $this->hasMany(Novedadmesescontdosisededepto::class, 'id_novedadmesescontdosi');
     }
     //relacion uno a muchos con la tabla mesescontdosisedeptos

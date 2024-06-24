@@ -19,6 +19,15 @@ class CreateCambiosnovedadmesesTable extends Migration
             $table-> unsignedBigInteger('novedadmesescontdosidepto_id');
             $table-> foreign('novedadmesescontdosidepto_id')->references('id_novedadmesescontdosi')->on('novedadmesescontdosisededeptos')->onDelete('cascade')->onUpdate('cascade');
 
+           /*  $table-> unsignedBigInteger('mescontdosisededepto_id')->nullable();
+            $table-> foreign('mescontdosisededepto_id')->references('id_mescontdosisededepto')->on('mesescontdosisedeptos')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
+            $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('novcontdosisededepto_id')->nullable();
+            $table-> foreign('novcontdosisededepto_id')->references('id_novcontdosisededepto')->on('novcontdosisededeptos')->onDelete('cascade')->onUpdate('cascade'); */
+            
             $table-> unsignedBigInteger('trabajadordosimetro_id')->nullable();
             $table-> foreign('trabajadordosimetro_id')->references('id_trabajadordosimetro')->on('trabajadordosimetros')->onDelete('cascade')->onUpdate('cascade');
 
@@ -44,7 +53,7 @@ class CreateCambiosnovedadmesesTable extends Migration
             $table-> foreign('areadepartamentosede_id')->references('id_areadepartamentosede')->on('areadepartamentosedes')->onDelete('cascade')->onUpdate('cascade');
             
             $table->string('ubicacion', 50)->nullable();
-            $table->integer('mes_asignacion')->nullable();;
+            $table->integer('mes_asignacion')->nullable();
             $table->integer('tipo_novedad')->nullable();;
             $table->text('nota_cambiodosim')->nullable();
 

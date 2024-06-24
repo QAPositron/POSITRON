@@ -21,6 +21,9 @@
         <title>QAPOSITRON</title>
         {{-- incluidos --}}
         <style>
+            body{
+                font-size: 20px;
+            }
             .active{
                 background-color: #EEEEEE;
                 background-color: rgba(231, 231, 231, 0.3);
@@ -109,9 +112,15 @@
                 color:#1A9980;
             }
             body{
-                background-image: url('{{ asset('imagenes/fondo13.png')}}');
+                /* background-image: url('{{ asset('imagenes/fondo13.png')}}'); */
                 background-repeat: no-repeat;
                 background-position: top 80px left 350px;
+            }
+            ul li::marker{
+                color: #0265b6;
+            }
+            li{
+                margin-bottom: 10px;
             }
         </style>
 
@@ -122,7 +131,6 @@
     <body>
         <div id="app">
             <div class="menu">
-                <ion-icon name="menu-outline"></ion-icon>
                 <ion-icon name="close-outline"></ion-icon>
             </div>
         
@@ -141,28 +149,40 @@
                                 <span style="font-size: 20px;">Inicio</span>
                             </a>
                         </li>
-                        <li>
+                        <li id='empresa'>
                             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <ion-icon name="chevron-forward-outline"></ion-icon>
                                 <span style="font-size: 20px;">Empresas</span>
                             </a>
-                            {{-- <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul> --}}
-                            {{-- <a href="{{route('liderdosim.sedes')}}">
-                                <ion-icon name="star-outline"></ion-icon>
-                                <span>Empresa</span>
-                            </a> --}}
+                            <ul class="dropdown-menu">
+                                @for ($i = 0; $i < count($arrayempresas); $i++)
+                                    <li><a class="dropdown-item" onclick="listadoEmpresas('{{$arrayempresas[$i]}}');">{{$arrayempresas[$i]}}</a></li>
+                                @endfor
+                            </ul>
                         </li>
-                        <li>
-                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li id="empresacheck" class="seleccionado"></li>
+                        <li id="contrato">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="butttoncontratos">
+                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                                <span style="font-size: 20px;">Contratos</span>
+                            </a>
+                        </li>
+                        <li id="contratocheck" class="seleccionado"></li>
+                        <li id='sedes'>
+                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="butttonsedes">
                                 <ion-icon name="chevron-forward-outline"></ion-icon>
                                 <span style="font-size: 20px;">Sedes</span>
                             </a>
                         </li>
-                        <li>
+                        <li id="sedescheck" class="seleccionado"></li>
+                        <li id='especialidades'>
+                            <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="butttonespecialidades">
+                                <ion-icon name="chevron-forward-outline"></ion-icon>
+                                <span style="font-size: 20px;">Especialidades</span>
+                            </a>
+                        </li>
+                        <li id="espcheck" class="seleccionado"></li>
+                        <li style="margin-top: 30px;">
                             <a href="#">
                                 <ion-icon name="chevron-forward-outline"></ion-icon>
                                 <span style="font-size: 20px;">Novedades</span>
@@ -179,8 +199,8 @@
                         <ion-icon name="person-circle-outline"></ion-icon>
                         <div class="info-usuario">
                             <div class="nombre-email">
-                                <span class="nombre">{{  ucwords(mb_strtolower(Auth::user()->name)) }}</span>
-                                <span class="email">{{strtolower(Auth::user()->email)}}</span>
+                                <span class="nombre" style="color: white;">{{  ucwords(mb_strtolower(Auth::user()->name)) }}</span>
+                                <span class="email" style="color: white;">{{strtolower(Auth::user()->email)}}</span>
                             </div>
                             <div>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -197,7 +217,6 @@
                                     </form>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -209,7 +228,7 @@
                         <div class="col-md"></div>
                         <div class="col-md"></div>
                         <div class="col-md ml-2">
-                            <h3 class="text-end mx-3 mt-2 text-light">{{$personasede[0]->razon_social_empresa}}</h3>
+                            <h3 class="text-end mx-3 mt-2 text-light" id="nombre"></h3>
                         </div>
                     </div>
                 </div>
@@ -239,6 +258,53 @@
           {{-- /incluidos --}}
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        <script type="text/javascript" src="{{ asset('/js/sidebar.js') }}"></script>
+        
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous">
+        </script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="text/javascript">
+            function listadoEmpresas(empresa){
+                $('#empresacheck').empty();
+                $("#empresacheck").append("<label id='empresaselet'>"+empresa+"</label>");
+                document.getElementById('nombre').innerHTML = empresa;
+                $("#sedes").append("<ul class='dropdown-menu' id='lisedes'></ul>");
+                console.log("se oprimio"+empresa);
+                $.get('dosimetria/contratos', {empresa: empresa}, function(contratosdosimetria){
+                    console.log("contratodosimetria");
+                    console.log(contratosdosimetria);
+                    $("#contrato").append("<ul class='dropdown-menu' id='licontratos'></ul>");
+                    $('#licontratos').empty();
+                    $('#contratoselet').empty();
+                    $.each(contratosdosimetria, function(index, value){
+                        const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+                        var fini = new Date(value.fecha_inicio);
+                        fini.setMinutes(fini.getMinutes() + fini.getTimezoneOffset());
+                        console.log(fini);
+                        var inicio = fini.getDate()+' '+meses[fini.getMonth()] + ' DE ' + fini.getUTCFullYear();
+                        console.log("****FECHA INICIO***");
+                        console.log(inicio);
+                        var ffin = new Date(value.fecha_finalizacion);
+                        ffin.setMinutes(ffin.getMinutes() + ffin.getTimezoneOffset());
+                        var fin = ffin.getDate()+' '+meses[ffin.getMonth()] + ' DE ' + ffin.getUTCFullYear();
+                        console.log("****FECHA FINALIZACION***");
+                        console.log(fin);
+                        $('#licontratos').append("<li><a class='dropdown-item' id='"+ value.id_contratodosimetria + "' onclick='listadoSedes("+value.id_contratodosimetria+",\""+inicio+"\",\""+fin+"\");'>"+inicio+" - "+fin+"</a></li>");
+                    });
+                });
+            }
+            function listadoSedes(id, inicio, fin){
+                console.log("contrato inicio="+inicio);
+                console.log("contrato fin="+fin);
+                console.log("id="+id); 
+                var host = window.location.host;
+                var path = "http://"+host+"/POSITRON/public/dosimetria/"+id+"/detalletrabajador";
+                window.open(path, '_self');
+               
+            }
+           
+        </script>
     </body>
 </html>

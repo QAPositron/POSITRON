@@ -90,7 +90,19 @@
     #lista1 li{
         line-height: 130%;
     }
-
+    #contenedor{
+        text-align: left;
+        width: 100%;
+        margin: auto;
+    }
+    #qa{
+        width: 30%;
+        float: left;
+    }
+    #cliente{
+        float: right;
+        width: 70%;
+    }
 </style>
 <body>
    {{--  <div id="watermark">
@@ -197,20 +209,23 @@
                 <b>USUARIO: </b>{{$cont->empresa->razon_social_empresa}}  <b>CIUDAD:</b>{{$cont->empresa->direccion_empresa}}, {{ucfirst(mb_strtolower($cont->empresa->municipios->nombre_municol))}} - {{ucfirst(mb_strtolower($cont->empresa->municipios->coldepartamento->nombre_deptocol))}} <b>Cel.</b> {{$cont->empresa->telefono_empresa}}
 
             </p>
-            <div style="position:relative; width:50%; height: 170px; top:80px; page-break-inside: avoid; ">
-                <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="70" style="position:relative;  left:75px;">
-                <p style="position:relative;  text-align: center; font-size: 11px;"><b>DIEGO F. APONTE CASTEÑEDA</b></p><br>
-                <p style="position:relative; bottom: 17px; text-align: center; font-size: 11px;">REP. LEGAL QA POSITRON SAS</p><br>
-                <p style="position:relative; bottom: 35px; text-align: center; font-size: 11px; ">CEL : (+57) 301 449 5401</p><br>
-                <p style="position:relative; bottom: 55px; text-align: center; font-size: 11px; ">e-mail: <u style="color: blue;">dosimetría.qapositron@gmail.com</u> </p>
+            <br><br><br><br>
+            <div id="contenedor" class="clearfix">
+                <div style="height: 170px;" id="qa">
+                    <img src="{{asset('imagenes/FIRMADEDIEGOFINAL.png')}}" width="170" height="70" style="position:relative;  left:15px;">
+                    <p style="position:relative;  text-align: center; font-size: 11px;"><b>DIEGO F. APONTE CASTEÑEDA</b></p><br>
+                    <p style="position:relative; bottom: 17px; text-align: center; font-size: 11px;">REP. LEGAL QA POSITRON SAS</p><br>
+                    <p style="position:relative; bottom: 35px; text-align: center; font-size: 11px; ">CEL : (+57) 301 449 5401</p><br>
+                    <p style="position:relative; bottom: 55px; text-align: center; font-size: 11px; ">e-mail: <u style="color: blue;">dosimetría.qapositron@gmail.com</u> </p>
+                </div>
+                <div style="height: 170px;" id="cliente" >
+                    <p style="position: relative; top:70px; text-align: center;"><b>{{$cont->empresa->nombre_representantelegal}}</b></p> <br>
+                    <p style="position: relative; top:53px;text-align: center; font-size: 11px;">REP. LEGAL {{$cont->empresa->razon_social_empresa}}</p> <br>
+                    <p style="position: relative; top:35px; text-align: center; font-size: 11px; ">CEL. (+57) {{$cont->empresa->telefono_representantelegal}}</p> <br>
+                    <p style="position:relative; top:15px; text-align: center; font-size: 11px; ">e-mail: <u style="color: blue;">{{mb_strtolower($cont->empresa->email_empresa)}}</u> </p>
+                </div>
             </div>
 
-            <div style="position:relative; width: 50%; height: 170px; left: 320px; top:-90px; page-break-inside: avoid;">
-                <p style="position: relative; top:70px; text-align: center;"><b>{{$cont->empresa->nombre_representantelegal}}</b></p> <br>
-                <p style="position: relative; top:53px;text-align: center; font-size: 11px;">REP. LEGAL {{$cont->empresa->razon_social_empresa}}</p> <br>
-                <p style="position: relative; top:35px; text-align: center; font-size: 11px; ">CEL. (+57) {{$cont->empresa->telefono_representantelegal}}</p> <br>
-                <p style="position:relative; top:15px; text-align: center; font-size: 11px; ">e-mail: <u style="color: blue;">{{mb_strtolower($cont->empresa->email_empresa)}}</u> </p>
-            </div>
         @endforeach
     
     </main>

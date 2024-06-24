@@ -180,7 +180,7 @@ crossorigin="anonymous">
             $('#municipio_empresa').fadeOut();
             $('#spinner_municipio').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');
             var departamento_id = $(this).val();
-            alert(departamento_id);
+            /* alert(departamento_id); */
             var padre = document.getElementById("spinner_municipio");
             var hijo = document.getElementById("spinner");
             if($.trim(departamento_id) != ''){

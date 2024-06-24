@@ -16,9 +16,9 @@ class Novedadmesescontdosisededepto extends Model
         return $this->belongsTo(Mesescontdosisedeptos::class, 'mescontdosisededepto_id', 'id_mescontdosisededepto');
     }
     //Relacion uno a muchos (inversa) con dosimetria contrato
-    public function dosimetriacontrato(){
+    public function novedad(){
         /* return $this->belongsTo('App\Models\Empresa'); */
-        return $this->belongsTo(Dosimetriacontrato::class, 'contratodosimetria_id', 'id_contratodosimetria');
+        return $this->belongsTo(Novedad::class, 'novedad_id', 'id_novedad');
     }
      //Relacion uno a muchos (inversa) con contratodosimetriasededepto
     public function contratodosimetriasededepto(){
@@ -26,8 +26,8 @@ class Novedadmesescontdosisededepto extends Model
     }
     //relacion uno a muchos (inversa) con novcontdosisededeptos
     public function novcontdosisededepto(){
-        /* return $this->hasMany('App\Models\Sede'); */
-        return $this->belongsTo(Novcontdosisededepto::class, 'novcontdosisededepto_id ', 'id_novcontdosisededepto');
+        /* return $this->belongsTo(Novcontdosisededepto::class, 'novcontdosisededepto_id ', 'id_novcontdosisededepto'); */
+        return $this->belongsTo(Novcontdosisededepto::class, 'novcontdosisededepto_id', 'id_novcontdosisededepto');
     }
     public function cambiosnovedadmeses(){
         return $this->hasMany(Cambiosnovedadmeses::class, 'id_cambionovedadmeses');

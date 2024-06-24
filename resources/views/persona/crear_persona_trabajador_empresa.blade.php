@@ -43,39 +43,9 @@
                     </div>
                     <div class="col-md"></div>
                     {{-- /////////////// AHORA LOS ROLES SON FIJOS Y SON CREADOS Y RELACIONADOS CON SPATIE DE LARAVEL(LIDER DE DOSIMETRIA, ADMIN Y SUPERADMIN) LOS DEMAS ROLES SE RELACIONAN NORMAL CON PERSONAS-ROLES//////////////////// --}}
-
-                    {{-- <div class="col-md-6">
-                        <label for="">*ROL:</label>
-                        <div class="form-floating">
-                            <select class="form-select @error('rol_personas') is-invalid @enderror" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true" >
-                                @foreach($roles as $rol)
-                                    @if($id == 1 && ($rol->id_rol == 3 || $rol->id_rol == 4 || $rol->id_rol == 5))
-                                        <option value ="{{$rol->id_rol}}" {{ in_array($rol->id_rol, (array) old('rol_personas', [])) ? "selected" : "" }}>{{$rol->nombre_rol}}</option>
-                                    
-                                    @elseif($id == 2 && $rol->id_rol == 1)
-                                        <option value ="{{$rol->id_rol}}" {{ in_array($rol->id_rol, (array) old('rol_personas', [])) ? "selected" : "" }}>{{$rol->nombre_rol}}</option> 
-                                    @elseif($id == 3 && $rol->id_rol == 2)
-                                        <option value ="{{$rol->id_rol}}" {{ in_array($rol->id_rol, (array) old('rol_personas', [])) ? "selected" : "" }}>{{$rol->nombre_rol}}</option>
-                                    @endif
-                                @endforeach 
-                            </select>
-                            @error('rol_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                        </div>
-                    </div> --}}
-                    {{-- /////////TEMPORALMENTE DESHABILITADO POR INDECISION////////////// AHORA SOLO HAY 4 ROLES FIJOS////// --}}
-                    {{-- <div class="col-md d-flex align-items-center">
-                        <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_rolModal" >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                            </svg>
-                        </button>
-                    </div> --}}
-                    {{-- ///////////////////////////////////////////////////////////////////// --}}
                 </div>
             
                 <br>
-                {{-- <input hidden type="number" name="id_perfiles[]" id="id_perfiles" value="">
-                <input hidden type="number" name="id_roles[]" id="id_roles" value=""> --}}
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating text-wrap">
@@ -315,31 +285,7 @@
     </div>
     <div class="col"></div>
 </div>
-<div class="modal fade" id="nueva_perfilModal" tabindex="-1" aria-labelledby="nueva_perfilModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" id="nueva_perfilModalLabel">NUEVO PERFIL LABORAL</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            @livewire('form-personas-perfiles')
-            
-        </div> 
-    </div>
-</div>
-{{-- //////////////// MODAL DESHABILITADO YA LOS ROLES SON FIJOS ////////////////////////// --}}
-{{-- <div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" id="nueva_rolModalLabel">NUEVO ROL</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            @livewire('form-personas-roles')
-            
-        </div> 
-    </div>
-</div> --}}
+
 <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -474,12 +420,12 @@ crossorigin="anonymous">
                         selectedsadd.push(el.value);
                     });
                     console.log(selectedsadd);
-
+                    var liderdosim = document.getElementById("LIDER DE DOSIMETRIA").checked;
                     selectedsadd.forEach(element => {
-                        $.get('personsedes',{sede_id : element}, function(personsedes){
+                        $.get('personasedes',{sede_id : element}, function(personsedes){
                             console.log(personsedes);
                             personsedes.forEach(element => {
-                                if(element.lider_dosimetria == 'TRUE'){
+                                if(element.lider_dosimetria == 'TRUE' && liderdosim == true){
                                     console.log("TIENE LIDER DOSIMETRIA la sede="+element.sede_id);
                                     return Swal.fire({
                                         title:"LA SEDE '"+element.nombre_sede+"' YA TIENE UN LIDER DE DOSIMETRIA",
@@ -557,12 +503,12 @@ crossorigin="anonymous">
                 selecteds.push(el.value);
             });
             console.log(selecteds);
-
+            var liderdosim = document.getElementById("LIDER DE DOSIMETRIA").checked;
             selecteds.forEach(element => {
-                $.get('personsedes',{sede_id : element}, function(personsedes){
+                $.get('personasedes',{sede_id : element}, function(personsedes){
                     console.log(personsedes);
                     personsedes.forEach(element => {
-                        if(element.lider_dosimetria == 'TRUE'){
+                        if(element.lider_dosimetria == 'TRUE' && liderdosim == true){
                             console.log("TIENE LIDER DOSIMETRIA la sede="+element.sede_id);
                             return Swal.fire({
                                 title:"LA SEDE '"+element.nombre_sede+"' YA TIENE UN LIDER DE DOSIMETRIA",
@@ -604,7 +550,62 @@ crossorigin="anonymous">
             var arrayidsedes = $('#id_sedes option:selected').toArray();
             console.log(arrayidsedes);
             console.log("cantidad"+arrayidsedes.length);
-            if(liderdosim == true && arrayidsedes.length > 1 && liderdosimsed.length == 0){
+            var idsedesadd =  document.querySelectorAll('select[name="id_sedes_add[]"');
+            console.log("SEDES ADD");
+            console.log(idsedesadd);
+            var arrayidsedesadd = [];
+            for(let i = 0; i < idsedesadd.length; i++) {
+                for (let x = 0; x < idsedesadd[i].selectedOptions.length; x++) {
+                    const element = idsedesadd[i].selectedOptions[x];
+                    arrayidsedesadd.push({'id':element.value, 'name':element.text});
+                }
+            }
+            console.log("ARRAY SEDES ADD");
+            console.log(arrayidsedesadd);
+            if(liderdosim == true && (arrayidsedes.length >= 1 && arrayidsedesadd.length >= 1) && liderdosimsed.length == 0){
+                console.log("es mayor a 1");
+                document.getElementById('liderdosimsedes').removeAttribute("hidden");
+                
+                arrayidsedes.forEach(element => {
+                    console.log(element.value);
+                    $("#liderdosimsedes").append(
+                        '<div class="row">'
+                            +'<div class="col-md"></div>'
+                            +'<div class="col-md">'
+                                +'<div class="form-check">'
+                                    +'<input class="form-check-input" type="checkbox" value="'+element.value+'" name="liderdosimsedes[]" id="liderdosimsedes'+element.value+'">'
+                                    +'<label class="form-check-label" for="defaultCheck1">'
+                                        +element.text
+                                    +'</label>'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="col-md"></div>'
+                        +'</div>'
+                    );
+                });
+                arrayidsedesadd.forEach(element => {
+                    console.log(element.value);
+                    $("#liderdosimsedes").append(
+                        '<div class="row">'
+                            +'<div class="col-md"></div>'
+                            +'<div class="col-md">'
+                                +'<div class="form-check">'
+                                    +'<input class="form-check-input" type="checkbox" value="'+element.id+'" name="liderdosimsedes[]" id="liderdosimsedes'+element.value+'">'
+                                    +'<label class="form-check-label" for="defaultCheck1">'
+                                        +element.name
+                                    +'</label>'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="col-md"></div>'
+                        +'</div>'
+                    );
+                });
+                return Swal.fire(
+                    'VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA',
+                    'SELECCIONE LAS SEDES PARA RELACIONAR AL LÍDER DE DOSIMETRÍA, DE LO CONTRARIO SOLO SERÁ UNA PERSONA RELACIONADA A DICHA SEDE CON ROLES DISTINTOS A LIDER DE DOSIMETRÍA!',
+                    'question'
+                )
+            }else if(liderdosim == true && arrayidsedes.length > 1 && liderdosimsed.length == 0){
                 console.log("es mayor a 1");
                 document.getElementById('liderdosimsedes').removeAttribute("hidden");
                 
@@ -630,14 +631,8 @@ crossorigin="anonymous">
                     'SELECCIONE LAS SEDES PARA RELACIONAR AL LÍDER DE DOSIMETRÍA, DE LO CONTRARIO SOLO SERÁ UNA PERSONA RELACIONADA A DICHA SEDE CON ROLES DISTINTOS A LIDER DE DOSIMETRÍA!',
                     'question'
                 )
-            }else{
-                console.log("es menor a 1");
             }
-            
-            var arrayidsedesadd =  document.querySelectorAll('select[name="id_sedes_add[]"');
-            console.log("SEDES ADD");
-            console.log(arrayidsedesadd.length);
-            
+           
             Swal.fire({
                 text: "DESEA GUARDAR ESTA PERSONA??",
                 icon: 'warning',
@@ -645,13 +640,13 @@ crossorigin="anonymous">
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'SI, SEGURO!'
-                }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
                    
                     this.submit();
                 }
             })
-        })
-    })
+        });
+    });
 </script>
 @endsection

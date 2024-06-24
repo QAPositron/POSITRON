@@ -162,7 +162,19 @@
                             </table>
                         </tbody>
                     </table>
-                    
+                    <div class="row">
+                        <div class="col-md"></div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="TRUE" id="checkDelete1" name="checkDelete1">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    ELIMINAR TODOS LOS DOSÍMETROS EXCEPTO LOS DOSÍMETROS DE CONTROL ÚNICOS PARA EL CONTRATO
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md"></div>
+                    </div>
+                    <br>
                     <div class="row">
                         <div class="col"></div>
                         <div class="col-10">
@@ -799,14 +811,15 @@
                     }
                     var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
                     console.log("**contdosisededepto_id " +contdosisededepto_id);
-                    console.log("**mes actual "+consultaMesactual);
+                    console.log("**mes seleccionado "+mes);
                     var contratodosimetriasede_id  = document.getElementById("id_contratodosimetriasede").value;
                     var contratodosimetria = document.getElementById("contratos_empresadosi").value;
-                    $.get('novedadactualcontdosisededepto', {contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual}, function(novedadactual){
+                    $.get('novedadactualcontdosisededepto', {contratodosimetria_id: contratodosimetria, mes: mes}, function(novedadactual){
                         console.log("/*/*/NOVEDAD DEL MES ACTUAL");
                         console.log(novedadactual);
                         console.log(Object.keys(novedadactual).length);
                         console.log(Object.values(novedadactual));
+                        $('#novedad').empty();
                         if(Object.keys(novedadactual).length  === 0){
                             console.log("entro al if")
                             var num = 1;
@@ -827,14 +840,14 @@
                             console.log(novedadactual);
                             console.log(novedadactual.length);
                             for(var i=1; i<novedadactual.length; i++){
-                                if(idNov != novedadactual[i].id_novedadmesescontdosi){
+                                if(idNov != novedadactual[i].id_novedad){
                                     console.log("es la i");
                                     console.log(novedadactual[i]);
                                     var num = parseInt(novedadactual[i].codigo_novedad);
                                     var n = num.toString().padStart(5,'0');
                                     console.log("ESTE ES EL CODIGO" +n);
-                                    idNov = novedadactual[i].id_novedadmesescontdosi;
-                                    $('#novedad').append("<option value='"+novedadactual[i].id_novedadmesescontdosi+"'> ACTUAL: P "+novedadactual[i].mes_asignacion+" - " +n+ "</option>");
+                                    idNov = novedadactual[i].id_novedad;
+                                    $('#novedad').append("<option value='"+novedadactual[i].id_novedad+"'> ACTUAL: P "+novedadactual[i].mes_asignacion+" - " +n+ "</option>");
                                 }
                             }
                             console.log(typeof novedadactual);

@@ -15,22 +15,20 @@ class CreateNovedadmesescontdosisededeptosTable extends Migration
     {
         Schema::create('novedadmesescontdosisededeptos', function (Blueprint $table) {
             $table->bigincrements('id_novedadmesescontdosi')->unique();
-            $table->integer('codigo_novedad')->nullable();
+            
+            $table-> unsignedBigInteger('novedad_id')->nullable();
+            $table-> foreign('novedad_id')->references('id_novedad')->on('novedads')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
+            $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
+
+            $table-> unsignedBigInteger('novcontdosisededepto_id')->nullable();
+            $table-> foreign('novcontdosisededepto_id')->references('id_novcontdosisededepto')->on('novcontdosisededeptos')->onDelete('cascade')->onUpdate('cascade');
 
             $table-> unsignedBigInteger('mescontdosisededepto_id')->nullable();
             $table-> foreign('mescontdosisededepto_id')->references('id_mescontdosisededepto')->on('mesescontdosisedeptos')->onDelete('cascade')->onUpdate('cascade');
             
-            $table-> unsignedBigInteger('contratodosimetria_id');
-            $table-> foreign('contratodosimetria_id')->references('id_contratodosimetria')->on('dosimetriacontratos')->onDelete('cascade')->onUpdate('cascade');
-            
-            $table-> unsignedBigInteger('contdosisededepto_id')->nullable();
-            $table-> foreign('contdosisededepto_id')->references('id_contdosisededepto')->on('contratodosimetriasededeptos')->onDelete('cascade')->onUpdate('cascade');
-            
-            $table-> unsignedBigInteger('novcontdosisededepto_id')->nullable();
-            $table-> foreign('novcontdosisededepto_id')->references('id_novcontdosisededepto')->on('novcontdosisededeptos')->onDelete('cascade')->onUpdate('cascade');
-            
-            $table->integer('mes_asignacion');
-            
+            $table->integer('mes_asignacion')->nullable();
             $table->timestamps();
         });
     }

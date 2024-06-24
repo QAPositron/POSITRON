@@ -25,11 +25,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
+    
 }
 body{
     height: 100vh;
     width: 100%;
-    /* background-image: '/imagenes/LOGODOSIMETRIA.png'; */
+    
 }
 
 /*-----------------Menu*/
@@ -64,26 +65,9 @@ body{
     background: linear-gradient(100deg, #213b74, #1a9788);
     transition: width 0.5s ease,background-color 0.3s ease,left 0.5s ease;
     z-index: 50;
+    
 }
 
-.mini-barra-lateral{
-    width: 110px;
-}
-
-/* .barra-lateral span{
-    width: 100px;
-    white-space: nowrap;
-    font-size: 100px;
-    text-align: left;
-    opacity: 1;
-    transition: opacity 0.5s ease,width 0.5s ease;
-}  */
-/* .barra-lateral span.oculto{
-    opacity: 0;
-    width: 0;
-}
- */
- 
 /*------------> Nombre de la página */
 .barra-lateral .nombre-pagina{
     width: 100%;
@@ -108,10 +92,12 @@ body{
 
 /*--------------> Menu Navegación*/
 .barra-lateral .navegacion{
-    height: 40%;
+    /* height: 50%; */
     overflow-y: auto;
     overflow-x: hidden;
-    
+    /* top: 50px; */
+    /* margin-bottom: 50px; */
+   
 }
 
 .barra-lateral .navegacion::-webkit-scrollbar{
@@ -133,7 +119,7 @@ body{
 
 .barra-lateral .navegacion a{
     width: 100%;
-    height: 45px;
+    height: 30px;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -154,18 +140,13 @@ body{
     width: 100%;
     height: 1px;
     background-color: var(--color-linea);
-    margin-bottom: 40px;
+    margin-bottom: 0px;
 }
 
 
-/*---------------> Usuario*/
-.perfil{
-    margin-bottom: 100px;
-}
 .barra-lateral .usuario{
     width: 100%;
     display: flex;
-
 }
 .barra-lateral .usuario .info-usuario{
     width: 100%;
@@ -191,17 +172,6 @@ body{
     font-size: 80px;
     color: white;
 }
-.barra-lateral .usuario .opciones{
-    font-size: 25px;
-}
-
-/*-------------main*/
-
-#inbox{
-    background-color: var(--color-menu-hover);
-    color: var(--color-menu-hover-texto);
-}
-
 main{
     margin-left: 10px;
     padding: 20px;
@@ -211,44 +181,15 @@ main{
 main.min-main{
     margin-left: 80px;
 }
+.seleccionado label{
+    background-color: white;
+    margin-left: 50px;
+    display: flex;
+    text-decoration: none;
+    border-radius: 10px;
+    color: var(--color-texto);
+    align-items: center;
+    padding: 10px;
+    height: auto;
 
-
-
-/*------------------> Responsive*/
-@media (max-height: 660px){
-    .barra-lateral .nombre-pagina{
-        margin-bottom: 5px;
-    }
-    .perfil{
-        margin-bottom: 3px;
-    }
-    .barra-lateral .linea{
-        margin-bottom: 3px;
-    }
-    .barra-lateral .navegacion{
-        height: 20%;
-    }
-
-}
-@media (max-width: 600px){
-    .barra-lateral{
-        position: fixed;
-        left: -350px;
-    }
-    .max-barra-lateral{
-        left: 0;
-    }
-    .menu{
-        display: flex;
-    }
-    .menu ion-icon:nth-child(2){
-        display: none;
-    }
-    main{
-        margin-left: 0;
-    }
-    main.min-main{
-        margin-left: 0;
-    }
-    
 }

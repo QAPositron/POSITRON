@@ -131,7 +131,7 @@
                                         
                                         {{-- /////////SI SOLO EXISTEN AREAS ASIGNADAS A UN DEPTO///////// --}}
                                         @if($dosisededeptocontra->dosi_torax == 0 && $dosisededeptocontra->dosi_cristalino == 0 && $dosisededeptocontra->dosi_muñeca == 0 && $dosisededeptocontra->dosi_dedo == 0 && $dosisededeptocontra->dosi_caso == 0 && $dosisededeptocontra->dosi_area != 0)
-                                           {{--  {{$mesTotalAreasignados[$i]}} --}}
+                                           {{$mesTotalAreasignados[$i]}}
                                             @if($i == 1 && $mesTotalAreasignados[$i]>0)
                                                 {{-- ZZ mesTotal {{$i}} > 0 & i=1 --}}
                                                 <div class="col-md text-center">

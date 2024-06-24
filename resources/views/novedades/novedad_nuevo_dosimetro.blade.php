@@ -836,15 +836,17 @@
                     }
                     var contdosisededepto_id = document.getElementById("especialidades_empresadosi").value;
                     console.log("**contdosisededepto_id " +contdosisededepto_id);
-                    console.log("**mes actual "+consultaMesactual);
+                    console.log("**mes seleccionado"+mes);
+
                     var contratodosimetriasede_id  = document.getElementById("contratodosimetriasede").value;
                     var contratodosimetria = document.getElementById("contratos_empresadosi").value;
 
-                    $.get('novedadactualcontdosisededepto', {contdosisededepto_id: contdosisededepto_id, mes: consultaMesactual}, function(novedadactual){
+                    $.get('novedadactualcontdosisededepto', {contratodosimetria_id: contratodosimetria, mes: mes}, function(novedadactual){
                         console.log("/*/*/NOVEDAD DEL MES ACTUAL");
                         console.log(novedadactual);
                         console.log(Object.keys(novedadactual).length);
-                        console.log(Object.values(novedadactual));
+                       /*  console.log(Object.values(novedadactual)); */
+                        $('#novedad').empty();
                         if(Object.keys(novedadactual).length  === 0){
                             console.log("entro al if")
                             var num = 1;
@@ -865,14 +867,14 @@
                             console.log(novedadactual);
                             console.log(novedadactual.length);
                             for(var i=1; i<novedadactual.length; i++){
-                                if(idNov != novedadactual[i].id_novedadmesescontdosi){
+                                if(idNov != novedadactual[i].id_novedad){
                                     console.log("es la i");
                                     console.log(novedadactual[i]);
                                     var num = parseInt(novedadactual[i].codigo_novedad);
                                     var n = num.toString().padStart(5,'0');
                                     console.log("ESTE ES EL CODIGO" +n);
-                                    idNov = novedadactual[i].id_novedadmesescontdosi;
-                                    $('#novedad').append("<option value='"+novedadactual[i].id_novedadmesescontdosi+"'> ACTUAL: P "+novedadactual[i].mes_asignacion+" - " +n+ "</option>");
+                                    idNov = novedadactual[i].id_novedad;
+                                    $('#novedad').append("<option value='"+novedadactual[i].id_novedad+"'> ACTUAL: P "+novedadactual[i].mes_asignacion+" - " +n+ "</option>");
                                 }
                             }
                             console.log(typeof novedadactual);
@@ -2512,7 +2514,7 @@
                         for(var x = 0; x < dosimetros.length; x++){
                             var valuesX = dosimetros[x].value;
                             console.log("dosimetros values x " +valuesX);
-                            if(values == valuesX && i != x values != '' && valuesX != ''){
+                            if(values == valuesX && i != x && values != '' && valuesX != ''){
                                 return Swal.fire({
                                         title:"ALGUNOS DOSÍMETROS SELECCIONADOS SE ENCUENTRAN REPETIDOS",
                                         text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN CORRECTAMENTE",
@@ -3369,6 +3371,7 @@
                 }
             })
         });
+        
     })
 </script>
 @endsection()

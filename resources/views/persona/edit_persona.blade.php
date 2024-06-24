@@ -30,24 +30,26 @@
                         @forEach($personasperfil as $personperf)
                             <div class="row">
                                 <div class="col-md "></div>
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <div class="form-floating text-wrap">
                                         <input type="text" class="form-control"  name="id_perfil" id="id_perfil"  value="{{$personperf->perfiles->nombre_perfil}}" autofocus style="text-transform:uppercase;" disabled>
                                         <label for="floatingInputDisabled">PERFIL LABORAL:</label>
                                     </div>
                                 </div>
-                                <div class="col-md d-flex">
-                                    <form class="form_eliminar_personaperfil" id="form_eliminar_personaperfil" name="form_eliminar_personaperfil" action="{{route('personaperfil.destroy', $personperf->id_personaperfil)}}" method="POST">
-                                        @csrf  
-                                        @method('delete')
-                                        <button class="btn btn-danger btn-lg mt-2"  type="submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                            </svg>
-                                        </button>
-                                    </form>
-                                </div>
+                                @can('superadmin.home')     
+                                    <div class="col-md d-flex">
+                                        <form class="form_eliminar_personaperfil" id="form_eliminar_personaperfil" name="form_eliminar_personaperfil" action="{{route('personaperfil.destroy', $personperf->id_personaperfil)}}" method="POST">
+                                            @csrf  
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-lg mt-2"  type="submit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endcan
                                 <div class="col-md"></div>
                             </div>
                             <br>
@@ -59,19 +61,18 @@
                         <b><label for="">NO HAY ROLES RELACIONADOS </label></b>
                     @else
                         @foreach($personasrol as $personrol)
-                            @if(!empty($user) && $personrol->role_id == 3 )
-                                @foreach ($personasede as $personsed)
-                                    
-                                    <div class="row">
-                                        <div class="col-md"></div>
-                                        <div class="col-md-8">
-                                            <div class="form-floating text-wrap">
-                                                <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->name}} - " autofocus style="text-transform:uppercase;" disabled>
-                                                <label for="floatingSelectGrid">ROL:</label>
-                                            </div>
-                                        </div>https://www.youtube.com/watch?v=8SyD8-xtG3Q
+                            @if ($personrol->role_id != 3)
+                                <div class="row">
+                                    <div class="col-md"></div>
+                                    <div class="col-md-9">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->name}}" autofocus style="text-transform:uppercase;" disabled>
+                                            <label for="floatingSelectGrid">ROL:</label>
+                                        </div>
+                                    </div>
+                                    @can('personarol.destroy')
                                         <div class="col-md d-flex">
-                                            <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
+                                            <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', ["personarol"=> $personrol->id_personarol, "sede"=>0])}}" method="POST">
                                                 @csrf  
                                                 @method('delete')
                                                 <button class="btn btn-danger btn-lg mt-2"  type="submit" data-bs-toggle="popover" data-bs-content="SE ELIMINARÁ EL USUARIO PARA INGRESAR A LA PALTAFORMA DE DOSÍMETRIA">
@@ -82,34 +83,40 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <div class="col-md"></div>
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="row">
-                                    <div class="col-md"></div>
-                                    <div class="col-md-8">
-                                        <div class="form-floating text-wrap">
-                                            <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="{{$personrol->roles->name}}" autofocus style="text-transform:uppercase;" disabled>
-                                            <label for="floatingSelectGrid">ROL:</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md d-flex">
-                                        <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', $personrol->id_personarol)}}" method="POST">
-                                            @csrf  
-                                            @method('delete')
-                                            <button class="btn btn-danger btn-lg mt-2"  type="submit" data-bs-toggle="popover" data-bs-content="SE ELIMINARÁ EL USUARIO PARA INGRESAR A LA PALTAFORMA DE DOSÍMETRIA">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    </div>
+                                    @endcan
                                     <div class="col-md"></div>
                                 </div>
+                                <br>
+                            @else
+                                @foreach ($personasede as $personsed)
+
+                                    @if($personsed->lider_dosimetria != NULL)
+                                        <div class="row">
+                                            <div class="col-md"></div>
+                                            <div class="col-md-9">
+                                                <div class="form-floating ">
+                                                    <input type="text" class="form-control"  name="id_rol" id="id_rol"  value="L. DOSIMETRÍA -({{$personsed->sede->nombre_sede}}){{$personsed->sede->empresa->nombre_empresa}}"  autofocus style="text-transform:uppercase;" disabled>
+                                                    <label for="floatingSelectGrid">ROL:</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <form class="form_eliminar_personarol" id="form_eliminar_personarol" name="form_eliminar_personarol" action="{{route('personarol.destroy', ["personarol"=> $personrol->id_personarol, "sede"=>$personsed->sede_id])}}" method="POST">
+                                                    @csrf  
+                                                    @method('delete')
+                                                    <button class="btn btn-danger btn-lg mt-2"  type="submit" data-bs-toggle="popover" data-bs-content="SE ELIMINARÁ EL USUARIO PARA INGRESAR A LA PALTAFORMA DE DOSÍMETRIA">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="col-md"></div>
+                                        </div>
+                                    @endif
+                                @endforeach
                             @endif
-                            <br>
+                            
                         @endforeach
                     @endif
                 </div>
@@ -130,18 +137,20 @@
                                         <label for="floatingSelectGrid">EMPRESA - SEDE:</label>
                                     </div>
                                 </div>
-                                <div class="col-md d-flex ">
-                                    <form class="form_eliminar_personasede" id="form_eliminar_personasede" name="form_eliminar_personasede" action="{{route('personasede.destroy', $personsede->id_personasede)}}" method="POST">
-                                        @csrf  
-                                        @method('delete')
-                                        <button class="btn btn-danger btn-lg mt-2"  type="submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                            </svg>
-                                        </button>
-                                    </form>
-                                </div>
+                                @can('personasede.destroy')    
+                                    <div class="col-md d-flex ">
+                                        <form class="form_eliminar_personasede" id="form_eliminar_personasede" name="form_eliminar_personasede" action="{{route('personasede.destroy', $personsede->id_personasede)}}" method="POST">
+                                            @csrf  
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-lg mt-2"  type="submit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endcan
                             </div>
                             <br>
                         @endforeach
@@ -178,27 +187,6 @@
                     </div>
                     <div class="col-md"></div>
                     {{-- /////////////// AHORA LOS ROLES SON FIJOS Y SON CREADOS Y RELACIONADOS CON SPATIE DE LARAVEL(LIDER DE DOSIMETRIA, ADMIN Y SUPERADMIN) LOS DEMAS ROLES SE RELACIONAN NORMAL CON PERSONAS-ROLES//////////////////// --}}
-
-                    {{--  <div class="col-md-6">
-                        <label for="">ROL:</label>
-                        <div class="form-floating">
-                            <select class="form-select  @error('rol_personas') is-invalid @enderror" name="rol_personas[]" id="rol_personas" autofocus aria-label="Floating label select example"  multiple="true">
-                                @foreach($roles as $rol)
-                                    <option value ="{{$rol->id_rol}}" {{ in_array($rol->id_rol, (array) old('rol_personas', [])) ? "selected" : "" }}>{{$rol->nombre_rol}}</option>
-                                @endforeach 
-                            </select>
-                            @error('rol_personas') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                        </div>
-                    </div> --}}
-                    {{-- /////////TEMPORALMENTE DESHABILITADO POR INDECISION////////////// AHORA SOLO HAY 4 ROLES FIJOS////// --}}
-                    {{-- <div class="col-md d-flex align-items-center">
-                        <button type="button" class="btn colorQA" data-bs-toggle="modal" data-bs-target="#nueva_rolModal" >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                            </svg>
-                        </button>
-                    </div> --}}
-                    {{-- ///////////////////////////////////////////////////////////////////// --}}
                 </div>
                 <br>
                 <div class="row g-2">
@@ -309,14 +297,13 @@
                     <div class="col-md"></div>
                     <div class="col-md">
                         <br>
-                        @php $checkrol = 0; @endphp
-                        @php $checkpersonrol = 0; @endphp
+                        {{-- @php $checkrol = 0; @endphp
+                        @php $checkpersonrol = 0; @endphp --}}
 
                         @foreach($roles as $rol)
-                            
                             <div class="form-check">
                                 @if ($personasrol->contains('role_id', $rol->id))
-                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked disabled>
+                                    <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif checked>
                                     <label class="form-check-label" for="defaultCheck1">
                                         {{$rol->name}}
                                     </label>
@@ -327,82 +314,90 @@
                                     </label>
                                 @endif
                             </div> 
-                            
                         @endforeach
                     </div>
                     <div class="col-md"></div>
                 </div>
                 <br> 
-                <div class="row g-2">
-                    <label for="">A CONTINUACIÓN, SELECCIONE UNA EMPRESA Y SUS SEDES PARA RELACIONAR ESTA PERSONA:</label>
+                <label for="">A CONTINUACIÓN, SELECCIONE UNA EMPRESA Y SUS SEDES PARA RELACIONAR A ESTA PERSONA:</label>
+                <br>
+                <br>
+                @if($id == 0)
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <select  class="form-select @error('id_empresa') is-invalid @enderror" name="id_empresas" id="id_empresas">
+                                    <option value="">--SELECCIONE--</option>
+                                    @foreach($empresas as $emp)
+                                        <option value ="{{ $emp->id_empresa }}" @if (old('id_empresas') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option>
+                                    @endforeach 
+                                </select>
+                                <label for="floatingSelectGrid">EMPRESA:</label>
+                                @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center">
+                            <button type="button" class="btn colorQA"  id="agregar" name="agregar">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="col-md">
+                            <label for="floatingSelectGrid">SEDE:</label>
+                            <div class="spinner_sede text-center" id="spinner_sede">
+    
+                            </div>
+                            <div class="form-floating" id="sede_empresa" name="sede_empresa">
+                                <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
+                                    
+                                </select>
+                                @error('sede_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                    </div>
                     <br>
+                    <div id="otraEmpresa">
+    
+                    </div>
+                @else
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="empresa_persona" id="empresa_persona" value="{{$empresa->nombre_empresa}}" readonly>
+                                <input type="number" class="form-control @error('id_empresa') is-invalid @enderror" name="id_empresa" id="id_empresa" value="{{$empresa->id_empresa}}"  hidden>
+                                <label for="floatingSelectGrid">* EMPRESA:</label>
+                                @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <label for="floatingSelectGrid">* SEDE:</label>
+                            <div class="form-floating" id="sede_empresa" name="sede_empresa">
+                                <select class="form-select @error('id_sedes') is-invalid @enderror" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true" {{-- onchange="changeSede();" --}}>
+                                    <option value="">--SELECCIONE--</option>
+                                    @foreach($sedes as $sede)
+
+                                        <option value ="{{ $sede->id_sede }}" {{ in_array($sede->id_sede, (array) old('id_sedes', [])) ? "selected" : "" }}>{{$sede->nombre_sede}}</option>
+                                    @endforeach 
+                                </select>
+                                @error('id_sedes') <span class="invalid-feedback">*{{ $message }}</span> @enderror
+                            </div>
+                        </div> 
+                    </div>
+                @endif
+                <br>
+                <div id="liderdosimsedesExist" hidden>
+                    <label for=""><b>SELECCIONE PARA QUE SEDES YA RELACIONADAS ESTA PERSONA SERÁ LIDER DE DOSIMETRÍA:</b></label>
                     <br>
-                    @if($id == 0)
-                        <div class="row g-2">
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <select  class="form-select @error('id_empresa') is-invalid @enderror" name="id_empresas" id="id_empresas">
-                                        <option value="">--SELECCIONE--</option>
-                                        @foreach($empresas as $emp)
-                                            <option value ="{{ $emp->id_empresa }}" @if (old('id_empresas') == $emp->id_empresa) {{ 'selected' }} @endif>{{$emp->nombre_empresa}}</option>
-                                        @endforeach 
-                                    </select>
-                                    <label for="floatingSelectGrid">EMPRESA:</label>
-                                    @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-1 d-flex align-items-center">
-                                <button type="button" class="btn colorQA"  id="agregar" name="agregar">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="col-md">
-                                <label for="floatingSelectGrid">SEDE:</label>
-                                <div class="spinner_sede text-center" id="spinner_sede">
-        
-                                </div>
-                                <div class="form-floating" id="sede_empresa" name="sede_empresa">
-                                    <select class="form-select" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true">
-                                        
-                                    </select>
-                                    @error('sede_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div id="otraEmpresa">
-        
-                        </div>
-                    @else
-                        <div class="row g-2">
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" name="empresa_persona" id="empresa_persona" value="{{$empresa->nombre_empresa}}" readonly>
-                                    <input type="number" class="form-control @error('id_empresa') is-invalid @enderror" name="id_empresa" id="id_empresa" value="{{$empresa->id_empresa}}"  hidden>
-                                    <label for="floatingSelectGrid">* EMPRESA:</label>
-                                    @error('id_empresa') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                                </div>
-                            </div>
-                            <div class="col-md">
-                                <label for="floatingSelectGrid">* SEDE:</label>
-                                <div class="form-floating" id="sede_empresa" name="sede_empresa">
-                                    <select class="form-select @error('id_sedes') is-invalid @enderror" id="id_sedes" name="id_sedes[]" autofocus aria-label="Floating label select example"  multiple="true" {{-- onchange="changeSede();" --}}>
-                                        <option value="">--SELECCIONE--</option>
-                                        @foreach($sedes as $sede)
-                                            <option value ="{{ $sede->id_sede }}" {{ in_array($sede->id_sede, (array) old('id_sedes', [])) ? "selected" : "" }}>{{$sede->nombre_sede}}</option>
-                                        @endforeach 
-                                    </select>
-                                    @error('id_sedes') <span class="invalid-feedback">*{{ $message }}</span> @enderror
-                                </div>
-                            </div> 
-                        </div>
-                    @endif
-                
                     <br>
                 </div>
-                
+                <div id="liderdosimsedes" hidden>
+                    <label for=""><b>SELECCIONE PARA QUE SEDES ESTA PERSONA SERÁ LIDER DE DOSIMETRÍA:</b></label>
+                    <br>
+                    <br>
+                </div>
+
+                <br>
                 <br>
                 <!---------BOTON------------->
                 <div class="row">
@@ -429,29 +424,6 @@
     <div class="col"></div>
 </div>
 
-<div class="modal fade" id="nueva_perfilModal" tabindex="-1" aria-labelledby="nueva_perfilModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" id="nueva_perfilModalLabel">NUEVO PERFIL LABORAL</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            @livewire('form-personas-perfiles')
-        </div> 
-    </div>
-</div>
-{{-- //////////////// MODAL DESHABILITADO YA LOS ROLES SON FIJOS ////////////////////////// --}}
-{{-- <div class="modal fade" id="nueva_rolModal" tabindex="-1" aria-labelledby="nueva_rolModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" id="nueva_rolModalLabel">NUEVO ROL</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            @livewire('form-personas-roles')    
-        </div> 
-    </div>
-</div> --}}
 <script
 src="https://code.jquery.com/jquery-3.6.0.js"
 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -532,6 +504,7 @@ crossorigin="anonymous">
 
 
     $(document).ready(function(){
+
         $('#id_empresas').on('change', function(){
             $('#sede_empresa').fadeOut();
             $('#spinner_sede').html('<div class="spinner-border text-secondary" id="spinner" role="status"></div>');
@@ -620,8 +593,99 @@ crossorigin="anonymous">
                 tags: true,
                 tokenSeparators: ['/',',',',',','," "]
             });
+            if('{{$id}}' == 0){
+                /////// se verifica si ya existe lider de dosimetria en las sedes seleccionadas para que sea unico por sede//////
+                let $sedesadd = $('#id_sedes'+i);
+                console.log($sedesadd);
+                let selectedsadd = [];
+                $('#id_sedes'+i).change(function(){
+                    console.log("HUBO CAMBIO");
+                    $sedesadd.children(':selected').each((idx, el) => {
+                        selectedsadd.push(el.value);
+                    });
+                    console.log(selectedsadd);
+                    var liderdosim = document.getElementById("LIDER DE DOSIMETRIA").checked;
+                    console.log("EXISTE LIDERDOSIMSELECT=");
+                    console.log(liderdosim);
+                    selectedsadd.forEach(element => {
+                        $.get('personsedes',{sede_id : element}, function(personsedes){
+                            console.log(personsedes);
+                            personsedes.forEach(element => {
+                                if(element.lider_dosimetria == 'TRUE' && liderdosim == true){
+                                    console.log("TIENE LIDER DOSIMETRIA la sede="+element.sede_id);
+                                    return Swal.fire({
+                                        title:"LA SEDE '"+element.nombre_sede+"' YA TIENE UN LIDER DE DOSIMETRIA",
+                                        text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                        icon: 'error'
+                                    });
+                                }
+                            })
+                        })
+                    })
+                });
+            }
+            
+            
             i++;
         });
+        /////// se verifica si ya existe lider de dosimetria en las sedes seleccionadas para que sea unico por sede//////
+        let $sedes = $('#id_sedes');
+        let selecteds = [];
+        // Buscamos los option seleccionados
+        $('#id_sedes').change(function(){
+            console.log("HUBO CAMBIO");
+            $sedes.children(':selected').each((idx, el) => {
+                selecteds.push(el.value);
+            });
+            console.log(selecteds);
+            var liderdosim = document.getElementById("LIDER DE DOSIMETRIA").checked;
+            selecteds.forEach(element => {
+                $.get('personsedes',{sede_id : element}, function(personsedes){
+                    console.log(personsedes);
+                    personsedes.forEach(element => {
+                        if(element.lider_dosimetria == 'TRUE' && liderdosim == true){
+                            console.log("TIENE LIDER DOSIMETRIA la sede="+element.sede_id);
+                            return Swal.fire({
+                                title:"LA SEDE '"+element.nombre_sede+"' YA TIENE UN LIDER DE DOSIMETRIA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
+                        }
+                    })
+                })
+            })
+        });
+
+        var liderdosim = document.getElementById("LIDER DE DOSIMETRIA");
+        liderdosim.addEventListener('change', function(){
+            var checked= liderdosim.checked;
+            var personasede = JSON.parse('{!!$personasede!!}');
+            console.log(personasede);
+            if(checked == true && personasede != undefined){
+                console.log("entro al if");
+               document.getElementById('liderdosimsedesExist').removeAttribute("hidden");
+                
+                $.each(personasede, function(index, value){
+                    console.log("PERSONSEDE");
+                    console.log(value.sede_id);
+                    $('#liderdosimsedesExist').append(
+                        '<div class="row">'
+                            +'<div class="col-md"></div>'
+                            +'<div class="col-md">'
+                                +'<div class="form-check">'
+                                    +'<input class="form-check-input" type="checkbox" value="'+value.sede_id+'" name="liderdosimsedesExist[]" id="liderdosimsedesExist'+value.sede_id+'">'
+                                    +'<label class="form-check-label" for="defaultCheck1">'
+                                        +value.sede.empresa.nombre_empresa+' - SEDE: '+value.sede.nombre_sede
+                                    +'</label>'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="col-md"></div>'
+                        +'</div>'
+                    );
+                })
+            }
+        })
+       
         $('.form_eliminar_personaperfil').submit(function(e){
             e.preventDefault();
             Swal.fire({
@@ -703,21 +767,125 @@ crossorigin="anonymous">
             })
         })
         $('#form_edit_persona').submit(function(e){
-        e.preventDefault();
-        Swal.fire({
-            text: 'SEGURO QUE DESEA ACTUALIZAR LA INFORMACION DE ESTA PERSONA',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                
-                this.submit(); 
+            e.preventDefault();
+            var superAdmin = document.getElementById("SUPER-ADMINISTRADOR").checked;
+            var admin = document.getElementById("ADMINISTRADOR").checked;
+            var liderdosim = document.getElementById("LIDER DE DOSIMETRIA").checked;
+            var toe = document.getElementById("TOE").checked;
+            var opr = document.getElementById("OPR").checked;
+            var estudiante = document.getElementById("ESTUDIANTE").checked;
+            var contacto = document.getElementById("CONTACTO").checked;
+            var publico = document.getElementById("PUBLICO").checked;
+
+            if(superAdmin == false && admin == false && liderdosim == false && toe == false && opr == false && estudiante == false && contacto == false && publico == false){
+                console.log("entro al if");
+                return Swal.fire({
+                                title:"FALTA SELECCIONAR AL MENOS UN ROL PARA LA PERSONA",
+                                text: "VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA",
+                                icon: 'error'
+                            });
             }
-        })
-    })
+            var liderdosimsed = document.querySelectorAll('input[name="liderdosimsedes[]"]');
+            console.log(liderdosimsed);
+            var arrayidsedes = $('#id_sedes option:selected').toArray();
+            console.log(arrayidsedes);
+            console.log("cantidad"+arrayidsedes.length);
+            var idsedesadd =  document.querySelectorAll('select[name="id_sedes_add[]"');
+            console.log("SEDES ADD");
+            console.log(idsedesadd);
+            var arrayidsedesadd = [];
+            for(let i = 0; i < idsedesadd.length; i++) {
+                for (let x = 0; x < idsedesadd[i].selectedOptions.length; x++) {
+                    const element = idsedesadd[i].selectedOptions[x];
+                    arrayidsedesadd.push({'id':element.value, 'name':element.text});
+                }
+            }
+            console.log("ARRAY SEDES ADD");
+            console.log(arrayidsedesadd);
+            if(liderdosim == true && (arrayidsedes.length >= 1 && arrayidsedesadd.length >= 1) && liderdosimsed.length == 0){
+                console.log("es mayor a 1");
+                document.getElementById('liderdosimsedes').removeAttribute("hidden");
+                
+                arrayidsedes.forEach(element => {
+                    console.log(element.value);
+                    $("#liderdosimsedes").append(
+                        '<div class="row">'
+                            +'<div class="col-md"></div>'
+                            +'<div class="col-md">'
+                                +'<div class="form-check">'
+                                    +'<input class="form-check-input" type="checkbox" value="'+element.value+'" name="liderdosimsedes[]" id="liderdosimsedes'+element.value+'">'
+                                    +'<label class="form-check-label" for="defaultCheck1">'
+                                        +element.text
+                                    +'</label>'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="col-md"></div>'
+                        +'</div>'
+                    );
+                });
+                arrayidsedesadd.forEach(element => {
+                    console.log(element.value);
+                    $("#liderdosimsedes").append(
+                        '<div class="row">'
+                            +'<div class="col-md"></div>'
+                            +'<div class="col-md">'
+                                +'<div class="form-check">'
+                                    +'<input class="form-check-input" type="checkbox" value="'+element.id+'" name="liderdosimsedes[]" id="liderdosimsedes'+element.value+'">'
+                                    +'<label class="form-check-label" for="defaultCheck1">'
+                                        +element.name
+                                    +'</label>'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="col-md"></div>'
+                        +'</div>'
+                    );
+                });
+                return Swal.fire(
+                    'VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA',
+                    'SELECCIONE LAS SEDES PARA RELACIONAR AL LÍDER DE DOSIMETRÍA, DE LO CONTRARIO SOLO SERÁ UNA PERSONA RELACIONADA A DICHA SEDE CON ROLES DISTINTOS A LIDER DE DOSIMETRÍA!',
+                    'question'
+                )
+            }else if(liderdosim == true && arrayidsedes.length > 1 && liderdosimsed.length == 0){
+                console.log("es mayor a 1");
+                document.getElementById('liderdosimsedes').removeAttribute("hidden");
+                
+                arrayidsedes.forEach(element => {
+                    console.log(element.value);
+                    $("#liderdosimsedes").append(
+                        '<div class="row">'
+                            +'<div class="col-md"></div>'
+                            +'<div class="col-md">'
+                                +'<div class="form-check">'
+                                    +'<input class="form-check-input" type="checkbox" value="'+element.value+'" name="liderdosimsedes[]" id="liderdosimsedes'+element.value+'">'
+                                    +'<label class="form-check-label" for="defaultCheck1">'
+                                        +element.text
+                                    +'</label>'
+                                +'</div>'
+                            +'</div>'
+                            +'<div class="col-md"></div>'
+                        +'</div>'
+                    );
+                });
+                return Swal.fire(
+                    'VERIFIQUE LAS CASILLAS Y SELECCIONE LA INFORMACIÓN DESEADA',
+                    'SELECCIONE LAS SEDES PARA RELACIONAR AL LÍDER DE DOSIMETRÍA, DE LO CONTRARIO SOLO SERÁ UNA PERSONA RELACIONADA A DICHA SEDE CON ROLES DISTINTOS A LIDER DE DOSIMETRÍA!',
+                    'question'
+                )
+            }
+            Swal.fire({
+                text: 'SEGURO QUE DESEA ACTUALIZAR LA INFORMACION DE ESTA PERSONA',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'SI!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    this.submit(); 
+                }
+            })
+        });
     });
 </script>
 @endsection()

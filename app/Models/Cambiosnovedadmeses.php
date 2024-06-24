@@ -39,7 +39,12 @@ class Cambiosnovedadmeses extends Model
         return $this->belongsTo(Areadepartamentosede::class, 'areadepartamentosede_id', 'id_areadepartamentosede');
     }
     //Relacion uno a uno (inversa) con holder
+    public function dosicontrolcontdosisedesAnterior(){
+        return $this->belongsTo(Dosicontrolcontdosisede::class, 'dosicontrol_ant_id', 'id_dosicontrolcontdosisedes');
+    }
+    //Relacion uno a uno (inversa) con holder
     public function dosicontrolcontdosisedes(){
         return $this->belongsTo(Dosicontrolcontdosisede::class, 'dosicontrol_id', 'id_dosicontrolcontdosisedes');
     }
+
 }

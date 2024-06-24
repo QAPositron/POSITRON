@@ -131,6 +131,8 @@
             var contrato_id = $(this).val();
             var check;
             var chech;
+            var temp1;
+            var temp2;
             if($.trim(contrato_id) != ''){
                 $.get('sedesEspcontDosi', {contrato_id: contrato_id}, function(sedesEsp){
                     console.log("ESTAS SON LAS SEDES Y ESP");
@@ -165,12 +167,12 @@
                             chech = value.id_contdosisededepto;
                             
                             $('#Tablas').append(myTable);
+                            
 
-                            $.get('novedadesContDosim', {contdosisededepto_id: value.id_contdosisededepto}, function(novedadesCont){
-                                console.log("ESTAS SON LAS NOVEDADES");
+                            $.get('novedadesContDosim', {contratodosimetria: contrato_id, contdosisededepto: value.id_contdosisededepto}, function(novedadesCont){
+                                console.log("ESTAS SON LAS NOVEDADES DE ESE CONTRATO SEGUN EL DEPARTAMENTO");
                                 console.log(novedadesCont);
                                 var id = [];
-                                var cheq;
                                 var periodo;
                                 var fecha_inicio;
                                 var fecha_final;
@@ -181,10 +183,8 @@
                                     $('#tabla'+value.id_contdosisededepto).append(tr);
                                 }else{
                                     $.each(novedadesCont, function(index, value2){
-                                        var arrayCambios =[];
                                         var periodo;
-                                         ///obtener la fecha del periodo en que se hizo la novedad/////
-                                        
+                                        ///obtener la fecha del periodo en que se hizo la novedad/////
                                         const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
                                         let fecha = new Date(value2.fecha_inicio);
                                         var fechaF = new Date(fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset()));
@@ -290,27 +290,20 @@
                                         var num = parseInt(value2.codigo_novedad);
                                         var n = num.toString().padStart(5,'0');
                                         console.log("ESTE ES EL CODIGO" +n);
+                                        console.log("novedad_id="+value2.id_novedad);
                                         var tr = `<tr><td class="text-center align-middle" id ="periodo`+value2.mes_asignacion+`" style='width: 20%'>`+periodo+`</td>
-                                            <td class="text-center align-middle">`+n+`</td>
-                                            <td class=" align-middle" id='obs`+value2.id_novedadmesescontdosi+`'></td>
-                                            <td class="text-center align-middle" style='width: 5%'">
-                                                <button class="btn btn-primary"  type="button" onclick="detalle('`+value2.id_novedadmesescontdosi+`', `+value2.contdosisededepto_id+`);">
-                                                    Detalle
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right mb-1" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </button>
-                                            </td>
-                                            <td class="text-center align-middle justify-content-center>
-                                                <div class="form-check">
-                                                    <input class="form-check-input text-center align-middle" type="checkbox" value="TRUE" id="`+value2.id_novedadmesescontdosi+`" name="checkbox">
-                                                </div>     
-                                            </td>
-                                        </tr>`;
-
+                                                <td class="text-center align-middle">`+n+`</td>
+                                                <td class=" align-middle" id='obs`+value2.id_novedadmesescontdosi+`'></td>
+                                                <td class="text-center align-middle" style='width: 5%'" id='detalle`+value2.id_novedadmesescontdosi+`'></td>
+                                                <td class="text-center align-middle justify-content-center>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input text-center align-middle" type="checkbox" value="TRUE" id="`+value2.id_novedad+`" name="checkbox">
+                                                    </div>     
+                                                </td>
+                                            </tr>`;
                                         $('#tabla'+value2.contdosisededepto_id).append(tr);
                                         
-                                        $.get('cambiosnovedadesContDosim', {novedad: value2.id_novedadmesescontdosi}, function(cambiosNov){
+                                        $.get('cambiosnovedadesContDosim', {novedadmesescontdosi: value2.id_novedadmesescontdosi}, function(cambiosNov){
                                             console.log("cambios novedad");
                                             console.log(cambiosNov);
                                             $.each(cambiosNov, function(index, value3){
@@ -318,18 +311,207 @@
                                                 var td ='- '+value3.nota_cambiodosim+'.'+`<br>`;
                                                 console.log(td);
                                                 $('#obs'+value3.novedadmesescontdosidepto_id).append(td);
-                                                /* arrayCambios.push(value3.nota_cambiodosim)
-                                                document.getElementById("obs"+value3.novedadmesescontdosidepto_id).innerHTML = value3.nota_cambiodosim; */
+                                                var buttonDetalle = ` <button class="btn btn-primary"  type="button" onclick="detalle('`+value3.id_cambionovedadmeses+`', 0);">
+                                                        Detalle
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right mb-1" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                                        </svg>
+                                                    </button>`;
+                                                $('#detalle'+value3.novedadmesescontdosidepto_id).append(buttonDetalle);
                                             })
-                                        })
-                                        
-                                    })
+                                        });
+                                    });
                                 }
                             })
                         } 
                     })
                     
                 });
+                $.get('sedesNovEspcontDosi', {contrato: contrato_id}, function(sedesNovEsp){
+                    console.log("ESTAS SON LAS SEDES Y SUB ESPECIALIDADES");
+                    console.log(sedesNovEsp);
+                    infoContrato.style.display= "block";
+                    $.each(sedesNovEsp, function(index, valor){
+                        if(valor.nombre_sede != temp1){
+                            $('#Tablas').append("<h4 class='text-center' id='tituloSede"+index+"'>"+valor.nombre_sede+"</h4>");
+                            temp1 = valor.nombre_sede;
+                            console.log("ESTE ES EL CHECK DE SEDE" +temp1);
+                        }
+                        if(valor.id_contdosisededepto != temp2 && valor.nombre_sede == temp1){
+                            
+                            let myTable= "<table class='table   table-bordered'><thead class='table-active text-center'><tr><th class='align-middle' colspan='5'>NOVEDADES - SUB-ESPECIALIDAD: "+valor.nombre_departamento+"</th></tr>";
+                            myTable+= "<th class='align-middle'>PERÍODO</th>";
+                            myTable+="<th class='align-middle' style='width: 10.90%'>CODIGO</th>";
+                            myTable+="<th class='align-middle'>OBSERVACIÓN</th>";
+                            myTable+="<th class='align-middle' style='width: 12.90%'>ACCIONES</th>";
+                            myTable+="<th class='align-middle' style='width: 8.90%'>SELECCIONE</th>";
+                            myTable+="</tr>";
+                            myTable+="</thead>";
+                            myTable+="<tbody id='tablasubesp"+valor.id_novcontdosisededepto+"'>";
+                            myTable+="</tbody>";
+                            
+                            temp2 = valor.id_contdosisededepto;
+                            
+                            $('#Tablas').append(myTable);
+
+                            $.get('novedadesSubEspContDosim', {contratodosimetria: contrato_id, novcontdosisededepto: valor.id_novcontdosisededepto}, function(novedadesSubEspCont){
+                                console.log("ESTAS SON LAS NOVEDADES DE ESE CONTRATO SEGUN EL DEPARTAMENTO NUEVO POR NOVEDAD");
+                                console.log(novedadesSubEspCont);
+                                var id = [];
+                                var periodo;
+                                var fecha_inicio;
+                                var fecha_final;
+                                if(novedadesSubEspCont.length == 0){
+                                    console.log("ES VACIO");
+                                    var tr = `<tr><td class="text-center align-middle" colspan='5'>"NO HAY NOVEDADES DE SUB-ESPECIALIDADES"</td>
+                                    </tr>`;
+                                    $('#tablasubesp'+valor.id_novcontdosisededepto).append(tr);
+                                }else{
+                                    $.each(novedadesSubEspCont, function(index, valor2){
+                                        var periodo;
+                                        ///obtener la fecha del periodo en que se hizo la novedad/////
+                                        const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+                                        let fecha = new Date(valor2.fecha_inicio);
+                                        var fechaF = new Date(fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset()));
+                                        console.log("ESTA ES LA FECHA DE INICIO=");
+                                        console.log(fechaF);
+                                        var numLec = valor2.numlecturas_año;
+                                        
+                                        if(valor2.periodo_recambio == 'MENS'){
+                                            var xx = 1; 
+                                            for(var i=0; i<=(numLec-2); i++){
+                                                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 1, 1);
+                                                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                                                var ultimoDiaPMF = new Date(ultimoDiaPM);
+                                                ultimoDiaPMF.setDate(ultimoDiaPMF.getDate()-1);
+                                                console.log(ultimoDiaPMF);
+                                                console.log("esta es la i="+i);
+                                                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                                                console.log("r1" +r);
+                                                var r2 = new Date(new Date(r).setMonth(r.getMonth()+1));
+                                                var fechaesp = meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                                                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                                                console.log("r2 " +r2final);
+                                                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                                                console.log(fechaesp1);
+                                                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                                                console.log(fechaesp2);
+                                                xx++;
+                                                console.log("XX ="+xx);
+                                                if(valor2.mes_asignacion == 1){
+                                                    console.log("entro al mes 1 = ");
+                                                    periodo = valor2.mes_asignacion+" - "+fechaF.getDate()+' '+meses[fechaF.getMonth()] + ' DE ' + fechaF.getUTCFullYear()+" al <br>"+ultimoDiaPMF.getDate()+' '+meses[ultimoDiaPMF.getMonth()] + ' DE ' + ultimoDiaPMF.getUTCFullYear();
+                                                }else if(valor2.mes_asignacion == xx){
+                                                    console.log("entro al mes xx = ");
+                                                    document.getElementById('periodo')
+                                                    periodo = valor2.mes_asignacion+" - "+fechaesp1+" al <br>"+fechaesp2;
+                                                    console.log("periodo = "+periodo);
+                                                }
+                                                
+                                            }
+                                        }else if(valor2.periodo_recambio == 'TRIMS'){
+                                            var xx = 1;
+                                            for(var i=0; i<=numLec; i= i+3){
+                                                var ultimoDiaPM = new Date(fechaF.getFullYear(), fechaF.getMonth() + 3, 1);
+                                                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                                                var ultimoDiaPMF = new Date(ultimoDiaPM);
+                                                ultimoDiaPMF.setDate(ultimoDiaPMF.getDate()-1);
+                                                console.log(ultimoDiaPMF);
+                                                console.log("ESTA ES LA I = "+i);
+                                                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                                                console.log("r1" +r);
+                                                var r2 = new Date(new Date(r).setMonth(r.getMonth()+3));
+                                                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                                                console.log("r2 " +r2final);
+                                                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                                                console.log(fechaesp1);
+
+                                                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                                                console.log(fechaesp2);
+                                                xx++;
+                                                console.log("XX ="+xx);
+                                                if(valor2.mes_asignacion == 1){
+                                                    console.log("entro al mes 1 = ");
+                                                    periodo = valor2.mes_asignacion+" - "+fechaF.getDate()+' '+meses[fechaF.getMonth()] + ' DE ' + fechaF.getUTCFullYear()+" al <br>"+ultimoDiaPMF.getDate()+' '+meses[ultimoDiaPMF.getMonth()] + ' DE ' + ultimoDiaPMF.getUTCFullYear();
+                                                }else if(valor2.mes_asignacion == xx){
+                                                    console.log("entro al mes xx = ");
+                                                    document.getElementById('periodo')
+                                                    periodo = valor2.mes_asignacion+" - "+fechaesp1+" al <br>"+fechaesp2;
+                                                    console.log("periodo = "+periodo);
+                                                }
+                                            }
+                                        }else if(valor2.periodo_recambio == 'BIMS'){
+                                            var xx = 1;
+                                            for(var i=0; i<=(numLec+2); i= i+2){
+                                                var ultimoDiaPM = new Date(fecha.getFullYear(), fecha.getMonth() + 2, 1);
+                                                console.log("ULTIMO DIA PRIMER MES:"+ ultimoDiaPM);
+                                                var ultimoDiaPMF = new Date(ultimoDiaPM);
+                                                ultimoDiaPMF.setDate(ultimoDiaPMF.getDate()-1);
+                                                console.log(ultimoDiaPMF);
+                                                console.log("ESTA ES LA I = "+i);
+                                                var r = new Date(new Date(ultimoDiaPM).setMonth(ultimoDiaPM.getMonth()+i));
+                                                console.log("r1" +r);
+                                                var r2 = new Date(new Date(r).setMonth(r.getMonth()+2));
+                                                var r2final = new Date(new Date(r2).setDate(r.getDate()-1));
+                                                console.log("r2 " +r2final);
+                                                var fechaesp1 = r.getDate()+' '+meses[r.getMonth()] + ' DE ' + r.getUTCFullYear();
+                                                console.log(fechaesp1);
+
+                                                var fechaesp2 = (r2final.getDate()) +' '+ meses[r2final.getMonth()] + ' DE ' + r2final.getUTCFullYear(); 
+                                                console.log(fechaesp2);
+                                                xx++;
+                                                console.log("XX"+xx);
+                                                if(valor2.mes_asignacion == 1){
+                                                    console.log("entro al mes 1 = ");
+                                                    periodo = valor2.mes_asignacion+" - "+fechaF.getDate()+' '+meses[fechaF.getMonth()] + ' DE ' + fechaF.getUTCFullYear()+" al <br>"+ultimoDiaPMF.getDate()+' '+meses[ultimoDiaPMF.getMonth()] + ' DE ' + ultimoDiaPMF.getUTCFullYear();
+                                                }else if(valor2.mes_asignacion == xx){
+                                                    console.log("entro al mes xx = ");
+                                                    document.getElementById('periodo')
+                                                    periodo = valor2.mes_asignacion+" - "+fechaesp1+" al <br>"+fechaesp2;
+                                                    console.log("periodo = "+periodo);
+                                                }
+                                            } 
+                                        }
+                                        var num = parseInt(valor2.codigo_novedad);
+                                        var n = num.toString().padStart(5,'0');
+                                        console.log("ESTE ES EL CODIGO" +n);
+                                        console.log("novedad_id="+valor2.id_novedad);
+                                        var tr = `<tr><td class="text-center align-middle" id ="periodo`+valor2.mes_asignacion+`" style='width: 20%'>`+periodo+`</td>
+                                                <td class="text-center align-middle">`+n+`</td>
+                                                <td class=" align-middle" id='subespobs`+valor2.id_novedadmesescontdosi+`'></td>
+                                                <td class="text-center align-middle" style='width: 5%'" id='subespdetalle`+valor2.id_novedadmesescontdosi+`'></td>
+                                                <td class="text-center align-middle justify-content-center>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input text-center align-middle" type="checkbox" value="TRUE" id="`+valor2.id_novedad+`" name="checkbox">
+                                                    </div>     
+                                                </td>
+                                            </tr>`;
+                                        $('#tablasubesp'+valor2.novcontdosisededepto_id).append(tr);
+                                        
+                                        $.get('cambiosnovedadesContDosim', {novedadmesescontdosi: valor2.id_novedadmesescontdosi}, function(cambiosNov){
+                                            console.log("cambios novedad");
+                                            console.log(cambiosNov);
+                                            $.each(cambiosNov, function(index, valor3){
+                                                console.log(valor3.nota_cambiodosim);
+                                                var td ='- '+valor3.nota_cambiodosim+'.'+`<br>`;
+                                                console.log(td);
+                                                $('#subespobs'+valor3.novedadmesescontdosidepto_id).append(td);
+                                                var buttonDetalle = ` <button class="btn btn-primary"  type="button" onclick="detalle('`+valor3.id_cambionovedadmeses+`', 1);">
+                                                        Detalle
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right mb-1" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                                                        </svg>
+                                                    </button>`;
+                                                $('#subespdetalle'+valor3.novedadmesescontdosidepto_id).append(buttonDetalle);
+                                            })
+                                        });
+                                    });
+                                }
+                            })
+                        } 
+                    })
+                })
+                
             }
         });
         $('.ir-arriba').click(function(){
@@ -355,10 +537,10 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
 
-    function detalle(id, deptodosi){
+    function detalle(id,item){
         
         var host = window.location.host;
-        var path = "http://"+host+"/POSITRON/public/novedades/"+id+"/"+deptodosi+"/detalleNovedad";
+        var path = "http://"+host+"/POSITRON/public/novedades/"+id+"/"+item+"/detalleNovedad";
         
         window.open(path, '_self');
     }

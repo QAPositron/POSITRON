@@ -67,17 +67,19 @@
                             <div class="col-md">
                                 <br>
                                 @foreach($roles as $rol)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif>
-                                        <label class="form-check-label" for="defaultCheck1">
-                                            {{$rol->name}}
-                                        </label>
-                                        @error('roles')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                    @if($rol->id == 1 || $rol->id == 2)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{$rol->id}}" id="{{$rol->name}}" name="roles[]" @if(is_array(old('roles')) && in_array($rol->id, old('roles'))) checked @endif>
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                {{$rol->name}}
+                                            </label>
+                                            @error('roles')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                             <div class="col-md"></div>

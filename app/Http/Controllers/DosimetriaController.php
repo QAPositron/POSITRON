@@ -595,11 +595,6 @@ class DosimetriaController extends Controller
 
     public function createdetalleContrato($id){
         $dosimetriacontrato = Dosimetriacontrato::find($id);
-        /* SELECT * FROM `dosimetriacontratos` INNER JOIN contratodosimetriasedes ON dosimetriacontratos.id_contratodosimetria = contratodosimetriasedes.contratodosimetria_id
-         INNER JOIN empresas ON dosimetriacontratos.empresa_id = empresas.id_empresa
-         INNER JOIN sedes ON contratodosimetriasedes.sede_id = sedes.id_sede
-         INNER JOIN contratodosimetriasededeptos ON contratodosimetriasedes.id_contratodosimetriasede = contratodosimetriasededeptos.contratodosimetriasede_id
-         INNER JOIN departamentosedes ON contratodosimetriasededeptos.departamentosede_id = departamentosedes.id_departamentosede;; */
         $dosimecontrasedeptos = Dosimetriacontrato::join('empresas', 'empresa_id', '=', 'id_empresa')
         ->join('contratodosimetriasedes', 'id_contratodosimetria', '=', 'contratodosimetria_id')
         ->join('sedes', 'sede_id', '=', 'id_sede')
@@ -1243,7 +1238,7 @@ class DosimetriaController extends Controller
             $query->orWhere('roles.name', 'TOE')
                   ->orWhere('roles.name', 'OPR')
                   ->orWhere('roles.name', 'PUBLICO');
-        })->get();
+        })->get(); 
         $dosimLibresGeneral = Dosimetro::where('estado_dosimetro', 'STOCK')
         ->where('tipo_dosimetro', 'GENERAL')
         ->get();
@@ -1267,12 +1262,13 @@ class DosimetriaController extends Controller
         
         $dosicontrolToraxmesant = Dosicontrolcontdosisede::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', $mesnumber-1)
-        /* ->where('novcontdosisededepto_id', NULL) */
+        ->where('novcontdosisededepto_id', NULL)
         ->where('ubicacion', 'TORAX')
         ->get();
+       /*  return $dosicontrolToraxmesant; */
         $dosicontrolCristalinomesant = Dosicontrolcontdosisede::where('contdosisededepto_id', $id)
         ->where('mes_asignacion', $mesnumber-1)
-        /* ->where('novcontdosisededepto_id', NULL) */
+        ->where('novcontdosisededepto_id', NULL)
         ->where('ubicacion', 'CRISTALINO')
         ->get();
         $dosicontrolDedomesant = Dosicontrolcontdosisede::where('contdosisededepto_id', $id)
@@ -1287,12 +1283,13 @@ class DosimetriaController extends Controller
         ->where('ubicacion', 'TORAX')
         ->where('controlTransT_unicoCont', 'TRUE')
         ->get();
-        
         $dosicontrolToraxUnicomesant =  Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
         ->where('mes_asignacion', $mesnumber-1)
         ->where('ubicacion', 'TORAX')
         ->where('controlTransT_unicoCont', 'TRUE')
+        ->where('novcontdosisededepto_id', NULL)
         ->get();
+        /* return $dosicontrolToraxUnicomesant; */
         
         $dosicontrolCristalinoUnicomesact = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
         ->where('mes_asignacion', $mesnumber)
@@ -1304,6 +1301,7 @@ class DosimetriaController extends Controller
         ->where('mes_asignacion', $mesnumber-1)
         ->where('ubicacion', 'CRISTALINO') 
         ->where('controlTransC_unicoCont', 'TRUE')
+        ->where('novcontdosisededepto_id', NULL)
         ->get();
         $dosicontrolDedoUnicomesact = Dosicontrolcontdosisede::where('contratodosimetria_id', $contdosisededepto->contratodosimetriasede->dosimetriacontrato->id_contratodosimetria)
         ->where('mes_asignacion', $mesnumber)
@@ -1314,6 +1312,7 @@ class DosimetriaController extends Controller
         ->where('mes_asignacion', $mesnumber-1)
         ->where('ubicacion', 'ANILLO')
         ->where('controlTransA_unicoCont', 'TRUE')
+        ->where('novcontdosisededepto_id', NULL)
         ->get();
         //////////////////////////////////////////////////////////////////
 
@@ -2877,6 +2876,7 @@ class DosimetriaController extends Controller
         return view('dosimetria.lectura_dosimetro_area_edit', compact('dosiareasig', 'item'));
     }
     public function pdf($id, $mesnumber, $item){
+       
         if($item == 0){
             $contdosisededepto = Contratodosimetriasededepto::find($id);
             $contratoDosi = Departamento::join('departamentosedes', 'departamentos.id_departamento', '=', 'departamentosedes.departamento_id')
@@ -3010,10 +3010,10 @@ class DosimetriaController extends Controller
             ->where('novcontdosisededeptos.id_novcontdosisededepto', '=', $id)
             ->where('lider_dosimetria', '=', 'TRUE')
             ->get();
-    
             $trabajdosiasig= Trabajadordosimetro::where('novcontdosisededepto_id', '=', $id)
             ->where('mes_asignacion', '=', $mesnumber)
             ->get();
+            
             
             $fechainiciodositrabaj = array();
             for($i=0; $i<count($trabajdosiasig); $i++){

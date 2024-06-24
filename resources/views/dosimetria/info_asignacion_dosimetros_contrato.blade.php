@@ -257,18 +257,7 @@
                                                 </svg> <br> EDITAR
                                             </a>
                                         </div>
-                                        <div class="col-md p-0 mt-3">
-                                            <form id="form_eliminar_asigArea" name="form_eliminar_asigArea" action="{{route('asigdosicont.destroyInfoArea', $dosiareasig->id_dosiareacontdosisedes)}}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm" type="submit">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                    </svg> <br> ELIMINAR
-                                                </button>
-                                            </form>
-                                        </div>
+                                        
                                     </div>  
                                     
                                 </td>
@@ -357,18 +346,7 @@
                                                     </svg><br> EDITAR
                                                 </a>
                                             </div>
-                                            <div class="col-md p-0 mt-3">
-                                                <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg> <br> ELIMINAR
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            
                                         </div>
                                     </td>
                                 </tr>
@@ -455,18 +433,7 @@
                                                     </svg><br> EDITAR
                                                 </a>
                                             </div>
-                                            <div class="col-md p-0 mt-3">
-                                                <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg> <br> ELIMINAR
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            
                                         </div>
                                     </td>
                                 </tr>
@@ -558,29 +525,18 @@
                                                 </svg> <br> EDITAR
                                             </a>
                                         </div>
-                                        <div class="col-md mt-3 p-0">
-                                            <form id="form_eliminar_asigcontrol" name="form_eliminar_asigcontrol" action="{{route('asigdosicont.destroyInfoControl',  $dosicontUniT->id_dosicontrolcontdosisedes)}}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm" type="submit">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                    </svg> <br> ELIMINAR
-                                                </button>
-                                            </form>
-                                        </div>
+                                        
                                     </div>  
                                 </td>
                             </tr>
                             @foreach($dosiareasignados as $dosiareasig)
                                 <tr>
                                     <td class='align-middle'>{{$dosiareasig->areadepartamentosede->nombre_area}}</td>
-                                {{--  <td class='align-middle text-center'>N.A.</td> --}}
+                                    {{-- <td class='align-middle text-center'>N.A.</td> --}}
                                     <td class='align-middle text-center'>{{$dosiareasig->dosimetro->codigo_dosimeter}}</td>
                                     <td class='align-middle text-center'>N.A.</td>
                                     <td class='align-middle text-center'>AMBIENTAL</td>
-                                    <td colspan="2" class='align-middle text-center'>
+                                    <td class='align-middle text-center'>
                                         @if($dosiareasig->nota2 == 'TRUE')
                                             {{'NP'}}
                                         @elseif($dosiareasig->DNL == 'TRUE')
@@ -595,7 +551,10 @@
                                             {{$dosiareasig->Hp10_calc_dose}}
                                         @endif
                                     </td>
-                                    <td colspan="2" class='align-middle text-center'>
+                                    <td class='align-middle text-center'>
+                                        {{$dosiareasig->Hp10_calc_dose - $dosicontUniT->Hp10_calc_dose}}
+                                    </td>
+                                    <td class='align-middle text-center'>
                                         @if($dosiareasig->nota2 == 'TRUE')
                                             {{'NP'}}
                                         @elseif($dosiareasig->DNL == 'TRUE')
@@ -610,7 +569,10 @@
                                             {{$dosiareasig->Hp3_calc_dose}}
                                         @endif
                                     </td>
-                                    <td colspan="2" class='align-middle text-center'>
+                                    <td class='align-middle text-center'>
+                                        {{$dosiareasig->Hp3_calc_dose - $dosicontUniT->Hp3_calc_dose}}
+                                    </td>
+                                    <td class='align-middle text-center'>
                                         @if($dosiareasig->nota2 == 'TRUE')
                                             {{'NP'}}
                                         @elseif($dosiareasig->DNL == 'TRUE')
@@ -626,6 +588,9 @@
                                         @endif
                                     </td>
                                     <td class='align-middle text-center'>
+                                        {{$dosiareasig->Hp007_calc_dose - $dosicontUniT->Hp007_calc_dose}}
+                                    </td>
+                                    <td class='align-middle text-center'>
                                         @for($i=1; $i<=5; $i++)
                                             @if($dosiareasig->{"nota$i"} == 'TRUE')
                                                 {{$i}})
@@ -637,8 +602,8 @@
                                     </td>
                                     <td class='text-center'>
                                         <div class="row px-2 align-items-center">
-                                            <div class="col-md text-center p-0 m-0">
-                                                <a href="{{route('lecturadosiarea.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            <div class="col-md p-0 m-0">
+                                                <a href="{{route('lecturadosiareacontrl.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                     <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -646,24 +611,13 @@
                                                 </a>
                                             </div>
                                             <div class="col-md p-0 m-0">
-                                                <a href="{{route('lecturadosiarea.edit', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->measurement_date == null && $dosiareasig->nota2 == null && $dosiareasig->DNL == null && $dosiareasig->EU == null && $dosiareasig->DPL == null && $dosiareasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                <a href="{{route('lecturadosiareacontrl.edit', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->measurement_date == null && $dosiareasig->nota2 == null && $dosiareasig->DNL == null && $dosiareasig->EU == null && $dosiareasig->DPL == null && $dosiareasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                     </svg> <br> EDITAR
                                                 </a>
                                             </div>
-                                            <div class="col-md p-0 mt-3">
-                                                <form id="form_eliminar_asigArea" name="form_eliminar_asigArea" action="{{route('asigdosicont.destroyInfoArea', $dosiareasig->id_dosiareacontdosisedes)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg> <br> ELIMINAR
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            
                                         </div>  
                                         
                                     </td>
@@ -683,7 +637,7 @@
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -698,7 +652,10 @@
                                                 {{$trabasig->Hp10_calc_dose}}
                                             @endif
                                         </td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp10_calc_dose - $dosicontUniT->Hp10_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -713,7 +670,10 @@
                                                 {{$trabasig->Hp3_calc_dose}}
                                             @endif
                                         </td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp3_calc_dose - $dosicontUniT->Hp3_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -729,16 +689,19 @@
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>
+                                            {{$trabasig->Hp007_calc_dose - $dosicontUniT->Hp007_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @for($i=1; $i<=6; $i++)
                                                 @if($trabasig->{"nota$i"} == 'TRUE')
                                                     {{$i}})
                                                 @endif 
                                             @endfor
                                         </td>
-                                        <td class='text-center'>
-                                            <div class="row px-2  align-items-center">
+                                        <td class='text-center '>
+                                            <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -746,25 +709,15 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosi.edit', ['lecdosicont'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                         </svg><br> EDITAR
                                                     </a>
                                                 </div>
-                                                <div class="col-md p-0 mt-3">
-                                                    <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger btn-sm" type="submit">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                            </svg> <br> ELIMINAR
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                                
                                             </div>
+                                            
                                         </td>
                                     </tr>
                                 @endif
@@ -781,7 +734,7 @@
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -796,7 +749,10 @@
                                                 {{$trabasig->Hp10_calc_dose}}
                                             @endif
                                         </td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp10_calc_dose - $dosicontUniT->Hp10_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -811,7 +767,10 @@
                                                 {{$trabasig->Hp3_calc_dose}}
                                             @endif
                                         </td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp3_calc_dose - $dosicontUniT->Hp3_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -827,16 +786,19 @@
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>
+                                            {{$trabasig->Hp007_calc_dose - $dosicontUniT->Hp007_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @for($i=1; $i<=6; $i++)
                                                 @if($trabasig->{"nota$i"} == 'TRUE')
                                                     {{$i}})
                                                 @endif 
                                             @endfor
                                         </td>
-                                        <td class='text-center'>
-                                            <div class="row px-2  align-items-center">
+                                        <td class='text-center '>
+                                            <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item] )}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -844,205 +806,284 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosi.edit', ['lecdosicont'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                         </svg><br> EDITAR
                                                     </a>
                                                 </div>
-                                                <div class="col-md p-0 mt-3">
-                                                    <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger btn-sm" type="submit">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                            </svg> <br> ELIMINAR
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                                
                                             </div>
+                                            
                                         </td>
                                     </tr>
                                 @endif
                             @endforeach
-                        @elseif($dosicontrolToraxasig->isEmpty())
-                            {{-- ///////ASIGNACIONES TORAX , CASO Y AMBIENTAL CON DOSIMETROS DE CONTROL UNICO POR CONTRATO//////// --}} 
-                            @foreach($dosicontrolUnicoToraxasig as $dosicontUniT)
-                                <tr id="C{{$dosicontUniT->id_dosicontrolcontdosisedes}}">
-                                    <td class='align-middle'><b>CONTROL TRANS. T.</b> </td>
-                                    <td class='align-middle text-center'><b>{{$dosicontUniT->dosimetro->codigo_dosimeter}}</b> </td>
-                                    <td class='align-middle text-center'><b>N.A.</b></td>
-                                    <td class='align-middle text-center'><b>N.A.</b></td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontUniT->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontUniT->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontUniT->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontUniT->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontUniT->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontUniT->Hp10_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontUniT->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontUniT->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontUniT->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontUniT->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontUniT->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontUniT->Hp3_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontUniT->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontUniT->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontUniT->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontUniT->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontUniT->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontUniT->Hp007_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    {{-- <td class='align-middle'></td> --}}
+                        @endforeach
+                    @else
+                        {{-- ///////ASIGNACIONES TORAX , CASO Y AMBIENTAL CON SU DOSIMETRO DE CONTROL POR ESPECIALIDAD//////// --}}
+                        @foreach($dosicontrolToraxasig as $dosicontToraxasig)
+                            <tr id="C{{$dosicontToraxasig->id_dosicontrolcontdosisedes}}">
+                                <td class='align-middle'><b>CONTROL TÓRAX</b> </td>
+                                {{-- <td class='align-middle text-center'><b>N.A.</b> </td> --}}
+                                <td class='align-middle text-center'><b>{{$dosicontToraxasig->dosimetro->codigo_dosimeter}}</b> </td>
+                                <td class='align-middle text-center'><b>N.A.</b></td>
+                                <td class='align-middle text-center'><b>CONTROL TÓRAX</b></td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontToraxasig->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontToraxasig->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontToraxasig->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontToraxasig->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontToraxasig->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontToraxasig->Hp10_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontToraxasig->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontToraxasig->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontToraxasig->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontToraxasig->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontToraxasig->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontToraxasig->Hp3_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontToraxasig->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontToraxasig->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontToraxasig->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontToraxasig->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontToraxasig->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontToraxasig->Hp007_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                {{-- <td class='align-middle'></td> --}}
+                                <td class='align-middle text-center'>
+                                    @for($i=1; $i<=6; $i++)
+                                        @if($dosicontToraxasig->{"nota$i"} == 'TRUE')
+                                            <b>{{$i}})</b>
+                                        @endif 
+                                    @endfor
+                                </td>
+                                <td class='text-center'>
+                                    <div class="row px-2 align-items-center">
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                </svg><br> LECTURA
+                                            </a> 
+                                        </div>
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->measurement_date == null && $dosicontToraxasig->nota2 == NULL && $dosicontToraxasig->DNL == null && $dosicontToraxasig->EU == null && $dosicontToraxasig->DPL == null && $dosicontToraxasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->measurement_date == null && $dosicontToraxasig->nota2 == NULL && $dosicontToraxasig->DNL == null && $dosicontToraxasig->EU == null && $dosicontToraxasig->DPL == null && $dosicontToraxasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                </svg> <br> EDITAR
+                                            </a>
+                                        </div>
+                                        
+                                    </div>  
+                                </td>
+                            </tr>
+                            @foreach($dosiareasignados as $dosiareasig)
+                                <tr>
+                                    <td class='align-middle'>{{$dosiareasig->areadepartamentosede->nombre_area}}</td>
+                                    {{-- <td class='align-middle text-center'>N.A.</td> --}}
+                                    <td class='align-middle text-center'>{{$dosiareasig->dosimetro->codigo_dosimeter}}</td>
+                                    <td class='align-middle text-center'>N.A.</td>
+                                    <td class='align-middle text-center'>AMBIENTAL</td>
                                     <td class='align-middle text-center'>
-                                        @for($i=1; $i<=6; $i++)
-                                            @if($dosicontUniT->{"nota$i"} == 'TRUE')
-                                                <b>{{$i}})</b>
+                                        @if($dosiareasig->nota2 == 'TRUE')
+                                            {{'NP'}}
+                                        @elseif($dosiareasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @elseif($dosiareasig->EU == 'TRUE')
+                                            {{'EU'}}
+                                        @elseif($dosiareasig->DPL == 'TRUE')
+                                            {{'DPL'}}
+                                        @elseif($dosiareasig->DSU == 'TRUE')
+                                            {{'DSU'}}
+                                        @else
+                                            {{$dosiareasig->Hp10_calc_dose}}
+                                        @endif
+                                    </td>
+                                    <td class='align-middle text-center'>
+                                        {{$dosiareasig->Hp10_calc_dose - $dosicontToraxasig->Hp10_calc_dose}}
+                                    </td>
+                                    <td class='align-middle text-center'>
+                                        @if($dosiareasig->nota2 == 'TRUE')
+                                            {{'NP'}}
+                                        @elseif($dosiareasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @elseif($dosiareasig->EU == 'TRUE')
+                                            {{'EU'}}
+                                        @elseif($dosiareasig->DPL == 'TRUE')
+                                            {{'DPL'}}
+                                        @elseif($dosiareasig->DSU == 'TRUE')
+                                            {{'DSU'}}
+                                        @else
+                                            {{$dosiareasig->Hp3_calc_dose}}
+                                        @endif
+                                    </td>
+                                    <td class='align-middle text-center'>
+                                        {{$dosiareasig->Hp3_calc_dose - $dosicontToraxasig->Hp3_calc_dose}}
+                                    </td>
+                                    <td class='align-middle text-center'>
+                                        @if($dosiareasig->nota2 == 'TRUE')
+                                            {{'NP'}}
+                                        @elseif($dosiareasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @elseif($dosiareasig->EU == 'TRUE')
+                                            {{'EU'}}
+                                        @elseif($dosiareasig->DPL == 'TRUE')
+                                            {{'DPL'}}
+                                        @elseif($dosiareasig->DSU == 'TRUE')
+                                            {{'DSU'}}
+                                        @else
+                                            {{$dosiareasig->Hp007_calc_dose}}
+                                        @endif
+                                    </td>
+                                    <td class='align-middle text-center'>
+                                        {{$dosiareasig->Hp007_calc_dose - $dosicontToraxasig->Hp007_calc_dose}}
+                                    </td>
+                                    <td class='align-middle text-center'>
+                                        @for($i=1; $i<=5; $i++)
+                                            @if($dosiareasig->{"nota$i"} == 'TRUE')
+                                                {{$i}})
                                             @endif 
                                         @endfor
+                                        @if($dosiareasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @endif
                                     </td>
                                     <td class='text-center'>
                                         <div class="row px-2 align-items-center">
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniT->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniT->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
+                                            <div class="col-md p-0 m-0">
+                                                <a href="{{route('lecturadosiareacontrl.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                     <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                     <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
                                                     </svg><br> LECTURA
-                                                </a> 
+                                                </a>
                                             </div>
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniT->measurement_date == null && $dosicontUniT->nota2 == NULL && $dosicontUniT->DNL == null && $dosicontUniT->EU == null && $dosicontUniT->DPL == null && $dosicontUniT->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniT->measurement_date == null && $dosicontUniT->nota2 == NULL && $dosicontUniT->DNL == null && $dosicontUniT->EU == null && $dosicontUniT->DPL == null && $dosicontUniT->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
+                                            <div class="col-md p-0 m-0">
+                                                <a href="{{route('lecturadosiareacontrl.edit', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->measurement_date == null && $dosiareasig->nota2 == null && $dosiareasig->DNL == null && $dosiareasig->EU == null && $dosiareasig->DPL == null && $dosiareasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                     </svg> <br> EDITAR
                                                 </a>
                                             </div>
-                                            <div class="col-md mt-3 p-0">
-                                                <form id="form_eliminar_asigcontrol" name="form_eliminar_asigcontrol" action="{{route('asigdosicont.destroyInfoControl',  $dosicontUniT->id_dosicontrolcontdosisedes)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg> <br> ELIMINAR
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            
                                         </div>  
+                                        
                                     </td>
                                 </tr>
-                                @foreach($dosiareasignados as $dosiareasig)
-                                    <tr>
-                                        <td class='align-middle'>{{$dosiareasig->areadepartamentosede->nombre_area}}</td>
-                                        {{-- <td class='align-middle text-center'>N.A.</td> --}}
-                                        <td class='align-middle text-center'>{{$dosiareasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle text-center'>N.A.</td>
-                                        <td class='align-middle text-center'>AMBIENTAL</td>
+                            @endforeach
+                            @foreach($trabjasignados as $trabasig)
+                                @if($trabasig->ubicacion == 'TORAX')
+                                    <tr id='{{$trabasig->id_trabajadordosimetro}}'>
+                                        <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                        {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
+                                        <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
                                         <td class='align-middle text-center'>
-                                            @if($dosiareasig->nota2 == 'TRUE')
+                                            @if($trabasig->holder_id == '')
+                                                N.A.
+                                            @else
+                                                {{$trabasig->holder->codigo_holder}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
-                                            @elseif($dosiareasig->DNL == 'TRUE')
+                                            @elseif($trabasig->DNL == 'TRUE')
                                                 {{'DNL'}}
-                                            @elseif($dosiareasig->EU == 'TRUE')
+                                            @elseif($trabasig->EU == 'TRUE')
                                                 {{'EU'}}
-                                            @elseif($dosiareasig->DPL == 'TRUE')
+                                            @elseif($trabasig->DPL == 'TRUE')
                                                 {{'DPL'}}
-                                            @elseif($dosiareasig->DSU == 'TRUE')
+                                            @elseif($trabasig->DSU == 'TRUE')
                                                 {{'DSU'}}
                                             @else
-                                                {{$dosiareasig->Hp10_calc_dose}}
+                                                {{$trabasig->Hp10_calc_dose}}
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>
-                                            {{$dosiareasig->Hp10_calc_dose - $dosicontUniT->Hp10_calc_dose}}
+                                            {{$trabasig->Hp10_calc_dose - $dosicontToraxasig->Hp10_calc_dose}}
                                         </td>
                                         <td class='align-middle text-center'>
-                                            @if($dosiareasig->nota2 == 'TRUE')
+                                            @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
-                                            @elseif($dosiareasig->DNL == 'TRUE')
+                                            @elseif($trabasig->DNL == 'TRUE')
                                                 {{'DNL'}}
-                                            @elseif($dosiareasig->EU == 'TRUE')
+                                            @elseif($trabasig->EU == 'TRUE')
                                                 {{'EU'}}
-                                            @elseif($dosiareasig->DPL == 'TRUE')
+                                            @elseif($trabasig->DPL == 'TRUE')
                                                 {{'DPL'}}
-                                            @elseif($dosiareasig->DSU == 'TRUE')
+                                            @elseif($trabasig->DSU == 'TRUE')
                                                 {{'DSU'}}
                                             @else
-                                                {{$dosiareasig->Hp3_calc_dose}}
+                                                {{$trabasig->Hp3_calc_dose}}
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>
-                                            {{$dosiareasig->Hp3_calc_dose - $dosicontUniT->Hp3_calc_dose}}
+                                            {{$trabasig->Hp3_calc_dose - $dosicontToraxasig->Hp3_calc_dose}}
                                         </td>
                                         <td class='align-middle text-center'>
-                                            @if($dosiareasig->nota2 == 'TRUE')
+                                            @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
-                                            @elseif($dosiareasig->DNL == 'TRUE')
+                                            @elseif($trabasig->DNL == 'TRUE')
                                                 {{'DNL'}}
-                                            @elseif($dosiareasig->EU == 'TRUE')
+                                            @elseif($trabasig->EU == 'TRUE')
                                                 {{'EU'}}
-                                            @elseif($dosiareasig->DPL == 'TRUE')
+                                            @elseif($trabasig->DPL == 'TRUE')
                                                 {{'DPL'}}
-                                            @elseif($dosiareasig->DSU == 'TRUE')
+                                            @elseif($trabasig->DSU == 'TRUE')
                                                 {{'DSU'}}
                                             @else
-                                                {{$dosiareasig->Hp007_calc_dose}}
+                                                {{$trabasig->Hp007_calc_dose}}
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>
-                                            {{$dosiareasig->Hp007_calc_dose - $dosicontUniT->Hp007_calc_dose}}
+                                            {{$trabasig->Hp007_calc_dose - $dosicontToraxasig->Hp007_calc_dose}}
                                         </td>
                                         <td class='align-middle text-center'>
-                                            @for($i=1; $i<=5; $i++)
-                                                @if($dosiareasig->{"nota$i"} == 'TRUE')
+                                            @for($i=1; $i<=6; $i++)
+                                                @if($trabasig->{"nota$i"} == 'TRUE')
                                                     {{$i}})
                                                 @endif 
                                             @endfor
-                                            @if($dosiareasig->DNL == 'TRUE')
-                                                {{'DNL'}}
-                                            @endif
                                         </td>
-                                        <td class='text-center'>
+                                        <td class='text-center '>
                                             <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosiareacontrl.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -1050,425 +1091,96 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosiareacontrl.edit', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->measurement_date == null && $dosiareasig->nota2 == null && $dosiareasig->DNL == null && $dosiareasig->EU == null && $dosiareasig->DPL == null && $dosiareasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                        </svg> <br> EDITAR
+                                                        </svg><br> EDITAR
                                                     </a>
                                                 </div>
-                                                <div class="col-md p-0 mt-3">
-                                                    <form id="form_eliminar_asigArea" name="form_eliminar_asigArea" action="{{route('asigdosicont.destroyInfoArea', $dosiareasig->id_dosiareacontdosisedes)}}" method="POST">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger btn-sm" type="submit">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                            </svg> <br> ELIMINAR
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>  
+                                                
+                                            </div>
                                             
                                         </td>
                                     </tr>
-                                @endforeach
-                                @foreach($trabjasignados as $trabasig)
-                                    @if($trabasig->ubicacion == 'TORAX')
-                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                            <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                            {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
-                                            <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->holder_id == '')
-                                                    N.A.
-                                                @else
-                                                    {{$trabasig->holder->codigo_holder}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp10_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp10_calc_dose - $dosicontUniT->Hp10_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp3_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp3_calc_dose - $dosicontUniT->Hp3_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp007_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp007_calc_dose - $dosicontUniT->Hp007_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @for($i=1; $i<=6; $i++)
-                                                    @if($trabasig->{"nota$i"} == 'TRUE')
-                                                        {{$i}})
-                                                    @endif 
-                                                @endfor
-                                            </td>
-                                            <td class='text-center '>
-                                                <div class="row px-2 align-items-center">
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                            </svg><br> LECTURA
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                            </svg><br> EDITAR
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 mt-3">
-                                                        <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger btn-sm" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg> <br> ELIMINAR
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    @if($trabasig->ubicacion == 'CASO')
-                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                            <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                            {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
-                                            <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->holder_id == '')
-                                                    N.A.
-                                                @else
-                                                    {{$trabasig->holder->codigo_holder}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp10_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp10_calc_dose - $dosicontUniT->Hp10_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp3_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp3_calc_dose - $dosicontUniT->Hp3_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp007_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp007_calc_dose - $dosicontUniT->Hp007_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @for($i=1; $i<=6; $i++)
-                                                    @if($trabasig->{"nota$i"} == 'TRUE')
-                                                        {{$i}})
-                                                    @endif 
-                                                @endfor
-                                            </td>
-                                            <td class='text-center '>
-                                                <div class="row px-2 align-items-center">
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                            </svg><br> LECTURA
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniT->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                            </svg><br> EDITAR
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 mt-3">
-                                                        <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger btn-sm" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg> <br> ELIMINAR
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                            @endforeach
-                        @else
-                            {{-- ///////ASIGNACIONES TORAX , CASO Y AMBIENTAL CON SU DOSIMETRO DE CONTROL POR ESPECIALIDAD//////// --}}
-                            @foreach($dosicontrolToraxasig as $dosicontToraxasig)
-                                <tr id="C{{$dosicontToraxasig->id_dosicontrolcontdosisedes}}">
-                                    <td class='align-middle'><b>CONTROL TÓRAX</b> </td>
-                                    {{-- <td class='align-middle text-center'><b>N.A.</b> </td> --}}
-                                    <td class='align-middle text-center'><b>{{$dosicontToraxasig->dosimetro->codigo_dosimeter}}</b> </td>
-                                    <td class='align-middle text-center'><b>N.A.</b></td>
-                                    <td class='align-middle text-center'><b>CONTROL TÓRAX</b></td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontToraxasig->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontToraxasig->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontToraxasig->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontToraxasig->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontToraxasig->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontToraxasig->Hp10_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontToraxasig->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontToraxasig->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontToraxasig->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontToraxasig->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontToraxasig->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontToraxasig->Hp3_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontToraxasig->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontToraxasig->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontToraxasig->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontToraxasig->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontToraxasig->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontToraxasig->Hp007_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    {{-- <td class='align-middle'></td> --}}
-                                    <td class='align-middle text-center'>
-                                        @for($i=1; $i<=6; $i++)
-                                            @if($dosicontToraxasig->{"nota$i"} == 'TRUE')
-                                                <b>{{$i}})</b>
-                                            @endif 
-                                        @endfor
-                                    </td>
-                                    <td class='text-center'>
-                                        <div class="row px-2 align-items-center">
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                    <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                    </svg><br> LECTURA
-                                                </a> 
-                                            </div>
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->measurement_date == null && $dosicontToraxasig->nota2 == NULL && $dosicontToraxasig->DNL == null && $dosicontToraxasig->EU == null && $dosicontToraxasig->DPL == null && $dosicontToraxasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontToraxasig->measurement_date == null && $dosicontToraxasig->nota2 == NULL && $dosicontToraxasig->DNL == null && $dosicontToraxasig->EU == null && $dosicontToraxasig->DPL == null && $dosicontToraxasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                    </svg> <br> EDITAR
-                                                </a>
-                                            </div>
-                                            <div class="col-md mt-3 p-0">
-                                                <form id="form_eliminar_asigcontrol" name="form_eliminar_asigcontrol" action="{{route('asigdosicont.destroyInfoControl',  $dosicontToraxasig->id_dosicontrolcontdosisedes)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg> <br> ELIMINAR
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>  
-                                    </td>
-                                </tr>
-                                @foreach($dosiareasignados as $dosiareasig)
-                                    <tr>
-                                        <td class='align-middle'>{{$dosiareasig->areadepartamentosede->nombre_area}}</td>
-                                        {{-- <td class='align-middle text-center'>N.A.</td> --}}
-                                        <td class='align-middle text-center'>{{$dosiareasig->dosimetro->codigo_dosimeter}}</td>
-                                        <td class='align-middle text-center'>N.A.</td>
-                                        <td class='align-middle text-center'>AMBIENTAL</td>
+                                @endif
+                                @if($trabasig->ubicacion == 'CASO')
+                                    <tr id='{{$trabasig->id_trabajadordosimetro}}'>
+                                        <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                        {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
+                                        <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
                                         <td class='align-middle text-center'>
-                                            @if($dosiareasig->nota2 == 'TRUE')
+                                            @if($trabasig->holder_id == '')
+                                                N.A.
+                                            @else
+                                                {{$trabasig->holder->codigo_holder}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
-                                            @elseif($dosiareasig->DNL == 'TRUE')
+                                            @elseif($trabasig->DNL == 'TRUE')
                                                 {{'DNL'}}
-                                            @elseif($dosiareasig->EU == 'TRUE')
+                                            @elseif($trabasig->EU == 'TRUE')
                                                 {{'EU'}}
-                                            @elseif($dosiareasig->DPL == 'TRUE')
+                                            @elseif($trabasig->DPL == 'TRUE')
                                                 {{'DPL'}}
-                                            @elseif($dosiareasig->DSU == 'TRUE')
+                                            @elseif($trabasig->DSU == 'TRUE')
                                                 {{'DSU'}}
                                             @else
-                                                {{$dosiareasig->Hp10_calc_dose}}
+                                                {{$trabasig->Hp10_calc_dose}}
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>
-                                            {{$dosiareasig->Hp10_calc_dose - $dosicontToraxasig->Hp10_calc_dose}}
+                                            {{$trabasig->Hp10_calc_dose - $dosicontToraxasig->Hp10_calc_dose}}
                                         </td>
                                         <td class='align-middle text-center'>
-                                            @if($dosiareasig->nota2 == 'TRUE')
+                                            @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
-                                            @elseif($dosiareasig->DNL == 'TRUE')
+                                            @elseif($trabasig->DNL == 'TRUE')
                                                 {{'DNL'}}
-                                            @elseif($dosiareasig->EU == 'TRUE')
+                                            @elseif($trabasig->EU == 'TRUE')
                                                 {{'EU'}}
-                                            @elseif($dosiareasig->DPL == 'TRUE')
+                                            @elseif($trabasig->DPL == 'TRUE')
                                                 {{'DPL'}}
-                                            @elseif($dosiareasig->DSU == 'TRUE')
+                                            @elseif($trabasig->DSU == 'TRUE')
                                                 {{'DSU'}}
                                             @else
-                                                {{$dosiareasig->Hp3_calc_dose}}
+                                                {{$trabasig->Hp3_calc_dose}}
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>
-                                            {{$dosiareasig->Hp3_calc_dose - $dosicontToraxasig->Hp3_calc_dose}}
+                                            {{$trabasig->Hp3_calc_dose - $dosicontToraxasig->Hp3_calc_dose}}
                                         </td>
                                         <td class='align-middle text-center'>
-                                            @if($dosiareasig->nota2 == 'TRUE')
+                                            @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
-                                            @elseif($dosiareasig->DNL == 'TRUE')
+                                            @elseif($trabasig->DNL == 'TRUE')
                                                 {{'DNL'}}
-                                            @elseif($dosiareasig->EU == 'TRUE')
+                                            @elseif($trabasig->EU == 'TRUE')
                                                 {{'EU'}}
-                                            @elseif($dosiareasig->DPL == 'TRUE')
+                                            @elseif($trabasig->DPL == 'TRUE')
                                                 {{'DPL'}}
-                                            @elseif($dosiareasig->DSU == 'TRUE')
+                                            @elseif($trabasig->DSU == 'TRUE')
                                                 {{'DSU'}}
                                             @else
-                                                {{$dosiareasig->Hp007_calc_dose}}
+                                                {{$trabasig->Hp007_calc_dose}}
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>
-                                            {{$dosiareasig->Hp007_calc_dose - $dosicontToraxasig->Hp007_calc_dose}}
+                                            {{$trabasig->Hp007_calc_dose - $dosicontToraxasig->Hp007_calc_dose}}
                                         </td>
                                         <td class='align-middle text-center'>
-                                            @for($i=1; $i<=5; $i++)
-                                                @if($dosiareasig->{"nota$i"} == 'TRUE')
+                                            @for($i=1; $i<=6; $i++)
+                                                @if($trabasig->{"nota$i"} == 'TRUE')
                                                     {{$i}})
                                                 @endif 
                                             @endfor
-                                            @if($dosiareasig->DNL == 'TRUE')
-                                                {{'DNL'}}
-                                            @endif
                                         </td>
-                                        <td class='text-center'>
+                                        <td class='text-center '>
                                             <div class="row px-2 align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosiareacontrl.create', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -1476,251 +1188,203 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosiareacontrl.edit', ['lecdosicont'=>$dosiareasig->id_dosiareacontdosisedes, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosiareasig->measurement_date == null && $dosiareasig->nota2 == null && $dosiareasig->DNL == null && $dosiareasig->EU == null && $dosiareasig->DPL == null && $dosiareasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                        </svg> <br> EDITAR
+                                                        </svg><br> EDITAR
                                                     </a>
                                                 </div>
-                                                <div class="col-md p-0 mt-3">
-                                                    <form id="form_eliminar_asigArea" name="form_eliminar_asigArea" action="{{route('asigdosicont.destroyInfoArea', $dosiareasig->id_dosiareacontdosisedes)}}" method="POST">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger btn-sm" type="submit">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                            </svg> <br> ELIMINAR
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>  
+                                                
+                                            </div>
                                             
                                         </td>
                                     </tr>
-                                @endforeach
-                                @foreach($trabjasignados as $trabasig)
-                                    @if($trabasig->ubicacion == 'TORAX')
-                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                            <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                            {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
-                                            <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->holder_id == '')
-                                                    N.A.
-                                                @else
-                                                    {{$trabasig->holder->codigo_holder}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp10_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp10_calc_dose - $dosicontToraxasig->Hp10_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp3_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp3_calc_dose - $dosicontToraxasig->Hp3_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp007_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp007_calc_dose - $dosicontToraxasig->Hp007_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @for($i=1; $i<=6; $i++)
-                                                    @if($trabasig->{"nota$i"} == 'TRUE')
-                                                        {{$i}})
-                                                    @endif 
-                                                @endfor
-                                            </td>
-                                            <td class='text-center '>
-                                                <div class="row px-2 align-items-center">
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                            </svg><br> LECTURA
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                            </svg><br> EDITAR
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 mt-3">
-                                                        <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger btn-sm" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg> <br> ELIMINAR
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    @if($trabasig->ubicacion == 'CASO')
-                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                            <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                            {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
-                                            <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->holder_id == '')
-                                                    N.A.
-                                                @else
-                                                    {{$trabasig->holder->codigo_holder}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp10_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp10_calc_dose - $dosicontToraxasig->Hp10_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp3_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp3_calc_dose - $dosicontToraxasig->Hp3_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp007_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp007_calc_dose - $dosicontToraxasig->Hp007_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @for($i=1; $i<=6; $i++)
-                                                    @if($trabasig->{"nota$i"} == 'TRUE')
-                                                        {{$i}})
-                                                    @endif 
-                                                @endfor
-                                            </td>
-                                            <td class='text-center '>
-                                                <div class="row px-2 align-items-center">
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                            </svg><br> LECTURA
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontToraxasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                            </svg><br> EDITAR
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 mt-3">
-                                                        <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger btn-sm" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg> <br> ELIMINAR
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
+                                @endif
                             @endforeach
-                        @endif    
-                        @if($dosicontrolCristalinoasig->isEmpty() && $dosicontrolUnicoCristasig->isEmpty())
-                            {{-- ///////ASIGNACIONES CRISTALINO SIN DOSIMETRO DE CONTROL//////// --}}
+                        @endforeach
+                    @endif    
+                    @if($dosicontrolCristalinoasig->isEmpty() && $dosicontrolUnicoCristasig->isEmpty())
+                        {{-- ///////ASIGNACIONES CRISTALINO SIN DOSIMETRO DE CONTROL//////// --}}
+                        @foreach($trabjasignados as $trabasig)
+                            @if($trabasig->ubicacion == 'CRISTALINO')
+                                <tr id='{{$trabasig->id_trabajadordosimetro}}'>
+                                    <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                    {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
+                                    <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                    <td class='align-middle text-center'>
+                                        @if($trabasig->holder_id == '')
+                                            N.A.
+                                        @else
+                                            {{$trabasig->holder->codigo_holder}}
+                                        @endif
+                                    </td>
+                                    <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
+                                    <td colspan="2" class='align-middle text-center'>
+                                        @if($trabasig->nota2 == 'TRUE')
+                                            {{'NP'}}
+                                        @elseif($trabasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @elseif($trabasig->EU == 'TRUE')
+                                            {{'EU'}}
+                                        @elseif($trabasig->DPL == 'TRUE')
+                                            {{'DPL'}}
+                                        @elseif($trabasig->DSU == 'TRUE')
+                                            {{'DSU'}}
+                                        @else
+                                            {{$trabasig->Hp10_calc_dose}}
+                                        @endif
+                                    </td>
+                                    <td colspan="2" class='align-middle text-center'>
+                                        @if($trabasig->nota2 == 'TRUE')
+                                            {{'NP'}}
+                                        @elseif($trabasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @elseif($trabasig->EU == 'TRUE')
+                                            {{'EU'}}
+                                        @elseif($trabasig->DPL == 'TRUE')
+                                            {{'DPL'}}
+                                        @elseif($trabasig->DSU == 'TRUE')
+                                            {{'DSU'}}
+                                        @else
+                                            {{$trabasig->Hp3_calc_dose}}
+                                        @endif
+                                    </td>
+                                    <td colspan="2" class='align-middle text-center'>
+                                        @if($trabasig->nota2 == 'TRUE')
+                                            {{'NP'}}
+                                        @elseif($trabasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @elseif($trabasig->EU == 'TRUE')
+                                            {{'EU'}}
+                                        @elseif($trabasig->DPL == 'TRUE')
+                                            {{'DPL'}}
+                                        @elseif($trabasig->DSU == 'TRUE')
+                                            {{'DSU'}}
+                                        @else
+                                            {{$trabasig->Hp007_calc_dose}}
+                                        @endif
+                                    </td>
+                                    <td class='align-middle text-center'>
+                                        @for($i=1; $i<=6; $i++)
+                                            @if($trabasig->{"nota$i"} == 'TRUE')
+                                                {{$i}})
+                                            @endif 
+                                        @endfor
+                                    </td>
+                                    <td class='text-center'>
+                                        <div class="row px-2 align-items-center">
+                                            <div class="col-md p-0 m-0">
+                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                    <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                    </svg><br> LECTURA
+                                                </a>
+                                            </div>
+                                            <div class="col-md p-0 m-0">
+                                                <a href="{{route('lecturadosi.edit', ['lecdosicont'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                    </svg><br> EDITAR
+                                                </a>
+                                            </div>
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    @elseif($dosicontrolCristalinoasig->isEmpty())
+                        {{-- ///////ASIGNACIONES CRISTALINO CON DOSIMETROS DE CONTROL UNICO POR CONTRATO//////// --}} 
+                        @foreach($dosicontrolUnicoCristasig as $dosicontUniCrist)
+                            <tr id="C{{$dosicontUniCrist->id_dosicontrolcontdosisedes}}">
+                                <td class='align-middle'> <b>CONTROL TRANS. C.</b> </td>
+                                {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
+                                <td class='align-middle text-center'><b>{{$dosicontUniCrist->dosimetro->codigo_dosimeter}}</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontUniCrist->holder->codigo_holder}}</b></td>
+                                <td class='align-middle text-center'><b>CONTROL CRISTALINO</b></td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontUniCrist->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontUniCrist->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontUniCrist->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontUniCrist->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontUniCrist->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontUniCrist->Hp10_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontUniCrist->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontUniCrist->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontUniCrist->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontUniCrist->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontUniCrist->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontUniCrist->Hp3_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontUniCrist->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontUniCrist->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontUniCrist->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontUniCrist->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontUniCrist->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontUniCrist->Hp007_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                {{-- <td class='align-middle'></td> --}}
+                                <td class='align-middle text-center'>
+                                    @for($i=1; $i<=6; $i++)
+                                        @if($dosicontUniCrist->{"nota$i"} == 'TRUE')
+                                            <b>{{$i}})</b>
+                                        @endif 
+                                    @endfor
+                                </td>
+                                <td class='text-center'>
+                                    <div class="row px-2  align-items-center">
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                </svg><br> LECTURA
+                                            </a> 
+                                        </div>
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->measurement_date == null && $dosicontUniCrist->nota2 == null && $dosicontUniCrist->DNL == null && $dosicontUniCrist->EU == null && $dosicontUniCrist->DPL == null && $dosicontUniCrist->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->measurement_date == null && $dosicontUniCrist->nota2 == null && $dosicontUniCrist->DNL == null && $dosicontUniCrist->EU == null && $dosicontUniCrist->DPL == null && $dosicontUniCrist->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                </svg> <br> EDITAR
+                                            </a>
+                                        </div>
+                                        
+                                    </div>  
+                                </td>
+                            </tr>
                             @foreach($trabjasignados as $trabasig)
                                 @if($trabasig->ubicacion == 'CRISTALINO')
                                     <tr id='{{$trabasig->id_trabajadordosimetro}}'>
@@ -1735,7 +1399,7 @@
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -1750,7 +1414,8 @@
                                                 {{$trabasig->Hp10_calc_dose}}
                                             @endif
                                         </td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -1765,7 +1430,10 @@
                                                 {{$trabasig->Hp3_calc_dose}}
                                             @endif
                                         </td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp3_calc_dose - $dosicontUniCrist->Hp3_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -1780,6 +1448,7 @@
                                                 {{$trabasig->Hp007_calc_dose}}
                                             @endif
                                         </td>
+                                        <td class='align-middle text-center'></td>
                                         <td class='align-middle text-center'>
                                             @for($i=1; $i<=6; $i++)
                                                 @if($trabasig->{"nota$i"} == 'TRUE')
@@ -1787,10 +1456,10 @@
                                                 @endif 
                                             @endfor
                                         </td>
-                                        <td class='text-center'>
-                                            <div class="row px-2 align-items-center">
+                                        <td class='text-center '>
+                                            <div class="row px-2  align-items-center">
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -1798,452 +1467,113 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosi.edit', ['lecdosicont'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                         </svg><br> EDITAR
                                                     </a>
                                                 </div>
-                                                <div class="col-md p-0 mt-3">
-                                                    <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger btn-sm" type="submit">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                            </svg> <br> ELIMINAR
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                                
                                             </div>
+                                            
                                         </td>
                                     </tr>
                                 @endif
                             @endforeach
-                        @elseif($dosicontrolCristalinoasig->isEmpty())
-                            {{-- ///////ASIGNACIONES CRISTALINO CON DOSIMETROS DE CONTROL UNICO POR CONTRATO//////// --}} 
-                            @foreach($dosicontrolUnicoCristasig as $dosicontUniCrist)
-                                <tr id="C{{$dosicontUniCrist->id_dosicontrolcontdosisedes}}">
-                                    <td class='align-middle'> <b>CONTROL TRANS. C.</b> </td>
-                                    {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
-                                    <td class='align-middle text-center'><b>{{$dosicontUniCrist->dosimetro->codigo_dosimeter}}</b></td>
-                                    <td class='align-middle text-center'><b>{{$dosicontUniCrist->holder->codigo_holder}}</b></td>
-                                    <td class='align-middle text-center'><b>CONTROL CRISTALINO</b></td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontUniCrist->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontUniCrist->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontUniCrist->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontUniCrist->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontUniCrist->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontUniCrist->Hp10_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontUniCrist->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontUniCrist->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontUniCrist->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontUniCrist->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontUniCrist->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontUniCrist->Hp3_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontUniCrist->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontUniCrist->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontUniCrist->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontUniCrist->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontUniCrist->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontUniCrist->Hp007_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    {{-- <td class='align-middle'></td> --}}
-                                    <td class='align-middle text-center'>
-                                        @for($i=1; $i<=6; $i++)
-                                            @if($dosicontUniCrist->{"nota$i"} == 'TRUE')
-                                                <b>{{$i}})</b>
-                                            @endif 
-                                        @endfor
-                                    </td>
-                                    <td class='text-center'>
-                                        <div class="row px-2  align-items-center">
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                    <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                    </svg><br> LECTURA
-                                                </a> 
-                                            </div>
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->measurement_date == null && $dosicontUniCrist->nota2 == null && $dosicontUniCrist->DNL == null && $dosicontUniCrist->EU == null && $dosicontUniCrist->DPL == null && $dosicontUniCrist->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniCrist->measurement_date == null && $dosicontUniCrist->nota2 == null && $dosicontUniCrist->DNL == null && $dosicontUniCrist->EU == null && $dosicontUniCrist->DPL == null && $dosicontUniCrist->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                    </svg> <br> EDITAR
-                                                </a>
-                                            </div>
-                                            <div class="col-md mt-3 p-0">
-                                                <form id="form_eliminar_asigcontrol" name="form_eliminar_asigcontrol" action="{{route('asigdosicont.destroyInfoControl',  $dosicontUniCrist->id_dosicontrolcontdosisedes)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg> <br> ELIMINAR
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>  
-                                    </td>
-                                </tr>
-                                @foreach($trabjasignados as $trabasig)
-                                    @if($trabasig->ubicacion == 'CRISTALINO')
-                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                            <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                            {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
-                                            <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->holder_id == '')
-                                                    N.A.
-                                                @else
-                                                    {{$trabasig->holder->codigo_holder}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp10_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'></td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp3_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp3_calc_dose - $dosicontUniCrist->Hp3_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp007_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'></td>
-                                            <td class='align-middle text-center'>
-                                                @for($i=1; $i<=6; $i++)
-                                                    @if($trabasig->{"nota$i"} == 'TRUE')
-                                                        {{$i}})
-                                                    @endif 
-                                                @endfor
-                                            </td>
-                                            <td class='text-center '>
-                                                <div class="row px-2  align-items-center">
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                            </svg><br> LECTURA
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniCrist->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                            </svg><br> EDITAR
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 mt-3">
-                                                        <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger btn-sm" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg> <br> ELIMINAR
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
+                        @endforeach
+                    @else
+                        {{-- ///////ASIGNACIONES CRISTALINO CON SU DOSIMETRO DE CONTROL POR ESPECIALIDAD//////// --}}
+                        @foreach($dosicontrolCristalinoasig as $dosicontCristalinoasig)
+                            <tr id="C{{$dosicontCristalinoasig->id_dosicontrolcontdosisedes}}">
+                                <td class='align-middle'> <b>CONTROL CRISTALINO</b> </td>
+                                {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
+                                <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->dosimetro->codigo_dosimeter}}</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->holder->codigo_holder}}</b></td>
+                                <td class='align-middle text-center'><b>CONTROL CRISTALINO</b></td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontCristalinoasig->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontCristalinoasig->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontCristalinoasig->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontCristalinoasig->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontCristalinoasig->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontCristalinoasig->Hp10_calc_dose}}</b>
                                     @endif
-                                @endforeach
-                            @endforeach
-                        @else
-                            {{-- ///////ASIGNACIONES CRISTALINO CON SU DOSIMETRO DE CONTROL POR ESPECIALIDAD//////// --}}
-                            @foreach($dosicontrolCristalinoasig as $dosicontCristalinoasig)
-                                <tr id="C{{$dosicontCristalinoasig->id_dosicontrolcontdosisedes}}">
-                                    <td class='align-middle'> <b>CONTROL CRISTALINO</b> </td>
-                                    {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
-                                    <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->dosimetro->codigo_dosimeter}}</b></td>
-                                    <td class='align-middle text-center'><b>{{$dosicontCristalinoasig->holder->codigo_holder}}</b></td>
-                                    <td class='align-middle text-center'><b>CONTROL CRISTALINO</b></td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontCristalinoasig->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontCristalinoasig->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontCristalinoasig->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontCristalinoasig->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontCristalinoasig->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontCristalinoasig->Hp10_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontCristalinoasig->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontCristalinoasig->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontCristalinoasig->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontCristalinoasig->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontCristalinoasig->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontCristalinoasig->Hp3_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontCristalinoasig->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontCristalinoasig->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontCristalinoasig->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontCristalinoasig->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontCristalinoasig->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontCristalinoasig->Hp007_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    {{-- <td class='align-middle'></td> --}}
-                                    <td class='align-middle text-center'>
-                                        @for($i=1; $i<=6; $i++)
-                                            @if($dosicontCristalinoasig->{"nota$i"} == 'TRUE')
-                                                <b>{{$i}})</b>
-                                            @endif 
-                                        @endfor
-                                    </td>
-                                    <td class='text-center'>
-                                        <div class="row px-2  align-items-center">
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                    <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                    </svg><br> LECTURA
-                                                </a> 
-                                            </div>
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->measurement_date == null && $dosicontCristalinoasig->nota2 == null && $dosicontCristalinoasig->DNL == null && $dosicontCristalinoasig->EU == null && $dosicontCristalinoasig->DPL == null && $dosicontCristalinoasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->measurement_date == null && $dosicontCristalinoasig->nota2 == null && $dosicontCristalinoasig->DNL == null && $dosicontCristalinoasig->EU == null && $dosicontCristalinoasig->DPL == null && $dosicontCristalinoasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                    </svg> <br> EDITAR
-                                                </a>
-                                            </div>
-                                            <div class="col-md mt-3 p-0">
-                                                <form id="form_eliminar_asigcontrol" name="form_eliminar_asigcontrol" action="{{route('asigdosicont.destroyInfoControl',  $dosicontCristalinoasig->id_dosicontrolcontdosisedes)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg> <br> ELIMINAR
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>  
-                                    </td>
-                                </tr>
-                                @foreach($trabjasignados as $trabasig)
-                                    @if($trabasig->ubicacion == 'CRISTALINO')
-                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                            <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                            {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
-                                            <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->holder_id == '')
-                                                    N.A.
-                                                @else
-                                                    {{$trabasig->holder->codigo_holder}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp10_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'></td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp3_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp3_calc_dose-$dosicontCristalinoasig->Hp3_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp007_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'></td>
-                                            <td class='align-middle text-center'>
-                                                @for($i=1; $i<=6; $i++)
-                                                    @if($trabasig->{"nota$i"} == 'TRUE')
-                                                        {{$i}})
-                                                    @endif 
-                                                @endfor
-                                            </td>
-                                            <td class='text-center '>
-                                                <div class="row px-2  align-items-center">
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                            </svg><br> LECTURA
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                            </svg><br> EDITAR
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 mt-3">
-                                                        <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger btn-sm" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg> <br> ELIMINAR
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontCristalinoasig->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontCristalinoasig->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontCristalinoasig->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontCristalinoasig->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontCristalinoasig->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontCristalinoasig->Hp3_calc_dose}}</b>
                                     @endif
-                                @endforeach
-                            @endforeach
-                        @endif
-                        @if($dosicontrolDedoasig->isEmpty() && $dosicontrolUnicoAnilloasig->isEmpty())
-                            {{-- ///////ASIGNACIONES ANILLO SIN DOSIMETRO DE CONTROL//////// --}}
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontCristalinoasig->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontCristalinoasig->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontCristalinoasig->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontCristalinoasig->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontCristalinoasig->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontCristalinoasig->Hp007_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                {{-- <td class='align-middle'></td> --}}
+                                <td class='align-middle text-center'>
+                                    @for($i=1; $i<=6; $i++)
+                                        @if($dosicontCristalinoasig->{"nota$i"} == 'TRUE')
+                                            <b>{{$i}})</b>
+                                        @endif 
+                                    @endfor
+                                </td>
+                                <td class='text-center'>
+                                    <div class="row px-2  align-items-center">
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                </svg><br> LECTURA
+                                            </a> 
+                                        </div>
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->measurement_date == null && $dosicontCristalinoasig->nota2 == null && $dosicontCristalinoasig->DNL == null && $dosicontCristalinoasig->EU == null && $dosicontCristalinoasig->DPL == null && $dosicontCristalinoasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontCristalinoasig->measurement_date == null && $dosicontCristalinoasig->nota2 == null && $dosicontCristalinoasig->DNL == null && $dosicontCristalinoasig->EU == null && $dosicontCristalinoasig->DPL == null && $dosicontCristalinoasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                </svg> <br> EDITAR
+                                            </a>
+                                        </div>
+                                        
+                                    </div>  
+                                </td>
+                            </tr>
                             @foreach($trabjasignados as $trabasig)
-                                @if($trabasig->ubicacion == 'ANILLO')
+                                @if($trabasig->ubicacion == 'CRISTALINO')
                                     <tr id='{{$trabasig->id_trabajadordosimetro}}'>
                                         <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
                                         {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
@@ -2256,7 +1586,7 @@
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -2271,7 +1601,8 @@
                                                 {{$trabasig->Hp10_calc_dose}}
                                             @endif
                                         </td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -2286,7 +1617,288 @@
                                                 {{$trabasig->Hp3_calc_dose}}
                                             @endif
                                         </td>
-                                        <td colspan="2" class='align-middle text-center'>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp3_calc_dose-$dosicontCristalinoasig->Hp3_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->nota2 == 'TRUE')
+                                                {{'NP'}}
+                                            @elseif($trabasig->DNL == 'TRUE')
+                                                {{'DNL'}}
+                                            @elseif($trabasig->EU == 'TRUE')
+                                                {{'EU'}}
+                                            @elseif($trabasig->DPL == 'TRUE')
+                                                {{'DPL'}}
+                                            @elseif($trabasig->DSU == 'TRUE')
+                                                {{'DSU'}}
+                                            @else
+                                                {{$trabasig->Hp007_calc_dose}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
+                                            @for($i=1; $i<=6; $i++)
+                                                @if($trabasig->{"nota$i"} == 'TRUE')
+                                                    {{$i}})
+                                                @endif 
+                                            @endfor
+                                        </td>
+                                        <td class='text-center '>
+                                            <div class="row px-2  align-items-center">
+                                                <div class="col-md p-0 m-0">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                        <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                        </svg><br> LECTURA
+                                                    </a>
+                                                </div>
+                                                <div class="col-md p-0 m-0">
+                                                    <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontCristalinoasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                        </svg><br> EDITAR
+                                                    </a>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        @endforeach
+                    @endif
+                    @if($dosicontrolDedoasig->isEmpty() && $dosicontrolUnicoAnilloasig->isEmpty())
+                        {{-- ///////ASIGNACIONES ANILLO SIN DOSIMETRO DE CONTROL//////// --}}
+                        @foreach($trabjasignados as $trabasig)
+                            @if($trabasig->ubicacion == 'ANILLO')
+                                <tr id='{{$trabasig->id_trabajadordosimetro}}'>
+                                    <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                    {{-- <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
+                                    <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                    <td class='align-middle text-center'>
+                                        @if($trabasig->holder_id == '')
+                                            N.A.
+                                        @else
+                                            {{$trabasig->holder->codigo_holder}}
+                                        @endif
+                                    </td>
+                                    <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
+                                    <td colspan="2" class='align-middle text-center'>
+                                        @if($trabasig->nota2 == 'TRUE')
+                                            {{'NP'}}
+                                        @elseif($trabasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @elseif($trabasig->EU == 'TRUE')
+                                            {{'EU'}}
+                                        @elseif($trabasig->DPL == 'TRUE')
+                                            {{'DPL'}}
+                                        @elseif($trabasig->DSU == 'TRUE')
+                                            {{'DSU'}}
+                                        @else
+                                            {{$trabasig->Hp10_calc_dose}}
+                                        @endif
+                                    </td>
+                                    <td colspan="2" class='align-middle text-center'>
+                                        @if($trabasig->nota2 == 'TRUE')
+                                            {{'NP'}}
+                                        @elseif($trabasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @elseif($trabasig->EU == 'TRUE')
+                                            {{'EU'}}
+                                        @elseif($trabasig->DPL == 'TRUE')
+                                            {{'DPL'}}
+                                        @elseif($trabasig->DSU == 'TRUE')
+                                            {{'DSU'}}
+                                        @else
+                                            {{$trabasig->Hp3_calc_dose}}
+                                        @endif
+                                    </td>
+                                    <td colspan="2" class='align-middle text-center'>
+                                        @if($trabasig->nota2 == 'TRUE')
+                                            {{'NP'}}
+                                        @elseif($trabasig->DNL == 'TRUE')
+                                            {{'DNL'}}
+                                        @elseif($trabasig->EU == 'TRUE')
+                                            {{'EU'}}
+                                        @elseif($trabasig->DPL == 'TRUE')
+                                            {{'DPL'}}
+                                        @elseif($trabasig->DSU == 'TRUE')
+                                            {{'DSU'}}
+                                        @else
+                                            {{$trabasig->Hp007_calc_dose}}
+                                        @endif
+                                    </td>
+                                    <td class='align-middle text-center'>
+                                        @for($i=1; $i<=6; $i++)
+                                            @if($trabasig->{"nota$i"} == 'TRUE')
+                                                {{$i}})
+                                            @endif 
+                                        @endfor
+                                    </td>
+                                    <td class='text-center'>
+                                        <div class="row px-2 align-items-center">
+                                            <div class="col-md text-center p-0 m-0">
+                                                <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                    <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                    </svg><br> LECTURA
+                                                </a>
+                                            </div>
+                                            <div class="col-md p-0 m-0">
+                                                <a href="{{route('lecturadosi.edit', ['lecdosicont'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                    </svg><br> EDITAR
+                                                </a>
+                                            </div>
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    @elseif($dosicontrolDedoasig->isEmpty())
+                        {{-- ///////ASIGNACIONES ANILLO CON DOSIMETROS DE CONTROL UNICO POR CONTRATO//////// --}} 
+                        @foreach($dosicontrolUnicoAnilloasig as $dosicontUniDedo)
+                            <tr id="C{{$dosicontUniDedo->id_dosicontrolcontdosisedes}}">
+                                <td class='align-middle'><b>CONTROL TRANS. A.</b></td>
+                                {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
+                                <td class='align-middle text-center'><b>{{$dosicontUniDedo->dosimetro->codigo_dosimeter}}</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontUniDedo->holder->codigo_holder}}</b></td>
+                                <td class='align-middle text-center'><b>CONTROL ANILLO</b></td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontUniDedo->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontUniDedo->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontUniDedo->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontUniDedo->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontUniDedo->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontUniDedo->Hp10_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontUniDedo->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontUniDedo->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontUniDedo->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontUniDedo->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontUniDedo->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontUniDedo->Hp3_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontUniDedo->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontUniDedo->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontUniDedo->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontUniDedo->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontUniDedo->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontUniDedo->Hp007_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                {{-- <td class='align-middle'></td> --}}
+                                <td class='align-middle text-center'>
+                                    @for($i=1; $i<=6; $i++)
+                                        @if($dosicontUniDedo->{"nota$i"} == 'TRUE')
+                                            <b>{{$i}})</b>
+                                        @endif 
+                                    @endfor
+                                </td>
+                                <td class='text-center'>
+                                    <div class="row px-2  align-items-center">
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                </svg><br> LECTURA
+                                            </a> 
+                                        </div>
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->measurement_date == null && $dosicontUniDedo->nota2 == null && $dosicontUniDedo->DNL == null && $dosicontUniDedo->EU == null && $dosicontUniDedo->DPL == null && $dosicontUniDedo->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->measurement_date == null && $dosicontUniDedo->nota2 == null && $dosicontUniDedo->DNL == null && $dosicontUniDedo->EU == null && $dosicontUniDedo->DPL == null && $dosicontUniDedo->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                </svg> <br> EDITAR
+                                            </a>
+                                        </div>
+                                        
+                                    </div>  
+                                </td>
+                            </tr>
+                            @foreach($trabjasignados as $trabasig)
+                                @if($trabasig->ubicacion == 'ANILLO')
+                                    <tr id='{{$trabasig->id_trabajadordosimetro}}'>
+                                        <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                        {{--  <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
+                                        <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->holder_id == '')
+                                                N.A.
+                                            @else
+                                                {{$trabasig->holder->codigo_holder}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
+                                        
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->nota2 == 'TRUE')
+                                                {{'NP'}}
+                                            @elseif($trabasig->DNL == 'TRUE')
+                                                {{'DNL'}}
+                                            @elseif($trabasig->EU == 'TRUE')
+                                                {{'EU'}}
+                                            @elseif($trabasig->DPL == 'TRUE')
+                                                {{'DPL'}}
+                                            @elseif($trabasig->DSU == 'TRUE')
+                                                {{'DSU'}}
+                                            @else
+                                                {{$trabasig->Hp10_calc_dose}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->nota2 == 'TRUE')
+                                                {{'NP'}}
+                                            @elseif($trabasig->DNL == 'TRUE')
+                                                {{'DNL'}}
+                                            @elseif($trabasig->EU == 'TRUE')
+                                                {{'EU'}}
+                                            @elseif($trabasig->DPL == 'TRUE')
+                                                {{'DPL'}}
+                                            @elseif($trabasig->DSU == 'TRUE')
+                                                {{'DSU'}}
+                                            @else
+                                                {{$trabasig->Hp3_calc_dose}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
                                             @if($trabasig->nota2 == 'TRUE')
                                                 {{'NP'}}
                                             @elseif($trabasig->DNL == 'TRUE')
@@ -2302,16 +1914,19 @@
                                             @endif
                                         </td>
                                         <td class='align-middle text-center'>
+                                            {{$trabasig->Hp007_calc_dose - $dosicontUniDedo->Hp007_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
                                             @for($i=1; $i<=6; $i++)
                                                 @if($trabasig->{"nota$i"} == 'TRUE')
                                                     {{$i}})
                                                 @endif 
                                             @endfor
                                         </td>
-                                        <td class='text-center'>
+                                        <td class='text-center '>
                                             <div class="row px-2 align-items-center">
-                                                <div class="col-md text-center p-0 m-0">
-                                                    <a href="{{route('lecturadosi.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                <div class="col-md p-0 m-0">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                                                         <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
@@ -2319,450 +1934,209 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md p-0 m-0">
-                                                    <a href="{{route('lecturadosi.edit', ['lecdosicont'=>$trabasig->id_trabajadordosimetro, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                    <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                         </svg><br> EDITAR
                                                     </a>
                                                 </div>
-                                                <div class="col-md p-0 mt-3">
-                                                    <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger btn-sm" type="submit">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                            </svg> <br> ELIMINAR
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                                
                                             </div>
                                         </td>
                                     </tr>
                                 @endif
                             @endforeach
-                        @elseif($dosicontrolDedoasig->isEmpty())
-                            {{-- ///////ASIGNACIONES ANILLO CON DOSIMETROS DE CONTROL UNICO POR CONTRATO//////// --}} 
-                            @foreach($dosicontrolUnicoAnilloasig as $dosicontUniDedo)
-                                <tr id="C{{$dosicontUniDedo->id_dosicontrolcontdosisedes}}">
-                                    <td class='align-middle'><b>CONTROL TRANS. A.</b></td>
-                                    {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
-                                    <td class='align-middle text-center'><b>{{$dosicontUniDedo->dosimetro->codigo_dosimeter}}</b></td>
-                                    <td class='align-middle text-center'><b>{{$dosicontUniDedo->holder->codigo_holder}}</b></td>
-                                    <td class='align-middle text-center'><b>CONTROL ANILLO</b></td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontUniDedo->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontUniDedo->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontUniDedo->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontUniDedo->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontUniDedo->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontUniDedo->Hp10_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontUniDedo->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontUniDedo->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontUniDedo->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontUniDedo->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontUniDedo->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontUniDedo->Hp3_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontUniDedo->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontUniDedo->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontUniDedo->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontUniDedo->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontUniDedo->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontUniDedo->Hp007_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    {{-- <td class='align-middle'></td> --}}
-                                    <td class='align-middle text-center'>
-                                        @for($i=1; $i<=6; $i++)
-                                            @if($dosicontUniDedo->{"nota$i"} == 'TRUE')
-                                                <b>{{$i}})</b>
-                                            @endif 
-                                        @endfor
-                                    </td>
-                                    <td class='text-center'>
-                                        <div class="row px-2  align-items-center">
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                    <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                    </svg><br> LECTURA
-                                                </a> 
-                                            </div>
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->measurement_date == null && $dosicontUniDedo->nota2 == null && $dosicontUniDedo->DNL == null && $dosicontUniDedo->EU == null && $dosicontUniDedo->DPL == null && $dosicontUniDedo->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontUniDedo->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontUniDedo->measurement_date == null && $dosicontUniDedo->nota2 == null && $dosicontUniDedo->DNL == null && $dosicontUniDedo->EU == null && $dosicontUniDedo->DPL == null && $dosicontUniDedo->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                    </svg> <br> EDITAR
-                                                </a>
-                                            </div>
-                                            <div class="col-md mt-3 p-0">
-                                                <form id="form_eliminar_asigcontrol" name="form_eliminar_asigcontrol" action="{{route('asigdosicont.destroyInfoControl',  $dosicontUniDedo->id_dosicontrolcontdosisedes)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg> <br> ELIMINAR
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>  
-                                    </td>
-                                </tr>
-                                @foreach($trabjasignados as $trabasig)
-                                    @if($trabasig->ubicacion == 'ANILLO')
-                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                            <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                        {{--  <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
-                                            <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->holder_id == '')
-                                                    N.A.
-                                                @else
-                                                    {{$trabasig->holder->codigo_holder}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                            
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp10_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'></td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp3_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'></td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp007_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp007_calc_dose - $dosicontUniDedo->Hp007_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @for($i=1; $i<=6; $i++)
-                                                    @if($trabasig->{"nota$i"} == 'TRUE')
-                                                        {{$i}})
-                                                    @endif 
-                                                @endfor
-                                            </td>
-                                            <td class='text-center '>
-                                                <div class="row px-2 align-items-center">
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniDedo->id_dosicontrolcontdosisedes])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                            </svg><br> LECTURA
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontUniDedo->id_dosicontrolcontdosisedes])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                            </svg><br> EDITAR
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 mt-3">
-                                                        <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger btn-sm" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg> <br> ELIMINAR
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                        @endforeach
+                    @else
+                        {{-- ///////ASIGNACIONES ANILLO CON SU DOSIMETRO DE CONTROL POR ESPECIALIDAD//////// --}}
+                        @foreach($dosicontrolDedoasig as $dosicontDedoasig)
+                            <tr id="C{{$dosicontDedoasig->id_dosicontrolcontdosisedes}}">
+                                <td class='align-middle'><b>CONTROL ANILLO</b></td>
+                                {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
+                                <td class='align-middle text-center'><b>{{$dosicontDedoasig->dosimetro->codigo_dosimeter}}</b></td>
+                                <td class='align-middle text-center'><b>{{$dosicontDedoasig->holder->codigo_holder}}</b></td>
+                                <td class='align-middle text-center'><b>CONTROL ANILLO</b></td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontDedoasig->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontDedoasig->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontDedoasig->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontDedoasig->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontDedoasig->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontDedoasig->Hp10_calc_dose}}</b>
                                     @endif
-                                @endforeach
-                            @endforeach
-                        @else
-                            {{-- ///////ASIGNACIONES ANILLO CON SU DOSIMETRO DE CONTROL POR ESPECIALIDAD//////// --}}
-                            @foreach($dosicontrolDedoasig as $dosicontDedoasig)
-                                <tr id="C{{$dosicontDedoasig->id_dosicontrolcontdosisedes}}">
-                                    <td class='align-middle'><b>CONTROL ANILLO</b></td>
-                                    {{-- <td class='align-middle text-center'><b>N.A.</b></td> --}}
-                                    <td class='align-middle text-center'><b>{{$dosicontDedoasig->dosimetro->codigo_dosimeter}}</b></td>
-                                    <td class='align-middle text-center'><b>{{$dosicontDedoasig->holder->codigo_holder}}</b></td>
-                                    <td class='align-middle text-center'><b>CONTROL ANILLO</b></td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontDedoasig->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontDedoasig->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontDedoasig->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontDedoasig->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontDedoasig->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontDedoasig->Hp10_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontDedoasig->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontDedoasig->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontDedoasig->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontDedoasig->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontDedoasig->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontDedoasig->Hp3_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    <td colspan="2" class='align-middle text-center'>
-                                        @if($dosicontDedoasig->nota2 == 'TRUE')
-                                            <b>{{'NP'}}</b>
-                                        @elseif($dosicontDedoasig->DNL == 'TRUE')
-                                            <b>{{'DNL'}}</b>
-                                        @elseif($dosicontDedoasig->EU == 'TRUE')
-                                            <b>{{'EU'}}</b>
-                                        @elseif($dosicontDedoasig->DPL == 'TRUE')
-                                            <b>{{'DPL'}}</b>
-                                        @elseif($dosicontDedoasig->DSU == 'TRUE')
-                                            <b>{{'DSU'}}</b>
-                                        @else
-                                            <b>{{$dosicontDedoasig->Hp007_calc_dose}}</b>
-                                        @endif
-                                    </td>
-                                    {{-- <td class='align-middle'></td> --}}
-                                    <td class='align-middle text-center'>
-                                        @for($i=1; $i<=6; $i++)
-                                            @if($dosicontDedoasig->{"nota$i"} == 'TRUE')
-                                                <b>{{$i}})</b>
-                                            @endif 
-                                        @endfor
-                                    </td>
-                                    <td class='text-center'>
-                                        <div class="row px-2  align-items-center">
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                    <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                    </svg><br> LECTURA
-                                                </a> 
-                                            </div>
-                                            <div class="col-md m-0 p-0">
-                                                @if($item == 0)
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->measurement_date == null && $dosicontDedoasig->nota2 == null && $dosicontDedoasig->DNL == null && $dosicontDedoasig->EU == null && $dosicontDedoasig->DPL == null && $dosicontDedoasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @else
-                                                    <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->measurement_date == null && $dosicontDedoasig->nota2 == null && $dosicontDedoasig->DNL == null && $dosicontDedoasig->EU == null && $dosicontDedoasig->DPL == null && $dosicontDedoasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                @endif
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                    </svg> <br> EDITAR
-                                                </a>
-                                            </div>
-                                            <div class="col-md mt-3 p-0">
-                                                <form id="form_eliminar_asigcontrol" name="form_eliminar_asigcontrol" action="{{route('asigdosicont.destroyInfoControl',  $dosicontDedoasig->id_dosicontrolcontdosisedes)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm" type="submit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                        </svg> <br> ELIMINAR
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>  
-                                    </td>
-                                </tr>
-                                @foreach($trabjasignados as $trabasig)
-                                    @if($trabasig->ubicacion == 'ANILLO')
-                                        <tr id='{{$trabasig->id_trabajadordosimetro}}'>
-                                            <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
-                                        {{--  <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
-                                            <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->holder_id == '')
-                                                    N.A.
-                                                @else
-                                                    {{$trabasig->holder->codigo_holder}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
-                                            
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp10_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'></td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp3_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'></td>
-                                            <td class='align-middle text-center'>
-                                                @if($trabasig->nota2 == 'TRUE')
-                                                    {{'NP'}}
-                                                @elseif($trabasig->DNL == 'TRUE')
-                                                    {{'DNL'}}
-                                                @elseif($trabasig->EU == 'TRUE')
-                                                    {{'EU'}}
-                                                @elseif($trabasig->DPL == 'TRUE')
-                                                    {{'DPL'}}
-                                                @elseif($trabasig->DSU == 'TRUE')
-                                                    {{'DSU'}}
-                                                @else
-                                                    {{$trabasig->Hp007_calc_dose}}
-                                                @endif
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                {{$trabasig->Hp007_calc_dose - $dosicontDedoasig->Hp007_calc_dose}}
-                                            </td>
-                                            <td class='align-middle text-center'>
-                                                @for($i=1; $i<=6; $i++)
-                                                    @if($trabasig->{"nota$i"} == 'TRUE')
-                                                        {{$i}})
-                                                    @endif 
-                                                @endfor
-                                            </td>
-                                            <td class='text-center '>
-                                                <div class="row px-2 align-items-center">
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontDedoasig->id_dosicontrolcontdosisedes])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                                            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                                                            </svg><br> LECTURA
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 m-0">
-                                                        <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontDedoasig->id_dosicontrolcontdosisedes])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                            </svg><br> EDITAR
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md p-0 mt-3">
-                                                        <form id="form_eliminar_trabajadorasig" name="form_eliminar_trabajadorasig" class="form_eliminar_trabajadorasig" action="{{route('asigdosicont.destroyInfoTrabajador', $trabasig->id_trabajadordosimetro)}}" method="POST">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button class="btn btn-danger btn-sm" type="submit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg> <br> ELIMINAR
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontDedoasig->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontDedoasig->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontDedoasig->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontDedoasig->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontDedoasig->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontDedoasig->Hp3_calc_dose}}</b>
                                     @endif
-                                @endforeach
+                                </td>
+                                <td colspan="2" class='align-middle text-center'>
+                                    @if($dosicontDedoasig->nota2 == 'TRUE')
+                                        <b>{{'NP'}}</b>
+                                    @elseif($dosicontDedoasig->DNL == 'TRUE')
+                                        <b>{{'DNL'}}</b>
+                                    @elseif($dosicontDedoasig->EU == 'TRUE')
+                                        <b>{{'EU'}}</b>
+                                    @elseif($dosicontDedoasig->DPL == 'TRUE')
+                                        <b>{{'DPL'}}</b>
+                                    @elseif($dosicontDedoasig->DSU == 'TRUE')
+                                        <b>{{'DSU'}}</b>
+                                    @else
+                                        <b>{{$dosicontDedoasig->Hp007_calc_dose}}</b>
+                                    @endif
+                                </td>
+                                {{-- <td class='align-middle'></td> --}}
+                                <td class='align-middle text-center'>
+                                    @for($i=1; $i<=6; $i++)
+                                        @if($dosicontDedoasig->{"nota$i"} == 'TRUE')
+                                            <b>{{$i}})</b>
+                                        @endif 
+                                    @endfor
+                                </td>
+                                <td class='text-center'>
+                                    <div class="row px-2  align-items-center">
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.create', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                </svg><br> LECTURA
+                                            </a> 
+                                        </div>
+                                        <div class="col-md m-0 p-0">
+                                            @if($item == 0)
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_contdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->measurement_date == null && $dosicontDedoasig->nota2 == null && $dosicontDedoasig->DNL == null && $dosicontDedoasig->EU == null && $dosicontDedoasig->DPL == null && $dosicontDedoasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @else
+                                                <a href="{{route('lecturadosicontrol.edit', ['lecdosicont'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'contdosisededepto'=>$contdosisededepto->id_novcontdosisededepto, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($dosicontDedoasig->measurement_date == null && $dosicontDedoasig->nota2 == null && $dosicontDedoasig->DNL == null && $dosicontDedoasig->EU == null && $dosicontDedoasig->DPL == null && $dosicontDedoasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                            @endif
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                </svg> <br> EDITAR
+                                            </a>
+                                        </div>
+                                        
+                                    </div>  
+                                </td>
+                            </tr>
+                            @foreach($trabjasignados as $trabasig)
+                                @if($trabasig->ubicacion == 'ANILLO')
+                                    <tr id='{{$trabasig->id_trabajadordosimetro}}'>
+                                        <td class='align-middle'>@if(!empty($trabasig->persona->primer_nombre_persona)){{$trabasig->persona->primer_nombre_persona}} {{$trabasig->persona->segundo_nombre_persona}} {{$trabasig->persona->primer_apellido_persona}} {{$trabasig->persona->segundo_apellido_persona}}@endif </td>
+                                        {{--  <td class='align-middle text-center'>@if(!empty($trabasig->persona->cedula_persona)) {{$trabasig->persona->cedula_persona}}@endif </td> --}}
+                                        <td class='align-middle text-center'>{{$trabasig->dosimetro->codigo_dosimeter}}</td>
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->holder_id == '')
+                                                N.A.
+                                            @else
+                                                {{$trabasig->holder->codigo_holder}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'>{{$trabasig->ubicacion}}</td>
+                                        
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->nota2 == 'TRUE')
+                                                {{'NP'}}
+                                            @elseif($trabasig->DNL == 'TRUE')
+                                                {{'DNL'}}
+                                            @elseif($trabasig->EU == 'TRUE')
+                                                {{'EU'}}
+                                            @elseif($trabasig->DPL == 'TRUE')
+                                                {{'DPL'}}
+                                            @elseif($trabasig->DSU == 'TRUE')
+                                                {{'DSU'}}
+                                            @else
+                                                {{$trabasig->Hp10_calc_dose}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->nota2 == 'TRUE')
+                                                {{'NP'}}
+                                            @elseif($trabasig->DNL == 'TRUE')
+                                                {{'DNL'}}
+                                            @elseif($trabasig->EU == 'TRUE')
+                                                {{'EU'}}
+                                            @elseif($trabasig->DPL == 'TRUE')
+                                                {{'DPL'}}
+                                            @elseif($trabasig->DSU == 'TRUE')
+                                                {{'DSU'}}
+                                            @else
+                                                {{$trabasig->Hp3_calc_dose}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'></td>
+                                        <td class='align-middle text-center'>
+                                            @if($trabasig->nota2 == 'TRUE')
+                                                {{'NP'}}
+                                            @elseif($trabasig->DNL == 'TRUE')
+                                                {{'DNL'}}
+                                            @elseif($trabasig->EU == 'TRUE')
+                                                {{'EU'}}
+                                            @elseif($trabasig->DPL == 'TRUE')
+                                                {{'DPL'}}
+                                            @elseif($trabasig->DSU == 'TRUE')
+                                                {{'DSU'}}
+                                            @else
+                                                {{$trabasig->Hp007_calc_dose}}
+                                            @endif
+                                        </td>
+                                        <td class='align-middle text-center'>
+                                            {{$trabasig->Hp007_calc_dose - $dosicontDedoasig->Hp007_calc_dose}}
+                                        </td>
+                                        <td class='align-middle text-center'>
+                                            @for($i=1; $i<=6; $i++)
+                                                @if($trabasig->{"nota$i"} == 'TRUE')
+                                                    {{$i}})
+                                                @endif 
+                                            @endfor
+                                        </td>
+                                        <td class='text-center '>
+                                            <div class="row px-2 align-items-center">
+                                                <div class="col-md p-0 m-0">
+                                                    <a href="{{route('lecturadosicontrl.create', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontDedoasig->id_dosicontrolcontdosisedes, 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->revision_entrada == NULL) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                                        <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                                                        </svg><br> LECTURA
+                                                    </a>
+                                                </div>
+                                                <div class="col-md p-0 m-0">
+                                                    <a href="{{route('lecturadosicontrl.edit', ['lecdosi'=>$trabasig->id_trabajadordosimetro, 'lecdosicontrol'=>$dosicontDedoasig->id_dosicontrolcontdosisedes , 'item'=>$item])}}" class="btn colorQA btn-sm" @if($trabasig->measurement_date == null && $trabasig->nota2 == null && $trabasig->DNL == null && $trabasig->EU == null && $trabasig->DPL == null && $trabasig->DSU == null) onclick="return false" style="background-color: #a0aec0" @endif>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                        </svg><br> EDITAR
+                                                    </a>
+                                                </div>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
-                        @endif
-                    </tbody>
-                </table>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
             </div>
         </div>
         <div class="col"></div>    

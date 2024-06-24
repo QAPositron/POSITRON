@@ -114,7 +114,7 @@
             <p style="position:relative;">Dirección: {{$contrato->empresa->direccion_empresa}}</p>
             <p style="position:relative;">Municipio: @php echo ucwords(mb_strtolower($contrato->empresa->municipios->nombre_municol, "UTF-8")); @endphp - @php echo ucwords(strtolower($contrato->empresa->municipios->coldepartamento->nombre_deptocol)); @endphp </p>
             <br>
-            @if(count($novedadmeses)>= 1 && $item == 0)
+            @if(count($novedades)> 1)
                 <p style="position:relative;"> <b>Ref.: histórico de novedades en dosímetros HIST-NOV-OSL-QA- 
                     @php 
                         date_default_timezone_set('America/Bogota');
@@ -128,20 +128,31 @@
                 <p style="position:relative; text-align:justify;">A continuación se lista el historial de las novedades de dosímetria con respecto a la solicitud recibida.</p>
                 <br>
                 
-                @foreach($novedadmeses as $key =>$nov)
+                @foreach($novedadmesesdepto as $novmesesdepto)
+                    @if ($novmesesdepto->contdosisededepto_id != null)
+                        <p style="text-align:center;">
+                            <b>SEDE: {{$novmesesdepto->contratodosimetriasededepto->contratodosimetriasede->sede->nombre_sede}}
+                           - ESPECIALIDAD: {{$novmesesdepto->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}</b> 
+                        </p>
+                    @else
+                        <p style="text-align:center;">
+                            <b>SEDE: {{$novmesesdepto->novcontdosisededepto->contratodosimetriasede->sede->nombre_sede}}
+                           - SUB-ESPECIALIDAD: {{$novmesesdepto->novcontdosisededepto->departamentosede->departamento->nombre_departamento}}</b> 
+                        </p>
+                    @endif
                     <table style=" margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; font-size:9px; width: 90%;" cellpadding="7">
                         <thead>
                             <tr style="background-color:#1A9980; color:white;">
                                 <th colspan="6">NOVEDAD No. 
                                     @php
-                                        $n = $nov->codigo_novedad;
+                                        $n = $novmesesdepto->novedad->codigo_novedad;
                                         $titulo = str_pad($n, 5, "0", STR_PAD_LEFT); 
                                         echo $titulo;
                                     @endphp
                                 </th>
                             </tr>
                             <tr style="background-color:#1A9980; color:white;">
-                                <th style="text-align:center; width: 11%;">FECHA</th>
+                                <th style="text-align:center; width: 11%;">FECHA DE REALIZADA</th>
                                 <th style="text-align:center; width: 11%;">CAMBIO</th>
                                 <th style="text-align:center; width: 20%;">PERÍODO</th>
                                 <th style="text-align:center;">TIPO DOSÍMETRO</th>
@@ -151,7 +162,7 @@
                         </thead>
                         <tbody>
                             @foreach($cambiosNovedad as $cambio)
-                                @if($nov->id_novedadmesescontdosi == $cambio->novedadmesescontdosidepto_id)
+                                @if($novmesesdepto->id_novedadmesescontdosi == $cambio->novedadmesescontdosidepto_id)
                                     @if($cambio->tipo_novedad == '1')
                                         <tr>
                                             <td style="text-align:center;">
@@ -173,6 +184,11 @@
                                                 <td style="text-align:center;">AMBIENTAL</td>
                                                 <td style="text-align:center;">{{$cambio->dosiareacontdosisedes->areadepartamentosede->nombre_area}}</td>
                                                 <td style="text-align:center;">N.A.</td>
+                                            @elseif($cambio->dosicontrol_id != null)
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedes->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedes->ultimo_dia_uso)); @endphp</td>
+                                                <td style="text-align:center;">CONTROL TRANSPORTE {{$cambio->dosicontrolcontdosisedes->ubicacion}}</td>
+                                                <td style="text-align:center;">N.A.</td>
+                                                <td style="text-align:center;">N.A.</td>
                                             @endif
                                         </tr>
                                     @endif
@@ -187,99 +203,20 @@
                                             <td style="text-align:center;">
                                                 RETIRO
                                             </td>
-                                            <td style="text-align:center;">
-                                                @if($nov->dosimetriacontrato->periodo_recambio == 'MENS')
-                                                    @php
-                                                        $inicioPM = date("d-m-Y", strtotime($nov->dosimetriacontrato->fecha_inicio));
-                                                        $finPM = date("t-m-Y",strtotime($inicioPM));
-                                                        if($cambio->mes_asignacion == 1){
-                                                            echo $inicioPM." - ".$finPM;
-                                                        }
-                                                        $numLec = $nov->dosimetriacontrato->numlecturas_año;
-                                                        $xx = 1;
-                                                        for($i=0; $i<=$numLec; $i++){
-                                                            $ultimoDiaPM = date("d-m-Y",strtotime($finPM."+ 1 days")); 
-                                                        /*  echo "ultimodia= ".$ultimoDiaPM."<br>"; */
-                                                            $fecha1 = date("d-m-Y", strtotime($ultimoDiaPM."+ ".$i." month"));
-                                                            $fecha2 = date("t-m-Y", strtotime($fecha1));
-                                                            /* echo $fecha1."---".$fecha2."<br>"; */
-                                                            $xx ++;
-                                                            /* echo $i ."<br>";
-                                                            echo "xx= ".$xx."<br>"; */
-                                                            if($xx == $cambio->mes_asignacion){
-                                                                echo $fecha1." - ".$fecha2;
-                                                            }
-                                                        }
-                                                    @endphp
-                                                @elseif($nov->dosimetriacontrato->periodo_recambio == 'BIMS')
-                                                    @php  
-                                                        $inicioPM = date("d-m-Y", strtotime($nov->dosimetriacontrato->fecha_inicio));
-                                                        /* echo "FECHA1 =".$inicioPM."<br>"; */
-                                                        $finPM = date("t-m-Y",strtotime($inicioPM."+ 1 month"));
-                                                        /* echo "FECHA2 = ".$finPM."<br>";  */
-                                                        if($cambio->mes_asignacion == 1){
-                                                            echo $inicioPM." - ".$finPM;
-                                                        }
-                                                        $numLec = $nov->dosimetriacontrato->numlecturas_año;
-                                                        $xx = 1;
-                                                        for($i=0; $i<=($numLec+2); $i=$i+2){
-                                                            $ultimoDiaPM = date("d-m-Y",strtotime($finPM."+ 1 days"));
-                                                            /* echo "ultimodia= ".$ultimoDiaPM."<br>";
-                                                            echo $i ."<br>"; */
-                                                            $fecha1 = date("d-m-Y", strtotime($ultimoDiaPM."+ ".$i." month"));
-                                                            $fecha2 = date("d-m-Y", strtotime($fecha1."+ 1 month"));
-                                                            $fecha2F = date("t-m-Y", strtotime($fecha2));
-                                                            /* echo $fecha1."---".$fecha2F."<br>"; */
-                                                            $xx ++;
-                                                            /* echo "xx= ".$xx."<br>"; */
-                                                            if($xx == $cambio->mes_asignacion){
-                                                                echo $fecha1." - ".$fecha2;
-                                                            }
-                                                        }
-                                                    @endphp 
-                                                @elseif($nov->dosimetriacontrato->periodo_recambio == 'TRIMS')
-                                                    @php
-                                                        $inicioPM = date("d-m-Y", strtotime($nov->dosimetriacontrato->fecha_inicio));
-                                                        /* echo "FECHA1 =".$inicioPM."<br>"; */ 
-                                                        $finPM = date("t-m-Y",strtotime($inicioPM."+ 2 month"));
-                                                        /* echo "FECHA2 = ".$finPM."<br>"; */
-                                                        if($cambio->mes_asignacion == 1){
-                                                            echo $inicioPM." - ".$finPM;
-                                                        }
-                                                        $numLec = $nov->dosimetriacontrato->numlecturas_año;
-                                                        $xx = 1;
-                                                        for($i=0; $i<=($numLec+2); $i= $i+3){
-                                                            $ultimoDiaPM = date("d-m-Y",strtotime($finPM."+ 1 days"));
-                                                            /* echo "ultimodia= ".$ultimoDiaPM."<br>";
-                                                            echo "es la i= ".$i ."<br>"; */
-                                                            $fecha1 = date("d-m-Y", strtotime($ultimoDiaPM."+ ".$i." month"));
-                                                            $fecha2 = date("d-m-Y", strtotime($fecha1."+ 2 month"));
-                                                            $fecha2F = date("t-m-Y", strtotime($fecha2));
-                                                            /*echo $fecha1."---".$fecha2F."<br>"; */
-                                                            $xx ++;
-                                                            /* echo "xx= ".$xx."<br>"; */
-                                                            if($xx == $cambio->mes_asignacion){
-                                                                echo $fecha1." - ".$fecha2;
-                                                            }
-                                                        }
-                                                    @endphp
-                                                @endif
-                                            </td>
-                                            @if($cambio->persona_id != null)
-                                                <td style="text-align:center;">{{$cambio->ubicacion}}</td>
-                                                <td style="text-align:center;">{{$cambio->persona->primer_nombre_persona}} {{$cambio->persona->segundo_nombre_persona}} {{$cambio->persona->primer_apellido_persona}} {{$cambio->persona->segundo_apellido_persona}}</td>
-                                                <td style="text-align:center;">{{$cambio->persona->cedula_persona}}</td>
-                                            @elseif($cambio->areadepartamentosede_id != null)
+                                            @if($cambio->dosiarea_ant_id != null)
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->dosiareacontdosisedesAnterior->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosiareacontdosisedesAnterior->ultimo_dia_uso)); @endphp</td>
                                                 <td style="text-align:center;">AMBIENTAL</td>
-                                                <td style="text-align:center;">{{$cambio->areadepartamentosede->nombre_area}} </td>
+                                                <td style="text-align:center;">{{$cambio->dosiareacontdosisedesAnterior->areadepartamentosede->nombre_area}} </td>
                                                 <td style="text-align:center;">N.A.</td>
                                             @elseif($cambio->trabajadordosimetro_ant_id != null)
-                                                <td style="text-align:center;">{{$cambio->ubicacion}}</td>
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->trabajadordosimetroAnterior->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->trabajadordosimetroAnterior->ultimo_dia_uso)); @endphp</td>
+                                                <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->ubicacion}}</td>
                                                 <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->persona->primer_nombre_persona}} {{$cambio->trabajadordosimetroAnterior->persona->segundo_nombre_persona}} {{$cambio->trabajadordosimetroAnterior->persona->primer_apellido_persona}} {{$cambio->trabajadordosimetroAnterior->persona->segundo_apellido_persona}}</td>
                                                 <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->persona->cedula_persona}}</td>
-                                            @elseif($cambio->dosiarea_ant_id != null)
-                                                <td style="text-align:center;">AMBIENTAL</td>
-                                                <td style="text-align:center;">{{$cambio->dosiareacontdosisedesAnterior->areadepartamentosede->nombre_area}}</td>
+                                            @elseif($cambio->dosicontrol_ant_id != null)
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedesAnterior->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedesAnterior->ultimo_dia_uso)); @endphp</td>
+                                                <td style="text-align:center;">CONTROL TRANSPORTE {{$cambio->dosicontrolcontdosisedesAnterior->ubicacion}}</td>
+                                                <td style="text-align:center;">N.A.</td>
                                                 <td style="text-align:center;">N.A.</td>
                                             @endif
                                         </tr>
@@ -339,7 +276,9 @@
                 @endforeach
                 <br>
                 <p style="position:relative; text-align:justify;">En caso de encontrar inconsistencias en la información, por favor hacerla llegar vía correo electrónico indicando el número (HIST-NOV-OSL-QA) del presente documento al correo: <label style="color:#1A9980;">dosimetría.qapositron@gmail.com.</label> </p>
-            @elseif(count($novedadmeses) == 1 && $item == 1)
+            @endif
+            @if(count($novedades) == 1)
+
                 <p style="position:relative;"> <b>Ref.: notificación de novedad en dosímetros asignados NOV-OSL-QA- 
                     @php 
                         date_default_timezone_set('America/Bogota');
@@ -356,7 +295,7 @@
                     <b>
                         NOVEDAD No.
                         @php
-                            $n = $novedadmeses[0]->codigo_novedad;
+                            $n = $novedades[0]->codigo_novedad;
                             $titulo = str_pad($n, 5, "0", STR_PAD_LEFT); 
                             echo $titulo;
                         @endphp
@@ -377,241 +316,172 @@
                     @if($cambios->tipo_novedad == 3)
                         @php $cam ++; @endphp
                     @endif
-                @endforeach
-                <br>
-                @if($ing != 0) 
-                    <table style=" margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; font-size:9px; width: 90%;" cellpadding="7">
-                        <thead>
-                            <tr style="background-color:#1A9980; color:white;">
-                                <th style="text-align:center;" colspan='5'>INGRESO DE DOSíMETRO</th>
-                            </tr>
-                            <tr style="background-color:#1A9980; color:white;">
-                                <th style="text-align:center; width: 11%;">FECHA</th>
-                                <th style="text-align:center; width: 20%;">PERÍODO</th>
-                                <th style="text-align:center; width: 5%;">TIPO DOSÍMETRO</th>
-                                <th style="text-align:center;">TRABAJADOR / ÁREA</th>
-                                <th style="text-align:center;">No. DE IDENTIFICACIÓN</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($cambiosNovedad as $cambio)
-                                @if($cambio->tipo_novedad == 1)
-                                    <tr>
-                                        <td style="text-align:center;">
-                                            @php
-                                                $fecha = date("t-m-Y",strtotime($cambio->created_at));
-                                                echo $fecha;
-                                            @endphp
-                                        </td>
-                                        @if($cambio->trabajadordosimetro_id != null)
-                                            <td style="text-align:center;"> @php echo date("d-m-Y", strtotime($cambio->trabajadordosimetro->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->trabajadordosimetro->ultimo_dia_uso)); @endphp </td>
-                                            <td style="text-align:center;"> {{$cambio->trabajadordosimetro->ubicacion}}</td>
-                                            <td style="text-align:center;"> {{$cambio->trabajadordosimetro->persona->primer_nombre_persona}} {{$cambio->trabajadordosimetro->persona->segundo_nombre_persona}} {{$cambio->trabajadordosimetro->persona->primer_apellido_persona}} {{$cambio->trabajadordosimetro->persona->segundo_apellido_persona}} </td>
-                                            <td style="text-align:center;"> {{$cambio->trabajadordosimetro->persona->cedula_persona}}</td>
-                                        @elseif($cambios->dosiarea_id != null)
-                                            <td style="text-align:center;"> @php echo date("d-m-Y", strtotime($cambio->dosiareacontdosisedes->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosiareacontdosisedes->ultimo_dia_uso)); @endphp</td>
-                                            <td style="text-align:center;"> {{$cambio->dosiareacontdosisedes->areadepartamentosede->nombre_area}}</td>
-                                            <td style="text-align:center;"> AMBIENTAL</td>
-                                            <td style="text-align:center;">N.A.</td>
-                                        @elseif($cambios->dosicontrol_id != null)
-                                            <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedes->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedes->ultimo_dia_uso)); @endphp</td>
-                                            <td style="text-align:center;"> {{$cambio->dosicontrolcontdosisedes->ubicacion}}</td>
-                                            <td style="text-align:center;"> "CONTROL TRANSPORTE"</td>
-                                            <td style="text-align:center;">N.A.</td>
-                                        @endif
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
-                @endif
-                <br>
-                @if($ret != 0)
-                    <table style=" margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; font-size:9px; width: 90%;" cellpadding="7">
-                        <thead>
-                            <tr style="background-color:#1A9980; color:white;">
-                                <th class="table-active text-center" colspan='5'>RETIRO DE DOSíMETRO</th>
-                            </tr>
-                            <tr style="background-color:#1A9980; color:white;">
-                                <th style='text-align:center; width: 11%'>FECHA</th>
-                                <th style='text-align:center; width: 20%;'>PERÍODO</th>
-                                <th style='text-align:center; width: 5%;'>TIPO DOSÍMETRO</th>
-                                <th style="text-align:center;">TRABAJADOR / ÁREA</th>
-                                <th style="text-align:center;">No. DE IDENTIFICACIÓN</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($cambiosNovedad as $cambios)
-                                @if($cambios->tipo_novedad == 2)
-                                    <tr>
-                                        <td style="text-align:center;">
-                                            @php
-                                                $fecha = date("t-m-Y",strtotime($cambios->created_at));
-                                                echo $fecha;
-                                            @endphp
-                                        </td>
-                                        <td style="text-align:center;">
-                                            @if($novedadmeses[0]->dosimetriacontrato->periodo_recambio == 'MENS')
+                @endforeacH
+                @foreach ($novedadmesesdepto as $novmesesdepto)
+                    @if ($novmesesdepto->contdosisededepto_id != null)
+                        <p style="text-align:center;">
+                            <b>SEDE: {{$novmesesdepto->contratodosimetriasededepto->contratodosimetriasede->sede->nombre_sede}}
+                           - ESPECIALIDAD: {{$novmesesdepto->contratodosimetriasededepto->departamentosede->departamento->nombre_departamento}}</b> 
+                        </p>
+                    @else
+                        <p style="text-align:center;">
+                            <b>SEDE: {{$novmesesdepto->novcontdosisededepto->contratodosimetriasede->sede->nombre_sede}}
+                           - SUB-ESPECIALIDAD: {{$novmesesdepto->novcontdosisededepto->departamentosede->departamento->nombre_departamento}}</b> 
+                        </p>
+                    @endif
+                    @if($ing != 0) 
+                        <br>
+                        <table style=" margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; font-size:9px; width: 90%;" cellpadding="7">
+                            <thead>
+                                <tr style="background-color:#1A9980; color:white;">
+                                    <th style="text-align:center;" colspan='5'>INGRESO DE DOSíMETRO</th>
+                                </tr>
+                                <tr style="background-color:#1A9980; color:white;">
+                                    <th style="text-align:center; width: 11%;">FECHA DE REALIZADA</th>
+                                    <th style="text-align:center; width: 20%;">PERÍODO</th>
+                                    <th style="text-align:center; width: 5%;">TIPO DOSÍMETRO</th>
+                                    <th style="text-align:center;">TRABAJADOR / ÁREA</th>
+                                    <th style="text-align:center;">No. DE IDENTIFICACIÓN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($cambiosNovedad as $cambio)
+                                    @if($cambio->tipo_novedad == 1 && $cambio->novedadmesescontdosidepto_id == $novmesesdepto->id_novedadmesescontdosi)
+                                        <tr>
+                                            <td style="text-align:center;">
                                                 @php
-                                                    $inicioPM = date("d-m-Y", strtotime($novedadmeses[0]->dosimetriacontrato->fecha_inicio));
-                                                    $finPM = date("t-m-Y",strtotime($inicioPM));
-                                                    if($cambios->mes_asignacion == 1){
-                                                        echo $inicioPM." - ".$finPM;
-                                                    }
-                                                    $numLec = $novedadmeses[0]->dosimetriacontrato->numlecturas_año;
-                                                    $xx = 1;
-                                                    for($i=0; $i<=$numLec; $i++){
-                                                        $ultimoDiaPM = date("d-m-Y",strtotime($finPM."+ 1 days")); 
-                                                    /*  echo "ultimodia= ".$ultimoDiaPM."<br>"; */
-                                                        $fecha1 = date("d-m-Y", strtotime($ultimoDiaPM."+ ".$i." month"));
-                                                        $fecha2 = date("t-m-Y", strtotime($fecha1));
-                                                        /* echo $fecha1."---".$fecha2."<br>"; */
-                                                        $xx ++;
-                                                        /* echo $i ."<br>";
-                                                        echo "xx= ".$xx."<br>"; */
-                                                        if($xx == $cambios->mes_asignacion){
-                                                            echo $fecha1." - ".$fecha2;
-                                                        }
-                                                    }
+                                                    $fecha = date("t-m-Y",strtotime($cambio->created_at));
+                                                    echo $fecha;
                                                 @endphp
-                                            @elseif($novedadmeses[0]->dosimetriacontrato->periodo_recambio == 'BIMS')
-                                                @php  
-                                                    $inicioPM = date("d-m-Y", strtotime($novedadmeses[0]->dosimetriacontrato->fecha_inicio));
-                                                    /* echo "FECHA1 =".$inicioPM."<br>"; */
-                                                    $finPM = date("t-m-Y",strtotime($inicioPM."+ 1 month"));
-                                                    /* echo "FECHA2 = ".$finPM."<br>";  */
-                                                    if($cambios->mes_asignacion == 1){
-                                                        echo $inicioPM." - ".$finPM;
-                                                    }
-                                                    $numLec = $novedadmeses[0]->dosimetriacontrato->numlecturas_año;
-                                                    $xx = 1;
-                                                    for($i=0; $i<=($numLec+2); $i=$i+2){
-                                                        $ultimoDiaPM = date("d-m-Y",strtotime($finPM."+ 1 days"));
-                                                        /* echo "ultimodia= ".$ultimoDiaPM."<br>";
-                                                        echo $i ."<br>"; */
-                                                        $fecha1 = date("d-m-Y", strtotime($ultimoDiaPM."+ ".$i." month"));
-                                                        $fecha2 = date("d-m-Y", strtotime($fecha1."+ 1 month"));
-                                                        $fecha2F = date("t-m-Y", strtotime($fecha2));
-                                                        /* echo $fecha1."---".$fecha2F."<br>"; */
-                                                        $xx ++;
-                                                        /* echo "xx= ".$xx."<br>"; */
-                                                        if($xx == $cambios->mes_asignacion){
-                                                            echo $fecha1." - ".$fecha2;
-                                                        }
-                                                    }
-                                                @endphp 
-                                            @elseif($novedadmeses[0]->dosimetriacontrato->periodo_recambio == 'TRIMS')
-                                                @php
-                                                    $inicioPM = date("d-m-Y", strtotime($novedadmeses[0]->dosimetriacontrato->fecha_inicio));
-                                                    /* echo "FECHA1 =".$inicioPM."<br>"; */ 
-                                                    $finPM = date("t-m-Y",strtotime($inicioPM."+ 2 month"));
-                                                    /* echo "FECHA2 = ".$finPM."<br>"; */
-                                                    if($cambios->mes_asignacion == 1){
-                                                        echo $inicioPM." - ".$finPM;
-                                                    }
-                                                    $numLec = $novedadmeses[0]->dosimetriacontrato->numlecturas_año;
-                                                    $xx = 1;
-                                                    for($i=0; $i<=($numLec+2); $i= $i+3){
-                                                        $ultimoDiaPM = date("d-m-Y",strtotime($finPM."+ 1 days"));
-                                                        /* echo "ultimodia= ".$ultimoDiaPM."<br>";
-                                                        echo "es la i= ".$i ."<br>"; */
-                                                        $fecha1 = date("d-m-Y", strtotime($ultimoDiaPM."+ ".$i." month"));
-                                                        $fecha2 = date("d-m-Y", strtotime($fecha1."+ 2 month"));
-                                                        $fecha2F = date("t-m-Y", strtotime($fecha2));
-                                                        /*echo $fecha1."---".$fecha2F."<br>"; */
-                                                        $xx ++;
-                                                        /* echo "xx= ".$xx."<br>"; */
-                                                        if($xx == $cambios->mes_asignacion){
-                                                            echo $fecha1." - ".$fecha2;
-                                                        }
-                                                    }
-                                                @endphp
+                                            </td>
+                                            @if($cambio->trabajadordosimetro_id != null)
+                                                <td style="text-align:center;"> @php echo date("d-m-Y", strtotime($cambio->trabajadordosimetro->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->trabajadordosimetro->ultimo_dia_uso)); @endphp </td>
+                                                <td style="text-align:center;"> {{$cambio->trabajadordosimetro->ubicacion}}</td>
+                                                <td style="text-align:center;"> {{$cambio->trabajadordosimetro->persona->primer_nombre_persona}} {{$cambio->trabajadordosimetro->persona->segundo_nombre_persona}} {{$cambio->trabajadordosimetro->persona->primer_apellido_persona}} {{$cambio->trabajadordosimetro->persona->segundo_apellido_persona}} </td>
+                                                <td style="text-align:center;"> {{$cambio->trabajadordosimetro->persona->cedula_persona}}</td>
+                                            @elseif($cambio->dosiarea_id != null)
+                                                <td style="text-align:center;"> @php echo date("d-m-Y", strtotime($cambio->dosiareacontdosisedes->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosiareacontdosisedes->ultimo_dia_uso)); @endphp</td>
+                                                <td style="text-align:center;"> AMBIENTAL</td>
+                                                <td style="text-align:center;"> {{$cambio->dosiareacontdosisedes->areadepartamentosede->nombre_area}}</td>
+                                                <td style="text-align:center;">N.A.</td>
+                                            @elseif($cambio->dosicontrol_id != null)
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedes->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedes->ultimo_dia_uso)); @endphp</td>
+                                                <td style="text-align:center;">CONTROL TRANSPORTE {{$cambio->dosicontrolcontdosisedes->ubicacion}}</td>
+                                                <td style="text-align:center;">N.A.</td>
+                                                <td style="text-align:center;">N.A.</td>
                                             @endif
-                                        </td>
-                                        @if($cambios->persona_id != null)
-                                        <td style="text-align:center;">{{$cambios->ubicacion}}</td>
-                                            <td style="text-align:center;">{{$cambios->persona->primer_nombre_persona}} {{$cambios->persona->segundo_nombre_persona}} {{$cambios->persona->primer_apellido_persona}} {{$cambios->persona->segundo_apellido_persona}}</td>
-                                            <td style="text-align:center;">{{$cambios->persona->cedula_persona}}</td>
-                                        @elseif($cambios->areadepartamentosede_id != null)
-                                            <td style="text-align:center;">{{$cambios->areadepartamentosede->nombre_area}} </td>
-                                            <td style="text-align:center;">AMBIENTAL</td>
-                                            <td style="text-align:center;">N.A.</td>
-                                        @elseif($cambios->trabajadordosimetro_ant_id != null)
-                                            <td style="text-align:center;">{{$cambios->trabajadordosimetroAnterior->ubicacion}}</td>
-                                            <td style="text-align:center;">{{$cambios->trabajadordosimetroAnterior->persona->primer_nombre_persona}} {{$cambios->trabajadordosimetroAnterior->persona->segundo_nombre_persona}} {{$cambios->trabajadordosimetroAnterior->persona->primer_apellido_persona}} {{$cambios->trabajadordosimetroAnterior->persona->segundo_apellido_persona}}</td>
-                                            <td style="text-align:center;">{{$cambios->trabajadordosimetroAnterior->persona->cedula_persona}}</td>
-                                        @elseif($cambios->dosiarea_ant_id != null)
-                                            <td style="text-align:center;">AMBIENTAL</td>
-                                            <td style="text-align:center;">{{$cambios->dosiareacontdosisedesAnterior->areadepartamentosede->nombre_area}}</td>
-                                            <td style="text-align:center;">N.A.</td>
-                                        @endif
-                                        {{-- ////falta implementar retiro de dosimetro control/// --}}
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
-                            
-                @endif
-                <br>
-                @if($cam != 0)
-                    <table style="margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; font-size:9px; width: 90%;" cellpadding="7">>
-                        <thead>
-                            <tr style="background-color:#1A9980; color:white;">
-                                <th style="text-align:center;" colspan='7'>CAMBIO DE TRABAJADOR</th>
-                            </tr>
-                            <tr style="background-color:#1A9980; color:white;">
-                                <th style="text-align:center; width: 11%;">FECHA</th>
-                                <th style="text-align:center; width: 20%;">PERÍODO</th>
-                                <th style="text-align:center; width: 5%;">TIPO DOSÍMETRO</th>
-                                <th style="text-align:center;">TRABAJADOR / ÁREA (INGRESO)</th>
-                                <th style="text-align:center;">No. DE IDEN. (INGRESO)</th>
-                                <th style="text-align:center;">TRABAJADOR / ÁREA (RETIRO)</th>
-                                <th style="text-align:center;">No. DE IDEN. (RETIRO))</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($cambiosNovedad as $cambio)
-                                @if($cambio->tipo_novedad == 3)
-                                    <tr>
-                                        <td style="text-align:center;">
-                                            @php
-                                                $fecha = date("t-m-Y",strtotime($cambio->created_at));
-                                                echo $fecha;
-                                            @endphp
-                                        </td>
-                                        @if($cambio->trabajadordosimetro_id != null)
-                                            <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->trabajadordosimetro->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->trabajadordosimetro->ultimo_dia_uso));@endphp </td>
-                                            <td style="text-align:center;">{{$cambio->trabajadordosimetro->ubicacion}}</td>
-                                            <td style="text-align:center;">{{$cambio->trabajadordosimetro->persona->primer_nombre_persona}} {{$cambio->trabajadordosimetro->persona->segundo_nombre_persona}} {{$cambio->trabajadordosimetro->persona->primer_apellido_persona}} {{$cambio->trabajadordosimetro->persona->segundo_apellido_persona}} </td>
-                                            <td style="text-align:center;">{{$cambio->trabajadordosimetro->persona->cedula_persona}}</td>
-                                            <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->persona->primer_nombre_persona}} {{$cambio->trabajadordosimetroAnterior->persona->segundo_nombre_persona}} {{$cambio->trabajadordosimetroAnterior->persona->primer_apellido_persona}} {{$cambio->trabajadordosimetroAnterior->persona->segundo_apellido_persona}}</td>
-                                            <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->persona->cedula_persona}}</td>
-                                        @elseif($cambio->dosiarea_id != null)
-                                            <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->dosiareacontdosisedes->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosiareacontdosisedes->ultimo_dia_uso)); @endphp</td>
-                                            <td style="text-align:center;">AMBIENTAL</td>
-                                            <td style="text-align:center;">{{$cambio->dosiareacontdosisedes->areadepartamentosede->nombre_area}}</td>
-                                            <td style="text-align:center;">N.A.</td>
-                                            <td style="text-align:center;">{{$cambio->dosiareacontdosisedesAnterior->areadepartamentosede->nombre_area}}</td>
-                                            <td style="text-align:center;">N.A.</td>
-                                        @endif
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
-                            
-                @endif
-                
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                    @if($ret != 0)
+                        <br>
+                        <table style=" margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; font-size:9px; width: 90%;" cellpadding="7">
+                            <thead>
+                                <tr style="background-color:#1A9980; color:white;">
+                                    <th class="table-active text-center" colspan='5'>RETIRO DE DOSíMETRO</th>
+                                </tr>
+                                <tr style="background-color:#1A9980; color:white;">
+                                    <th style='text-align:center; width: 11%'>FECHA DE REALIZADA</th>
+                                    <th style='text-align:center; width: 20%;'>PERÍODO</th>
+                                    <th style='text-align:center; width: 5%;'>TIPO DOSÍMETRO</th>
+                                    <th style="text-align:center;">TRABAJADOR / ÁREA</th>
+                                    <th style="text-align:center;">No. DE IDENTIFICACIÓN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($cambiosNovedad as $cambio)
+                                    @if($cambio->tipo_novedad == 2 && $cambio->novedadmesescontdosidepto_id == $novmesesdepto->id_novedadmesescontdosi)
+                                        <tr>
+                                            <td style="text-align:center;">
+                                                @php
+                                                    $fecha = date("t-m-Y",strtotime($cambio->created_at));
+                                                    echo $fecha;
+                                                @endphp
+                                            </td>
+                                            @if($cambio->dosiarea_ant_id != null)
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->dosiareacontdosisedesAnterior->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosiareacontdosisedesAnterior->ultimo_dia_uso)); @endphp</td>
+                                                <td style="text-align:center;">AMBIENTAL</td>
+                                                <td style="text-align:center;">{{$cambio->dosiareacontdosisedesAnterior->areadepartamentosede->nombre_area}} </td>
+                                                <td style="text-align:center;">N.A.</td>
+                                            @elseif($cambio->trabajadordosimetro_ant_id != null)
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->trabajadordosimetroAnterior->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->trabajadordosimetroAnterior->ultimo_dia_uso)); @endphp</td>
+                                                <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->ubicacion}}</td>
+                                                <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->persona->primer_nombre_persona}} {{$cambio->trabajadordosimetroAnterior->persona->segundo_nombre_persona}} {{$cambio->trabajadordosimetroAnterior->persona->primer_apellido_persona}} {{$cambio->trabajadordosimetroAnterior->persona->segundo_apellido_persona}}</td>
+                                                <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->persona->cedula_persona}}</td>
+                                            @elseif($cambio->dosicontrol_ant_id != null)
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedesAnterior->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosicontrolcontdosisedesAnterior->ultimo_dia_uso)); @endphp</td>
+                                                <td style="text-align:center;">CONTROL TRANSPORTE {{$cambio->dosicontrolcontdosisedesAnterior->ubicacion}}</td>
+                                                <td style="text-align:center;">N.A.</td>
+                                                <td style="text-align:center;">N.A.</td>
+                                            @endif
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>  
+                    @endif
+                    @if($cam != 0)
+                        <br>
+                        <table style="margin: 0 auto; border: solid 0.3px #000; border-collapse:collapse; font-size:9px; width: 90%;" cellpadding="7">>
+                            <thead>
+                                <tr style="background-color:#1A9980; color:white;">
+                                    <th style="text-align:center;" colspan='7'>CAMBIO DE TRABAJADOR</th>
+                                </tr>
+                                <tr style="background-color:#1A9980; color:white;">
+                                    <th style="text-align:center; width: 11%;">FECHA DE REAlIZADA</th>
+                                    <th style="text-align:center; width: 20%;">PERÍODO</th>
+                                    <th style="text-align:center; width: 5%;">TIPO DOSÍMETRO</th>
+                                    <th style="text-align:center;">TRABAJADOR / ÁREA (INGRESO)</th>
+                                    <th style="text-align:center;">No. DE IDEN. (INGRESO)</th>
+                                    <th style="text-align:center;">TRABAJADOR / ÁREA (RETIRO)</th>
+                                    <th style="text-align:center;">No. DE IDEN. (RETIRO))</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($cambiosNovedad as $cambio)
+                                    @if($cambio->tipo_novedad == 3 && $cambio->novedadmesescontdosidepto_id == $novmesesdepto->id_novedadmesescontdosi)
+                                        <tr>
+                                            <td style="text-align:center;">
+                                                @php
+                                                    $fecha = date("t-m-Y",strtotime($cambio->created_at));
+                                                    echo $fecha;
+                                                @endphp
+                                            </td>
+                                            @if($cambio->trabajadordosimetro_id != null)
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->trabajadordosimetro->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->trabajadordosimetro->ultimo_dia_uso));@endphp </td>
+                                                <td style="text-align:center;">{{$cambio->trabajadordosimetro->ubicacion}}</td>
+                                                <td style="text-align:center;">{{$cambio->trabajadordosimetro->persona->primer_nombre_persona}} {{$cambio->trabajadordosimetro->persona->segundo_nombre_persona}} {{$cambio->trabajadordosimetro->persona->primer_apellido_persona}} {{$cambio->trabajadordosimetro->persona->segundo_apellido_persona}} </td>
+                                                <td style="text-align:center;">{{$cambio->trabajadordosimetro->persona->cedula_persona}}</td>
+                                                <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->persona->primer_nombre_persona}} {{$cambio->trabajadordosimetroAnterior->persona->segundo_nombre_persona}} {{$cambio->trabajadordosimetroAnterior->persona->primer_apellido_persona}} {{$cambio->trabajadordosimetroAnterior->persona->segundo_apellido_persona}}</td>
+                                                <td style="text-align:center;">{{$cambio->trabajadordosimetroAnterior->persona->cedula_persona}}</td>
+                                            @elseif($cambio->dosiarea_id != null)
+                                                <td style="text-align:center;">@php echo date("d-m-Y", strtotime($cambio->dosiareacontdosisedes->primer_dia_uso))." - ".date("d-m-Y", strtotime($cambio->dosiareacontdosisedes->ultimo_dia_uso)); @endphp</td>
+                                                <td style="text-align:center;">AMBIENTAL</td>
+                                                <td style="text-align:center;">{{$cambio->dosiareacontdosisedes->areadepartamentosede->nombre_area}}</td>
+                                                <td style="text-align:center;">N.A.</td>
+                                                <td style="text-align:center;">{{$cambio->dosiareacontdosisedesAnterior->areadepartamentosede->nombre_area}}</td>
+                                                <td style="text-align:center;">N.A.</td>
+                                            @endif
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                                
+                    @endif
+                @endforeach
                 <br>
                 <p style="position:relative; text-align:justify;">En caso de encontrar inconsistencias en la información, por favor hacerla llegar vía correo electrónico indicando el número (NOV-OSL-QA) del presente documento al correo: <label style="color:#1A9980;">dosimetría.qapositron@gmail.com.</label> </p>
             @endif
             
             <br>
-            <div style="position:relative; display:block;">
-                <p style="text-align:justify;">Cordialmente,</p>
-
-                <div style=" width: 200px; height: 130px;">
+            <div style="position:relative; display:block; page-break-inside: avoid;">
+                <p style="position:relative; text-align:justify;">Cordialmente,</p>
+                <br>
+                <div style="position:relative; width: 200px; height: 130px; page-break-inside: avoid;">
                     <img src="{{asset('imagenes/FIRMAYUDI.png')}}" width="130" height="70" style="position:relative; left:30px; top:4px;">
                     <p style="position:relative; bottom:10px; text-align:center;">___________________________</p> <br>
                     <p style="position:relative; bottom: 30px; text-align: center; font-size: 11px; color:#1A9980;">JUDY J.GAVIRIA TORRES</p> <br>

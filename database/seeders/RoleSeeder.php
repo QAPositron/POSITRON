@@ -24,10 +24,11 @@ class RoleSeeder extends Seeder
         $role7 = Role::create(['name' => 'OPR']);
         $role8 = Role::create(['name' => 'PUBLICO']);
         
+        Permission::create(['name' =>'superadmin.home'])->assignRole($role1);
         Permission::create(['name' =>'admin.home'])->syncRoles([$role1, $role2]);
         Permission::create(['name' =>'liderdosim.home'])->assignRole($role3);
 
-        //// para asignar un rol este permiso pero si se quiere asignar mas de un rol se usa ->syncRoles([])
+        //// para asignar un rol este permiso ->assignRole() pero si se quiere asignar mas de un rol se usa ->syncRoles([])
 
         
     }
